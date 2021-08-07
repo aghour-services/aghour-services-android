@@ -13,6 +13,7 @@
         android:theme="@style/Theme.AghourServices">
         <activity
             android:name=".SplashScreen"
+            android:theme="@style/Theme.SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
