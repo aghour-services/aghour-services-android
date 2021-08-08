@@ -3,32 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="5dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/imageview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/app_name"
-            android:textAlignment="center" />
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
