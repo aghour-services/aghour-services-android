@@ -19,9 +19,9 @@ class CategoriesActivity : AppCompatActivity() {
         setSupportActionBar(myToolbar)
 
         recyclerview.layoutManager = GridLayoutManager(this, 2)
-        val messi = "Leo Messi"
+        val name = "Doctor"
         for (i in 0..9) {
-            data.add(ItemsViewModel(R.drawable.messi, messi + (i + 1)))
+            data.add(ItemsViewModel(R.mipmap.ic_doctor, name + (i + 1)))
         }
         val adapter = CustomAdapter(data) { position -> onListItemClick(position) }
         recyclerview.adapter = adapter

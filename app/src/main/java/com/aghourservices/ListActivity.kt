@@ -9,11 +9,11 @@ class ListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_view)
         val arrlist=ArrayList<list_data>()
-        arrlist.add(list_data("khaled elabady","vet",R.drawable.img))
-        arrlist.add(list_data("khaled elabady","vet",R.drawable.img))
-        arrlist.add(list_data("khaled","vet",R.drawable.img))
-        arrlist.add(list_data("khaled","vet",R.drawable.img))
-        arrlist.add(list_data("khaled","vet",R.drawable.img))
+        arrlist.add(list_data("khaled elabady","vet",R.mipmap.img_doctor))
+        arrlist.add(list_data("khaled elabady","vet",R.mipmap.img_doctor))
+        arrlist.add(list_data("khaled","vet",R.mipmap.img_doctor))
+        arrlist.add(list_data("khaled","vet",R.mipmap.img_doctor))
+        arrlist.add(list_data("khaled","vet",R.mipmap.img_doctor))
         val myadapter=listAdapter(this,arrlist)
         mylist.adapter=myadapter
 
