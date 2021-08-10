@@ -22,9 +22,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".categories.MainActivity"
+            android:name=".categories.CategoriesActivity"
             android:exported="true"
-            android:theme="@style/Theme.AghourServices.NoActionBar"></activity>
+            android:theme="@style/Theme.AghourServices.NoActionBar" />
+
+        <activity
+            android:name=".ListActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AghourServices.NoActionBar" />
     </application>
 
 </manifest>
