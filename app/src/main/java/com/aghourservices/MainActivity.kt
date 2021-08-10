@@ -17,8 +17,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         // getting the recyclerview by its id
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerview)
+
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = GridLayoutManager(this, 2)
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // This will pass the ArrayList to our Adapter
-        val adapter = CustomAdapter(data)
+        val adapter = CustomAdapter(this,data)
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
 
@@ -57,4 +59,5 @@ class MainActivity : AppCompatActivity() {
                 }
             })
     }
+
 }

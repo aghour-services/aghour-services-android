@@ -1,13 +1,18 @@
 package com.aghourservices
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 
-class CustomAdapter (private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+
+class CustomAdapter (private val context: Context,private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,6 +34,16 @@ class CustomAdapter (private val mList: List<ItemsViewModel>) : RecyclerView.Ada
 
         // sets the text to the textview from our itemHolder class
         holder.textView.text = ItemsViewModel.text
+        when(position){
+            0->{
+                holder.itemView.setOnClickListener {
+                    val i=Intent(context,ListActivity::class.java)
+                    context.startActivity(i)
+
+                }
+
+            }
+        }
 
     }
 
@@ -42,4 +57,7 @@ class CustomAdapter (private val mList: List<ItemsViewModel>) : RecyclerView.Ada
         val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val textView: TextView = itemView.findViewById(R.id.textView)
     }
+
+
+
 }
