@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.aghourservices">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AghourServices">
+        android:theme="@style/Theme.AghourServices"
+        tools:ignore="AllowBackup">
         <activity
             android:name=".SplashScreen"
             android:exported="true"
@@ -25,9 +26,8 @@
             android:name=".categories.CategoriesActivity"
             android:exported="true"
             android:theme="@style/Theme.AghourServices.NoActionBar" />
-
         <activity
-            android:name=".ListActivity"
+            android:name=".listView.ListActivity"
             android:exported="true"
             android:theme="@style/Theme.AghourServices.NoActionBar" />
     </application>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">أجهور الكبرى</string>
+    <string name="second_text">Second Text</string>
+    <string name="first_text">First Text</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.aghourservices
+package com.aghourservices.listView
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.aghourservices.R
 import kotlinx.android.synthetic.main.listdesign.view.*
 
 class listAdapter(context: Context,arrlist:ArrayList<list_data>)
