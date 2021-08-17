@@ -9,8 +9,6 @@ import com.aghourservices.R
 class CategoryViewHolder(itemView: View, private val onItemClicked: (position: Int) -> Unit) :
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
     val imageView: ImageView = itemView.findViewById(R.id.imageview)
-    val textView: TextView = itemView.findViewById(R.id.firstTxt)
-    val titleView: TextView = itemView.findViewById(R.id.secondTxt)
 
     init {
         itemView.setOnClickListener(this)

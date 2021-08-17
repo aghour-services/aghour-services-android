@@ -37,7 +37,7 @@ class CategoriesActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerview.layoutManager = linearLayoutManager
         loadCategoriesList()
-        recyclerview.layoutManager = GridLayoutManager(this, 2)
+        recyclerview.layoutManager = GridLayoutManager(this, 3)
     }
 
     private fun loadCategoriesList() {

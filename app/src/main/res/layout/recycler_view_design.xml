@@ -5,46 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="10dp">
+    android:layout_margin="6dp">
+
     <LinearLayout
-        android:background="@drawable/selector"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/selector"
         android:orientation="vertical"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/imageview"
-            android:layout_width="142dp"
-            android:layout_height="142dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            tools:ignore="ContentDescription" />
+            android:src="@mipmap/ic_launcher"
+            tools:ignore="ContentDescription,ImageContrastCheck" />
 
         <TextView
             android:id="@+id/firstTxt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:foregroundGravity="bottom"
-            android:gravity="center|bottom"
-            android:textColor="@color/gray"
-            android:text="@string/first_text"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:ignore="SmallSp" />
-
-        <TextView
-            android:id="@+id/secondTxt"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:foregroundGravity="bottom"
-            android:text="@string/second_text"
-            android:gravity="center|bottom"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="صيدليات البري"
             android:textColor="@color/gray"
-            android:textSize="10sp"
-            android:textStyle="normal"
+            android:textSize="14sp"
             tools:ignore="SmallSp" />
 
     </LinearLayout>

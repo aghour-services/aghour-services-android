@@ -9,13 +9,13 @@
     android:background="@color/teal_700">
 
     <TextView
+        android:id="@+id/toolbarTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="end"
         android:text="@string/app_name"
         android:textColor="@color/white"
-        android:textSize="23sp"
+        android:textSize="20sp"
         android:textStyle="bold">
 
     </TextView>

@@ -30,6 +30,7 @@
             android:name=".listView.ListActivity"
             android:exported="true"
             android:theme="@style/Theme.AghourServices.NoActionBar" />
+
     </application>
 
 </manifest>
