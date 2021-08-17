@@ -25,9 +25,8 @@ const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 class CategoriesActivity : AppCompatActivity() {
 
     lateinit var adapter: CategoriesAdapter
-    lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
-    val data = ArrayList<CategoryItem>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,7 +54,7 @@ class CategoriesActivity : AppCompatActivity() {
             ) {
                 val responseBody = response.body()!!
                 Log.v("DATA", responseBody.toString())
-                adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
+                adapter = CategoriesAdapter(responseBody) { onListItemClick() }
                 recyclerview.adapter = adapter
             }
 
@@ -65,7 +64,7 @@ class CategoriesActivity : AppCompatActivity() {
         })
     }
 
-    private fun onListItemClick(position: Int) {
+    private fun onListItemClick() {
         val intent = Intent(this, ListActivity::class.java)
         startActivity(intent)
     }

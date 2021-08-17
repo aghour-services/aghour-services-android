@@ -22,7 +22,6 @@ class CategoriesAdapter(
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val categoryItem = List[position]
         Picasso.get().load(categoryItem.url).into(holder.imageView)
-
     }
 
     override fun getItemCount(): Int {

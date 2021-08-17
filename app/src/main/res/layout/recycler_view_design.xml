@@ -21,8 +21,8 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:src="@mipmap/ic_launcher"
-            tools:ignore="ContentDescription,ImageContrastCheck" />
-
+        tools:ignore="ContentDescription" />
+   
         <TextView
             android:id="@+id/firstTxt"
             android:layout_width="wrap_content"
