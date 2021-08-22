@@ -3,6 +3,6 @@ package com.aghourservices.api
 import retrofit2.http.GET
 
 interface ApiServices {
-    @GET("photos")
+    @GET("categories")
     fun loadCategoriesList(): retrofit2.Call<ArrayList<CategoryItem>>
 }

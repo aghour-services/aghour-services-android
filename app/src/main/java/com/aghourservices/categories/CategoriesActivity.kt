@@ -7,11 +7,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aghourservices.listView.ListActivity
 import com.aghourservices.R
 import com.aghourservices.api.ApiServices
 import com.aghourservices.api.CategoryItem
 import com.aghourservices.categories.ui.CategoriesAdapter
+import com.aghourservices.listView.ListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_toolbar.*
 import retrofit2.Call
@@ -20,8 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = "https://jsonplaceholder.typicode.com/"
-
+const val BASE_URL = "https://aghour-services-backend.herokuapp.com/api/"
 class CategoriesActivity : AppCompatActivity() {
 
     lateinit var adapter: CategoriesAdapter
@@ -36,7 +35,7 @@ class CategoriesActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerview.layoutManager = linearLayoutManager
         loadCategoriesList()
-        recyclerview.layoutManager = GridLayoutManager(this, 3)
+        recyclerview.layoutManager = GridLayoutManager(this, 2)
     }
 
     private fun loadCategoriesList() {

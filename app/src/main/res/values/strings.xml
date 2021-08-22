@@ -1,5 +1,3 @@
 <resources>
-    <string name="app_name">أجهور الكبرى</string>
-    <string name="second_text">Second Text</string>
-    <string name="first_text">First Text</string>
+    <string name="app_name" translatable="false">أجهور الكبرى</string>
 </resources>

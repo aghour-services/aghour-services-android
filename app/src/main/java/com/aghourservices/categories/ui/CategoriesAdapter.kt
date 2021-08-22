@@ -21,10 +21,15 @@ class CategoriesAdapter(
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val categoryItem = List[position]
-        Picasso.get().load(categoryItem.url).into(holder.imageView)
+        Picasso.get().load(icon_url(categoryItem.icon_path)).into(holder.imageView)
+        holder.firstTxt.text = List[position].name
     }
 
     override fun getItemCount(): Int {
         return List.size
+    }
+
+    private fun icon_url(icon_name: String): String {
+        return "https://aghour-services-backend.herokuapp.com$icon_name"
     }
 }

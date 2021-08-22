@@ -35,12 +35,15 @@
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
+
+    <!--All Text Font Style-->
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/cairo_black</item>
+        <item name="android:fontFamily">@font/cairo_bold</item>
     </style>
 
+    <!--All Text Buttons Font Style-->
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">@font/rakkas</item>
+        <item name="android:fontFamily">@font/cairo_black</item>
     </style>
 
 </resources>

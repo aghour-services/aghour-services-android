@@ -1,9 +1,6 @@
 package com.aghourservices.api
 
 data class CategoryItem(
-    val albumId: Int,
-    val id: Int,
-    val thumbnailUrl: String,
-    val title: String,
-    val url: String
+    val icon_path: String,
+    val name: String,
 )
