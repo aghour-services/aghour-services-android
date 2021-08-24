@@ -1,4 +1,4 @@
-package com.aghourservices
+package com.aghourservices.splashScreen
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.R
 import com.aghourservices.categories.CategoriesActivity
 
 class SplashScreen<splashImage : View?> : AppCompatActivity() {

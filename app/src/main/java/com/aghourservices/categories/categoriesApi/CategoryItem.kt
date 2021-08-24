@@ -1,4 +1,4 @@
-package com.aghourservices.api
+package com.aghourservices.categories.categoriesApi
 
 data class CategoryItem(
     val icon_path: String,

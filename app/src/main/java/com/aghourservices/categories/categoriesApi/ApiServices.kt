@@ -1,4 +1,4 @@
-package com.aghourservices.api
+package com.aghourservices.categories.categoriesApi
 
 import retrofit2.http.GET
 

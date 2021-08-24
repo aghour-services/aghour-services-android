@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import kotlinx.android.synthetic.main.recycler_view_design.view.*
 
-class CategoryViewHolder(itemView: View, private val onItemClicked: (position: Int) -> Unit) :
+class CategoryViewHolder(itemView: View, private val onItemClicked:
+    (position: Int) -> Unit) :
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     val imageView: ImageView = itemView.findViewById(R.id.imageview)
-    var firstTxt: TextView
+    var firstTxt: TextView = itemView.firstTxt
+
     init {
         itemView.setOnClickListener(this)
-        firstTxt = itemView.firstTxt
     }
 
     override fun onClick(v: View) {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".categories.CategoriesActivity">
+    tools:context=".markets.MarketsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,9 +13,10 @@
         <include layout="@layout/toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/marketList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/recycler_view_design" />
+            tools:listitem="@layout/markets_view" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

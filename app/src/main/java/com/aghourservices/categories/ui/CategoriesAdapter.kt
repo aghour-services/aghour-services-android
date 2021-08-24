@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
-import com.aghourservices.api.CategoryItem
+import com.aghourservices.categories.categoriesApi.CategoryItem
 import com.squareup.picasso.Picasso
 
 class CategoriesAdapter(
@@ -33,3 +33,4 @@ class CategoriesAdapter(
         return "https://aghour-services-backend.herokuapp.com$icon_name"
     }
 }
+

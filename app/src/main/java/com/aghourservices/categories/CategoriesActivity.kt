@@ -8,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.api.ApiServices
-import com.aghourservices.api.CategoryItem
+import com.aghourservices.categories.categoriesApi.ApiServices
+import com.aghourservices.categories.categoriesApi.CategoryItem
 import com.aghourservices.categories.ui.CategoriesAdapter
-import com.aghourservices.listView.ListActivity
+import com.aghourservices.markets.MarketsActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.my_toolbar.*
+import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,20 +22,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://aghour-services-backend.herokuapp.com/api/"
 class CategoriesActivity : AppCompatActivity() {
-
     lateinit var adapter: CategoriesAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(myToolbar)
+        setSupportActionBar(Toolbar)
 
         recyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerview.layoutManager = linearLayoutManager
         loadCategoriesList()
         recyclerview.layoutManager = GridLayoutManager(this, 2)
+
     }
 
     private fun loadCategoriesList() {
@@ -46,6 +46,7 @@ class CategoriesActivity : AppCompatActivity() {
         val retrofitData = retrofitBuilder.loadCategoriesList()
 
         retrofitData.enqueue(object : Callback<ArrayList<CategoryItem>?> {
+
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ArrayList<CategoryItem>?>,
@@ -63,8 +64,9 @@ class CategoriesActivity : AppCompatActivity() {
         })
     }
 
+    //Start Second Intent Activity
     private fun onListItemClick() {
-        val intent = Intent(this, ListActivity::class.java)
+        val intent = Intent(this, MarketsActivity::class.java)
         startActivity(intent)
     }
 }
