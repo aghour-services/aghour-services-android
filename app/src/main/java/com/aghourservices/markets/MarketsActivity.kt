@@ -20,10 +20,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.FieldPosition
 
 const val BASE_URL = "https://jsonplaceholder.typicode.com"
-
 class MarketsActivity : AppCompatActivity() {
 
     lateinit var adapter: MarketsAdapter
@@ -72,7 +70,6 @@ class MarketsActivity : AppCompatActivity() {
         val phoneNumber = "01287303441"
         callPhone(phoneNumber)
     }
-
     private fun callPhone(phoneNumber: String) {
         Toast.makeText(this, phoneNumber, Toast.LENGTH_SHORT).show()
         val callIntent = Intent(Intent.ACTION_DIAL)
