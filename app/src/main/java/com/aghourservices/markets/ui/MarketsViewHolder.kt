@@ -1,6 +1,8 @@
 package com.aghourservices.markets.ui
 
 import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,11 +16,8 @@ class MarketsViewHolder(
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     val imageViewer: ImageView = itemView.findViewById(R.id.image)
-    var txtOne: TextView = itemView.TxtOne
-
-    init {
-        itemView.setOnClickListener(this)
-    }
+    var id: TextView = itemView.findViewById(R.id.id)
+    var title: TextView = itemView.title
 
     override fun onClick(v: View) {
         onItemClicked(absoluteAdapterPosition)

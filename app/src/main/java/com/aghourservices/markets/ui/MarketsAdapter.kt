@@ -10,7 +10,6 @@ import com.squareup.picasso.Picasso
 class MarketsAdapter(
     private val arrayList: ArrayList<MarketItem>,
     private val onItemClicked: (position: Int) -> Unit
-
 ) :
     RecyclerView.Adapter<MarketsViewHolder>(){
 
@@ -23,7 +22,8 @@ class MarketsAdapter(
     override fun onBindViewHolder(holder: MarketsViewHolder, position: Int) {
         val marketItem = arrayList[position]
         Picasso.get().load(marketItem.url).into(holder.imageViewer)
-        holder.txtOne.text = arrayList[position].id.toString()
+        holder.id.text = arrayList[position].id.toString()
+        holder.title.text = arrayList[position].title
     }
 
     override fun getItemCount(): Int {
