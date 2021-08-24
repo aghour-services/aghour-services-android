@@ -1,9 +1,7 @@
 package com.aghourservices.markets.api
 
 data class MarketItem(
-    val albumId: Int,
+    val url: String,
     val id: Int,
-    val thumbnailUrl: String,
-    val title: String,
-    val url: String
+    val title: String
 )
