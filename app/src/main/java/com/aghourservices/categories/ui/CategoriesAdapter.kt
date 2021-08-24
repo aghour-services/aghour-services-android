@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
-import com.aghourservices.categories.categoriesApi.CategoryItem
+import com.aghourservices.categories.api.CategoryItem
 import com.squareup.picasso.Picasso
 
 class CategoriesAdapter(

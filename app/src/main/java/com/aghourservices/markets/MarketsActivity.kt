@@ -1,16 +1,18 @@
 package com.aghourservices.markets
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.markets.marketsApi.ApiServices
-import com.aghourservices.markets.marketsApi.MarketItem
+import com.aghourservices.markets.api.ApiServices
+import com.aghourservices.markets.api.MarketItem
 import com.aghourservices.markets.ui.MarketsAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_markets_view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
@@ -45,7 +47,7 @@ class MarketsActivity : AppCompatActivity() {
 
         val dataMarkets = retrofitBuilder.loadMarketsList()
 
-        dataMarkets.enqueue(object : Callback<ArrayList<MarketItem>?>{
+        dataMarkets.enqueue(object : Callback<ArrayList<MarketItem>?> {
 
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
@@ -54,7 +56,7 @@ class MarketsActivity : AppCompatActivity() {
             ) {
                 val responseBody = response.body()!!
                 Log.v("DATA", responseBody.toString())
-                adapter = MarketsAdapter(responseBody)
+                adapter = MarketsAdapter(responseBody) { position -> onListItemClick(position) }
                 marketList.adapter = adapter
             }
 
@@ -62,5 +64,17 @@ class MarketsActivity : AppCompatActivity() {
                 Log.d("MarketsActivity", "onFailure: " + t.message)
             }
         })
+    }
+
+    private fun onListItemClick(position: Int) {
+        val phoneNumber = "01287303441"
+        callPhone(phoneNumber)
+    }
+
+    private fun callPhone(phoneNumber: String) {
+        Toast.makeText(this, phoneNumber, Toast.LENGTH_SHORT).show()
+        val callIntent = Intent(Intent.ACTION_DIAL)
+        callIntent.data = Uri.parse("tel:$phoneNumber") //change the number
+        startActivity(callIntent)
     }
 }

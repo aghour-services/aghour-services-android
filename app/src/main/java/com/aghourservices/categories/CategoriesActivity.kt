@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.categories.categoriesApi.ApiServices
-import com.aghourservices.categories.categoriesApi.CategoryItem
+import com.aghourservices.categories.api.ApiServices
+import com.aghourservices.categories.api.CategoryItem
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.markets.MarketsActivity
 import kotlinx.android.synthetic.main.activity_main.*
