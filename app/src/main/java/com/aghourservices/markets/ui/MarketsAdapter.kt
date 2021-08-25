@@ -22,7 +22,6 @@ class MarketsAdapter(
     override fun onBindViewHolder(holder: MarketsViewHolder, position: Int) {
         val marketItem = arrayList[position]
         Picasso.get().load(marketItem.url).into(holder.imageViewer)
-        holder.id.text = arrayList[position].id.toString()
         holder.title.text = arrayList[position].title
     }
 

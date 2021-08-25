@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
 import com.aghourservices.categories.CategoriesActivity
 
-class SplashScreen<splashImage : View?> : AppCompatActivity() {
+class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -21,10 +21,6 @@ class SplashScreen<splashImage : View?> : AppCompatActivity() {
             val intent = Intent(this, CategoriesActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000)
-
-        val splashScreen = findViewById<splashImage>(R.id.splashImage)as ImageView
-        val animation : Animation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
-        splashScreen.startAnimation(animation)
+        }, 2000)
     }
 }

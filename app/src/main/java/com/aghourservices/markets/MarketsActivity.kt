@@ -73,7 +73,6 @@ class MarketsActivity : AppCompatActivity() {
         callPhone(phoneNumber)
     }
     private fun callPhone(phoneNumber: String) {
-        Toast.makeText(this, phoneNumber, Toast.LENGTH_SHORT).show()
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)

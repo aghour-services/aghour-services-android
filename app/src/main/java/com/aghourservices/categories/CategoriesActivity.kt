@@ -41,9 +41,6 @@ class CategoriesActivity : AppCompatActivity() {
         recyclerview.layoutManager = linearLayoutManager
         loadCategoriesList()
         recyclerview.layoutManager = GridLayoutManager(this, 2)
-        val animation : Animation = AnimationUtils.loadAnimation(this, R.anim.down_side)
-        recyclerview.startAnimation(animation)
-
     }
 
     private fun loadCategoriesList() {

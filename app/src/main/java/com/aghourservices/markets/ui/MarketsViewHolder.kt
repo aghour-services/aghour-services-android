@@ -13,7 +13,6 @@ class MarketsViewHolder(
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     var imageViewer: ImageView = itemView.findViewById(R.id.image)
-    var id: TextView = itemView.findViewById(R.id.id)
     var title: TextView = itemView.findViewById(R.id.title)
     var imageButton: ImageButton = itemView.findViewById(R.id.btnCall)
 

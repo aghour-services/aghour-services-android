@@ -1,6 +1,6 @@
 package com.aghourservices.categories.api
 
 data class CategoryItem(
-    val icon_path: String,
+    val icon: String,
     val name: String,
 )

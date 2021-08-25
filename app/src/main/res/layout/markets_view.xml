@@ -1,30 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp">
+    android:layout_margin="10dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
         android:orientation="vertical"
         android:background="@drawable/selector"
         tools:ignore="UseCompoundDrawables">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher" />
-
         <TextView
-            android:id="@+id/id"
-            android:layout_width="wrap_content"
+            android:id="@+id/name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="right"
             android:text="Mohamed"
             android:textStyle="bold"
             android:textColor="@color/blue"
@@ -32,23 +27,36 @@
             tools:ignore="SmallSp" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:gravity="right"
             android:textStyle="bold"
             android:text="Ahmed"
             android:textSize="12sp"
             android:textColor="@color/gray" />
 
-        <ImageButton
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:text="desc"
+            android:textSize="12sp"
+            android:textColor="@color/gray" />
+
+        <Button
             android:id="@+id/btnCall"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
             android:layout_marginTop="25dp"
-            android:background="@drawable/my_buttons"
-            android:src="@drawable/ic_call" />
+            android:background="@drawable/button_selector"
+            android:drawableLeft="@drawable/ic_call"
+            android:paddingLeft="12dp"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
