@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.CategoryItem
@@ -25,6 +29,8 @@ class CategoriesActivity : AppCompatActivity() {
     lateinit var adapter: CategoriesAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,6 +41,8 @@ class CategoriesActivity : AppCompatActivity() {
         recyclerview.layoutManager = linearLayoutManager
         loadCategoriesList()
         recyclerview.layoutManager = GridLayoutManager(this, 2)
+        val animation : Animation = AnimationUtils.loadAnimation(this, R.anim.down_side)
+        recyclerview.startAnimation(animation)
 
     }
 
