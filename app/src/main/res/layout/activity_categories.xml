@@ -16,6 +16,6 @@
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/recycler_view_design" />
+            tools:listitem="@layout/category_card" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

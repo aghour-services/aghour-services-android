@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".markets.MarketsActivity">
+    tools:context=".firms.MarketsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,10 +13,10 @@
         <include layout="@layout/toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/marketList"
+            android:id="@+id/firmsRecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/markets_view" />
+            tools:listitem="@layout/firms_card" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
