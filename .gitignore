@@ -9,3 +9,5 @@
 .cxx
 local.properties
 .idea/gradle.xml
+/gradle/caches
+/gradle/wrapper/dists

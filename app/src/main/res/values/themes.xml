@@ -9,9 +9,10 @@
         <item name="colorSecondary">@color/blue200</item>
         <item name="colorSecondaryVariant">@color/primary_color</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->z
+        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- disable darkTheme. -->
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 

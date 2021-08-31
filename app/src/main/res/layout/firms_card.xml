@@ -19,31 +19,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Mohamed"
+            android:text="Name"
             android:textColor="@color/blue"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:ignore="SmallSp" />
+            tools:ignore="RtlHardcoded,SmallSp" />
 
         <TextView
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Ahmed"
-            android:textColor="@color/gray"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:text="Address"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/green1"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="desc"
+            android:text="Description"
             android:textColor="@color/gray"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="2dp"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/btnCall"
@@ -52,10 +56,10 @@
             android:layout_gravity="right"
             android:layout_marginTop="25dp"
             android:background="@drawable/button_selector"
-            android:drawableLeft="@drawable/ic_call"
-            android:paddingLeft="12dp"
+            android:drawableStart="@drawable/ic_call"
+            android:paddingStart="12dp"
             android:textColor="@color/white"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+            tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry,SpeakableTextPresentCheck" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
