@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,6 +28,7 @@ class MarketsActivity : AppCompatActivity() {
     lateinit var adapter: FirmsAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var toolBar: Toolbar
+    private lateinit var toolBarTv: TextView
     private lateinit var firmsRecyclerView: RecyclerView
     private lateinit var firmsList: ArrayList<FirmItem>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,9 @@ class MarketsActivity : AppCompatActivity() {
         firmsRecyclerView.layoutManager = GridLayoutManager(this, 1)
 
         var categoryId = intent.getIntExtra("category_id", 0)
+        var categoryName = intent.getStringExtra("category_name")
+
+        toolBarTv.text = categoryName
         loadMarketsList(categoryId)
     }
 
@@ -83,6 +88,8 @@ class MarketsActivity : AppCompatActivity() {
 
     private fun initViews() {
         toolBar = findViewById(R.id.toolBar)
+        toolBarTv = findViewById(R.id.toolBarTv)
+
         firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
     }
 }

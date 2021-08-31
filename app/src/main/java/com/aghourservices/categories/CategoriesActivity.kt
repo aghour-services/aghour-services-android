@@ -71,9 +71,13 @@ class CategoriesActivity : AppCompatActivity() {
 
     //Start Second Intent Activity
     private fun onListItemClick(position: Int) {
-        var categoryId = categoryList.get(position).id
+        var categoryId = categoryList[position].id
+        var categoryName = categoryList[position].name
+
         val intent = Intent(this, MarketsActivity::class.java)
         intent.putExtra("category_id", categoryId)
+        intent.putExtra("category_name", categoryName)
+
         startActivity(intent)
     }
 
