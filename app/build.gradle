@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.aghourservices"
-        minSdk 23
+        minSdk 21
         targetSdk 30
         //noinspection OldTargetApi
         versionCode 3
