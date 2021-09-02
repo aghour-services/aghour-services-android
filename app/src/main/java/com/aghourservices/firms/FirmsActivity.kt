@@ -89,7 +89,6 @@ class MarketsActivity : AppCompatActivity() {
     private fun initViews() {
         toolBar = findViewById(R.id.toolBar)
         toolBarTv = findViewById(R.id.toolBarTv)
-
         firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
     }
 }
