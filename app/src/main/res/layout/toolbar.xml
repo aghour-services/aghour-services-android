@@ -18,7 +18,6 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         tools:ignore="RtlHardcoded">
-
     </TextView>
 
 </androidx.appcompat.widget.Toolbar>
