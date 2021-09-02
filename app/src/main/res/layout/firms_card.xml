@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/selector"
         android:orientation="vertical"
-        android:padding="15dp"
+        android:padding="20dp"
         tools:ignore="UseCompoundDrawables">
 
         <TextView
@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Address"
             android:layout_marginTop="2dp"
+            android:text="Address"
             android:textColor="@color/green1"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -42,27 +42,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_marginTop="2dp"
             android:text="Description"
             android:textColor="@color/gray"
-            android:layout_marginTop="2dp"
             android:textSize="12sp"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/btnCall"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="01287303441"
-            android:textSize="18sp"
-            android:textAlignment="center"
-            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_selector"
             android:drawableLeft="@drawable/ic_call"
-            android:padding="8dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="+201207083552"
+            android:textAlignment="center"
             android:textColor="@color/white"
+            android:textSize="16sp"
             tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry,SpeakableTextPresentCheck" />
     </LinearLayout>
 
