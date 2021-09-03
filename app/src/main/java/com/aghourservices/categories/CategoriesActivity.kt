@@ -12,19 +12,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
+import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.CategoryItem
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.firms.MarketsActivity
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.FieldPosition
 
-const val BASE_URL = "https://aghour-services-backend.herokuapp.com/api/"
+const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class CategoriesActivity : AppCompatActivity() {
     lateinit var adapter: CategoriesAdapter
@@ -32,11 +36,14 @@ class CategoriesActivity : AppCompatActivity() {
     private lateinit var toolBar: Toolbar;
     private lateinit var recyclerview: RecyclerView;
     private lateinit var categoryList: ArrayList<CategoryItem>
+    private lateinit var adView: AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
         initViews()
         setSupportActionBar(toolBar)
+        AghourAdManager.loadAd(this, adView)
 
         recyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
@@ -86,10 +93,11 @@ class CategoriesActivity : AppCompatActivity() {
     private fun initViews() {
         toolBar = findViewById(R.id.toolBar)
         recyclerview = findViewById(R.id.recyclerview)
+        adView = findViewById(R.id.adView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
+        menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -98,7 +106,10 @@ class CategoriesActivity : AppCompatActivity() {
             R.id.shareButton -> {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.aghourservices")
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "https://play.google.com/store/apps/details?id=com.aghourservices"
+                    )
                     type = "text/plain"
                 }
 

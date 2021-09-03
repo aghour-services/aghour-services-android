@@ -12,16 +12,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
+import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.firms.api.ApiServices
 import com.aghourservices.firms.api.FirmItem
 import com.aghourservices.firms.ui.FirmsAdapter
+import com.google.android.gms.ads.AdView
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = "https://aghour-services-backend.herokuapp.com/api/"
+const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class MarketsActivity : AppCompatActivity() {
 
@@ -31,11 +38,16 @@ class MarketsActivity : AppCompatActivity() {
     private lateinit var toolBarTv: TextView
     private lateinit var firmsRecyclerView: RecyclerView
     private lateinit var firmsList: ArrayList<FirmItem>
+    private lateinit var adView: AdView
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_firms_view)
+        setContentView(R.layout.activity_firms)
         initViews()
         setSupportActionBar(toolBar)
+        AghourAdManager.loadAd(this, adView)
 
         firmsRecyclerView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
@@ -77,7 +89,15 @@ class MarketsActivity : AppCompatActivity() {
 
     private fun onListItemClick(position: Int) {
         val phoneNumber = firmsList.get(position).phone_number
+        sendFirebaseEvent("Call", phoneNumber)
         callPhone(phoneNumber)
+    }
+
+    private fun sendFirebaseEvent(eventName: String, data: String) {
+        firebaseAnalytics = Firebase.analytics
+        firebaseAnalytics.logEvent(eventName) {
+            param("data", data)
+        }
     }
 
     private fun callPhone(phoneNumber: String) {
@@ -90,5 +110,6 @@ class MarketsActivity : AppCompatActivity() {
         toolBar = findViewById(R.id.toolBar)
         toolBarTv = findViewById(R.id.toolBarTv)
         firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
+        adView = findViewById(R.id.adView)
     }
 }

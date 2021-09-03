@@ -41,6 +41,9 @@
             android:exported="true"
             android:theme="@style/Theme.AghourServices.NoActionBar" />
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6023673239780727~5080774708" />
     </application>
 
 </manifest>

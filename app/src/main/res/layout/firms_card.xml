@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/selector"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="18dp"
         tools:ignore="UseCompoundDrawables">
 
         <TextView
@@ -21,7 +21,7 @@
             android:layout_gravity="right"
             android:text="Name"
             android:textColor="@color/blue"
-            android:textSize="20sp"
+            android:textSize="19sp"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded,SmallSp" />
 
@@ -59,7 +59,7 @@
             android:drawableLeft="@drawable/ic_call"
             android:gravity="center"
             android:padding="10dp"
-            android:text="+201207083552"
+            android:text="01207083552"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp"
