@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/selector"
         android:orientation="vertical"
-        android:padding="18dp"
+        android:padding="20dp"
         tools:ignore="UseCompoundDrawables">
 
         <TextView

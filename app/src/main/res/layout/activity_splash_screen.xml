@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/splashImage"
-        android:layout_width="281dp"
-        android:layout_height="345dp"
+        android:layout_width="288dp"
+        android:layout_height="326dp"
         android:src="@mipmap/splash_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
