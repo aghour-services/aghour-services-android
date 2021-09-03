@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class MarketsActivity : AppCompatActivity() {
+class FirmsActivity : AppCompatActivity() {
 
     lateinit var adapter: FirmsAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -58,17 +58,17 @@ class MarketsActivity : AppCompatActivity() {
         var categoryName = intent.getStringExtra("category_name")
 
         toolBarTv.text = categoryName
-        loadMarketsList(categoryId)
+        loadFirms(categoryId)
     }
 
-    private fun loadMarketsList(categoryId: Int) {
+    private fun loadFirms(categoryId: Int) {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
 
-        val dataMarkets = retrofitBuilder.loadMarketsList(categoryId)
+        val firmsList = retrofitBuilder.loadFirms(categoryId)
 
-        dataMarkets.enqueue(object : Callback<ArrayList<FirmItem>?> {
+        firmsList.enqueue(object : Callback<ArrayList<FirmItem>?> {
 
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
@@ -76,13 +76,13 @@ class MarketsActivity : AppCompatActivity() {
                 response: Response<ArrayList<FirmItem>?>,
             ) {
                 val responseBody = response.body()!!
-                firmsList = responseBody
+                this@FirmsActivity.firmsList = responseBody
                 adapter = FirmsAdapter(responseBody) { position -> onListItemClick(position) }
                 firmsRecyclerView.adapter = adapter
             }
 
             override fun onFailure(call: Call<ArrayList<FirmItem>?>, t: Throwable) {
-                Log.d("MarketsActivity", "onFailure: " + t.message)
+                Log.d("FirmsActivity", "onFailure: " + t.message)
             }
         })
     }

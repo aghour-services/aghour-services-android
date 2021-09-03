@@ -16,7 +16,7 @@ import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.CategoryItem
 import com.aghourservices.categories.ui.CategoriesAdapter
-import com.aghourservices.firms.MarketsActivity
+import com.aghourservices.firms.FirmsActivity
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -83,7 +83,7 @@ class CategoriesActivity : AppCompatActivity() {
         var categoryId = categoryList[position].id
         var categoryName = categoryList[position].name
 
-        val intent = Intent(this, MarketsActivity::class.java)
+        val intent = Intent(this, FirmsActivity::class.java)
         intent.putExtra("category_id", categoryId)
         intent.putExtra("category_name", categoryName)
 
