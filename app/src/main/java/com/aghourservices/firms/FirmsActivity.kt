@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.firms.api.ApiServices
@@ -39,8 +42,10 @@ class FirmsActivity : AppCompatActivity() {
     private lateinit var firmsRecyclerView: RecyclerView
     private lateinit var firmsList: ArrayList<FirmItem>
     private lateinit var adView: AdView
-
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+    //define SwipeRefreshLayout
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +66,16 @@ class FirmsActivity : AppCompatActivity() {
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+
+        //call swipeRefreshLayout
+        var number = 0
+        swipeRefreshLayout = findViewById(R.id.swipe)
+        swipeRefreshLayout.setOnRefreshListener {
+            number++
+            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+                swipeRefreshLayout.isRefreshing = false
+            }, 1000)
+        }
     }
 
     private fun loadFirms(categoryId: Int) {

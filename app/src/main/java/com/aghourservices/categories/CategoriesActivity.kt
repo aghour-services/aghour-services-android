@@ -3,6 +3,8 @@ package com.aghourservices.categories
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.categories.api.ApiServices
@@ -38,6 +41,9 @@ class CategoriesActivity : AppCompatActivity() {
     private lateinit var categoryList: ArrayList<CategoryItem>
     private lateinit var adView: AdView
 
+    //define SwipeRefreshLayout
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
@@ -50,6 +56,16 @@ class CategoriesActivity : AppCompatActivity() {
         recyclerview.layoutManager = linearLayoutManager
         loadCategoriesList()
         recyclerview.layoutManager = GridLayoutManager(this, 2)
+
+        //call swipeRefreshLayout
+        var number = 0
+        swipeRefreshLayout = findViewById(R.id.swipe)
+        swipeRefreshLayout.setOnRefreshListener {
+            number++
+            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+                swipeRefreshLayout.isRefreshing = false
+            }, 1000)
+        }
     }
 
     private fun loadCategoriesList() {
