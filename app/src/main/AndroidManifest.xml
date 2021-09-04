@@ -37,7 +37,7 @@
             android:exported="true"
             android:theme="@style/Theme.AghourServices.NoActionBar" />
         <activity
-            android:name=".firms.MarketsActivity"
+            android:name=".firms.FirmsActivity"
             android:exported="true"
             android:theme="@style/Theme.AghourServices.NoActionBar" />
 

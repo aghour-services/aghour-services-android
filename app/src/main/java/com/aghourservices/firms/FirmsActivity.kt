@@ -54,11 +54,13 @@ class FirmsActivity : AppCompatActivity() {
         firmsRecyclerView.layoutManager = linearLayoutManager
         firmsRecyclerView.layoutManager = GridLayoutManager(this, 1)
 
-        var categoryId = intent.getIntExtra("category_id", 0)
-        var categoryName = intent.getStringExtra("category_name")
-
+        val categoryId = intent.getIntExtra("category_id", 0)
+        val categoryName = intent.getStringExtra("category_name")
         toolBarTv.text = categoryName
         loadFirms(categoryId)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
     }
 
     private fun loadFirms(categoryId: Int) {
@@ -111,5 +113,10 @@ class FirmsActivity : AppCompatActivity() {
         toolBarTv = findViewById(R.id.toolBarTv)
         firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
         adView = findViewById(R.id.adView)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
