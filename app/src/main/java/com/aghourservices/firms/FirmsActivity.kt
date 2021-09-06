@@ -74,6 +74,7 @@ class FirmsActivity : AppCompatActivity() {
             number++
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 swipeRefreshLayout.isRefreshing = false
+                loadFirms(categoryId)
             }, 1000)
         }
     }

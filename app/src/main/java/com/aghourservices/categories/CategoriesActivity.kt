@@ -64,6 +64,7 @@ class CategoriesActivity : AppCompatActivity() {
             number++
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 swipeRefreshLayout.isRefreshing = false
+                loadCategoriesList()
             }, 1000)
         }
     }
