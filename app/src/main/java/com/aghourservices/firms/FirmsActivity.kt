@@ -8,18 +8,25 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.aghourservices.BuildConfig.DEBUG
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.firms.api.ApiServices
 import com.aghourservices.firms.api.FirmItem
 import com.aghourservices.firms.ui.FirmsAdapter
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -52,31 +59,27 @@ class FirmsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_firms)
         initViews()
         setSupportActionBar(toolBar)
-        AghourAdManager.loadAd(this, adView)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         firmsRecyclerView.setHasFixedSize(true)
-        linearLayoutManager = LinearLayoutManager(this)
-        firmsRecyclerView.layoutManager = linearLayoutManager
-        firmsRecyclerView.layoutManager = GridLayoutManager(this, 1)
+        firmsRecyclerView.layoutManager = LinearLayoutManager(this)
 
         val categoryId = intent.getIntExtra("category_id", 0)
         val categoryName = intent.getStringExtra("category_name")
         toolBarTv.text = categoryName
+
         loadFirms(categoryId)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-
-        //call swipeRefreshLayout
-        var number = 0
         swipeRefreshLayout = findViewById(R.id.swipe)
         swipeRefreshLayout.setOnRefreshListener {
-            number++
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 swipeRefreshLayout.isRefreshing = false
                 loadFirms(categoryId)
             }, 1000)
         }
+
+        AghourAdManager.displayBannerAd(this, adView)
     }
 
     private fun loadFirms(categoryId: Int) {
@@ -95,7 +98,9 @@ class FirmsActivity : AppCompatActivity() {
             ) {
                 val responseBody = response.body()!!
                 this@FirmsActivity.firmsList = responseBody
-                adapter = FirmsAdapter(responseBody) { position -> onListItemClick(position) }
+                adapter = FirmsAdapter(applicationContext, responseBody) { position ->
+                    onListItemClick(position)
+                }
                 firmsRecyclerView.adapter = adapter
             }
 

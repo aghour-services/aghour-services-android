@@ -1,6 +1,7 @@
 package com.aghourservices.firms.ui
 
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ class FirmsViewHolder(
 ) :
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
+    var adFrame: ViewGroup = itemView.findViewById(R.id.ad_frame)
     var name: TextView = itemView.findViewById(R.id.name)
     var description: TextView = itemView.findViewById(R.id.description)
     var address: TextView = itemView.findViewById(R.id.address)

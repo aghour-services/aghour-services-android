@@ -1,5 +1,6 @@
 package com.aghourservices.categories.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,15 +12,16 @@ class CategoriesAdapter(
     private val List: List<CategoryItem>,
     private val onItemClicked: (position: Int) -> Unit
 ) :
-    RecyclerView.Adapter<CategoryViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.category_card, parent, false)
         return CategoryViewHolder(view, onItemClicked)
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val holder = holder as CategoryViewHolder
         val categoryItem = List[position]
         Picasso.get().load(categoryItem.icon).into(holder.imageView)
         holder.firstTxt.text = List[position].name

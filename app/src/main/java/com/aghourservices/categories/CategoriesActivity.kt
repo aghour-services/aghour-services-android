@@ -20,10 +20,7 @@ import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.CategoryItem
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.firms.FirmsActivity
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,7 +38,6 @@ class CategoriesActivity : AppCompatActivity() {
     private lateinit var categoryList: ArrayList<CategoryItem>
     private lateinit var adView: AdView
 
-    //define SwipeRefreshLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +45,7 @@ class CategoriesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_categories)
         initViews()
         setSupportActionBar(toolBar)
-        AghourAdManager.loadAd(this, adView)
+        AghourAdManager.displayBannerAd(this, adView)
 
         recyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
@@ -85,7 +81,8 @@ class CategoriesActivity : AppCompatActivity() {
             ) {
                 val responseBody = response.body()!!
                 categoryList = responseBody
-                adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
+                adapter =
+                    CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
                 recyclerview.adapter = adapter
             }
 
