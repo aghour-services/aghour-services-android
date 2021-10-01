@@ -1,5 +1,6 @@
 package com.aghourservices.ads
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,7 @@ class AghourAdManager {
             adLoader.loadAd(AdRequest.Builder().build())
         }
 
+        @SuppressLint("InflateParams")
         private fun displayNativeAd(context: Context, parent: ViewGroup, ad: NativeAd) {
             val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -51,7 +53,6 @@ class AghourAdManager {
                 adView.callToActionView.visibility = View.VISIBLE
                 (adView.callToActionView as Button).text = ad.callToAction
             }
-
             adView.setNativeAd(ad)
             parent.removeAllViews()
             parent.addView(adView)

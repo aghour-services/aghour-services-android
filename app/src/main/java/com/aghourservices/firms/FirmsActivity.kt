@@ -6,32 +6,28 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.aghourservices.BuildConfig.DEBUG
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.firms.api.ApiServices
-import com.aghourservices.firms.api.FirmItem
+import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.FirmsAdapter
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdLoader
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 
 import com.google.firebase.ktx.Firebase
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,13 +39,16 @@ const val BASE_URL = "https://aghour-services.magdi.work/api/"
 class FirmsActivity : AppCompatActivity() {
 
     lateinit var adapter: FirmsAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var toolBar: Toolbar
     private lateinit var toolBarTv: TextView
     private lateinit var firmsRecyclerView: RecyclerView
-    private lateinit var firmsList: ArrayList<FirmItem>
+    private lateinit var firmsList: ArrayList<Firm>
     private lateinit var adView: AdView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+    private lateinit var realm: Realm
+    private lateinit var firmsShimmer: ShimmerFrameLayout
+    private lateinit var handler: Handler
+    private lateinit var runnable: Runnable
 
     //define SwipeRefreshLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -58,6 +57,16 @@ class FirmsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firms)
         initViews()
+
+        Realm.init(this)
+        val config = RealmConfiguration
+            .Builder()
+            .allowWritesOnUiThread(true)
+            .name("firm.realm")
+            .schemaVersion(1)
+            .deleteRealmIfMigrationNeeded()
+            .build()
+        realm = Realm.getInstance(config)
         setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -69,14 +78,16 @@ class FirmsActivity : AppCompatActivity() {
         val categoryName = intent.getStringExtra("category_name")
         toolBarTv.text = categoryName
 
-        loadFirms(categoryId)
+        runnable = Runnable { loadFirms(categoryId) }
+        handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(runnable, 1500)
 
         swipeRefreshLayout = findViewById(R.id.swipe)
         swipeRefreshLayout.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 swipeRefreshLayout.isRefreshing = false
                 loadFirms(categoryId)
-            }, 1000)
+            }, 1200)
         }
 
         AghourAdManager.displayBannerAd(this, adView)
@@ -87,31 +98,62 @@ class FirmsActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
 
-        val firmsList = retrofitBuilder.loadFirms(categoryId)
+        val retrofitData = retrofitBuilder.loadFirms(categoryId)
 
-        firmsList.enqueue(object : Callback<ArrayList<FirmItem>?> {
+        retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
 
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
-                call: Call<ArrayList<FirmItem>?>,
-                response: Response<ArrayList<FirmItem>?>,
+                call: Call<ArrayList<Firm>?>,
+                response: Response<ArrayList<Firm>?>,
             ) {
-                val responseBody = response.body()!!
-                this@FirmsActivity.firmsList = responseBody
-                adapter = FirmsAdapter(applicationContext, responseBody) { position ->
-                    onListItemClick(position)
+                firmsList = response.body()!!
+                realm.executeTransaction {
+                    for (i in firmsList) {
+                        try {
+                            val firm = realm.createObject(Firm::class.java, i.id)
+                            firm.name = i.name
+                            firm.address = i.address
+                            firm.description = i.description
+                            firm.phone_number = i.phone_number
+                            firm.category_id = i.category_id
+                        } catch (e: Exception) {
+                        }
+                    }
                 }
-                firmsRecyclerView.adapter = adapter
+                setAdapter(firmsList)
             }
 
-            override fun onFailure(call: Call<ArrayList<FirmItem>?>, t: Throwable) {
-                Log.d("FirmsActivity", "onFailure: " + t.message)
+            override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
+                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                firmsList = ArrayList<Firm>()
+                firmsList.addAll(result)
+                setAdapter(firmsList)
+
+                firmsShimmer.visibility = View.GONE
+                Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
+
             }
         })
+        stopShimmerAnimation()
+    }
+
+    private fun stopShimmerAnimation() {
+        firmsShimmer.stopShimmer()
+        firmsShimmer.visibility = View.GONE
+        firmsRecyclerView.visibility = View.VISIBLE
+    }
+
+
+    private fun setAdapter(firmsList: ArrayList<Firm>) {
+        adapter = FirmsAdapter(applicationContext, firmsList) { position ->
+            onListItemClick(position)
+        }
+        firmsRecyclerView.adapter = adapter
     }
 
     private fun onListItemClick(position: Int) {
-        val phoneNumber = firmsList.get(position).phone_number
+        val phoneNumber = firmsList[position].phone_number
         sendFirebaseEvent("Call", phoneNumber)
         callPhone(phoneNumber)
     }
@@ -134,6 +176,7 @@ class FirmsActivity : AppCompatActivity() {
         toolBarTv = findViewById(R.id.toolBarTv)
         firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
         adView = findViewById(R.id.adView)
+        firmsShimmer = findViewById(R.id.firmsShimmer)
     }
 
     override fun onSupportNavigateUp(): Boolean {

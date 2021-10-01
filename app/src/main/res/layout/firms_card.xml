@@ -9,8 +9,8 @@
         android:id="@+id/firm_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector"
         android:orientation="vertical"
+        android:background="@color/white"
         android:padding="20dp"
         tools:ignore="UseCompoundDrawables">
 
@@ -21,7 +21,7 @@
             android:layout_gravity="right"
             android:text="Name"
             android:textColor="@color/blue"
-            android:textSize="19sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded,SmallSp" />
 
@@ -33,7 +33,7 @@
             android:layout_marginTop="2dp"
             android:text="Address"
             android:textColor="@color/green1"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded" />
 
@@ -45,7 +45,7 @@
             android:layout_marginTop="2dp"
             android:text="Description"
             android:textColor="@color/gray"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded" />
 

@@ -6,5 +6,5 @@ import retrofit2.http.Query
 interface ApiServices {
 
     @GET("firms")
-    fun loadFirms(@Query("category_id") category_id: Int): retrofit2.Call<ArrayList<FirmItem>>
+    fun loadFirms(@Query("category_id") category_id: Int): retrofit2.Call<ArrayList<Firm>>
 }
