@@ -52,6 +52,7 @@ class CategoriesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_categories)
         initViews()
 
+        setSupportActionBar(toolBar)
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed(runnable, 2000)
@@ -63,7 +64,6 @@ class CategoriesActivity : AppCompatActivity() {
             .allowWritesOnUiThread(true)
             .build()
         realm = Realm.getInstance(config)
-        setSupportActionBar(toolBar)
         AghourAdManager.displayBannerAd(this, adView)
 
         //recyclerView initialize
@@ -150,7 +150,7 @@ class CategoriesActivity : AppCompatActivity() {
 
     //Id Fun
     private fun initViews() {
-        toolBar = findViewById(R.id.toolBar)
+        toolBar = findViewById(R.id.toolbar)
         recyclerview = findViewById(R.id.recyclerview)
         adView = findViewById(R.id.adView)
         shimmerLayout = findViewById(R.id.shimmerLayout)

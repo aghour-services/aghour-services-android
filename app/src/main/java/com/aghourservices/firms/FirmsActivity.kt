@@ -125,7 +125,8 @@ class FirmsActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result =
+                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList<Firm>()
                 firmsList.addAll(result)
                 setAdapter(firmsList)
@@ -172,7 +173,7 @@ class FirmsActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        toolBar = findViewById(R.id.toolBar)
+        toolBar = findViewById(R.id.toolbar)
         toolBarTv = findViewById(R.id.toolBarTv)
         firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
         adView = findViewById(R.id.adView)
