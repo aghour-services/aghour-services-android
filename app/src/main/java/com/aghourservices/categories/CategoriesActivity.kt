@@ -112,6 +112,7 @@ class CategoriesActivity : AppCompatActivity() {
                 }
                 adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
                 recyclerview.adapter = adapter
+                stopShimmerAnimation()
             }
 
             override fun onFailure(call: Call<ArrayList<Category>?>, t: Throwable) {
@@ -122,11 +123,10 @@ class CategoriesActivity : AppCompatActivity() {
                     CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
 
                 //shimmer Animation without Internet
-                shimmerLayout.visibility = View.GONE
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
+                stopShimmerAnimation()
             }
         })
-        stopShimmerAnimation()
     }
 
     //load Shimmer Animation

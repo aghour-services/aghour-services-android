@@ -80,7 +80,7 @@ class FirmsActivity : AppCompatActivity() {
 
         runnable = Runnable { loadFirms(categoryId) }
         handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 1500)
+        handler.postDelayed(runnable, 1000)
 
         swipeRefreshLayout = findViewById(R.id.swipe)
         swipeRefreshLayout.setOnRefreshListener {
@@ -122,6 +122,7 @@ class FirmsActivity : AppCompatActivity() {
                     }
                 }
                 setAdapter(firmsList)
+                stopShimmerAnimation()
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
@@ -131,12 +132,10 @@ class FirmsActivity : AppCompatActivity() {
                 firmsList.addAll(result)
                 setAdapter(firmsList)
 
-                firmsShimmer.visibility = View.GONE
                 Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
-
+                stopShimmerAnimation()
             }
         })
-        stopShimmerAnimation()
     }
 
     private fun stopShimmerAnimation() {
