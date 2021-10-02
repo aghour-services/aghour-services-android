@@ -55,7 +55,7 @@ class CategoriesActivity : AppCompatActivity() {
         setSupportActionBar(toolBar)
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 2000)
+        handler.postDelayed(runnable, 1500)
         Realm.init(this)
         val config = RealmConfiguration.Builder()
             .name("category.realm")

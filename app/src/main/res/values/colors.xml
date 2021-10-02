@@ -25,5 +25,6 @@
     <color name="description">#1a1a1a</color>
     <color name="chef">#777</color>
     <color name="timestamp">#777</color>
-    <color name="Gray">#D8D8D8</color>
+    <color name="gray2">#F0F0F0</color>
+    <color name="Gray">#DCDCDC</color>
 </resources>
