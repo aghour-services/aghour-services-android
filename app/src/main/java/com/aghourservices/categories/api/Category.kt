@@ -6,9 +6,9 @@ import io.realm.annotations.RealmClass
 
 
 @RealmClass
-open class Category :RealmObject() {
+open class Category : RealmObject() {
     @PrimaryKey
-    var id:Int = 0
-    var icon:String? = null
-    var name : String? = null
+    var id: Int = 0
+    var icon: String? = null
+    var name: String? = null
 }
