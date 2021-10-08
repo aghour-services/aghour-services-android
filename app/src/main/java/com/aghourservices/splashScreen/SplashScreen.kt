@@ -20,9 +20,6 @@ class SplashScreen : AppCompatActivity() {
             val intent = Intent(this, CategoriesActivity::class.java)
             startActivity(intent)
             finish()
-        }, 1400)
-        val image = findViewById<ImageView>(R.id.splashImage)
-        val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
-        image.startAnimation(animation)
+        }, 1000)
     }
 }
