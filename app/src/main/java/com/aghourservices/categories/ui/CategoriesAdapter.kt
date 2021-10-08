@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.categories.api.Category
+import com.aghourservices.firms.api.Firm
 import com.squareup.picasso.Picasso
 
 class CategoriesAdapter(
-    private val List: List<Category>,
+    private var List: List<Category>,
     private val onItemClicked: (position: Int) -> Unit
 ) :
 
@@ -28,5 +29,9 @@ class CategoriesAdapter(
     override fun getItemCount(): Int {
         return List.size
     }
+//    fun filterList(filteredNames: ArrayList<Category>) {
+//        this.List = filteredNames
+//        notifyDataSetChanged()
+//    }
 }
 

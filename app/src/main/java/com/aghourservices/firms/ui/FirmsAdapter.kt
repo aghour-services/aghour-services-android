@@ -10,7 +10,7 @@ import com.aghourservices.firms.api.Firm
 
 class FirmsAdapter(
     val context: Context,
-    private val arrayList: ArrayList<Firm>,
+    private var arrayList: ArrayList<Firm>,
     private val onItemClicked: (position: Int) -> Unit,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -44,4 +44,5 @@ class FirmsAdapter(
     override fun getItemCount(): Int {
         return itemsCount
     }
+
 }

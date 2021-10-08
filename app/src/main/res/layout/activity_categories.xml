@@ -7,11 +7,14 @@
     tools:context=".categories.CategoriesActivity">
 
 
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,6 +23,7 @@
             android:layout_marginTop="32dp"
             android:orientation="vertical"
             android:padding="6dp">
+
 
             <include layout="@layout/category_shimmer" />
 
@@ -59,6 +63,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/toolbar" />
+        <include
+            android:id="@+id/search_box_container"
+            layout="@layout/search_header_layout" />
+<!--        <EditText-->
+<!--            android:id="@+id/editTextSearch"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:hint="Search.."-->
+<!--            android:drawableLeft="@drawable/ic_baseline_search_24"-->
+<!--            android:paddingRight="8dp"-->
+<!--            android:textColor="@color/blue200" />-->
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -72,15 +88,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/offWhite"
+
                 android:visibility="gone"
                 android:padding="5dp"
-                tools:listitem="@layout/category_card" />
+                tools:listitem="@layout/category_card"
+                />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <include layout="@layout/admob_banner" />
-
+        <TextView
+            android:id="@+id/no_search_results_found_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_search_results_found"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recyclerview" />
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

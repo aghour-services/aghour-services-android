@@ -4,12 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +24,8 @@ import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.firms.FirmsActivity
+import com.aghourservices.firms.api.Firm
+import com.aghourservices.firms.ui.FirmsAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
@@ -29,6 +35,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
@@ -47,6 +55,15 @@ class CategoriesActivity : AppCompatActivity() {
     private lateinit var shimmerLayout: ShimmerFrameLayout
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
+    private lateinit var editText: AppCompatEditText
+    private lateinit var noSearchResultsFoundText: TextView
+    private lateinit var clearQueryImageView: ImageView
+    private lateinit var voiceSearchImageView: ImageView
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
@@ -82,7 +99,58 @@ class CategoriesActivity : AppCompatActivity() {
                 loadCategoriesList()
             }, 1200)
         }
+        editText = findViewById(R.id.search_edit_text)
+
+        editText.doOnTextChanged { text, _, _, _ ->
+            val query = text.toString().toLowerCase(Locale.getDefault())
+            filterWithQuery(query)
+            toggleSearchIcons(query)
+        }
+
+
+
     }
+    private fun filterWithQuery(query: String) {
+        if (query.isNotEmpty()) {
+            val filteredList: ArrayList<Category> = onQueryChanged(query)
+            adapter = CategoriesAdapter(filteredList) { position -> onListItemClick(position) }
+            recyclerview.adapter = adapter
+            toggleRecyclerView(filteredList)
+        } else if (query.isEmpty()) {
+            adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
+            recyclerview.adapter = adapter
+        }
+    }
+    private fun onQueryChanged(filterQuery: String): ArrayList<Category> {
+        val filteredList = ArrayList<Category>()
+        for (CurrenetItem in categoryList) {
+            if (CurrenetItem.name!!.toLowerCase(Locale.getDefault()).contains(filterQuery)) {
+                filteredList.add(CurrenetItem)
+            }
+        }
+        return filteredList
+    }
+    private fun toggleRecyclerView(sportsList: List<Category>) {
+        if (sportsList.isEmpty()) {
+            recyclerview.visibility = View.INVISIBLE
+//            noSearchResultsFoundText.visibility = View.VISIBLE
+        } else {
+            recyclerview.visibility = View.VISIBLE
+//            noSearchResultsFoundText.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun toggleSearchIcons(query: String) {
+        if (query.isNotEmpty()) {
+            clearQueryImageView.visibility = View.VISIBLE
+            voiceSearchImageView.visibility = View.INVISIBLE
+        } else if (query.isEmpty()) {
+            clearQueryImageView.visibility = View.INVISIBLE
+            voiceSearchImageView.visibility = View.VISIBLE
+        }
+    }
+
+
 
     //LoadCategoriesList With RetrofitBuilder
     private fun loadCategoriesList() {
@@ -154,6 +222,8 @@ class CategoriesActivity : AppCompatActivity() {
         recyclerview = findViewById(R.id.recyclerview)
         adView = findViewById(R.id.adView)
         shimmerLayout = findViewById(R.id.shimmerLayout)
+        clearQueryImageView = findViewById(R.id.clear_search_query)
+        voiceSearchImageView = findViewById(R.id.voice_search_query)
     }
 
     //Share Button View and Create
@@ -181,4 +251,30 @@ class CategoriesActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+//    private fun filter(text: String) {
+//        //new array list that will hold the filtered data
+//        val filteredNames = ArrayList<Category>()
+//        //looping through existing elements and adding the element to filtered list
+//        categoryList.filterTo(filteredNames) {
+//            //if the existing elements contains the search input
+//            it.name!!.toLowerCase().contains(text.toLowerCase())
+//        }
+//        //calling a method of the adapter class and passing the filtered list
+//        adapter!!.filterList(filteredNames)
+//    }
 }
+//val editTextSearch:EditText
+//editTextSearch=findViewById(R.id.editTextSearch)
+//editTextSearch.addTextChangedListener(object :TextWatcher{
+//    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//
+//    }
+//
+//    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//    }
+//
+//    override fun afterTextChanged(editable: Editable?) {
+//        filter(editable.toString())
+//    }
+//
+//})
