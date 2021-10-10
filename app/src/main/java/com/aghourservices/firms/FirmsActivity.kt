@@ -24,7 +24,6 @@ import com.google.android.gms.ads.AdView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
-
 import com.google.firebase.ktx.Firebase
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -172,7 +171,7 @@ class FirmsActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        toolBar = findViewById(R.id.toolBar)
+        toolBar = findViewById(R.id.toolbar)
         toolBarTv = findViewById(R.id.toolBarTv)
         firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
         adView = findViewById(R.id.adView)
