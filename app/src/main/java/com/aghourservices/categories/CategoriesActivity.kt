@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
+import com.aghourservices.search.SearchActivity
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
@@ -38,6 +40,7 @@ class CategoriesActivity : AppCompatActivity() {
     //Global initialize
     lateinit var adapter: CategoriesAdapter
     private lateinit var toolBar: Toolbar
+    private lateinit var searchText: EditText
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerview: RecyclerView
     private lateinit var categoryList: ArrayList<Category>
@@ -75,12 +78,18 @@ class CategoriesActivity : AppCompatActivity() {
         //Call SwipeRefreshLayout
         var number = 0
         swipeRefreshLayout = findViewById(R.id.swipe)
+        swipeRefreshLayout.setColorSchemeResources(R.color.blue200)
         swipeRefreshLayout.setOnRefreshListener {
             number++
-            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+            Handler(Looper.getMainLooper()).postDelayed({
                 swipeRefreshLayout.isRefreshing = false
                 loadCategoriesList()
-            }, 1200)
+            }, 1500)
+        }
+
+        searchText.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -151,6 +160,7 @@ class CategoriesActivity : AppCompatActivity() {
     //Id Fun
     private fun initViews() {
         toolBar = findViewById(R.id.toolbar)
+        searchText = findViewById(R.id.searchText)
         recyclerview = findViewById(R.id.recyclerview)
         adView = findViewById(R.id.adView)
         shimmerLayout = findViewById(R.id.shimmerLayout)

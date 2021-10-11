@@ -10,15 +10,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        android:src="@mipmap/app_logo"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:src="@mipmap/splash"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -28,8 +26,8 @@
         android:gravity="center"
         android:text="خدمات أجهور الكبرى"
         android:textColor="@color/offWhite"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="22sp"
+        android:fontFamily="@font/cairo_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -10,7 +10,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/offWhite">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue200"
             app:layout_scrollFlags="scroll|enterAlways">
+
 
             <TextView
                 android:id="@+id/toolBarTv"
@@ -27,13 +29,16 @@
                 android:gravity="right"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
+                android:fontFamily="@font/cairo_black"
                 tools:ignore="RtlHardcoded" />
 
         </androidx.appcompat.widget.Toolbar>
 
+        <include layout="@layout/search_header" />
+
     </com.google.android.material.appbar.AppBarLayout>
+
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -44,11 +49,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="80dp"
             android:orientation="vertical"
-            android:padding="6dp">
+            android:padding="3dp">
 
             <include layout="@layout/category_shimmer" />
 
@@ -83,7 +88,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"

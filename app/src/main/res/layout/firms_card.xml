@@ -35,17 +35,17 @@
             android:orientation="horizontal">
 
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:text="Address"
-            android:textColor="@color/green1"
-            android:textSize="15sp"
-            android:fontFamily="@font/cairo_bold"
-            tools:ignore="RtlHardcoded" />
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Address"
+                android:textColor="@color/green1"
+                android:textSize="15sp"
+                android:fontFamily="@font/cairo_bold"
+                tools:ignore="RtlHardcoded" />
 
             <ImageView
                 android:layout_width="22dp"
@@ -65,16 +65,16 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:text="Description"
-            android:textColor="@color/gray"
-            android:textSize="13sp"
-            android:fontFamily="@font/cairo_bold" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Description"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:fontFamily="@font/cairo_bold" />
 
             <ImageView
                 android:layout_width="22dp"
