@@ -31,6 +31,7 @@ class SearchResultAdapter(
         holder.address.text = marketItem.address
         holder.description.text = marketItem.description
         holder.imageButton.text = marketItem.phone_number
+        holder.categoryName.text=marketItem.category_name
 
         if (getItemViewType(position) == 0) {
             NativeAdViewHolder(context, holder.adFrame)
