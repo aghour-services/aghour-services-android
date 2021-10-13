@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    app:cardCornerRadius="5dp"
+    android:layout_margin="12dp">
 
     <LinearLayout
         android:id="@+id/firm_card_view"
@@ -31,11 +32,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:fontFamily="@font/cairo_bold"
+            android:fontFamily="@font/cairo_black"
             android:gravity="right"
             android:text="Category"
-            android:textColor="@color/gray"
-            android:textSize="13sp" />
+            android:textColor="@color/blue"
+            android:textSize="16sp" />
 
 
         <TextView
