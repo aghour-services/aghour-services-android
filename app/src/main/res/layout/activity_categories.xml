@@ -34,11 +34,7 @@
                 tools:ignore="RtlHardcoded" />
 
 
-
         </androidx.appcompat.widget.Toolbar>
-
-        <include layout="@layout/search_header"
-            app:layout_scrollFlags="scroll|enterAlways" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -53,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             android:padding="3dp">
 

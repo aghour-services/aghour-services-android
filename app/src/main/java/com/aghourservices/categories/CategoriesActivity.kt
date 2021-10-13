@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.search.SearchActivity
 import com.aghourservices.ads.AghourAdManager
@@ -37,12 +38,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 
-class CategoriesActivity : AppCompatActivity() {
+class CategoriesActivity : BaseActivity() {
 
     //Global initialize
     lateinit var adapter: CategoriesAdapter
     private lateinit var toolBar: Toolbar
-    private lateinit var searchText: EditText
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerview: RecyclerView
     private lateinit var categoryList: ArrayList<Category>
@@ -87,11 +87,6 @@ class CategoriesActivity : AppCompatActivity() {
                 swipeRefreshLayout.isRefreshing = false
                 loadCategoriesList()
             }, 1500)
-        }
-
-        searchText.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
         }
     }
 
@@ -147,7 +142,6 @@ class CategoriesActivity : AppCompatActivity() {
         recyclerview.visibility = View.VISIBLE
     }
 
-
     //Start FirmsActivity With putExtra Data
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
@@ -162,34 +156,8 @@ class CategoriesActivity : AppCompatActivity() {
     //Id Fun
     private fun initViews() {
         toolBar = findViewById(R.id.toolbar)
-        searchText = findViewById(R.id.searchText)
         recyclerview = findViewById(R.id.recyclerview)
         adView = findViewById(R.id.adView)
         shimmerLayout = findViewById(R.id.shimmerLayout)
-    }
-
-    //Share Button View and Create
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.shareButton -> {
-                val sendIntent: Intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(
-                        Intent.EXTRA_TEXT,
-                        "https://play.google.com/store/apps/details?id=com.aghourservices"
-                    )
-                    type = "text/plain"
-                }
-                val shareIntent = Intent.createChooser(sendIntent, null)
-                startActivity(shareIntent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

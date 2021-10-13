@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.firms.api.ApiServices
@@ -35,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class FirmsActivity : AppCompatActivity() {
+class FirmsActivity : BaseActivity() {
 
     lateinit var adapter: FirmsAdapter
     private lateinit var toolBar: Toolbar

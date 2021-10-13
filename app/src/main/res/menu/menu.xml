@@ -6,5 +6,10 @@
         android:icon="@drawable/ic_baseline_share_24"
         android:title="SHARE"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/searchIcon"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:showAsAction="ifRoom" />
 
 </menu>
