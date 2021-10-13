@@ -5,9 +5,21 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.search.SearchActivity
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 
 
 open class BaseActivity : AppCompatActivity() {
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+    protected fun sendFirebaseEvent(eventName: String, data: String) {
+        firebaseAnalytics = Firebase.analytics
+        firebaseAnalytics.logEvent(eventName) {
+            param("data", data)
+        }
+    }
 
     private fun openSearchActivity() {
         val intent = Intent(this, SearchActivity::class.java)
@@ -15,6 +27,8 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun shareApp() {
+        sendFirebaseEvent("Share", "")
+
         val shareText = "https://play.google.com/store/apps/details?id=com.aghourservices"
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND

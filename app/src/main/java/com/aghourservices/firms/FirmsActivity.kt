@@ -43,7 +43,6 @@ class FirmsActivity : BaseActivity() {
     private lateinit var firmsRecyclerView: RecyclerView
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var adView: AdView
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var realm: Realm
     private lateinit var firmsShimmer: ShimmerFrameLayout
     private lateinit var handler: Handler
@@ -155,13 +154,6 @@ class FirmsActivity : BaseActivity() {
         val phoneNumber = firmsList[position].phone_number
         sendFirebaseEvent("Call", phoneNumber)
         callPhone(phoneNumber)
-    }
-
-    private fun sendFirebaseEvent(eventName: String, data: String) {
-        firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.logEvent(eventName) {
-            param("data", data)
-        }
     }
 
     private fun callPhone(phoneNumber: String) {
