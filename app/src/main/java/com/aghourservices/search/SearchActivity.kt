@@ -5,9 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.TextureView
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,10 +32,12 @@ const val BASE_URL = "https://aghour-services.magdi.work/api/"
 class SearchActivity : AppCompatActivity() {
     private lateinit var searchImageIc: ImageView
     private lateinit var searchEditText: EditText
+    private lateinit var noDataTv: TextView
     private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var searchResults: ArrayList<SearchResult>
-    lateinit var adapter: SearchResultAdapter
+    private lateinit var adapter: SearchResultAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +75,6 @@ class SearchActivity : AppCompatActivity() {
             ) {
                 searchResults = response.body()!!
                 setAdapter(searchResults)
-                stopShimmerAnimation()
             }
 
             override fun onFailure(call: Call<ArrayList<SearchResult>?>, t: Throwable) {
@@ -80,15 +83,14 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
-
-    private fun stopShimmerAnimation() {
-//        firmsShimmer.stopShimmer()
-//        firmsShimmer.visibility = View.GONE
-        searchResultRecycler.visibility = View.VISIBLE
-    }
-
-
     private fun setAdapter(searchResults: ArrayList<SearchResult>) {
+        if (searchResults.isEmpty()) {
+            noDataTv.visibility = View.VISIBLE
+            searchResultRecycler.visibility = View.GONE
+            return
+        }
+        noDataTv.visibility = View.GONE
+        searchResultRecycler.visibility = View.VISIBLE
         adapter = SearchResultAdapter(applicationContext, searchResults) { position ->
             onListItemClick(position)
         }
@@ -117,6 +119,7 @@ class SearchActivity : AppCompatActivity() {
     private fun initViews() {
         searchImageIc = findViewById(R.id.search_image_view)
         searchEditText = findViewById(R.id.search_text)
+        noDataTv = findViewById(R.id.no_data_text)
         searchResultRecycler = findViewById(R.id.searchResultRecycler)
     }
 }

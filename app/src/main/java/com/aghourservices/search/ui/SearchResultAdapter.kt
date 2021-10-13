@@ -18,7 +18,8 @@ class SearchResultAdapter(
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_result_card, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.search_result_card, parent, false)
         return SearchResultViewHolder(view, onItemClicked)
     }
 
@@ -26,12 +27,12 @@ class SearchResultAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val holder = holder as SearchResultViewHolder
-        val marketItem = arrayList[position]
-        holder.name.text = marketItem.name
-        holder.address.text = marketItem.address
-        holder.description.text = marketItem.description
-        holder.imageButton.text = marketItem.phone_number
-        holder.categoryName.text=marketItem.category_name
+        val item = arrayList[position]
+        holder.name.text = item.name
+        holder.address.text = item.address
+        holder.description.text = item.description
+        holder.imageButton.text = item.phone_number
+        holder.categoryName.text = item.category_name
 
         if (getItemViewType(position) == 0) {
             NativeAdViewHolder(context, holder.adFrame)

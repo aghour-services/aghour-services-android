@@ -26,6 +26,17 @@
             android:textColor="@color/blue"
             android:textSize="23sp" />
 
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:fontFamily="@font/cairo_bold"
+            android:gravity="right"
+            android:text="Category"
+            android:textColor="@color/gray"
+            android:textSize="13sp" />
+
 
         <TextView
             android:id="@+id/address"
@@ -38,7 +49,6 @@
             android:text="Address"
             android:textColor="@color/green1"
             android:textSize="15sp"
-            app:drawableRightCompat="@mipmap/location"
             tools:ignore="RtlHardcoded" />
 
 
@@ -51,22 +61,7 @@
             android:gravity="right"
             android:text="Description"
             android:textColor="@color/gray"
-            android:textSize="13sp"
-            app:drawableRightCompat="@mipmap/description" />
-
-
-        <TextView
-            android:id="@+id/category_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:fontFamily="@font/cairo_bold"
-            android:gravity="right"
-            android:text="Category..."
-            android:textColor="@color/gray"
-            android:textSize="13sp"
-            app:drawableRightCompat="@mipmap/description" />
-
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/btnCall"

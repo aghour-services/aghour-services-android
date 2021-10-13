@@ -26,11 +26,11 @@ class FirmsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val holder = holder as FirmsViewHolder
-        val marketItem = arrayList[position]
-        holder.name.text = marketItem.name
-        holder.address.text = marketItem.address
-        holder.description.text = marketItem.description
-        holder.imageButton.text = marketItem.phone_number
+        val item = arrayList[position]
+        holder.name.text = item.name
+        holder.address.text = item.address
+        holder.description.text = item.description
+        holder.imageButton.text = item.phone_number
 
         if (getItemViewType(position) == 0) {
             NativeAdViewHolder(context, holder.adFrame)
