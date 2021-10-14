@@ -10,25 +10,27 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue200"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
 
             <TextView
                 android:id="@+id/toolBarTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
+                android:fontFamily="@font/cairo_black"
                 android:gravity="right"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
                 tools:ignore="RtlHardcoded" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -44,11 +46,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="33dp"
             android:orientation="vertical"
-            android:padding="6dp">
+            android:padding="3dp">
 
             <include layout="@layout/category_shimmer" />
 
@@ -83,7 +85,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"

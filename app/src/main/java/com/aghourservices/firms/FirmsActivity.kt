@@ -9,11 +9,11 @@ import android.os.Looper
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.firms.api.ApiServices
@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class FirmsActivity : AppCompatActivity() {
+class FirmsActivity : BaseActivity() {
 
     lateinit var adapter: FirmsAdapter
     private lateinit var toolBar: Toolbar
@@ -43,7 +43,6 @@ class FirmsActivity : AppCompatActivity() {
     private lateinit var firmsRecyclerView: RecyclerView
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var adView: AdView
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var realm: Realm
     private lateinit var firmsShimmer: ShimmerFrameLayout
     private lateinit var handler: Handler
@@ -155,13 +154,6 @@ class FirmsActivity : AppCompatActivity() {
         val phoneNumber = firmsList[position].phone_number
         sendFirebaseEvent("Call", phoneNumber)
         callPhone(phoneNumber)
-    }
-
-    private fun sendFirebaseEvent(eventName: String, data: String) {
-        firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.logEvent(eventName) {
-            param("data", data)
-        }
     }
 
     private fun callPhone(phoneNumber: String) {

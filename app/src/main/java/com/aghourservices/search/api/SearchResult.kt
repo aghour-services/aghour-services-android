@@ -1,4 +1,4 @@
-package com.aghourservices.firms.api
+package com.aghourservices.search.api
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
@@ -6,7 +6,7 @@ import io.realm.annotations.RealmClass
 
 
 @RealmClass
-open class Firm : RealmObject() {
+open class SearchResult : RealmObject() {
     @PrimaryKey
     var id: Int = 0
     var category_id: Int = 0

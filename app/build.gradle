@@ -4,6 +4,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'realm-android'
+    id 'kotlin-android'
 
 }
 
@@ -15,8 +16,8 @@ android {
         minSdk 21
         targetSdk 30
         //noinspection OldTargetApi
-        versionCode 8
-        versionName "1.5"
+        versionCode 9
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

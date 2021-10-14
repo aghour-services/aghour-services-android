@@ -1,5 +1,6 @@
 package com.aghourservices.firms.api
 
+import com.aghourservices.firms.api.Firm
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -23,6 +23,9 @@
         android:theme="@style/Theme.AghourServices"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".search.SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.SplashTheme">
