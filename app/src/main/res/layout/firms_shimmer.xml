@@ -1,58 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_gravity="center"
-    android:layout_margin="6dp">
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:layout_margin="12dp">
+
+    <LinearLayout
+        android:id="@+id/firm_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_gravity="end"
+            android:layout_marginStart="200dp"
+            android:background="@drawable/shimmer_background"
+            android:gravity="end" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="15dp"
+            android:gravity="end"
+            android:orientation="horizontal">
 
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="70dp"
-        android:layout_height="11dp"
-        android:layout_marginTop="13dp"
-        android:background="@color/Gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:background="@drawable/shimmer_background"
+                android:gravity="end" />
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="90dp"
-        android:layout_height="11dp"
-        android:layout_marginTop="13dp"
-        android:background="@color/Gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="110dp"
-        android:layout_height="11dp"
-        android:layout_marginTop="13dp"
-        android:background="@color/Gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4"
-        tools:ignore="MissingConstraints" />
-
-    <View
-        android:layout_width="185dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/Gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3"
-        app:layout_constraintVertical_bias="1.0" />
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shimmer_background"
+                android:gravity="end" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCall"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/shimmer_background" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

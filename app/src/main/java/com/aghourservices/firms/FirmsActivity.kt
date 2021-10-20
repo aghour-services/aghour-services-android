@@ -10,6 +10,9 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -81,6 +84,7 @@ class FirmsActivity : BaseActivity() {
         handler.postDelayed(runnable, 1000)
 
         swipeRefreshLayout = findViewById(R.id.swipe)
+        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
         swipeRefreshLayout.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 swipeRefreshLayout.isRefreshing = false
