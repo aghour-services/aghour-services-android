@@ -10,9 +10,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.core.graphics.blue
-import androidx.core.graphics.green
-import androidx.core.graphics.red
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -24,10 +21,6 @@ import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.FirmsAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -68,6 +61,7 @@ class FirmsActivity : BaseActivity() {
             .deleteRealmIfMigrationNeeded()
             .build()
         realm = Realm.getInstance(config)
+
         setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -86,10 +80,10 @@ class FirmsActivity : BaseActivity() {
         swipeRefreshLayout = findViewById(R.id.swipe)
         swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
         swipeRefreshLayout.setOnRefreshListener {
-            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+            Handler(Looper.getMainLooper()).postDelayed({
                 swipeRefreshLayout.isRefreshing = false
                 loadFirms(categoryId)
-            }, 1200)
+            }, 1000)
         }
 
         AghourAdManager.displayBannerAd(this, adView)

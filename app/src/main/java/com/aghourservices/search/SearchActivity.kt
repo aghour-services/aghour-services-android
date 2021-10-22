@@ -3,13 +3,12 @@ package com.aghourservices.search
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.TextureView
 import android.view.View
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchActivity : AppCompatActivity() {
-    private lateinit var searchImageIc: ImageView
+    private lateinit var searchToolbar: Toolbar
     private lateinit var searchEditText: EditText
     private lateinit var noDataTv: TextView
     private lateinit var searchResultRecycler: RecyclerView
@@ -45,18 +44,22 @@ class SearchActivity : AppCompatActivity() {
         initViews()
 
 
+        setSupportActionBar(searchToolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+
         searchResultRecycler.setHasFixedSize(true)
         searchResultRecycler.layoutManager = LinearLayoutManager(this)
 
-        searchImageIc.setOnClickListener {
+        searchEditText.setOnClickListener {
             search(searchEditText.text.toString())
         }
 
-        searchEditText.doOnTextChanged { text, start, before, count ->
+        searchEditText.doOnTextChanged { text, _, _, _ ->
             search(text.toString())
         }
-    }
 
+    }
 
     private fun search(text: String) {
         sendFirebaseEvent("Search", text)
@@ -117,9 +120,14 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        searchImageIc = findViewById(R.id.search_image_view)
+        searchToolbar = findViewById(R.id.searchToolbar)
         searchEditText = findViewById(R.id.search_text)
         noDataTv = findViewById(R.id.no_data_text)
         searchResultRecycler = findViewById(R.id.searchResultRecycler)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
