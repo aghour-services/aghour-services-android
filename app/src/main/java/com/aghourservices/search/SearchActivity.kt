@@ -1,13 +1,16 @@
 package com.aghourservices.search
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +33,8 @@ const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var searchToolbar: Toolbar
-    private lateinit var searchEditText: EditText
+    private lateinit var backButton: ImageView
+    private lateinit var searchEditText: AppCompatEditText
     private lateinit var noDataTv: TextView
     private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
@@ -45,8 +49,7 @@ class SearchActivity : AppCompatActivity() {
 
 
         setSupportActionBar(searchToolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
+
 
         searchResultRecycler.setHasFixedSize(true)
         searchResultRecycler.layoutManager = LinearLayoutManager(this)
@@ -57,6 +60,29 @@ class SearchActivity : AppCompatActivity() {
 
         searchEditText.doOnTextChanged { text, _, _, _ ->
             search(text.toString())
+        }
+
+        backButton.setOnClickListener {
+            val AlertDialogBuilder = AlertDialog.Builder(this)
+            AlertDialogBuilder.setTitle("تحذير...")
+            AlertDialogBuilder.setIcon(R.mipmap.ic_launcher)
+            AlertDialogBuilder.setMessage("متأكد انك عايز تخرج ؟")
+            AlertDialogBuilder.setCancelable(false)
+            AlertDialogBuilder.setPositiveButton("نعم") { _, _ ->
+                finish()
+            }
+            AlertDialogBuilder.setNegativeButton("لا"){_,_ ->
+                Toast.makeText(this, "تم الخروج", Toast.LENGTH_LONG).show()
+            }
+            AlertDialogBuilder.setNeutralButton("قيمنا :D"){_,_ ->
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.aghourservices")))
+                } catch (e: ActivityNotFoundException){
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.aghourservices")))
+                }
+            }
+            val AlertDialog = AlertDialogBuilder.create()
+            AlertDialog.show()
         }
 
     }
@@ -120,14 +146,10 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        backButton = findViewById(R.id.back_btn)
         searchToolbar = findViewById(R.id.searchToolbar)
         searchEditText = findViewById(R.id.search_text)
         noDataTv = findViewById(R.id.no_data_text)
         searchResultRecycler = findViewById(R.id.searchResultRecycler)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

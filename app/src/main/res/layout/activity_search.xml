@@ -15,24 +15,40 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/search_view_background">
 
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/back_icon" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:gravity="center|right"
             app:endIconMode="clear_text"
-            android:textColorHint="@color/white"
+            app:endIconTint="@color/offWhite"
             app:hintEnabled="false">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/search_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
                 android:layout_marginRight="10dp"
+                android:background="@android:color/transparent"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:fitsSystemWindows="true"
+                android:textColor="@color/offWhite"
+                android:gravity="center|right"
                 android:hint="ابحث هنا"
                 android:imeOptions="actionDone"
-                android:background="@android:color/transparent"
                 android:inputType="text"
                 android:padding="10dp"
-                android:textSize="20sp" />
+                android:textColorHint="@color/Gray"
+                android:textSize="22sp" />
+            <requestFocus/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.appcompat.widget.Toolbar>
 
