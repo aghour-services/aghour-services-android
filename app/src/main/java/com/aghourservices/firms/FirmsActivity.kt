@@ -21,10 +21,6 @@ import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.FirmsAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -65,6 +61,7 @@ class FirmsActivity : BaseActivity() {
             .deleteRealmIfMigrationNeeded()
             .build()
         realm = Realm.getInstance(config)
+
         setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -81,11 +78,12 @@ class FirmsActivity : BaseActivity() {
         handler.postDelayed(runnable, 1000)
 
         swipeRefreshLayout = findViewById(R.id.swipe)
+        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
         swipeRefreshLayout.setOnRefreshListener {
-            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+            Handler(Looper.getMainLooper()).postDelayed({
                 swipeRefreshLayout.isRefreshing = false
                 loadFirms(categoryId)
-            }, 1200)
+            }, 1000)
         }
 
         AghourAdManager.displayBannerAd(this, adView)

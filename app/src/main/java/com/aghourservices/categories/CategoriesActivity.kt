@@ -4,14 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
-import com.aghourservices.search.SearchActivity
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
@@ -61,6 +54,7 @@ class CategoriesActivity : BaseActivity() {
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed(runnable, 1000)
+
         Realm.init(this)
         val config = RealmConfiguration.Builder()
             .name("category.realm")
@@ -80,7 +74,7 @@ class CategoriesActivity : BaseActivity() {
         //Call SwipeRefreshLayout
         var number = 0
         swipeRefreshLayout = findViewById(R.id.swipe)
-        swipeRefreshLayout.setColorSchemeResources(R.color.blue200)
+        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
         swipeRefreshLayout.setOnRefreshListener {
             number++
             Handler(Looper.getMainLooper()).postDelayed({
