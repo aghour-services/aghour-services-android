@@ -82,8 +82,8 @@
                 android:id="@+id/firmsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/offWhite"
                 android:visibility="gone"
+                android:background="@color/offWhite"
                 tools:listitem="@layout/firms_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

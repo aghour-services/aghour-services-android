@@ -1,11 +1,16 @@
 package com.aghourservices.categories
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Html
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -153,5 +158,44 @@ class CategoriesActivity : BaseActivity() {
         recyclerview = findViewById(R.id.recyclerview)
         adView = findViewById(R.id.adView)
         shimmerLayout = findViewById(R.id.shimmerLayout)
+    }
+
+    private val positiveButton = ("نعم")
+    private val negativeButton = ("لا")
+    private val neutralButton = ("قيم التـطـبيق")
+    private val message = ("انت علي وشك الخروج من التطبيق")
+
+    override fun onBackPressed() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("هل تريد الخروج ؟")
+        alertDialogBuilder.setMessage(Html.fromHtml("<font color='#FF000000'>$message</font>"))
+        alertDialogBuilder.setIcon(R.mipmap.ic_launcher)
+        alertDialogBuilder.setCancelable(false)
+        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
+            Toast.makeText(this,"تم الخروج", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
+        alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
+        }
+        alertDialogBuilder.setNeutralButton(Html.fromHtml("<font color='#59A5E1'>$neutralButton</font>")) { _, _ ->
+            try {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=com.aghourservices")
+                    )
+                )
+            } catch (e: ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=com.aghourservices")
+                    )
+                )
+            }
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 }

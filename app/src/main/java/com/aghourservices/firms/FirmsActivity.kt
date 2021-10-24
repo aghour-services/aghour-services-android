@@ -43,8 +43,6 @@ class FirmsActivity : BaseActivity() {
     private lateinit var firmsShimmer: ShimmerFrameLayout
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
-
-    //define SwipeRefreshLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {

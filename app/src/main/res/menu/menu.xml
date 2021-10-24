@@ -13,5 +13,4 @@
         android:title="SHARE"
         app:showAsAction="ifRoom" />
 
-
 </menu>
