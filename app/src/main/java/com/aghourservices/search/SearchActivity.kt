@@ -21,9 +21,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
+import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
+import com.google.android.gms.ads.AdView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -41,6 +43,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var backButton: ImageView
     private lateinit var searchEditText: AppCompatEditText
     private lateinit var noDataTv: TextView
+    private lateinit var adView:AdView
     private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var searchResults: ArrayList<SearchResult>
@@ -55,6 +58,7 @@ class SearchActivity : AppCompatActivity() {
         setSupportActionBar(searchToolbar)
         searchResultRecycler.setHasFixedSize(true)
         searchResultRecycler.layoutManager = LinearLayoutManager(this)
+        AghourAdManager.displayBannerAd(this, adView)
 
         searchEditText.setOnClickListener {
             search(searchEditText.text.toString())
@@ -139,6 +143,7 @@ class SearchActivity : AppCompatActivity() {
         backButton = findViewById(R.id.back_btn)
         searchToolbar = findViewById(R.id.searchToolbar)
         searchEditText = findViewById(R.id.search_text)
+        adView = findViewById(R.id.adView)
         noDataTv = findViewById(R.id.no_data_text)
         searchResultRecycler = findViewById(R.id.searchResultRecycler)
     }

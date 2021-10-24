@@ -25,7 +25,7 @@
 
             <ImageView
                 android:id="@+id/back_btn"
-                android:layout_width="25dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/back_icon" />
 
@@ -47,13 +47,14 @@
                     android:background="@android:color/transparent"
                     android:gravity="center|right"
                     android:hint="ابحث هنا"
+                    android:fontFamily="@font/cairo_black"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:padding="10dp"
-                    android:textColor="@color/offWhite"
-                    android:textColorHint="@color/Gray"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/offWhite"
                     android:textCursorDrawable="@drawable/cursor_color"
-                    android:textSize="22sp" />
+                    android:textSize="16sp" />
                 <requestFocus/>
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -78,8 +79,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:textColor="#B9B9B9"
+            android:fontFamily="@font/cairo_black"
             android:text="لا توجد نتائج بحث"
-            android:textSize="35sp" />
+            android:textSize="25sp" />
     </LinearLayout>
 
     <LinearLayout

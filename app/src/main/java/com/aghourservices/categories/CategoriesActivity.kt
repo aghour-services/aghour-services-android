@@ -170,12 +170,10 @@ class CategoriesActivity : BaseActivity() {
         alertDialogBuilder.setTitle("هل تريد الخروج ؟")
         alertDialogBuilder.setMessage(Html.fromHtml("<font color='#FF000000'>$message</font>"))
         alertDialogBuilder.setIcon(R.mipmap.ic_launcher)
-        alertDialogBuilder.setCancelable(false)
+        alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
-            Toast.makeText(this,"تم الخروج", Toast.LENGTH_SHORT).show()
             finish()
         }
-
         alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
         }
         alertDialogBuilder.setNeutralButton(Html.fromHtml("<font color='#59A5E1'>$neutralButton</font>")) { _, _ ->

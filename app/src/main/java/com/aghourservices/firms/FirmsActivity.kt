@@ -59,11 +59,12 @@ class FirmsActivity : BaseActivity() {
             .deleteRealmIfMigrationNeeded()
             .build()
         realm = Realm.getInstance(config)
+        AghourAdManager.displayBannerAd(this, adView)
+
 
         setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-
         firmsRecyclerView.setHasFixedSize(true)
         firmsRecyclerView.layoutManager = LinearLayoutManager(this)
 
