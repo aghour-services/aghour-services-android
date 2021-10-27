@@ -42,7 +42,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchToolbar: Toolbar
     private lateinit var backButton: ImageView
     private lateinit var searchEditText: AppCompatEditText
-    private lateinit var noDataTv: TextView
     private lateinit var adView:AdView
     private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
@@ -107,11 +106,9 @@ class SearchActivity : AppCompatActivity() {
 
     private fun setAdapter(searchResults: ArrayList<SearchResult>) {
         if (searchResults.isEmpty()) {
-            noDataTv.visibility = View.VISIBLE
             searchResultRecycler.visibility = View.GONE
             return
         }
-        noDataTv.visibility = View.GONE
         searchResultRecycler.visibility = View.VISIBLE
         adapter = SearchResultAdapter(applicationContext, searchResults) { position ->
             onListItemClick(position)
@@ -144,7 +141,6 @@ class SearchActivity : AppCompatActivity() {
         searchToolbar = findViewById(R.id.searchToolbar)
         searchEditText = findViewById(R.id.search_text)
         adView = findViewById(R.id.adView)
-        noDataTv = findViewById(R.id.no_data_text)
         searchResultRecycler = findViewById(R.id.searchResultRecycler)
     }
 }

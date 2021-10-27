@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/blue1"
+    android:background="@color/offWhite"
     tools:context=".splashScreen.SplashScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,17 +13,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            android:src="@mipmap/app_logo"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="350dp"
+            android:src="@mipmap/rounded"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.45999998" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.0"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/colorful_loading" />
 
         <TextView
             android:id="@+id/textView"
@@ -33,8 +47,8 @@
             android:fontFamily="@font/cairo_black"
             android:gravity="center"
             android:text="خدمات أجهور الكبرى"
-            android:textColor="@color/offWhite"
-            android:textSize="22sp"
+            android:textColor="@color/blue1"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
