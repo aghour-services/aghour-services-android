@@ -1,21 +1,31 @@
 package com.aghourservices.search
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
+import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
+import com.google.android.gms.ads.AdView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -30,26 +40,24 @@ const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var searchToolbar: Toolbar
-    private lateinit var searchEditText: EditText
-    private lateinit var noDataTv: TextView
+    private lateinit var backButton: ImageView
+    private lateinit var searchEditText: AppCompatEditText
+    private lateinit var adView:AdView
     private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var searchResults: ArrayList<SearchResult>
     private lateinit var adapter: SearchResultAdapter
-
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         initViews()
 
-
         setSupportActionBar(searchToolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-
         searchResultRecycler.setHasFixedSize(true)
         searchResultRecycler.layoutManager = LinearLayoutManager(this)
+        AghourAdManager.displayBannerAd(this, adView)
 
         searchEditText.setOnClickListener {
             search(searchEditText.text.toString())
@@ -59,6 +67,16 @@ class SearchActivity : AppCompatActivity() {
             search(text.toString())
         }
 
+        backButton.setOnClickListener {
+            finish()
+        }
+        swipeRefreshLayout = findViewById(R.id.swipe)
+        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
+        swipeRefreshLayout.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                swipeRefreshLayout.isRefreshing = false
+            }, 500)
+        }
     }
 
     private fun search(text: String) {
@@ -88,11 +106,9 @@ class SearchActivity : AppCompatActivity() {
 
     private fun setAdapter(searchResults: ArrayList<SearchResult>) {
         if (searchResults.isEmpty()) {
-            noDataTv.visibility = View.VISIBLE
             searchResultRecycler.visibility = View.GONE
             return
         }
-        noDataTv.visibility = View.GONE
         searchResultRecycler.visibility = View.VISIBLE
         adapter = SearchResultAdapter(applicationContext, searchResults) { position ->
             onListItemClick(position)
@@ -119,15 +135,12 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+
     private fun initViews() {
+        backButton = findViewById(R.id.back_btn)
         searchToolbar = findViewById(R.id.searchToolbar)
         searchEditText = findViewById(R.id.search_text)
-        noDataTv = findViewById(R.id.no_data_text)
+        adView = findViewById(R.id.adView)
         searchResultRecycler = findViewById(R.id.searchResultRecycler)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

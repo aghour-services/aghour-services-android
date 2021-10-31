@@ -24,7 +24,8 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".search.SearchActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true"
@@ -48,5 +49,4 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-6023673239780727~5080774708" />
     </application>
-
 </manifest>

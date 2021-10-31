@@ -43,8 +43,6 @@ class FirmsActivity : BaseActivity() {
     private lateinit var firmsShimmer: ShimmerFrameLayout
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
-
-    //define SwipeRefreshLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,11 +59,12 @@ class FirmsActivity : BaseActivity() {
             .deleteRealmIfMigrationNeeded()
             .build()
         realm = Realm.getInstance(config)
+        AghourAdManager.displayBannerAd(this, adView)
+
 
         setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-
         firmsRecyclerView.setHasFixedSize(true)
         firmsRecyclerView.layoutManager = LinearLayoutManager(this)
 

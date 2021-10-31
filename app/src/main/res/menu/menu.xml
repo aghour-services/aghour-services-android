@@ -6,12 +6,11 @@
         android:id="@+id/searchIcon"
         android:icon="@drawable/ic_search"
         android:title="Search"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/shareButton"
         android:icon="@drawable/ic_baseline_share_24"
         android:title="SHARE"
         app:showAsAction="ifRoom" />
-
 
 </menu>
