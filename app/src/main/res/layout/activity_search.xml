@@ -17,9 +17,9 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/searchToolbar"
             android:layout_width="match_parent"
-            android:fitsSystemWindows="true"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/search_view_background"
+            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|enterAlways">
 
 
@@ -45,9 +45,9 @@
                     android:layout_gravity="right|center"
                     android:layout_marginRight="10dp"
                     android:background="@android:color/transparent"
+                    android:fontFamily="@font/cairo_black"
                     android:gravity="center|right"
                     android:hint="ابحث هنا"
-                    android:fontFamily="@font/cairo_black"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:padding="10dp"
@@ -55,7 +55,8 @@
                     android:textColorHint="@color/offWhite"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:textSize="16sp" />
-                <requestFocus/>
+
+                <requestFocus />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -63,20 +64,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:padding="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="300dp"
         android:orientation="vertical">
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            app:lottie_rawRes="@raw/search"
+            android:layout_height="150dp"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/search" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="بتدور علي دكتور أو مطعم؟"
+            android:textColor="#323232"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="ابحث عن اللي انت محتاجه ووفر وقتك"
+            android:textColor="@color/gray"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
