@@ -42,7 +42,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchToolbar: Toolbar
     private lateinit var backButton: ImageView
     private lateinit var searchEditText: AppCompatEditText
-    private lateinit var adView:AdView
+    private lateinit var adView: AdView
     private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var searchResults: ArrayList<SearchResult>
@@ -64,7 +64,10 @@ class SearchActivity : AppCompatActivity() {
         }
 
         searchEditText.doOnTextChanged { text, _, _, _ ->
-            search(text.toString())
+            val searchKeyWord = text.toString()
+            if (searchKeyWord.length > 2) {
+                search(searchKeyWord)
+            }
         }
 
         backButton.setOnClickListener {
