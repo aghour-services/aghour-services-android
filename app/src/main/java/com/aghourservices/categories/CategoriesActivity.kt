@@ -160,37 +160,36 @@ class CategoriesActivity : BaseActivity() {
         shimmerLayout = findViewById(R.id.shimmerLayout)
     }
 
-    private val positiveButton = ("نعم")
-    private val negativeButton = ("لا")
-    private val neutralButton = ("قيم التـطـبيق")
-    private val message = ("انت علي وشك الخروج من التطبيق")
 
     override fun onBackPressed() {
+        showOnCloseDialog()
+    }
+
+    private fun showOnCloseDialog() {
+        val title = "هل تريد الخروج ؟"
+        val message = ("انت علي وشك الخروج من التطبيق")
+        val positiveButton = ("نعم")
+        val negativeButton = ("لا")
+        val neutralButton = ("قيم التـطـبيق")
+
         val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("هل تريد الخروج ؟")
+        alertDialogBuilder.setTitle(title)
         alertDialogBuilder.setMessage(Html.fromHtml("<font color='#FF000000'>$message</font>"))
         alertDialogBuilder.setIcon(R.mipmap.ic_launcher)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
             finish()
+            sendFirebaseEvent("ALERT_FINISH_ACTION", "")
         }
         alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
+            sendFirebaseEvent("ALERT_STAY_ACTION", "")
         }
         alertDialogBuilder.setNeutralButton(Html.fromHtml("<font color='#59A5E1'>$neutralButton</font>")) { _, _ ->
+            val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
+            sendFirebaseEvent("ALERT_RATE_ACTION", "")
             try {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=com.aghourservices")
-                    )
-                )
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             } catch (e: ActivityNotFoundException) {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=com.aghourservices")
-                    )
-                )
             }
         }
         val alertDialog = alertDialogBuilder.create()
