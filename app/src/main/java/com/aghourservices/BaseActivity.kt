@@ -1,6 +1,10 @@
 package com.aghourservices
 
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +16,11 @@ import com.google.firebase.ktx.Firebase
 
 
 open class BaseActivity : AppCompatActivity() {
+
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+    lateinit var uriString: String
+    var hasPackage: Boolean = false
 
     protected fun sendFirebaseEvent(eventName: String, data: String) {
         firebaseAnalytics = Firebase.analytics
@@ -26,7 +34,7 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun shareApp() {
+    fun shareApp() {
         sendFirebaseEvent("Share", "")
         val shareText = "https://play.google.com/store/apps/details?id=com.aghourservices"
         val sendIntent: Intent = Intent().apply {
@@ -38,23 +46,34 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(shareIntent)
     }
 
+    fun rateApp() {
+        val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        } catch (e: ActivityNotFoundException) {
+        }
+    }
+
+    fun facebook() {
+        val url = "https://www.facebook.com/aghourservices"
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        } catch (e: ActivityNotFoundException) {
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-
-    //Share Button View and Create
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.shareButton -> {
-                shareApp()
-            }
+
             R.id.searchIcon -> {
                 openSearchActivity()
             }
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

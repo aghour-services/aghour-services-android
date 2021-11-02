@@ -1,17 +1,15 @@
 package com.aghourservices.categories
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Html
+import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +23,7 @@ import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.firms.FirmsActivity
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
+import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -50,6 +49,10 @@ class CategoriesActivity : BaseActivity() {
     private lateinit var shimmerLayout: ShimmerFrameLayout
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
+    lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
@@ -59,6 +62,25 @@ class CategoriesActivity : BaseActivity() {
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed(runnable, 1000)
+
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        navView.setNavigationItemSelectedListener {
+
+            when (it.itemId) {
+                R.id.nav_home -> Toast.makeText(this, "جاري البحث", Toast.LENGTH_SHORT).show()
+                R.id.nav_fav -> Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                R.id.nav_share -> { shareApp() }
+                R.id.nav_log -> Toast.makeText(this, "Clicked Log out", Toast.LENGTH_SHORT).show()
+                R.id.nav_rate -> { rateApp() }
+                R.id.nav_faceBook -> { facebook() }
+            }
+            true
+        }
 
         Realm.init(this)
         val config = RealmConfiguration.Builder()
@@ -113,7 +135,6 @@ class CategoriesActivity : BaseActivity() {
                         } catch (e: Exception) {
                         }
                     }
-
                 }
                 adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
                 recyclerview.adapter = adapter
@@ -158,41 +179,16 @@ class CategoriesActivity : BaseActivity() {
         recyclerview = findViewById(R.id.recyclerview)
         adView = findViewById(R.id.adView)
         shimmerLayout = findViewById(R.id.shimmerLayout)
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navView = findViewById(R.id.nav_view)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-    override fun onBackPressed() {
-        showOnCloseDialog()
-    }
-
-    private fun showOnCloseDialog() {
-        val title = "هل تريد الخروج ؟"
-        val message = ("انت علي وشك الخروج من التطبيق")
-        val positiveButton = ("نعم")
-        val negativeButton = ("لا")
-        val neutralButton = ("قيم التـطـبيق")
-
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setMessage(Html.fromHtml("<font color='#FF000000'>$message</font>"))
-        alertDialogBuilder.setIcon(R.mipmap.ic_launcher)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
-            finish()
-            sendFirebaseEvent("ALERT_FINISH_ACTION", "")
-        }
-        alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
-            sendFirebaseEvent("ALERT_STAY_ACTION", "")
-        }
-        alertDialogBuilder.setNeutralButton(Html.fromHtml("<font color='#59A5E1'>$neutralButton</font>")) { _, _ ->
-            val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
-            sendFirebaseEvent("ALERT_RATE_ACTION", "")
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-            } catch (e: ActivityNotFoundException) {
+        when {
+            toggle.onOptionsItemSelected(item) -> {
             }
         }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
+        return super.onOptionsItemSelected(item)
     }
 }

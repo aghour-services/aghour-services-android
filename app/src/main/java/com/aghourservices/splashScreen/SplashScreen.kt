@@ -1,5 +1,6 @@
 package com.aghourservices.splashScreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +9,7 @@ import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.categories.CategoriesActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreen : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
