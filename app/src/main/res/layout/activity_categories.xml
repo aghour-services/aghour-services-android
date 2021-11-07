@@ -114,9 +114,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:itemIconTint="@color/blue1"
         app:headerLayout="@layout/nav_header"
         app:itemTextAppearance="@style/RobotoButtonStyle"
-        app:itemTextColor="@color/blue1"
+        app:itemTextColor="@color/blue200"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

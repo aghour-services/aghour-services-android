@@ -1,9 +1,6 @@
 package com.aghourservices
 
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
@@ -18,9 +15,6 @@ import com.google.firebase.ktx.Firebase
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var firebaseAnalytics: FirebaseAnalytics
-
-    lateinit var uriString: String
-    var hasPackage: Boolean = false
 
     protected fun sendFirebaseEvent(eventName: String, data: String) {
         firebaseAnalytics = Firebase.analytics
@@ -48,22 +42,18 @@ open class BaseActivity : AppCompatActivity() {
 
     fun rateApp() {
         val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        } catch (e: ActivityNotFoundException) {
+           val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
-    }
 
     fun facebook() {
         val url = "https://www.facebook.com/aghourservices"
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        } catch (e: ActivityNotFoundException) {
-        }
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

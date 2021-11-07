@@ -25,7 +25,7 @@
     <item
         android:id="@+id/nav_faceBook"
         android:icon="@drawable/facebook"
-        android:title="صفحتنا علي فيس بوك" />
+        android:title="صفحتنا علي الفيسبوك" />
 
     <item
         android:id="@+id/nav_log"

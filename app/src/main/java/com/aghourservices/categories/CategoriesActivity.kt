@@ -1,9 +1,11 @@
 package com.aghourservices.categories
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -35,7 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 
-class CategoriesActivity : BaseActivity() {
+class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     //Global initialize
     lateinit var adapter: CategoriesAdapter
@@ -69,18 +71,7 @@ class CategoriesActivity : BaseActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        navView.setNavigationItemSelectedListener {
-
-            when (it.itemId) {
-                R.id.nav_home -> Toast.makeText(this, "جاري البحث", Toast.LENGTH_SHORT).show()
-                R.id.nav_fav -> Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-                R.id.nav_share -> { shareApp() }
-                R.id.nav_log -> Toast.makeText(this, "Clicked Log out", Toast.LENGTH_SHORT).show()
-                R.id.nav_rate -> { rateApp() }
-                R.id.nav_faceBook -> { facebook() }
-            }
-            true
-        }
+        navView.setNavigationItemSelectedListener(this)
 
         Realm.init(this)
         val config = RealmConfiguration.Builder()
@@ -190,5 +181,34 @@ class CategoriesActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @SuppressLint("WrongConstant")
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> Toast.makeText(this, "جاري البحث", Toast.LENGTH_SHORT).show()
+            R.id.nav_fav -> Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            R.id.nav_share -> {
+                shareApp()
+            }
+            R.id.nav_log -> Toast.makeText(this, "Clicked Log out", Toast.LENGTH_SHORT).show()
+            R.id.nav_rate -> {
+                rateApp()
+            }
+            R.id.nav_faceBook -> {
+                facebook()
+            }
+        }
+        drawerLayout.closeDrawer(Gravity.START)
+        return true
+    }
+
+    @SuppressLint("WrongConstant")
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawer(Gravity.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 }

@@ -70,15 +70,16 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        backButton.setOnClickListener {
-            finish()
-        }
         swipeRefreshLayout = findViewById(R.id.swipe)
         swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
         swipeRefreshLayout.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
                 swipeRefreshLayout.isRefreshing = false
             }, 500)
+        }
+
+        backButton.setOnClickListener {
+            finish()
         }
     }
 
@@ -137,7 +138,6 @@ class SearchActivity : AppCompatActivity() {
             param("data", data)
         }
     }
-
 
     private fun initViews() {
         backButton = findViewById(R.id.back_btn)
