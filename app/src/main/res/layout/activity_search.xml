@@ -39,6 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center"
                     android:gravity="center|right"
+                    app:boxBackgroundMode="none"
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/Gray"
                     app:hintEnabled="false">

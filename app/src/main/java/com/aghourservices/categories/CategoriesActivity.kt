@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat.recreate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,20 +58,16 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_AghourServices)
         setContentView(R.layout.activity_categories)
         initViews()
-
+        swipeCategory()
         setSupportActionBar(toolBar)
-        runnable = Runnable { loadCategoriesList() }
-        handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 1000)
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         navView.setNavigationItemSelectedListener(this)
 
         Realm.init(this)
@@ -89,17 +86,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         recyclerview.layoutManager = linearLayoutManager
         recyclerview.layoutManager = GridLayoutManager(this, 2)
 
-        //Call SwipeRefreshLayout
-        var number = 0
-        swipeRefreshLayout = findViewById(R.id.swipe)
-        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
-        swipeRefreshLayout.setOnRefreshListener {
-            number++
-            Handler(Looper.getMainLooper()).postDelayed({
-                swipeRefreshLayout.isRefreshing = false
-                loadCategoriesList()
-            }, 1500)
-        }
     }
 
     //LoadCategoriesList With RetrofitBuilder
@@ -136,8 +122,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 val result = realm.where(Category::class.java).findAll()
                 categoryList = ArrayList()
                 categoryList.addAll(result)
-                recyclerview.adapter =
-                    CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
+                recyclerview.adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
 
                 //shimmer Animation without Internet
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
@@ -162,6 +147,22 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         intent.putExtra("category_id", categoryId)
         intent.putExtra("category_name", categoryName)
         startActivity(intent)
+    }
+
+    //refresh
+    private fun swipeCategory() {
+        runnable = Runnable { loadCategoriesList() }
+        handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(runnable, 1000)
+
+        swipeRefreshLayout = findViewById(R.id.swipe)
+        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
+        swipeRefreshLayout.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                swipeRefreshLayout.isRefreshing = false
+                loadCategoriesList()
+            }, 1000)
+        }
     }
 
     //Id Fun
