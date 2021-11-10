@@ -11,9 +11,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 
-
 open class BaseActivity : AppCompatActivity() {
-
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     protected fun sendFirebaseEvent(eventName: String, data: String) {
@@ -42,14 +40,17 @@ open class BaseActivity : AppCompatActivity() {
 
     fun rateApp() {
         val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
-           val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
-        }
-
-    fun facebook() {
-        val url = "https://www.facebook.com/aghourservices"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
+    }
+
+    fun facebook() {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318"))
+            startActivity(intent)
+        } catch (e: Exception) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/aghourservices")))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
