@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat.recreate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +22,7 @@ import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
+import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
@@ -37,38 +37,32 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-
 class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     //Global initialize
     lateinit var adapter: CategoriesAdapter
-    private lateinit var toolBar: Toolbar
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var recyclerview: RecyclerView
     private lateinit var categoryList: ArrayList<Category>
-    private lateinit var adView: AdView
     private lateinit var realm: Realm
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var shimmerLayout: ShimmerFrameLayout
+    private lateinit var adView: AdView
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
-    lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navView: NavigationView
+    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var binding: ActivityCategoriesBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_AghourServices)
-        setContentView(R.layout.activity_categories)
-        initViews()
+        binding = ActivityCategoriesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         swipeCategory()
-        setSupportActionBar(toolBar)
+        setSupportActionBar(binding.toolbar)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
-        drawerLayout.addDrawerListener(toggle)
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        navView.setNavigationItemSelectedListener(this)
+        binding.navView.setNavigationItemSelectedListener(this)
 
         Realm.init(this)
         val config = RealmConfiguration.Builder()
@@ -78,14 +72,14 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             .allowWritesOnUiThread(true)
             .build()
         realm = Realm.getInstance(config)
+        adView = findViewById(R.id.adView)
         AghourAdManager.displayBannerAd(this, adView)
 
         //recyclerView initialize
-        recyclerview.setHasFixedSize(true)
+        binding.recyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
-        recyclerview.layoutManager = linearLayoutManager
-        recyclerview.layoutManager = GridLayoutManager(this, 2)
-
+        binding.recyclerview.layoutManager = linearLayoutManager
+        binding.recyclerview.layoutManager = GridLayoutManager(this, 2)
     }
 
     //LoadCategoriesList With RetrofitBuilder
@@ -114,7 +108,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                     }
                 }
                 adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
-                recyclerview.adapter = adapter
+                binding.recyclerview.adapter = adapter
                 stopShimmerAnimation()
             }
 
@@ -122,7 +116,8 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 val result = realm.where(Category::class.java).findAll()
                 categoryList = ArrayList()
                 categoryList.addAll(result)
-                recyclerview.adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
+                binding.recyclerview.adapter =
+                    CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
 
                 //shimmer Animation without Internet
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
@@ -133,9 +128,9 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     //load Shimmer Animation
     private fun stopShimmerAnimation() {
-        shimmerLayout.stopShimmer()
-        shimmerLayout.visibility = View.GONE
-        recyclerview.visibility = View.VISIBLE
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE
+        binding.recyclerview.visibility = View.VISIBLE
     }
 
     //Start FirmsActivity With putExtra Data
@@ -153,26 +148,14 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private fun swipeCategory() {
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 1000)
-
-        swipeRefreshLayout = findViewById(R.id.swipe)
-        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
-        swipeRefreshLayout.setOnRefreshListener {
+        handler.postDelayed(runnable, 0)
+        binding.swipe.setColorSchemeResources(R.color.swipeColor)
+        binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
-                swipeRefreshLayout.isRefreshing = false
+                binding.swipe.isRefreshing = false
                 loadCategoriesList()
-            }, 1000)
+            }, 500)
         }
-    }
-
-    //Id Fun
-    private fun initViews() {
-        toolBar = findViewById(R.id.toolbar)
-        recyclerview = findViewById(R.id.recyclerview)
-        adView = findViewById(R.id.adView)
-        shimmerLayout = findViewById(R.id.shimmerLayout)
-        drawerLayout = findViewById(R.id.drawerLayout)
-        navView = findViewById(R.id.nav_view)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -187,12 +170,12 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     @SuppressLint("WrongConstant")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> Toast.makeText(this, "الصفحة الرئيسية", Toast.LENGTH_SHORT).show()
+            R.id.nav_home -> Toast.makeText(this, "الرئيسية", Toast.LENGTH_SHORT).show()
             R.id.nav_fav -> Toast.makeText(this, "المفضلة", Toast.LENGTH_SHORT).show()
             R.id.nav_share -> {
                 shareApp()
             }
-            R.id.nav_log -> Toast.makeText(this, "جاري تسجيل الدخول", Toast.LENGTH_SHORT).show()
+            R.id.nav_log -> Toast.makeText(this, "جاري تسجيل الخروج", Toast.LENGTH_SHORT).show()
             R.id.nav_rate -> {
                 rateApp()
             }
@@ -200,14 +183,14 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 facebook()
             }
         }
-        drawerLayout.closeDrawer(Gravity.START)
+        binding.drawerLayout.closeDrawer(Gravity.START)
         return true
     }
 
     @SuppressLint("WrongConstant")
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START)
+        if (binding.drawerLayout.isDrawerOpen(Gravity.START)) {
+            binding.drawerLayout.closeDrawer(Gravity.START)
         } else {
             super.onBackPressed()
         }

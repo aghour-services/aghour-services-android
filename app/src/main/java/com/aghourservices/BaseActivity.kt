@@ -49,7 +49,12 @@ open class BaseActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318"))
             startActivity(intent)
         } catch (e: Exception) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/aghourservices")))
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://www.facebook.com/aghourservices")
+                )
+            )
         }
     }
 

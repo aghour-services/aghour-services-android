@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.databinding.ActivitySearchBinding
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
@@ -39,46 +40,43 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchActivity : AppCompatActivity() {
-    private lateinit var searchToolbar: Toolbar
-    private lateinit var backButton: ImageView
-    private lateinit var searchEditText: AppCompatEditText
     private lateinit var adView: AdView
-    private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var searchResults: ArrayList<SearchResult>
     private lateinit var adapter: SearchResultAdapter
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var binding: ActivitySearchBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
-        initViews()
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(searchToolbar)
-        searchResultRecycler.setHasFixedSize(true)
-        searchResultRecycler.layoutManager = LinearLayoutManager(this)
+        setSupportActionBar(binding.searchToolbar)
+        binding.searchResultRecycler.setHasFixedSize(true)
+        binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
+
+        adView = findViewById(R.id.adView)
         AghourAdManager.displayBannerAd(this, adView)
 
-        searchEditText.setOnClickListener {
-            search(searchEditText.text.toString())
+        binding.searchText.setOnClickListener {
+            search(binding.searchText.text.toString())
         }
 
-        searchEditText.doOnTextChanged { text, _, _, _ ->
+        binding.searchText.doOnTextChanged { text, _, _, _ ->
             val searchKeyWord = text.toString()
             if (searchKeyWord.length > 2) {
                 search(searchKeyWord)
             }
         }
 
-        swipeRefreshLayout = findViewById(R.id.swipe)
-        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
-        swipeRefreshLayout.setOnRefreshListener {
+        binding.swipe.setColorSchemeResources(R.color.swipeColor)
+        binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
-                swipeRefreshLayout.isRefreshing = false
-            }, 500)
+                binding.swipe.isRefreshing = false
+            }, 100)
         }
 
-        backButton.setOnClickListener {
+        binding.backBtn.setOnClickListener {
             finish()
         }
     }
@@ -110,14 +108,14 @@ class SearchActivity : AppCompatActivity() {
 
     private fun setAdapter(searchResults: ArrayList<SearchResult>) {
         if (searchResults.isEmpty()) {
-            searchResultRecycler.visibility = View.GONE
+            binding.searchResultRecycler.visibility = View.GONE
             return
         }
-        searchResultRecycler.visibility = View.VISIBLE
+        binding.searchResultRecycler.visibility = View.VISIBLE
         adapter = SearchResultAdapter(applicationContext, searchResults) { position ->
             onListItemClick(position)
         }
-        searchResultRecycler.adapter = adapter
+        binding.searchResultRecycler.adapter = adapter
     }
 
     private fun onListItemClick(position: Int) {
@@ -137,13 +135,5 @@ class SearchActivity : AppCompatActivity() {
         firebaseAnalytics.logEvent(eventName) {
             param("data", data)
         }
-    }
-
-    private fun initViews() {
-        backButton = findViewById(R.id.back_btn)
-        searchToolbar = findViewById(R.id.searchToolbar)
-        searchEditText = findViewById(R.id.search_text)
-        adView = findViewById(R.id.adView)
-        searchResultRecycler = findViewById(R.id.searchResultRecycler)
     }
 }

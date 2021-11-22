@@ -16,6 +16,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.databinding.ActivityCategoriesBinding
+import com.aghourservices.databinding.ActivityFirmsBinding
 import com.aghourservices.firms.api.ApiServices
 import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.FirmsAdapter
@@ -33,22 +35,19 @@ const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class FirmsActivity : BaseActivity() {
 
-    lateinit var adapter: FirmsAdapter
-    private lateinit var toolBar: Toolbar
-    private lateinit var toolBarTv: TextView
-    private lateinit var firmsRecyclerView: RecyclerView
+    private lateinit var adapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var adView: AdView
     private lateinit var realm: Realm
-    private lateinit var firmsShimmer: ShimmerFrameLayout
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var binding: ActivityFirmsBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_firms)
-        initViews()
+        binding = ActivityFirmsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Realm.init(this)
         val config = RealmConfiguration
@@ -59,32 +58,33 @@ class FirmsActivity : BaseActivity() {
             .deleteRealmIfMigrationNeeded()
             .build()
         realm = Realm.getInstance(config)
+
+        adView = findViewById(R.id.adView)
         AghourAdManager.displayBannerAd(this, adView)
 
-
-        setSupportActionBar(toolBar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        firmsRecyclerView.setHasFixedSize(true)
-        firmsRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.firmsRecyclerview.setHasFixedSize(true)
+        binding.firmsRecyclerview.layoutManager = LinearLayoutManager(this)
 
         val categoryId = intent.getIntExtra("category_id", 0)
         val categoryName = intent.getStringExtra("category_name")
-        toolBarTv.text = categoryName
+        binding.toolBarTv.text = categoryName
 
         runnable = Runnable { loadFirms(categoryId) }
         handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 1000)
+        handler.postDelayed(runnable, 0)
 
-        swipeRefreshLayout = findViewById(R.id.swipe)
-        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
-        swipeRefreshLayout.setOnRefreshListener {
+        binding.swipe.setColorSchemeResources(R.color.swipeColor)
+        binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
-                swipeRefreshLayout.isRefreshing = false
+                binding.swipe.isRefreshing = false
                 loadFirms(categoryId)
-            }, 1000)
+            }, 500)
         }
 
+        adView = findViewById(R.id.adView)
         AghourAdManager.displayBannerAd(this, adView)
     }
 
@@ -121,9 +121,8 @@ class FirmsActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result =
-                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
-                firmsList = ArrayList<Firm>()
+                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                firmsList = ArrayList()
                 firmsList.addAll(result)
                 setAdapter(firmsList)
 
@@ -134,17 +133,16 @@ class FirmsActivity : BaseActivity() {
     }
 
     private fun stopShimmerAnimation() {
-        firmsShimmer.stopShimmer()
-        firmsShimmer.visibility = View.GONE
-        firmsRecyclerView.visibility = View.VISIBLE
+        binding.firmsShimmer.stopShimmer()
+        binding.firmsShimmer.visibility = View.GONE
+        binding.firmsRecyclerview.visibility = View.VISIBLE
     }
-
 
     private fun setAdapter(firmsList: ArrayList<Firm>) {
         adapter = FirmsAdapter(applicationContext, firmsList) { position ->
             onListItemClick(position)
         }
-        firmsRecyclerView.adapter = adapter
+        binding.firmsRecyclerview.adapter = adapter
     }
 
     private fun onListItemClick(position: Int) {
@@ -157,14 +155,6 @@ class FirmsActivity : BaseActivity() {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
-    }
-
-    private fun initViews() {
-        toolBar = findViewById(R.id.toolbar)
-        toolBarTv = findViewById(R.id.toolBarTv)
-        firmsRecyclerView = findViewById(R.id.firmsRecyclerview)
-        adView = findViewById(R.id.adView)
-        firmsShimmer = findViewById(R.id.firmsShimmer)
     }
 
     override fun onSupportNavigateUp(): Boolean {
