@@ -73,7 +73,7 @@ class SearchActivity : AppCompatActivity() {
         binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
                 binding.swipe.isRefreshing = false
-            }, 100)
+            }, 500)
         }
 
         binding.backBtn.setOnClickListener {

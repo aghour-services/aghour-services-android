@@ -27,7 +27,6 @@
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-
                 <ImageView
                     android:id="@+id/back_btn"
                     android:layout_width="30dp"
@@ -76,11 +75,11 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="230dp"
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/search" />
+            app:lottie_rawRes="@raw/no_search_result" />
 
     </LinearLayout>
 
@@ -89,6 +88,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
@@ -103,6 +103,7 @@
                 android:background="@color/offWhite"
                 android:visibility="gone"
                 tools:listitem="@layout/search_result_card" />
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <include layout="@layout/admob_banner" />

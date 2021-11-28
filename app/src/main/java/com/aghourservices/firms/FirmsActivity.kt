@@ -7,21 +7,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
-import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.databinding.ActivityFirmsBinding
 import com.aghourservices.firms.api.ApiServices
 import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.FirmsAdapter
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -74,8 +68,7 @@ class FirmsActivity : BaseActivity() {
 
         runnable = Runnable { loadFirms(categoryId) }
         handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 0)
-
+        handler.postDelayed(runnable, 600)
         binding.swipe.setColorSchemeResources(R.color.swipeColor)
         binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
@@ -117,24 +110,33 @@ class FirmsActivity : BaseActivity() {
                     }
                 }
                 setAdapter(firmsList)
-                stopShimmerAnimation()
+//                stopShimmerAnimation()
+                progressBar()
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result =
+                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
                 setAdapter(firmsList)
 
                 Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
-                stopShimmerAnimation()
+                Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_LONG).show()
+//                stopShimmerAnimation()
+                progressBar()
             }
         })
     }
 
-    private fun stopShimmerAnimation() {
-        binding.firmsShimmer.stopShimmer()
-        binding.firmsShimmer.visibility = View.GONE
+//    private fun stopShimmerAnimation() {
+//        binding.firmsShimmer.stopShimmer()
+//        binding.firmsShimmer.visibility = View.GONE
+//        binding.firmsRecyclerview.visibility = View.VISIBLE
+//    }
+
+    private fun progressBar() {
+        binding.progressBar.visibility = View.GONE
         binding.firmsRecyclerview.visibility = View.VISIBLE
     }
 

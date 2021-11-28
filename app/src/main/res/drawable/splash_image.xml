@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/blue200" />
     <item
-        android:width="440dp"
-        android:height="440dp"
+        android:width="450dp"
+        android:height="450dp"
         android:drawable="@drawable/app_logo_name"
         android:gravity="center"
         tools:ignore="UnusedAttribute" />

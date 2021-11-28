@@ -10,12 +10,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
@@ -24,7 +20,6 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
@@ -55,14 +50,15 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         setTheme(R.style.Theme_AghourServices)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        swipeCategory()
         setSupportActionBar(binding.toolbar)
+        swipeCategory()
 
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.navView.setNavigationItemSelectedListener(this)
+        binding.navView.itemIconTintList = null
 
         Realm.init(this)
         val config = RealmConfiguration.Builder()
@@ -76,10 +72,11 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         AghourAdManager.displayBannerAd(this, adView)
 
         //recyclerView initialize
-        binding.recyclerview.setHasFixedSize(true)
+        binding.categoriesRecyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
-        binding.recyclerview.layoutManager = linearLayoutManager
-        binding.recyclerview.layoutManager = GridLayoutManager(this, 2)
+        binding.categoriesRecyclerview.layoutManager = linearLayoutManager
+        binding.categoriesRecyclerview.layoutManager = GridLayoutManager(this, 2)
+
     }
 
     //LoadCategoriesList With RetrofitBuilder
@@ -90,7 +87,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         val retrofitData = retrofitBuilder.loadCategoriesList()
 
         retrofitData.enqueue(object : Callback<ArrayList<Category>?> {
-
             override fun onResponse(
                 call: Call<ArrayList<Category>?>,
                 response: Response<ArrayList<Category>?>,
@@ -108,29 +104,38 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                     }
                 }
                 adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
-                binding.recyclerview.adapter = adapter
-                stopShimmerAnimation()
+                binding.categoriesRecyclerview.adapter = adapter
+//                stopShimmerAnimation()
+                progressBar()
+
             }
 
             override fun onFailure(call: Call<ArrayList<Category>?>, t: Throwable) {
                 val result = realm.where(Category::class.java).findAll()
                 categoryList = ArrayList()
                 categoryList.addAll(result)
-                binding.recyclerview.adapter =
-                    CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
+                adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
+                binding.categoriesRecyclerview.adapter = adapter
 
                 //shimmer Animation without Internet
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
-                stopShimmerAnimation()
+                Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_LONG).show()
+//                stopShimmerAnimation()
+                progressBar()
             }
         })
     }
 
-    //load Shimmer Animation
-    private fun stopShimmerAnimation() {
-        binding.shimmerLayout.stopShimmer()
-        binding.shimmerLayout.visibility = View.GONE
-        binding.recyclerview.visibility = View.VISIBLE
+//    load Shimmer Animation
+//    private fun stopShimmerAnimation() {
+//        binding.shimmerLayout.stopShimmer()
+//        binding.shimmerLayout.visibility = View.GONE
+//        binding.recyclerview.visibility = View.VISIBLE
+//    }
+
+    private fun progressBar() {
+        binding.progressBar.visibility = View.GONE
+        binding.categoriesRecyclerview.visibility = View.VISIBLE
     }
 
     //Start FirmsActivity With putExtra Data
@@ -148,7 +153,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private fun swipeCategory() {
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 0)
+        handler.postDelayed(runnable, 800)
         binding.swipe.setColorSchemeResources(R.color.swipeColor)
         binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
@@ -175,7 +180,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_share -> {
                 shareApp()
             }
-            R.id.nav_log -> Toast.makeText(this, "جاري تسجيل الخروج", Toast.LENGTH_SHORT).show()
+            R.id.nav_log -> Toast.makeText(this, "تسجيل الخروج", Toast.LENGTH_SHORT).show()
             R.id.nav_rate -> {
                 rateApp()
             }

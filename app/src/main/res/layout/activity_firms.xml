@@ -34,43 +34,55 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/firmsShimmer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <!--    <com.facebook.shimmer.ShimmerFrameLayout-->
+    <!--        android:id="@+id/firmsShimmer"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="32dp"
-            android:orientation="vertical"
-            android:padding="6dp">
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:layout_marginTop="32dp"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:padding="6dp">-->
 
-            <include layout="@layout/firms_shimmer" />
+    <!--            <include layout="@layout/firms_shimmer" />-->
 
-            <include layout="@layout/firms_shimmer" />
+    <!--            <include layout="@layout/firms_shimmer" />-->
 
-            <include layout="@layout/firms_shimmer" />
+    <!--            <include layout="@layout/firms_shimmer" />-->
 
-            <include layout="@layout/firms_shimmer" />
+    <!--            <include layout="@layout/firms_shimmer" />-->
 
-            <include layout="@layout/firms_shimmer" />
+    <!--            <include layout="@layout/firms_shimmer" />-->
 
-            <include layout="@layout/firms_shimmer" />
+    <!--            <include layout="@layout/firms_shimmer" />-->
 
-            <include layout="@layout/firms_shimmer" />
+    <!--            <include layout="@layout/firms_shimmer" />-->
 
-        </LinearLayout>
+    <!--        </LinearLayout>-->
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
+    <!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:indeterminateTint="#2C85CB"
+            android:progress="0"
+            android:scaleX="0.15"
+            android:scaleY="0.15"
+            android:visibility="visible" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
@@ -82,8 +94,8 @@
                 android:id="@+id/firmsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="gone"
                 android:background="@color/offWhite"
+                android:visibility="gone"
                 tools:listitem="@layout/firms_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

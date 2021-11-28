@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.search.SearchActivity
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -42,19 +43,17 @@ open class BaseActivity : AppCompatActivity() {
         val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
+        Toast.makeText(this, "تقييم التطبيق", Toast.LENGTH_SHORT).show()
     }
 
     fun facebook() {
+
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318"))
             startActivity(intent)
+            Toast.makeText(this, "الفيس بوك", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("http://www.facebook.com/aghourservices")
-                )
-            )
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/aghourservices")))
         }
     }
 

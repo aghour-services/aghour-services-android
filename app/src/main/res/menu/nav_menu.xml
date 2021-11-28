@@ -5,21 +5,21 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/home"
         android:title="الصفحة الرئيسية" />
     <item
         android:id="@+id/nav_fav"
-        android:icon="@drawable/ic_favorite"
+        android:icon="@drawable/heart"
         android:title="المفضلة" />
 
     <item
         android:id="@+id/nav_share"
-        android:icon="@drawable/ic_share"
+        android:icon="@drawable/share"
         android:title="مشاركة التطبيق" />
 
     <item
         android:id="@+id/nav_rate"
-        android:icon="@drawable/ic_rate"
+        android:icon="@drawable/star"
         android:title="قيم التطبيق" />
 
     <item
@@ -29,7 +29,7 @@
 
     <item
         android:id="@+id/nav_log"
-        android:icon="@drawable/ic_log"
+        android:icon="@drawable/exit"
         android:title="تسجيل خروج" />
 
 </menu>

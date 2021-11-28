@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">أجهور الكبرى</string>
-    <string name="ad_banner_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ad_native_unit_id">ca-app-pub-3940256099942544/2247696110</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
+    <string name="ad_banner_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_native_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="open" translatable="false">Open</string>
+    <string name="close" translatable="false">Close</string>
 
     <!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/4791335369</string>-->
     <!--    <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/8061384589</string>-->
