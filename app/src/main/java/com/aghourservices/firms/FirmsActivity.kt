@@ -110,8 +110,7 @@ class FirmsActivity : BaseActivity() {
                     }
                 }
                 setAdapter(firmsList)
-//                stopShimmerAnimation()
-                progressBar()
+                stopShimmerAnimation()
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
@@ -122,21 +121,15 @@ class FirmsActivity : BaseActivity() {
                 setAdapter(firmsList)
 
                 Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
-                Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_LONG).show()
-//                stopShimmerAnimation()
-                progressBar()
+                Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
+                stopShimmerAnimation()
             }
         })
     }
 
-//    private fun stopShimmerAnimation() {
-//        binding.firmsShimmer.stopShimmer()
-//        binding.firmsShimmer.visibility = View.GONE
-//        binding.firmsRecyclerview.visibility = View.VISIBLE
-//    }
-
-    private fun progressBar() {
-        binding.progressBar.visibility = View.GONE
+    private fun stopShimmerAnimation() {
+        binding.firmsShimmer.stopShimmer()
+        binding.firmsShimmer.visibility = View.GONE
         binding.firmsRecyclerview.visibility = View.VISIBLE
     }
 

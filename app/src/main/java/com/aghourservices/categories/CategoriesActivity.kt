@@ -105,8 +105,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 }
                 adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
-//                stopShimmerAnimation()
-                progressBar()
+                stopShimmerAnimation()
 
             }
 
@@ -119,22 +118,16 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
                 //shimmer Animation without Internet
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
-                Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_LONG).show()
-//                stopShimmerAnimation()
-                progressBar()
+                Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
+                stopShimmerAnimation()
             }
         })
     }
 
 //    load Shimmer Animation
-//    private fun stopShimmerAnimation() {
-//        binding.shimmerLayout.stopShimmer()
-//        binding.shimmerLayout.visibility = View.GONE
-//        binding.recyclerview.visibility = View.VISIBLE
-//    }
-
-    private fun progressBar() {
-        binding.progressBar.visibility = View.GONE
+    private fun stopShimmerAnimation() {
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
     }
 
