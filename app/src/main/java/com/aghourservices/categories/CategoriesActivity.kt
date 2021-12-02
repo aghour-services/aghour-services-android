@@ -168,7 +168,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     @SuppressLint("WrongConstant")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> Toast.makeText(this, "الرئيسية", Toast.LENGTH_SHORT).show()
             R.id.nav_fav -> Toast.makeText(this, "المفضلة", Toast.LENGTH_SHORT).show()
             R.id.nav_share -> {
                 shareApp()
