@@ -114,24 +114,6 @@
             android:textSize="17sp" />
 
         <Button
-            android:id="@+id/btn2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/vodafone_selector"
-            android:drawableLeft="@drawable/ic_vodafone"
-            android:fontFamily="@font/cairo_bold"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="0108194052"
-            android:textAlignment="center"
-            android:textColor="@color/vodafone"
-            android:textSize="17sp" />
-
-        <Button
             android:id="@+id/btn3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -147,6 +129,24 @@
             android:text="01187303441"
             android:textAlignment="center"
             android:textColor="@color/etisalat"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/vodafone_selector"
+            android:drawableLeft="@drawable/ic_vodafone"
+            android:fontFamily="@font/cairo_bold"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="01081940521"
+            android:textAlignment="center"
+            android:textColor="@color/vodafone"
             android:textSize="17sp" />
 
         <FrameLayout
