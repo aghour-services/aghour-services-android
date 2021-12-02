@@ -16,8 +16,12 @@
     <color name="gray">#7E7E7E</color>
     <color name="gray1">#E6E5E5</color>
     <color name="blue">#2F3F86</color>
-    <color name="green">#1DA32E</color>
+    <color name="adColor">#1DA32E</color>
     <color name="green1">#3B8F45</color>
+    <color name="orange">#FFA500</color>
+    <color name="vodafone">#E60000</color>
+    <color name="etisalat">#82AA40</color>
+    <color name="colorButtonBg">#F8F8F8</color>
 
     <color name="colorPrimary">#d91248</color>
     <color name="colorPrimaryDark">#d91248</color>

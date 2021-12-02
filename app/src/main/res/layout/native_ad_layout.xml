@@ -32,7 +32,7 @@
                 android:id="@+id/ad_call_to_action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_selector"
+                android:background="@drawable/ad_selector"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
