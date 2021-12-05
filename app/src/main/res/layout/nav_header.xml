@@ -13,20 +13,12 @@
         android:layout_marginStart="16dp"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_img"
-            android:layout_gravity="start"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/user" />
-
-
         <TextView
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:padding="2dp"
+            android:padding="5dp"
             android:gravity="left"
             android:text="اسم المستخدم"
             android:textColor="@color/white"
@@ -38,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="01234567890"
-            android:padding="2dp"
+            android:padding="10dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:textColor="@color/offWhite"
             android:textSize="16sp" />
@@ -49,6 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="30dp"
-        android:background="@color/white" />
+        android:background="@color/black" />
 
 </LinearLayout>

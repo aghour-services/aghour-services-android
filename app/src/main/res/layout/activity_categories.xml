@@ -42,69 +42,45 @@
             </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmerLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="36dp"
-                android:orientation="vertical"
-                android:padding="2dp">
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-                <include layout="@layout/category_shimmer" />
-
-            </LinearLayout>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipe"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/blue200"
+                    android:progress="0"
+                    android:scaleX="0.15"
+                    android:scaleY="0.15"
+                    android:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categoriesRecyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:scrollbars="vertical"
+                    android:scrollbarSize="2dp"
                     android:background="@color/offWhite"
                     android:padding="5dp"
-                    android:visibility="gone"
-                    tools:listitem="@layout/category_card" />
+                    tools:listitem="@layout/category_card"
+                    tools:ignore="NestedWeights" />
 
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <include layout="@layout/admob_banner" />
 
-            <include layout="@layout/admob_banner" />
-
+            </LinearLayout>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

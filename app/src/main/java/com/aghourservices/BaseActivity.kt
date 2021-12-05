@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.login.LoginActivity
 import com.aghourservices.search.SearchActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -47,7 +48,6 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun facebook() {
-
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318"))
             startActivity(intent)
@@ -55,6 +55,11 @@ open class BaseActivity : AppCompatActivity() {
         } catch (e: Exception) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/aghourservices")))
         }
+    }
+
+    fun logOut() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

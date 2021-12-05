@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.aghourservices">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,7 +13,8 @@
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
-        android:xlargeScreens="true" />
+        android:xlargeScreens="true"
+        android:resizeable="false"/>
 
     <application
         android:allowBackup="true"
@@ -24,8 +26,10 @@
         android:theme="@style/splashScreenTheme">
 
         <activity
-            android:name=".categories.CategoriesActivity"
-            android:exported="true">
+            android:name=".login.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,14 +37,24 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".categories.CategoriesActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AghourServices.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".firms.FirmsActivity"
             android:exported="true"
-            android:theme="@style/Theme.AghourServices.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AghourServices.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".search.SearchActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AghourServices.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            tools:ignore="LockedOrientationActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -53,7 +67,7 @@
             android:resource="@color/colorAccent" />
 
         <service
-            android:name=".firebase.FirebaseMessageService"
+            android:name=".fcm.FirebaseMessageService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

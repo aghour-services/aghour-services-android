@@ -105,8 +105,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 }
                 adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
-                stopShimmerAnimation()
-
+                progressBar()
             }
 
             override fun onFailure(call: Call<ArrayList<Category>?>, t: Throwable) {
@@ -119,15 +118,13 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 //shimmer Animation without Internet
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
-                stopShimmerAnimation()
+                progressBar()
             }
         })
     }
 
-//    load Shimmer Animation
-    private fun stopShimmerAnimation() {
-        binding.shimmerLayout.stopShimmer()
-        binding.shimmerLayout.visibility = View.GONE
+    private fun progressBar() {
+        binding.progressBar.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
     }
 
@@ -135,7 +132,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
         val categoryName = categoryList[position].name
-
         val intent = Intent(this, FirmsActivity::class.java)
         intent.putExtra("category_id", categoryId)
         intent.putExtra("category_name", categoryName)
@@ -146,14 +142,14 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private fun swipeCategory() {
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(runnable, 800)
-        binding.swipe.setColorSchemeResources(R.color.swipeColor)
-        binding.swipe.setOnRefreshListener {
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.swipe.isRefreshing = false
-                loadCategoriesList()
-            }, 500)
-        }
+        handler.postDelayed(runnable, 0)
+//        binding.swipe.setColorSchemeResources(R.color.swipeColor)
+//        binding.swipe.setOnRefreshListener {
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                binding.swipe.isRefreshing = false
+//                loadCategoriesList()
+//            }, 500)
+//        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -172,12 +168,14 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_share -> {
                 shareApp()
             }
-            R.id.nav_log -> Toast.makeText(this, "تسجيل الخروج", Toast.LENGTH_SHORT).show()
             R.id.nav_rate -> {
                 rateApp()
             }
             R.id.nav_faceBook -> {
                 facebook()
+            }
+            R.id.nav_log -> {
+                logOut()
             }
         }
         binding.drawerLayout.closeDrawer(Gravity.START)
@@ -189,7 +187,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         if (binding.drawerLayout.isDrawerOpen(Gravity.START)) {
             binding.drawerLayout.closeDrawer(Gravity.START)
         } else {
-            super.onBackPressed()
+            finishAffinity()
         }
     }
 }

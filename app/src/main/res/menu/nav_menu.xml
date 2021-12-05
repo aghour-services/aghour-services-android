@@ -4,6 +4,11 @@
     tools:showIn="navigation_view">
 
     <item
+        android:id="@+id/nav_fav"
+        android:icon="@drawable/heart"
+        android:title="المفضلة" />
+
+    <item
         android:id="@+id/nav_rate"
         android:icon="@drawable/star"
         android:title="قيم التطبيق" />
@@ -12,11 +17,6 @@
         android:id="@+id/nav_share"
         android:icon="@drawable/share"
         android:title="مشاركة التطبيق" />
-
-    <item
-        android:id="@+id/nav_fav"
-        android:icon="@drawable/heart"
-        android:title="المفضلة" />
 
     <item
         android:id="@+id/nav_faceBook"

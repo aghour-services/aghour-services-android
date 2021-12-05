@@ -5,38 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="5dp">
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@drawable/selector"
-        android:orientation="vertical"
-        android:padding="10dp"
-        tools:ignore="UseCompoundDrawables">
+        android:scrollbars="vertical"
+        android:background="@drawable/selector">
 
-        <ImageView
-            android:id="@+id/category_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:src="@mipmap/ic_launcher"
-            tools:ignore="ContentDescription,InefficientWeight" />
-
-        <TextView
-            android:id="@+id/category_title_tv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/cairo_black"
-            android:gravity="center"
-            android:text="Category Name"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:orientation="vertical"
+            android:padding="15dp">
 
+            <ImageView
+                android:id="@+id/category_icon"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:src="@mipmap/ic_launcher"
+                tools:ignore="ContentDescription,InefficientWeight" />
+
+            <TextView
+                android:id="@+id/category_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/cairo_black"
+                android:gravity="center"
+                android:text="Category Name"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

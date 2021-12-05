@@ -82,6 +82,9 @@
                 android:id="@+id/firmsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:scrollbarSize="2dp"
+                android:orientation="vertical"
+                android:scrollbars="vertical"
                 android:background="@color/offWhite"
                 android:visibility="gone"
                 tools:listitem="@layout/firms_card" />
