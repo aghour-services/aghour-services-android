@@ -71,7 +71,7 @@
     </style>
 
     <style name="headerTextPrimary" parent="headerText">
-        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/blue200</item>
     </style>
 
     <style name="modifiedEditText" parent="parent">

@@ -25,7 +25,7 @@
                 android:layout_marginEnd="25dp"
                 android:gravity="end"
                 android:text="@string/app_name"
-                android:textColor="@color/white"
+                android:textColor="@color/Gray"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 tools:ignore="RtlHardcoded" />
@@ -82,10 +82,8 @@
                 android:id="@+id/firmsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scrollbarSize="2dp"
+                android:background="@color/loginBkColor"
                 android:orientation="vertical"
-                android:scrollbars="vertical"
-                android:background="@color/offWhite"
                 android:visibility="gone"
                 tools:listitem="@layout/firms_card" />
 
