@@ -37,7 +37,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = "https://aghour-services.magdi.work/api/"
+private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var adView: AdView

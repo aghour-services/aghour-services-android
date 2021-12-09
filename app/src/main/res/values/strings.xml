@@ -4,10 +4,8 @@
     <string name="ad_native_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name="open" translatable="false">Open</string>
     <string name="close" translatable="false">Close</string>
-    <string name="register">REGISTER</string>
     <string name="login_email_hint">رقم التليفون</string>
     <string name="login_password_hint">كلمة السر</string>
-    <string name="signup_login_hint">Already have an account? Sign In</string>
     <string name="login_signup_hint">ليس لديك حساب ؟ سجل الأن</string>
 
     <!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/4791335369</string>-->

@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/loginCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginTop="@dimen/loginViewsMargin"
-    android:layout_marginBottom="@dimen/loginViewsMargin"
+    android:layout_marginTop="75dp"
+    android:layout_marginBottom="75dp"
     android:background="@color/whiteCardColor"
-    app:cardCornerRadius="@dimen/loginCardRadius">
+    app:cardCornerRadius="20dp">
 
     <LinearLayout
-        style="@style/linearParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_gravity="center"
-        android:padding="@dimen/loginViewsMargin">
+        android:padding="75dp">
 
         <TextView
-            style="@style/headerTextPrimary"
-            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue200"
+            android:layout_marginTop="75dp"
             android:textSize="22sp"
             android:fontFamily="@font/cairo_bold"
             android:text="تسجيل الدخول" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"
-            style="@style/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:hintEnabled="false"
-            android:layout_marginTop="@dimen/loginViewsMargin">
+            android:layout_marginTop="75dp">
 
             <EditText
                 android:id="@+id/phoneNumber"
-                style="@style/modifiedEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryTextColor"
                 android:drawableRight="@drawable/ic_phone"
                 android:hint="@string/login_email_hint"
                 android:inputType="phone|number"
@@ -38,15 +46,17 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputPassword"
-            style="@style/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:hintEnabled="false"
-            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_marginTop="75dp"
             app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/password"
-                style="@style/modifiedEditText"
-                android:hint="@string/login_password_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryTextColor"                android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:textSize="18sp" />
@@ -59,18 +69,20 @@
             android:textSize="16sp"
             android:fontFamily="@font/cairo_bold"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_marginTop="75dp"
             android:background="@drawable/login_button"
             android:text="تسجيل دخول"
-            android:textColor="@color/blue200" />
+            android:textColor="@color/whiteTextColor" />
 
         <TextView
-            style="@style/parent"
+            android:id="@+id/txt_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_marginTop="75dp"
             android:fontFamily="@font/cairo_bold"
             android:gravity="right"
-            android:text="@string/login_signup_hint"
+            android:text="ليس لديك حساب ؟ انشئ حساب جديد"
             android:textAlignment="center"
             android:textColor="@color/blue200"
             android:textSize="18sp" />

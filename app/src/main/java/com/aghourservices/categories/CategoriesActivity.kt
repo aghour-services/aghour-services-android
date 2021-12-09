@@ -30,7 +30,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = "https://aghour-services.magdi.work/api/"
+private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     //Global initialize
@@ -59,7 +59,10 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
+        adView = findViewById(R.id.adView)
+        AghourAdManager.displayBannerAd(this, adView)
 
+        //initialize Realm
         Realm.init(this)
         val config = RealmConfiguration.Builder()
             .name("category.realm")
@@ -68,15 +71,12 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             .allowWritesOnUiThread(true)
             .build()
         realm = Realm.getInstance(config)
-        adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
 
         //recyclerView initialize
         binding.categoriesRecyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         binding.categoriesRecyclerview.layoutManager = linearLayoutManager
         binding.categoriesRecyclerview.layoutManager = GridLayoutManager(this, 2)
-
     }
 
     //LoadCategoriesList With RetrofitBuilder
@@ -143,13 +143,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         runnable = Runnable { loadCategoriesList() }
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed(runnable, 0)
-//        binding.swipe.setColorSchemeResources(R.color.swipeColor)
-//        binding.swipe.setOnRefreshListener {
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                binding.swipe.isRefreshing = false
-//                loadCategoriesList()
-//            }, 500)
-//        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

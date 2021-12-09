@@ -2,7 +2,6 @@
 <resources>
     <!--dimes for design 3-->
     <dimen name="headerTextSize">22sp</dimen>
-    <dimen name="newsMoreTextSize">12sp</dimen>
     <dimen name="loginCardRadius">20dp</dimen>
     <dimen name="loginViewsMargin">75dp</dimen>
 
