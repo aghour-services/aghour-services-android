@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
@@ -118,13 +119,20 @@ class FirmsActivity : BaseActivity() {
                     realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
-                setAdapter(firmsList)
 
-                Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
-                Toast.makeText(this@FirmsActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
+                setAdapter(firmsList)
                 stopShimmerAnimation()
+
+                if (firmsList.isEmpty()) {
+                    noInternetConnection()
+                }
             }
         })
+    }
+
+    fun noInternetConnection() {
+        binding.noInternet.visibility = View.VISIBLE
+        binding.firmsRecyclerview.visibility = View.GONE
     }
 
     private fun stopShimmerAnimation() {

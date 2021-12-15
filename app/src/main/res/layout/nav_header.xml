@@ -5,7 +5,6 @@
     android:background="@color/blue1"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,23 +13,35 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/user_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="سجل دخول"
+            android:textColor="@color/white"
+            android:fontFamily="@font/cairo_bold"
+            android:textSize="22sp"
+            android:gravity="left"
+            android:padding="10dp" />
+
+        <TextView
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="5dp"
             android:gravity="left"
+            android:visibility="gone"
             android:text="اسم المستخدم"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:fontFamily="@font/segoe_ui_bold"/>
-
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="01234567890"
             android:padding="10dp"
+            android:visibility="gone"
             android:fontFamily="@font/segoe_ui_bold"
             android:textColor="@color/offWhite"
             android:textSize="16sp" />

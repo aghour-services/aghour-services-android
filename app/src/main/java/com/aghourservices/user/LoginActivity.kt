@@ -22,15 +22,14 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var phoneNumber: EditText
     private lateinit var pass: EditText
     private lateinit var btnLogin: Button
-    private lateinit var txt_register: TextView
+    private lateinit var txtRegister: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
-        val sharedPreferences: SharedPreferences =
-            getSharedPreferences("myShared", Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences = getSharedPreferences("myShared", Context.MODE_PRIVATE)
         val user = sharedPreferences.getString("u", "")
         val passWord = sharedPreferences.getString("p", "")
         phoneNumber.setText(user)
@@ -40,9 +39,9 @@ class LoginActivity : AppCompatActivity() {
             if (phoneNumber.text.toString().isEmpty() || pass.text.toString()
                     .isEmpty()
             ) {
-                Toast.makeText(this, "اكتب بياناتك الأول يا نجم", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "اكتب بياناتك كاملة", Toast.LENGTH_SHORT).show()
             } else if (phoneNumber.text.toString() != userName || pass.text.toString() != password) {
-                Toast.makeText(this, "البيانات غلط", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "بياناتك غلط", Toast.LENGTH_SHORT).show()
             } else if (phoneNumber.text.toString()
                     .isNotEmpty() && pass.text.toString()
                     .isNotEmpty()
@@ -62,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        txt_register.setOnClickListener {
+        txtRegister.setOnClickListener {
             val intent = Intent(this,SignupActivity::class.java)
             startActivity(intent)
         }
@@ -76,6 +75,6 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         phoneNumber = findViewById(R.id.phoneNumber)
         pass = findViewById(R.id.password)
-        txt_register = findViewById(R.id.txt_register)
+        txtRegister = findViewById(R.id.txt_register)
     }
 }

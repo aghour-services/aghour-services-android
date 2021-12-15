@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,6 +21,7 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
+import com.aghourservices.user.SignupActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
@@ -44,10 +46,8 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityCategoriesBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_AghourServices)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -77,6 +77,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         linearLayoutManager = LinearLayoutManager(this)
         binding.categoriesRecyclerview.layoutManager = linearLayoutManager
         binding.categoriesRecyclerview.layoutManager = GridLayoutManager(this, 2)
+
     }
 
     //LoadCategoriesList With RetrofitBuilder
@@ -116,7 +117,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 binding.categoriesRecyclerview.adapter = adapter
 
                 //shimmer Animation without Internet
-                Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
                 Toast.makeText(this@CategoriesActivity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
                 progressBar()
             }

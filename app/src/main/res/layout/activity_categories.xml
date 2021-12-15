@@ -61,8 +61,8 @@
                     android:layout_gravity="center"
                     android:indeterminateTint="@color/blue200"
                     android:progress="0"
-                    android:scaleX="0.13"
-                    android:scaleY="0.13"
+                    android:scaleX="0.11"
+                    android:scaleY="0.11"
                     android:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView

@@ -7,6 +7,7 @@
     <string name="login_email_hint">رقم التليفون</string>
     <string name="login_password_hint">كلمة السر</string>
     <string name="login_signup_hint">ليس لديك حساب ؟ سجل الأن</string>
+    <string name="aghour_logo">Aghour Logo</string>
 
     <!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/4791335369</string>-->
     <!--    <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/8061384589</string>-->

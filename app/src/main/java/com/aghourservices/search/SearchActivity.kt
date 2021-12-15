@@ -1,25 +1,15 @@
 package com.aghourservices.search
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.databinding.ActivitySearchBinding
@@ -101,7 +91,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<SearchResult>?>, t: Throwable) {
-
+                customView()
             }
         })
     }
@@ -135,5 +125,10 @@ class SearchActivity : AppCompatActivity() {
         firebaseAnalytics.logEvent(eventName) {
             param("data", data)
         }
+    }
+
+    fun customView() {
+        binding.searchAnimation.visibility = View.GONE
+        binding.noInternet.visibility = View.VISIBLE
     }
 }

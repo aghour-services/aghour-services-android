@@ -60,10 +60,9 @@ class SignupActivity : AppCompatActivity() {
                 Log.e("Create", t.message.toString())
             }
         })
-
     }
 
     override fun onBackPressed() {
-        finish()
+        finishAffinity()
     }
 }
