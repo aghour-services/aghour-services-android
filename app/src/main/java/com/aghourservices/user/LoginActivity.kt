@@ -29,13 +29,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
-        val sharedPreferences: SharedPreferences = getSharedPreferences("myShared", Context.MODE_PRIVATE)
-        val user = sharedPreferences.getString("u", "")
-        val passWord = sharedPreferences.getString("p", "")
-        phoneNumber.setText(user)
-        pass.setText(passWord)
+//        val sharedPreferences: SharedPreferences = getSharedPreferences("myShared", Context.MODE_PRIVATE)
+//        val user = sharedPreferences.getString("u", "")
+//        val passWord = sharedPreferences.getString("p", "")
+//        phoneNumber.setText(user)
+//        pass.setText(passWord)
         btnLogin.setOnClickListener {
-
             if (phoneNumber.text.toString().isEmpty() || pass.text.toString()
                     .isEmpty()
             ) {
@@ -48,12 +47,12 @@ class LoginActivity : AppCompatActivity() {
             )
                 if (phoneNumber.text.toString() == userName && pass.text.toString() == password) {
 
-                    val shared: SharedPreferences =
-                        getSharedPreferences("myShared", Context.MODE_PRIVATE)
-                    val editor = shared.edit()
-                    editor.putString("u", phoneNumber.text.toString())
-                    editor.putString("p", pass.text.toString())
-                    editor.apply()
+
+//                    val shared: SharedPreferences = getSharedPreferences("myShared", Context.MODE_PRIVATE)
+//                    val editor = shared.edit()
+//                    editor.putString("u", phoneNumber.text.toString())
+//                    editor.putString("p", pass.text.toString())
+//                    editor.apply()
 
                     val intent = Intent(this, CategoriesActivity::class.java)
                     intent.putExtra("app", "Simple RecyclerView")
@@ -66,15 +65,13 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    override fun onBackPressed() {
-        finishAffinity()
-    }
-
     private fun initViews() {
         btnLogin = findViewById(R.id.btnLogin)
         phoneNumber = findViewById(R.id.phoneNumber)
         pass = findViewById(R.id.password)
         txtRegister = findViewById(R.id.txt_register)
+    }
+    override fun onBackPressed() {
+        finishAffinity()
     }
 }

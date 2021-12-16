@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.user.LoginActivity
 import com.aghourservices.search.SearchActivity
+import com.aghourservices.user.SignupActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -58,7 +59,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun logOut() {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, SignupActivity::class.java)
         startActivity(intent)
     }
 

@@ -27,8 +27,7 @@
 
         <activity
             android:name=".splashScreen.SplashScreen"
-            android:exported="true"
-            android:theme="@style/Theme.AghourServices">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
