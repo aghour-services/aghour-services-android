@@ -7,7 +7,6 @@ data class User(
     var mobile: String,
     var password: String
 ) {
-
     fun userObject(): JsonObject {
         val userObject = JsonObject()
         val userDetails = JsonObject()

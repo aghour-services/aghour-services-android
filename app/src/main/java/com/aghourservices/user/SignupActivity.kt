@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.databinding.ActivityRegisterBinding
 import com.aghourservices.user.api.ApiServices
 import com.aghourservices.user.api.User
-import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,35 +26,28 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        binding.btnRegister.setOnClickListener(View.OnClickListener {
-            if (binding.name.text.toString().isEmpty() || binding.mobile.text.toString()
-                    .isEmpty() || binding.password.text.toString().isEmpty()
+        binding.btnCreate.setOnClickListener(View.OnClickListener {
+            if (binding.name.text.toString().trim().isEmpty() || binding.mobile.text.toString()
+                    .trim()
+                    .isEmpty() || binding.password.text.toString().trim().isEmpty()
             ) {
-                Toast.makeText(
-                    this@SignupActivity,
-                    "Please enter both the values",
-                    Toast.LENGTH_SHORT
-                ).show()
+                binding.name.error = "اكتب اسمك"
+                binding.mobile.error = "اكتب رقم موبايلك"
+                binding.password.error = "اكتب كلمة السر الجديدة"
+
                 return@OnClickListener
+
+            } else {
+                var name = binding.name.text.toString()
+                var mobile = binding.mobile.text.toString()
+                var password = binding.password.text.toString()
+                val user = User(name, mobile, password)
+                createUser(user)
             }
-
-            var name = binding.name.text.toString()
-            var mobile = binding.mobile.text.toString()
-            var password = binding.password.text.toString()
-            val user = User(name, mobile, password)
-            createUser(user)
         })
-
-        binding.loginTxt.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun createUser(user: User) {
-
-        binding.idLoadingPB.visibility = View.VISIBLE
 
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -66,27 +58,9 @@ class SignupActivity : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
-                binding.idLoadingPB.visibility = View.GONE
-
-//                binding.name.setText("")
-//                binding.mobile.setText("")
-//                binding.password.setText("")
                 response.code()
-
-                val responseFromAPI = response.body()
-
-//
                 Toast.makeText(this@SignupActivity, response.code().toString(), Toast.LENGTH_LONG)
                     .show()
-
-//                val responseString = """
-//                        Response Code : ${response.code()}
-//                        Name : ${responseFromAPI!!.name}
-//                        Job : ${responseFromAPI.mobile}
-//                        password : ${responseFromAPI.password}
-//                        """.trimIndent()
-
-//                binding.idTVResponse.text = responseString
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {

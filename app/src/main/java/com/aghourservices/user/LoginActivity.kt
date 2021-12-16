@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var phoneNumber: EditText
     private lateinit var pass: EditText
     private lateinit var btnLogin: Button
-    private lateinit var txtRegister: TextView
+    private lateinit var btnRegister: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        txtRegister.setOnClickListener {
+        btnRegister.setOnClickListener {
             val intent = Intent(this,SignupActivity::class.java)
             startActivity(intent)
         }
@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         phoneNumber = findViewById(R.id.phoneNumber)
         pass = findViewById(R.id.password)
-        txtRegister = findViewById(R.id.txt_register)
+        btnRegister = findViewById(R.id.btn_register)
     }
     override fun onBackPressed() {
         finishAffinity()

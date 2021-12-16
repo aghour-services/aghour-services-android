@@ -76,6 +76,7 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
+                android:textIsSelectable="true"
                 android:fontFamily="@font/cairo_bold"
                 android:gravity="right"
                 android:text="Description"

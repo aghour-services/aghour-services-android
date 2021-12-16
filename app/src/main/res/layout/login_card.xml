@@ -85,19 +85,53 @@
                 android:text="تسجيل دخول"
                 android:textColor="@color/whiteTextColor"
                 android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/txt_register"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/primaryTextColor" />
+
+                <TextView
+                    android:id="@+id/login_txt"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo_bold"
+                    android:text="أو"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue200"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/primaryTextColor" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="55dp"
+                android:background="@drawable/login_button"
                 android:fontFamily="@font/cairo_bold"
-                android:gravity="right"
-                android:text="ليس لديك حساب ؟ انشئ حساب جديد"
-                android:textAlignment="center"
-                android:textColor="@color/blue200"
-                android:textSize="18sp" />
+                android:text="انشاء حساب جديد"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
