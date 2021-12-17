@@ -49,6 +49,12 @@ class SignupActivity : AppCompatActivity() {
                 createUser(user)
             }
         })
+
+        binding.btnUseApp.setOnClickListener {
+            binding.progressBarRigster.visibility = View.VISIBLE
+            val intent = Intent(this,CategoriesActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun createUser(user: User) {
@@ -62,15 +68,15 @@ class SignupActivity : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
+
                 if (response.code() != 201) {
                     Toast.makeText(
-                        this@SignupActivity,
-                        "خطأ في التسجل, رجاء اعادة المحاولة",
+                        this@SignupActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
                         Toast.LENGTH_LONG
                     ).show()
-
                     return
                 }
+                binding.progressBarRigster.visibility = View.VISIBLE
                 var userInfo = UserInfo()
                 userInfo.saveUserData(this@SignupActivity, user)
                 var intent = Intent(this@SignupActivity, CategoriesActivity::class.java)

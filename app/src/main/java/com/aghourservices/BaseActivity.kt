@@ -46,14 +46,12 @@ open class BaseActivity : AppCompatActivity() {
         val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
-        Toast.makeText(this, "تقييم التطبيق", Toast.LENGTH_SHORT).show()
     }
 
     fun facebook() {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318"))
             startActivity(intent)
-            Toast.makeText(this, "الفيس بوك", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             startActivity(
                 Intent(
@@ -77,7 +75,6 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
             R.id.searchIcon -> {
                 openSearchActivity()
             }

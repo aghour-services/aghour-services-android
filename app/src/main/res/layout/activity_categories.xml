@@ -31,12 +31,11 @@
                         android:id="@+id/toolBarTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="25dp"
                         android:fontFamily="@font/cairo_black"
                         android:gravity="end"
                         android:text="@string/app_name"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                 </androidx.appcompat.widget.Toolbar>
             </LinearLayout>
@@ -59,10 +58,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:indeterminateTint="@color/blue200"
+                    android:indeterminateTint="@color/progressBar"
                     android:progress="0"
-                    android:scaleX="0.11"
-                    android:scaleY="0.11"
+                    android:scaleX="0.1"
+                    android:scaleY="0.1"
                     android:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -91,6 +90,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
+        app:itemVerticalPadding="22dp"
+        app:itemIconSize="25dp"
         app:itemTextAppearance="@style/RobotoButtonStyle"
         app:itemTextColor="@color/blue200"
         app:menu="@menu/nav_menu" />

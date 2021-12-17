@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.user.api.User
 
 class UserInfo {
-    fun init(context: Context) {
-    }
-
     fun isUserLoggedIn(context: Context): Boolean {
         val userDataPref = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
         var name = userDataPref?.getString("name", null)

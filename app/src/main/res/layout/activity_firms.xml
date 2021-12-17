@@ -16,18 +16,22 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue200"
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:textAlignment="center"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <TextView
                 android:id="@+id/toolBarTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="25dp"
                 android:gravity="end"
+                android:layout_gravity="start"
+                android:textAlignment="center"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/cairo_black"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -44,8 +48,8 @@
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@drawable/cloud" />
 
         <TextView
@@ -53,7 +57,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/cairo_bold"
             android:text="تأكد من اتصالك بالانترنت"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <com.facebook.shimmer.ShimmerFrameLayout

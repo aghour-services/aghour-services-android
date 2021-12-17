@@ -20,14 +20,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:padding="30dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="30dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="55dp"
                 android:fontFamily="@font/cairo_bold"
+                android:gravity="center"
                 android:text="تسجيل الدخول"
                 android:textColor="@color/blue200"
                 android:textSize="22sp" />
@@ -43,13 +45,15 @@
                     android:id="@+id/phoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="@drawable/edt_text_background"
                     android:backgroundTint="@color/primaryTextColor"
                     android:drawableRight="@drawable/ic_phone"
-                    android:padding="18dp"
-                    android:background="@drawable/edt_text_background"
+                    android:gravity="left"
                     android:hint="@string/login_email_hint"
                     android:inputType="phone|number"
                     android:maxLines="1"
+                    android:padding="18dp"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,12 +69,14 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primaryTextColor"
-                    android:hint="@string/login_password_hint"
+                    android:layout_gravity="left"
                     android:background="@drawable/edt_text_background"
-                    android:padding="18dp"
+                    android:backgroundTint="@color/primaryTextColor"
+                    android:gravity="left"
+                    android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1"
+                    android:padding="18dp"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,6 +91,7 @@
                 android:text="تسجيل دخول"
                 android:textColor="@color/whiteTextColor"
                 android:textSize="16sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,28 +101,28 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="2dp"
                     android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:background="@color/primaryTextColor" />
 
                 <TextView
                     android:id="@+id/login_txt"
                     android:layout_width="0dp"
-                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
                     android:fontFamily="@font/cairo_bold"
-                    android:text="أو"
                     android:gravity="center"
+                    android:text="أو"
                     android:textAlignment="center"
                     android:textColor="@color/blue200"
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="2dp"
                     android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:background="@color/primaryTextColor" />
 
             </LinearLayout>
@@ -124,25 +131,12 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="20dp"
                 android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:layout_marginTop="55dp"
                 android:background="@drawable/login_button"
                 android:fontFamily="@font/cairo_bold"
                 android:text="انشاء حساب جديد"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/btn_use_app"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="55dp"
-                android:background="@drawable/login_button"
-                android:fontFamily="@font/cairo_bold"
-                android:text="استخدم التطبيق الان"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>

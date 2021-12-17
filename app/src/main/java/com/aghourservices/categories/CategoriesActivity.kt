@@ -1,10 +1,13 @@
 package com.aghourservices.categories
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Html
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +16,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
@@ -24,6 +28,7 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
+import com.aghourservices.user.LoginActivity
 import com.aghourservices.user.SignupActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
@@ -193,7 +198,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     @SuppressLint("WrongConstant")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_fav -> Toast.makeText(this, "المفضلة", Toast.LENGTH_SHORT).show()
             R.id.nav_share -> {
                 shareApp()
             }
@@ -204,11 +208,33 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 facebook()
             }
             R.id.nav_log -> {
-                logOut()
+                showOnCloseDialog()
             }
         }
         binding.drawerLayout.closeDrawer(Gravity.START)
         return true
+    }
+
+    private fun showOnCloseDialog() {
+        val title = "تسجيل الخروج"
+        val message = "متأكد انك عايز تسجل خروج"
+        val positiveButton = "نعم"
+        val negativeButton = "لا"
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(title)
+        alertDialogBuilder.setMessage(message)
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
+            logOut()
+            sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
+        }
+        alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
+            sendFirebaseEvent("ALERT_STAY_ACTION", "")
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     @SuppressLint("WrongConstant")
@@ -219,4 +245,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             finishAffinity()
         }
     }
+
+
 }

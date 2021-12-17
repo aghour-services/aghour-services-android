@@ -12,12 +12,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:background="@drawable/selector">
+        android:background="@drawable/selector"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="15dp">
 
@@ -27,8 +29,8 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:src="@mipmap/ic_launcher"
-                tools:ignore="ContentDescription,InefficientWeight" />
+                android:contentDescription="Category Icon"
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/category_title_tv"
@@ -38,6 +40,7 @@
                 android:fontFamily="@font/cairo_black"
                 android:gravity="center"
                 android:text="Category Name"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 

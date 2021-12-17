@@ -17,10 +17,10 @@ private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class LoginActivity : AppCompatActivity() {
     private var userName: String = "01287303441"
-    private var password: String = "m7madmagdy"
+    private var pass: String = "m7madmagdy"
     private lateinit var binding: ActivityLoginBinding
     private lateinit var phoneNumber: EditText
-    private lateinit var pass: EditText
+    private lateinit var password: EditText
     private lateinit var btnLogin: Button
     private lateinit var btnRegister: Button
 
@@ -29,33 +29,22 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
-//        val sharedPreferences: SharedPreferences = getSharedPreferences("myShared", Context.MODE_PRIVATE)
-//        val user = sharedPreferences.getString("u", "")
-//        val passWord = sharedPreferences.getString("p", "")
-//        phoneNumber.setText(user)
-//        pass.setText(passWord)
         btnLogin.setOnClickListener {
-            if (phoneNumber.text.toString().isEmpty() || pass.text.toString()
+            if (phoneNumber.text.toString().trim().isEmpty() || password.text.toString().trim()
                     .isEmpty()
             ) {
-                Toast.makeText(this, "اكتب بياناتك كاملة", Toast.LENGTH_SHORT).show()
-            } else if (phoneNumber.text.toString() != userName || pass.text.toString() != password) {
+                phoneNumber.error = "اكتب رقم تليفونك"
+                password.error = "اكتب كلمة السر"
+
+            } else if (phoneNumber.text.toString() != userName || password.text.toString() != pass) {
                 Toast.makeText(this, "بياناتك غلط", Toast.LENGTH_SHORT).show()
+
             } else if (phoneNumber.text.toString()
-                    .isNotEmpty() && pass.text.toString()
+                    .isNotEmpty() && password.text.toString()
                     .isNotEmpty()
             )
-                if (phoneNumber.text.toString() == userName && pass.text.toString() == password) {
-
-
-//                    val shared: SharedPreferences = getSharedPreferences("myShared", Context.MODE_PRIVATE)
-//                    val editor = shared.edit()
-//                    editor.putString("u", phoneNumber.text.toString())
-//                    editor.putString("p", pass.text.toString())
-//                    editor.apply()
-
+                if (phoneNumber.text.toString() == userName && password.text.toString() == pass) {
                     val intent = Intent(this, CategoriesActivity::class.java)
-                    intent.putExtra("app", "Simple RecyclerView")
                     startActivity(intent)
                 }
         }
@@ -68,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initViews() {
         btnLogin = findViewById(R.id.btnLogin)
         phoneNumber = findViewById(R.id.phoneNumber)
-        pass = findViewById(R.id.password)
+        password = findViewById(R.id.password)
         btnRegister = findViewById(R.id.btn_register)
     }
     override fun onBackPressed() {

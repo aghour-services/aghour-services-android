@@ -115,8 +115,7 @@ class FirmsActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result =
-                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
 
