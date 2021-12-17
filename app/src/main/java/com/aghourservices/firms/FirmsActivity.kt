@@ -3,12 +3,14 @@ package com.aghourservices.firms
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
@@ -39,6 +41,7 @@ class FirmsActivity : BaseActivity() {
     private lateinit var binding: ActivityFirmsBinding
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFirmsBinding.inflate(layoutInflater)
@@ -70,12 +73,13 @@ class FirmsActivity : BaseActivity() {
         runnable = Runnable { loadFirms(categoryId) }
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed(runnable, 0)
-        binding.swipe.setColorSchemeResources(R.color.swipeColor)
+        binding.swipe.setColorSchemeResources(R.color.white)
+        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
         binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
                 binding.swipe.isRefreshing = false
                 loadFirms(categoryId)
-            }, 500)
+            }, 1000)
         }
 
         adView = findViewById(R.id.adView)

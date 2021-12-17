@@ -2,23 +2,21 @@ package com.aghourservices.cache
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.user.api.User
 
 class UserInfo {
     fun isUserLoggedIn(context: Context): Boolean {
         val userDataPref = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        var name = userDataPref?.getString("name", null)
+        val name = userDataPref?.getString("name", null)
         return name != null
     }
 
     fun getUserData(context: Context): User {
         val userDataPref = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        var name = userDataPref.getString("name", "").toString()
-        var mobile = userDataPref.getString("mobile", "").toString()
+        val name = userDataPref.getString("name", "").toString()
+        val mobile = userDataPref.getString("mobile", "").toString()
 
-        var user = User(name, mobile, "")
-        return user
+        return User(name, mobile, "")
     }
 
     fun saveUserData(context: Context, user: User) {
@@ -27,7 +25,6 @@ class UserInfo {
         editor.putString("name", user.name)
         editor.putString("mobile", user.mobile)
         editor.apply()
-        editor.commit()
     }
 
     fun clearUserData(context: Context) {

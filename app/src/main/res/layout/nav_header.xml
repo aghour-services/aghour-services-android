@@ -14,21 +14,21 @@
 
         <ImageView
             android:id="@+id/userIcon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:src="@drawable/user" />
 
         <Button
             android:id="@+id/btn_register2"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="15dp"
+            android:layout_margin="20dp"
             android:background="@drawable/login_button"
-            android:fontFamily="@font/cairo_bold"
+            android:fontFamily="@font/cairo_black"
+            android:padding="15dp"
             android:gravity="center"
-            android:padding="10dp"
             android:text="انشاء حساب"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -51,12 +51,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/segoe_ui_bold"
+                android:fontFamily="@font/cairo_black"
                 android:gravity="center"
                 android:text="اسم المستخدم"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/user_mobile"
@@ -69,7 +69,7 @@
                 android:text="01234567890"
                 android:textAlignment="center"
                 android:textColor="@color/offWhite"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

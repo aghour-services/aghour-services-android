@@ -1,12 +1,11 @@
 package com.aghourservices.user
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
@@ -23,6 +22,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var btnLogin: Button
     private lateinit var btnRegister: Button
+    private lateinit var btnUseApp: Button
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,16 +51,25 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnRegister.setOnClickListener {
-            val intent = Intent(this,SignupActivity::class.java)
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+        btnUseApp.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            val intent = Intent(this, CategoriesActivity::class.java)
             startActivity(intent)
         }
     }
+
     private fun initViews() {
         btnLogin = findViewById(R.id.btnLogin)
         phoneNumber = findViewById(R.id.phoneNumber)
         password = findViewById(R.id.password)
         btnRegister = findViewById(R.id.btn_register)
+        btnUseApp = findViewById(R.id.btn_use_app)
+        progressBar = findViewById(R.id.progressBar_Login)
     }
+
     override fun onBackPressed() {
         finishAffinity()
     }

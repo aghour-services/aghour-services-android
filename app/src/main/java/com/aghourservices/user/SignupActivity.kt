@@ -1,13 +1,11 @@
 package com.aghourservices.user
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivityRegisterBinding
@@ -42,9 +40,9 @@ class SignupActivity : AppCompatActivity() {
                 return@OnClickListener
 
             } else {
-                var name = binding.name.text.toString()
-                var mobile = binding.mobile.text.toString()
-                var password = binding.password.text.toString()
+                val name = binding.name.text.toString()
+                val mobile = binding.mobile.text.toString()
+                val password = binding.password.text.toString()
                 val user = User(name, mobile, password)
                 createUser(user)
             }
@@ -53,6 +51,10 @@ class SignupActivity : AppCompatActivity() {
         binding.btnUseApp.setOnClickListener {
             binding.progressBarRigster.visibility = View.VISIBLE
             val intent = Intent(this,CategoriesActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnLogin.setOnClickListener {
+            val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
     }
@@ -77,9 +79,9 @@ class SignupActivity : AppCompatActivity() {
                     return
                 }
                 binding.progressBarRigster.visibility = View.VISIBLE
-                var userInfo = UserInfo()
+                val userInfo = UserInfo()
                 userInfo.saveUserData(this@SignupActivity, user)
-                var intent = Intent(this@SignupActivity, CategoriesActivity::class.java)
+                val intent = Intent(this@SignupActivity, CategoriesActivity::class.java)
                 startActivity(intent)
             }
 

@@ -1,14 +1,12 @@
 package com.aghourservices.categories
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Html
 import android.view.Gravity
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -16,7 +14,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
@@ -28,8 +25,8 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
-import com.aghourservices.user.LoginActivity
 import com.aghourservices.user.SignupActivity
+import com.aghourservices.user.addData.AddDataActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
@@ -65,6 +62,8 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         checkUser()
         setSupportActionBar(binding.toolbar)
         swipeCategory()
+        hideNavLogout()
+        hideAddItem()
 
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
         binding.drawerLayout.addDrawerListener(toggle)
@@ -75,7 +74,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         binding.navView.itemIconTintList = null
 
         adView = findViewById(R.id.adView)
-
 
         AghourAdManager.displayBannerAd(this, adView)
 
@@ -109,17 +107,18 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             btnRegister.visibility = View.GONE
             userDataView.visibility = View.VISIBLE
 
-            var user = userInfo.getUserData(this@CategoriesActivity)
+            val user = userInfo.getUserData(this@CategoriesActivity)
 
             userName.text = user.name
             userMobile.text = user.mobile
         }
 
         btnRegister.setOnClickListener {
-            var intent = Intent(this, SignupActivity::class.java)
+            val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
     }
+
 
     //LoadCategoriesList With RetrofitBuilder
     private fun loadCategoriesList() {
@@ -210,31 +209,40 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_log -> {
                 showOnCloseDialog()
             }
+            R.id.about_us -> {
+                Toast.makeText(this,"جايين أهو", Toast.LENGTH_SHORT).show()
+            }
+            R.id.addFirm -> {
+                startActivity(Intent(this,AddDataActivity::class.java))
+            }
         }
         binding.drawerLayout.closeDrawer(Gravity.START)
         return true
     }
 
-    private fun showOnCloseDialog() {
-        val title = "تسجيل الخروج"
-        val message = "متأكد انك عايز تسجل خروج"
-        val positiveButton = "نعم"
-        val negativeButton = "لا"
+    private fun hideNavLogout() {
+        val isUserLogin = UserInfo().isUserLoggedIn(this)
+        if (isUserLogin) {
+            val navView: Menu = binding.navView.menu
+            navView.findItem(R.id.nav_log).isVisible = true
+        }
+        else{
+            val navView: Menu = binding.navView.menu
+            navView.findItem(R.id.nav_log).isVisible = false
+        }
+    }
 
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setMessage(message)
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
-            logOut()
-            sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
+
+    private fun hideAddItem() {
+        val isUserLogin = UserInfo().isUserLoggedIn(this)
+        if (isUserLogin) {
+            val navView: Menu = binding.navView.menu
+            navView.findItem(R.id.addFirm).isVisible = true
         }
-        alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
-            sendFirebaseEvent("ALERT_STAY_ACTION", "")
+        else{
+            val navView: Menu = binding.navView.menu
+            navView.findItem(R.id.addFirm).isVisible = false
         }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
     }
 
     @SuppressLint("WrongConstant")

@@ -24,7 +24,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.AghourServices">
-
+        <activity
+            android:name=".user.addData.AddDataActivity"
+            android:exported="true" />
         <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true">
@@ -34,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".categories.CategoriesActivity"
             android:exported="true"
@@ -47,7 +48,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AghourServices.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
             android:name=".search.SearchActivity"
             android:exported="true"
@@ -55,7 +55,6 @@
             android:theme="@style/Theme.AghourServices.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
             android:name=".user.LoginActivity"
             android:exported="true"

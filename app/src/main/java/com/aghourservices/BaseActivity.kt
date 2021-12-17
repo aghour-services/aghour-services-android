@@ -2,9 +2,11 @@ package com.aghourservices
 
 import android.content.Intent
 import android.net.Uri
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.user.LoginActivity
@@ -62,11 +64,34 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun logOut() {
+    private fun logOut() {
         UserInfo().clearUserData(this@BaseActivity)
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
+
+    fun showOnCloseDialog() {
+        val title = "تسجيل الخروج !"
+        val message = "متأكد انك عايز تسجل خروج ؟"
+        val positiveButton = "نعم"
+        val negativeButton = "لا"
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(title)
+        alertDialogBuilder.setMessage(message)
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
+            logOut()
+            sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
+        }
+        alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
+            sendFirebaseEvent("ALERT_STAY_ACTION", "")
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
