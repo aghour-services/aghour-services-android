@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.cache.UserInfo
 import com.aghourservices.user.LoginActivity
 import com.aghourservices.search.SearchActivity
 import com.aghourservices.user.SignupActivity
@@ -54,11 +55,17 @@ open class BaseActivity : AppCompatActivity() {
             startActivity(intent)
             Toast.makeText(this, "الفيس بوك", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/aghourservices")))
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://www.facebook.com/aghourservices")
+                )
+            )
         }
     }
 
     fun logOut() {
+        UserInfo().clearUserData(this@BaseActivity)
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }

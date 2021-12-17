@@ -1,11 +1,15 @@
 package com.aghourservices.user
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.R
+import com.aghourservices.cache.UserInfo
+import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivityRegisterBinding
 import com.aghourservices.user.api.ApiServices
 import com.aghourservices.user.api.User
@@ -58,13 +62,23 @@ class SignupActivity : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
-                response.code()
-                Toast.makeText(this@SignupActivity, response.code().toString(), Toast.LENGTH_LONG)
-                    .show()
+                if (response.code() != 201) {
+                    Toast.makeText(
+                        this@SignupActivity,
+                        "خطأ في التسجل, رجاء اعادة المحاولة",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    return
+                }
+                var userInfo = UserInfo()
+                userInfo.saveUserData(this@SignupActivity, user)
+                var intent = Intent(this@SignupActivity, CategoriesActivity::class.java)
+                startActivity(intent)
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(this@SignupActivity, "Error Found is", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SignupActivity, "Error", Toast.LENGTH_LONG).show()
             }
         })
     }

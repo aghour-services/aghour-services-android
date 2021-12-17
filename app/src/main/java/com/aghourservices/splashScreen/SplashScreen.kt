@@ -7,8 +7,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.aghourservices.R
+import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
-import com.aghourservices.user.LoginActivity
+import com.aghourservices.user.SignupActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
@@ -17,7 +18,14 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, CategoriesActivity::class.java)
+            lateinit var intent: Intent
+            val userInfo = UserInfo()
+
+            if (userInfo.isUserLoggedIn(this)) {
+                intent = Intent(this, CategoriesActivity::class.java)
+            } else {
+                intent = Intent(this, SignupActivity::class.java)
+            }
             startActivity(intent)
             finish()
         }, 1000)

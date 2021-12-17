@@ -8,6 +8,8 @@ import android.os.Looper
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
@@ -45,11 +48,16 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private lateinit var runnable: Runnable
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityCategoriesBinding
+    private lateinit var btnRegister: Button
+    private lateinit var userDataView: LinearLayout
+    private lateinit var userName: TextView
+    private lateinit var userMobile: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkUser()
         setSupportActionBar(binding.toolbar)
         swipeCategory()
 
@@ -57,9 +65,13 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
+
         adView = findViewById(R.id.adView)
+
+
         AghourAdManager.displayBannerAd(this, adView)
 
         //initialize Realm
@@ -78,6 +90,30 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         binding.categoriesRecyclerview.layoutManager = linearLayoutManager
         binding.categoriesRecyclerview.layoutManager = GridLayoutManager(this, 2)
 
+    }
+
+    private fun checkUser() {
+        val headerView: View = binding.navView.getHeaderView(0)
+        userDataView = headerView.findViewById(R.id.user_data_view)
+        btnRegister = headerView.findViewById(R.id.btn_register2)
+        userName = headerView.findViewById(R.id.user_name)
+        userMobile = headerView.findViewById(R.id.user_mobile)
+
+        val userInfo = UserInfo()
+        if (userInfo.isUserLoggedIn(this@CategoriesActivity)) {
+            btnRegister.visibility = View.GONE
+            userDataView.visibility = View.VISIBLE
+
+            var user = userInfo.getUserData(this@CategoriesActivity)
+
+            userName.text = user.name
+            userMobile.text = user.mobile
+        }
+
+        btnRegister.setOnClickListener {
+            var intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     //LoadCategoriesList With RetrofitBuilder
