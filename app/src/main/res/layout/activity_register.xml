@@ -166,6 +166,17 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
+            <CheckBox
+                android:id="@+id/do_not_show_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="لا تظهرها مرة أخرى"
+                android:padding="5dp"
+                android:textColor="@color/blue200"
+                android:fontFamily="@font/cairo_black"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"/>
+
             <ProgressBar
                 android:id="@+id/progressBar_Rigster"
                 android:layout_width="wrap_content"

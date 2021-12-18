@@ -16,6 +16,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.aghourservices.cache.Settings
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
@@ -50,12 +54,11 @@ class SignupActivity : AppCompatActivity() {
 
         binding.btnUseApp.setOnClickListener {
             binding.progressBarRigster.visibility = View.VISIBLE
-            val intent = Intent(this,CategoriesActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, CategoriesActivity::class.java))
+            doNotShowAgain()
         }
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this,LoginActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 
@@ -89,6 +92,21 @@ class SignupActivity : AppCompatActivity() {
                 Toast.makeText(this@SignupActivity, "Error", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun doNotShowAgain() {
+        val settings = Settings()
+        if (binding.doNotShowAgain.isChecked) {
+            sendFirebaseEvent("SKIP_LOGIN", "")
+            settings.doNotShowRigsterActivity(this)
+        }
+    }
+
+    private fun sendFirebaseEvent(eventName: String, data: String) {
+        val firebaseAnalytics = Firebase.analytics
+        firebaseAnalytics.logEvent(eventName) {
+            param("data", data)
+        }
     }
 
     override fun onBackPressed() {

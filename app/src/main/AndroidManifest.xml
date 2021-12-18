@@ -62,6 +62,7 @@
         <activity
             android:name=".user.SignupActivity"
             android:exported="true"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
