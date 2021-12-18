@@ -59,11 +59,12 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        binding.swipe.setColorSchemeResources(R.color.swipeColor)
+        binding.swipe.setColorSchemeResources(R.color.white)
+        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
         binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
                 binding.swipe.isRefreshing = false
-            }, 500)
+            }, 1000)
         }
 
         binding.backBtn.setOnClickListener {

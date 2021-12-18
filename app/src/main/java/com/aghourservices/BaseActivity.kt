@@ -28,8 +28,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun openSearchActivity() {
-        val intent = Intent(this, SearchActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, SearchActivity::class.java))
     }
 
     fun shareApp() {
@@ -45,12 +44,14 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun rateApp() {
+        sendFirebaseEvent("Rate", "")
         val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
 
     fun facebook() {
+        sendFirebaseEvent("Facebook_Page", "")
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318"))
             startActivity(intent)
@@ -65,6 +66,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun logOut() {
+        sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(this@BaseActivity)
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)

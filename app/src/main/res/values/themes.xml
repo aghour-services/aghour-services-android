@@ -22,8 +22,18 @@
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="CategoriesTheme" parent="Theme.AghourServices.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/white</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+    </style>
+
+    <style name="AddDataTheme" parent="Theme.AghourServices">
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -38,7 +48,7 @@
 
     <!--All Text Font Style-->
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="android:fontFamily">@font/cairo_black</item>
     </style>
 
     <!--All Text Buttons Font Style-->

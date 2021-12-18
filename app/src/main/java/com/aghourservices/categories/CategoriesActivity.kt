@@ -9,15 +9,13 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
+import com.aghourservices.aboutUs.AboutUsActivity
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.ApiServices
@@ -59,8 +57,8 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        checkUser()
         setSupportActionBar(binding.toolbar)
+        checkUser()
         swipeCategory()
         hideNavLogout()
         hideAddItem()
@@ -98,7 +96,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private fun checkUser() {
         val headerView: View = binding.navView.getHeaderView(0)
         userDataView = headerView.findViewById(R.id.user_data_view)
-        btnRegister = headerView.findViewById(R.id.btn_register2)
+        btnRegister = headerView.findViewById(R.id.btn_register)
         userName = headerView.findViewById(R.id.user_name)
         userMobile = headerView.findViewById(R.id.user_mobile)
 
@@ -108,7 +106,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             userDataView.visibility = View.VISIBLE
 
             val user = userInfo.getUserData(this@CategoriesActivity)
-
             userName.text = user.name
             userMobile.text = user.mobile
         }
@@ -118,7 +115,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
     }
-
 
     //LoadCategoriesList With RetrofitBuilder
     private fun loadCategoriesList() {
@@ -210,10 +206,12 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 showOnCloseDialog()
             }
             R.id.about_us -> {
-                Toast.makeText(this,"جايين أهو", Toast.LENGTH_SHORT).show()
+                sendFirebaseEvent("About","")
+                startActivity(Intent(this,AboutUsActivity::class.java))
             }
             R.id.addFirm -> {
-                startActivity(Intent(this,AddDataActivity::class.java))
+                sendFirebaseEvent("Add_Firm","")
+                startActivity(Intent(this, AddDataActivity::class.java))
             }
         }
         binding.drawerLayout.closeDrawer(Gravity.START)
@@ -225,21 +223,18 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         if (isUserLogin) {
             val navView: Menu = binding.navView.menu
             navView.findItem(R.id.nav_log).isVisible = true
-        }
-        else{
+        } else {
             val navView: Menu = binding.navView.menu
             navView.findItem(R.id.nav_log).isVisible = false
         }
     }
-
 
     private fun hideAddItem() {
         val isUserLogin = UserInfo().isUserLoggedIn(this)
         if (isUserLogin) {
             val navView: Menu = binding.navView.menu
             navView.findItem(R.id.addFirm).isVisible = true
-        }
-        else{
+        } else {
             val navView: Menu = binding.navView.menu
             navView.findItem(R.id.addFirm).isVisible = false
         }
@@ -253,6 +248,4 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             finishAffinity()
         }
     }
-
-
 }

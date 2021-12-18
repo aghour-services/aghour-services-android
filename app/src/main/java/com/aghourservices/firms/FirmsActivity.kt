@@ -63,9 +63,9 @@ class FirmsActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+
         binding.firmsRecyclerview.setHasFixedSize(true)
         binding.firmsRecyclerview.layoutManager = LinearLayoutManager(this)
-
         val categoryId = intent.getIntExtra("category_id", 0)
         val categoryName = intent.getStringExtra("category_name")
         binding.toolBarTv.text = categoryName

@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
-import com.aghourservices.databinding.ActivityRegisterBinding
 import com.aghourservices.user.api.ApiServices
 import com.aghourservices.user.api.User
 import retrofit2.Call
@@ -17,6 +16,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.aghourservices.cache.Settings
+import com.aghourservices.databinding.ActivitySignUpBinding
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
@@ -25,11 +25,11 @@ private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SignupActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnCreate.setOnClickListener(View.OnClickListener {
@@ -39,7 +39,7 @@ class SignupActivity : AppCompatActivity() {
             ) {
                 binding.name.error = "اكتب اسمك"
                 binding.mobile.error = "اكتب رقم موبايلك"
-                binding.password.error = "اكتب كلمة السر الجديدة"
+                binding.password.error = "اختر كلمة سر لا تقل عن 6 أحرف"
 
                 return@OnClickListener
 
@@ -84,8 +84,7 @@ class SignupActivity : AppCompatActivity() {
                 binding.progressBarRigster.visibility = View.VISIBLE
                 val userInfo = UserInfo()
                 userInfo.saveUserData(this@SignupActivity, user)
-                val intent = Intent(this@SignupActivity, CategoriesActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this@SignupActivity, CategoriesActivity::class.java))
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {

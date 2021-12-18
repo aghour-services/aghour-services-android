@@ -25,7 +25,7 @@
 
     <item android:id="@+id/about_us"
         android:icon="@drawable/about_us"
-        android:title="احنا مين !"/>
+        android:title="عن التطبيق"/>
 
     <item
         android:id="@+id/nav_log"

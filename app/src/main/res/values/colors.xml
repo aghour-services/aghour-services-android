@@ -44,4 +44,7 @@
 
     <!--colros for card-->
     <color name="whiteCardColor">#fff</color>
+
+    <!--color for about app-->
+    <color name="about">#4B4B4B</color>
 </resources>
