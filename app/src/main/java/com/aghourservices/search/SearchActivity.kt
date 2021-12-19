@@ -40,7 +40,6 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.searchToolbar)
         binding.searchResultRecycler.setHasFixedSize(true)
         binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)

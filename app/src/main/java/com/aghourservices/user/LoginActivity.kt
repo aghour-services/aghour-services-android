@@ -9,14 +9,15 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
+import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivityLoginBinding
+import com.google.android.gms.ads.AdView
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class LoginActivity : AppCompatActivity() {
-    private var userName: String = "01287303441"
-    private var pass: String = "m7madmagdy"
+
     private lateinit var binding: ActivityLoginBinding
     private lateinit var phoneNumber: EditText
     private lateinit var password: EditText
@@ -24,30 +25,24 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnRegister: Button
     private lateinit var btnUseApp: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
+
+        adView = findViewById(R.id.adView)
+        AghourAdManager.displayBannerAd(this, adView)
+
         btnLogin.setOnClickListener {
             if (phoneNumber.text.toString().trim().isEmpty() || password.text.toString().trim()
                     .isEmpty()
             ) {
-                phoneNumber.error = "اكتب رقم تليفونك"
+                phoneNumber.error = "ادخل بريدك الالكتروني"
                 password.error = "اكتب كلمة السر"
-
-            } else if (phoneNumber.text.toString() != userName || password.text.toString() != pass) {
-                Toast.makeText(this, "بياناتك غلط", Toast.LENGTH_SHORT).show()
-
-            } else if (phoneNumber.text.toString()
-                    .isNotEmpty() && password.text.toString()
-                    .isNotEmpty()
-            )
-                if (phoneNumber.text.toString() == userName && password.text.toString() == pass) {
-                    val intent = Intent(this, CategoriesActivity::class.java)
-                    startActivity(intent)
-                }
+            }
         }
 
         btnRegister.setOnClickListener {
@@ -71,6 +66,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finishAffinity()
+        finish()
     }
 }

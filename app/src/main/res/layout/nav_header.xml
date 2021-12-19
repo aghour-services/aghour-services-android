@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/userIcon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:src="@drawable/user" />
 
@@ -27,7 +27,7 @@
             android:layout_margin="20dp"
             android:background="@drawable/login_button"
             android:fontFamily="@font/cairo_black"
-            android:padding="15dp"
+            android:padding="14dp"
             android:gravity="center"
             android:text="انشاء حساب"
             android:textAlignment="center"
@@ -54,6 +54,19 @@
                 android:fontFamily="@font/cairo_black"
                 android:gravity="center"
                 android:text="اسم المستخدم"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cairo_black"
+                android:gravity="center"
+                android:text="البريد الالكتروني"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18sp" />

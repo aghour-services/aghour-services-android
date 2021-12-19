@@ -22,22 +22,19 @@ class SplashScreen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         Handler(Looper.getMainLooper()).postDelayed({
-            Handler(Looper.getMainLooper()).postDelayed({
-                lateinit var intent: Intent
-                val userInfo = UserInfo()
-                val settings = Settings()
-                val skip = userInfo.isUserLoggedIn(this) || settings.showRigsterActivity(this)
+            lateinit var intent: Intent
+            val userInfo = UserInfo()
+            val settings = Settings()
+            val skip = userInfo.isUserLoggedIn(this) || settings.showRigsterActivity(this)
 
-                intent = if (skip) {
-                    Intent(this, CategoriesActivity::class.java)
-                } else {
-                    Intent(this, SignupActivity::class.java)
-                }
-                startActivity(intent)
-                finish()
-            }, 400)
-        }, 800)
+            intent = if (skip) {
+                Intent(this, CategoriesActivity::class.java)
+            } else {
+                Intent(this, SignupActivity::class.java)
+            }
+            startActivity(intent)
+            finish()
+        }, 600)
     }
 }

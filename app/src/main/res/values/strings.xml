@@ -4,7 +4,7 @@
     <string name="ad_native_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name="open" translatable="false">Open</string>
     <string name="close" translatable="false">Close</string>
-    <string name="login_email_hint">رقم التليفون</string>
+    <string name="login_email_hint">البريد الالكتروني</string>
     <string name="login_password_hint">كلمة السر</string>
     <string name="login_signup_hint">ليس لديك حساب ؟ سجل الأن</string>
     <string name="aghour_logo">Aghour Logo</string>
@@ -25,16 +25,12 @@
     </string>
 
     <string name="create_account">
-        2- أكتب اسمك، ورقم هاتفك، واختر كلمة مرور جديدة لا تقل عن 6 أحرف
+        2- أكتب اسمك، وبريدك الالكتروني، واختر كلمة مرور جديدة لا تقل عن 6 أحرف
         ثم اضغط علي انشاء حساب.
     </string>
 
     <string name="benefits_account">
          هتبقي مستخدم بشكل رسمي علي التطبيق وهتقدر تضيف بيانات جديدة للتطبيق.
          ومميزات تانية كتير هتكون متوفرة في التطبيق فيما بعد. 😉😎
-    </string>
-
-    <string name="choose">
-        اختر التصنيف
     </string>
 </resources>

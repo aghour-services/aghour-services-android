@@ -20,25 +20,32 @@ import com.aghourservices.databinding.ActivitySignUpBinding
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
+import android.annotation.SuppressLint
+import com.aghourservices.R
+import com.aghourservices.ads.AghourAdManager
+import com.google.android.gms.ads.AdView
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        adView = findViewById(R.id.adView)
+        AghourAdManager.displayBannerAd(this, adView)
+
         binding.btnCreate.setOnClickListener(View.OnClickListener {
             if (binding.name.text.toString().trim().isEmpty() || binding.mobile.text.toString()
-                    .trim()
-                    .isEmpty() || binding.password.text.toString().trim().isEmpty()
+                    .trim().isEmpty() || binding.password.text.toString().trim().isEmpty()
             ) {
                 binding.name.error = "اكتب اسمك"
-                binding.mobile.error = "اكتب رقم موبايلك"
+                binding.mobile.error = "رقم تليفونك"
                 binding.password.error = "اختر كلمة سر لا تقل عن 6 أحرف"
 
                 return@OnClickListener
@@ -53,7 +60,7 @@ class SignupActivity : AppCompatActivity() {
         })
 
         binding.btnUseApp.setOnClickListener {
-            binding.progressBarRigster.visibility = View.VISIBLE
+            binding.progressBarRegister.visibility = View.VISIBLE
             startActivity(Intent(this, CategoriesActivity::class.java))
             doNotShowAgain()
         }
@@ -63,7 +70,6 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun createUser(user: User) {
-
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
@@ -73,7 +79,6 @@ class SignupActivity : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
-
                 if (response.code() != 201) {
                     Toast.makeText(
                         this@SignupActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
@@ -81,14 +86,18 @@ class SignupActivity : AppCompatActivity() {
                     ).show()
                     return
                 }
-                binding.progressBarRigster.visibility = View.VISIBLE
+                binding.progressBarRegister.visibility = View.VISIBLE
                 val userInfo = UserInfo()
                 userInfo.saveUserData(this@SignupActivity, user)
                 startActivity(Intent(this@SignupActivity, CategoriesActivity::class.java))
             }
 
+            @SuppressLint("ShowToast")
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(this@SignupActivity, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@SignupActivity, "تأكد من اتصالك بالانترنت",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
     }

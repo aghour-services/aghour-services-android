@@ -17,7 +17,7 @@ class UserInfo {
         val name = userDataPref.getString("name", "").toString()
         val mobile = userDataPref.getString("mobile", "").toString()
 
-        return User(name, mobile, "")
+        return User(name,  mobile,"")
     }
 
     fun saveUserData(context: Context, user: User) {

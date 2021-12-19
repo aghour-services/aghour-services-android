@@ -22,7 +22,6 @@ class FirmsAdapter(
         return FirmsViewHolder(view, onItemClicked)
     }
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val holder = holder as FirmsViewHolder

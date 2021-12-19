@@ -51,6 +51,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private lateinit var btnRegister: Button
     private lateinit var userDataView: LinearLayout
     private lateinit var userName: TextView
+    private lateinit var userEmail: TextView
     private lateinit var userMobile: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +73,6 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         binding.navView.itemIconTintList = null
 
         adView = findViewById(R.id.adView)
-
         AghourAdManager.displayBannerAd(this, adView)
 
         //initialize Realm
@@ -206,7 +206,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 showOnCloseDialog()
             }
             R.id.about_us -> {
-                sendFirebaseEvent("About","")
+                sendFirebaseEvent("About_App","")
                 startActivity(Intent(this,AboutUsActivity::class.java))
             }
             R.id.addFirm -> {

@@ -11,7 +11,7 @@ data class User(
         val userObject = JsonObject()
         val userDetails = JsonObject()
         userDetails.addProperty("name", name)
-        userDetails.addProperty("mobile", mobile)
+        userDetails.addProperty("mobile",mobile)
         userDetails.addProperty("password", password)
         userObject.add("user", userDetails)
         return userObject
