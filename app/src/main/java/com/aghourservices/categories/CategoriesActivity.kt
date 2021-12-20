@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
@@ -107,7 +108,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             userDataView.visibility = View.VISIBLE
 
             val user = userInfo.getUserData(this@CategoriesActivity)
-            userName.text = user.name
+            userName.text = user.name.toString()
             userMobile.text = user.mobile
             userEmail.text = user.email
         }

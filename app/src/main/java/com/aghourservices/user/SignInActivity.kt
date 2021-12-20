@@ -44,21 +44,19 @@ class SignInActivity : AppCompatActivity() {
                 binding.email.error = "ادخل بريدك الالكتروني"
                 binding.password.error = "اكتب كلمة السر"
             } else {
-                val email = binding.email.toString()
-                val password = binding.password.toString()
+                val email = binding.email.text.toString()
+                val password = binding.password.text.toString()
                 val user = User("", "", email, password, "")
                 loginUser(user)
             }
         }
 
         binding.btnRegister.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
         binding.btnUseApp.setOnClickListener {
             binding.progressBarLogin.visibility = View.VISIBLE
-            val intent = Intent(this, CategoriesActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, CategoriesActivity::class.java))
         }
     }
 
@@ -69,9 +67,8 @@ class SignInActivity : AppCompatActivity() {
         val retrofitData = retrofitBuilder.signIn(user.userObject())
 
         retrofitData.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
+            override fun onResponse(call: Call<User>, response: Response<User?>) {
                 if (response.code() != 200) {
-                    Log.e("Error", response.code().toString())
                     Toast.makeText(
                         this@SignInActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
                         Toast.LENGTH_LONG
@@ -79,7 +76,9 @@ class SignInActivity : AppCompatActivity() {
                     return
                 }
                 val userInfo = UserInfo()
-                userInfo.saveUserData(this@SignInActivity, user)
+                val user = response.body()?.name
+                Log.e("User", user.toString())
+//                userInfo.saveUserData(this@SignInActivity, user)
                 startActivity(Intent(this@SignInActivity, CategoriesActivity::class.java))
             }
 

@@ -79,13 +79,15 @@ class SignUpActivity : AppCompatActivity() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 201) {
                     Toast.makeText(
-                        this@SignUpActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
+                        this@SignUpActivity, "${response.code()}",
                         Toast.LENGTH_LONG
                     ).show()
                     return
                 }
                 binding.progressBarRegister.visibility = View.VISIBLE
                 val userInfo = UserInfo()
+                val user = response.body()!!
+
                 userInfo.saveUserData(this@SignUpActivity, user)
                 startActivity(Intent(this@SignUpActivity, CategoriesActivity::class.java))
             }
