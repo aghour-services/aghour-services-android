@@ -25,7 +25,7 @@ import com.google.android.gms.ads.AdView
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class SignupActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var adView: AdView
@@ -79,21 +79,21 @@ class SignupActivity : AppCompatActivity() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 201) {
                     Toast.makeText(
-                        this@SignupActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
+                        this@SignUpActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
                         Toast.LENGTH_LONG
                     ).show()
                     return
                 }
                 binding.progressBarRegister.visibility = View.VISIBLE
                 val userInfo = UserInfo()
-                userInfo.saveUserData(this@SignupActivity, user)
-                startActivity(Intent(this@SignupActivity, CategoriesActivity::class.java))
+                userInfo.saveUserData(this@SignUpActivity, user)
+                startActivity(Intent(this@SignUpActivity, CategoriesActivity::class.java))
             }
 
             @SuppressLint("ShowToast")
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(
-                    this@SignupActivity, "تأكد من اتصالك بالانترنت",
+                    this@SignUpActivity, "تأكد من اتصالك بالانترنت",
                     Toast.LENGTH_LONG
                 ).show()
             }

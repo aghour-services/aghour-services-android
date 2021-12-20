@@ -55,12 +55,12 @@
             android:windowSoftInputMode="stateVisible|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".user.sign_in.LoginActivity"
+            android:name=".user.SignInActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".user.signUp.SignupActivity"
+            android:name=".user.SignUpActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

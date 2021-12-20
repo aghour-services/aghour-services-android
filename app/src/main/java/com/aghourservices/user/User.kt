@@ -16,7 +16,6 @@ data class User(
         userDetails.addProperty("mobile", mobile)
         userDetails.addProperty("email", email)
         userDetails.addProperty("password", password)
-        userDetails.addProperty("token", token)
         userObject.add("user", userDetails)
         return userObject
     }

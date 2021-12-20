@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:focusableInTouchMode="true"
-    tools:context=".user.sign_in.SignInActivity">
+    tools:context=".user.SignInActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -60,28 +60,6 @@
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:hintEnabled="false">
-
-                <EditText
-                    android:id="@+id/mobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
-                    android:drawableRight="@drawable/ic_phone"
-                    android:gravity="left"
-                    android:hint="رقم التليفون"
-                    android:inputType="phone|number"
-                    android:maxLines="1"
-                    android:padding="14dp"
-                    android:textColorHint="@color/about" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"

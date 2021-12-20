@@ -24,7 +24,7 @@ import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
 import com.aghourservices.firms.AddFirm
-import com.aghourservices.user.signUp.SignupActivity
+import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
@@ -113,7 +113,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
 
         btnRegister.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 
@@ -207,11 +207,11 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 showOnCloseDialog()
             }
             R.id.about_us -> {
-                sendFirebaseEvent("About_App","")
-                startActivity(Intent(this,AboutUsActivity::class.java))
+                sendFirebaseEvent("About_App", "")
+                startActivity(Intent(this, AboutUsActivity::class.java))
             }
             R.id.addFirm -> {
-                sendFirebaseEvent("Add_Firm","")
+                sendFirebaseEvent("Add_Firm", "")
                 startActivity(Intent(this, AddFirm::class.java))
             }
         }
