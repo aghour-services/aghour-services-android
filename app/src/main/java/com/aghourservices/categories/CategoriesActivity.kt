@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
@@ -23,8 +24,8 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
-import com.aghourservices.user.SignupActivity
-import com.aghourservices.user.addData.AddDataActivity
+import com.aghourservices.firms.AddFirm
+import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
@@ -99,6 +100,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         btnRegister = headerView.findViewById(R.id.btn_register)
         userName = headerView.findViewById(R.id.user_name)
         userMobile = headerView.findViewById(R.id.user_mobile)
+        userEmail = headerView.findViewById(R.id.user_email)
 
         val userInfo = UserInfo()
         if (userInfo.isUserLoggedIn(this@CategoriesActivity)) {
@@ -106,13 +108,13 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             userDataView.visibility = View.VISIBLE
 
             val user = userInfo.getUserData(this@CategoriesActivity)
-            userName.text = user.name
+            userName.text = user.name.toString()
             userMobile.text = user.mobile
+            userEmail.text = user.email
         }
 
         btnRegister.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 
@@ -206,12 +208,12 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 showOnCloseDialog()
             }
             R.id.about_us -> {
-                sendFirebaseEvent("About_App","")
-                startActivity(Intent(this,AboutUsActivity::class.java))
+                sendFirebaseEvent("About_App", "")
+                startActivity(Intent(this, AboutUsActivity::class.java))
             }
             R.id.addFirm -> {
-                sendFirebaseEvent("Add_Firm","")
-                startActivity(Intent(this, AddDataActivity::class.java))
+                sendFirebaseEvent("Add_Firm", "")
+                startActivity(Intent(this, AddFirm::class.java))
             }
         }
         binding.drawerLayout.closeDrawer(Gravity.START)

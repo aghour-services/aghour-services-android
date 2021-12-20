@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user.addData.AddDataActivity">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".firms.AddFirm">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/addDataToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/blue200"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_height="wrap_content"
+            android:background="@color/blue200">
 
             <ImageView
                 android:id="@+id/back_btn"
-                android:layout_width="25dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/back_icon" />
 
@@ -32,7 +29,7 @@
                 android:id="@+id/toolBarTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/cairo_bold"
                 android:gravity="end"
                 android:paddingLeft="15dp"
                 android:text="اضافة بيانات"
@@ -41,21 +38,34 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/cairo_black"
-                android:gravity="center"
+                android:fontFamily="@font/cairo_bold"
                 android:text="اضافة بيانات"
-                android:textColor="@color/blue200"
+                android:textColor="@color/blue1"
                 android:textSize="22sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="10dp"
                 app:hintEnabled="false">
 
                 <EditText
@@ -71,14 +81,15 @@
                     android:gravity="left"
                     android:hint="الاسم (دكتور، مطعم، صيدلية...الخ)"
                     android:inputType="text"
-                    android:padding="18dp"
+                    android:padding="14dp"
+                    android:textColorHint="@color/about"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="15dp"
                 app:hintEnabled="false">
 
                 <EditText
@@ -94,40 +105,17 @@
                     android:gravity="left"
                     android:hint="العنوان"
                     android:inputType="text"
-                    android:padding="18dp"
+                    android:padding="14dp"
+                    android:textColorHint="@color/about"
                     android:textSize="18sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputDescribtion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                app:hintEnabled="false">
-
-                <EditText
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
-                    android:drawableRight="@drawable/ic_description"
-                    android:gravity="left"
-                    android:hint="الوصف"
-                    android:inputType="text"
-                    android:padding="18dp"
-                    android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="15dp"
                 app:hintEnabled="false">
 
                 <EditText
@@ -144,7 +132,35 @@
                     android:hint="رقم التليفون"
                     android:inputType="phone|number"
                     android:maxLines="1"
-                    android:padding="18dp"
+                    android:padding="14dp"
+                    android:textColorHint="@color/about"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputDescribtion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:hintEnabled="false">
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edt_text_background"
+                    android:backgroundTint="@color/primaryTextColor"
+                    android:ems="5"
+                    android:gravity="left"
+                    android:hint="الوصف"
+                    android:lines="5"
+                    android:maxLength="200"
+                    android:maxLines="4"
+                    android:padding="14dp"
+                    android:textColorHint="@color/about"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,7 +168,7 @@
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="20dp"
+                android:layout_margin="5dp"
                 android:spinnerMode="dialog"
                 android:textAlignment="center" />
 
@@ -170,16 +186,14 @@
                 android:id="@+id/btn_add_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/login_button"
-                android:fontFamily="@font/cairo_bold"
+                android:fontFamily="@font/cairo_black"
                 android:text="اضافة"
                 android:textColor="@color/whiteTextColor"
                 android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 
-        <include layout="@layout/admob_banner" />
-
-    </LinearLayout>
-
-</ScrollView>
+    <include layout="@layout/admob_banner" />
+</LinearLayout>

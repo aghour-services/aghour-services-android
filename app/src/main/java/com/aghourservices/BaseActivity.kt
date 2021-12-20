@@ -5,13 +5,11 @@ import android.net.Uri
 import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.user.LoginActivity
 import com.aghourservices.search.SearchActivity
-import com.aghourservices.user.SignupActivity
+import com.aghourservices.user.SignInActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -39,22 +37,19 @@ open class BaseActivity : AppCompatActivity() {
             putExtra(Intent.EXTRA_TEXT, shareText)
             type = "text/plain"
         }
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
+        startActivity(Intent.createChooser(sendIntent, null))
     }
 
     fun rateApp() {
         sendFirebaseEvent("Rate", "")
         val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(intent)
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 
     fun facebook() {
         sendFirebaseEvent("Facebook_Page", "")
         try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318"))
-            startActivity(intent)
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318")))
         } catch (e: Exception) {
             startActivity(
                 Intent(
@@ -68,8 +63,7 @@ open class BaseActivity : AppCompatActivity() {
     private fun logOut() {
         sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(this@BaseActivity)
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, SignInActivity::class.java))
     }
 
     fun showOnCloseDialog() {

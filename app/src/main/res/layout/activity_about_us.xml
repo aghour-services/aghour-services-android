@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -162,7 +161,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -224,7 +222,81 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:src="@mipmap/user" />
-        </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:fontFamily="@font/cairo_black"
+                android:text="تعال بقا نعرف نضيف بيانات ازاي بعد ما عملنا حساب ! 😃😉"
+                android:textAlignment="center"
+                android:textColor="@color/blue1"
+                android:textIsSelectable="true"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:text="1- هتضغط علي اضافة بيانات كما هو موضح بالصورة اعلاه."
+                android:textAlignment="center"
+                android:textColor="@color/about"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:text="2- هيفتح معاك الصفحة دي ."
+                android:textAlignment="center"
+                android:textColor="@color/about"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:text="@string/add_firm"
+                android:textAlignment="center"
+                android:textColor="@color/about"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/add_firm" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:text="3- هتضغط علي اختر التصنيف وتختار واحد من التصنيفات دول ."
+                android:textAlignment="center"
+                android:textColor="@color/about"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/choose" />
+
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -1,9 +1,7 @@
 package com.aghourservices.cache
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import com.aghourservices.user.api.User
 
 const val PREFERENCE_NAME: String = "user_settings"
 const val SKIP_LOGIN_KEY: String = "skip_login"
