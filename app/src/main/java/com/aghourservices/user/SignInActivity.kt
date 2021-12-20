@@ -14,6 +14,8 @@ import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.user.api.SignInService
 import com.google.android.gms.ads.AdView
+import com.google.gson.JsonObject
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,15 +39,14 @@ class SignInActivity : AppCompatActivity() {
         AghourAdManager.displayBannerAd(this, adView)
 
         binding.btnLogin.setOnClickListener {
-            if (binding.email.text.toString().trim().isEmpty() || binding.password.text.toString()
-                    .trim()
-                    .isEmpty()
-            ) {
+            var email = binding.email.text.toString()
+            var password = binding.password.text.toString()
+            val valid = email.isEmpty() || password.isEmpty()
+
+            if (valid) {
                 binding.email.error = "ادخل بريدك الالكتروني"
                 binding.password.error = "اكتب كلمة السر"
             } else {
-                val email = binding.email.text.toString()
-                val password = binding.password.text.toString()
                 val user = User("", "", email, password, "")
                 loginUser(user)
             }
@@ -67,7 +68,7 @@ class SignInActivity : AppCompatActivity() {
         val retrofitData = retrofitBuilder.signIn(user.userObject())
 
         retrofitData.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User?>) {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 200) {
                     Toast.makeText(
                         this@SignInActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
@@ -76,9 +77,9 @@ class SignInActivity : AppCompatActivity() {
                     return
                 }
                 val userInfo = UserInfo()
-                val user = response.body()?.name
-                Log.e("User", user.toString())
-//                userInfo.saveUserData(this@SignInActivity, user)
+                val user = response.body() as User
+
+                userInfo.saveUserData(this@SignInActivity, user)
                 startActivity(Intent(this@SignInActivity, CategoriesActivity::class.java))
             }
 

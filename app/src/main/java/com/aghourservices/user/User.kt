@@ -3,7 +3,6 @@ package com.aghourservices.user
 import com.google.gson.JsonObject
 
 data class User(
-    var id: Int,
     var name: String,
     var mobile: String,
     var email: String,

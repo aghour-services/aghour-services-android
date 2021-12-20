@@ -39,10 +39,15 @@ class SignUpActivity : AppCompatActivity() {
         AghourAdManager.displayBannerAd(this, adView)
 
         binding.btnCreate.setOnClickListener(View.OnClickListener {
-            if (binding.name.text.toString().trim().isEmpty() || binding.email.text.toString()
-                    .trim().isEmpty()
-                || binding.password.text.toString().trim().isEmpty()
-            ) {
+
+            val name = binding.name.text.toString()
+            val mobile = binding.mobile.text.toString()
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
+
+            val valid = name.isEmpty() || email.isEmpty() || password.isEmpty()
+
+            if (valid) {
                 binding.name.error = "اكتب اسمك"
                 binding.email.error = "ادخل بريدك الالكتروني"
                 binding.password.error = "اختر كلمة سر لا تقل عن 6 أحرف"
@@ -50,10 +55,6 @@ class SignUpActivity : AppCompatActivity() {
                 return@OnClickListener
 
             } else {
-                val name = binding.name.text.toString()
-                val mobile = binding.mobile.text.toString()
-                val email = binding.email.text.toString()
-                val password = binding.password.text.toString()
                 val user = User(name, mobile, email, password, "")
                 createUser(user)
             }
@@ -86,7 +87,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
                 binding.progressBarRegister.visibility = View.VISIBLE
                 val userInfo = UserInfo()
-                val user = response.body()!!
+                val user = response.body() as User
 
                 userInfo.saveUserData(this@SignUpActivity, user)
                 startActivity(Intent(this@SignUpActivity, CategoriesActivity::class.java))
