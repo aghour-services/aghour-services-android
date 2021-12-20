@@ -8,16 +8,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.categories.api.Category
 import com.aghourservices.databinding.ActivityFirmsBinding
-import com.aghourservices.firms.api.ApiServices
-import com.aghourservices.firms.api.Firm
+import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
@@ -39,7 +37,6 @@ class FirmsActivity : BaseActivity() {
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
     private lateinit var binding: ActivityFirmsBinding
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,10 +83,11 @@ class FirmsActivity : BaseActivity() {
         AghourAdManager.displayBannerAd(this, adView)
     }
 
+
     private fun loadFirms(categoryId: Int) {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(ApiServices::class.java)
+            .baseUrl(BASE_URL).build().create(ListFirms::class.java)
 
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
 
@@ -119,7 +117,8 @@ class FirmsActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result =
+                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
 
