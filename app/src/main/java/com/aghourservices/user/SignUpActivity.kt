@@ -2,14 +2,11 @@ package com.aghourservices.user
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
-import com.aghourservices.user.api.ApiServices
-import com.aghourservices.user.api.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import android.annotation.SuppressLint
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.user.api.SignUpService
 import com.google.android.gms.ads.AdView
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
@@ -41,11 +39,12 @@ class SignupActivity : AppCompatActivity() {
         AghourAdManager.displayBannerAd(this, adView)
 
         binding.btnCreate.setOnClickListener(View.OnClickListener {
-            if (binding.name.text.toString().trim().isEmpty() || binding.mobile.text.toString()
-                    .trim().isEmpty() || binding.password.text.toString().trim().isEmpty()
+            if (binding.name.text.toString().trim().isEmpty() || binding.email.text.toString()
+                    .trim().isEmpty()
+                || binding.password.text.toString().trim().isEmpty()
             ) {
                 binding.name.error = "اكتب اسمك"
-                binding.mobile.error = "رقم تليفونك"
+                binding.email.error = "ادخل بريدك الالكتروني"
                 binding.password.error = "اختر كلمة سر لا تقل عن 6 أحرف"
 
                 return@OnClickListener
@@ -53,8 +52,9 @@ class SignupActivity : AppCompatActivity() {
             } else {
                 val name = binding.name.text.toString()
                 val mobile = binding.mobile.text.toString()
+                val email = binding.email.text.toString()
                 val password = binding.password.text.toString()
-                val user = User(name, mobile, password)
+                val user = User(name, mobile, email, password, "")
                 createUser(user)
             }
         })
@@ -65,17 +65,15 @@ class SignupActivity : AppCompatActivity() {
             doNotShowAgain()
         }
         binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
         }
     }
 
     private fun createUser(user: User) {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(ApiServices::class.java)
-
-        val retrofitData = retrofitBuilder.createUser(user.userObject())
-        Log.d("User", user.toString())
+            .baseUrl(BASE_URL).build().create(SignUpService::class.java)
+        val retrofitData = retrofitBuilder.signUp(user.userObject())
 
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {

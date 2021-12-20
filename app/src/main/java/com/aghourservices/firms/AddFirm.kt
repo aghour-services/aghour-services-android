@@ -1,4 +1,4 @@
-package com.aghourservices.user.addData
+package com.aghourservices.firms
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -9,14 +9,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBar
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.databinding.ActivityAddDataBinding
-import com.aghourservices.user.api.User
 import com.google.android.gms.ads.AdView
 
-class AddDataActivity : AppCompatActivity() {
+class AddFirm : AppCompatActivity() {
     private lateinit var binding: ActivityAddDataBinding
     lateinit var adView: AdView
     var languages = arrayOf(
@@ -81,7 +79,7 @@ class AddDataActivity : AppCompatActivity() {
                     if (p0.getItemAtPosition(p2).equals("أختر التصنيف")) {
                     } else {
                         val item: String = p0.getItemAtPosition(p2).toString()
-                        Toast.makeText(this@AddDataActivity, item, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddFirm, item, Toast.LENGTH_SHORT).show()
                     }
                 }
 

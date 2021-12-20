@@ -23,8 +23,8 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.ActivityCategoriesBinding
 import com.aghourservices.firms.FirmsActivity
-import com.aghourservices.user.SignupActivity
-import com.aghourservices.user.addData.AddDataActivity
+import com.aghourservices.firms.AddFirm
+import com.aghourservices.user.signUp.SignupActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
@@ -99,6 +99,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         btnRegister = headerView.findViewById(R.id.btn_register)
         userName = headerView.findViewById(R.id.user_name)
         userMobile = headerView.findViewById(R.id.user_mobile)
+        userEmail = headerView.findViewById(R.id.user_email)
 
         val userInfo = UserInfo()
         if (userInfo.isUserLoggedIn(this@CategoriesActivity)) {
@@ -108,11 +109,11 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             val user = userInfo.getUserData(this@CategoriesActivity)
             userName.text = user.name
             userMobile.text = user.mobile
+            userEmail.text = user.email
         }
 
         btnRegister.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SignupActivity::class.java))
         }
     }
 
@@ -211,7 +212,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             }
             R.id.addFirm -> {
                 sendFirebaseEvent("Add_Firm","")
-                startActivity(Intent(this, AddDataActivity::class.java))
+                startActivity(Intent(this, AddFirm::class.java))
             }
         }
         binding.drawerLayout.closeDrawer(Gravity.START)

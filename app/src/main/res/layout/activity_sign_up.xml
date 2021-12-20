@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:focusableInTouchMode="true"
-    tools:context=".user.SignupActivity">
+    tools:context=".user.signUp.SignupActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -49,30 +49,10 @@
                     android:hint="الأسم"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:padding="14dp" />
+                    android:padding="14dp"
+                    android:textColorHint="@color/about" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--<com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:hintEnabled="false">
-
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
-                    android:drawableRight="@drawable/ic_email"
-                    android:gravity="left"
-                    android:hint="@string/login_email_hint"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:padding="14dp" />
-            </com.google.android.material.textfield.TextInputLayout>
--->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,15 +71,38 @@
                     android:hint="رقم التليفون"
                     android:inputType="phone|number"
                     android:maxLines="1"
-                    android:padding="14dp" />
+                    android:padding="14dp"
+                    android:textColorHint="@color/about" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:passwordToggleEnabled="true"
                 app:hintEnabled="false">
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="@drawable/edt_text_background"
+                    android:backgroundTint="@color/primaryTextColor"
+                    android:drawableRight="@drawable/ic_email"
+                    android:gravity="left"
+                    android:hint="@string/login_email_hint"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColorHint="@color/about" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true">
 
                 <EditText
                     android:id="@+id/password"
@@ -113,7 +116,8 @@
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:padding="14dp" />
+                    android:padding="14dp"
+                    android:textColorHint="@color/about" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -192,12 +196,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_margin="6dp"
-                android:padding="6dp"
-                android:textSize="12sp"
                 android:button="@drawable/check_selector"
                 android:fontFamily="@font/cairo_black"
+                android:padding="6dp"
                 android:text="لا تظهرها مرة أخرى"
-                android:textColor="@color/blue200" />
+                android:textColor="@color/blue200"
+                android:textSize="12sp" />
 
             <ProgressBar
                 android:id="@+id/progressBar_Register"

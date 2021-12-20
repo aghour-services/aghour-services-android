@@ -1,11 +1,12 @@
 package com.aghourservices.user.api
 
+import com.aghourservices.user.User
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface ApiServices {
+interface SignUpService {
     @POST("users")
-    fun createUser(@Body user: JsonObject): Call<User>
+    fun signUp(@Body user: JsonObject): Call<User>
 }

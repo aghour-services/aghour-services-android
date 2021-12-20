@@ -5,13 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.Settings
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivitySplashScreenBinding
-import com.aghourservices.user.SignupActivity
+import com.aghourservices.user.signUp.SignupActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
