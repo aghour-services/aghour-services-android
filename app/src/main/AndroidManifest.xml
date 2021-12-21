@@ -58,10 +58,12 @@
             android:name=".user.SignInActivity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:theme="@style/AddDataTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".user.SignUpActivity"
             android:exported="true"
+            android:theme="@style/AddDataTheme"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity

@@ -34,30 +34,31 @@
                 android:paddingLeft="15dp"
                 android:text="اضافة بيانات"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </androidx.appcompat.widget.Toolbar>
 
     </LinearLayout>
+
+    <include layout="@layout/admob_banner" />
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/cairo_bold"
+                android:fontFamily="@font/cairo_black"
                 android:text="اضافة بيانات"
                 android:textColor="@color/blue1"
                 android:textSize="22sp" />
@@ -76,11 +77,12 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
+                    android:backgroundTint="@color/blue200"
                     android:drawableRight="@drawable/ic_person"
                     android:gravity="left"
                     android:hint="الاسم (دكتور، مطعم، صيدلية...الخ)"
                     android:inputType="text"
+                    android:maxLines="1"
                     android:padding="14dp"
                     android:textColorHint="@color/about"
                     android:textSize="18sp" />
@@ -100,10 +102,11 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
+                    android:backgroundTint="@color/blue200"
                     android:drawableRight="@drawable/ic_location"
                     android:gravity="left"
                     android:hint="العنوان"
+                    android:maxLines="1"
                     android:inputType="text"
                     android:padding="14dp"
                     android:textColorHint="@color/about"
@@ -126,11 +129,12 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
+                    android:backgroundTint="@color/blue200"
                     android:drawableRight="@drawable/ic_phone"
                     android:gravity="left"
                     android:hint="رقم التليفون"
                     android:inputType="phone|number"
+                    android:maxLength="11"
                     android:maxLines="1"
                     android:padding="14dp"
                     android:textColorHint="@color/about"
@@ -138,30 +142,29 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputDescribtion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="300"
                 app:hintEnabled="false">
 
                 <EditText
                     android:id="@+id/description"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="left"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
-                    android:ems="5"
+                    android:backgroundTint="@color/blue200"
                     android:gravity="left"
                     android:hint="الوصف"
-                    android:lines="5"
-                    android:maxLength="200"
-                    android:maxLines="4"
+                    android:maxLength="300"
                     android:padding="14dp"
                     android:textColorHint="@color/about"
                     android:textSize="18sp" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner
@@ -171,16 +174,6 @@
                 android:layout_margin="5dp"
                 android:spinnerMode="dialog"
                 android:textAlignment="center" />
-
-            <ProgressBar
-                android:id="@+id/progressbar_add_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/progressBar"
-                android:scaleX=".9"
-                android:scaleY=".9"
-                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_add_data"
@@ -194,6 +187,4 @@
                 android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
-
-    <include layout="@layout/admob_banner" />
 </LinearLayout>

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
-import com.aghourservices.firms.api.Firm
+import com.aghourservices.firms.Firm
 
 class FirmsAdapter(
     val context: Context,

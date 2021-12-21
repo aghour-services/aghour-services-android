@@ -18,6 +18,8 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import android.annotation.SuppressLint
+import android.text.Html
+import androidx.appcompat.app.AlertDialog
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
 import com.aghourservices.user.api.SignUpService
@@ -79,10 +81,7 @@ class SignUpActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 201) {
-                    Toast.makeText(
-                        this@SignUpActivity, "${response.code()}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    errorLogin()
                     return
                 }
                 binding.progressBarRegister.visibility = View.VISIBLE
@@ -95,10 +94,7 @@ class SignUpActivity : AppCompatActivity() {
 
             @SuppressLint("ShowToast")
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(
-                    this@SignUpActivity, "تأكد من اتصالك بالانترنت",
-                    Toast.LENGTH_LONG
-                ).show()
+                noInternet()
             }
         })
     }
@@ -116,6 +112,32 @@ class SignUpActivity : AppCompatActivity() {
         firebaseAnalytics.logEvent(eventName) {
             param("data", data)
         }
+    }
+
+    fun errorLogin() {
+        val title = R.string.error_logIn
+        val positiveButton = "تمام"
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(title)
+        alertDialogBuilder.setIcon(R.drawable.cloud)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    fun noInternet() {
+        val title = R.string.no_internet
+        val positiveButton = "تمام"
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(title)
+        alertDialogBuilder.setIcon(R.drawable.cloud)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     override fun onBackPressed() {

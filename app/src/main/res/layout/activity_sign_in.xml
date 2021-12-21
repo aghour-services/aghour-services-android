@@ -79,6 +79,7 @@
                     android:gravity="left"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
+                    android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:padding="14dp"
                     android:textColorHint="@color/about"
@@ -94,7 +95,7 @@
                 android:background="@drawable/login_button"
                 android:fontFamily="@font/cairo_bold"
                 android:text="تسجيل دخول"
-                android:textColor="@color/whiteTextColor"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <LinearLayout

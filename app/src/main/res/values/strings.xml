@@ -2,6 +2,10 @@
     <string name="app_name">أجهور الكبرى</string>
     <string name="ad_banner_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ad_native_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+
+    <!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/4791335369</string>-->
+    <!--    <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/8061384589</string>-->
+
     <string name="open" translatable="false">Open</string>
     <string name="close" translatable="false">Close</string>
     <string name="login_email_hint">البريد الالكتروني</string>
@@ -34,4 +38,7 @@
          ومميزات تانية كتير هتكون متوفرة في التطبيق فيما بعد. 😃😎
     </string>
     <string name="add_firm">هتكتب فيها الاسم والعنوان ورقم التليفون، ووصف عن ما يقدمة المكان او اختصاص الدكتور (مثلا) ومتنساش تختار التصنيف.</string>
+    <string name="data_added">"تم ارسال البيانات وسيتم الموافقة عليها فورا 😃"</string>
+    <string name="no_internet">" عفوا لا يوجد انترنت 😑"</string>
+    <string name="error_logIn">"خطأ في التسجيل يرجي اعادة المحاولة 😑"</string>
 </resources>

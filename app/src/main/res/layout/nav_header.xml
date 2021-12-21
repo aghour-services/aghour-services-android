@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/userIcon"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:src="@drawable/user" />
 
@@ -39,45 +39,44 @@
             android:id="@+id/user_data_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 
             <TextView
                 android:id="@+id/user_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:fontFamily="@font/cairo_black"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:text="اسم المستخدم"
                 android:textAlignment="center"
+                android:text="User Name"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:layout_gravity="center"
-                android:fontFamily="@font/cairo_bold"
                 android:gravity="center"
-                android:text="البريد الالكتروني"
                 android:textAlignment="center"
+                android:fontFamily="@font/cairo_bold"
+                android:text="mohamedmagdysaber@gmail.com"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/user_mobile"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/segoe_ui_bold"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:text="01234567890"
                 android:textAlignment="center"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:text="01234567890"
                 android:textColor="@color/offWhite"
                 android:textSize="14sp" />
         </LinearLayout>

@@ -71,6 +71,7 @@
                     android:hint="رقم التليفون"
                     android:inputType="phone|number"
                     android:maxLines="1"
+                    android:maxLength="11"
                     android:padding="14dp"
                     android:textColorHint="@color/about" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -175,7 +176,7 @@
                 android:background="@drawable/login_button"
                 android:fontFamily="@font/cairo_bold"
                 android:text="تسجيل دخول"
-                android:textColor="@color/whiteTextColor"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <Button
@@ -208,7 +209,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
                 android:indeterminateTint="@color/progressBar"
                 android:scaleX=".9"
                 android:scaleY=".9"
