@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
-import com.aghourservices.firms.api.Firm
+import com.aghourservices.firms.Firm
 
 class FirmsAdapter(
     val context: Context,
@@ -14,14 +14,13 @@ class FirmsAdapter(
     private val onItemClicked: (position: Int) -> Unit,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var itemsCountToShowAds = 4
+    private var itemsCountToShowAds = 3
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.firms_card, parent, false)
         return FirmsViewHolder(view, onItemClicked)
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 

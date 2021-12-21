@@ -1,27 +1,18 @@
 package com.aghourservices.search
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.databinding.ActivitySearchBinding
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
@@ -36,49 +27,47 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = "https://aghour-services.magdi.work/api/"
+private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchActivity : AppCompatActivity() {
-    private lateinit var searchToolbar: Toolbar
-    private lateinit var backButton: ImageView
-    private lateinit var searchEditText: AppCompatEditText
     private lateinit var adView: AdView
-    private lateinit var searchResultRecycler: RecyclerView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var searchResults: ArrayList<SearchResult>
     private lateinit var adapter: SearchResultAdapter
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var binding: ActivitySearchBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
-        initViews()
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.searchToolbar)
+        binding.searchResultRecycler.setHasFixedSize(true)
+        binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
 
-        setSupportActionBar(searchToolbar)
-        searchResultRecycler.setHasFixedSize(true)
-        searchResultRecycler.layoutManager = LinearLayoutManager(this)
+        adView = findViewById(R.id.adView)
         AghourAdManager.displayBannerAd(this, adView)
 
-        searchEditText.setOnClickListener {
-            search(searchEditText.text.toString())
+        binding.searchText.setOnClickListener {
+            search(binding.searchText.text.toString())
         }
 
-        searchEditText.doOnTextChanged { text, _, _, _ ->
+        binding.searchText.doOnTextChanged { text, _, _, _ ->
             val searchKeyWord = text.toString()
             if (searchKeyWord.length > 2) {
                 search(searchKeyWord)
             }
         }
 
-        backButton.setOnClickListener {
-            finish()
-        }
-        swipeRefreshLayout = findViewById(R.id.swipe)
-        swipeRefreshLayout.setColorSchemeResources(R.color.swipeColor)
-        swipeRefreshLayout.setOnRefreshListener {
+        binding.swipe.setColorSchemeResources(R.color.white)
+        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
+        binding.swipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
-                swipeRefreshLayout.isRefreshing = false
-            }, 500)
+                binding.swipe.isRefreshing = false
+            }, 1000)
+        }
+
+        binding.backBtn.setOnClickListener {
+            finish()
         }
     }
 
@@ -102,21 +91,21 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<SearchResult>?>, t: Throwable) {
-
+                customView()
             }
         })
     }
 
     private fun setAdapter(searchResults: ArrayList<SearchResult>) {
         if (searchResults.isEmpty()) {
-            searchResultRecycler.visibility = View.GONE
+            binding.searchResultRecycler.visibility = View.GONE
             return
         }
-        searchResultRecycler.visibility = View.VISIBLE
+        binding.searchResultRecycler.visibility = View.VISIBLE
         adapter = SearchResultAdapter(applicationContext, searchResults) { position ->
             onListItemClick(position)
         }
-        searchResultRecycler.adapter = adapter
+        binding.searchResultRecycler.adapter = adapter
     }
 
     private fun onListItemClick(position: Int) {
@@ -138,12 +127,8 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun initViews() {
-        backButton = findViewById(R.id.back_btn)
-        searchToolbar = findViewById(R.id.searchToolbar)
-        searchEditText = findViewById(R.id.search_text)
-        adView = findViewById(R.id.adView)
-        searchResultRecycler = findViewById(R.id.searchResultRecycler)
+    fun customView() {
+        binding.searchAnimation.visibility = View.GONE
+        binding.noInternet.visibility = View.VISIBLE
     }
 }

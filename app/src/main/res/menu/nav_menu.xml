@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/addFirm"
+        android:icon="@drawable/add"
+        android:title="اضافة بيانات"/>
+
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/share"
+        android:title="مشاركة التطبيق" />
+
+    <item
+        android:id="@+id/nav_rate"
+        android:icon="@drawable/star"
+        android:title="قيم التطبيق" />
+
+    <item
+        android:id="@+id/nav_faceBook"
+        android:icon="@drawable/facebook"
+        android:title="تابعنا علي فيسبوك" />
+
+    <item android:id="@+id/about_us"
+        android:icon="@drawable/about_us"
+        android:title="عن التطبيق"/>
+
+    <item
+        android:id="@+id/nav_log"
+        android:icon="@drawable/exit"
+        android:title="تسجيل خروج" />
+
+</menu>

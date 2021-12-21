@@ -1,22 +1,39 @@
 package com.aghourservices.splashScreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.aghourservices.BaseActivity
-import com.aghourservices.R
+import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.cache.Settings
+import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
+import com.aghourservices.databinding.ActivitySplashScreenBinding
+import com.aghourservices.user.SignUpActivity
 
-class SplashScreen : BaseActivity() {
+@SuppressLint("CustomSplashScreen")
+class SplashScreen : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, CategoriesActivity::class.java)
+            lateinit var intent: Intent
+            val userInfo = UserInfo()
+            val settings = Settings()
+            val skip = userInfo.isUserLoggedIn(this) || settings.showRigsterActivity(this)
+
+            intent = if (skip) {
+                Intent(this, CategoriesActivity::class.java)
+            } else {
+                Intent(this, SignUpActivity::class.java)
+            }
             startActivity(intent)
             finish()
-        }, 1000)
+        }, 600)
     }
 }
