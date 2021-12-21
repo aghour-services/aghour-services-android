@@ -79,6 +79,7 @@
                     android:gravity="left"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
+                    android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:padding="14dp"
                     android:textColorHint="@color/about"

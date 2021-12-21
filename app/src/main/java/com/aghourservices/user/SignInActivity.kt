@@ -72,12 +72,13 @@ class SignInActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 200) {
-                    Toast.makeText(this@SignInActivity,"${response.code()}",Toast.LENGTH_LONG).show()
+                    errorLogin()
                     return
                 }
                 val userInfo = UserInfo()
                 val user = response.body() as User
 
+                binding.progressBarLogin.visibility = View.VISIBLE
                 userInfo.saveUserData(this@SignInActivity, user)
                 startActivity(Intent(this@SignInActivity, CategoriesActivity::class.java))
             }
