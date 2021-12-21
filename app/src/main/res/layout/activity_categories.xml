@@ -89,7 +89,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:itemIconSize="22dp"
+        app:itemIconSize="24dp"
         app:itemTextAppearance="@style/RobotoButtonStyle"
         app:itemTextColor="@color/blue200"
         app:itemVerticalPadding="16dp"

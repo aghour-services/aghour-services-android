@@ -3,9 +3,11 @@ package com.aghourservices.user
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
 import com.aghourservices.ads.AghourAdManager
@@ -39,8 +41,8 @@ class SignInActivity : AppCompatActivity() {
         AghourAdManager.displayBannerAd(this, adView)
 
         binding.btnLogin.setOnClickListener {
-            var email = binding.email.text.toString()
-            var password = binding.password.text.toString()
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
             val valid = email.isEmpty() || password.isEmpty()
 
             if (valid) {
@@ -70,10 +72,7 @@ class SignInActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 200) {
-                    Toast.makeText(
-                        this@SignInActivity, "خطأ في التسجيل برجاء اعادة المحاولة",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@SignInActivity,"${response.code()}",Toast.LENGTH_LONG).show()
                     return
                 }
                 val userInfo = UserInfo()
@@ -85,12 +84,35 @@ class SignInActivity : AppCompatActivity() {
 
             @SuppressLint("ShowToast")
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(
-                    this@SignInActivity, "تأكد من اتصالك بالانترنت",
-                    Toast.LENGTH_LONG
-                ).show()
+                noInternet()
             }
         })
+    }
+
+    fun errorLogin() {
+        val title = R.string.error_logIn
+        val positiveButton = "تمام"
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(title)
+        alertDialogBuilder.setIcon(R.drawable.cloud)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    fun noInternet() {
+        val title = R.string.no_internet
+        val positiveButton = "تمام"
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(title)
+        alertDialogBuilder.setIcon(R.drawable.cloud)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     override fun onBackPressed() {

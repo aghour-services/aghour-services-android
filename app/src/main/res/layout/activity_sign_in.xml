@@ -94,7 +94,7 @@
                 android:background="@drawable/login_button"
                 android:fontFamily="@font/cairo_bold"
                 android:text="تسجيل دخول"
-                android:textColor="@color/whiteTextColor"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <LinearLayout

@@ -33,6 +33,7 @@
     </style>
 
     <style name="AddDataTheme" parent="Theme.AghourServices">
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     </style>
 
