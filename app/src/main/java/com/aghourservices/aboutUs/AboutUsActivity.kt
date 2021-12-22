@@ -3,7 +3,7 @@ package com.aghourservices.aboutUs
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.databinding.ActivityAboutUsBinding
 import com.google.android.gms.ads.AdView
 
@@ -21,7 +21,7 @@ class AboutUsActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
     }
 
     override fun onSupportNavigateUp(): Boolean {

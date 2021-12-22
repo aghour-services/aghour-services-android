@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.databinding.ActivitySearchBinding
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
@@ -45,7 +45,7 @@ class SearchActivity : AppCompatActivity() {
         binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())

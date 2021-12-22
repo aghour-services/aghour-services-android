@@ -12,8 +12,8 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
-import com.aghourservices.categories.api.Category
+import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.aghourservices.databinding.ActivityFirmsBinding
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
@@ -43,7 +43,8 @@ class FirmsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFirmsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val interstitial = Interstitial()
+        interstitial.load(this)
         Realm.init(this)
         val config = RealmConfiguration
             .Builder()
@@ -55,7 +56,7 @@ class FirmsActivity : BaseActivity() {
         realm = Realm.getInstance(config)
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -80,7 +81,7 @@ class FirmsActivity : BaseActivity() {
         }
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
     }
 
 
@@ -117,7 +118,8 @@ class FirmsActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result =
+                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
 

@@ -3,7 +3,6 @@ package com.aghourservices.user
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
@@ -21,7 +20,7 @@ import android.annotation.SuppressLint
 import android.text.Html
 import androidx.appcompat.app.AlertDialog
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.user.api.SignUpService
 import com.google.android.gms.ads.AdView
 
@@ -38,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         binding.btnCreate.setOnClickListener(View.OnClickListener {
 

@@ -4,20 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.user.api.SignInService
 import com.google.android.gms.ads.AdView
-import com.google.gson.JsonObject
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +34,7 @@ class SignInActivity : AppCompatActivity() {
 
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         binding.btnLogin.setOnClickListener {
             val email = binding.email.text.toString()

@@ -1,18 +1,16 @@
 package com.aghourservices.firms
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.Category
 import com.aghourservices.databinding.ActivityAddDataBinding
@@ -20,7 +18,6 @@ import com.aghourservices.firms.api.CreateFirm
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import kotlinx.coroutines.awaitCancellation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,7 +41,7 @@ class AddFirm : AppCompatActivity() {
         spinnerAdapter(categoryList)
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         binding.backBtn.setOnClickListener {
             finish()

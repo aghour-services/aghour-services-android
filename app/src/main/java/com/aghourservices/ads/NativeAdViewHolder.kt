@@ -9,6 +9,6 @@ class NativeAdViewHolder(
     itemView: ViewGroup
 ) : RecyclerView.ViewHolder(itemView) {
     init {
-        AghourAdManager.loadNativeAd(context, itemView)
+        Native.load(context, itemView)
     }
 }

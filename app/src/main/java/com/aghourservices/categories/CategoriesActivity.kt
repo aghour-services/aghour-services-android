@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseActivity
 import com.aghourservices.R
 import com.aghourservices.aboutUs.AboutUsActivity
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
@@ -74,7 +73,7 @@ class CategoriesActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         binding.navView.itemIconTintList = null
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         //initialize Realm
         Realm.init(this)
