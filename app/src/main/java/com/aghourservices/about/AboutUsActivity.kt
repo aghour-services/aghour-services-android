@@ -1,4 +1,4 @@
-package com.aghourservices.aboutUs
+package com.aghourservices.about
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

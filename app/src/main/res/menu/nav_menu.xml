@@ -4,7 +4,7 @@
     tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/addFirm"
+        android:id="@+id/nav_add_firm"
         android:icon="@drawable/add"
         android:title="اضافة بيانات"/>
 

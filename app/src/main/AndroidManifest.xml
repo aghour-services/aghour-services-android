@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".categories.CategoriesActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/CategoriesTheme"
@@ -73,7 +73,7 @@
             android:theme="@style/AddDataTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".aboutUs.AboutUsActivity"
+            android:name=".about.AboutUsActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AghourServices.NoActionBar"

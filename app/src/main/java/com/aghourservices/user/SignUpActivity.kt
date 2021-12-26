@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.categories.CategoriesActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +18,7 @@ import com.google.firebase.ktx.Firebase
 import android.annotation.SuppressLint
 import android.text.Html
 import androidx.appcompat.app.AlertDialog
+import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.user.api.SignUpService
@@ -63,7 +63,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnUseApp.setOnClickListener {
             binding.progressBarRegister.visibility = View.VISIBLE
-            startActivity(Intent(this, CategoriesActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             doNotShowAgain()
         }
         binding.btnLogin.setOnClickListener {
@@ -88,7 +88,7 @@ class SignUpActivity : AppCompatActivity() {
                 val user = response.body() as User
 
                 userInfo.saveUserData(this@SignUpActivity, user)
-                startActivity(Intent(this@SignUpActivity, CategoriesActivity::class.java))
+                startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
             }
 
             @SuppressLint("ShowToast")

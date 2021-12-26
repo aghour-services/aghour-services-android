@@ -7,10 +7,10 @@ import android.text.Html
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.user.api.SignInService
 import com.google.android.gms.ads.AdView
@@ -55,7 +55,7 @@ class SignInActivity : AppCompatActivity() {
         }
         binding.btnUseApp.setOnClickListener {
             binding.progressBarLogin.visibility = View.VISIBLE
-            startActivity(Intent(this, CategoriesActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -76,7 +76,7 @@ class SignInActivity : AppCompatActivity() {
 
                 binding.progressBarLogin.visibility = View.VISIBLE
                 userInfo.saveUserData(this@SignInActivity, user)
-                startActivity(Intent(this@SignInActivity, CategoriesActivity::class.java))
+                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
             }
 
             @SuppressLint("ShowToast")

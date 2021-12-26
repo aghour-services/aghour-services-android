@@ -9,8 +9,8 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import com.aghourservices.MainActivity
 import com.aghourservices.R
-import com.aghourservices.categories.CategoriesActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -46,7 +46,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
     @SuppressLint("UnspecifiedImmutableFlag")
     fun generateNotification(title: String, message: String) {
 
-        val intent = Intent(this, CategoriesActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
