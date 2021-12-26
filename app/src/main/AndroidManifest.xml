@@ -66,18 +66,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AddDataTheme"
             tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".firms.AddFirm"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/AddDataTheme"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".about.AboutUsActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AghourServices.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

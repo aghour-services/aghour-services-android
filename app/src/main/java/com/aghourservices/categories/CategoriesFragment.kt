@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
@@ -15,6 +17,8 @@ import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.FragmentCategoriesBinding
+import com.aghourservices.firms.AddDataFragment
+import com.aghourservices.firms.FirmsFragment
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -49,7 +53,10 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+    }
 
+    override fun onResume() {
+        super.onResume()
         loadCategoriesList()
     }
 
@@ -120,20 +127,17 @@ class CategoriesFragment : Fragment() {
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
         val categoryName = categoryList[position].name
-        Toast.makeText(activity, categoryName, Toast.LENGTH_SHORT).show()
 
-//        val intent = Intent(this, FirmsActivity::class.java)
-//        intent.putExtra("category_id", categoryId)
-//        intent.putExtra("category_name", categoryName)
-//        startActivity(intent)
+        val fragmentManager = requireActivity().supportFragmentManager
+        val arguments = Bundle();
+        arguments.putInt("category_id", categoryId);
+        arguments.putString("category_name", categoryName);
+        val firmsFragment = FirmsFragment()
+        firmsFragment.arguments = arguments
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, firmsFragment)
+            .addToBackStack("Firms").commit()
+
     }
-
-    //refresh
-//    private fun swipeCategory() {
-//        runnable = Runnable { loadCategoriesList() }
-//        handler = Handler(Looper.getMainLooper())
-//        handler.postDelayed(runnable, 0)
-//    }
 
     private fun progressBar() {
         binding.progressBar.visibility = View.GONE

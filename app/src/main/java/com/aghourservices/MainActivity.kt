@@ -17,8 +17,9 @@ import androidx.fragment.app.replace
 import androidx.navigation.findNavController
 import com.aghourservices.about.AboutFragment
 import com.aghourservices.cache.UserInfo
+import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
-import com.aghourservices.firms.AddFirm
+import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.user.SignUpActivity
 import com.google.android.material.navigation.NavigationView
 
@@ -49,6 +50,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
+        supportFragmentManager.commit {
+            replace<CategoriesFragment>(R.id.fragmentContainerView)
+        }
     }
 
     private fun checkUser() {
@@ -90,6 +94,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     @SuppressLint("WrongConstant")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.nav_add_firm -> {
+                sendFirebaseEvent("AddFirm", "")
+                supportFragmentManager.commit {
+                    replace<AddDataFragment>(R.id.fragmentContainerView)
+                    setReorderingAllowed(true)
+                    addToBackStack("AddFirm") // name can be null
+                }
+            }
             R.id.nav_share -> {
                 shareApp()
             }
@@ -103,20 +115,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 showOnCloseDialog()
             }
             R.id.about_us -> {
-                sendFirebaseEvent("About_App", "")
-//                findNavController(R.id.fragmentContainerView).navigate(R.id.action_categoriesFragment_to_aboutFragment)
+                sendFirebaseEvent("AboutApp", "")
                 supportFragmentManager.commit {
                     replace<AboutFragment>(R.id.fragmentContainerView)
                     setReorderingAllowed(true)
                     addToBackStack("About") // name can be null
                 }
             }
-            R.id.nav_add_firm -> {
-                sendFirebaseEvent("Add_Firm", "")
-                startActivity(Intent(this, AddFirm::class.java))
-            }
         }
-        binding.drawerLayout.closeDrawer(Gravity.START)
+//        binding.drawerLayout.closeDrawer(Gravity.START)
+        binding.drawerLayout.closeDrawer(Gravity.START, true)
         return true
     }
 
