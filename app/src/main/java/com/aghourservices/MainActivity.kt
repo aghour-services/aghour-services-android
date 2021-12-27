@@ -3,18 +3,16 @@ package com.aghourservices
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.text.TextUtils.replace
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
-import androidx.navigation.findNavController
+import androidx.appcompat.widget.Toolbar
 import com.aghourservices.about.AboutFragment
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesFragment
@@ -22,6 +20,7 @@ import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.user.SignUpActivity
 import com.google.android.material.navigation.NavigationView
+import androidx.fragment.app.*
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -33,26 +32,87 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private lateinit var userName: TextView
     private lateinit var userEmail: TextView
     private lateinit var userMobile: TextView
+    private var selectedItemId = -1
+    lateinit var toolbar: Toolbar
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    override
+    fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.title = "a"
         checkUser()
         hideNavLogout()
         hideAddItem()
+        toggle = object : ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            toolbar,
+            R.string.open,
+            R.string.close
+        ) {
+            override fun onDrawerClosed(view: View) {
+                super.onDrawerClosed(view)
+                if (selectedItemId == -1) {
+                    return
+                }
+                when (selectedItemId) {
+                    R.id.nav_home -> {
+                        replaceFragment(CategoriesFragment())
+                    }
+                    R.id.nav_add_firm -> {
+                        replaceFragment(AddDataFragment())
+                    }
+                    R.id.nav_share -> {
+                        shareApp()
+                    }
+                    R.id.nav_rate -> {
+                        rateApp()
+                    }
+                    R.id.nav_faceBook -> {
+                        facebook()
+                    }
+                    R.id.about_us -> {
+                        replaceFragment(AboutFragment())
+                    }
+                    R.id.nav_log -> {
+                        showOnCloseDialog()
+                    }
+                }
+                selectedItemId = -1
+                //toast("Drawer closed")
+            }
 
-        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                //toast("Drawer opened")
+            }
+        }
+
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
-        supportFragmentManager.commit {
-            replace<CategoriesFragment>(R.id.fragmentContainerView)
-        }
+        replaceFragment(CategoriesFragment())
+    }
+
+    override fun setTitle(title: CharSequence?) {
+        binding.toolBarTv.text = title
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val backStateName: String = fragment.javaClass.toString()
+        val manager: FragmentManager = supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
+        ft.replace(R.id.fragmentContainerView, fragment)
+        ft.addToBackStack(backStateName)
+        ft.commit()
     }
 
     private fun checkUser() {
@@ -79,52 +139,21 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    //LoadCategoriesList With RetrofitBuilder
+//LoadCategoriesList With RetrofitBuilder
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when {
-            toggle.onOptionsItemSelected(item) -> {
-            }
+            toggle.onOptionsItemSelected(item) -> {}
         }
         return super.onOptionsItemSelected(item)
     }
 
     @SuppressLint("WrongConstant")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_add_firm -> {
-                sendFirebaseEvent("AddFirm", "")
-                supportFragmentManager.commit {
-                    replace<AddDataFragment>(R.id.fragmentContainerView)
-                    setReorderingAllowed(true)
-                    addToBackStack("AddFirm") // name can be null
-                }
-            }
-            R.id.nav_share -> {
-                shareApp()
-            }
-            R.id.nav_rate -> {
-                rateApp()
-            }
-            R.id.nav_faceBook -> {
-                facebook()
-            }
-            R.id.nav_log -> {
-                showOnCloseDialog()
-            }
-            R.id.about_us -> {
-                sendFirebaseEvent("AboutApp", "")
-                supportFragmentManager.commit {
-                    replace<AboutFragment>(R.id.fragmentContainerView)
-                    setReorderingAllowed(true)
-                    addToBackStack("About") // name can be null
-                }
-            }
-        }
-//        binding.drawerLayout.closeDrawer(Gravity.START)
         binding.drawerLayout.closeDrawer(Gravity.START, true)
+        selectedItemId = item.itemId
         return true
     }
 

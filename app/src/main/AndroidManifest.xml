@@ -42,12 +42,6 @@
             android:theme="@style/CategoriesTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".firms.FirmsActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AghourServices.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".search.SearchActivity"
             android:exported="true"
             android:screenOrientation="portrait"

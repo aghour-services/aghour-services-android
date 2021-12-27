@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
         android:id="@+id/noInternet"
         android:layout_width="match_parent"
@@ -38,9 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
-            android:orientation="vertical"
-            android:padding="6dp">
+            android:orientation="vertical">
 
             <include layout="@layout/firms_shimmer" />
 
@@ -66,7 +63,6 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
             android:layout_width="match_parent"
@@ -77,7 +73,7 @@
                 android:id="@+id/firmsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="#EAEAEA"
+                android:background="#DDDDDD"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:listitem="@layout/firms_card" />

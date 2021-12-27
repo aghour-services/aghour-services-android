@@ -85,11 +85,8 @@ class FirmsFragment : Fragment() {
         if (bundle != null) {
             categoryId = bundle.getInt("category_id", 0)
             val categoryName = bundle.getString("category_name")
-            requireActivity().actionBar?.title = categoryName
-            (activity as AppCompatActivity?)?.supportActionBar?.title = categoryName
-
+            requireActivity().title = categoryName
         }
-
 
         runnable = Runnable { loadFirms(categoryId) }
         handler = Handler(Looper.getMainLooper())

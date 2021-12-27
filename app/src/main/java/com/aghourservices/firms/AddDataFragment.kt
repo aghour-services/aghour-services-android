@@ -40,12 +40,6 @@ class AddDataFragment : Fragment() {
         return binding.root
     }
 
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Toast.makeText(requireActivity(), "Save..", Toast.LENGTH_SHORT).show()
-    }
-
     override fun onResume() {
         super.onResume()
 
@@ -65,6 +59,7 @@ class AddDataFragment : Fragment() {
 
         adView = requireActivity().findViewById(R.id.adView)
         Banner.show(requireActivity(), adView)
+        requireActivity().title = getString(R.string.add_data_fragment)
 
 
         binding.btnAddData.setOnClickListener(View.OnClickListener

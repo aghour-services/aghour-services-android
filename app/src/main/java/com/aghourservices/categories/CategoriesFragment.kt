@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.categories.api.ApiServices
@@ -37,14 +39,12 @@ class CategoriesFragment : Fragment() {
     private lateinit var adapter: CategoriesAdapter
     private lateinit var categoryList: ArrayList<Category>
 
-    private lateinit var handler: Handler
-    private lateinit var runnable: Runnable
     private lateinit var adView: AdView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentCategoriesBinding.inflate(layoutInflater)
         return binding.root
@@ -52,12 +52,17 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
     }
+
 
     override fun onResume() {
         super.onResume()
-        loadCategoriesList()
+        if (binding.categoriesRecyclerview.adapter == null) {
+            init()
+            loadCategoriesList()
+        }
+        adView = requireActivity().findViewById(R.id.adView)
+        Banner.show(requireActivity(), adView)
     }
 
     private fun init() {
@@ -69,15 +74,11 @@ class CategoriesFragment : Fragment() {
             .allowWritesOnUiThread(true)
             .build()
         realm = Realm.getInstance(config)
-
-        //recyclerView initialize
+        requireActivity().title = getString(R.string.categories_fragment)
         binding.categoriesRecyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(activity)
         binding.categoriesRecyclerview.layoutManager = linearLayoutManager
         binding.categoriesRecyclerview.layoutManager = GridLayoutManager(activity, 2)
-
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
     }
 
     private fun loadCategoriesList() {

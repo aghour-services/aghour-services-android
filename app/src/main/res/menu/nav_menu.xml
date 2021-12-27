@@ -4,9 +4,14 @@
     tools:showIn="navigation_view">
 
     <item
+        android:id="@+id/nav_home"
+        android:icon="@mipmap/ic_home"
+        android:title="الرئيسية" />
+
+    <item
         android:id="@+id/nav_add_firm"
         android:icon="@drawable/add"
-        android:title="اضافة بيانات"/>
+        android:title="اضافة بيانات" />
 
     <item
         android:id="@+id/nav_share"
@@ -23,9 +28,10 @@
         android:icon="@drawable/facebook"
         android:title="تابعنا علي فيسبوك" />
 
-    <item android:id="@+id/about_us"
+    <item
+        android:id="@+id/about_us"
         android:icon="@drawable/about_us"
-        android:title="عن التطبيق"/>
+        android:title="عن التطبيق" />
 
     <item
         android:id="@+id/nav_log"
