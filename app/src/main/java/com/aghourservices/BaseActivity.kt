@@ -25,10 +25,6 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    private fun openSearchActivity() {
-        startActivity(Intent(this, SearchActivity::class.java))
-    }
-
     fun shareApp() {
         sendFirebaseEvent("Share", "")
         val shareText = "https://play.google.com/store/apps/details?id=com.aghourservices"
@@ -75,7 +71,7 @@ open class BaseActivity : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(title)
         alertDialogBuilder.setMessage(message)
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setIcon(R.mipmap.ic_launcher_round)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
             logOut()

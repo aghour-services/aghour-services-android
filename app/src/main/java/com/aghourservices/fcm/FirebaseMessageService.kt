@@ -32,10 +32,11 @@ class FirebaseMessageService : FirebaseMessagingService() {
     }
 
     //attach the notification created with the custom layout
+    @SuppressLint("RemoteViewLayout")
     private fun getRemoteView(title: String, message: String): RemoteViews {
         val remoteView = RemoteViews("com.aghourservices.firebase", R.layout.notification)
 
-        remoteView.setImageViewResource(R.id.app_logo, R.drawable.ic_launcher)
+        remoteView.setImageViewResource(R.id.app_logo, R.mipmap.ic_launcher_round)
         remoteView.setTextViewText(R.id.title, title)
         remoteView.setTextViewText(R.id.message, message)
         return remoteView
@@ -53,7 +54,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         //channel id, channel nam
         var builder: NotificationCompat.Builder =
             NotificationCompat.Builder(applicationContext, channelId)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setAutoCancel(true)
                 .setVibrate(longArrayOf(1000, 1000, 1000, 1000))
                 .setOnlyAlertOnce(true)

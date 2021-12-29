@@ -83,11 +83,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 selectedItemId = -1
                 //toast("Drawer closed")
             }
-
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-                //toast("Drawer opened")
-            }
         }
 
         binding.drawerLayout.addDrawerListener(toggle)

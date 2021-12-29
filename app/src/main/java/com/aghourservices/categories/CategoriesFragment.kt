@@ -1,25 +1,19 @@
 package com.aghourservices.categories
 
 import android.os.Bundle
-import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.FragmentCategoriesBinding
-import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.firms.FirmsFragment
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
@@ -47,7 +41,12 @@ class CategoriesFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentCategoriesBinding.inflate(layoutInflater)
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onResume() {
@@ -69,22 +68,21 @@ class CategoriesFragment : Fragment() {
         realm = Realm.getInstance(config)
         requireActivity().title = getString(R.string.categories_fragment)
 
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
-
         binding.categoriesRecyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(activity)
         binding.categoriesRecyclerview.layoutManager = linearLayoutManager
         binding.categoriesRecyclerview.layoutManager = GridLayoutManager(activity, 2)
-
     }
 
     private fun loadCategoriesList() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
-        val retrofitData = retrofitBuilder.loadCategoriesList()
 
+        adView = requireActivity().findViewById(R.id.adView)
+        Banner.show(requireActivity(), adView)
+
+        val retrofitData = retrofitBuilder.loadCategoriesList()
         retrofitData.enqueue(object : Callback<ArrayList<Category>?> {
             override fun onResponse(
                 call: Call<ArrayList<Category>?>,

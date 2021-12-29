@@ -88,12 +88,12 @@ class FirmsFragment : Fragment() {
         }
 
         runnable = Runnable { loadFirms(categoryId) }
-        handler = Handler(Looper.getMainLooper())
+        handler = Handler(Looper.myLooper()!!)
         handler.postDelayed(runnable, 0)
         binding.swipe.setColorSchemeResources(R.color.white)
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
         binding.swipe.setOnRefreshListener {
-            Handler(Looper.getMainLooper()).postDelayed({
+            Handler(Looper.myLooper()!!).postDelayed({
                 binding.swipe.isRefreshing = false
                 loadFirms(categoryId)
             }, 1000)
