@@ -77,6 +77,7 @@ class SignInActivity : AppCompatActivity() {
                 binding.progressBarLogin.visibility = View.VISIBLE
                 userInfo.saveUserData(this@SignInActivity, user)
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                finishAffinity()
             }
 
             @SuppressLint("ShowToast")

@@ -89,6 +89,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 userInfo.saveUserData(this@SignUpActivity, user)
                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                finishAffinity()
             }
 
             @SuppressLint("ShowToast")

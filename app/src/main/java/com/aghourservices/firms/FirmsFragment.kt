@@ -28,6 +28,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
+import com.aghourservices.firebase_analytics.Event
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
@@ -168,8 +172,10 @@ class FirmsFragment : Fragment() {
     }
 
     private fun onListItemClick(position: Int) {
-        val phoneNumber = firmsList[position].phone_number
-//        sendFirebaseEvent("Call", phoneNumber)
+        val firm = firmsList[position]
+        val phoneNumber = firm.phone_number
+        var eventName = "call_${firm.name}"
+        Event.sendFirebaseEvent(eventName, phoneNumber)
         callPhone(phoneNumber)
     }
 

@@ -59,10 +59,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 }
                 when (selectedItemId) {
                     R.id.nav_home -> {
-                        replaceFragment(CategoriesFragment())
+                        replaceFragment(CategoriesFragment(), false)
                     }
                     R.id.nav_add_firm -> {
-                        replaceFragment(AddDataFragment())
+                        replaceFragment(AddDataFragment(), true)
                     }
                     R.id.nav_share -> {
                         shareApp()
@@ -74,7 +74,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                         facebook()
                     }
                     R.id.about_us -> {
-                        replaceFragment(AboutFragment())
+                        replaceFragment(AboutFragment(), true)
                     }
                     R.id.nav_log -> {
                         showOnCloseDialog()
@@ -91,14 +91,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
-        replaceFragment(CategoriesFragment())
+        replaceFragment(CategoriesFragment(), false)
     }
 
     override fun setTitle(title: CharSequence?) {
         binding.toolBarTv.text = title
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, stacked: Boolean) {
         val backStateName: String = fragment.javaClass.toString()
         val manager: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
@@ -109,7 +109,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.anim.slide_out_right
         )
         ft.replace(R.id.fragmentContainerView, fragment)
-        ft.addToBackStack(backStateName)
+        if (stacked) {
+            ft.addToBackStack(backStateName)
+        }
         ft.commit()
     }
 

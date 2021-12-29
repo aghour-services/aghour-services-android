@@ -51,10 +51,8 @@ class CategoriesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (binding.categoriesRecyclerview.adapter == null) {
-            init()
-            loadCategoriesList()
-        }
+        init()
+        loadCategoriesList()
     }
 
     private fun init() {

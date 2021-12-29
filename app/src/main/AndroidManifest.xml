@@ -70,9 +70,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
-        <meta-data
-            android:name="firebase_analytics_collection_deactivated"
-            android:value="@bool/FIREBASE_ANALYTICS_DEACTIVATED" />
+<!--        <meta-data-->
+<!--            android:name="firebase_analytics_collection_deactivated"-->
+<!--            android:value="@bool/FIREBASE_ANALYTICS_DEACTIVATED" />-->
 
         <service
             android:name=".fcm.FirebaseMessageService"
