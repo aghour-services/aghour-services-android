@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
+import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.search.SearchActivity
 import com.aghourservices.user.SignInActivity
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -16,21 +17,10 @@ import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 
 open class BaseActivity : AppCompatActivity() {
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
-    protected fun sendFirebaseEvent(eventName: String, data: String) {
-        firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.logEvent(eventName) {
-            param("data", data)
-        }
-    }
-
-    private fun openSearchActivity() {
-        startActivity(Intent(this, SearchActivity::class.java))
-    }
 
     fun shareApp() {
-        sendFirebaseEvent("Share", "")
+        Event.sendFirebaseEvent("Share", "")
         val shareText = "https://play.google.com/store/apps/details?id=com.aghourservices"
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -41,13 +31,13 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun rateApp() {
-        sendFirebaseEvent("Rate", "")
+        Event.sendFirebaseEvent("Rate", "")
         val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 
     fun facebook() {
-        sendFirebaseEvent("Facebook_Page", "")
+        Event.sendFirebaseEvent("Facebook_Page", "")
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318")))
         } catch (e: Exception) {
@@ -61,7 +51,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun logOut() {
-        sendFirebaseEvent("Sign_Out", "")
+        Event.sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(this@BaseActivity)
         startActivity(Intent(this, SignInActivity::class.java))
     }
@@ -75,31 +65,16 @@ open class BaseActivity : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(title)
         alertDialogBuilder.setMessage(message)
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setIcon(R.mipmap.ic_launcher_round)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
             logOut()
-            sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
+            Event.sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
         }
         alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
-            sendFirebaseEvent("ALERT_STAY_ACTION", "")
+            Event.sendFirebaseEvent("ALERT_STAY_ACTION", "")
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.searchIcon -> {
-                openSearchActivity()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

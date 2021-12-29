@@ -57,4 +57,8 @@
         <item name="android:fontFamily">@font/cairo_black</item>
     </style>
 
+    <style name="Theme.AghourServices.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.AghourServices.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

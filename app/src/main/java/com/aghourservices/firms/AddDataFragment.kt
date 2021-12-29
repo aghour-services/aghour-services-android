@@ -1,19 +1,20 @@
 package com.aghourservices.firms
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.Category
-import com.aghourservices.databinding.ActivityAddDataBinding
+import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.firms.api.CreateFirm
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
@@ -26,28 +27,43 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class AddFirm : AppCompatActivity() {
-    private lateinit var binding: ActivityAddDataBinding
-    lateinit var adView: AdView
+class AddDataFragment : Fragment() {
+    private lateinit var binding: FragmentAddDataBinding
+    private lateinit var adView: AdView
     private lateinit var categoryList: ArrayList<Category>
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityAddDataBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.addDataToolbar)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentAddDataBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val bundle = arguments
+        if (bundle != null) {
+            val value1 = bundle.getInt("category_id", -1)
+            val value2 = bundle.getString("category_name", "")
+            Toast.makeText(requireActivity(), value1.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), value2, Toast.LENGTH_SHORT).show()
+        }
+        init()
+    }
+
+    private fun init() {
         loadCategories()
         spinnerAdapter(categoryList)
 
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+        adView = requireActivity().findViewById(R.id.adView)
+        Banner.show(requireActivity(), adView)
+        requireActivity().title = getString(R.string.add_data_fragment)
 
-        binding.backBtn.setOnClickListener {
-            finish()
-        }
 
-        binding.btnAddData.setOnClickListener(View.OnClickListener {
+        binding.btnAddData.setOnClickListener(View.OnClickListener
+        {
             val selectedCategoryPosition = binding.spinner.selectedItemPosition
             val selectedCategory = categoryList[selectedCategoryPosition]
 
@@ -76,6 +92,7 @@ class AddFirm : AppCompatActivity() {
         })
     }
 
+
     private fun spinnerAdapter(categoryList: ArrayList<Category>) {
         val categories = mutableListOf<String>()
 
@@ -83,7 +100,11 @@ class AddFirm : AppCompatActivity() {
             categories.add(item.name!!)
         }
         val spinnerAdapter =
-            ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, categories)
+            ArrayAdapter(
+                requireActivity(),
+                R.layout.support_simple_spinner_dropdown_item,
+                categories
+            )
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         with(binding.spinner)
         {
@@ -92,7 +113,7 @@ class AddFirm : AppCompatActivity() {
     }
 
     private fun createFirm(firm: Firm) {
-        val user = UserInfo().getUserData(this)
+        val user = UserInfo().getUserData(requireActivity())
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
@@ -114,7 +135,7 @@ class AddFirm : AppCompatActivity() {
     }
 
     private fun loadCategories() {
-        Realm.init(this)
+        Realm.init(requireContext())
         val config = RealmConfiguration.Builder().name("category.realm")
             .deleteRealmIfMigrationNeeded().schemaVersion(1)
             .allowWritesOnUiThread(true).build()
@@ -130,9 +151,9 @@ class AddFirm : AppCompatActivity() {
         val title = R.string.data_added
         val positiveButton = "تمام"
 
-        val alertDialogBuilder = AlertDialog.Builder(this)
+        val alertDialogBuilder = AlertDialog.Builder(requireActivity())
         alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setIcon(R.mipmap.ic_launcher_round)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
         val alertDialog = alertDialogBuilder.create()
@@ -149,7 +170,7 @@ class AddFirm : AppCompatActivity() {
         val title = R.string.no_internet
         val positiveButton = "تمام"
 
-        val alertDialogBuilder = AlertDialog.Builder(this)
+        val alertDialogBuilder = AlertDialog.Builder(requireActivity())
         alertDialogBuilder.setTitle(title)
         alertDialogBuilder.setIcon(R.drawable.cloud)
         alertDialogBuilder.setCancelable(true)

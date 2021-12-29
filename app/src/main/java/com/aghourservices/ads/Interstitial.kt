@@ -2,15 +2,10 @@ package com.aghourservices.ads
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import com.aghourservices.cache.Settings
-import com.aghourservices.cache.UserInfo
-import com.aghourservices.categories.CategoriesActivity
-import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback

@@ -4,41 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".aboutUs.AboutUsActivity">
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/aboutAppToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/blue200">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo_black"
-                android:gravity="end"
-                android:text="عن التطبيق"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </LinearLayout>
-
-    <include layout="@layout/admob_banner" />
+    tools:context=".about.AboutFragment">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="5dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -321,4 +294,6 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/admob_banner" />
 </LinearLayout>
