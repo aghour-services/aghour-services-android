@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.MainActivity
 import com.aghourservices.cache.Settings
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.categories.CategoriesActivity
 import com.aghourservices.databinding.ActivitySplashScreenBinding
 import com.aghourservices.user.SignUpActivity
 
@@ -28,7 +28,7 @@ class SplashScreen : AppCompatActivity() {
             val skip = userInfo.isUserLoggedIn(this) || settings.showRigsterActivity(this)
 
             intent = if (skip) {
-                Intent(this, CategoriesActivity::class.java)
+                Intent(this, MainActivity::class.java)
             } else {
                 Intent(this, SignUpActivity::class.java)
             }

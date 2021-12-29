@@ -7,14 +7,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.RequiresApi
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aghourservices.BaseActivity
-import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
-import com.aghourservices.categories.api.Category
-import com.aghourservices.databinding.ActivityFirmsBinding
+import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
+import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
 import com.google.android.gms.ads.AdView
@@ -26,9 +26,17 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.R
+import com.aghourservices.firebase_analytics.Event
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
+
+
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class FirmsActivity : BaseActivity() {
+class FirmsFragment : Fragment() {
 
     private lateinit var adapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
@@ -36,15 +44,31 @@ class FirmsActivity : BaseActivity() {
     private lateinit var realm: Realm
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
-    private lateinit var binding: ActivityFirmsBinding
+    private var categoryId = 0
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityFirmsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private lateinit var binding: FragmentFirmsBinding
 
-        Realm.init(this)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentFirmsBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val interstitial = Interstitial()
+        interstitial.load(requireActivity())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        init()
+    }
+
+    private fun init() {
+        Realm.init(requireActivity())
         val config = RealmConfiguration
             .Builder()
             .allowWritesOnUiThread(true)
@@ -54,33 +78,30 @@ class FirmsActivity : BaseActivity() {
             .build()
         realm = Realm.getInstance(config)
 
-        adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
-
-        setSupportActionBar(binding.toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        adView = requireActivity().findViewById(R.id.adView)
+        Banner.show(requireActivity(), adView)
 
         binding.firmsRecyclerview.setHasFixedSize(true)
-        binding.firmsRecyclerview.layoutManager = LinearLayoutManager(this)
-        val categoryId = intent.getIntExtra("category_id", 0)
-        val categoryName = intent.getStringExtra("category_name")
-        binding.toolBarTv.text = categoryName
+        binding.firmsRecyclerview.layoutManager = LinearLayoutManager(requireActivity())
+
+        val bundle = arguments
+        if (bundle != null) {
+            categoryId = bundle.getInt("category_id", 0)
+            val categoryName = bundle.getString("category_name")
+            requireActivity().title = categoryName
+        }
 
         runnable = Runnable { loadFirms(categoryId) }
-        handler = Handler(Looper.getMainLooper())
+        handler = Handler(Looper.myLooper()!!)
         handler.postDelayed(runnable, 0)
         binding.swipe.setColorSchemeResources(R.color.white)
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
         binding.swipe.setOnRefreshListener {
-            Handler(Looper.getMainLooper()).postDelayed({
+            Handler(Looper.myLooper()!!).postDelayed({
                 binding.swipe.isRefreshing = false
                 loadFirms(categoryId)
             }, 1000)
         }
-
-        adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
     }
 
 
@@ -117,7 +138,8 @@ class FirmsActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result =
+                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
 
@@ -143,15 +165,17 @@ class FirmsActivity : BaseActivity() {
     }
 
     private fun setAdapter(firmsList: ArrayList<Firm>) {
-        adapter = FirmsAdapter(applicationContext, firmsList) { position ->
+        adapter = FirmsAdapter(requireContext(), firmsList) { position ->
             onListItemClick(position)
         }
         binding.firmsRecyclerview.adapter = adapter
     }
 
     private fun onListItemClick(position: Int) {
-        val phoneNumber = firmsList[position].phone_number
-        sendFirebaseEvent("Call", phoneNumber)
+        val firm = firmsList[position]
+        val phoneNumber = firm.phone_number
+        var eventName = "call_${firm.name}"
+        Event.sendFirebaseEvent(eventName, phoneNumber)
         callPhone(phoneNumber)
     }
 
@@ -159,10 +183,5 @@ class FirmsActivity : BaseActivity() {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

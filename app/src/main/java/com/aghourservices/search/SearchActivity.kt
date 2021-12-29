@@ -11,8 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.databinding.ActivitySearchBinding
+import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
@@ -45,7 +46,7 @@ class SearchActivity : AppCompatActivity() {
         binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())
@@ -72,7 +73,9 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun search(text: String) {
-        sendFirebaseEvent("Search", text)
+        var eventName = "search_${text}"
+
+        Event.sendFirebaseEvent(eventName, text)
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
@@ -109,8 +112,11 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun onListItemClick(position: Int) {
-        val phoneNumber = searchResults[position].phone_number
-        sendFirebaseEvent("Call", phoneNumber)
+        val firm = searchResults[position]
+        val phoneNumber = firm.phone_number
+        var eventName = "call_${firm.name}"
+        Event.sendFirebaseEvent(eventName, phoneNumber)
+
         callPhone(phoneNumber)
     }
 
@@ -118,13 +124,6 @@ class SearchActivity : AppCompatActivity() {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
-    }
-
-    private fun sendFirebaseEvent(eventName: String, data: String) {
-        firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.logEvent(eventName) {
-            param("data", data)
-        }
     }
 
     fun customView() {

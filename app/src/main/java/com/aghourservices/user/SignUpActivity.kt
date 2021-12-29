@@ -3,10 +3,8 @@ package com.aghourservices.user
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.categories.CategoriesActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,8 +18,9 @@ import com.google.firebase.ktx.Firebase
 import android.annotation.SuppressLint
 import android.text.Html
 import androidx.appcompat.app.AlertDialog
+import com.aghourservices.MainActivity
 import com.aghourservices.R
-import com.aghourservices.ads.AghourAdManager
+import com.aghourservices.ads.Banner
 import com.aghourservices.user.api.SignUpService
 import com.google.android.gms.ads.AdView
 
@@ -38,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adView = findViewById(R.id.adView)
-        AghourAdManager.displayBannerAd(this, adView)
+        Banner.show(this, adView)
 
         binding.btnCreate.setOnClickListener(View.OnClickListener {
 
@@ -64,7 +63,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnUseApp.setOnClickListener {
             binding.progressBarRegister.visibility = View.VISIBLE
-            startActivity(Intent(this, CategoriesActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             doNotShowAgain()
         }
         binding.btnLogin.setOnClickListener {
@@ -89,7 +88,8 @@ class SignUpActivity : AppCompatActivity() {
                 val user = response.body() as User
 
                 userInfo.saveUserData(this@SignUpActivity, user)
-                startActivity(Intent(this@SignUpActivity, CategoriesActivity::class.java))
+                startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                finishAffinity()
             }
 
             @SuppressLint("ShowToast")
