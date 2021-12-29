@@ -13,7 +13,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 class Interstitial {
     private var interstitialAd: InterstitialAd? = null
     private val tag = "Interstitial Ad"
-    private val adUnit = "ca-app-pub-3940256099942544/1033173712"
+    private val adUnit = ""
 
     fun load(context: Context) {
         var adRequest = AdRequest.Builder().build()
