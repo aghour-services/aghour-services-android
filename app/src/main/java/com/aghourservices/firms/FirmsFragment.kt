@@ -47,7 +47,7 @@ class FirmsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFirmsBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -60,7 +60,6 @@ class FirmsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         init()
     }
 
@@ -99,9 +98,6 @@ class FirmsFragment : Fragment() {
                 loadFirms(categoryId)
             }, 1000)
         }
-
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
     }
 
 

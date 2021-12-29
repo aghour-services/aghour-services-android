@@ -9,8 +9,9 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="5dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -293,4 +294,6 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/admob_banner" />
 </LinearLayout>

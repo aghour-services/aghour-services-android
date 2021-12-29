@@ -50,19 +50,12 @@ class CategoriesFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-
     override fun onResume() {
         super.onResume()
         if (binding.categoriesRecyclerview.adapter == null) {
             init()
             loadCategoriesList()
         }
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
     }
 
     private fun init() {
@@ -75,10 +68,15 @@ class CategoriesFragment : Fragment() {
             .build()
         realm = Realm.getInstance(config)
         requireActivity().title = getString(R.string.categories_fragment)
+
+        adView = requireActivity().findViewById(R.id.adView)
+        Banner.show(requireActivity(), adView)
+
         binding.categoriesRecyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(activity)
         binding.categoriesRecyclerview.layoutManager = linearLayoutManager
         binding.categoriesRecyclerview.layoutManager = GridLayoutManager(activity, 2)
+
     }
 
     private fun loadCategoriesList() {
@@ -123,7 +121,6 @@ class CategoriesFragment : Fragment() {
         })
     }
 
-
     //Start FirmsActivity With putExtra Data
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
@@ -135,9 +132,15 @@ class CategoriesFragment : Fragment() {
         arguments.putString("category_name", categoryName);
         val firmsFragment = FirmsFragment()
         firmsFragment.arguments = arguments
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, firmsFragment)
+        fragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            .replace(R.id.fragmentContainerView, firmsFragment)
             .addToBackStack("Firms").commit()
-
     }
 
     private fun progressBar() {

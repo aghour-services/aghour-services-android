@@ -21,6 +21,7 @@ import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.user.SignUpActivity
 import com.google.android.material.navigation.NavigationView
 import androidx.fragment.app.*
+import com.aghourservices.search.SearchActivity
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,19 +36,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private var selectedItemId = -1
     lateinit var toolbar: Toolbar
 
-
-    override
-    fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.title = "a"
         checkUser()
-        hideNavLogout()
-        hideAddItem()
+        hideNavItem()
         toggle = object : ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
@@ -110,6 +107,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val backStateName: String = fragment.javaClass.toString()
         val manager: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
+        ft.setCustomAnimations(
+            R.anim.slide_in_right,
+            R.anim.slide_out_left,
+            R.anim.slide_in_left,
+            R.anim.slide_out_right
+        )
         ft.replace(R.id.fragmentContainerView, fragment)
         ft.addToBackStack(backStateName)
         ft.commit()
@@ -139,10 +142,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-//LoadCategoriesList With RetrofitBuilder
-
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.searchIcon -> {
+                startActivity(Intent(this, SearchActivity::class.java))
+            }
+        }
 
         when {
             toggle.onOptionsItemSelected(item) -> {}
@@ -157,27 +168,19 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
-    private fun hideNavLogout() {
-        val isUserLogin = UserInfo().isUserLoggedIn(this)
-        if (isUserLogin) {
-            val navView: Menu = binding.navView.menu
-            navView.findItem(R.id.nav_log).isVisible = true
-        } else {
-            val navView: Menu = binding.navView.menu
-            navView.findItem(R.id.nav_log).isVisible = false
-        }
-    }
-
-    private fun hideAddItem() {
+    private fun hideNavItem() {
         val isUserLogin = UserInfo().isUserLoggedIn(this)
         if (isUserLogin) {
             val navView: Menu = binding.navView.menu
             navView.findItem(R.id.nav_add_firm).isVisible = true
+            navView.findItem(R.id.nav_log).isVisible = true
         } else {
             val navView: Menu = binding.navView.menu
             navView.findItem(R.id.nav_add_firm).isVisible = false
+            navView.findItem(R.id.nav_log).isVisible = false
         }
     }
+
 
     @SuppressLint("WrongConstant")
     override fun onBackPressed() {
