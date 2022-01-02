@@ -21,7 +21,10 @@ import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.user.SignUpActivity
 import com.google.android.material.navigation.NavigationView
 import androidx.fragment.app.*
+import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.aghourservices.search.SearchActivity
+import com.google.android.gms.ads.AdView
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +38,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private lateinit var userMobile: TextView
     private var selectedItemId = -1
     lateinit var toolbar: Toolbar
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         checkUser()
         hideNavItem()
+
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
+        val interstitial = Interstitial()
+        interstitial.load(this)
+
         toggle = object : ActionBarDrawerToggle(
             this,
             binding.drawerLayout,

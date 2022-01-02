@@ -56,12 +56,7 @@ class AddDataFragment : Fragment() {
     private fun init() {
         loadCategories()
         spinnerAdapter(categoryList)
-
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
         requireActivity().title = getString(R.string.add_data_fragment)
-
-
         binding.btnAddData.setOnClickListener(View.OnClickListener
         {
             val selectedCategoryPosition = binding.spinner.selectedItemPosition

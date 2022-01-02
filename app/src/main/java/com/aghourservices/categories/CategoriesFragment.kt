@@ -39,7 +39,6 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentCategoriesBinding.inflate(layoutInflater)
 
         return binding.root
@@ -76,10 +75,6 @@ class CategoriesFragment : Fragment() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
-
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
-
         val retrofitData = retrofitBuilder.loadCategoriesList()
         retrofitData.enqueue(object : Callback<ArrayList<Category>?> {
             override fun onResponse(

@@ -47,13 +47,16 @@
             </com.google.android.material.appbar.AppBarLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             app:defaultNavHost="true" />
+
+        <include layout="@layout/admob_banner"/>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

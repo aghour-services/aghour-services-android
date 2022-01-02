@@ -33,19 +33,16 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 
-
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class FirmsFragment : Fragment() {
 
     private lateinit var adapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
-    private lateinit var adView: AdView
     private lateinit var realm: Realm
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
     private var categoryId = 0
-
     private lateinit var binding: FragmentFirmsBinding
 
     override fun onCreateView(
@@ -58,8 +55,6 @@ class FirmsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val interstitial = Interstitial()
-        interstitial.load(requireActivity())
     }
 
     override fun onResume() {
@@ -77,13 +72,8 @@ class FirmsFragment : Fragment() {
             .deleteRealmIfMigrationNeeded()
             .build()
         realm = Realm.getInstance(config)
-
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
-
         binding.firmsRecyclerview.setHasFixedSize(true)
         binding.firmsRecyclerview.layoutManager = LinearLayoutManager(requireActivity())
-
         val bundle = arguments
         if (bundle != null) {
             categoryId = bundle.getInt("category_id", 0)
@@ -109,11 +99,8 @@ class FirmsFragment : Fragment() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ListFirms::class.java)
-
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
-
         retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
-
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ArrayList<Firm>?>,

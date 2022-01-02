@@ -40,9 +40,9 @@ class Native {
             adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
 
             if (ad.callToAction == null) {
-                adView.callToActionView.visibility = View.INVISIBLE
+                adView.callToActionView!!.visibility = View.INVISIBLE
             } else {
-                adView.callToActionView.visibility = View.VISIBLE
+                adView.callToActionView!!.visibility = View.VISIBLE
                 (adView.callToActionView as Button).text = ad.callToAction
             }
             adView.setNativeAd(ad)

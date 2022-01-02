@@ -79,9 +79,6 @@
                 tools:listitem="@layout/firms_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <include layout="@layout/admob_banner" />
-
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
