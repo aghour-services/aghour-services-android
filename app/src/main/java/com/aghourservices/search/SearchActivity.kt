@@ -40,8 +40,8 @@ class SearchActivity : AppCompatActivity() {
 
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-        val interstitial = Interstitial()
-        interstitial.load(this)
+//        val interstitial = Interstitial()
+//        interstitial.load(this)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())

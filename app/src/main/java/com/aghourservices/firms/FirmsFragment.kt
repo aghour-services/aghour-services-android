@@ -49,6 +49,8 @@ class FirmsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFirmsBinding.inflate(layoutInflater)
+//        val interstitial = Interstitial()
+//        interstitial.load(requireActivity())
         return binding.root
     }
 

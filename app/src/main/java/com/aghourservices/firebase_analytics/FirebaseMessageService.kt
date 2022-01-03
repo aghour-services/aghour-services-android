@@ -1,4 +1,4 @@
-package com.aghourservices.fcm
+package com.aghourservices.firebase_analytics
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.google.android.gms.ads.AdView
 
 class AboutFragment : BaseFragment() {
@@ -22,5 +23,7 @@ class AboutFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.about_fragment)
+//        val interstitial = Interstitial()
+//        interstitial.load(requireActivity())
     }
 }

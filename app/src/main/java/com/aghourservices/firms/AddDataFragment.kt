@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.Category
 import com.aghourservices.databinding.FragmentAddDataBinding
@@ -35,13 +36,16 @@ class AddDataFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddDataBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        val interstitial = Interstitial()
+//        interstitial.load(requireActivity())
 
         val bundle = arguments
         if (bundle != null) {

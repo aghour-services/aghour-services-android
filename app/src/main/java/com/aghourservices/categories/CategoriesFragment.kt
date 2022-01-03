@@ -5,19 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
-import com.aghourservices.ads.Banner
-import com.aghourservices.ads.Interstitial
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.firms.FirmsFragment
-import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -40,7 +36,6 @@ class CategoriesFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCategoriesBinding.inflate(layoutInflater)
-
         return binding.root
     }
 
@@ -49,7 +44,6 @@ class CategoriesFragment : BaseFragment() {
         init()
         loadCategoriesList()
     }
-
 
     private fun init() {
         Realm.init(requireContext())
@@ -115,8 +109,8 @@ class CategoriesFragment : BaseFragment() {
         val categoryName = categoryList[position].name
         val fragmentManager = requireActivity().supportFragmentManager
         val arguments = Bundle()
-        arguments.putInt("category_id", categoryId);
-        arguments.putString("category_name", categoryName);
+        arguments.putInt("category_id", categoryId)
+        arguments.putString("category_name", categoryName)
         val firmsFragment = FirmsFragment()
         firmsFragment.arguments = arguments
         fragmentManager.beginTransaction()
@@ -134,5 +128,4 @@ class CategoriesFragment : BaseFragment() {
         binding.progressBar.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
     }
-
 }

@@ -2,16 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="oval">
-            <solid android:color="@color/gray1" />
-
-            <size android:width="80dp" android:height="80dp" />
+            <solid android:color="@color/Gray" />
+            <size android:width="100dp" android:height="100dp" />
         </shape>
     </item>
     <item>
         <shape android:shape="oval">
             <solid android:color="@color/white" />
 
-            <size android:width="120dp" android:height="120dp" />
+            <size android:width="100dp" android:height="100dp" />
         </shape>
     </item>
 </selector>

@@ -19,11 +19,11 @@
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
             android:layout_gravity="center"
             android:background="@drawable/back_selector"
-            android:layout_weight="1"
+            android:layout_weight="1.6"
             android:src="@drawable/ic_back" />
 
         <com.google.android.material.textfield.TextInputLayout

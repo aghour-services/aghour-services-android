@@ -10,22 +10,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.*
 import com.aghourservices.about.AboutFragment
+import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.firms.AddDataFragment
-import com.aghourservices.user.SignUpActivity
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.*
-import com.aghourservices.ads.Banner
-import com.aghourservices.ads.Interstitial
 import com.aghourservices.search.SearchActivity
+import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
-
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -139,7 +137,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             userDataView.visibility = View.VISIBLE
 
             val user = userInfo.getUserData(this@MainActivity)
-            userName.text = user.name.toString()
+            userName.text = user.name
             userMobile.text = user.mobile
             userEmail.text = user.email
         }
@@ -192,7 +190,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             navView.findItem(R.id.nav_log).isVisible = false
         }
     }
-
 
     @SuppressLint("WrongConstant")
     override fun onBackPressed() {
