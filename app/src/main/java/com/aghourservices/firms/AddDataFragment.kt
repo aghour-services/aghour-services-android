@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
@@ -27,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class AddDataFragment : Fragment() {
+class AddDataFragment : BaseFragment() {
     private lateinit var binding: FragmentAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
 

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
@@ -27,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class CategoriesFragment : Fragment() {
+class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var realm: Realm

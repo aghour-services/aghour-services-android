@@ -34,7 +34,7 @@ class Interstitial {
                     }, 30000)
                     Handler(Looper.getMainLooper()).postDelayed({
                         interstitialAd.show(context as Activity)
-                    }, 40000)
+                    }, 60000)
                 }
             })
     }

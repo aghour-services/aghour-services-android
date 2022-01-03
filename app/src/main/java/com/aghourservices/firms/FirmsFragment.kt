@@ -27,6 +27,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.firebase_analytics.Event
 import com.google.firebase.analytics.ktx.analytics
@@ -35,12 +36,11 @@ import com.google.firebase.ktx.Firebase
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class FirmsFragment : Fragment() {
+class FirmsFragment : BaseFragment() {
     private lateinit var adapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var realm: Realm
     private lateinit var handler: Handler
-    private lateinit var runnable: Runnable
     private var categoryId = 0
     private lateinit var binding: FragmentFirmsBinding
 
@@ -55,6 +55,7 @@ class FirmsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        loadFirms(categoryId)
         refresh()
     }
 
@@ -78,10 +79,8 @@ class FirmsFragment : Fragment() {
         }
     }
 
-    private fun refresh(){
-        runnable = Runnable { loadFirms(categoryId) }
+    private fun refresh() {
         handler = Handler(Looper.myLooper()!!)
-        handler.postDelayed(runnable, 0)
         binding.swipe.setColorSchemeResources(R.color.white)
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
         binding.swipe.setOnRefreshListener {
@@ -122,7 +121,8 @@ class FirmsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result =
+                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
                 setAdapter(firmsList)
