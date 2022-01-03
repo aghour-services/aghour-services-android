@@ -82,17 +82,13 @@ class FirmsFragment : Fragment() {
         runnable = Runnable { loadFirms(categoryId) }
         handler = Handler(Looper.myLooper()!!)
         handler.postDelayed(runnable, 0)
-        binding.swipe.setColorSchemeResources(R.color.blue200)
-        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.white)
+        binding.swipe.setColorSchemeResources(R.color.white)
+        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
         binding.swipe.setOnRefreshListener {
-            binding.firmsRecyclerview.visibility = View.GONE
-            binding.firmsProgressBar.visibility = View.VISIBLE
-            Handler(Looper.myLooper()!!).postDelayed({
+            handler.postDelayed({
                 binding.swipe.isRefreshing = false
-                binding.firmsProgressBar.visibility = View.GONE
-                binding.firmsRecyclerview.visibility = View.VISIBLE
                 loadFirms(categoryId)
-            }, 1500)
+            }, 1000)
         }
     }
 

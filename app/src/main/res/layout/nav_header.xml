@@ -63,7 +63,7 @@
                 android:maxLines="1"
                 android:text="mohamedmagdysaber@gmail.com"
                 android:textAlignment="center"
-                android:textColor="@color/gray1"
+                android:textColor="@color/offWhite"
                 android:textSize="14sp" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:gravity="center"
                 android:text="01287303441"
                 android:textAlignment="center"
-                android:textColor="@color/userPhone"
+                android:textColor="@color/offWhite"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>

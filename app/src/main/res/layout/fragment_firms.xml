@@ -80,16 +80,4 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/firmsProgressBar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/progressBar"
-        android:progress="0"
-        android:scaleX="0.1"
-        android:scaleY="0.1"
-        android:visibility="gone" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
