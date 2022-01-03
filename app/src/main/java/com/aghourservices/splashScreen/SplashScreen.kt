@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.MainActivity
+import com.aghourservices.R
 import com.aghourservices.cache.Settings
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.ActivitySplashScreenBinding
@@ -34,6 +35,7 @@ class SplashScreen : AppCompatActivity() {
             }
             startActivity(intent)
             finish()
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }, 600)
     }
 }

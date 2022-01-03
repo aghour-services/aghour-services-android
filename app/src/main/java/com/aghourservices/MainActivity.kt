@@ -50,6 +50,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         checkUser()
         hideNavItem()
 
+        //ads
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
         val interstitial = Interstitial()
@@ -98,7 +99,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
         replaceFragment(CategoriesFragment(), false)
@@ -113,10 +113,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val manager: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
         ft.setCustomAnimations(
-            R.anim.slide_in_right,
-            R.anim.slide_out_left,
-            R.anim.slide_in_left,
-            R.anim.slide_out_right
+            R.anim.fade_in,
+            R.anim.fade_out,
+            R.anim.fade_in,
+            R.anim.fade_out
         )
         ft.replace(R.id.fragmentContainerView, fragment)
         if (stacked) {
@@ -158,7 +158,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         when (item.itemId) {
             R.id.searchIcon -> {
-                startActivity(Intent(this, SearchActivity::class.java))
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out,
+                )
             }
         }
 

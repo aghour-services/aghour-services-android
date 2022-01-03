@@ -10,9 +10,6 @@ import com.aghourservices.ads.Banner
 import com.google.android.gms.ads.AdView
 
 class AboutFragment : Fragment() {
-
-    lateinit var adView: AdView
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,7 +22,5 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.about_fragment)
 
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireActivity(), adView)
     }
 }

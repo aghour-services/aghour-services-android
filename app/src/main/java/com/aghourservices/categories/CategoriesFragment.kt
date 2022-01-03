@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
@@ -33,8 +34,6 @@ class CategoriesFragment : Fragment() {
     private lateinit var adapter: CategoriesAdapter
     private lateinit var categoryList: ArrayList<Category>
 
-    private lateinit var adView: AdView
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,13 +45,10 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onResume() {
-        super.onResume()
         init()
         loadCategoriesList()
     }
+
 
     private fun init() {
         Realm.init(requireContext())
@@ -116,19 +112,18 @@ class CategoriesFragment : Fragment() {
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
         val categoryName = categoryList[position].name
-
         val fragmentManager = requireActivity().supportFragmentManager
-        val arguments = Bundle();
+        val arguments = Bundle()
         arguments.putInt("category_id", categoryId);
         arguments.putString("category_name", categoryName);
         val firmsFragment = FirmsFragment()
         firmsFragment.arguments = arguments
         fragmentManager.beginTransaction()
             .setCustomAnimations(
-                R.anim.slide_in_right,
-                R.anim.slide_out_left,
-                R.anim.slide_in_left,
-                R.anim.slide_out_right
+                R.anim.fade_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.fade_out
             )
             .replace(R.id.fragmentContainerView, firmsFragment)
             .addToBackStack("Firms").commit()

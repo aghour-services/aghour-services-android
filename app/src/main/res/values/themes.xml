@@ -3,7 +3,8 @@
     <style name="Theme.AghourServices" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Status bar color. -->
         <item name="windowActionBar">true</item>
-        <item name="android:statusBarColor" tools:targetApi="q">@color/blue200</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/white</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
@@ -33,7 +34,7 @@
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">@color/white</item>
+        <item name="color">@color/blue200</item>
     </style>
 
     <!--All Text Font Style-->
@@ -45,9 +46,4 @@
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">@font/cairo_black</item>
     </style>
-
-    <style name="Theme.AghourServices.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.AghourServices.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 </resources>

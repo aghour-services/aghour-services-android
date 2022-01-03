@@ -29,10 +29,12 @@ class Interstitial {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     Log.d(tag, "Ad was loaded.")
                     this@Interstitial.interstitialAd = interstitialAd
-//                    Toast.makeText(context, "سيظهر اعلان بعد 3 ثواني", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
                         interstitialAd.show(context as Activity)
-                    }, 20000)
+                    }, 30000)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        interstitialAd.show(context as Activity)
+                    }, 40000)
                 }
             })
     }

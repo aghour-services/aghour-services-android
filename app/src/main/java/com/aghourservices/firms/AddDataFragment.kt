@@ -29,7 +29,6 @@ private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class AddDataFragment : Fragment() {
     private lateinit var binding: FragmentAddDataBinding
-    private lateinit var adView: AdView
     private lateinit var categoryList: ArrayList<Category>
 
     override fun onCreateView(
@@ -40,8 +39,8 @@ class AddDataFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val bundle = arguments
         if (bundle != null) {
@@ -167,7 +166,7 @@ class AddDataFragment : Fragment() {
 
         val alertDialogBuilder = AlertDialog.Builder(requireActivity())
         alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.drawable.cloud)
+        alertDialogBuilder.setIcon(R.mipmap.cloud)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
         val alertDialog = alertDialogBuilder.create()

@@ -36,7 +36,6 @@ import com.google.firebase.ktx.Firebase
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class FirmsFragment : Fragment() {
-
     private lateinit var adapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var realm: Realm
@@ -55,11 +54,8 @@ class FirmsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onResume() {
-        super.onResume()
         init()
+        refresh()
     }
 
     private fun init() {
@@ -80,20 +76,25 @@ class FirmsFragment : Fragment() {
             val categoryName = bundle.getString("category_name")
             requireActivity().title = categoryName
         }
+    }
 
+    private fun refresh(){
         runnable = Runnable { loadFirms(categoryId) }
         handler = Handler(Looper.myLooper()!!)
         handler.postDelayed(runnable, 0)
-        binding.swipe.setColorSchemeResources(R.color.white)
-        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
+        binding.swipe.setColorSchemeResources(R.color.blue200)
+        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.white)
         binding.swipe.setOnRefreshListener {
+            binding.firmsRecyclerview.visibility = View.GONE
+            binding.firmsProgressBar.visibility = View.VISIBLE
             Handler(Looper.myLooper()!!).postDelayed({
                 binding.swipe.isRefreshing = false
+                binding.firmsProgressBar.visibility = View.GONE
+                binding.firmsRecyclerview.visibility = View.VISIBLE
                 loadFirms(categoryId)
-            }, 1000)
+            }, 1500)
         }
     }
-
 
     private fun loadFirms(categoryId: Int) {
         val retrofitBuilder = Retrofit.Builder()
@@ -125,14 +126,11 @@ class FirmsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result =
-                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
-
                 setAdapter(firmsList)
                 stopShimmerAnimation()
-
                 if (firmsList.isEmpty()) {
                     noInternetConnection()
                 }
@@ -161,7 +159,7 @@ class FirmsFragment : Fragment() {
     private fun onListItemClick(position: Int) {
         val firm = firmsList[position]
         val phoneNumber = firm.phone_number
-        var eventName = "call_${firm.name}"
+        val eventName = "call_${firm.name}"
         Event.sendFirebaseEvent(eventName, phoneNumber)
         callPhone(phoneNumber)
     }
