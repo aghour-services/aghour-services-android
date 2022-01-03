@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_gravity="center"
-            android:background="@drawable/selector"
+            android:background="@drawable/back_selector"
             android:layout_weight="1"
             android:src="@drawable/ic_back" />
 
