@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="30dp"
         android:layout_weight="1">
@@ -135,16 +135,19 @@
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:backgroundTintMode="add"
+                android:backgroundTint="@color/shimmerColor"
                 android:spinnerMode="dialog"
-                android:textAlignment="center" />
+                android:prompt="@string/Choose"
+                android:textAlignment="center"/>
 
             <Button
                 android:id="@+id/btn_add_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/login_button"
                 android:fontFamily="@font/cairo_black"
                 android:text="اضافة"
@@ -152,6 +155,4 @@
                 android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
-
-    <include layout="@layout/admob_banner" />
 </LinearLayout>

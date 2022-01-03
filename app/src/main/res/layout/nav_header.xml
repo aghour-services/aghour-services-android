@@ -17,7 +17,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            android:src="@drawable/user" />
+            android:src="@mipmap/user" />
 
         <Button
             android:id="@+id/btn_register"
@@ -27,13 +27,12 @@
             android:layout_margin="20dp"
             android:background="@drawable/login_button"
             android:fontFamily="@font/cairo_black"
-            android:padding="14dp"
             android:gravity="center"
+            android:padding="14dp"
             android:text="انشاء حساب"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="12sp" />
-
 
         <LinearLayout
             android:id="@+id/user_data_view"
@@ -46,11 +45,11 @@
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo_black"
                 android:layout_gravity="center"
+                android:fontFamily="@font/cairo_black"
                 android:gravity="center"
+                android:text="Mohamed Magdy"
                 android:textAlignment="center"
-                android:text="User Name"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -58,25 +57,25 @@
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:textAlignment="center"
                 android:fontFamily="@font/cairo_bold"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="mohamedmagdysaber@gmail.com"
-                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textColor="@color/offWhite"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/user_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:textAlignment="center"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/segoe_ui_bold"
-                android:text="01234567890"
+                android:gravity="center"
+                android:text="01287303441"
+                android:textAlignment="center"
                 android:textColor="@color/offWhite"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -84,8 +83,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1.5dp"
         android:layout_marginTop="10dp"
         android:background="@color/black" />
-
 </LinearLayout>

@@ -18,10 +18,9 @@ import com.google.firebase.ktx.Firebase
 
 open class BaseActivity : AppCompatActivity() {
 
-
     fun shareApp() {
         Event.sendFirebaseEvent("Share", "")
-        val shareText = "https://play.google.com/store/apps/details?id=com.aghourservices"
+        val shareText = R.string.shareText
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, shareText)

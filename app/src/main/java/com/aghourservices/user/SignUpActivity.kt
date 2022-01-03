@@ -120,7 +120,7 @@ class SignUpActivity : AppCompatActivity() {
 
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.drawable.cloud)
+        alertDialogBuilder.setIcon(R.mipmap.cloud)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
         val alertDialog = alertDialogBuilder.create()
@@ -133,7 +133,7 @@ class SignUpActivity : AppCompatActivity() {
 
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.drawable.cloud)
+        alertDialogBuilder.setIcon(R.mipmap.cloud)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
         val alertDialog = alertDialogBuilder.create()

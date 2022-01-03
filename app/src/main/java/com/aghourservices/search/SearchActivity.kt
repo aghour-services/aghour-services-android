@@ -4,24 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.aghourservices.databinding.ActivitySearchBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
 import com.google.android.gms.ads.AdView
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,22 +26,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchActivity : AppCompatActivity() {
-    private lateinit var adView: AdView
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var searchResults: ArrayList<SearchResult>
     private lateinit var adapter: SearchResultAdapter
     private lateinit var binding: ActivitySearchBinding
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.searchToolbar)
         binding.searchResultRecycler.setHasFixedSize(true)
         binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
 
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
+//        val interstitial = Interstitial()
+//        interstitial.load(this)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())
@@ -58,23 +53,13 @@ class SearchActivity : AppCompatActivity() {
                 search(searchKeyWord)
             }
         }
-
-        binding.swipe.setColorSchemeResources(R.color.white)
-        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
-        binding.swipe.setOnRefreshListener {
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.swipe.isRefreshing = false
-            }, 1000)
-        }
-
         binding.backBtn.setOnClickListener {
             finish()
         }
     }
 
     private fun search(text: String) {
-        var eventName = "search_${text}"
-
+        val eventName = "search_${text}"
         Event.sendFirebaseEvent(eventName, text)
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -114,7 +99,7 @@ class SearchActivity : AppCompatActivity() {
     private fun onListItemClick(position: Int) {
         val firm = searchResults[position]
         val phoneNumber = firm.phone_number
-        var eventName = "call_${firm.name}"
+        val eventName = "call_${firm.name}"
         Event.sendFirebaseEvent(eventName, phoneNumber)
 
         callPhone(phoneNumber)
@@ -127,7 +112,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun customView() {
-        binding.searchAnimation.visibility = View.GONE
+        binding.lottieAnimationView.visibility = View.GONE
         binding.noInternet.visibility = View.VISIBLE
     }
 }

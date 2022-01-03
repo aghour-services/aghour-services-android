@@ -29,7 +29,4 @@
         android:scrollbars="vertical"
         tools:ignore="NestedWeights"
         tools:listitem="@layout/category_card" />
-
-    <include layout="@layout/admob_banner" />
-
 </LinearLayout>

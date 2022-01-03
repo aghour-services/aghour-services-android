@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:textAlignment="viewEnd"
-    android:textDirection="rtl"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:textDirection="rtl">
 
     <item
         android:id="@+id/searchIcon"

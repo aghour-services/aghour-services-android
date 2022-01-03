@@ -10,19 +10,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.*
 import com.aghourservices.about.AboutFragment
+import com.aghourservices.ads.Banner
+import com.aghourservices.ads.Interstitial
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.firms.AddDataFragment
-import com.aghourservices.user.SignUpActivity
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.*
 import com.aghourservices.search.SearchActivity
-
+import com.aghourservices.user.SignUpActivity
+import com.google.android.gms.ads.AdView
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,6 +36,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private lateinit var userMobile: TextView
     private var selectedItemId = -1
     lateinit var toolbar: Toolbar
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         checkUser()
         hideNavItem()
+
+        //ads
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
+        val interstitial = Interstitial()
+        interstitial.load(this)
+
         toggle = object : ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
@@ -88,7 +97,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
         replaceFragment(CategoriesFragment(), false)
@@ -103,10 +111,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val manager: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
         ft.setCustomAnimations(
-            R.anim.slide_in_right,
-            R.anim.slide_out_left,
-            R.anim.slide_in_left,
-            R.anim.slide_out_right
+            R.anim.fade_in,
+            R.anim.fade_out,
+            R.anim.fade_in,
+            R.anim.fade_out
         )
         ft.replace(R.id.fragmentContainerView, fragment)
         if (stacked) {
@@ -129,7 +137,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             userDataView.visibility = View.VISIBLE
 
             val user = userInfo.getUserData(this@MainActivity)
-            userName.text = user.name.toString()
+            userName.text = user.name
             userMobile.text = user.mobile
             userEmail.text = user.email
         }
@@ -148,7 +156,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         when (item.itemId) {
             R.id.searchIcon -> {
-                startActivity(Intent(this, SearchActivity::class.java))
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out,
+                )
             }
         }
 
@@ -177,7 +190,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             navView.findItem(R.id.nav_log).isVisible = false
         }
     }
-
 
     @SuppressLint("WrongConstant")
     override fun onBackPressed() {
