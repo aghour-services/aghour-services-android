@@ -18,13 +18,13 @@ class Event {
             }
         }
 
-        fun sendScreenName(screenName: String, className: String) {
+        fun sendScreenName(screenName: String) {
             var firebaseAnalytics = Firebase.analytics
             Log.d("Analytics", screenName)
-            Log.d("Analytics", className)
+            Log.d("Analytics", screenName)
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
                 param(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
-                param(FirebaseAnalytics.Param.SCREEN_CLASS, className)
+                param(FirebaseAnalytics.Param.SCREEN_CLASS, screenName)
             }
         }
 

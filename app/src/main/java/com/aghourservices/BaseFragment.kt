@@ -10,9 +10,6 @@ open class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Event.sendScreenName(
-            this::class.simpleName.toString(),
-            this::class.qualifiedName.toString()
-        )
+        Event.sendScreenName(this::class.simpleName.toString())
     }
 }

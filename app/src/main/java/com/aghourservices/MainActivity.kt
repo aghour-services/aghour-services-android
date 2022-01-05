@@ -1,8 +1,11 @@
 package com.aghourservices
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
@@ -51,8 +54,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         //ads
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-        val interstitial = Interstitial()
-        interstitial.load(this)
+
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                val interstitial = Interstitial()
+                interstitial.load(this@MainActivity)
+                mainHandler.postDelayed(this, 60000)
+            }
+        })
 
         toggle = object : ActionBarDrawerToggle(
             this,

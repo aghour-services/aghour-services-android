@@ -6,19 +6,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
-import com.aghourservices.ads.Interstitial
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
 import io.realm.Realm
-import io.realm.Realm.getApplicationContext
 import io.realm.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,9 +45,13 @@ class FirmsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
-        loadFirms(categoryId)
-        refresh()
+        try {
+            init()
+            loadFirms(categoryId)
+            refresh()
+        } catch (e: Exception) {
+            Log.e("Exception: ", e.message!!)
+        }
     }
 
     private fun init() {
@@ -72,14 +75,18 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun refresh() {
-        handler = Handler(Looper.getMainLooper()!!)
-        binding.swipe.setColorSchemeResources(R.color.white)
-        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
-        binding.swipe.setOnRefreshListener {
-            handler.postDelayed({
-                binding.swipe.isRefreshing = false
-                loadFirms(categoryId)
-            }, 800)
+        try {
+            handler = Handler(Looper.getMainLooper()!!)
+            binding.swipe.setColorSchemeResources(R.color.white)
+            binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
+            binding.swipe.setOnRefreshListener {
+                handler.postDelayed({
+                    binding.swipe.isRefreshing = false
+                    loadFirms(categoryId)
+                }, 1000)
+            }
+        } catch (e: Exception) {
+            Log.e("Exception: ", e.message!!)
         }
     }
 
