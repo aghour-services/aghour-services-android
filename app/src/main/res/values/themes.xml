@@ -2,11 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.AghourServices" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Status bar color. -->
-        <item name="colorPrimaryVariant">@color/blue200</item>
+        <item name="android:statusBarColor">@color/blue200</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->
         <item name="windowActionBar">true</item>
-        <item name="android:statusBarColor" tools:targetApi="q">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:navigationBarColor">@color/white</item>
@@ -27,6 +26,7 @@
 
     <style name="AddDataTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+        <item name="android:statusBarColor">@color/blue200</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     </style>
 

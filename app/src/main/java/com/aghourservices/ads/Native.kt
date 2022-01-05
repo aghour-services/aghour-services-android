@@ -23,7 +23,6 @@ class Native {
                 .forNativeAd { ad: NativeAd ->
                     display(context, parent, ad)
                 }.withNativeAdOptions(NativeAdOptions.Builder().build()).build()
-
             adLoader.loadAd(AdRequest.Builder().build())
         }
 

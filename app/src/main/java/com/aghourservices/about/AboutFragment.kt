@@ -23,7 +23,7 @@ class AboutFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.about_fragment)
-//        val interstitial = Interstitial()
-//        interstitial.load(requireActivity())
+        val interstitial = Interstitial()
+        interstitial.load(requireActivity())
     }
 }

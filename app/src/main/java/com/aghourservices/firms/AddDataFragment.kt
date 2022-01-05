@@ -44,9 +44,6 @@ class AddDataFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val interstitial = Interstitial()
-//        interstitial.load(requireActivity())
-
         val bundle = arguments
         if (bundle != null) {
             val value1 = bundle.getInt("category_id", -1)
@@ -61,8 +58,7 @@ class AddDataFragment : BaseFragment() {
         loadCategories()
         spinnerAdapter(categoryList)
         requireActivity().title = getString(R.string.add_data_fragment)
-        binding.btnAddData.setOnClickListener(View.OnClickListener
-        {
+        binding.btnAddData.setOnClickListener(View.OnClickListener {
             val selectedCategoryPosition = binding.spinner.selectedItemPosition
             val selectedCategory = categoryList[selectedCategoryPosition]
 
@@ -81,8 +77,8 @@ class AddDataFragment : BaseFragment() {
             if (firm.inValid()) {
                 binding.name.error = "الاسم"
                 binding.address.error = "العنوان"
-                binding.description.error = "اكتب وصف عن صاحب المكان"
                 binding.phoneNumber.error = "اكتب رقم التليفون"
+                binding.description.error = "اكتب وصف عن صاحب المكان"
 
                 return@OnClickListener
             } else {

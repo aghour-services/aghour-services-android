@@ -22,19 +22,17 @@ class Interstitial {
         InterstitialAd.load(context, unitId, adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d(tag, adError.message.toString())
+                    Log.d(tag, adError.message)
                     interstitialAd = null
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     Log.d(tag, "Ad was loaded.")
                     this@Interstitial.interstitialAd = interstitialAd
+                    Toast.makeText(context, "سيظهر اعلان بعد 3 ثواني", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
                         interstitialAd.show(context as Activity)
-                    }, 10000)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        interstitialAd.show(context as Activity)
-                    }, 60000)
+                    }, 3000)
                 }
             })
     }

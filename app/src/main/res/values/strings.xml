@@ -53,4 +53,9 @@
     <string name="add_data_fragment">إضافة البيانات</string>
     <string name="Choose">أختر التصنيف</string>
     <string name="shareText">\"https://play.google.com/store/apps/details?id=com.aghourservices\"</string>
+
+    <!--animation duration-->
+    <string name="shortDuration">300</string>
+    <string name="mediumDuration">400</string>
+    <string name="longDuration">700</string>
 </resources>

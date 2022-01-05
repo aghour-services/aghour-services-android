@@ -159,8 +159,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 val intent = Intent(this, SearchActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(
-                    R.anim.fade_in,
-                    R.anim.fade_out,
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left,
                 )
             }
         }

@@ -11,10 +11,10 @@ import com.aghourservices.firms.Firm
 class FirmsAdapter(
     val context: Context,
     private val arrayList: ArrayList<Firm>,
-    private val onItemClicked: (position: Int) -> Unit,
+    private val onItemClicked: (position: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var itemsCountToShowAds = 4
+    private var itemsCountToShowAds = 8
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

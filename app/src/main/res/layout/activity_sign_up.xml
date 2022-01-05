@@ -199,7 +199,7 @@
                 android:layout_margin="6dp"
                 android:button="@drawable/check_selector"
                 android:fontFamily="@font/cairo_black"
-                android:padding="6dp"
+                android:padding="8dp"
                 android:text="لا تظهرها مرة أخرى"
                 android:textColor="@color/blue200"
                 android:textSize="12sp" />
