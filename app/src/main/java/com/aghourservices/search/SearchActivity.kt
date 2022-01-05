@@ -40,8 +40,6 @@ class SearchActivity : AppCompatActivity() {
 
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-//        val interstitial = Interstitial()
-//        interstitial.load(this)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())
@@ -64,11 +62,10 @@ class SearchActivity : AppCompatActivity() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
-
         val retrofitData = retrofitBuilder.search(text)
 
-        retrofitData.enqueue(object : Callback<ArrayList<SearchResult>?> {
 
+        retrofitData.enqueue(object : Callback<ArrayList<SearchResult>?> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ArrayList<SearchResult>?>,

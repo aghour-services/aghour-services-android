@@ -3,21 +3,20 @@ package com.aghourservices.firms
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aghourservices.ads.Banner
-import com.aghourservices.ads.Interstitial
+import com.aghourservices.BaseFragment
+import com.aghourservices.R
 import com.aghourservices.databinding.FragmentFirmsBinding
+import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
-import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -25,14 +24,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-import androidx.appcompat.app.AppCompatActivity
-import com.aghourservices.BaseFragment
-import com.aghourservices.R
-import com.aghourservices.firebase_analytics.Event
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
@@ -49,16 +40,18 @@ class FirmsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFirmsBinding.inflate(layoutInflater)
-//        val interstitial = Interstitial()
-//        interstitial.load(requireActivity())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
-        loadFirms(categoryId)
-        refresh()
+        try {
+            init()
+            loadFirms(categoryId)
+            refresh()
+        } catch (e: Exception) {
+            Log.e("Exception: ", e.message!!)
+        }
     }
 
     private fun init() {
@@ -82,14 +75,18 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun refresh() {
-        handler = Handler(Looper.myLooper()!!)
-        binding.swipe.setColorSchemeResources(R.color.white)
-        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
-        binding.swipe.setOnRefreshListener {
-            handler.postDelayed({
-                binding.swipe.isRefreshing = false
-                loadFirms(categoryId)
-            }, 1000)
+        try {
+            handler = Handler(Looper.getMainLooper()!!)
+            binding.swipe.setColorSchemeResources(R.color.white)
+            binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
+            binding.swipe.setOnRefreshListener {
+                handler.postDelayed({
+                    binding.swipe.isRefreshing = false
+                    loadFirms(categoryId)
+                }, 1000)
+            }
+        } catch (e: Exception) {
+            Log.e("Exception: ", e.message!!)
         }
     }
 
