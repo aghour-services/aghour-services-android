@@ -70,8 +70,8 @@
                     android:gravity="left"
                     android:hint="رقم التليفون"
                     android:inputType="phone|number"
-                    android:maxLines="1"
                     android:maxLength="11"
+                    android:maxLines="1"
                     android:padding="14dp"
                     android:textColorHint="@color/about" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +103,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:hintEnabled="false"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/blue200">
 
                 <EditText
                     android:id="@+id/password"
@@ -121,17 +122,50 @@
                     android:textColorHint="@color/about" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/login_button"
-                android:fontFamily="@font/cairo_bold"
-                android:text="انشاء حساب"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"
+             android:layout_marginTop="10dp"
+             android:layout_height="wrap_content">
+
+             <Button
+                 android:id="@+id/btnCreate"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:background="@drawable/login_button"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+
+             <TextView
+                 android:id="@+id/account_txt_create"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:fontFamily="@font/cairo_bold"
+                 android:gravity="center"
+                 android:text="انشاء حساب"
+                 android:textColor="@color/white"
+                 android:textSize="16sp"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="@+id/btnCreate" />
+
+             <ProgressBar
+                 android:id="@+id/progressBar_Register"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center"
+                 android:indeterminateTint="@color/progressBar"
+                 android:scaleX=".9"
+                 android:scaleY=".9"
+                 android:visibility="gone"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+         </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -179,17 +213,51 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/btn_use_app"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:background="@drawable/login_button"
-                android:fontFamily="@font/cairo_bold"
-                android:text="تخطي التسجيل"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_use_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/login_button"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar_UseApp"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:indeterminateTint="@color/progressBar"
+                    android:scaleX=".9"
+                    android:scaleY=".9"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_use_app"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_use_app"
+                    app:layout_constraintStart_toStartOf="@+id/btn_use_app"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/useApp_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/cairo_bold"
+                    android:gravity="center"
+                    android:text="تخطي التسجيل"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_use_app"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/btn_use_app"
+                    app:layout_constraintTop_toTopOf="@+id/btn_use_app" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <CheckBox
                 android:id="@+id/do_not_show_again"
@@ -203,16 +271,6 @@
                 android:text="لا تظهرها مرة أخرى"
                 android:textColor="@color/blue200"
                 android:textSize="12sp" />
-
-            <ProgressBar
-                android:id="@+id/progressBar_Register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/progressBar"
-                android:scaleX=".9"
-                android:scaleY=".9"
-                android:visibility="gone" />
 
             <include layout="@layout/admob_banner" />
         </LinearLayout>

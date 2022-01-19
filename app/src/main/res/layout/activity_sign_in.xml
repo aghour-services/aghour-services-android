@@ -67,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:hintEnabled="false"
+                app:passwordToggleTint="@color/blue200"
                 app:passwordToggleEnabled="true">
 
                 <EditText
@@ -86,17 +87,52 @@
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/login_button"
-                android:fontFamily="@font/cairo_bold"
-                android:text="تسجيل دخول"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_marginTop="10dp"
+               android:layout_height="wrap_content">
+
+               <Button
+                   android:id="@+id/btnLogin"
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:layout_gravity="center_horizontal"
+                   android:background="@drawable/login_button"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+
+               <TextView
+                   android:id="@+id/txtLogin"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:fontFamily="@font/cairo_bold"
+                   android:gravity="center"
+                   android:text="تسجيل دخول"
+                   android:textColor="@color/white"
+                   android:textSize="16sp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="@+id/btnLogin" />
+
+               <ProgressBar
+                   android:id="@+id/progressBar_Login"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_margin="10dp"
+                   android:indeterminateTint="@color/progressBar"
+                   android:scaleX=".9"
+                   android:scaleY=".9"
+                   android:visibility="gone"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+                   app:layout_constraintStart_toStartOf="@+id/btnLogin"
+                   app:layout_constraintTop_toTopOf="parent" />
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,17 +191,6 @@
                 android:text="تخطي التسجيل"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
-
-            <ProgressBar
-                android:id="@+id/progressBar_Login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:indeterminateTint="@color/progressBar"
-                android:scaleX=".9"
-                android:scaleY=".9"
-                android:visibility="gone" />
 
             <include layout="@layout/admob_banner" />
 

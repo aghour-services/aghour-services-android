@@ -74,6 +74,7 @@ class SignInActivity : AppCompatActivity() {
                 val userInfo = UserInfo()
                 val user = response.body() as User
 
+                binding.txtLogin.visibility = View.GONE
                 binding.progressBarLogin.visibility = View.VISIBLE
                 userInfo.saveUserData(this@SignInActivity, user)
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))

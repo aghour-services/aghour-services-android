@@ -61,7 +61,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             override fun run() {
                 val interstitial = Interstitial()
                 interstitial.load(this@MainActivity)
-                mainHandler.postDelayed(this, 60000)
+                mainHandler.postDelayed(this, 1200000)
             }
         })
 
