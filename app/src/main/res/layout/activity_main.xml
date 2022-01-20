@@ -44,7 +44,7 @@
             android:layout_weight="1"
             app:defaultNavHost="true" />
 
-        <include layout="@layout/admob_banner" />
+<!--        <include layout="@layout/admob_banner" />-->
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -53,10 +53,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:itemIconSize="24dp"
+        app:itemIconSize="20dp"
         app:itemTextAppearance="@style/RobotoButtonStyle"
         app:itemTextColor="@color/blue200"
-        app:itemVerticalPadding="16dp"
+        app:itemVerticalPadding="12dp"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

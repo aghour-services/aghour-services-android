@@ -38,8 +38,8 @@ class SearchActivity : AppCompatActivity() {
         binding.searchResultRecycler.setHasFixedSize(true)
         binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
 
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+//        adView = findViewById(R.id.adView)
+//        Banner.show(this, adView)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())

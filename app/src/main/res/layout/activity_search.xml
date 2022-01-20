@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:layout_margin="6dp"
+            android:layout_margin="10dp"
             android:gravity="right|center"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
@@ -43,12 +43,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/search_view_background"
-                android:fontFamily="@font/segoe_ui_regular"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="right|center"
                 android:hint="بحث"
                 android:imeOptions="actionDone"
                 android:inputType="text"
-                android:padding="12dp"
+                android:paddingRight="16dp"
                 android:textColor="@color/about"
                 android:textColorHint="@color/about"
                 android:textCursorDrawable="@drawable/cursor_color"
@@ -128,14 +128,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-        <include layout="@layout/admob_banner" />
+<!--        <include layout="@layout/admob_banner" />-->
     </LinearLayout>
 
 
