@@ -40,21 +40,16 @@ class SignUpActivity : AppCompatActivity() {
         Banner.show(this, adView)
 
         binding.btnCreate.setOnClickListener(View.OnClickListener {
-
             val name = binding.name.text.toString()
             val mobile = binding.mobile.text.toString()
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
-
             val valid = name.isEmpty() || email.isEmpty() || password.isEmpty()
-
             if (valid) {
                 binding.name.error = "اكتب اسمك"
                 binding.email.error = "ادخل بريدك الالكتروني"
                 binding.password.error = "اختر كلمة سر لا تقل عن 6 أحرف"
-
                 return@OnClickListener
-
             } else {
                 val user = User(name, mobile, email, password, "")
                 createUser(user)
@@ -62,7 +57,8 @@ class SignUpActivity : AppCompatActivity() {
         })
 
         binding.btnUseApp.setOnClickListener {
-            binding.progressBarRegister.visibility = View.VISIBLE
+            binding.useAppTxt.visibility = View.GONE
+            binding.progressBarUseApp.visibility = View.VISIBLE
             startActivity(Intent(this, MainActivity::class.java))
             doNotShowAgain()
         }
@@ -83,6 +79,7 @@ class SignUpActivity : AppCompatActivity() {
                     errorLogin()
                     return
                 }
+                binding.accountTxtCreate.visibility =View.GONE
                 binding.progressBarRegister.visibility = View.VISIBLE
                 val userInfo = UserInfo()
                 val user = response.body() as User

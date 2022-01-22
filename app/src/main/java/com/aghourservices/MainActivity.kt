@@ -52,18 +52,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         hideNavItem()
 
         //ads
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+//        adView = findViewById(R.id.adView)
+//        Banner.show(this, adView)
 
-        val mainHandler = Handler(Looper.getMainLooper())
-
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                val interstitial = Interstitial()
-                interstitial.load(this@MainActivity)
-                mainHandler.postDelayed(this, 60000)
-            }
-        })
+//        val mainHandler = Handler(Looper.getMainLooper())
+//        mainHandler.post(object : Runnable {
+//            override fun run() {
+//                val interstitial = Interstitial()
+//                interstitial.load(this@MainActivity)
+//                mainHandler.postDelayed(this, 1200000)
+//            }
+//        })
 
         toggle = object : ActionBarDrawerToggle(
             this,

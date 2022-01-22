@@ -17,8 +17,6 @@ class SearchResultViewHolder(
     var description: TextView = itemView.findViewById(R.id.description)
     var address: TextView = itemView.findViewById(R.id.address)
     var categoryName: TextView = itemView.findViewById(R.id.category_name)
-
-
     var imageButton: Button = itemView.findViewById(R.id.btnCall)
 
     init {
