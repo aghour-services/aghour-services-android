@@ -23,6 +23,7 @@ import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.firms.AddDataFragment
+import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchActivity
 import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
@@ -81,6 +82,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     R.id.nav_home -> {
                         replaceFragment(CategoriesFragment(), false)
                     }
+                    R.id.nav_news -> {
+                        replaceFragment(NewsFragment(), false)
+                    }
                     R.id.nav_add_firm -> {
                         replaceFragment(AddDataFragment(), true)
                     }
@@ -110,7 +114,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.itemIconTintList = null
-        replaceFragment(CategoriesFragment(), false)
+        replaceFragment(NewsFragment(), false)
     }
 
     override fun setTitle(title: CharSequence?) {
@@ -167,8 +171,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         when (item.itemId) {
             R.id.searchIcon -> {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, SearchActivity::class.java))
                 overridePendingTransition(
                     R.anim.slide_in_right,
                     R.anim.slide_out_left,
