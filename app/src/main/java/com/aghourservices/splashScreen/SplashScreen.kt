@@ -26,6 +26,7 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         Firebase.messaging.subscribeToTopic("News")
             .addOnCompleteListener { task ->
                 var msg = "Done"
@@ -48,6 +49,6 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
             finish()
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-        }, 600)
+        }, 500)
     }
 }

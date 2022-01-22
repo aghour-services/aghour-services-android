@@ -1,7 +1,6 @@
 package com.aghourservices
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -57,7 +56,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         Banner.show(this, adView)
 
         val mainHandler = Handler(Looper.getMainLooper())
-
         mainHandler.post(object : Runnable {
             override fun run() {
                 val interstitial = Interstitial()

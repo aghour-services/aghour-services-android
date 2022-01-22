@@ -95,7 +95,6 @@ class CategoriesFragment : BaseFragment() {
                 categoryList.addAll(result)
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
-
                 //shimmer Animation without Internet
                 Toast.makeText(activity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
                 progressBar()

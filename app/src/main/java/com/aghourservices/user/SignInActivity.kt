@@ -52,10 +52,12 @@ class SignInActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
         binding.btnUseApp.setOnClickListener {
             binding.progressBarLogin.visibility = View.VISIBLE
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
@@ -77,7 +79,7 @@ class SignInActivity : AppCompatActivity() {
                 binding.progressBarLogin.visibility = View.VISIBLE
                 userInfo.saveUserData(this@SignInActivity, user)
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-                finishAffinity()
+                finish()
             }
 
             @SuppressLint("ShowToast")
@@ -90,7 +92,6 @@ class SignInActivity : AppCompatActivity() {
     fun errorLogin() {
         val title = R.string.error_logIn
         val positiveButton = "تمام"
-
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(title)
         alertDialogBuilder.setIcon(R.mipmap.cloud)
@@ -103,7 +104,6 @@ class SignInActivity : AppCompatActivity() {
     fun noInternet() {
         val title = R.string.no_internet
         val positiveButton = "تمام"
-
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(title)
         alertDialogBuilder.setIcon(R.mipmap.cloud)
