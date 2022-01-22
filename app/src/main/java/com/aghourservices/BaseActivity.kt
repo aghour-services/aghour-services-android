@@ -20,7 +20,7 @@ open class BaseActivity : AppCompatActivity() {
 
     fun shareApp() {
         Event.sendFirebaseEvent("Share", "")
-        val shareText = R.string.shareText
+        val shareText = getString(R.string.shareText)
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, shareText)
