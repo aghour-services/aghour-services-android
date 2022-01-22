@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/progressBar"
+        android:indeterminateTint="@color/progressBarMain"
         android:progress="0"
-        android:scaleX="0.1"
-        android:scaleY="0.1"
+        android:scaleX="0.12"
+        android:scaleY="0.12"
         android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView

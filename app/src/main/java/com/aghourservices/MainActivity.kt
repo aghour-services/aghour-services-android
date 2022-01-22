@@ -64,6 +64,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
         })
 
+
         toggle = object : ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
