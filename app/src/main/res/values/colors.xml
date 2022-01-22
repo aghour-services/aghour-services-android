@@ -50,4 +50,5 @@
 
     <!--color for about app-->
     <color name="about">#4B4B4B</color>
+    <color name="news_bg">#ECECEC</color>
 </resources>

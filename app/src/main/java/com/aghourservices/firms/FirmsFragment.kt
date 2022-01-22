@@ -77,8 +77,8 @@ class FirmsFragment : BaseFragment() {
     private fun refresh() {
         try {
             handler = Handler(Looper.getMainLooper()!!)
-            binding.swipe.setColorSchemeResources(R.color.white)
-            binding.swipe.setProgressBackgroundColorSchemeResource(R.color.blue200)
+            binding.swipe.setColorSchemeResources(R.color.blue200)
+            binding.swipe.setProgressBackgroundColorSchemeResource(R.color.white)
             binding.swipe.setOnRefreshListener {
                 handler.postDelayed({
                     binding.swipe.isRefreshing = false
@@ -145,10 +145,14 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun setAdapter(firmsList: ArrayList<Firm>) {
-        adapter = FirmsAdapter(requireContext(), firmsList) { position ->
-            onListItemClick(position)
+        try {
+            adapter = FirmsAdapter(requireContext(), firmsList) { position ->
+                onListItemClick(position)
+            }
+            binding.firmsRecyclerview.adapter = adapter
+        } catch (e: Exception) {
+
         }
-        binding.firmsRecyclerview.adapter = adapter
     }
 
     private fun onListItemClick(position: Int) {

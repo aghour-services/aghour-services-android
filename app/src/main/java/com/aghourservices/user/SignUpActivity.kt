@@ -60,10 +60,12 @@ class SignUpActivity : AppCompatActivity() {
             binding.useAppTxt.visibility = View.GONE
             binding.progressBarUseApp.visibility = View.VISIBLE
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
             doNotShowAgain()
         }
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
     }
 
@@ -86,7 +88,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 userInfo.saveUserData(this@SignUpActivity, user)
                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-                finishAffinity()
+                finish()
             }
 
             @SuppressLint("ShowToast")
@@ -138,6 +140,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finishAffinity()
+        finish()
     }
 }
