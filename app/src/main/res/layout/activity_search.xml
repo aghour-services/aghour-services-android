@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/searchBg"
     android:orientation="vertical"
     tools:context=".search.SearchActivity">
 
@@ -14,25 +14,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/back_btn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:padding="8dp"
-            android:layout_margin="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_gravity="center"
+            android:layout_margin="4dp"
             android:background="@drawable/back_selector"
+            android:padding="8dp"
             android:src="@drawable/ic_back" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edtLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:gravity="right|center"
             app:endIconDrawable="@drawable/ic_clear"
             app:endIconMode="clear_text"
@@ -62,7 +63,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/about"
+        android:background="@color/lineView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -71,9 +72,9 @@
         android:id="@+id/noInternet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="120dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,13 +84,13 @@
             android:id="@+id/custom_toast_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-           android:src="@mipmap/cloud" />
+            android:src="@mipmap/cloud" />
 
         <TextView
             android:id="@+id/custom_toast_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/cairo_bold"
+            android:fontFamily="@font/cairo_black"
             android:text="تأكد من اتصالك بالانترنت"
             android:textSize="14sp" />
     </LinearLayout>
@@ -100,7 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
@@ -122,21 +123,21 @@
             android:id="@+id/searchResultRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/offWhite"
+            android:background="@color/recyclerViewBg"
             android:visibility="gone"
             tools:listitem="@layout/search_result_card" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-<!--        <include layout="@layout/admob_banner" />-->
-    </LinearLayout>
 
+        <include layout="@layout/admob_banner" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

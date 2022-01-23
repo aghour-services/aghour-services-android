@@ -1,59 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    android:layout_margin="3dp">
+    app:cardCornerRadius="6dp"
+    android:layout_margin="5dp">
 
     <LinearLayout
-        android:id="@+id/firm_card_view"
+        android:id="@+id/news_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:background="@color/white"
-        android:gravity="right"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="20dp"
+        android:background="@color/news_bg"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="5dp"
-            android:background="@color/white"
+            android:fontFamily="@font/segoe_ui_bold"
             android:gravity="right"
-            android:orientation="horizontal"
-            android:textAlignment="center">
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="1dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/cairo_bold"
-                android:gravity="right"
-                android:text="Description"
-                android:textColor="@color/gray"
-                android:textIsSelectable="true"
-                android:textSize="22sp" />
-        </LinearLayout>
+            android:text="Description"
+            android:textColor="@color/newsDescription"
+            android:textIsSelectable="true"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="1dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/cairo_bold"
             android:gravity="right"
+            android:layout_marginTop="5dp"
             android:text="time"
-            android:textColor="@color/gray"
+            android:textColor="@color/time"
             android:textIsSelectable="true"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

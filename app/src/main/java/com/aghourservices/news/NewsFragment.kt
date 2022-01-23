@@ -40,7 +40,6 @@ class NewsFragment : BaseFragment() {
         return binding.root
     }
 
-
     private fun setAdapter(articleList: ArrayList<Article>) {
         try {
             adapter = ArticlesAdapter(requireContext(), articleList)
@@ -49,7 +48,6 @@ class NewsFragment : BaseFragment() {
 
         }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,8 +65,8 @@ class NewsFragment : BaseFragment() {
     private fun refresh() {
         try {
             handler = Handler(Looper.getMainLooper()!!)
-            binding.swipe.setColorSchemeResources(R.color.blue200)
-            binding.swipe.setProgressBackgroundColorSchemeResource(R.color.white)
+            binding.swipe.setColorSchemeResources(R.color.swipeColor)
+            binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
             binding.swipe.setOnRefreshListener {
                 handler.postDelayed({
                     binding.swipe.isRefreshing = false

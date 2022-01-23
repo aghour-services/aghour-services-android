@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/progressBarMain"
+        android:indeterminateTint="@color/categoryProgressBar"
         android:progress="0"
         android:scaleX="0.12"
         android:scaleY="0.12"
@@ -22,11 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/offWhite"
+        android:background="@color/recyclerViewBg"
         android:orientation="vertical"
         android:padding="5dp"
         android:scrollbarSize="2dp"
         android:scrollbars="vertical"
-        tools:ignore="NestedWeights"
         tools:listitem="@layout/category_card" />
 </LinearLayout>

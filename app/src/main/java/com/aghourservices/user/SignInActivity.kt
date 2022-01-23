@@ -55,7 +55,8 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
         binding.btnUseApp.setOnClickListener {
-            binding.progressBarLogin.visibility = View.VISIBLE
+            binding.progressBarUseApp.visibility = View.VISIBLE
+            binding.txtUseApp.visibility = View.GONE
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -73,17 +74,15 @@ class SignInActivity : AppCompatActivity() {
                     errorLogin()
                     return
                 }
-                val userInfo = UserInfo()
-                val user = response.body() as User
-
                 binding.txtLogin.visibility = View.GONE
                 binding.progressBarLogin.visibility = View.VISIBLE
+                val userInfo = UserInfo()
+                val user = response.body() as User
                 userInfo.saveUserData(this@SignInActivity, user)
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                 finish()
             }
 
-            @SuppressLint("ShowToast")
             override fun onFailure(call: Call<User>, t: Throwable) {
                 noInternet()
             }

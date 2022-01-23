@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/add_data_bg"
     android:theme="@style/AddDataTheme"
     android:orientation="vertical">
 
@@ -20,12 +20,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:fontFamily="@font/cairo_black"
-                android:text="اضافة بيانات"
-                android:textColor="@color/blue1"
+                android:text="إضافة بيانات"
+                android:textColor="@color/add_data"
                 android:textSize="22sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -42,14 +42,13 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/blue200"
                     android:drawableRight="@drawable/ic_person"
                     android:gravity="left"
                     android:hint="الاسم (دكتور، مطعم، صيدلية...الخ)"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
-                    android:textColorHint="@color/about"
+                    android:textColorHint="@color/hint"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,14 +66,13 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/blue200"
                     android:drawableRight="@drawable/ic_location"
                     android:gravity="left"
                     android:hint="العنوان"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
-                    android:textColorHint="@color/about"
+                    android:textColorHint="@color/hint"
                     android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +92,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/blue200"
                     android:drawableRight="@drawable/ic_phone"
                     android:gravity="left"
                     android:hint="رقم التليفون"
@@ -102,7 +99,7 @@
                     android:maxLength="11"
                     android:maxLines="1"
                     android:padding="14dp"
-                    android:textColorHint="@color/about"
+                    android:textColorHint="@color/hint"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,12 +119,11 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/blue200"
                     android:gravity="left"
                     android:hint="الوصف"
                     android:maxLength="300"
                     android:padding="14dp"
-                    android:textColorHint="@color/about"
+                    android:textColorHint="@color/hint"
                     android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -138,7 +134,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
                 android:backgroundTintMode="add"
-                android:backgroundTint="@color/blue1"
+                android:backgroundTint="@color/spinnerBg"
                 android:spinnerMode="dialog"
                 android:prompt="@string/Choose"
                 android:textAlignment="center"/>
@@ -148,11 +144,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="@drawable/login_button"
+                android:background="@drawable/skip_button"
                 android:fontFamily="@font/cairo_black"
                 android:text="اضافة"
-                android:textColor="@color/whiteTextColor"
-                android:textSize="16sp" />
+                android:textColor="@color/addDataTxt"
+                android:textSize="15sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

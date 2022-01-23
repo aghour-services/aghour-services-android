@@ -1,21 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.AghourServices" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.AghourServices" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Status bar color. -->
         <item name="windowActionBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <!-- Customize your theme here. -->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/navBarColor</item>
     </style>
 
     <style name="Theme.AghourServices.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlNormal">@color/colorControl</item>
     </style>
 
     <style name="CategoriesTheme" parent="Theme.AghourServices.NoActionBar">
@@ -39,16 +37,6 @@
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/drawerIcon</item>
-    </style>
-
-    <!--All Text Font Style-->
-    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/cairo_black</item>
-    </style>
-
-    <!--All Text Buttons Font Style-->
-    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">@font/cairo_black</item>
     </style>
 
 </resources>

@@ -51,7 +51,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         checkUser()
         hideNavItem()
 
-        //ads
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
@@ -63,7 +62,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 mainHandler.postDelayed(this, 60000)
             }
         })
-
 
         toggle = object : ActionBarDrawerToggle(
             this,
@@ -104,7 +102,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     }
                 }
                 selectedItemId = -1
-                //toast("Drawer closed")
             }
         }
 
@@ -158,6 +155,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         btnRegister.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
     }
 

@@ -57,14 +57,14 @@ open class BaseActivity : AppCompatActivity() {
 
     fun showOnCloseDialog() {
         val title = "تسجيل الخروج !"
-        val message = "متأكد انك عايز تسجل خروج ؟"
+        val message = "أنت علي وشك تسجيل الخروج من حسابك ؟"
         val positiveButton = "نعم"
         val negativeButton = "لا"
 
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(title)
         alertDialogBuilder.setMessage(message)
-        alertDialogBuilder.setIcon(R.mipmap.ic_launcher_round)
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
             logOut()
