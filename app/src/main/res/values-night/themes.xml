@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="Theme.AghourServices" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
@@ -21,13 +22,13 @@
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
-    <style name="AddDataTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AddDataTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
         <item name="android:statusBarColor">@color/toolbarBg</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     </style>
 
-    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/splashScreenBg</item>
         <item name="windowActionBar">true</item>
         <item name="android:windowBackground">@color/splashScreenBg</item>

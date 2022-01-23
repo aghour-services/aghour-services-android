@@ -173,8 +173,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <Button
                         android:id="@+id/btn_use_app"
@@ -220,10 +220,10 @@
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:layout_weight="1"
                     android:background="@drawable/skip_button"
                     android:fontFamily="@font/cairo_black"
                     android:text="انشاء حساب جديد"
@@ -231,6 +231,7 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
+
             <include layout="@layout/admob_banner" />
         </LinearLayout>
     </ScrollView>
