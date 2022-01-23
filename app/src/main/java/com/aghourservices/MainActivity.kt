@@ -54,14 +54,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-//        val mainHandler = Handler(Looper.getMainLooper())
-//        mainHandler.post(object : Runnable {
-//            override fun run() {
-//                val interstitial = Interstitial()
-//                interstitial.load(this@MainActivity)
-//                mainHandler.postDelayed(this, 60000)
-//            }
-//        })
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                val interstitial = Interstitial()
+                interstitial.load(this@MainActivity)
+                mainHandler.postDelayed(this, 60000)
+            }
+        })
 
         toggle = object : ActionBarDrawerToggle(
             this,
@@ -155,6 +155,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         btnRegister.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
     }
 

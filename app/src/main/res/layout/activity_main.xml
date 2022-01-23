@@ -40,9 +40,9 @@
             android:id="@+id/fragmentContainerView"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:background="@color/recyclerViewBg"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/recyclerViewBg"
             app:defaultNavHost="true" />
 
         <include layout="@layout/admob_banner" />
@@ -52,9 +52,9 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/nav_header"
         android:layout_gravity="start"
         android:background="@color/navDrawerBg"
+        app:headerLayout="@layout/nav_header"
         app:itemIconSize="20dp"
         app:itemTextAppearance="@style/RobotoTextViewStyle"
         app:itemTextColor="@color/itemNavColor"
