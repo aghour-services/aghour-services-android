@@ -36,7 +36,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
     private fun getRemoteView(title: String, message: String): RemoteViews {
         val remoteView = RemoteViews("com.aghourservices.firebase", R.layout.notification)
 
-        remoteView.setImageViewResource(R.id.app_logo, R.mipmap.ic_launcher_round)
+        remoteView.setImageViewResource(R.id.app_logo, R.drawable.ic_launcher_round)
         remoteView.setTextViewText(R.id.title, title)
         remoteView.setTextViewText(R.id.message, message)
         return remoteView

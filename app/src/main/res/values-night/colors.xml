@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="toolbarBg">#11161B</color>
+    <color name="toolbarText">#C1C1C1</color>
+    <color name="drawerIcon">#C1C1C1</color>
+    <color name="searchIcon">#C1C1C1</color>
+    <color name="navBarColor">#11161B</color>
+    <color name="recyclerViewBg">#101010</color>
+    <color name="splashScreenBg">#11161B</color>
+    <color name="categoryName">#C9C9C9</color>
+    <color name="categoryCardBg">#1B2025</color>
+    <color name="categoryCardPress">#1B1B1B</color>
+    <color name="categoryProgressBar">#11161B</color>
+    <color name="shimmerBg">#DADADA</color>
+    <color name="shimmerColor">#232B33</color>
+    <color name="news_bg">#0D171E</color>
+    <color name="newsDescription">#CCCCCC</color>
+    <color name="time">#439446</color>
+    <color name="firmsBg">#252525</color>
+    <color name="firmName">#CCCCCC</color>
+    <color name="firmDescription">#CCCCCC</color>
+    <color name="callBg">#1C242C</color>
+    <color name="callPress">#536E57</color>
+    <color name="edtStroke">#292929</color>
+    <color name="add_data_bg">#11161B</color>
+    <color name="skipBtnStroke">#292929</color>
+    <color name="skipBtnBg">#252525</color>
+    <color name="skipBtnPress">#656464</color>
+    <color name="addDataTxt">#CCCCCC</color>
+    <color name="navHeaderBg">#192027</color>
+    <color name="create_btn">#1D252C</color>
+    <color name="create_btn_press">#11161B</color>
+    <color name="createAccountText">#CCCCCC</color>
+    <color name="focusedBg">#10151B</color>
+    <color name="signUpBg">#11161B</color>
+    <color name="signUpTxt">#FFFFFF</color>
+
+</resources>

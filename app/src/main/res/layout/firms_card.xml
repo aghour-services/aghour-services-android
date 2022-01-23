@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="3dp"
+    app:cardCornerRadius="3dp"
     android:layout_gravity="center">
 
     <LinearLayout
@@ -11,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:background="@color/white"
+        android:background="@color/firmsBg"
         android:gravity="right"
         android:orientation="vertical"
         android:padding="15dp">
@@ -25,7 +27,7 @@
             android:textAlignment="center"
             android:gravity="right"
             android:text="Name"
-            android:textColor="@color/blue"
+            android:textColor="@color/firmName"
             android:textSize="23sp" />
 
         <LinearLayout
@@ -33,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="5dp"
-            android:background="@color/white"
+            android:background="@color/firmsBg"
             android:textAlignment="center"
             android:gravity="right"
             android:orientation="horizontal">
@@ -49,7 +51,7 @@
                 android:fontFamily="@font/cairo_bold"
                 android:gravity="right"
                 android:text="Address"
-                android:textColor="@color/green1"
+                android:textColor="@color/address"
                 android:textSize="15sp"
                 tools:ignore="RtlHardcoded" />
 
@@ -66,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="5dp"
-            android:background="@color/white"
+            android:background="@color/firmsBg"
             android:textAlignment="center"
             android:gravity="right"
             android:orientation="horizontal">
@@ -82,7 +84,7 @@
                 android:fontFamily="@font/cairo_bold"
                 android:gravity="right"
                 android:text="Description"
-                android:textColor="@color/gray"
+                android:textColor="@color/firmDescription"
                 android:textSize="13sp" />
 
             <ImageView
@@ -103,12 +105,12 @@
             android:drawableLeft="@drawable/ic_phone_call"
             android:gravity="center"
             android:layout_margin="20dp"
-            android:padding="8dp"
+            android:padding="6dp"
             android:fontFamily="@font/cairo_bold"
             android:text="01207083552"
             android:textAlignment="center"
-            android:textColor="@color/green"
-            android:textSize="18sp"/>
+            android:textColor="@color/phoneColor"
+            android:textSize="16sp"/>
 
         <FrameLayout
             android:id="@+id/ad_frame"

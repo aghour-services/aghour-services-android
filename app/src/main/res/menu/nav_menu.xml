@@ -19,14 +19,14 @@
         android:title="اضافة بيانات" />
 
     <item
-        android:id="@+id/nav_share"
-        android:icon="@mipmap/share"
-        android:title="مشاركة التطبيق" />
+        android:id="@+id/nav_rate"
+        android:icon="@mipmap/star"
+        android:title="تقييم" />
 
     <item
-        android:id="@+id/nav_rate"
-        android:icon="@mipmap/negma"
-        android:title="قيم التطبيق" />
+        android:id="@+id/nav_share"
+        android:icon="@mipmap/share"
+        android:title="شارك مع أصدقائك" />
 
     <item
         android:id="@+id/nav_faceBook"

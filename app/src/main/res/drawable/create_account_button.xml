@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true">
+    <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <stroke android:width="1dp" android:color="@color/edtStroke"/>
-            <solid android:color="@color/focusedBg"/>
-            <corners android:radius="8dp"/>
+            <corners android:radius="10dp" />
+            <solid android:color="@color/create_btn_press" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/edtTextBg"/>
             <corners android:radius="8dp"/>
+            <solid android:color="@color/create_btn" />
         </shape>
     </item>
 </selector>

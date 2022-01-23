@@ -28,19 +28,18 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:contentDescription="Category Icon"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/ic_launcher_round" />
 
             <TextView
                 android:id="@+id/category_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/cairo_bold"
                 android:gravity="center"
                 android:text="Category Name"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/categoryName"
                 android:textSize="14sp" />
 
         </LinearLayout>

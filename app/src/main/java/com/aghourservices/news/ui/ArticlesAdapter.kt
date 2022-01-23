@@ -13,6 +13,7 @@ class ArticlesAdapter(
     private val arrayList: ArrayList<Article>
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+//    private var itemsCountToShowAds = 3
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -25,7 +26,15 @@ class ArticlesAdapter(
         val item = arrayList[position]
         hold.description.text = item.description
         hold.date.text = item.created_at
+
+//        if (getItemViewType(position) == 0) {
+//            NativeAdViewHolder(context, hold.adFrame)
+//        }
     }
+
+//    override fun getItemViewType(position: Int): Int {
+//        return (position + 1) % (itemsCountToShowAds + 1)
+//    }
 
     override fun getItemCount(): Int {
         return itemsCount

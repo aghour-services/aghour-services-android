@@ -20,7 +20,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/blue200"
+                android:background="@color/toolbarBg"
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <TextView
@@ -30,7 +30,7 @@
                     android:fontFamily="@font/cairo_black"
                     android:gravity="end"
                     android:text="@string/app_name"
-                    android:textColor="@color/white"
+                    android:textColor="@color/toolbarText"
                     android:textSize="18sp" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -44,7 +44,7 @@
             android:layout_weight="1"
             app:defaultNavHost="true" />
 
-<!--        <include layout="@layout/admob_banner" />-->
+        <include layout="@layout/admob_banner" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -55,8 +55,8 @@
         app:headerLayout="@layout/nav_header"
         app:itemIconSize="20dp"
         app:itemTextAppearance="@style/RobotoButtonStyle"
-        app:itemTextColor="@color/blue200"
-        app:itemVerticalPadding="12dp"
+        app:itemTextColor="@color/itemNavColor"
+        app:itemVerticalPadding="10dp"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -3,21 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerVertical="true"
-    android:layout_gravity="center"
-    android:background="@color/blue200"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="@color/splashScreenBg"
     tools:context=".splashScreen.SplashScreen">
 
     <ImageView
         android:id="@+id/splashImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         android:contentDescription="@string/aghour_logo"
-        android:gravity="center"
-        android:src="@mipmap/app_logo_name"
-        android:textColor="@color/blue1" />
+        android:src="@mipmap/app_logo_name" />
 
 </LinearLayout>

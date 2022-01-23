@@ -51,19 +51,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         checkUser()
         hideNavItem()
 
-        //ads
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                val interstitial = Interstitial()
-                interstitial.load(this@MainActivity)
-                mainHandler.postDelayed(this, 60000)
-            }
-        })
-
+//        val mainHandler = Handler(Looper.getMainLooper())
+//        mainHandler.post(object : Runnable {
+//            override fun run() {
+//                val interstitial = Interstitial()
+//                interstitial.load(this@MainActivity)
+//                mainHandler.postDelayed(this, 60000)
+//            }
+//        })
 
         toggle = object : ActionBarDrawerToggle(
             this,
@@ -104,7 +102,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     }
                 }
                 selectedItemId = -1
-                //toast("Drawer closed")
             }
         }
 

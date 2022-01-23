@@ -40,22 +40,34 @@
             android:orientation="vertical">
 
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
+
             <include layout="@layout/news_shimmer" />
 
         </LinearLayout>
-
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <LinearLayout
@@ -73,11 +85,12 @@
                 android:id="@+id/newsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="#DDDDDD"
+                android:background="@color/recyclerViewBg"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:listitem="@layout/news_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

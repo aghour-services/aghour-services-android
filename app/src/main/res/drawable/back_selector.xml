@@ -2,14 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="oval">
-            <solid android:color="@color/Gray" />
+            <solid android:color="@color/backIconSelector" />
             <size android:width="100dp" android:height="100dp" />
         </shape>
     </item>
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/white" />
-
+            <solid android:color="@color/backIconBg" />
             <size android:width="100dp" android:height="100dp" />
         </shape>
     </item>

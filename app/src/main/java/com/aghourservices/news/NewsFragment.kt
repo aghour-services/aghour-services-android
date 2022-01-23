@@ -40,7 +40,6 @@ class NewsFragment : BaseFragment() {
         return binding.root
     }
 
-
     private fun setAdapter(articleList: ArrayList<Article>) {
         try {
             adapter = ArticlesAdapter(requireContext(), articleList)
@@ -49,7 +48,6 @@ class NewsFragment : BaseFragment() {
 
         }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

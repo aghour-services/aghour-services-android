@@ -72,7 +72,7 @@
                 android:id="@+id/firmsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="#DDDDDD"
+                android:background="@color/recyclerViewBg"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:listitem="@layout/firms_card" />

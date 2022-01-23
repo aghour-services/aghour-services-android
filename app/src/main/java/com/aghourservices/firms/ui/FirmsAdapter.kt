@@ -14,7 +14,7 @@ class FirmsAdapter(
     private val onItemClicked: (position: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-//    private var itemsCountToShowAds = 8
+    private var itemsCountToShowAds = 9
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -24,21 +24,21 @@ class FirmsAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        val holder = holder as FirmsViewHolder
+        val hold = holder as FirmsViewHolder
         val item = arrayList[position]
-        holder.name.text = item.name
-        holder.address.text = item.address
-        holder.description.text = item.description
-        holder.imageButton.text = item.phone_number
+        hold.name.text = item.name
+        hold.address.text = item.address
+        hold.description.text = item.description
+        hold.imageButton.text = item.phone_number
 
-//        if (getItemViewType(position) == 0) {
-//            NativeAdViewHolder(context, holder.adFrame)
-//        }
+        if (getItemViewType(position) == 0) {
+            NativeAdViewHolder(context, hold.adFrame)
+        }
     }
 
-//    override fun getItemViewType(position: Int): Int {
-//        return (position + 1) % (itemsCountToShowAds + 1)
-//    }
+    override fun getItemViewType(position: Int): Int {
+        return (position + 1) % (itemsCountToShowAds + 1)
+    }
 
     override fun getItemCount(): Int {
         return itemsCount
