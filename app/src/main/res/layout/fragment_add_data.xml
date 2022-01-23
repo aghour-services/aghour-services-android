@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:fontFamily="@font/cairo_black"
-                android:text="اضافة بيانات"
+                android:text="إضافة بيانات"
                 android:textColor="@color/add_data"
                 android:textSize="22sp" />
 

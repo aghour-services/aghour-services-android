@@ -28,7 +28,7 @@
                 android:fontFamily="@font/cairo_black"
                 android:text="استخدام التطبيق :"
                 android:textAlignment="center"
-                android:textColor="@color/blue1"
+                android:textColor="@color/blue"
                 android:textSize="20sp" />
 
             <TextView
@@ -121,7 +121,7 @@
                 android:fontFamily="@font/cairo_black"
                 android:text="ازاي تعمل حساب علي التطبيق ؟"
                 android:textAlignment="center"
-                android:textColor="@color/blue1"
+                android:textColor="@color/blue"
                 android:textSize="16sp" />
 
             <TextView
@@ -172,7 +172,7 @@
                 android:fontFamily="@font/cairo_black"
                 android:text="هستفاد ايه لو عملت حساب علي التطبيق ؟"
                 android:textAlignment="center"
-                android:textColor="@color/blue1"
+                android:textColor="@color/blue"
                 android:textIsSelectable="true"
                 android:textSize="16sp" />
 
@@ -208,7 +208,7 @@
                 android:fontFamily="@font/cairo_black"
                 android:text="تعال بقا نعرف نضيف بيانات ازاي بعد ما عملنا حساب ! 😃😉"
                 android:textAlignment="center"
-                android:textColor="@color/blue1"
+                android:textColor="@color/blue"
                 android:textIsSelectable="true"
                 android:textSize="16sp" />
 

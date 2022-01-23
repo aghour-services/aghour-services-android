@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:focusableInTouchMode="true"
     tools:context=".user.SignInActivity">
 
@@ -23,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_login_bk"
-                android:backgroundTint="@color/blue200" />
+                android:backgroundTint="@color/login_bk_tint" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -33,7 +32,7 @@
                 android:fontFamily="@font/cairo_black"
                 android:gravity="center"
                 android:text="تسجيل الدخول"
-                android:textColor="@color/blue200"
+                android:textColor="@color/loginTxtColor"
                 android:textSize="22sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -49,7 +48,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
                     android:drawableRight="@drawable/ic_email"
                     android:gravity="left"
                     android:hint="@string/login_email_hint"
@@ -76,7 +74,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:background="@drawable/edt_text_background"
-                    android:backgroundTint="@color/primaryTextColor"
                     android:gravity="left"
                     android:hint="@string/login_password_hint"
                     android:imeOptions="actionDone"
@@ -110,7 +107,7 @@
                     android:fontFamily="@font/cairo_black"
                     android:gravity="center"
                     android:text="تسجيل دخول"
-                    android:textColor="@color/white"
+                    android:textColor="@color/btnSignInTxt"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +138,7 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="2dp"
+                    android:layout_height="1.5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@color/primaryTextColor" />
@@ -161,7 +158,7 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="2dp"
+                    android:layout_height="1.5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@color/primaryTextColor" />
@@ -198,7 +195,7 @@
                         android:fontFamily="@font/cairo_black"
                         android:gravity="center"
                         android:text="تخطي التسجيل"
-                        android:textColor="@color/blue1"
+                        android:textColor="@color/signInTxt"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -220,7 +217,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="0dp"
@@ -231,7 +227,7 @@
                     android:background="@drawable/skip_button"
                     android:fontFamily="@font/cairo_black"
                     android:text="انشاء حساب جديد"
-                    android:textColor="@color/blue1"
+                    android:textColor="@color/signInTxt"
                     android:textSize="14sp" />
 
             </LinearLayout>

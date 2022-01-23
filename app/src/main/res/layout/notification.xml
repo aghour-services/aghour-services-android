@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/notifyBg"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -25,6 +26,7 @@
             android:layout_toRightOf="@+id/app_logo"
             android:fontFamily="@font/cairo_black"
             android:text="Title"
+            android:textColor="@color/notifyTitle"
             android:textSize="22sp" />
 
         <TextView
@@ -36,7 +38,7 @@
             android:layout_toRightOf="@+id/app_logo"
             android:fontFamily="@font/cairo_bold"
             android:text="This is message"
-            android:textColor="@color/gray"
+            android:textColor="@color/notifyMessage"
             android:textSize="16sp" />
 
     </RelativeLayout>

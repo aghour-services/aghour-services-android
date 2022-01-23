@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
     android:layout_margin="3dp"
-    app:cardCornerRadius="3dp"
-    android:layout_gravity="center">
+    app:cardCornerRadius="3dp">
 
     <LinearLayout
         android:id="@+id/firm_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:background="@color/firmsBg"
         android:gravity="right"
+        android:background="@color/firmsBg"
         android:orientation="vertical"
         android:padding="15dp">
 
@@ -24,9 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:fontFamily="@font/cairo_bold"
-            android:textAlignment="center"
             android:gravity="right"
             android:text="Name"
+            android:textAlignment="center"
             android:textColor="@color/firmName"
             android:textSize="23sp" />
 
@@ -35,10 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="5dp"
-            android:background="@color/firmsBg"
-            android:textAlignment="center"
             android:gravity="right"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:textAlignment="center">
 
             <TextView
                 android:id="@+id/address"
@@ -47,10 +46,10 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:textAlignment="center"
                 android:fontFamily="@font/cairo_bold"
                 android:gravity="right"
                 android:text="Address"
+                android:textAlignment="center"
                 android:textColor="@color/address"
                 android:textSize="15sp"
                 tools:ignore="RtlHardcoded" />
@@ -68,10 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="5dp"
-            android:background="@color/firmsBg"
-            android:textAlignment="center"
             android:gravity="right"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:textAlignment="center">
 
             <TextView
                 android:id="@+id/description"
@@ -80,11 +78,11 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:textIsSelectable="true"
                 android:fontFamily="@font/cairo_bold"
                 android:gravity="right"
+                android:textColor="@color/firmsDescription"
                 android:text="Description"
-                android:textColor="@color/firmDescription"
+                android:textIsSelectable="true"
                 android:textSize="13sp" />
 
             <ImageView
@@ -100,17 +98,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="right"
+            android:layout_margin="20dp"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
             android:drawableLeft="@drawable/ic_phone_call"
-            android:gravity="center"
-            android:layout_margin="20dp"
-            android:padding="6dp"
             android:fontFamily="@font/cairo_bold"
+            android:gravity="center"
+            android:padding="6dp"
             android:text="01207083552"
             android:textAlignment="center"
             android:textColor="@color/phoneColor"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <FrameLayout
             android:id="@+id/ad_frame"

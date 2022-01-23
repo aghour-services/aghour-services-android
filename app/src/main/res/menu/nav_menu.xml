@@ -11,12 +11,12 @@
     <item
         android:id="@+id/nav_news"
         android:icon="@mipmap/news"
-        android:title="أخر الأخبار" />
+        android:title="آخر الأخبار" />
 
     <item
         android:id="@+id/nav_add_firm"
         android:icon="@mipmap/plus"
-        android:title="اضافة بيانات" />
+        android:title="إضافة بيانات" />
 
     <item
         android:id="@+id/nav_rate"
