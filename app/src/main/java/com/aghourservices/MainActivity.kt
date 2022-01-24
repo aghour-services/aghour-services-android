@@ -28,6 +28,7 @@ import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 
+
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var toggle: ActionBarDrawerToggle
@@ -207,7 +208,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         if (binding.drawerLayout.isDrawerOpen(Gravity.START)) {
             binding.drawerLayout.closeDrawer(Gravity.START)
         } else {
-            super.onBackPressed()
+            val fragment = supportFragmentManager.fragments.last() as BaseFragment
+            if (!fragment.onBackPressed()) {
+                super.onBackPressed()
+            }
         }
     }
 }

@@ -48,5 +48,8 @@
     <color name="notifyMessage">#C3C3C3</color>
     <color name="notifyBg">#0F1922</color>
     <color name="colorControl">#0A0F13</color>
+    <color name="textModeSwitch">#F4F4F4</color>
+    <color name="backIconTint">#F4F4F4</color>
+    <color name="hint">#656565</color>
 
 </resources>

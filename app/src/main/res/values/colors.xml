@@ -95,5 +95,6 @@
     <color name="notifyMessage">#808080</color>
     <color name="notifyBg">#FFFFFF</color>
     <color name="colorControl">#FFFFFF</color>
+    <color name="textModeSwitch">#FFFFFF</color>
 
 </resources>
