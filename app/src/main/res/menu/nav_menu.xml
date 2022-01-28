@@ -19,24 +19,9 @@
         android:title="إضافة بيانات" />
 
     <item
-        android:id="@+id/nav_rate"
-        android:icon="@mipmap/star"
-        android:title="تقييم" />
-
-    <item
-        android:id="@+id/nav_share"
-        android:icon="@mipmap/share"
-        android:title="شارك مع أصدقائك" />
-
-    <item
         android:id="@+id/nav_faceBook"
         android:icon="@mipmap/facebook"
         android:title="تابعنا علي فيسبوك" />
-
-    <item
-        android:id="@+id/about_us"
-        android:icon="@mipmap/about_us"
-        android:title="عن التطبيق" />
 
     <item
         android:id="@+id/nav_log"

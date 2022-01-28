@@ -6,9 +6,9 @@
     <string name="ad_interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>
 
     <!--Release-->
-<!--    <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/6312134661</string>-->
-<!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/3494399639</string>-->
-<!--    <string name="ad_interstitial_unit_id">ca-app-pub-6023673239780727/8172011248</string>-->
+    <!--    <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/6312134661</string>-->
+    <!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/3494399639</string>-->
+    <!--    <string name="ad_interstitial_unit_id">ca-app-pub-6023673239780727/8172011248</string>-->
 
     <string name="open" translatable="false">Open</string>
     <string name="close" translatable="false">Close</string>
@@ -56,6 +56,7 @@
     <string name="Choose">أختر التصنيف</string>
     <string name="news_fragment">آخر الأخبار</string>
     <string name="shareText">"قم بتحميل تطبيق أجهور الكبرى من خلال الرابط التالي https://play.google.com/store/apps/details?id=com.aghourservices"</string>
+    <string name="choose_theme_text">اختر شكل التطبيق</string>
 
     <!--animation duration-->
     <string name="shortDuration">300</string>

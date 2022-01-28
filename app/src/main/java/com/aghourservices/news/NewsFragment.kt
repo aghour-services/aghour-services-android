@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
+import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.news.api.ArticlesAPI
@@ -60,8 +61,6 @@ class NewsFragment : BaseFragment() {
             Log.e("Exception: ", e.message!!)
         }
     }
-
-
     private fun refresh() {
         try {
             handler = Handler(Looper.getMainLooper()!!)
@@ -77,7 +76,6 @@ class NewsFragment : BaseFragment() {
             Log.e("Exception: ", e.message!!)
         }
     }
-
 
     private fun loadArticles(categoryId: Int) {
         val retrofitBuilder = Retrofit.Builder()

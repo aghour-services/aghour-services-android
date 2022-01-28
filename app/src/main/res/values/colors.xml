@@ -37,7 +37,7 @@
     <color name="categoryCardBg">#FFFFFF</color>
     <color name="categoryCardPress">#E6E5E5</color>
     <color name="shimmerBg">#FFFFFF</color>
-    <color name="newsDescription">#777777</color>
+    <color name="newsDescription">#203647</color>
     <color name="time">#439446</color>
     <color name="firmsBg">#FFFFFF</color>
     <color name="swipeBg">#FFFFFF</color>
@@ -96,5 +96,12 @@
     <color name="notifyBg">#FFFFFF</color>
     <color name="colorControl">#FFFFFF</color>
     <color name="textModeSwitch">#FFFFFF</color>
+    <color name="textDismiss">#192835</color>
+    <color name="dialogText">#1E313F</color>
+    <color name="dialogItem">#FFFFFF</color>
+    <color name="dialogItemClick">#F4F4F4</color>
+    <color name="newsHint">#B8B8B8</color>
+    <color name="adColor">#4CAF50</color>
+    <color name="adColorSelect">#48A34C</color>
 
 </resources>

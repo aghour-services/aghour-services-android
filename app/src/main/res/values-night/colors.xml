@@ -23,7 +23,7 @@
     <color name="edtStroke">#808F9E</color>
     <color name="add_data_bg">#151B20</color>
     <color name="add_data">#E4E4E4</color>
-    <color name="skipBtnStroke">#292929</color>
+    <color name="skipBtnStroke">#E9F5FF</color>
     <color name="skipBtnBg">#181717</color>
     <color name="skipBtnPress">#656464</color>
     <color name="addDataTxt">#CCCCCC</color>
@@ -51,5 +51,7 @@
     <color name="textModeSwitch">#F4F4F4</color>
     <color name="backIconTint">#F4F4F4</color>
     <color name="hint">#656565</color>
+    <color name="textDismiss">#FAFAFA</color>
+    <color name="dialogText">#FAFAFA</color>
 
 </resources>

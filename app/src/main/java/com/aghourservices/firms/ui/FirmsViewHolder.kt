@@ -11,7 +11,6 @@ class FirmsViewHolder(
     itemView: View, private val onItemClicked: (position: Int) -> Unit,
 ) :
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
-
     var adFrame: ViewGroup = itemView.findViewById(R.id.ad_frame)
     var name: TextView = itemView.findViewById(R.id.name)
     var description: TextView = itemView.findViewById(R.id.description)

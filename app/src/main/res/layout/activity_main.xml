@@ -14,6 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/linearToolbar"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
@@ -45,7 +46,8 @@
             android:background="@color/recyclerViewBg"
             app:defaultNavHost="true" />
 
-        <include layout="@layout/admob_banner" />
+        <include layout="@layout/admob_banner"/>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

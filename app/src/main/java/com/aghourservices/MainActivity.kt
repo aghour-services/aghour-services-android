@@ -1,7 +1,9 @@
 package com.aghourservices
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +14,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.*
@@ -26,8 +29,8 @@ import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchActivity
 import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
-
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -55,14 +58,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                val interstitial = Interstitial()
-                interstitial.load(this@MainActivity)
-                mainHandler.postDelayed(this, 60000)
-            }
-        })
+//        val mainHandler = Handler(Looper.getMainLooper())
+//        mainHandler.post(object : Runnable {
+//            override fun run() {
+//                val interstitial = Interstitial()
+//                interstitial.load(this@MainActivity)
+//                mainHandler.postDelayed(this, 60000)
+//            }
+//        })
 
         toggle = object : ActionBarDrawerToggle(
             this,
@@ -86,17 +89,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     R.id.nav_add_firm -> {
                         replaceFragment(AddDataFragment(), true)
                     }
-                    R.id.nav_share -> {
-                        shareApp()
-                    }
-                    R.id.nav_rate -> {
-                        rateApp()
-                    }
                     R.id.nav_faceBook -> {
                         facebook()
-                    }
-                    R.id.about_us -> {
-                        replaceFragment(AboutFragment(), true)
                     }
                     R.id.nav_log -> {
                         showOnCloseDialog()
@@ -118,7 +112,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.toolBarTv.text = title
     }
 
-    private fun replaceFragment(fragment: Fragment, stacked: Boolean) {
+    fun replaceFragment(fragment: Fragment, stacked: Boolean) {
         val backStateName: String = fragment.javaClass.toString()
         val manager: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
@@ -142,12 +136,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         userName = headerView.findViewById(R.id.user_name)
         userMobile = headerView.findViewById(R.id.user_mobile)
         userEmail = headerView.findViewById(R.id.user_email)
-
         val userInfo = UserInfo()
         if (userInfo.isUserLoggedIn(this@MainActivity)) {
             btnRegister.visibility = View.GONE
             userDataView.visibility = View.VISIBLE
-
             val user = userInfo.getUserData(this@MainActivity)
             userName.text = user.name
             userMobile.text = user.mobile
@@ -174,6 +166,36 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     R.anim.slide_in_right,
                     R.anim.slide_out_left,
                 )
+            }
+            R.id.moreIcon -> {
+                val dialog = BottomSheetDialog(this)
+                @SuppressLint("InflateParams")
+                val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+                val btnClose = view.findViewById<Button>(R.id.btnDismiss)
+                val share = view.findViewById<LinearLayout>(R.id.share)
+                val rate = view.findViewById<LinearLayout>(R.id.rate)
+                val about = view.findViewById<LinearLayout>(R.id.about)
+
+                btnClose.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                share.setOnClickListener {
+                    shareApp()
+                    dialog.dismiss()
+                }
+
+                rate.setOnClickListener {
+                    rateApp()
+                    dialog.dismiss()
+                }
+                about.setOnClickListener {
+                    replaceFragment(AboutFragment(), true)
+                    dialog.dismiss()
+                }
+                dialog.setCancelable(true)
+                dialog.setContentView(view)
+                dialog.show()
             }
         }
 

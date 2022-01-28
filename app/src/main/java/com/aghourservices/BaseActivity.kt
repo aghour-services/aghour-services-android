@@ -3,31 +3,23 @@ package com.aghourservices
 import android.content.Intent
 import android.net.Uri
 import android.text.Html
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.firebase_analytics.Event
-import com.aghourservices.search.SearchActivity
 import com.aghourservices.user.SignInActivity
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 
 open class BaseActivity : AppCompatActivity() {
 
     fun shareApp() {
         Event.sendFirebaseEvent("Share", "")
         val shareText = getString(R.string.shareText)
-
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, shareText)
             type = "text/plain"
         }
-        startActivity(Intent.createChooser(sendIntent, null))
+        startActivity(Intent.createChooser(sendIntent, "مشاركة"))
     }
 
     fun rateApp() {
