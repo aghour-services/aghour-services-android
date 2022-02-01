@@ -14,6 +14,7 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.firms.FirmsFragment
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -96,7 +97,8 @@ class CategoriesFragment : BaseFragment() {
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
                 //shimmer Animation without Internet
-                Toast.makeText(activity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(activity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root,"لا يوجد انترنت",Snackbar.LENGTH_LONG).show()
                 progressBar()
             }
         })
@@ -114,10 +116,10 @@ class CategoriesFragment : BaseFragment() {
         firmsFragment.arguments = arguments
         fragmentManager.beginTransaction()
             .setCustomAnimations(
-                R.anim.fade_in,
-                R.anim.fade_out,
-                R.anim.fade_in,
-                R.anim.fade_out
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
             )
             .replace(R.id.fragmentContainerView, firmsFragment)
             .addToBackStack("Firms").commit()

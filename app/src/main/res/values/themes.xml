@@ -9,7 +9,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <!-- Customize your theme here. -->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/navBarColor</item>
     </style>
 
     <style name="Theme.AghourServices.NoActionBar">
@@ -33,7 +33,7 @@
         <item name="android:statusBarColor">@color/splashScreenBg</item>
         <item name="windowActionBar">true</item>
         <item name="android:windowBackground">@color/splashScreenBg</item>
-        <item name="android:navigationBarColor">@color/splashScreenBg</item>
+        <item name="android:navigationBarColor">@color/navBarColor</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 

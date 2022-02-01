@@ -1,8 +1,8 @@
 package com.aghourservices
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
-import android.text.Html
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.cache.UserInfo
@@ -49,24 +49,21 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showOnCloseDialog() {
-        val title = "تسجيل الخروج !"
-        val message = "أنت علي وشك تسجيل الخروج من حسابك ؟"
-        val positiveButton = "نعم"
-        val negativeButton = "لا"
-
         val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setMessage(message)
+        alertDialogBuilder.setTitle(R.string.title)
+        alertDialogBuilder.setMessage(R.string.message)
         alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
         alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ ->
+        alertDialogBuilder.setPositiveButton(R.string.positiveButton) { _, _ ->
             logOut()
             Event.sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
         }
-        alertDialogBuilder.setNegativeButton(Html.fromHtml("<font color='#59A5E1'>$negativeButton</font>")) { _, _ ->
+        alertDialogBuilder.setNegativeButton(R.string.negativeButton) { _, _ ->
             Event.sendFirebaseEvent("ALERT_STAY_ACTION", "")
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
     }
 }

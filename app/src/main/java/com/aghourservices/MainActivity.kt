@@ -1,9 +1,7 @@
 package com.aghourservices
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,10 +12,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.about.AboutFragment
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
@@ -58,14 +57,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-//        val mainHandler = Handler(Looper.getMainLooper())
-//        mainHandler.post(object : Runnable {
-//            override fun run() {
-//                val interstitial = Interstitial()
-//                interstitial.load(this@MainActivity)
-//                mainHandler.postDelayed(this, 60000)
-//            }
-//        })
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                val interstitial = Interstitial()
+                interstitial.load(this@MainActivity)
+                mainHandler.postDelayed(this, 60000)
+            }
+        })
 
         toggle = object : ActionBarDrawerToggle(
             this,
@@ -117,10 +116,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val manager: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
         ft.setCustomAnimations(
-            R.anim.fade_in,
-            R.anim.fade_out,
-            R.anim.fade_in,
-            R.anim.fade_out
+            R.anim.slide_in_right,
+            R.anim.slide_out_left,
+            R.anim.slide_in_left,
+            R.anim.slide_out_right
         )
         ft.replace(R.id.fragmentContainerView, fragment)
         if (stacked) {
@@ -157,6 +156,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return super.onCreateOptionsMenu(menu)
     }
 
+    @SuppressLint("InflateParams")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -169,7 +169,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             R.id.moreIcon -> {
                 val dialog = BottomSheetDialog(this)
-                @SuppressLint("InflateParams")
                 val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
                 val btnClose = view.findViewById<Button>(R.id.btnDismiss)
                 val share = view.findViewById<LinearLayout>(R.id.share)
@@ -205,9 +204,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return super.onOptionsItemSelected(item)
     }
 
-    @SuppressLint("WrongConstant")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        binding.drawerLayout.closeDrawer(Gravity.START, true)
+        binding.drawerLayout.closeDrawer(Gravity.LEFT, true)
         selectedItemId = item.itemId
         return true
     }
@@ -225,10 +223,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    @SuppressLint("WrongConstant")
     override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(Gravity.START)) {
-            binding.drawerLayout.closeDrawer(Gravity.START)
+        if (binding.drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            binding.drawerLayout.closeDrawer(Gravity.LEFT)
         } else {
             val fragment = supportFragmentManager.fragments.last() as BaseFragment
             if (!fragment.onBackPressed()) {

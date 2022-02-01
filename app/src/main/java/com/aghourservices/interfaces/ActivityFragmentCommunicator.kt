@@ -1,4 +1,4 @@
-package com.aghourservices
+package com.aghourservices.interfaces
 
 interface ActivityFragmentCommunicator {
 

@@ -17,6 +17,7 @@ import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
 import com.google.android.gms.ads.AdView
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,9 +63,8 @@ class SearchActivity : AppCompatActivity() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
+
         val retrofitData = retrofitBuilder.search(text)
-
-
         retrofitData.enqueue(object : Callback<ArrayList<SearchResult>?> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(

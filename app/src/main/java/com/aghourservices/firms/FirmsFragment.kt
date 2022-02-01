@@ -1,9 +1,7 @@
 package com.aghourservices.firms
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,8 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
@@ -27,11 +23,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearSmoothScroller
-import androidx.recyclerview.widget.RecyclerView.SmoothScroller
-import io.realm.Realm.getApplicationContext
-
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
@@ -41,7 +32,6 @@ class FirmsFragment : BaseFragment() {
     private lateinit var realm: Realm
     private lateinit var handler: Handler
     private var categoryId = 0
-    lateinit var smoothScroller: SmoothScroller
     private lateinit var binding: FragmentFirmsBinding
 
     override fun onCreateView(
@@ -105,7 +95,6 @@ class FirmsFragment : BaseFragment() {
             .baseUrl(BASE_URL).build().create(ListFirms::class.java)
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
-            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ArrayList<Firm>?>,
                 response: Response<ArrayList<Firm>?>,

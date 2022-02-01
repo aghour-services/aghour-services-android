@@ -1,24 +1,19 @@
 package com.aghourservices.firms
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
-import com.aghourservices.ads.Banner
-import com.aghourservices.ads.Interstitial
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.Category
 import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.firms.api.CreateFirm
-import com.google.android.gms.ads.AdView
+import com.aghourservices.interfaces.AlertDialog.Companion.dataAdded
+import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -87,10 +82,8 @@ class AddDataFragment : BaseFragment() {
         })
     }
 
-
     private fun spinnerAdapter(categoryList: ArrayList<Category>) {
         val categories = mutableListOf<String>()
-
         for (item in categoryList) {
             categories.add(item.name!!)
         }
@@ -113,18 +106,14 @@ class AddDataFragment : BaseFragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build().create(CreateFirm::class.java)
-
         val retrofitData = retrofitBuilder.createFirm(firm.toJsonObject(), user.token)
-
         retrofitData.enqueue(object : Callback<Firm> {
-
-            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
-                dataAdded()
+                dataAdded(requireContext())
+                setTextEmpty()
             }
-
             override fun onFailure(call: Call<Firm>, t: Throwable) {
-                noInternet()
+                noInternet(requireContext())
             }
         })
     }
@@ -134,43 +123,16 @@ class AddDataFragment : BaseFragment() {
         val config = RealmConfiguration.Builder().name("category.realm")
             .deleteRealmIfMigrationNeeded().schemaVersion(1)
             .allowWritesOnUiThread(true).build()
-
         val categoryRealm = Realm.getInstance(config)
-
         val result = categoryRealm.where(Category::class.java).findAll()
         categoryList = ArrayList()
         categoryList.addAll(result)
     }
 
-    fun dataAdded() {
-        val title = R.string.data_added
-        val positiveButton = "تمام"
-
-        val alertDialogBuilder = AlertDialog.Builder(requireActivity())
-        alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.mipmap.ic_launcher_round)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-
-        //setText Empty
+    private fun setTextEmpty(){
         binding.name.setText("")
         binding.address.setText("")
         binding.description.setText("")
         binding.phoneNumber.setText("")
-    }
-
-    fun noInternet() {
-        val title = R.string.no_internet
-        val positiveButton = "تمام"
-
-        val alertDialogBuilder = AlertDialog.Builder(requireActivity())
-        alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.mipmap.cloud)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
     }
 }

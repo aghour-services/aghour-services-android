@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">أجهور الكبرى</string>
-    <!--Test-->
-    <string name="ad_banner_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ad_native_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name="ad_interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+<!--    &lt;!&ndash;Test&ndash;&gt;-->
+<!--    <string name="ad_banner_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
+<!--    <string name="ad_native_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>-->
+<!--    <string name="ad_interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>-->
 
-    <!--Release-->
-    <!--    <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/6312134661</string>-->
-    <!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/3494399639</string>-->
-    <!--    <string name="ad_interstitial_unit_id">ca-app-pub-6023673239780727/8172011248</string>-->
+    Release
+        <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/6312134661</string>
+        <string name="ad_native_unit_id">ca-app-pub-6023673239780727/3494399639</string>
+        <string name="ad_interstitial_unit_id">ca-app-pub-6023673239780727/8172011248</string>
 
     <string name="open" translatable="false">Open</string>
     <string name="close" translatable="false">Close</string>
@@ -62,4 +62,9 @@
     <string name="shortDuration">300</string>
     <string name="mediumDuration">400</string>
     <string name="longDuration">700</string>
+    <string name="title">تسجيل الخروج !</string>
+    <string name="message">أنت علي وشك تسجيل الخروج من حسابك ؟</string>
+    <string name="doneButton">تمام</string>
+    <string name="positiveButton">نعم</string>
+    <string name="negativeButton">لا</string>
 </resources>
