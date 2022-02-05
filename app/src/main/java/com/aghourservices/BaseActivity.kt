@@ -11,23 +11,6 @@ import com.aghourservices.user.SignInActivity
 
 open class BaseActivity : AppCompatActivity() {
 
-    fun shareApp() {
-        Event.sendFirebaseEvent("Share", "")
-        val shareText = getString(R.string.shareText)
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, shareText)
-            type = "text/plain"
-        }
-        startActivity(Intent.createChooser(sendIntent, "مشاركة"))
-    }
-
-    fun rateApp() {
-        Event.sendFirebaseEvent("Rate", "")
-        val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-    }
-
     fun facebook() {
         Event.sendFirebaseEvent("Facebook_Page", "")
         try {

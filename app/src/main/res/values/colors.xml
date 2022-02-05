@@ -8,7 +8,7 @@
     <color name="backIconTint">#FF000000</color>
     <color name="searchBg">#F7F7F7</color>
     <color name="backIconBg">#F7F7F7</color>
-    <color name="backIconSelector">#DCDCDC</color>
+    <color name="backIconSelector">#C4C4C4</color>
     <color name="searchViewBg">#CBE8FF</color>
     <color name="clear">#BDBDBD</color>
     <color name="lineView">#3F3F3F</color>
@@ -19,7 +19,7 @@
     <color name="emailColor">#F8F8F8</color>
     <color name="phoneColor">#4CAF50</color>
     <color name="create_btn">#3073A8</color>
-    <color name="create_btn_press">#225C8A</color>
+    <color name="create_btn_press">#205580</color>
     <color name="categoryName">#0E0E0E</color>
     <color name="firmName">#396387</color>
     <color name="address">#3B8F45</color>
@@ -35,7 +35,7 @@
     <color name="shimmerColor">#C5C5C5</color>
     <color name="news_bg">#ECECEC</color>
     <color name="categoryCardBg">#FFFFFF</color>
-    <color name="categoryCardPress">#E6E5E5</color>
+    <color name="categoryCardPress">#B6B6B6</color>
     <color name="shimmerBg">#FFFFFF</color>
     <color name="newsDescription">#203647</color>
     <color name="time">#439446</color>
@@ -48,7 +48,7 @@
     <color name="edtStroke">#1B1B1B</color>
     <color name="skipBtnStroke">#000000</color>
     <color name="skipBtnBg">#FFFFFF</color>
-    <color name="skipBtnPress">#E8E8E8</color>
+    <color name="skipBtnPress">#D5D5D5</color>
     <color name="edtTextBg">#D2EBFF</color>
     <color name="createAccountText">#1F79C0</color>
     <color name="focusedBg">#F8FCFF</color>
@@ -77,7 +77,7 @@
     <color name="name_placeholder">#F8F8F7</color>
     <color name="item_name">#0c0c0c</color>
     <color name="description">#1a1a1a</color>
-    <color name="chef">#777</color>
+    <color name="cursor">#193B57</color>
     <color name="timestamp">#C2C2C2</color>
     <color name="gray2">#E6E6E6</color>
     <color name="Gray">#DCDCDC</color>
@@ -99,9 +99,11 @@
     <color name="textDismiss">#192835</color>
     <color name="dialogText">#1E313F</color>
     <color name="dialogItem">#FFFFFF</color>
-    <color name="dialogItemClick">#F4F4F4</color>
+    <color name="dialogItemClick">#A6A6A6</color>
     <color name="newsHint">#B8B8B8</color>
-    <color name="adColor">#4CAF50</color>
-    <color name="adColorSelect">#48A34C</color>
+    <color name="adColor">#49A64D</color>
+    <color name="adColorSelect">#4EB653</color>
+    <color name="native_ad_bg">#FFFFFF</color>
+    <color name="toggle_password">#2E6FA3</color>
 
 </resources>

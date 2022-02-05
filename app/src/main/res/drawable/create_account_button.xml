@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/create_btn_press">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <corners android:radius="10dp" />
-            <solid android:color="@color/create_btn_press" />
+            <corners android:radius="8dp" />
         </shape>
     </item>
     <item>
@@ -12,4 +12,4 @@
             <solid android:color="@color/create_btn" />
         </shape>
     </item>
-</selector>
+</ripple>

@@ -101,7 +101,7 @@
                 android:layout_marginTop="10dp"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/blue200">
+                app:passwordToggleTint="@color/toggle_password">
 
                 <EditText
                     android:id="@+id/password"
@@ -126,8 +126,9 @@
                 <Button
                     android:id="@+id/btnCreate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="42dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/login_button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -183,11 +184,12 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/cairo_bold"
                     android:gravity="center"
-                    android:padding="4dp"
                     android:text="أو"
+                    android:padding="4dp"
+                    android:layout_margin="4dp"
                     android:textAlignment="center"
                     android:textColor="@color/blue200"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <View
                     android:layout_width="0dp"
@@ -214,7 +216,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:background="@drawable/skip_button"
+                        android:background="@drawable/sign_up_buttons"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -257,7 +259,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/skip_button"
+                    android:background="@drawable/sign_up_buttons"
                     android:fontFamily="@font/cairo_black"
                     android:text="تسجيل دخول"
                     android:textColor="@color/signUpTxt"

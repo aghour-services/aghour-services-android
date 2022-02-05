@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/dialogItemClick">
+    android:color="@color/categoryCardPress">
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="4dp" />
-            <solid android:color="@color/dialogItem" />
+            <corners android:radius="6dp" />
+            <solid android:color="@color/categoryCardBg" />
         </shape>
     </item>
 </ripple>

@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="@drawable/skip_button"
+                android:background="@drawable/sign_up_buttons"
                 android:fontFamily="@font/cairo_black"
                 android:text="اضافة"
                 android:textColor="@color/addDataTxt"
