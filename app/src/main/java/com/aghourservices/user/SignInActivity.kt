@@ -31,9 +31,8 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+//        adView = findViewById(R.id.adView)
+//        Banner.show(this, adView)
 
         binding.btnLogin.setOnClickListener {
             val email = binding.email.text.toString()

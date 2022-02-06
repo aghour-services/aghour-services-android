@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
@@ -44,6 +45,11 @@ class FirmsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /** hide or show actionBar **/
+        val activity = (activity as AppCompatActivity?)!!
+        activity.supportActionBar!!.show()
+
         try {
             init()
             loadFirms(categoryId)

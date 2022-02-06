@@ -49,14 +49,21 @@
     <color name="notifyMessage">#6E6E6E</color>
     <color name="notifyBg">#0F1922</color>
     <color name="colorControl">#0A0F13</color>
-    <color name="textModeSwitch">#F4F4F4</color>
-    <color name="backIconTint">#F4F4F4</color>
+    <color name="textModeSwitch">#FFFFFF</color>
+    <color name="backIconTint">#FFFFFF</color>
     <color name="hint">#656565</color>
     <color name="textDismiss">#FAFAFA</color>
-    <color name="dialogText">#FAFAFA</color>
+    <color name="dialogText">#FFFFFF</color>
     <color name="native_ad_bg">#193145</color>
     <color name="adColor">#244763</color>
     <color name="adColorSelect">#356285</color>
     <color name="toggle_password">#2196F3</color>
+    <color name="settingsToolbarBg">#11161B</color>
+    <color name="settingsToolbarTxt">#FFFFFF</color>
+    <color name="settingsBg">#151515</color>
+    <color name="dialogSettingItem">#14212B</color>
+    <color name="dialogItem">#14212B</color>
+    <color name="settings_back_bg">#11161B</color>
+    <color name="settings_back_ripple">#4C6279</color>
 
 </resources>

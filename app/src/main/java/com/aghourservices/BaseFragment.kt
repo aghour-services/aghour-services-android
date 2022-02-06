@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -49,6 +51,30 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
             ft.addToBackStack(backStateName)
         }
         ft.commit()
+    }
+
+
+    fun chooseThemeDialog() {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(getString(R.string.choose_theme_text))
+        val styles = arrayOf("الوضع الساطع","الوضع المظلم")
+        val checkedItem = 0
+
+        builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
+
+            when (which) {
+                0 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    dialog.dismiss()
+                }
+                1 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    dialog.dismiss()
+                }
+            }
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onBackPressed(): Boolean {

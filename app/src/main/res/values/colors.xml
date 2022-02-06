@@ -105,5 +105,13 @@
     <color name="adColorSelect">#4EB653</color>
     <color name="native_ad_bg">#FFFFFF</color>
     <color name="toggle_password">#2E6FA3</color>
+    <color name="settingsToolbarBg">#F7F7F7</color>
+    <color name="settingsToolbarTxt">#000000</color>
+    <color name="settingsBg">#FFFFFF</color>
+    <color name="dialogSettingItem">#FFFFFF</color>
+    <color name="settings_back_bg">#F5F5F5F5</color>
+    <color name="settings_back_ripple">#BCBCBC</color>
+    <color name="changeThemeRipple">#C0C0C0</color>
+    <color name="changeThemeBtnBg">#2E5574</color>
 
 </resources>

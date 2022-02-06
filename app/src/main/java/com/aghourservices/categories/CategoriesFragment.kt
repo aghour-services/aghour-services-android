@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -42,6 +43,11 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /** hide or show actionBar **/
+        val activity = (activity as AppCompatActivity?)!!
+        activity.supportActionBar!!.show()
+
         init()
         loadCategoriesList()
     }

@@ -3,32 +3,107 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/settingsBg">
 
     <LinearLayout
+        android:id="@+id/linearToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/settingsToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/settingsToolbarBg">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="42dp"
+                android:layout_height="45dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/back_settings_ripple"
+                android:padding="7dp"
+                android:src="@drawable/ic_back_settings" />
+
+            <TextView
+                android:id="@+id/toolBarTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/settings_fragment"
+                android:textColor="@color/settingsToolbarTxt"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/lineView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearToolbar" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_selector"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:layout_margin="4dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973">
+        app:layout_constraintTop_toBottomOf="@+id/view4">
+
+        <LinearLayout
+            android:id="@+id/changeTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/dialog_selector"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_gravity="start"
+                android:src="@mipmap/dark_mode" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="end"
+                android:text="تغير الشكل"
+                android:textColor="@color/dialogText"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="8dp"
             android:background="@drawable/dialog_selector"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="25dp"
@@ -43,10 +118,10 @@
                 android:layout_marginLeft="16dp"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="end"
-                android:textStyle="bold"
                 android:text="شارك مع أصدقائك"
                 android:textColor="@color/dialogText"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,9 +129,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="8dp"
             android:background="@drawable/dialog_selector"
             android:orientation="horizontal"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/share">
@@ -74,10 +149,10 @@
                 android:layout_marginLeft="16dp"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="end"
-                android:textStyle="bold"
                 android:text="تقييم التطبيق"
                 android:textColor="@color/dialogText"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -87,7 +162,7 @@
             android:layout_gravity="center"
             android:background="@drawable/dialog_selector"
             android:orientation="horizontal"
-            android:padding="8dp"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rate">
@@ -104,31 +179,12 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
                 android:fontFamily="@font/segoe_ui_regular"
-                android:textStyle="bold"
                 android:gravity="end"
                 android:text="عن التطبيق"
                 android:textColor="@color/dialogText"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btnDismiss"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:layout_marginBottom="16dp"-->
-    <!--        android:background="@drawable/sign_up_buttons"-->
-    <!--        android:fontFamily="@font/cairo_black"-->
-    <!--        android:text="الغاء"-->
-    <!--        android:textAllCaps="false"-->
-    <!--        android:textColor="@color/textDismiss"-->
-    <!--        android:textSize="18sp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/about" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

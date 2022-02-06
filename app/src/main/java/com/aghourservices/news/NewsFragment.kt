@@ -55,7 +55,7 @@ class NewsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.news_fragment)
 
-        /** hide actionBar **/
+        /** hide or show actionBar **/
         val activity = (activity as AppCompatActivity?)!!
         activity.supportActionBar!!.show()
 

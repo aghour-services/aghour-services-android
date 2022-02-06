@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -232,7 +231,7 @@
 
             </LinearLayout>
 
-            <include layout="@layout/admob_banner" />
+<!--            <include layout="@layout/admob_banner" />-->
         </LinearLayout>
     </ScrollView>
 </androidx.cardview.widget.CardView>

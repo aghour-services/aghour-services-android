@@ -1,12 +1,12 @@
 package com.aghourservices
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.about.AboutFragment
 import com.aghourservices.databinding.FragmentSettingsBinding
 
@@ -30,6 +30,9 @@ class SettingsFragment : BaseFragment() {
         val activity = (activity as AppCompatActivity?)!!
         activity.supportActionBar!!.hide()
 
+        binding.backBtn.setOnClickListener {
+            activity.onBackPressed()
+        }
         binding.share.setOnClickListener {
             shareApp()
         }
@@ -39,6 +42,9 @@ class SettingsFragment : BaseFragment() {
         }
         binding.about.setOnClickListener {
             replaceFragment(AboutFragment(), true)
+        }
+        binding.changeTheme.setOnClickListener {
+            chooseThemeDialog()
         }
     }
 }
