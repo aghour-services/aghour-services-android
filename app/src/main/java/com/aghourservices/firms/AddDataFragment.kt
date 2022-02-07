@@ -40,10 +40,6 @@ class AddDataFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /** hide or show actionBar **/
-        val activity = (activity as AppCompatActivity?)!!
-        activity.supportActionBar!!.show()
-
         val bundle = arguments
         if (bundle != null) {
             val value1 = bundle.getInt("category_id", -1)

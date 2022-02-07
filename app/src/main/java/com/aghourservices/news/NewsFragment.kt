@@ -56,11 +56,6 @@ class NewsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.news_fragment)
-
-        /** hide or show actionBar **/
-        val activity = (activity as AppCompatActivity?)!!
-        activity.supportActionBar!!.show()
-
         try {
             init()
             loadArticles(categoryId)
