@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.AghourServices" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Base application light theme. -->
+    <style name="Theme.LightApp" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -10,15 +10,22 @@
         <!-- Customize your theme here. -->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:navigationBarColor">@color/navBarColor</item>
+
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
-    <style name="Theme.AghourServices.NoActionBar">
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="Theme.LightApp.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
 
-    <style name="CategoriesTheme" parent="Theme.AghourServices.NoActionBar">
+    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar">
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
@@ -44,6 +51,10 @@
     <!--All Text Font Style-->
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/cairo_black</item>
+    </style>
+
+    <style name="SegoeTextRegular" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/segoe_ui_regular</item>
     </style>
 
     <!--All Text Buttons Font Style-->

@@ -16,6 +16,7 @@ import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.ui.ArticlesAdapter
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -51,6 +52,7 @@ class NewsFragment : BaseFragment() {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.news_fragment)
@@ -67,6 +69,7 @@ class NewsFragment : BaseFragment() {
             Log.e("Exception: ", e.message!!)
         }
     }
+
     private fun refresh() {
         try {
             handler = Handler(Looper.getMainLooper()!!)
@@ -110,11 +113,9 @@ class NewsFragment : BaseFragment() {
             }
 
             override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                val result =
-                    realm.where(Article::class.java).findAll()
+                val result = realm.where(Article::class.java).findAll()
                 articleList = ArrayList()
                 articleList.addAll(result)
-
                 setAdapter(articleList)
                 stopShimmerAnimation()
                 if (articleList.isEmpty()) {

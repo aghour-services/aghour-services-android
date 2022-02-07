@@ -13,11 +13,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.aghourservices.about.AboutFragment
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
 import com.aghourservices.cache.UserInfo
@@ -28,6 +28,7 @@ import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchActivity
 import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -155,7 +156,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return super.onCreateOptionsMenu(menu)
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressLint("InflateParams", "ResourceType")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -166,8 +167,34 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     R.anim.slide_out_left,
                 )
             }
-            R.id.settings -> {
-                replaceFragment(SettingsFragment(), true)
+            R.id.moreIcon -> {
+                val dialog = BottomSheetDialog(this)
+                val view = layoutInflater.inflate(R.layout.bottom_dialog_sheet, null)
+                val btnClose = view.findViewById<Button>(R.id.btnDismiss)
+                val share = view.findViewById<LinearLayout>(R.id.share)
+                val rate = view.findViewById<LinearLayout>(R.id.rate)
+                val aboutApp = view.findViewById<LinearLayout>(R.id.about)
+
+                btnClose.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                share.setOnClickListener {
+                    shareApp()
+                    dialog.dismiss()
+                }
+
+                rate.setOnClickListener {
+                    rateApp()
+                    dialog.dismiss()
+                }
+                aboutApp.setOnClickListener {
+                    replaceFragment(AboutFragment(), true)
+                    dialog.dismiss()
+                }
+                dialog.setCancelable(true)
+                dialog.setContentView(view)
+                dialog.show()
             }
         }
 

@@ -55,15 +55,14 @@
     <color name="textDismiss">#FAFAFA</color>
     <color name="dialogText">#FFFFFF</color>
     <color name="native_ad_bg">#193145</color>
-    <color name="adColor">#244763</color>
-    <color name="adColorSelect">#356285</color>
     <color name="toggle_password">#2196F3</color>
     <color name="settingsToolbarBg">#11161B</color>
     <color name="settingsToolbarTxt">#FFFFFF</color>
     <color name="settingsBg">#151515</color>
-    <color name="dialogSettingItem">#14212B</color>
-    <color name="dialogItem">#14212B</color>
+    <color name="dialogSettingItem">#35383A</color>
+    <color name="dialogItem">#151515</color>
     <color name="settings_back_bg">#11161B</color>
     <color name="settings_back_ripple">#4C6279</color>
+    <color name="lineView">#F6F6F6</color>
 
 </resources>

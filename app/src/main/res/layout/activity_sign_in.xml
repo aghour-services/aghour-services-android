@@ -91,8 +91,9 @@
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="42dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/login_button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -122,10 +123,10 @@
                     android:scaleX="0.8"
                     android:scaleY="0.8"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnLogin"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/btnLogin"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/btnLogin" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,6 +168,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
 
 
@@ -230,8 +232,7 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
-
-<!--            <include layout="@layout/admob_banner" />-->
+            <include layout="@layout/admob_banner" />
         </LinearLayout>
     </ScrollView>
 </androidx.cardview.widget.CardView>
