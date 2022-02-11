@@ -64,5 +64,6 @@
     <color name="settings_back_bg">#11161B</color>
     <color name="settings_back_ripple">#4C6279</color>
     <color name="lineView">#F6F6F6</color>
+    <color name="bottomNavPress">#16222B</color>
 
 </resources>

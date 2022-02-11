@@ -4,11 +4,11 @@
     android:textAlignment="viewEnd"
     android:textDirection="rtl">
 
-    <item
-        android:id="@+id/searchIcon"
-        android:icon="@drawable/ic_search"
-        android:title="Search"
-        app:showAsAction="ifRoom|collapseActionView" />
+<!--    <item-->
+<!--        android:id="@+id/searchIcon"-->
+<!--        android:icon="@drawable/ic_search"-->
+<!--        android:title="Search"-->
+<!--        app:showAsAction="ifRoom|collapseActionView" />-->
 
     <item
         android:id="@+id/moreIcon"

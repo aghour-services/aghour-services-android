@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.user.SignInActivity
@@ -40,6 +41,19 @@ open class BaseActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    fun loadFragments(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.parent_container, fragment)
+                .commit()
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
+        }
+        return true
     }
 
     private fun logOut() {

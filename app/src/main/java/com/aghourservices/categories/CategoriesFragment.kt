@@ -43,6 +43,10 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = (activity as AppCompatActivity)
+        activity.supportActionBar?.show()
+
         init()
         loadCategoriesList()
     }
@@ -122,7 +126,7 @@ class CategoriesFragment : BaseFragment() {
                 R.anim.slide_in_left,
                 R.anim.slide_out_right
             )
-            .replace(R.id.fragmentContainerView, firmsFragment)
+            .replace(R.id.parent_container, firmsFragment)
             .addToBackStack("Firms").commit()
     }
 

@@ -1,23 +1,25 @@
 package com.aghourservices.search
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
-import com.aghourservices.ads.Interstitial
-import com.aghourservices.databinding.ActivitySearchBinding
+import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.firebase_analytics.Event
+import com.aghourservices.interfaces.ShowSoftKeyboard
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
 import com.google.android.gms.ads.AdView
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,21 +28,44 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class SearchActivity : AppCompatActivity() {
+class SearchFragment : BaseFragment() {
     private lateinit var searchResults: ArrayList<SearchResult>
     private lateinit var adapter: SearchResultAdapter
-    private lateinit var binding: ActivitySearchBinding
     private lateinit var adView: AdView
+    private lateinit var binding: FragmentSearchBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Inflate the layout for this fragment
+        binding = FragmentSearchBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val activity = (activity as AppCompatActivity)
+        activity.supportActionBar?.hide()
+
+        if (binding.searchText.requestFocus()) {
+            val showSoftKeyboard = ShowSoftKeyboard
+            showSoftKeyboard.show(requireActivity(), binding.searchText)
+        }
+
+//        if (binding.searchText.requestFocus()) {
+//            (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(
+//                InputMethodManager.SHOW_FORCED,
+//                InputMethodManager.HIDE_IMPLICIT_ONLY
+//            )
+//        }
+
         binding.searchResultRecycler.setHasFixedSize(true)
-        binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
+        binding.searchResultRecycler.layoutManager = LinearLayoutManager(requireActivity())
 
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+        adView = requireActivity().findViewById(R.id.adView)
+        Banner.show(requireContext(), adView)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())
@@ -53,7 +78,7 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         binding.backBtn.setOnClickListener {
-            finish()
+            requireActivity().onBackPressed()
         }
     }
 
@@ -87,7 +112,7 @@ class SearchActivity : AppCompatActivity() {
             return
         }
         binding.searchResultRecycler.visibility = View.VISIBLE
-        adapter = SearchResultAdapter(applicationContext, searchResults) { position ->
+        adapter = SearchResultAdapter(requireContext(), searchResults) { position ->
             onListItemClick(position)
         }
         binding.searchResultRecycler.adapter = adapter

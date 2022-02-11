@@ -4,7 +4,7 @@
     <color name="toolbarText">#FFFFFF</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
-    <color name="itemNavColor">#3983BD</color>
+    <color name="itemNavColor">#FBFBFB</color>
     <color name="backIconTint">#FF000000</color>
     <color name="searchBg">#F7F7F7</color>
     <color name="backIconBg">#F7F7F7</color>
@@ -59,10 +59,9 @@
     <color name="loginTxtColor">#287ABB</color>
     <color name="signInTxt">#275F8C</color>
     <color name="btnSignInTxt">#FFFFFF</color>
-    <color name="navDrawerBg">#EDEDED</color>
+    <color name="navDrawerBg">#4290CD</color>
     <color name="firmsDescription">#797979</color>
     <color name="checkBox">#2A76B3</color>
-
 
     <color name="blue200">#3F749E</color>
     <color name="white">#FFFFFF</color>
@@ -113,5 +112,6 @@
     <color name="settings_back_ripple">#BCBCBC</color>
     <color name="changeThemeRipple">#C0C0C0</color>
     <color name="changeThemeBtnBg">#2E5574</color>
+    <color name="bottomNavPress">#DFDFDF</color>
 
 </resources>

@@ -46,6 +46,8 @@ class FirmsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = (activity as AppCompatActivity)
+        activity.supportActionBar?.show()
         try {
             init()
             loadFirms(categoryId)
@@ -168,7 +170,6 @@ class FirmsFragment : BaseFragment() {
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
     }
-
 
     override fun onBackPressed(): Boolean {
         val layoutManager = binding.firmsRecyclerview.layoutManager as LinearLayoutManager
