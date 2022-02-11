@@ -6,9 +6,9 @@
     <string name="ad_interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>
 
     <!--Release-->
-<!--    <string name="ad_banner_unit_id">ca-app-pub-6023673239780727/6312134661</string>-->
-<!--    <string name="ad_native_unit_id">ca-app-pub-6023673239780727/3494399639</string>-->
-<!--    <string name="ad_interstitial_unit_id">ca-app-pub-6023673239780727/8172011248</string>-->
+<!--    <string name="ad_banner_unit_id">ca-app-pub-1747848120826315/1405022371</string>-->
+<!--    <string name="ad_native_unit_id">ca-app-pub-1747848120826315/1213450688</string>-->
+<!--    <string name="ad_interstitial_unit_id">ca-app-pub-1747848120826315/5313489556</string>-->
 
     <string name="open" translatable="false">Open</string>
     <string name="close" translatable="false">Close</string>
