@@ -21,9 +21,4 @@
         android:icon="@drawable/ic__news_article"
         android:title="آخر الأخبار" />
 
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_settings"
-        android:title="الإعدادات" />
-
 </menu>

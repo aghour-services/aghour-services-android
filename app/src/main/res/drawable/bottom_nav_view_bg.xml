@@ -2,10 +2,10 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/bottomNavPress">
     <item>
-        <shape android:shape="rectangle">
+        <shape>
             <corners
-                android:topLeftRadius="14dp"
-                android:topRightRadius="14dp" />
+                android:topLeftRadius="6dp"
+                android:topRightRadius="6dp" />
             <solid android:color="@color/navDrawerBg" />
         </shape>
     </item>

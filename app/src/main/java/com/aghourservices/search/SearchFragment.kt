@@ -38,7 +38,6 @@ class SearchFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -50,22 +49,11 @@ class SearchFragment : BaseFragment() {
         activity.supportActionBar?.hide()
 
         if (binding.searchText.requestFocus()) {
-            val showSoftKeyboard = ShowSoftKeyboard
-            showSoftKeyboard.show(requireActivity(), binding.searchText)
+            ShowSoftKeyboard.show(requireActivity(), binding.searchText)
         }
-
-//        if (binding.searchText.requestFocus()) {
-//            (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(
-//                InputMethodManager.SHOW_FORCED,
-//                InputMethodManager.HIDE_IMPLICIT_ONLY
-//            )
-//        }
 
         binding.searchResultRecycler.setHasFixedSize(true)
         binding.searchResultRecycler.layoutManager = LinearLayoutManager(requireActivity())
-
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireContext(), adView)
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())

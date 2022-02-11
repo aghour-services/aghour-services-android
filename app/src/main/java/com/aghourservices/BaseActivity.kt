@@ -1,83 +1,27 @@
 package com.aghourservices
 
-import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.aghourservices.cache.UserInfo
-import com.aghourservices.firebase_analytics.Event
-import com.aghourservices.user.SignInActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
 open class BaseActivity : AppCompatActivity() {
-
-    fun shareApp() {
-        Event.sendFirebaseEvent("Share", "")
-        val shareText = getString(R.string.shareText)
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, shareText)
-            type = "text/plain"
-        }
-        startActivity(Intent.createChooser(sendIntent, "مشاركة"))
-    }
-
-    fun rateApp() {
-        Event.sendFirebaseEvent("Rate", "")
-        val url = "https://play.google.com/store/apps/details?id=com.aghourservices"
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-    }
-
-    fun facebook() {
-        Event.sendFirebaseEvent("Facebook_Page", "")
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("fb:/page/110004384736318")))
-        } catch (e: Exception) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("http://www.facebook.com/aghourservices")
-                )
-            )
-        }
-    }
-
-    fun loadFragments(fragment: Fragment?): Boolean {
+    fun loadFragments(fragment: Fragment?, stacked: Boolean) {
+        val backStateName: String = fragment?.javaClass.toString()
+        val manager: FragmentManager = supportFragmentManager
         if (fragment != null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.parent_container, fragment)
-                .commit()
-            overridePendingTransition(
+            val ft: FragmentTransaction = manager.beginTransaction()
+            ft.setCustomAnimations(
                 R.anim.slide_in_right,
-                R.anim.slide_out_left
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
             )
+            ft.replace(R.id.parent_container, fragment)
+            if (stacked){
+                ft.addToBackStack(backStateName)
+            }
+            ft.commit()
         }
-        return true
-    }
-
-    private fun logOut() {
-        Event.sendFirebaseEvent("Sign_Out", "")
-        UserInfo().clearUserData(this@BaseActivity)
-        startActivity(Intent(this, SignInActivity::class.java))
-    }
-
-    fun showOnCloseDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle(R.string.title)
-        alertDialogBuilder.setMessage(R.string.message)
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(R.string.positiveButton) { _, _ ->
-            logOut()
-            Event.sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
-        }
-        alertDialogBuilder.setNegativeButton(R.string.negativeButton) { _, _ ->
-            Event.sendFirebaseEvent("ALERT_STAY_ACTION", "")
-        }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
     }
 }

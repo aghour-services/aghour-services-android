@@ -4,7 +4,7 @@
     <color name="toolbarText">#FFFFFF</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
-    <color name="itemNavColor">#FBFBFB</color>
+    <color name="itemNavColor">#FFFFFF</color>
     <color name="backIconTint">#FF000000</color>
     <color name="searchBg">#F7F7F7</color>
     <color name="backIconBg">#F7F7F7</color>
@@ -16,7 +16,7 @@
     <color name="splashScreenBg">#3C88C5</color>
     <color name="navHeaderBg">#3984BF</color>
     <color name="userColor">#FFFFFF</color>
-    <color name="emailColor">#F8F8F8</color>
+    <color name="emailColor">#FFFFFF</color>
     <color name="phoneColor">#4CAF50</color>
     <color name="create_btn">#3073A8</color>
     <color name="create_btn_press">#205580</color>
@@ -113,5 +113,7 @@
     <color name="changeThemeRipple">#C0C0C0</color>
     <color name="changeThemeBtnBg">#2E5574</color>
     <color name="bottomNavPress">#DFDFDF</color>
+    <color name="backSettingsIcon">#FFFFFF</color>
+    <color name="backIconSettingRipple">#ADDBFF</color>
 
 </resources>
