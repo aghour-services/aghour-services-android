@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -17,6 +18,7 @@ import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -55,6 +57,11 @@ class FirmsFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBottomNav()
     }
 
     private fun init() {

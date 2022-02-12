@@ -6,6 +6,26 @@
     android:orientation="vertical"
     tools:context=".about.AboutFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBg">
+
+        <TextView
+            android:id="@+id/toolBarTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:gravity="center"
+            android:text="@string/about_fragment"
+            android:textColor="@color/toolbarText"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"

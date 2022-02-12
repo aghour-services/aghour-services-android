@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
+import com.aghourservices.about.AboutFragment
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.FragmentSettingBinding
 import com.aghourservices.user.SignUpActivity
@@ -26,6 +27,11 @@ class SettingFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        hideBottomNav()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkUser()
@@ -34,6 +40,19 @@ class SettingFragment : BaseFragment() {
         activity.supportActionBar?.hide()
         binding.backBtn.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+        binding.facebook.setOnClickListener {
+            facebook()
+        }
+
+        binding.share.setOnClickListener {
+            shareApp()
+        }
+        binding.rate.setOnClickListener {
+            rateApp()
+        }
+        binding.about.setOnClickListener {
+            loadFragments(AboutFragment(), true)
         }
         binding.logOut.setOnClickListener {
             showOnCloseDialog()

@@ -20,7 +20,7 @@ import com.aghourservices.settings.SettingFragment
 import com.google.android.gms.ads.AdView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(){
     private lateinit var binding: ActivityMainBinding
     lateinit var toolbar: Toolbar
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -35,8 +35,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         supportActionBar?.show()
         binding.bottomView.itemIconTintList = null
 
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+//        adView = findViewById(R.id.adView)
+//        Banner.show(this, adView)
 
         val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.post(object : Runnable {
@@ -48,7 +48,19 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         })
         loadFragments(CategoriesFragment(), false)
         bottomNavigationView = findViewById(R.id.bottomView)
-        bottomNavigationView.setOnItemSelectedListener(this)
+
+        binding.bottomView.setOnItemSelectedListener {
+            var fragment: Fragment? = null
+            when (it.itemId) {
+                R.id.home -> fragment = CategoriesFragment()
+                R.id.search -> fragment = SearchFragment()
+                R.id.news -> fragment = NewsFragment()
+                R.id.addData -> fragment = AddDataFragment()
+                R.id.settings -> fragment = SettingFragment()
+            }
+            loadFragments(fragment, true)
+            return@setOnItemSelectedListener true
+        }
     }
 
     override fun setTitle(title: CharSequence?) {
@@ -71,30 +83,9 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var fragment: Fragment? = null
-
-        when (item.itemId) {
-            R.id.home -> fragment = CategoriesFragment()
-            R.id.search -> fragment = SearchFragment()
-            R.id.news -> fragment = NewsFragment()
-            R.id.addData -> fragment = AddDataFragment()
-            R.id.settings -> fragment = SettingFragment()
-            else -> {
-                bottomNavigationView.visibility = View.GONE
-            }
-        }
-        loadFragments(fragment, true)
-        return true
-    }
-
     override fun onBackPressed() {
         val fragment = supportFragmentManager.fragments.last() as BaseFragment
         if (!fragment.onBackPressed()) {
-            super.onBackPressed()
-        } else if (bottomNavigationView.selectedItemId == R.id.home) {
-        } else {
-            bottomNavigationView.selectedItemId = R.id.home
             super.onBackPressed()
         }
     }

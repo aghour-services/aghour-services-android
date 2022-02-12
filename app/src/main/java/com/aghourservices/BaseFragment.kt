@@ -5,21 +5,56 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.interfaces.ActivityFragmentCommunicator
 import com.aghourservices.user.SignInActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
+    lateinit var bottomNavigationView: LinearLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Event.sendScreenName(this::class.simpleName.toString())
     }
+
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    fun showBottomNav() {
+        bottomNavigationView = requireActivity().findViewById(R.id.linearBottomNavVIew)
+        bottomNavigationView.visibility = View.VISIBLE
+    }
+
+    fun hideBottomNav() {
+        bottomNavigationView = requireActivity().findViewById(R.id.linearBottomNavVIew)
+        bottomNavigationView.visibility = View.GONE
+    }
+
+    fun loadFragments(fragment: Fragment?, stacked: Boolean) {
+        val backStateName: String = fragment?.javaClass.toString()
+        val manager: FragmentManager = requireActivity().supportFragmentManager
+        if (fragment != null) {
+            val ft: FragmentTransaction = manager.beginTransaction()
+            ft.setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            ft.replace(R.id.parent_container, fragment)
+            if (stacked){
+                ft.addToBackStack(backStateName)
+            }
+            ft.commit()
+        }
     }
 
     fun shareApp() {
