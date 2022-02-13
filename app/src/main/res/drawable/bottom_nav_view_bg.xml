@@ -3,8 +3,8 @@
     android:color="@color/bottomNavPress">
     <item>
         <shape>
-            <corners android:topLeftRadius="6dp"
-                android:topRightRadius="6dp"/>
+            <corners android:topLeftRadius="4dp"
+                android:topRightRadius="4dp"/>
             <solid android:color="@color/navDrawerBg" />
         </shape>
     </item>

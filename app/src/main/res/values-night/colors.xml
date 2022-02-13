@@ -68,5 +68,7 @@
     <color name="aboutApp">#FFFFFF</color>
     <color name="scrollViewBg">#292929</color>
     <color name="aboutUseApp">#FFFFFF</color>
-
+    <color name="createBtnBg">#232323</color>
+    <color name="createBtnPress">#303030</color>
+    <color name="strokeColor">#FFFFFF</color>
 </resources>
