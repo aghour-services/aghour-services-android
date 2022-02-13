@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -180,16 +181,24 @@ class FirmsFragment : BaseFragment() {
 
     override fun onBackPressed(): Boolean {
         val layoutManager = binding.firmsRecyclerview.layoutManager as LinearLayoutManager
-        if (layoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
-            super.onBackPressed()
-            return false
-        } else {
-            binding.swipe.isRefreshing = true
-            binding.firmsRecyclerview.smoothScrollToPosition(0)
-            handler.postDelayed({
-                loadFirms(categoryId)
-                binding.swipe.isRefreshing = false
-            }, 1000)
+        when {
+            layoutManager.findFirstCompletelyVisibleItemPosition() == 0 -> {
+                super.onBackPressed()
+                return false
+            }
+            binding.noInternet.visibility == View.VISIBLE -> {
+                super.onBackPressed()
+                return false
+            }
+            else -> {
+                binding.swipe.isRefreshing = true
+                binding.firmsRecyclerview.smoothScrollToPosition(0)
+                handler.postDelayed({
+                    loadFirms(categoryId)
+                    binding.swipe.isRefreshing = false
+                }, 1000)
+                notify(requireContext(), "إضغط مرة اخري للخروج")
+            }
         }
         return true
     }

@@ -20,6 +20,11 @@ class AboutFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        hideBottomNav()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = (activity as AppCompatActivity)

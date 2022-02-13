@@ -43,13 +43,9 @@ class NewsFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun setAdapter(articleList: ArrayList<Article>) {
-        try {
-            adapter = ArticlesAdapter(requireContext(), articleList)
-            binding.newsRecyclerview.adapter = adapter
-        } catch (e: Exception) {
-
-        }
+    override fun onResume() {
+        super.onResume()
+        showBottomNav()
     }
 
     @SuppressLint("RestrictedApi")
@@ -117,12 +113,23 @@ class NewsFragment : BaseFragment() {
                 articleList.addAll(result)
                 setAdapter(articleList)
                 stopShimmerAnimation()
+                notify(requireActivity(),"لا يوجد إنترنت")
                 if (articleList.isEmpty()) {
                     noInternetConnection()
                 }
             }
         })
     }
+
+    private fun setAdapter(articleList: ArrayList<Article>) {
+        try {
+            adapter = ArticlesAdapter(requireContext(), articleList)
+            binding.newsRecyclerview.adapter = adapter
+        } catch (e: Exception) {
+
+        }
+    }
+
 
     private fun init() {
         Realm.init(requireActivity())

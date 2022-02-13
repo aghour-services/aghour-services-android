@@ -1,11 +1,13 @@
 package com.aghourservices
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -26,6 +28,10 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
 
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    fun notify(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     fun showBottomNav() {
@@ -50,7 +56,7 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
                 R.anim.slide_out_right
             )
             ft.replace(R.id.parent_container, fragment)
-            if (stacked){
+            if (stacked) {
                 ft.addToBackStack(backStateName)
             }
             ft.commit()
@@ -92,10 +98,11 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         Event.sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(requireActivity())
         startActivity(Intent(requireActivity(), SignInActivity::class.java))
+        requireActivity().finish()
     }
 
-    fun showOnCloseDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(requireActivity())
+    fun showOnCloseDialog(context: Context) {
+        val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle(R.string.title)
         alertDialogBuilder.setMessage(R.string.message)
         alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
@@ -112,5 +119,4 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
     }
-
 }

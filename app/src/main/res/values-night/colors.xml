@@ -19,7 +19,7 @@
     <color name="firmsBg">#141F27</color>
     <color name="firmName">#FFFFFF</color>
     <color name="callBg">#202932</color>
-    <color name="callPress">#536E57</color>
+    <color name="callPress">#445668</color>
     <color name="edtStroke">#808F9E</color>
     <color name="add_data_bg">#151B20</color>
     <color name="add_data">#E4E4E4</color>
@@ -43,8 +43,8 @@
     <color name="backIconSelector">#151C23</color>
     <color name="swipeColor">#FFFFFF</color>
     <color name="swipeBg">#0F1317</color>
-    <color name="navDrawerBg">#0D1419</color>
-    <color name="firmsDescription">#81888E</color>
+    <color name="navDrawerBg">#191919</color>
+    <color name="firmsDescription">#CCCCCC</color>
     <color name="notifyTitle">#FFFFFF</color>
     <color name="notifyMessage">#6E6E6E</color>
     <color name="notifyBg">#0F1922</color>
@@ -65,5 +65,8 @@
     <color name="settings_back_ripple">#4C6279</color>
     <color name="lineView">#F6F6F6</color>
     <color name="bottomNavPress">#16222B</color>
+    <color name="aboutApp">#FFFFFF</color>
+    <color name="scrollViewBg">#292929</color>
+    <color name="aboutUseApp">#FFFFFF</color>
 
 </resources>

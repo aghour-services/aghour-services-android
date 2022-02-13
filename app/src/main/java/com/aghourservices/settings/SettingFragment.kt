@@ -2,19 +2,15 @@ package com.aghourservices.settings
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.BaseFragment
-import com.aghourservices.R
 import com.aghourservices.about.AboutFragment
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.FragmentSettingBinding
 import com.aghourservices.user.SignUpActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SettingFragment : BaseFragment() {
     private lateinit var binding: FragmentSettingBinding
@@ -44,7 +40,6 @@ class SettingFragment : BaseFragment() {
         binding.facebook.setOnClickListener {
             facebook()
         }
-
         binding.share.setOnClickListener {
             shareApp()
         }
@@ -55,7 +50,7 @@ class SettingFragment : BaseFragment() {
             loadFragments(AboutFragment(), true)
         }
         binding.logOut.setOnClickListener {
-            showOnCloseDialog()
+            showOnCloseDialog(requireActivity())
         }
     }
 

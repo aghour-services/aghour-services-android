@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/scrollViewBg"
     tools:context=".about.AboutFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg">
@@ -15,16 +15,18 @@
         <TextView
             android:id="@+id/toolBarTv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
             android:text="@string/about_fragment"
+            android:textAlignment="center"
             android:textColor="@color/toolbarText"
             android:textSize="22sp"
             android:textStyle="bold" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -45,11 +47,12 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:text="استخدام التطبيق :"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
-                android:textSize="20sp" />
+                android:textColor="@color/aboutUseApp"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -57,11 +60,12 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:text="أولا :"
                 android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textColor="@color/aboutApp"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -70,10 +74,11 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/use_app"
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textIsSelectable="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -84,11 +89,12 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:text="ثانيا :"
                 android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textColor="@color/aboutApp"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -100,7 +106,7 @@
                 android:lineSpacingMultiplier="1.4"
                 android:text="@string/free_app"
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textIsSelectable="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -111,11 +117,12 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:text="ثالثا :"
                 android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textColor="@color/aboutApp"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -127,7 +134,7 @@
                 android:lineSpacingMultiplier="1.4"
                 android:text="@string/contact_us"
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textIsSelectable="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -141,7 +148,7 @@
                 android:fontFamily="@font/cairo_black"
                 android:text="ازاي تعمل حساب علي التطبيق ؟"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/aboutUseApp"
                 android:textSize="16sp" />
 
             <TextView
@@ -152,7 +159,7 @@
                 android:layout_marginRight="15dp"
                 android:text="1- هتضغط علي زر انشاء حساب كما هو موضح بالصورة أدناه."
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -171,7 +178,7 @@
                 android:layout_marginRight="15dp"
                 android:text="@string/create_account"
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textIsSelectable="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -189,12 +196,13 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:textStyle="bold"
                 android:text="هستفاد ايه لو عملت حساب علي التطبيق ؟"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/aboutUseApp"
                 android:textIsSelectable="true"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -206,7 +214,7 @@
                 android:lineSpacingMultiplier="1.2"
                 android:text="@string/benefits_account"
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textIsSelectable="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -225,12 +233,13 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:textStyle="bold"
                 android:text="تعال بقا نعرف نضيف بيانات ازاي بعد ما عملنا حساب ! 😃😉"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/aboutUseApp"
                 android:textIsSelectable="true"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -240,7 +249,7 @@
                 android:layout_marginRight="15dp"
                 android:text="1- هتضغط علي اضافة بيانات كما هو موضح بالصورة اعلاه."
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -252,7 +261,7 @@
                 android:layout_marginRight="15dp"
                 android:text="2- هيفتح معاك الصفحة دي ."
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -264,7 +273,7 @@
                 android:layout_marginRight="15dp"
                 android:text="@string/add_firm"
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -282,7 +291,7 @@
                 android:layout_marginRight="15dp"
                 android:text="3- هتضغط علي اختر التصنيف وتختار واحد من التصنيفات دول ."
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -292,7 +301,6 @@
                 android:layout_marginTop="20dp"
                 android:src="@mipmap/spinner" />
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -301,7 +309,7 @@
                 android:layout_marginRight="15dp"
                 android:text="4- اخر حاجة هتضغط علي اضافة وكده مبروك عليك  ."
                 android:textAlignment="center"
-                android:textColor="@color/about"
+                android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

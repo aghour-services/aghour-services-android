@@ -21,7 +21,7 @@
     <color name="create_btn">#3073A8</color>
     <color name="create_btn_press">#205580</color>
     <color name="categoryName">#0E0E0E</color>
-    <color name="firmName">#396387</color>
+    <color name="firmName">#121A22</color>
     <color name="address">#3B8F45</color>
     <color name="add_data_bg">#FFFFFF</color>
     <color name="add_data">#266CA3</color>
@@ -35,7 +35,7 @@
     <color name="shimmerColor">#C5C5C5</color>
     <color name="news_bg">#ECECEC</color>
     <color name="categoryCardBg">#FFFFFF</color>
-    <color name="categoryCardPress">#B6B6B6</color>
+    <color name="categoryCardPress">#CCCCCC</color>
     <color name="shimmerBg">#FFFFFF</color>
     <color name="newsDescription">#203647</color>
     <color name="time">#439446</color>
@@ -44,7 +44,7 @@
     <color name="swipeColor">#59A5E1</color>
     <color name="callBg">#FFFFFF</color>
     <color name="callStroke">#4CAF50</color>
-    <color name="callPress">#CEE8CF</color>
+    <color name="callPress">#D2F1D3</color>
     <color name="edtStroke">#1B1B1B</color>
     <color name="skipBtnStroke">#000000</color>
     <color name="skipBtnBg">#FFFFFF</color>
@@ -60,7 +60,7 @@
     <color name="signInTxt">#275F8C</color>
     <color name="btnSignInTxt">#FFFFFF</color>
     <color name="navDrawerBg">#4290CD</color>
-    <color name="firmsDescription">#797979</color>
+    <color name="firmsDescription">#2E2E2E</color>
     <color name="checkBox">#2A76B3</color>
 
     <color name="blue200">#3F749E</color>
@@ -115,5 +115,8 @@
     <color name="bottomNavPress">#DFDFDF</color>
     <color name="backSettingsIcon">#FFFFFF</color>
     <color name="backIconSettingRipple">#ADDBFF</color>
+    <color name="aboutApp">#000000</color>
+    <color name="scrollViewBg">#FFFFFF</color>
+    <color name="aboutUseApp">#20384B</color>
 
 </resources>

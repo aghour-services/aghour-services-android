@@ -20,23 +20,24 @@ import com.aghourservices.settings.SettingFragment
 import com.google.android.gms.ads.AdView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
-    lateinit var toolbar: Toolbar
-    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var toolbar: Toolbar
     lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        loadFragments(CategoriesFragment(), false)
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.show()
         binding.bottomView.itemIconTintList = null
 
-//        adView = findViewById(R.id.adView)
-//        Banner.show(this, adView)
+        val bottomNavView = binding.bottomView
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
 
         val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.post(object : Runnable {
@@ -46,10 +47,7 @@ class MainActivity : BaseActivity(){
                 mainHandler.postDelayed(this, 60000)
             }
         })
-        loadFragments(CategoriesFragment(), false)
-        bottomNavigationView = findViewById(R.id.bottomView)
-
-        binding.bottomView.setOnItemSelectedListener {
+        bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
             when (it.itemId) {
                 R.id.home -> fragment = CategoriesFragment()
@@ -74,7 +72,6 @@ class MainActivity : BaseActivity(){
 
     @SuppressLint("InflateParams", "ResourceType")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.settings -> {
                 loadFragments(SettingFragment(), true)

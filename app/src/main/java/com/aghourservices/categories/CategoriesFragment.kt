@@ -106,13 +106,12 @@ class CategoriesFragment : BaseFragment() {
                 categoryList.addAll(result)
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
-                Snackbar.make(binding.root,"لا يوجد انترنت",Snackbar.LENGTH_SHORT).show()
                 progressBar()
+                notify(requireActivity(),"لا يوجد إنترنت")
             }
         })
     }
 
-    //Start FirmsActivity With putExtra Data
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
         val categoryName = categoryList[position].name

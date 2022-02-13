@@ -1,9 +1,14 @@
 package com.aghourservices.interfaces
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AlertDialog
+import com.aghourservices.BaseFragment
 import com.aghourservices.R
+import com.aghourservices.cache.UserInfo
+import com.aghourservices.firebase_analytics.Event
+import com.aghourservices.user.SignInActivity
 
 interface AlertDialog {
 
@@ -40,5 +45,6 @@ interface AlertDialog {
             alertDialog.show()
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
         }
+
     }
 }

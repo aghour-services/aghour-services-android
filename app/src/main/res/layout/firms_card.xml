@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="3dp"
+    app:cardElevation="6dp"
     app:cardCornerRadius="3dp">
 
     <LinearLayout
@@ -23,9 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:fontFamily="@font/cairo_black"
-            android:gravity="right"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:textStyle="bold"
+            android:gravity="right|center"
             android:text="Name"
+            android:padding="2dp"
+            android:layout_margin="2dp"
             android:textAlignment="center"
             android:textColor="@color/firmName"
             android:textSize="23sp" />
@@ -46,12 +50,14 @@
                 android:layout_gravity="right|center"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/cairo_bold"
+                android:padding="4dp"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:textStyle="bold"
                 android:gravity="right|center"
                 android:text="Address"
                 android:textAlignment="center"
                 android:textColor="@color/address"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
 
             <ImageView
@@ -77,14 +83,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginRight="1dp"
+                style="@style/Theme.Material3.Light"
                 android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:textStyle="bold"
+                android:padding="4dp"
                 android:gravity="right|center"
                 android:textColor="@color/firmsDescription"
                 android:text="Description"
+                android:textAlignment="center"
                 android:textIsSelectable="true"
-                android:textSize="13sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
