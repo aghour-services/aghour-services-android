@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/native_ad_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -7,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardElevation="10pt"
         android:background="@color/native_ad_bg">
 
         <LinearLayout
@@ -27,14 +29,16 @@
                 android:id="@+id/ad_headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
+                android:layout_margin="5dp"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/ad_call_to_action"
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
-                android:layout_height="35dp"
+                android:layout_height="38dp"
                 android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:background="@drawable/ad_selector"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="تـحـمـيـل"

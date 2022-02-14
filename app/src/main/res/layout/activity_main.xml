@@ -35,18 +35,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/recyclerViewBg"
-        app:layout_constraintBottom_toTopOf="@+id/linearBottomNavVIew"
+        app:layout_constraintBottom_toTopOf="@+id/linearAdMob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <include
-            layout="@layout/admob_banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom" />
+    <LinearLayout
+        android:id="@+id/linearAdMob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toTopOf="@+id/linearBottomNavVIew"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    </FrameLayout>
+        <include layout="@layout/admob_banner" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearBottomNavVIew"
@@ -54,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/recyclerViewBg"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -61,11 +67,11 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomView"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:background="@drawable/bottom_nav_view_bg"
             app:itemPaddingTop="6dp"
-            app:itemTextAppearanceInactive="@style/SegoeTextBold"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
+            app:itemTextAppearanceInactive="@style/SegoeTextBold"
             app:itemTextColor="@color/itemNavColor"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"

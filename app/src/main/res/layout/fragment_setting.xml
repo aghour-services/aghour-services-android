@@ -124,219 +124,228 @@
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <LinearLayout
-            android:id="@+id/darMode"
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="2dp"
-            android:background="@drawable/dialog_selector"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/share"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="0dp"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_gravity="start|center"
-                android:src="@mipmap/dark_mode" />
-
-            <TextView
-                android:id="@+id/switchModeTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="left|center"
-                android:text="الوضع الليلي"
-                android:layout_marginLeft="16dp"
-                android:textColor="@color/createAccountText"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switchMode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:textSize="14sp"
-                android:thumb="@drawable/custom_thumb"
-                app:showText="true"
-                app:track="@drawable/custom_track" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="2dp"
-            android:background="@drawable/dialog_selector"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/share"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_gravity="start|center"
-                android:src="@mipmap/facebook" />
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/darMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="end"
-                android:text="صفحتنا علي الفيسبوك"
-                android:textColor="@color/dialogText"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_selector"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/share"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="2dp"
-            android:background="@drawable/dialog_selector"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/rate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|center"
+                    android:src="@mipmap/dark_mode" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_gravity="start|center"
-                android:src="@mipmap/share" />
+                <TextView
+                    android:id="@+id/switchModeTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="left|center"
+                    android:text="الوضع الليلي"
+                    android:textColor="@color/createAccountText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            <TextView
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:textSize="14sp"
+                    android:thumb="@drawable/custom_thumb"
+                    app:showText="true"
+                    app:track="@drawable/custom_track" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/facebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="end"
-                android:text="شارك مع أصدقائك"
-                android:textColor="@color/dialogText"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_selector"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/share"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/rate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="2dp"
-            android:background="@drawable/dialog_selector"
-            android:orientation="horizontal"
-            android:padding="10dp"
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|center"
+                    android:src="@mipmap/facebook" />
 
-            app:layout_constraintBottom_toTopOf="@+id/about"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="end"
+                    android:text="صفحتنا علي الفيسبوك"
+                    android:textColor="@color/dialogText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_gravity="start"
-                android:src="@mipmap/star" />
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/share"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="end"
-                android:text="تقييم التطبيق"
-                android:textColor="@color/dialogText"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_selector"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="2dp"
-            android:background="@drawable/dialog_selector"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/log_out"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|center"
+                    android:src="@mipmap/share" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_gravity="start"
-                android:src="@mipmap/about_us" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="end"
+                    android:text="شارك مع أصدقائك"
+                    android:textColor="@color/dialogText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="end"
-                android:text="عن التطبيق"
-                android:textColor="@color/dialogText"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_selector"
+                android:orientation="horizontal"
+                android:padding="10dp"
 
-        <LinearLayout
-            android:id="@+id/log_out"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/dialog_selector"
-            android:orientation="horizontal"
-            android:padding="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/about"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start"
+                    android:src="@mipmap/star" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_gravity="start"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/exit" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="end"
+                    android:text="تقييم التطبيق"
+                    android:textColor="@color/dialogText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="end"
-                android:text="تسجيل الخروج"
-                android:textColor="@color/dialogText"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_selector"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/log_out"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start"
+                    android:src="@mipmap/about_us" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="end"
+                    android:text="عن التطبيق"
+                    android:textColor="@color/dialogText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/log_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/dialog_selector"
+                android:orientation="horizontal"
+                android:padding="10dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/exit" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="end"
+                    android:text="تسجيل الخروج"
+                    android:textColor="@color/dialogText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

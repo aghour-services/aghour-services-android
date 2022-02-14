@@ -7,7 +7,7 @@
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
-        android:title="الإعدادات"
+        android:title="@string/settings_fragment"
         app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>

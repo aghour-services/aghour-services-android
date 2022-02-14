@@ -34,8 +34,6 @@ class SettingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         checkUser()
         hideUserLogOut()
-        appTheme()
-        switchChecked()
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
         binding.backBtn.setOnClickListener {
@@ -84,6 +82,7 @@ class SettingFragment : BaseFragment() {
         }
     }
 
+    /**
     private fun appTheme(){
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
             requireActivity().setTheme(R.style.Theme_DarkApp)
@@ -102,5 +101,5 @@ class SettingFragment : BaseFragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
-    }
+    } **/
 }

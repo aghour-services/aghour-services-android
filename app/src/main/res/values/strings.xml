@@ -1,17 +1,19 @@
 <resources>
     <string name="app_name">أجهور الكبرى</string>
+
     <!--Test-->
-    <string name="ad_banner_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ad_native_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="ad_banner_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_native_unit_id">ca-app-pub-3940256099942544/2247696110</string>
     <string name="ad_interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>
 
 
     <!--Release-->
-    <!--    <string name="ad_banner_unit_id">ca-app-pub-1747848120826315/1405022371</string>-->
-    <!--    <string name="ad_native_unit_id">ca-app-pub-1747848120826315/1213450688</string>-->
-    <!--    <string name="ad_interstitial_unit_id">ca-app-pub-1747848120826315/5313489556</string>-->
-    <string name="open" translatable="false">Open</string>
-    <string name="close" translatable="false">Close</string>
+<!--        <string name="admob_app_id">ca-app-pub-1747848120826315~3829017498</string>-->
+<!--        <string name="ad_banner_unit_id">ca-app-pub-1747848120826315/1405022371</string>-->
+<!--        <string name="ad_native_unit_id">ca-app-pub-1747848120826315/1213450688</string>-->
+<!--        <string name="ad_interstitial_unit_id">ca-app-pub-1747848120826315/5313489556</string>-->
+
     <string name="login_email_hint">البريد الالكتروني</string>
     <string name="login_password_hint">كلمة السر</string>
     <string name="login_signup_hint">ليس لديك حساب ؟ سجل الأن</string>
@@ -67,8 +69,5 @@
     <string name="doneButton">تمام</string>
     <string name="positiveButton">نعم</string>
     <string name="negativeButton">لا</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="setting_fragment">الاعدادات</string>
     <string name="settings_fragment">الإعدادات</string>
 </resources>

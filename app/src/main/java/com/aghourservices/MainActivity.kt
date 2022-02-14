@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.aghourservices.ads.Banner
@@ -18,12 +18,11 @@ import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchFragment
 import com.aghourservices.settings.SettingFragment
 import com.google.android.gms.ads.AdView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toolbar: Toolbar
-    lateinit var adView: AdView
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,19 +33,20 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.show()
         binding.bottomView.itemIconTintList = null
-
         val bottomNavView = binding.bottomView
+
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
         val mainHandler = Handler(Looper.getMainLooper())
+        val interstitial = Interstitial()
         mainHandler.post(object : Runnable {
             override fun run() {
-                val interstitial = Interstitial()
                 interstitial.load(this@MainActivity)
                 mainHandler.postDelayed(this, 60000)
             }
         })
+
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
             when (it.itemId) {
