@@ -34,8 +34,10 @@ class SettingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         checkUser()
         hideUserLogOut()
+
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
+
         binding.backBtn.setOnClickListener {
             requireActivity().onBackPressed()
         }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -23,6 +24,9 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toolbar: Toolbar
     private lateinit var adView: AdView
+    private var handler = Handler(Looper.getMainLooper())
+    private lateinit var runnable: Runnable
+    private val interstitial = Interstitial()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +42,8 @@ class MainActivity : BaseActivity() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        val interstitial = Interstitial()
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                interstitial.load(this@MainActivity)
-                mainHandler.postDelayed(this, 60000)
-            }
-        })
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
 
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
@@ -59,6 +57,16 @@ class MainActivity : BaseActivity() {
             loadFragments(fragment, true)
             return@setOnItemSelectedListener true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handler.postDelayed(runnable, 120000)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable)
     }
 
     override fun setTitle(title: CharSequence?) {
