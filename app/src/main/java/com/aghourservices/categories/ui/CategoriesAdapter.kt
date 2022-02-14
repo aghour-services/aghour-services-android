@@ -18,8 +18,8 @@ class CategoriesAdapter(
         return CategoryViewHolder(view, onItemClicked)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val holder = holder as CategoryViewHolder
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        val holder = viewHolder as CategoryViewHolder
         val categoryItem = List[position]
         Picasso.get().load(categoryItem.icon).into(holder.imageView)
         holder.firstTxt.text = List[position].name

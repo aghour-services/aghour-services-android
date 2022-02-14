@@ -9,8 +9,8 @@ import com.google.firebase.ktx.Firebase
 class Event {
     companion object {
 
-        fun sendFirebaseEvent(eventName: String, data: String) {
-            var eventName = cleanEventName(eventName)
+        fun sendFirebaseEvent(event: String, data: String) {
+            var eventName = cleanEventName(event)
             Log.d("Event", eventName)
             var firebaseAnalytics = Firebase.analytics
             firebaseAnalytics.logEvent(eventName) {
