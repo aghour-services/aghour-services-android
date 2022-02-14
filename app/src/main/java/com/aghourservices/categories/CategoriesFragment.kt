@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -14,6 +15,7 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.firms.FirmsFragment
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -39,8 +41,17 @@ class CategoriesFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        showBottomNav()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = (activity as AppCompatActivity)
+        activity.supportActionBar?.show()
+
         init()
         loadCategoriesList()
     }
@@ -95,14 +106,12 @@ class CategoriesFragment : BaseFragment() {
                 categoryList.addAll(result)
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
-                //shimmer Animation without Internet
-                Toast.makeText(activity, "لا يوجد انترنت", Toast.LENGTH_SHORT).show()
                 progressBar()
+                notify(requireActivity(),"لا يوجد إنترنت")
             }
         })
     }
 
-    //Start FirmsActivity With putExtra Data
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
         val categoryName = categoryList[position].name
@@ -114,12 +123,12 @@ class CategoriesFragment : BaseFragment() {
         firmsFragment.arguments = arguments
         fragmentManager.beginTransaction()
             .setCustomAnimations(
-                R.anim.fade_in,
-                R.anim.fade_out,
-                R.anim.fade_in,
-                R.anim.fade_out
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
             )
-            .replace(R.id.fragmentContainerView, firmsFragment)
+            .replace(R.id.parent_container, firmsFragment)
             .addToBackStack("Firms").commit()
     }
 

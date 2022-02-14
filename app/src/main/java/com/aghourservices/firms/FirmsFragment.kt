@@ -1,9 +1,7 @@
 package com.aghourservices.firms
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,8 +9,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
@@ -20,6 +19,7 @@ import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -27,11 +27,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearSmoothScroller
-import androidx.recyclerview.widget.RecyclerView.SmoothScroller
-import io.realm.Realm.getApplicationContext
-
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
@@ -41,7 +36,6 @@ class FirmsFragment : BaseFragment() {
     private lateinit var realm: Realm
     private lateinit var handler: Handler
     private var categoryId = 0
-    lateinit var smoothScroller: SmoothScroller
     private lateinit var binding: FragmentFirmsBinding
 
     override fun onCreateView(
@@ -54,6 +48,9 @@ class FirmsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = (activity as AppCompatActivity)
+        activity.supportActionBar?.show()
         try {
             init()
             loadFirms(categoryId)
@@ -61,6 +58,11 @@ class FirmsFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBottomNav()
     }
 
     private fun init() {
@@ -105,7 +107,6 @@ class FirmsFragment : BaseFragment() {
             .baseUrl(BASE_URL).build().create(ListFirms::class.java)
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
-            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ArrayList<Firm>?>,
                 response: Response<ArrayList<Firm>?>,
@@ -178,19 +179,26 @@ class FirmsFragment : BaseFragment() {
         startActivity(callIntent)
     }
 
-
     override fun onBackPressed(): Boolean {
         val layoutManager = binding.firmsRecyclerview.layoutManager as LinearLayoutManager
-        if (layoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
-            super.onBackPressed()
-            return false
-        } else {
-            binding.swipe.isRefreshing = true
-            binding.firmsRecyclerview.smoothScrollToPosition(0)
-            handler.postDelayed({
-                loadFirms(categoryId)
-                binding.swipe.isRefreshing = false
-            }, 1000)
+        when {
+            layoutManager.findFirstCompletelyVisibleItemPosition() == 0 -> {
+                super.onBackPressed()
+                return false
+            }
+            binding.noInternet.visibility == View.VISIBLE -> {
+                super.onBackPressed()
+                return false
+            }
+            else -> {
+                binding.swipe.isRefreshing = true
+                binding.firmsRecyclerview.smoothScrollToPosition(0)
+                handler.postDelayed({
+                    loadFirms(categoryId)
+                    binding.swipe.isRefreshing = false
+                }, 1000)
+                notify(requireContext(), "إضغط مرة اخري للخروج")
+            }
         }
         return true
     }

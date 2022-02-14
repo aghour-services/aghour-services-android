@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/add_data_bg"
-    android:theme="@style/AddDataTheme"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AddDataTheme">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,8 +22,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:fontFamily="@font/cairo_black"
+                android:gravity="center"
                 android:text="إضافة بيانات"
                 android:textColor="@color/add_data"
                 android:textSize="22sp" />
@@ -133,22 +133,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
-                android:backgroundTintMode="add"
                 android:backgroundTint="@color/spinnerBg"
-                android:spinnerMode="dialog"
+                android:backgroundTintMode="add"
                 android:prompt="@string/Choose"
-                android:textAlignment="center"/>
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
 
             <Button
                 android:id="@+id/btn_add_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="@drawable/skip_button"
-                android:fontFamily="@font/cairo_black"
-                android:text="اضافة"
+                android:background="@drawable/sign_up_buttons"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:textStyle="bold"
+                android:text="إضافة البيانات"
                 android:textColor="@color/addDataTxt"
-                android:textSize="15sp" />
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:background="@drawable/create_account_button"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="يجب عليك إنشاء حساب أولا"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

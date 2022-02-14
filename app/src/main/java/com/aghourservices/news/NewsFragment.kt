@@ -8,12 +8,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
+import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.ui.ArticlesAdapter
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -40,18 +43,19 @@ class NewsFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun setAdapter(articleList: ArrayList<Article>) {
-        try {
-            adapter = ArticlesAdapter(requireContext(), articleList)
-            binding.newsRecyclerview.adapter = adapter
-        } catch (e: Exception) {
-
-        }
+    override fun onResume() {
+        super.onResume()
+        showBottomNav()
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.news_fragment)
+
+        val activity = (activity as AppCompatActivity)
+        activity.supportActionBar?.show()
+
         try {
             init()
             loadArticles(categoryId)
@@ -60,7 +64,6 @@ class NewsFragment : BaseFragment() {
             Log.e("Exception: ", e.message!!)
         }
     }
-
 
     private fun refresh() {
         try {
@@ -77,7 +80,6 @@ class NewsFragment : BaseFragment() {
             Log.e("Exception: ", e.message!!)
         }
     }
-
 
     private fun loadArticles(categoryId: Int) {
         val retrofitBuilder = Retrofit.Builder()
@@ -106,19 +108,28 @@ class NewsFragment : BaseFragment() {
             }
 
             override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                val result =
-                    realm.where(Article::class.java).findAll()
+                val result = realm.where(Article::class.java).findAll()
                 articleList = ArrayList()
                 articleList.addAll(result)
-
                 setAdapter(articleList)
                 stopShimmerAnimation()
+                notify(requireActivity(),"لا يوجد إنترنت")
                 if (articleList.isEmpty()) {
                     noInternetConnection()
                 }
             }
         })
     }
+
+    private fun setAdapter(articleList: ArrayList<Article>) {
+        try {
+            adapter = ArticlesAdapter(requireContext(), articleList)
+            binding.newsRecyclerview.adapter = adapter
+        } catch (e: Exception) {
+
+        }
+    }
+
 
     private fun init() {
         Realm.init(requireActivity())

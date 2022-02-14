@@ -23,9 +23,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/recyclerViewBg"
-        android:orientation="vertical"
         android:padding="5dp"
-        android:scrollbarSize="2dp"
-        android:scrollbars="vertical"
         tools:listitem="@layout/category_card" />
 </LinearLayout>

@@ -5,8 +5,9 @@
     android:textDirection="rtl">
 
     <item
-        android:id="@+id/searchIcon"
-        android:icon="@drawable/ic_search"
-        android:title="Search"
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title="الإعدادات"
         app:showAsAction="ifRoom|collapseActionView" />
+
 </menu>

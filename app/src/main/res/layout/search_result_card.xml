@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:background="@color/firmsBg"
         android:gravity="right"
+        android:background="@color/firmsBg"
         android:orientation="vertical"
         android:padding="15dp">
 
@@ -23,9 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:fontFamily="@font/cairo_black"
-            android:gravity="right"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:textStyle="bold"
+            android:gravity="right|center"
             android:text="Name"
+            android:padding="2dp"
+            android:layout_margin="2dp"
             android:textAlignment="center"
             android:textColor="@color/firmName"
             android:textSize="23sp" />
@@ -34,12 +37,14 @@
             android:id="@+id/category_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:fontFamily="@font/cairo_bold"
-            android:gravity="right"
+            android:layout_gravity="right|center"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:textStyle="bold"
+            android:padding="6dp"
+            android:gravity="right|center"
             android:text="Category"
             android:textColor="@color/firmName"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,12 +62,14 @@
                 android:layout_gravity="right|center"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/cairo_bold"
-                android:gravity="right"
+                android:padding="4dp"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:textStyle="bold"
+                android:gravity="right|center"
                 android:text="Address"
                 android:textAlignment="center"
                 android:textColor="@color/address"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 tools:ignore="RtlHardcoded" />
 
             <ImageView
@@ -90,12 +97,13 @@
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="right"
-                android:text="Description"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:gravity="right|center"
                 android:textColor="@color/firmsDescription"
+                android:text="Description"
                 android:textIsSelectable="true"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -112,7 +120,7 @@
             android:layout_gravity="right"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/call_btn_selector"
             android:drawableLeft="@drawable/ic_phone_call"
             android:fontFamily="@font/cairo_bold"
             android:gravity="center"
@@ -128,5 +136,4 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

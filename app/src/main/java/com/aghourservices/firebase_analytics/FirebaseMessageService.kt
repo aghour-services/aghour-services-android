@@ -35,7 +35,6 @@ class FirebaseMessageService : FirebaseMessagingService() {
     @SuppressLint("RemoteViewLayout")
     private fun getRemoteView(title: String, message: String): RemoteViews {
         val remoteView = RemoteViews("com.aghourservices.firebase", R.layout.notification)
-
         remoteView.setImageViewResource(R.id.app_logo, R.drawable.ic_launcher_round)
         remoteView.setTextViewText(R.id.title, title)
         remoteView.setTextViewText(R.id.message, message)
@@ -46,7 +45,6 @@ class FirebaseMessageService : FirebaseMessagingService() {
     //generate the notification
     @SuppressLint("UnspecifiedImmutableFlag")
     fun generateNotification(title: String, message: String) {
-
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)

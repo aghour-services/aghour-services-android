@@ -1,18 +1,21 @@
 package com.aghourservices.search
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
-import com.aghourservices.ads.Interstitial
-import com.aghourservices.databinding.ActivitySearchBinding
+import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.firebase_analytics.Event
+import com.aghourservices.interfaces.ShowSoftKeyboard
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
@@ -25,21 +28,37 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
-class SearchActivity : AppCompatActivity() {
+class SearchFragment : BaseFragment() {
     private lateinit var searchResults: ArrayList<SearchResult>
     private lateinit var adapter: SearchResultAdapter
-    private lateinit var binding: ActivitySearchBinding
     private lateinit var adView: AdView
+    private lateinit var binding: FragmentSearchBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSearchBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBottomNav()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val activity = (activity as AppCompatActivity)
+        activity.supportActionBar?.hide()
+
+        if (binding.searchText.requestFocus()) {
+            ShowSoftKeyboard.show(requireActivity(), binding.searchText)
+        }
+
         binding.searchResultRecycler.setHasFixedSize(true)
-        binding.searchResultRecycler.layoutManager = LinearLayoutManager(this)
-
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+        binding.searchResultRecycler.layoutManager = LinearLayoutManager(requireActivity())
 
         binding.searchText.setOnClickListener {
             search(binding.searchText.text.toString())
@@ -52,7 +71,7 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         binding.backBtn.setOnClickListener {
-            finish()
+            requireActivity().onBackPressed()
         }
     }
 
@@ -62,9 +81,8 @@ class SearchActivity : AppCompatActivity() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(ApiServices::class.java)
+
         val retrofitData = retrofitBuilder.search(text)
-
-
         retrofitData.enqueue(object : Callback<ArrayList<SearchResult>?> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
@@ -87,7 +105,7 @@ class SearchActivity : AppCompatActivity() {
             return
         }
         binding.searchResultRecycler.visibility = View.VISIBLE
-        adapter = SearchResultAdapter(applicationContext, searchResults) { position ->
+        adapter = SearchResultAdapter(requireContext(), searchResults) { position ->
             onListItemClick(position)
         }
         binding.searchResultRecycler.adapter = adapter

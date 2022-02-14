@@ -1,12 +1,11 @@
 package com.aghourservices.user
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
+import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
@@ -31,7 +30,6 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
@@ -71,47 +69,45 @@ class SignInActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 200) {
-                    errorLogin()
+                    errorLogin(this@SignInActivity)
                     return
                 }
                 binding.txtLogin.visibility = View.GONE
                 binding.progressBarLogin.visibility = View.VISIBLE
                 val userInfo = UserInfo()
-                val user = response.body() as User
-                userInfo.saveUserData(this@SignInActivity, user)
+                val responseUser = response.body() as User
+                userInfo.saveUserData(this@SignInActivity, responseUser)
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                 finish()
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                noInternet()
+                noInternet(this@SignInActivity)
             }
         })
     }
 
-    fun errorLogin() {
-        val title = R.string.error_logIn
-        val positiveButton = "تمام"
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.mipmap.cloud)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-    }
-
-    fun noInternet() {
-        val title = R.string.no_internet
-        val positiveButton = "تمام"
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle(title)
-        alertDialogBuilder.setIcon(R.mipmap.cloud)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton(Html.fromHtml("<font color='#59A5E1'>$positiveButton</font>")) { _, _ -> }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-    }
+//    fun errorLogin() {
+//        val alertDialogBuilder = AlertDialog.Builder(this)
+//        alertDialogBuilder.setTitle(R.string.error_logIn)
+//        alertDialogBuilder.setIcon(R.mipmap.cloud)
+//        alertDialogBuilder.setCancelable(true)
+//        alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
+//        val alertDialog = alertDialogBuilder.create()
+//        alertDialog.show()
+//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+//    }
+//
+//    fun noInternet() {
+//        val alertDialogBuilder = AlertDialog.Builder(this)
+//        alertDialogBuilder.setTitle(R.string.no_internet)
+//        alertDialogBuilder.setIcon(R.mipmap.cloud)
+//        alertDialogBuilder.setCancelable(true)
+//        alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
+//        val alertDialog = alertDialogBuilder.create()
+//        alertDialog.show()
+//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+//    }
 
     override fun onBackPressed() {
         finish()
