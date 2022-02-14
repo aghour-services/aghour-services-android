@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.BaseFragment
+import com.aghourservices.R
 import com.aghourservices.about.AboutFragment
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.FragmentSettingBinding
@@ -32,6 +34,8 @@ class SettingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         checkUser()
         hideUserLogOut()
+        appTheme()
+        switchChecked()
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
         binding.backBtn.setOnClickListener {
@@ -77,6 +81,26 @@ class SettingFragment : BaseFragment() {
             binding.logOut.visibility = View.VISIBLE
         } else {
             binding.logOut.visibility = View.GONE
+        }
+    }
+
+    private fun appTheme(){
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            requireActivity().setTheme(R.style.Theme_DarkApp)
+        } else {
+            requireActivity().setTheme(R.style.Theme_LightApp)
+        }
+    }
+    private fun switchChecked(){
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            binding.switchMode.isChecked = true
+        }
+        binding.switchMode.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
     }
 }

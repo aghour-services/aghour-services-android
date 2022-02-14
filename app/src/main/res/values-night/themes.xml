@@ -9,7 +9,6 @@
         <!-- Customize your theme here. -->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:navigationBarColor">@color/navBarColor</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <style name="WindowAnimationTransition">
