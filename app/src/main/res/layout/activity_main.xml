@@ -67,9 +67,10 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomView"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="55dp"
             android:background="@drawable/bottom_nav_view_bg"
-            app:itemPaddingTop="6dp"
+            app:itemPaddingTop="4dp"
+            app:itemIconSize="28dp"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
             app:itemTextAppearanceInactive="@style/SegoeTextBold"
             app:itemTextColor="@color/itemNavColor"

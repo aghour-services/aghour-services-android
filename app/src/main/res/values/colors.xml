@@ -26,7 +26,7 @@
     <color name="add_data_bg">#FFFFFF</color>
     <color name="add_data">#266CA3</color>
     <color name="edtIcons">#6D6D6D</color>
-    <color name="spinnerBg">#2C6DA2</color>
+    <color name="spinnerBg">#B3BCC6</color>
     <color name="addDataTxt">#2886D1</color>
     <color name="hint">#4B4B4B</color>
     <color name="black">#000000</color>
@@ -121,5 +121,8 @@
     <color name="createBtnBg">#FFFFFF</color>
     <color name="createBtnPress">#D5D5D5</color>
     <color name="strokeColor">#000000</color>
+    <color name="spinnerTextColor">#162735</color>
+    <color name="dropDown">#FFFFFF</color>
+    <color name="spinnerRipple">#DBE5EF</color>
 
 </resources>

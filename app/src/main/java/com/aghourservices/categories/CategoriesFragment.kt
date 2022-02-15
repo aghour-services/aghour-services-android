@@ -1,5 +1,6 @@
 package com.aghourservices.categories
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,17 +42,11 @@ class CategoriesFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        showBottomNav()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        showBottomNav()
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.show()
-
         init()
         loadCategoriesList()
     }
@@ -107,7 +102,7 @@ class CategoriesFragment : BaseFragment() {
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
                 progressBar()
-                notify(requireActivity(),"لا يوجد إنترنت")
+                Snackbar.make(requireContext(),binding.root, "لا يوجد إنترنت",Snackbar.LENGTH_SHORT).show()
             }
         })
     }

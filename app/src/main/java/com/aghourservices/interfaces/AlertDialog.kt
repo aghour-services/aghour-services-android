@@ -38,7 +38,7 @@ interface AlertDialog {
         fun dataAdded(context: Context) {
             val alertDialogBuilder = AlertDialog.Builder(context)
             alertDialogBuilder.setTitle(R.string.data_added)
-            alertDialogBuilder.setIcon(R.mipmap.ic_launcher_round)
+            alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()

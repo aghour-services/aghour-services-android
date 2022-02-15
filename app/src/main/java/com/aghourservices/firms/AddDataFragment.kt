@@ -1,10 +1,12 @@
 package com.aghourservices.firms
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -30,23 +32,22 @@ private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 class AddDataFragment : BaseFragment() {
     private lateinit var binding: FragmentAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
+    private lateinit var media: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAddDataBinding.inflate(layoutInflater)
-        hideUserAddData()
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        showBottomNav()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().title = getString(R.string.add_data_fragment)
+
+        hideUserAddData()
+        showBottomNav()
 
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.show()
@@ -68,11 +69,19 @@ class AddDataFragment : BaseFragment() {
 
     private fun init() {
         loadCategories()
-        spinnerAdapter(categoryList)
-        requireActivity().title = getString(R.string.add_data_fragment)
+        spinnerAdapter()
+
         binding.btnAddData.setOnClickListener(View.OnClickListener {
             val selectedCategoryPosition = binding.spinner.selectedItemPosition
             val selectedCategory = categoryList[selectedCategoryPosition]
+
+//            media = MediaPlayer.create(requireContext(), R.raw.error)
+//            media.setOnPreparedListener {
+//                media.start()
+//            }
+//            media.setOnCompletionListener {
+//                media.release()
+//            }
 
             val name = binding.name.text.toString()
             val address = binding.address.text.toString()
@@ -99,22 +108,10 @@ class AddDataFragment : BaseFragment() {
         })
     }
 
-    private fun spinnerAdapter(categoryList: ArrayList<Category>) {
-        val categories = mutableListOf<String>()
-        for (item in categoryList) {
-            categories.add(item.name!!)
-        }
-        val spinnerAdapter =
-            ArrayAdapter(
-                requireActivity(),
-                R.layout.support_simple_spinner_dropdown_item,
-                categories
-            )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        with(binding.spinner)
-        {
-            adapter = spinnerAdapter
-        }
+    private fun spinnerAdapter() {
+        val spinnerAdapter = SpinnerAdapter(requireActivity(), Category.Categories.List!!)
+        val spinner = binding.spinner
+        spinner.adapter = spinnerAdapter
     }
 
     private fun createFirm(firm: Firm) {

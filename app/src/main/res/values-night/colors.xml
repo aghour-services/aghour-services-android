@@ -22,11 +22,11 @@
     <color name="callPress">#445668</color>
     <color name="edtStroke">#808F9E</color>
     <color name="add_data_bg">#151B20</color>
-    <color name="add_data">#E4E4E4</color>
-    <color name="skipBtnStroke">#E9F5FF</color>
+    <color name="add_data">#FFFFFF</color>
+    <color name="skipBtnStroke">#E2E2E2</color>
     <color name="skipBtnBg">#181717</color>
     <color name="skipBtnPress">#656464</color>
-    <color name="addDataTxt">#CCCCCC</color>
+    <color name="addDataTxt">#FFFFFF</color>
     <color name="navHeaderBg">#192027</color>
     <color name="create_btn">#1D252C</color>
     <color name="create_btn_press">#11161B</color>
@@ -71,4 +71,9 @@
     <color name="createBtnBg">#232323</color>
     <color name="createBtnPress">#303030</color>
     <color name="strokeColor">#FFFFFF</color>
+    <color name="spinnerTextColor">#FFFFFF</color>
+    <color name="dropDown">#EDEDED</color>
+    <color name="spinnerBg">#223445</color>
+    <color name="spinnerRipple">#4D6C8A</color>
+
 </resources>
