@@ -10,11 +10,11 @@
     <color name="backIconBg">#F7F7F7</color>
     <color name="backIconSelector">#C4C4C4</color>
     <color name="searchViewBg">#CBE8FF</color>
-    <color name="clear">#BDBDBD</color>
+    <color name="clear">#EC4949</color>
     <color name="lineView">#3F3F3F</color>
     <color name="recyclerViewBg">#F3F3F3</color>
     <color name="splashScreenBg">#3C88C5</color>
-    <color name="navHeaderBg">#3984BF</color>
+    <color name="navHeaderBg">#387DB3</color>
     <color name="userColor">#FFFFFF</color>
     <color name="emailColor">#FFFFFF</color>
     <color name="phoneColor">#4CAF50</color>

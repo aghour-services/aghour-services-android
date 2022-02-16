@@ -24,12 +24,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:textStyle="bold"
                 android:gravity="center"
-                android:text="انشاء حساب جديد"
+                android:text="إنشاء حساب جديد"
                 android:textAlignment="center"
                 android:textColor="@color/createAccountText"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -139,11 +140,12 @@
                     android:id="@+id/account_txt_create"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/cairo_black"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:textStyle="bold"
                     android:gravity="center"
                     android:text="انشاء حساب"
                     android:textColor="@color/signUpCreateTxt"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -241,11 +243,12 @@
                         android:id="@+id/useApp_txt"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/cairo_black"
+                        android:fontFamily="@font/segoe_ui_bold"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="تخطي التسجيل"
-                        android:textColor="@color/signUpTxt"
-                        android:textSize="14sp"
+                        android:textColor="#429A45"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/btn_use_app"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/btn_use_app"
@@ -260,10 +263,11 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/sign_up_buttons"
-                    android:fontFamily="@font/cairo_black"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:textStyle="bold"
                     android:text="تسجيل دخول"
-                    android:textColor="@color/signUpTxt"
-                    android:textSize="14sp" />
+                    android:textColor="#1D3345"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <CheckBox
@@ -271,13 +275,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_margin="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="4dp"
                 android:button="@drawable/check_selector"
-                android:fontFamily="@font/cairo_black"
-                android:padding="8dp"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:textStyle="bold"
+                android:padding="10dp"
                 android:text="لا تظهرها مرة أخرى"
-                android:textColor="@color/signUpTxt"
-                android:textSize="12sp" />
+                android:textColor="#2982C8"
+                android:textSize="16sp" />
 
             <include layout="@layout/admob_banner" />
         </LinearLayout>

@@ -10,14 +10,18 @@ import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
+import com.aghourservices.databinding.FragmentAboutBinding
+import com.aghourservices.databinding.FragmentSearchBinding
 import com.google.android.gms.ads.AdView
 
 class AboutFragment : BaseFragment() {
+    lateinit var binding: FragmentAboutBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
+    ): View {
+        binding = FragmentAboutBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onResume() {
@@ -29,5 +33,9 @@ class AboutFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
+
+        binding.backBtn.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 }

@@ -134,8 +134,9 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/spinner"
-                android:elevation="8dp"
+                android:elevation="10dp"
                 android:spinnerMode="dialog" />
 
             <Button
@@ -145,7 +146,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/sign_up_buttons"
                 android:elevation="8dp"
                 android:fontFamily="@font/segoe_ui_bold"
@@ -156,20 +157,24 @@
 
             <Button
                 android:id="@+id/btn_register"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/create_account_button"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center"
                 android:padding="14dp"
+                android:elevation="10dp"
                 android:text="يجب إنشاء حساب أولا"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:visibility="gone" />
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
