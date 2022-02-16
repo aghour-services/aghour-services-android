@@ -56,7 +56,7 @@
     <LinearLayout
         android:id="@+id/linearBottomNavVIew"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:background="@color/recyclerViewBg"
         android:orientation="vertical"
@@ -67,9 +67,10 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomView"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="match_parent"
             android:background="@drawable/bottom_nav_view_bg"
-            app:itemPaddingTop="6dp"
+            app:itemPaddingTop="4dp"
+            app:itemIconSize="28dp"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
             app:itemTextAppearanceInactive="@style/SegoeTextBold"
             app:itemTextColor="@color/itemNavColor"

@@ -48,7 +48,7 @@ class FirmsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        hideBottomNav()
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.show()
         try {
@@ -58,11 +58,6 @@ class FirmsFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        hideBottomNav()
     }
 
     private fun init() {

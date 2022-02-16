@@ -17,6 +17,7 @@ import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.interfaces.ActivityFragmentCommunicator
 import com.aghourservices.user.SignInActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 
 open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     lateinit var bottomNavigationView: LinearLayout

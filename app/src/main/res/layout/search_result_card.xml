@@ -6,15 +6,16 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="3dp"
-    app:cardCornerRadius="3dp">
+    app:cardCornerRadius="3dp"
+    app:cardElevation="6dp">
 
     <LinearLayout
         android:id="@+id/firm_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:gravity="right"
         android:background="@color/firmsBg"
+        android:gravity="right"
         android:orientation="vertical"
         android:padding="15dp">
 
@@ -23,15 +24,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:textStyle="bold"
-            android:gravity="right|center"
-            android:text="Name"
-            android:padding="2dp"
             android:layout_margin="2dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:gravity="right|center"
+            android:padding="2dp"
+            android:text="Name"
             android:textAlignment="center"
             android:textColor="@color/firmName"
-            android:textSize="23sp" />
+            android:textSize="23sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/category_name"
@@ -39,12 +40,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|center"
             android:fontFamily="@font/segoe_ui_bold"
-            android:textStyle="bold"
-            android:padding="6dp"
             android:gravity="right|center"
+            android:padding="6dp"
             android:text="Category"
             android:textColor="@color/firmName"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,14 +63,14 @@
                 android:layout_gravity="right|center"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:padding="4dp"
                 android:fontFamily="@font/segoe_ui_bold"
-                android:textStyle="bold"
                 android:gravity="right|center"
+                android:padding="4dp"
                 android:text="Address"
                 android:textAlignment="center"
                 android:textColor="@color/address"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 tools:ignore="RtlHardcoded" />
 
             <ImageView
@@ -97,13 +98,13 @@
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
-                android:textStyle="bold"
-                android:padding="4dp"
                 android:gravity="right|center"
-                android:textColor="@color/firmsDescription"
+                android:padding="4dp"
                 android:text="Description"
+                android:textColor="@color/firmsDescription"
                 android:textIsSelectable="true"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="20dp"

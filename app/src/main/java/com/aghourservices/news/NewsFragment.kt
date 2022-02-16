@@ -113,7 +113,7 @@ class NewsFragment : BaseFragment() {
                 articleList.addAll(result)
                 setAdapter(articleList)
                 stopShimmerAnimation()
-                notify(requireActivity(),"لا يوجد إنترنت")
+                Snackbar.make(requireContext(),binding.root, "لا يوجد إنترنت",Snackbar.LENGTH_SHORT).show()
                 if (articleList.isEmpty()) {
                     noInternetConnection()
                 }

@@ -27,12 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/cairo_black"
+                android:layout_margin="15dp"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="تسجيل الدخول"
                 android:textColor="@color/loginTxtColor"
-                android:textSize="22sp" />
+                android:textSize="26sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
@@ -104,11 +105,12 @@
                     android:id="@+id/txtLogin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/cairo_black"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:textStyle="bold"
                     android:gravity="center"
                     android:text="تسجيل دخول"
                     android:textColor="@color/btnSignInTxt"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +135,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:orientation="horizontal">
 
                 <View
@@ -150,11 +152,12 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/cairo_bold"
                     android:gravity="center"
-                    android:padding="4dp"
                     android:text="أو"
+                    android:padding="4dp"
+                    android:layout_margin="4dp"
                     android:textAlignment="center"
                     android:textColor="@color/blue200"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <View
                     android:layout_width="0dp"
@@ -193,11 +196,12 @@
                         android:id="@+id/txtUseApp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/cairo_black"
+                        android:fontFamily="@font/segoe_ui_bold"
                         android:gravity="center"
+                        android:textStyle="bold"
                         android:text="تخطي التسجيل"
-                        android:textColor="@color/signInTxt"
-                        android:textSize="14sp"
+                        android:textColor="#429A45"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -225,11 +229,12 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:background="@drawable/sign_up_buttons"
-                    android:fontFamily="@font/cairo_black"
+                    android:fontFamily="@font/segoe_ui_bold"
                     android:text="انشاء حساب جديد"
-                    android:textColor="@color/signInTxt"
-                    android:textSize="14sp" />
+                    android:textColor="#E91E63"
+                    android:textSize="16sp" />
 
             </LinearLayout>
             <include layout="@layout/admob_banner" />
