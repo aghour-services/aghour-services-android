@@ -1,13 +1,6 @@
 <resources>
     <string name="app_name">أجهور الكبرى</string>
 
-    <!--Test-->
-    <!--        <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>-->
-    <!--        <string name="ad_banner_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
-    <!--        <string name="ad_native_unit_id">ca-app-pub-3940256099942544/2247696110</string>-->
-    <!--        <string name="ad_interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>-->
-
-    <!--Release-->
     <string name="admob_app_id">ca-app-pub-1747848120826315~3829017498</string>
     <string name="ad_banner_unit_id">ca-app-pub-1747848120826315/1405022371</string>
     <string name="ad_native_unit_id">ca-app-pub-1747848120826315/1213450688</string>
