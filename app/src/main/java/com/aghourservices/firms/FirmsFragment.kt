@@ -185,6 +185,10 @@ class FirmsFragment : BaseFragment() {
                 super.onBackPressed()
                 return false
             }
+            binding.firmsShimmer.visibility == View.VISIBLE -> {
+                super.onBackPressed()
+                return false
+            }
             else -> {
                 binding.swipe.isRefreshing = true
                 binding.firmsRecyclerview.smoothScrollToPosition(0)

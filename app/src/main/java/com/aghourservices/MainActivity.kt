@@ -8,8 +8,11 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
 import com.aghourservices.categories.CategoriesFragment
@@ -18,6 +21,7 @@ import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchFragment
 import com.aghourservices.settings.SettingFragment
+import com.aghourservices.settings.ThemePreference
 import com.google.android.gms.ads.AdView
 
 class MainActivity : BaseActivity() {
@@ -42,8 +46,8 @@ class MainActivity : BaseActivity() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
+//        runnable = Runnable { interstitial.load(this@MainActivity) }
+//        handler.post(runnable)
 
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
@@ -55,19 +59,19 @@ class MainActivity : BaseActivity() {
                 R.id.settings -> fragment = SettingFragment()
             }
             loadFragments(fragment, true)
-            return@setOnItemSelectedListener true
+            true
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        handler.postDelayed(runnable, 120000)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacks(runnable)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        handler.postDelayed(runnable, 120000)
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        handler.removeCallbacks(runnable)
+//    }
 
     override fun setTitle(title: CharSequence?) {
         binding.toolBarTv.text = title

@@ -7,7 +7,6 @@
         <item name="windowActionBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <!-- Customize your theme here. -->
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:navigationBarColor">@color/navBarColor</item>
     </style>
 
@@ -39,8 +38,10 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
-    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">@color/drawerIcon</item>
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:radioButtonStyle">@color/alertBtnBg</item>
+        <item name="android:textColorPrimary">@color/alertTxtColor</item>
+        <item name="fontFamily">@font/segoe_ui_bold</item>
     </style>
 
 </resources>

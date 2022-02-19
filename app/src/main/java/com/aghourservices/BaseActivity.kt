@@ -3,9 +3,12 @@ package com.aghourservices
 import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.aghourservices.categories.CategoriesFragment
+import com.aghourservices.settings.ThemePreference
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -29,6 +32,21 @@ open class BaseActivity : AppCompatActivity() {
                 ft.addToBackStack(backStateName)
             }
             ft.commit()
+        }
+    }
+
+
+    private fun checkTheme() {
+        when (ThemePreference.AppTheme(this).darkMode) {
+            0 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            1 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            2 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
         }
     }
 }

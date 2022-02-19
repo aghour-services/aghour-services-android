@@ -42,13 +42,9 @@ class SearchFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        hideBottomNav()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideBottomNav()
 
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()

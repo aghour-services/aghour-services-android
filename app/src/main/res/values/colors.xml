@@ -124,5 +124,7 @@
     <color name="spinnerTextColor">#162735</color>
     <color name="dropDown">#FFFFFF</color>
     <color name="spinnerRipple">#DBE5EF</color>
-
+    <color name="alertBg">#FFFFFF</color>
+    <color name="alertTxtColor">#000000</color>
+    <color name="alertBtnBg">#000000</color>
 </resources>

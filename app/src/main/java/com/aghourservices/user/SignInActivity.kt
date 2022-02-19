@@ -1,5 +1,6 @@
 package com.aghourservices.user
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -22,9 +23,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://aghour-services.magdi.work/api/users/"
 
 class SignInActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivitySignInBinding
     private lateinit var adView: AdView
+    private var progressDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,48 +67,40 @@ class SignInActivity : AppCompatActivity() {
             .baseUrl(BASE_URL).build().create(SignInService::class.java)
         val retrofitData = retrofitBuilder.signIn(user.userObject())
 
+        showProgressDialog()
+
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 200) {
                     errorLogin(this@SignInActivity)
+                    hideProgressDialog()
                     return
                 }
-                binding.txtLogin.visibility = View.GONE
-                binding.progressBarLogin.visibility = View.VISIBLE
                 val userInfo = UserInfo()
                 val responseUser = response.body() as User
                 userInfo.saveUserData(this@SignInActivity, responseUser)
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                hideProgressDialog()
                 finish()
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 noInternet(this@SignInActivity)
+                hideProgressDialog()
             }
         })
     }
 
-//    fun errorLogin() {
-//        val alertDialogBuilder = AlertDialog.Builder(this)
-//        alertDialogBuilder.setTitle(R.string.error_logIn)
-//        alertDialogBuilder.setIcon(R.mipmap.cloud)
-//        alertDialogBuilder.setCancelable(true)
-//        alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
-//        val alertDialog = alertDialogBuilder.create()
-//        alertDialog.show()
-//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
-//    }
-//
-//    fun noInternet() {
-//        val alertDialogBuilder = AlertDialog.Builder(this)
-//        alertDialogBuilder.setTitle(R.string.no_internet)
-//        alertDialogBuilder.setIcon(R.mipmap.cloud)
-//        alertDialogBuilder.setCancelable(true)
-//        alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
-//        val alertDialog = alertDialogBuilder.create()
-//        alertDialog.show()
-//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
-//    }
+    private fun showProgressDialog(){
+        progressDialog = Dialog(this)
+        progressDialog!!.setContentView(R.layout.dialog_custom_progress)
+        progressDialog!!.show()
+    }
+
+    private fun hideProgressDialog(){
+        if(progressDialog != null)
+            progressDialog!!.dismiss()
+    }
 
     override fun onBackPressed() {
         finish()

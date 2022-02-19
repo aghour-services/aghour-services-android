@@ -9,6 +9,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/navBarColor</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
     <style name="WindowAnimationTransition">
@@ -37,6 +38,12 @@
         <item name="android:windowBackground">@color/splashScreenBg</item>
         <item name="android:navigationBarColor">@color/navBarColor</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:radioButtonStyle">@color/alertBtnBg</item>
+        <item name="android:textColorPrimary">@color/alertTxtColor</item>
+        <item name="fontFamily">@font/segoe_ui_bold</item>
     </style>
 
     <!--All Text Font Style-->

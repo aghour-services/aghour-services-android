@@ -7,19 +7,21 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import com.aghourservices.BaseActivity
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.cache.Settings
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.ActivitySplashScreenBinding
+import com.aghourservices.settings.ThemePreference
 import com.aghourservices.user.SignUpActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 
 @SuppressLint("CustomSplashScreen")
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : BaseActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
@@ -46,7 +48,7 @@ class SplashScreen : AppCompatActivity() {
             }
             startActivity(intent)
             finish()
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }, 500)
     }
 }

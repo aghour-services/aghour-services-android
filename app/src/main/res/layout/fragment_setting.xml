@@ -51,9 +51,9 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="90dp"
             android:background="@drawable/create_acount"
+            android:elevation="15dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:gravity="center"
-            android:elevation="15dp"
             android:text="انشاء حساب"
             android:textAlignment="center"
             android:textColor="@color/createAccountText"
@@ -127,22 +127,22 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="15dp"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <LinearLayout
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:gravity="bottom"
             android:layout_gravity="bottom"
+            android:gravity="bottom"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/darMode"
+                android:id="@+id/darkMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -150,7 +150,6 @@
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/share"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -162,27 +161,16 @@
                     android:src="@mipmap/dark_mode" />
 
                 <TextView
-                    android:id="@+id/switchModeTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left|center"
-                    android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/segoe_ui_regular"
-                    android:gravity="left|center"
-                    android:text="الوضع الليلي"
-                    android:textColor="@color/createAccountText"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switchMode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/segoe_ui_bold"
-                    android:textSize="14sp"
-                    android:thumb="@drawable/custom_thumb"
-                    app:showText="true"
-                    app:track="@drawable/custom_track" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="end"
+                    android:text="الوضع المظلم"
+                    android:textColor="@color/dialogText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout

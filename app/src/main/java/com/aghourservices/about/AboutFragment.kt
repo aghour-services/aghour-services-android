@@ -24,15 +24,11 @@ class AboutFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        hideBottomNav()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
+        hideBottomNav()
 
         binding.backBtn.setOnClickListener {
             requireActivity().onBackPressed()

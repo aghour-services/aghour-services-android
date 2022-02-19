@@ -76,5 +76,7 @@
     <color name="dropDown">#EDEDED</color>
     <color name="spinnerBg">#223445</color>
     <color name="spinnerRipple">#4D6C8A</color>
-
+    <color name="alertBg">#2C2C2C</color>
+    <color name="alertTxtColor">#FFFFFF</color>
+    <color name="alertBtnBg">#F1F1F1</color>
 </resources>

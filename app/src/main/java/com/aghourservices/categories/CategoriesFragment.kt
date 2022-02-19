@@ -1,12 +1,11 @@
 package com.aghourservices.categories
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -16,6 +15,7 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.firms.FirmsFragment
+import com.aghourservices.settings.ThemePreference
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -102,7 +102,15 @@ class CategoriesFragment : BaseFragment() {
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
                 progressBar()
-                Snackbar.make(requireContext(),binding.root, "لا يوجد إنترنت",Snackbar.LENGTH_SHORT).show()
+                try {
+                    Snackbar.make(
+                        requireContext(),
+                        binding.root,
+                        "لا يوجد إنترنت",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception) {
+                }
             }
         })
     }

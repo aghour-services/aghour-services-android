@@ -61,6 +61,9 @@
     <string name="doneButton">تمام</string>
     <string name="positiveButton">نعم</string>
     <string name="negativeButton">لا</string>
+    <string name="cancelButton">إلغاء</string>
     <string name="settings_fragment">الإعدادات</string>
     <string name="selected_item">تم اختيار</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

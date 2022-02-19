@@ -116,20 +116,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/btnLogin" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar_Login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:indeterminateTint="@color/white"
-                    android:scaleX="0.8"
-                    android:scaleY="0.8"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnLogin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/btnLogin"
-                    app:layout_constraintTop_toTopOf="@+id/btnLogin" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
