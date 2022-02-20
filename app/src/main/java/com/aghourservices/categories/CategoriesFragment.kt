@@ -104,7 +104,7 @@ class CategoriesFragment : BaseFragment() {
                 progressBar()
                 try {
                     Snackbar.make(
-                        requireContext(),
+                        requireActivity(),
                         binding.root,
                         "لا يوجد إنترنت",
                         Snackbar.LENGTH_SHORT

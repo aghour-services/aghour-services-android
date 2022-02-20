@@ -23,6 +23,7 @@ import com.google.firebase.messaging.ktx.messaging
 class SplashScreen : BaseActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        checkTheme()
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -50,5 +51,22 @@ class SplashScreen : BaseActivity() {
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }, 500)
+    }
+
+    fun checkTheme() {
+        when (ThemePreference(this).darkMode) {
+            0 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                delegate.applyDayNight()
+            }
+            1 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                delegate.applyDayNight()
+            }
+            2 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                delegate.applyDayNight()
+            }
+        }
     }
 }

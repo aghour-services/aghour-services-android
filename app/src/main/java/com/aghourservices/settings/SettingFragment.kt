@@ -1,6 +1,7 @@
 package com.aghourservices.settings
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,6 +39,9 @@ class SettingFragment : BaseFragment() {
         binding.backBtn.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        binding.darkMode.setOnClickListener {
+            chooseThemeDialog()
+        }
         binding.facebook.setOnClickListener {
             facebook()
         }
@@ -52,10 +56,6 @@ class SettingFragment : BaseFragment() {
         }
         binding.logOut.setOnClickListener {
             showOnCloseDialog(requireActivity())
-        }
-
-        binding.darkMode.setOnClickListener {
-            chooseThemeDialog()
         }
     }
 
@@ -107,36 +107,38 @@ class SettingFragment : BaseFragment() {
     } **/
 
     private fun chooseThemeDialog() {
+        val activity = (requireActivity() as AppCompatActivity)
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.choose_theme_text))
         builder.setNegativeButton(R.string.cancelButton) { _, _ -> }
         val styles = arrayOf("قيد التشغيل", "متوقف", "استخدام النظام الإفتراضي")
-        val checkedItem = ThemePreference.AppTheme(requireContext()).darkMode
-//        val activity = (activity as AppCompatActivity)
-
+        val checkedItem = ThemePreference(requireContext()).darkMode
         builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
             when (which) {
                 0 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    ThemePreference.AppTheme(requireContext()).darkMode = 0
+                    ThemePreference(requireContext()).darkMode = 0
+                    activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
                 1 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    ThemePreference.AppTheme(requireContext()).darkMode = 1
+                    ThemePreference(requireContext()).darkMode = 1
+                    activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
                 2 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                    ThemePreference.AppTheme(requireContext()).darkMode = 2
+                    ThemePreference(requireContext()).darkMode = 2
+                    activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
-
             }
         }
         val dialog = builder.create()
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20.toFloat()
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18.toFloat()
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextAppearance(R.style.SegoeTextBold)
         }
