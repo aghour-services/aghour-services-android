@@ -14,12 +14,11 @@ class SearchResultAdapter(
     private val onItemClicked: (position: Int) -> Unit,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var itemsCountToShowAds = 2
+    private var itemsCountToShowAds = 1
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.search_result_card, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_result_card, parent, false)
         return SearchResultViewHolder(view, onItemClicked)
     }
 

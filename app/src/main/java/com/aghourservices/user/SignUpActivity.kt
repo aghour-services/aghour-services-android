@@ -16,6 +16,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.graphics.Color
 import android.text.Html
 import androidx.appcompat.app.AlertDialog
@@ -33,6 +34,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var adView: AdView
+    private var progressDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +75,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun createUser(user: User) {
+        showProgressDialog()
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(SignUpService::class.java)
@@ -82,20 +85,22 @@ class SignUpActivity : AppCompatActivity() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 201) {
                     errorLogin(this@SignUpActivity)
+                    hideProgressDialog()
                     return
                 }
                 binding.accountTxtCreate.visibility =View.GONE
                 binding.progressBarRegister.visibility = View.VISIBLE
                 val userInfo = UserInfo()
                 val responseUser = response.body() as User
-
                 userInfo.saveUserData(this@SignUpActivity, responseUser)
                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                hideProgressDialog()
                 finish()
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 noInternet(this@SignUpActivity)
+                hideProgressDialog()
             }
         })
     }
@@ -115,27 +120,17 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-//    fun errorLogin() {
-//        val alertDialogBuilder = AlertDialog.Builder(this)
-//        alertDialogBuilder.setTitle(R.string.error_logIn)
-//        alertDialogBuilder.setIcon(R.mipmap.cloud)
-//        alertDialogBuilder.setCancelable(true)
-//        alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
-//        val alertDialog = alertDialogBuilder.create()
-//        alertDialog.show()
-//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
-//    }
-//
-//    fun noInternet() {
-//        val alertDialogBuilder = AlertDialog.Builder(this)
-//        alertDialogBuilder.setTitle(R.string.no_internet)
-//        alertDialogBuilder.setIcon(R.mipmap.cloud)
-//        alertDialogBuilder.setCancelable(true)
-//        alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
-//        val alertDialog = alertDialogBuilder.create()
-//        alertDialog.show()
-//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
-//    }
+    private fun showProgressDialog(){
+        progressDialog = Dialog(this)
+        progressDialog!!.setContentView(R.layout.dialog_custom_progress)
+        progressDialog!!.setCancelable(false)
+        progressDialog!!.show()
+    }
+
+    private fun hideProgressDialog(){
+        if(progressDialog != null)
+            progressDialog!!.dismiss()
+    }
 
     override fun onBackPressed() {
         finish()

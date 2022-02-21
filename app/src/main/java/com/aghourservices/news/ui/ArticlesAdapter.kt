@@ -10,15 +10,16 @@ import com.aghourservices.news.Article
 
 class ArticlesAdapter(
     val context: Context,
-    private val arrayList: ArrayList<Article>
+    private val arrayList: ArrayList<Article>,
+    private val onItemClicked: (position: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-//    private var itemsCountToShowAds = 3
+    private var itemsCountToShowAds = 1
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.news_card, parent, false)
-        return ArticlesViewHolder(view)
+        return ArticlesViewHolder(view, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -27,14 +28,14 @@ class ArticlesAdapter(
         hold.description.text = item.description
         hold.date.text = item.created_at
 
-//        if (getItemViewType(position) == 0) {
-//            NativeAdViewHolder(context, hold.adFrame)
-//        }
+        if (getItemViewType(position) == 0) {
+            NativeAdViewHolder(context, hold.adFrame)
+        }
     }
 
-//    override fun getItemViewType(position: Int): Int {
-//        return (position + 1) % (itemsCountToShowAds + 1)
-//    }
+    override fun getItemViewType(position: Int): Int {
+        return (position + 1) % (itemsCountToShowAds + 1)
+    }
 
     override fun getItemCount(): Int {
         return itemsCount

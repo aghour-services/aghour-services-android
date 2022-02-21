@@ -1,6 +1,9 @@
 package com.aghourservices.news
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,12 +11,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
+import com.aghourservices.firms.FirmsFragment
 import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.ui.ArticlesAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -109,7 +115,12 @@ class NewsFragment : BaseFragment() {
                 articleList.addAll(result)
                 setAdapter(articleList)
                 stopShimmerAnimation()
-                Snackbar.make(requireContext(),binding.root, "لا يوجد إنترنت",Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    requireContext(),
+                    binding.root,
+                    "لا يوجد إنترنت",
+                    500
+                ).show()
                 if (articleList.isEmpty()) {
                     noInternetConnection()
                 }
@@ -119,13 +130,19 @@ class NewsFragment : BaseFragment() {
 
     private fun setAdapter(articleList: ArrayList<Article>) {
         try {
-            adapter = ArticlesAdapter(requireContext(), articleList)
+            adapter = ArticlesAdapter(requireContext(), articleList) { position ->
+                onListItemClick(position)
+            }
             binding.newsRecyclerview.adapter = adapter
         } catch (e: Exception) {
-
         }
     }
 
+    private fun onListItemClick(position: Int) {
+        val articleId = articleList[position].id
+        val articleDesc = articleList[position].description
+        val articleTime = articleList[position].created_at
+    }
 
     private fun init() {
         Realm.init(requireActivity())

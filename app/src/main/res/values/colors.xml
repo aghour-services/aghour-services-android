@@ -127,4 +127,9 @@
     <color name="alertBg">#FFFFFF</color>
     <color name="alertTxtColor">#000000</color>
     <color name="alertBtnBg">#000000</color>
+    <color name="dialogBg">#FFFFFF</color>
+    <color name="news_ripple">#C1BEBE</color>
+    <color name="toastColor">#0C141A</color>
+    <color name="firmsRipple">#BBBBBB</color>
+
 </resources>

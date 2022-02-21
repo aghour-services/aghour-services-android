@@ -1,5 +1,6 @@
 package com.aghourservices.firms
 
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -32,7 +33,7 @@ private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 class AddDataFragment : BaseFragment() {
     private lateinit var binding: FragmentAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
-    private lateinit var media: MediaPlayer
+    private var progressDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,15 +75,6 @@ class AddDataFragment : BaseFragment() {
         binding.btnAddData.setOnClickListener(View.OnClickListener {
             val selectedCategoryPosition = binding.spinner.selectedItemPosition
             val selectedCategory = categoryList[selectedCategoryPosition]
-
-//            media = MediaPlayer.create(requireContext(), R.raw.error)
-//            media.setOnPreparedListener {
-//                media.start()
-//            }
-//            media.setOnCompletionListener {
-//                media.release()
-//            }
-
             val name = binding.name.text.toString()
             val address = binding.address.text.toString()
             val description = binding.description.text.toString()
@@ -100,7 +92,6 @@ class AddDataFragment : BaseFragment() {
                 binding.address.error = "العنوان"
                 binding.phoneNumber.error = "اكتب رقم التليفون"
                 binding.description.error = "اكتب وصف عن صاحب المكان"
-
                 return@OnClickListener
             } else {
                 createFirm(firm)

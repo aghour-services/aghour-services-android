@@ -1,5 +1,8 @@
 package com.aghourservices.categories.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,8 +18,10 @@ class CategoryViewHolder(
     var firstTxt: TextView = itemView.findViewById(R.id.category_title_tv)
 
     init {
-        itemView.setOnClickListener(this)
+        itemView.setOnClickListener (this)
     }
+
+
 
     override fun onClick(v: View) {
         onItemClicked(absoluteAdapterPosition)

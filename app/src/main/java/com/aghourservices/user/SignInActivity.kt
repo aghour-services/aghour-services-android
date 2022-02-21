@@ -62,12 +62,12 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun loginUser(user: User) {
+        showProgressDialog()
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(SignInService::class.java)
         val retrofitData = retrofitBuilder.signIn(user.userObject())
 
-        showProgressDialog()
 
         retrofitData.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -94,6 +94,7 @@ class SignInActivity : AppCompatActivity() {
     private fun showProgressDialog(){
         progressDialog = Dialog(this)
         progressDialog!!.setContentView(R.layout.dialog_custom_progress)
+        progressDialog!!.setCancelable(false)
         progressDialog!!.show()
     }
 

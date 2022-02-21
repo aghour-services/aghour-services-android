@@ -4,15 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
 import com.aghourservices.categories.CategoriesFragment
@@ -21,7 +16,6 @@ import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchFragment
 import com.aghourservices.settings.SettingFragment
-import com.aghourservices.settings.ThemePreference
 import com.google.android.gms.ads.AdView
 
 class MainActivity : BaseActivity() {

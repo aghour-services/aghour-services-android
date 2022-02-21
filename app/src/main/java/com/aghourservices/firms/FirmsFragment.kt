@@ -156,7 +156,6 @@ class FirmsFragment : BaseFragment() {
             }
             binding.firmsRecyclerview.adapter = adapter
         } catch (e: Exception) {
-
         }
     }
 

@@ -1,6 +1,7 @@
 package com.aghourservices.categories
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,7 @@ class CategoriesFragment : BaseFragment() {
     private lateinit var realm: Realm
     private lateinit var adapter: CategoriesAdapter
     private lateinit var categoryList: ArrayList<Category>
+    private lateinit var handler: Handler
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,7 +109,7 @@ class CategoriesFragment : BaseFragment() {
                         requireActivity(),
                         binding.root,
                         "لا يوجد إنترنت",
-                        Snackbar.LENGTH_SHORT
+                        500
                     ).show()
                 } catch (e: Exception) {
                 }
@@ -138,5 +140,18 @@ class CategoriesFragment : BaseFragment() {
     private fun progressBar() {
         binding.progressBar.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
+    }
+
+    override fun onBackPressed(): Boolean {
+        val layoutManager = binding.categoriesRecyclerview.layoutManager as LinearLayoutManager
+        when {
+            layoutManager.findFirstCompletelyVisibleItemPosition() == 0 -> {
+                requireActivity().finishAffinity()
+            }
+            else -> {
+                binding.categoriesRecyclerview.smoothScrollToPosition(0)
+            }
+        }
+        return true
     }
 }

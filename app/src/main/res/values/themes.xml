@@ -23,8 +23,7 @@
         <item name="colorControlNormal">@color/white</item>
     </style>
 
-    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar">
-    </style>
+    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar" />
 
     <style name="AddDataTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
@@ -54,6 +53,7 @@
     <style name="SegoeTextRegular" parent="android:Widget.TextView">
         <item name="fontFamily">@font/segoe_ui_regular</item>
     </style>
+
     <style name="SegoeTextBold" parent="android:Widget.TextView">
         <item name="fontFamily">@font/segoe_ui_bold</item>
     </style>

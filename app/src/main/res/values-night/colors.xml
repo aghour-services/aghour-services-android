@@ -41,7 +41,7 @@
     <color name="itemNavColor">#FFFFFF</color>
     <color name="searchBg">#080B0E</color>
     <color name="backIconBg">#080B0E</color>
-    <color name="backIconSelector">#151C23</color>
+    <color name="backIconSelector">#36485A</color>
     <color name="swipeColor">#FFFFFF</color>
     <color name="swipeBg">#0F1317</color>
     <color name="navDrawerBg">#191919</color>
@@ -79,4 +79,8 @@
     <color name="alertBg">#2C2C2C</color>
     <color name="alertTxtColor">#FFFFFF</color>
     <color name="alertBtnBg">#F1F1F1</color>
+    <color name="dialogBg">#162835</color>
+    <color name="news_ripple">#2E4453</color>
+    <color name="firmsRipple">#20323E</color>
+
 </resources>

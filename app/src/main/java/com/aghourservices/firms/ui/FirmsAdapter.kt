@@ -14,7 +14,7 @@ class FirmsAdapter(
     private val onItemClicked: (position: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var itemsCountToShowAds = 4
+    private var itemsCountToShowAds = 2
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -29,7 +29,7 @@ class FirmsAdapter(
         hold.name.text = item.name
         hold.address.text = item.address
         hold.description.text = item.description
-        hold.imageButton.text = item.phone_number
+        hold.callButton.text = item.phone_number
 
         if (getItemViewType(position) == 0) {
             NativeAdViewHolder(context, hold.adFrame)
