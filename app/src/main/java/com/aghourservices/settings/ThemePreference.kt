@@ -1,6 +1,5 @@
 package com.aghourservices.settings
 
-import android.app.Application
 import android.content.Context
 import androidx.preference.PreferenceManager
 

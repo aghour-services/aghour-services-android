@@ -54,8 +54,7 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
         binding.btnUseApp.setOnClickListener {
-            binding.progressBarUseApp.visibility = View.VISIBLE
-            binding.txtUseApp.visibility = View.GONE
+            showProgressDialog()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

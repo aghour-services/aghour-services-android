@@ -53,7 +53,7 @@ class SplashScreen : BaseActivity() {
         }, 500)
     }
 
-    fun checkTheme() {
+    private fun checkTheme() {
         when (ThemePreference(this).darkMode) {
             0 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

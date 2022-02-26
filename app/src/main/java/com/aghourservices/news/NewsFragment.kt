@@ -1,9 +1,8 @@
 package com.aghourservices.news
 
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
+import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,15 +10,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
-import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
-import com.aghourservices.firms.FirmsFragment
 import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.ui.ArticlesAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -53,7 +50,6 @@ class NewsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.news_fragment)
-        showBottomNav()
 
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.show()
@@ -139,9 +135,26 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun onListItemClick(position: Int) {
-        val articleId = articleList[position].id
-        val articleDesc = articleList[position].description
-        val articleTime = articleList[position].created_at
+        val article = articleList[position]
+        val description = article.description
+        shareNew(description)
+    }
+
+    private fun shareNew(description: String) {
+        val shareButton: TextView = requireActivity().findViewById(R.id.shareNews)
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "$description\nتم مشاركة هذا الخبر من تطبيق خدمات أجهور الكبرى\nلتحميل التطبيق اضغط هنا-> shorturl.at/xG123".trim()
+            )
+            type = "text/plain"
+        }
+        startActivity(shareIntent)
+
+        shareButton.setOnClickListener {
+            shareNew(description)
+        }
     }
 
     private fun init() {

@@ -10,7 +10,7 @@ import io.realm.annotations.RealmClass
 open class Article : RealmObject() {
     @PrimaryKey
     var id: Int = 0
-    var description: String = ""
+    var description: String = "".trim()
     var created_at: String = ""
 
     fun toJsonObject(): JsonObject {

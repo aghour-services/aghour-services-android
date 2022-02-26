@@ -62,8 +62,7 @@ class SignUpActivity : AppCompatActivity() {
         })
 
         binding.btnUseApp.setOnClickListener {
-            binding.useAppTxt.visibility = View.GONE
-            binding.progressBarUseApp.visibility = View.VISIBLE
+            showProgressDialog()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
             doNotShowAgain()
@@ -88,8 +87,6 @@ class SignUpActivity : AppCompatActivity() {
                     hideProgressDialog()
                     return
                 }
-                binding.accountTxtCreate.visibility =View.GONE
-                binding.progressBarRegister.visibility = View.VISIBLE
                 val userInfo = UserInfo()
                 val responseUser = response.body() as User
                 userInfo.saveUserData(this@SignUpActivity, responseUser)

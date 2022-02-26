@@ -25,7 +25,7 @@ class ArticlesAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val hold = holder as ArticlesViewHolder
         val item = arrayList[position]
-        hold.description.text = item.description
+        hold.description.text = item.description.trim()
         hold.date.text = item.created_at
 
         if (getItemViewType(position) == 0) {

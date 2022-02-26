@@ -1,13 +1,11 @@
 package com.aghourservices.firms.ui
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 
@@ -20,20 +18,11 @@ class FirmsViewHolder(
     var description: TextView = itemView.findViewById(R.id.description)
     var address: TextView = itemView.findViewById(R.id.address)
     var callButton: Button = itemView.findViewById(R.id.btnCall)
+    private val shareFirm: TextView = itemView.findViewById(R.id.shareFirm)
 
     init {
         callButton.setOnClickListener(this)
-        callButton.setOnLongClickListener {
-            copyClipboard()
-        }
-    }
-
-    private fun copyClipboard(): Boolean {
-        val clipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip: ClipData = ClipData.newPlainText("Label", callButton.text)
-        clipboardManager.setPrimaryClip(clip)
-        Toast.makeText(itemView.context, "تم نسخ رقم الهاتف", Toast.LENGTH_LONG).show()
-        return true
+        shareFirm.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {

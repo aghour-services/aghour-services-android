@@ -52,7 +52,7 @@
     <color name="colorControl">#242424</color>
     <color name="textModeSwitch">#FFFFFF</color>
     <color name="backIconTint">#FFFFFF</color>
-    <color name="hint">#656565</color>
+    <color name="hint">#E0E0E0</color>
     <color name="textDismiss">#FAFAFA</color>
     <color name="dialogText">#FFFFFF</color>
     <color name="native_ad_bg">#193145</color>
@@ -82,5 +82,13 @@
     <color name="dialogBg">#162835</color>
     <color name="news_ripple">#2E4453</color>
     <color name="firmsRipple">#20323E</color>
-
+    <color name="shareText">#FFFFFF</color>
+    <color name="shareRipple">#20323E</color>
+    <color name="edtTextBg">#444E57</color>
+    <color name="about">#E6E6E6</color>
+    <color name="passToggle">#C6C6C6</color>
+    <color name="dontShow">#E8E8E8</color>
+    <color name="checkBox">#B8BBBD</color>
+    <color name="searchTxt">#0E0E0E</color>
+    <color name="searchHint">#0E0E0E</color>
 </resources>

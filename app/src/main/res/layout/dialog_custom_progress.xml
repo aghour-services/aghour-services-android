@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="برجاء الإنتظار"
+            android:text="جاري التحميل"
             android:textColor="@color/dialogText"
             android:textSize="22sp" />
     </LinearLayout>

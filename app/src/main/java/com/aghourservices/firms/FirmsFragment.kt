@@ -1,6 +1,8 @@
 package com.aghourservices.firms
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -8,9 +10,9 @@ import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.MeasureSpec
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -19,7 +21,6 @@ import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -27,6 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
@@ -161,10 +163,37 @@ class FirmsFragment : BaseFragment() {
 
     private fun onListItemClick(position: Int) {
         val firm = firmsList[position]
+        val name = firm.name
+        val address = firm.address
+        val description = firm.description
         val phoneNumber = firm.phone_number
         val eventName = "call_${firm.name}"
         Event.sendFirebaseEvent(eventName, phoneNumber)
         callPhone(phoneNumber)
+
+        shareFirm(name, address, description, phoneNumber)
+    }
+
+    private fun shareFirm(
+        name: String,
+        address: String,
+        description: String,
+        phoneNumber: String
+    ) {
+        val shareFirmBtn: TextView = requireActivity().findViewById(R.id.shareFirm)
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT,
+                name + "\n" + address + "\n" + description + "\n" + phoneNumber
+            )
+            type = "text/plain"
+        }
+        startActivity(shareIntent)
+
+        shareFirmBtn.setOnClickListener {
+            shareFirm(name, address, description, phoneNumber)
+        }
     }
 
     private fun callPhone(phoneNumber: String) {
