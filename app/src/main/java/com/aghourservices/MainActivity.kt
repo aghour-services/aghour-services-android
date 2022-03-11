@@ -6,7 +6,9 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
@@ -17,6 +19,7 @@ import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchFragment
 import com.aghourservices.settings.SettingFragment
 import com.google.android.gms.ads.AdView
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,12 +39,11 @@ class MainActivity : BaseActivity() {
         supportActionBar?.show()
         binding.bottomView.itemIconTintList = null
         val bottomNavView = binding.bottomView
-
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-//        runnable = Runnable { interstitial.load(this@MainActivity) }
-//        handler.post(runnable)
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
 
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
@@ -57,15 +59,15 @@ class MainActivity : BaseActivity() {
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        handler.postDelayed(runnable, 120000)
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        handler.removeCallbacks(runnable)
-//    }
+    override fun onResume() {
+        super.onResume()
+        handler.postDelayed(runnable, 120000)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable)
+    }
 
     override fun setTitle(title: CharSequence?) {
         binding.toolBarTv.text = title

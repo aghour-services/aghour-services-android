@@ -44,4 +44,10 @@
         <item name="fontFamily">@font/segoe_ui_bold</item>
     </style>
 
+    <style name="my_dialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">0dp</item>
+        <item name="android:windowMinWidthMinor">0dp</item>
+        <item name="android:background">@drawable/news_card_ripple</item>
+        <item name="android:textColor">@color/dialogText</item>
+    </style>
 </resources>

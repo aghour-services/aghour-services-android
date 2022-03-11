@@ -1,4 +1,4 @@
-package com.aghourservices.news
+package com.aghourservices.news.api
 
 import com.google.gson.JsonObject
 import io.realm.RealmObject

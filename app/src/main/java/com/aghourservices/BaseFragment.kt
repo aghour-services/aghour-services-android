@@ -32,7 +32,7 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     }
 
     fun notify(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun showBottomNav() {
@@ -48,8 +48,9 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     fun loadFragments(fragment: Fragment?, stacked: Boolean) {
         val backStateName: String = fragment?.javaClass.toString()
         val manager: FragmentManager = requireActivity().supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
+
         if (fragment != null) {
-            val ft: FragmentTransaction = manager.beginTransaction()
             ft.setCustomAnimations(
                 R.anim.slide_in_right,
                 R.anim.slide_out_left,
@@ -65,7 +66,7 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     }
 
     fun shareApp() {
-        Event.sendFirebaseEvent("Share", "")
+        Event.sendFirebaseEvent("Share_App", "")
         val shareText = getString(R.string.shareText)
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -117,14 +118,17 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 18.toFloat()
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18.toFloat()
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextAppearance(R.style.SegoeTextBold)
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextAppearance(R.style.SegoeTextBold)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextAppearance(R.style.SegoeTextBold)
         }
-
     }
 }

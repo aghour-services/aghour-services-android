@@ -17,7 +17,6 @@
             android:layout_width="52dp"
             android:layout_height="48dp"
             android:padding="10dp"
-            android:layout_margin="4dp"
             android:layout_gravity="left|center"
             android:background="@drawable/about_app_back_ripple"
             android:src="@drawable/ic_back_settings" />
@@ -28,11 +27,10 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:paddingRight="40dp"
+            android:paddingRight="45dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
             android:text="@string/about_fragment"
-            android:textAlignment="center"
             android:textColor="@color/toolbarText"
             android:textSize="22sp"
             android:textStyle="bold" />

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
-import com.aghourservices.news.Article
+import com.aghourservices.news.api.Article
 
 class ArticlesAdapter(
     val context: Context,
@@ -14,7 +14,7 @@ class ArticlesAdapter(
     private val onItemClicked: (position: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var itemsCountToShowAds = 1
+    private var itemsCountToShowAds = 2
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -24,9 +24,8 @@ class ArticlesAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val hold = holder as ArticlesViewHolder
-        val item = arrayList[position]
-        hold.description.text = item.description.trim()
-        hold.date.text = item.created_at
+        val article = arrayList[position]
+        hold.setNewsList(article)
 
         if (getItemViewType(position) == 0) {
             NativeAdViewHolder(context, hold.adFrame)

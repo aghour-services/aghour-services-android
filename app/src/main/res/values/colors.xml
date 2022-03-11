@@ -35,7 +35,7 @@
     <color name="shimmerColor">#C5C5C5</color>
     <color name="news_bg">#ECECEC</color>
     <color name="categoryCardBg">#FFFFFF</color>
-    <color name="categoryCardPress">#CCCCCC</color>
+    <color name="categoryCardPress">#CFCFCF</color>
     <color name="shimmerBg">#FFFFFF</color>
     <color name="newsDescription">#203647</color>
     <color name="time">#439446</color>
@@ -44,7 +44,7 @@
     <color name="swipeColor">#59A5E1</color>
     <color name="callBg">#FFFFFF</color>
     <color name="callStroke">#4CAF50</color>
-    <color name="callPress">#D2F1D3</color>
+    <color name="callPress">#EFFDEF</color>
     <color name="edtStroke">#1B1B1B</color>
     <color name="skipBtnStroke">#000000</color>
     <color name="skipBtnBg">#FFFFFF</color>
@@ -131,12 +131,11 @@
     <color name="dialogBg">#FFFFFF</color>
     <color name="news_ripple">#C1BEBE</color>
     <color name="toastColor">#0C141A</color>
-    <color name="firmsRipple">#BBBBBB</color>
+    <color name="firmsRipple">#E3E3E3</color>
     <color name="shareText">#000000</color>
     <color name="shareRipple">#E4E4E4</color>
     <color name="favShadow">#A2A2A2</color>
     <color name="dontShow">#2982C8</color>
     <color name="searchTxt">#4D4D4D</color>
     <color name="searchHint">#4D4D4D</color>
-
 </resources>

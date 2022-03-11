@@ -22,6 +22,7 @@ import com.google.firebase.messaging.ktx.messaging
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : BaseActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         checkTheme()
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class SplashScreen : BaseActivity() {
             lateinit var intent: Intent
             val userInfo = UserInfo()
             val settings = Settings()
+
             val skip = userInfo.isUserLoggedIn(this) || settings.showRigsterActivity(this)
 
             intent = if (skip) {
@@ -47,6 +49,7 @@ class SplashScreen : BaseActivity() {
             } else {
                 Intent(this, SignUpActivity::class.java)
             }
+
             startActivity(intent)
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

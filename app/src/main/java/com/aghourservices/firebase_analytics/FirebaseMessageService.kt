@@ -40,7 +40,6 @@ class FirebaseMessageService : FirebaseMessagingService() {
         return remoteView
     }
 
-
     //generate the notification
     @SuppressLint("UnspecifiedImmutableFlag")
     fun generateNotification(title: String, message: String) {

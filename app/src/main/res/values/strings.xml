@@ -41,8 +41,6 @@
     <string name="data_added">"تم ارسال البيانات وسيتم الموافقة عليها فورا 😃"</string>
     <string name="no_internet">" عفوا لا يوجد انترنت 😑"</string>
     <string name="error_logIn">"خطأ في التسجيل يرجي اعادة المحاولة 😑"</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="categories_fragment">الرئيسية</string>
     <string name="about_fragment">معلومات عن التطبيق</string>
@@ -64,7 +62,10 @@
     <string name="cancelButton">إلغاء</string>
     <string name="settings_fragment">الإعدادات</string>
     <string name="selected_item">تم اختيار</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favorite_fragment">المفضلة</string>
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="news_share">نسخ الخبر</string>
+
 </resources>

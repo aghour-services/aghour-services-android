@@ -50,6 +50,7 @@ class SignUpActivity : AppCompatActivity() {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
             val valid = name.isEmpty() || email.isEmpty() || password.isEmpty()
+
             if (valid) {
                 binding.name.error = "اكتب اسمك"
                 binding.email.error = "ادخل بريدك الالكتروني"
@@ -81,6 +82,7 @@ class SignUpActivity : AppCompatActivity() {
         val retrofitData = retrofitBuilder.signUp(user.userObject())
 
         retrofitData.enqueue(object : Callback<User> {
+
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 201) {
                     errorLogin(this@SignUpActivity)

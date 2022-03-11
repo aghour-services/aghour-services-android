@@ -21,6 +21,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/ic_login_bk"
                 android:backgroundTint="@color/login_bk_tint" />
 
@@ -40,18 +41,18 @@
                 android:id="@+id/textInputEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:hintEnabled="false">
+                app:hintEnabled="false"
+                android:layout_marginTop="5dp">
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:hint="@string/login_email_hint"
                     android:background="@drawable/edt_text_background"
                     android:drawableRight="@drawable/ic_email"
                     android:gravity="left"
-                    android:hint="@string/login_email_hint"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:padding="14dp"
@@ -65,8 +66,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
+                app:hintEnabled="false"
                 app:passwordToggleTint="@color/passToggle">
 
                 <EditText
@@ -74,9 +75,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:hint="@string/login_password_hint"
                     android:background="@drawable/edt_text_background"
                     android:gravity="left"
-                    android:hint="@string/login_password_hint"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -90,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/login_button"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
@@ -143,7 +144,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <Button
                     android:id="@+id/btn_use_app"
@@ -179,6 +181,7 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
             <include layout="@layout/admob_banner" />
         </LinearLayout>
     </ScrollView>

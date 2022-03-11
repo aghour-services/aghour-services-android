@@ -23,7 +23,6 @@ class SettingFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentSettingBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -33,6 +32,7 @@ class SettingFragment : BaseFragment() {
         checkUser()
         hideUserLogOut()
         hideBottomNav()
+
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
 
@@ -61,10 +61,11 @@ class SettingFragment : BaseFragment() {
 
     private fun checkUser() {
         val userInfo = UserInfo()
+        val user = userInfo.getUserData(requireActivity())
+
         if (userInfo.isUserLoggedIn(requireActivity())) {
             binding.btnRegister.visibility = View.GONE
             binding.userDataView.visibility = View.VISIBLE
-            val user = userInfo.getUserData(requireActivity())
             binding.userName.text = user.name
             binding.userMobile.text = user.mobile
             binding.userEmail.text = user.email
@@ -84,27 +85,6 @@ class SettingFragment : BaseFragment() {
             binding.logOut.visibility = View.GONE
         }
     }
-
-    /**
-    private fun appTheme(){
-    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-    requireActivity().setTheme(R.style.Theme_DarkApp)
-    } else {
-    requireActivity().setTheme(R.style.Theme_LightApp)
-    }
-    }
-    private fun switchChecked(){
-    if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-    binding.switchMode.isChecked = true
-    }
-    binding.switchMode.setOnCheckedChangeListener { _, isChecked ->
-    if (isChecked){
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    }else{
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-    }
-    }
-    } **/
 
     private fun chooseThemeDialog() {
         val activity = (requireActivity() as AppCompatActivity)

@@ -21,8 +21,6 @@ class CategoryViewHolder(
         itemView.setOnClickListener (this)
     }
 
-
-
     override fun onClick(v: View) {
         onItemClicked(absoluteAdapterPosition)
     }

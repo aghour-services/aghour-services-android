@@ -90,15 +90,15 @@ class SignInActivity : AppCompatActivity() {
         })
     }
 
-    private fun showProgressDialog(){
+    private fun showProgressDialog() {
         progressDialog = Dialog(this)
         progressDialog!!.setContentView(R.layout.dialog_custom_progress)
         progressDialog!!.setCancelable(false)
         progressDialog!!.show()
     }
 
-    private fun hideProgressDialog(){
-        if(progressDialog != null)
+    private fun hideProgressDialog() {
+        if (progressDialog != null)
             progressDialog!!.dismiss()
     }
 

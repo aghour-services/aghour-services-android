@@ -2,6 +2,7 @@ package com.aghourservices.news
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -12,11 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
+import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.ui.ArticlesAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -37,6 +38,7 @@ class NewsFragment : BaseFragment() {
     private lateinit var handler: Handler
     private lateinit var binding: FragmentNewsBinding
     private var categoryId = 0
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +52,7 @@ class NewsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.news_fragment)
+        showBottomNav()
 
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.show()
@@ -73,6 +76,8 @@ class NewsFragment : BaseFragment() {
                     binding.swipe.isRefreshing = false
                     loadArticles(categoryId)
                 }, 1000)
+                mediaPlayer = MediaPlayer.create(requireContext(), R.raw.refresh)
+                mediaPlayer.start()
             }
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
@@ -111,17 +116,26 @@ class NewsFragment : BaseFragment() {
                 articleList.addAll(result)
                 setAdapter(articleList)
                 stopShimmerAnimation()
-                Snackbar.make(
-                    requireContext(),
-                    binding.root,
-                    "لا يوجد إنترنت",
-                    500
-                ).show()
                 if (articleList.isEmpty()) {
                     noInternetConnection()
                 }
+                try {
+                    onSNACK(requireView())
+                } catch (e: Exception) {
+                }
             }
         })
+    }
+
+    fun onSNACK(view: View) {
+        val snackbar = Snackbar.make(view, "لا يوجد إنترنت", Snackbar.LENGTH_LONG)
+        val snackbarView = snackbar.view
+        snackbarView.setBackgroundColor(Color.BLACK)
+        val textView =
+            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        textView.textSize = 18f
+        snackbar.show()
     }
 
     private fun setAdapter(articleList: ArrayList<Article>) {
@@ -136,25 +150,6 @@ class NewsFragment : BaseFragment() {
 
     private fun onListItemClick(position: Int) {
         val article = articleList[position]
-        val description = article.description
-        shareNew(description)
-    }
-
-    private fun shareNew(description: String) {
-        val shareButton: TextView = requireActivity().findViewById(R.id.shareNews)
-        val shareIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(
-                Intent.EXTRA_TEXT,
-                "$description\nتم مشاركة هذا الخبر من تطبيق خدمات أجهور الكبرى\nلتحميل التطبيق اضغط هنا-> shorturl.at/xG123".trim()
-            )
-            type = "text/plain"
-        }
-        startActivity(shareIntent)
-
-        shareButton.setOnClickListener {
-            shareNew(description)
-        }
     }
 
     private fun init() {

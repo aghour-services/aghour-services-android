@@ -3,6 +3,7 @@ package com.aghourservices.firms
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -29,7 +30,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class FirmsFragment : BaseFragment() {
@@ -39,6 +39,7 @@ class FirmsFragment : BaseFragment() {
     private lateinit var handler: Handler
     private var categoryId = 0
     private lateinit var binding: FragmentFirmsBinding
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,6 +92,8 @@ class FirmsFragment : BaseFragment() {
                 handler.postDelayed({
                     binding.swipe.isRefreshing = false
                     loadFirms(categoryId)
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.grindr_refresh)
+                    mediaPlayer.start()
                 }, 1000)
             }
         } catch (e: Exception) {
@@ -163,37 +166,10 @@ class FirmsFragment : BaseFragment() {
 
     private fun onListItemClick(position: Int) {
         val firm = firmsList[position]
-        val name = firm.name
-        val address = firm.address
-        val description = firm.description
         val phoneNumber = firm.phone_number
         val eventName = "call_${firm.name}"
         Event.sendFirebaseEvent(eventName, phoneNumber)
         callPhone(phoneNumber)
-
-        shareFirm(name, address, description, phoneNumber)
-    }
-
-    private fun shareFirm(
-        name: String,
-        address: String,
-        description: String,
-        phoneNumber: String
-    ) {
-        val shareFirmBtn: TextView = requireActivity().findViewById(R.id.shareFirm)
-        val shareIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(
-                Intent.EXTRA_TEXT,
-                name + "\n" + address + "\n" + description + "\n" + phoneNumber
-            )
-            type = "text/plain"
-        }
-        startActivity(shareIntent)
-
-        shareFirmBtn.setOnClickListener {
-            shareFirm(name, address, description, phoneNumber)
-        }
     }
 
     private fun callPhone(phoneNumber: String) {
@@ -223,6 +199,8 @@ class FirmsFragment : BaseFragment() {
                 handler.postDelayed({
                     loadFirms(categoryId)
                     binding.swipe.isRefreshing = false
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.refresh)
+                    mediaPlayer.start()
                 }, 1000)
                 notify(requireContext(), "إضغط مرة اخري للخروج")
             }

@@ -3,6 +3,8 @@ package com.aghourservices.firms.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
@@ -23,13 +25,9 @@ class FirmsAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         val hold = holder as FirmsViewHolder
-        val item = arrayList[position]
-        hold.name.text = item.name
-        hold.address.text = item.address
-        hold.description.text = item.description
-        hold.callButton.text = item.phone_number
+        val firm = arrayList[position]
+        hold.setList(firm)
 
         if (getItemViewType(position) == 0) {
             NativeAdViewHolder(context, hold.adFrame)

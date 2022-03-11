@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -51,7 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/admob_banner" />
+        <include
+            layout="@layout/admob_banner"/>
     </LinearLayout>
 
     <LinearLayout
@@ -70,8 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bottom_nav_view_bg"
-            app:itemIconSize="30dp"
             android:padding="2dp"
+            app:itemIconSize="30dp"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
             app:itemTextAppearanceInactive="@style/SegoeTextBold"
             app:itemTextColor="@color/itemNavColor"

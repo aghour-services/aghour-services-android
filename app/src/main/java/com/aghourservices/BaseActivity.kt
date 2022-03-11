@@ -19,8 +19,9 @@ open class BaseActivity : AppCompatActivity() {
     fun loadFragments(fragment: Fragment?, stacked: Boolean) {
         val backStateName: String = fragment?.javaClass.toString()
         val manager: FragmentManager = supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
+
         if (fragment != null) {
-            val ft: FragmentTransaction = manager.beginTransaction()
             ft.setCustomAnimations(
                 R.anim.slide_in_right,
                 R.anim.slide_out_left,
@@ -34,5 +35,4 @@ open class BaseActivity : AppCompatActivity() {
             ft.commit()
         }
     }
-
 }

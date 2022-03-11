@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="3dp"
+    android:id="@+id/firms_card"
     app:cardCornerRadius="3dp"
     app:cardElevation="6dp">
 
@@ -17,7 +18,7 @@
             android:id="@+id/firm_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/firms_ripple"
+            android:background="@color/firmsBg"
             android:orientation="vertical"
             android:padding="20dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -104,7 +105,7 @@
 
                 <ImageView
                     android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="1dp"
                     android:src="@mipmap/description" />
             </LinearLayout>
