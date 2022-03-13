@@ -28,7 +28,6 @@ class ArticlesViewHolder(
     val description: TextView = itemView.findViewById(R.id.description)
     private val date: TextView = itemView.findViewById(R.id.date)
     private val shareButton: TextView = itemView.findViewById(R.id.shareNews)
-    private lateinit var mediaPlayer: MediaPlayer
     private val newsCard: LinearLayout = itemView.findViewById(R.id.news_card_view)
 
     fun setNewsList(article: Article) {
@@ -45,9 +44,6 @@ class ArticlesViewHolder(
                 type = "text/plain"
             }
             itemView.context.startActivity(Intent.createChooser(shareIntent, "شارك الخبر"))
-
-            mediaPlayer = MediaPlayer.create(itemView.context, R.raw.facebook_share)
-            mediaPlayer.start()
         }
         newsCard.setOnLongClickListener {
             val alertDialogBuilder = AlertDialog.Builder(itemView.context, R.style.my_dialog)

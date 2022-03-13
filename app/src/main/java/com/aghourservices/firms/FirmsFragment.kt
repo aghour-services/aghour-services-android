@@ -39,7 +39,6 @@ class FirmsFragment : BaseFragment() {
     private lateinit var handler: Handler
     private var categoryId = 0
     private lateinit var binding: FragmentFirmsBinding
-    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,8 +91,6 @@ class FirmsFragment : BaseFragment() {
                 handler.postDelayed({
                     binding.swipe.isRefreshing = false
                     loadFirms(categoryId)
-                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.grindr_refresh)
-                    mediaPlayer.start()
                 }, 1000)
             }
         } catch (e: Exception) {
@@ -199,8 +196,6 @@ class FirmsFragment : BaseFragment() {
                 handler.postDelayed({
                     loadFirms(categoryId)
                     binding.swipe.isRefreshing = false
-                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.refresh)
-                    mediaPlayer.start()
                 }, 1000)
                 notify(requireContext(), "إضغط مرة اخري للخروج")
             }

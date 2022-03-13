@@ -25,7 +25,6 @@ class SearchResultViewHolder(
     var callButton: Button = itemView.findViewById(R.id.btnCall)
     var shareFirm: TextView = itemView.findViewById(R.id.shareFirm)
     var favorite: CheckBox = itemView.findViewById(R.id.fav)
-    private lateinit var mediaPlayer: MediaPlayer
 
     fun setList(searchResult: SearchResult) {
         name.text = searchResult.name
@@ -47,12 +46,6 @@ class SearchResultViewHolder(
                 type = "text/plain"
             }
             itemView.context.startActivity(Intent.createChooser(sendIntent, "شارك بواسطة.."))
-            mediaPlayer = MediaPlayer.create(itemView.context, R.raw.facebook_share)
-            mediaPlayer.start()
-        }
-        favorite.setOnClickListener {
-            mediaPlayer = MediaPlayer.create(itemView.context, R.raw.like)
-            mediaPlayer.start()
         }
     }
 

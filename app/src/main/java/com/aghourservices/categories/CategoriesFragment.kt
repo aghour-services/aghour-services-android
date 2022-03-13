@@ -151,7 +151,6 @@ class CategoriesFragment : BaseFragment() {
             }
             else -> {
                 binding.categoriesRecyclerview.smoothScrollToPosition(0)
-                notify(requireContext(), "إضغط مرة اخري للخروج")
             }
         }
         return true

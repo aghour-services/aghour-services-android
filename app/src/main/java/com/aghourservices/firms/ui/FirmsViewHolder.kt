@@ -24,10 +24,9 @@ class FirmsViewHolder(
     var name: TextView = itemView.findViewById(R.id.name)
     var description: TextView = itemView.findViewById(R.id.description)
     var address: TextView = itemView.findViewById(R.id.address)
-    var callButton: Button = itemView.findViewById(R.id.btnCall)
+    private var callButton: Button = itemView.findViewById(R.id.btnCall)
     var shareFirm: TextView = itemView.findViewById(R.id.shareFirm)
     var favorite: CheckBox = itemView.findViewById(R.id.fav)
-    private lateinit var mediaPlayer: MediaPlayer
 
     fun setList(firm: Firm) {
         name.text = firm.name
@@ -48,12 +47,6 @@ class FirmsViewHolder(
                 type = "text/plain"
             }
             itemView.context.startActivity(Intent.createChooser(sendIntent, "شارك بواسطة.."))
-            mediaPlayer = MediaPlayer.create(itemView.context, R.raw.facebook_share)
-            mediaPlayer.start()
-        }
-        favorite.setOnClickListener{
-            mediaPlayer = MediaPlayer.create(itemView.context, R.raw.like)
-            mediaPlayer.start()
         }
     }
 

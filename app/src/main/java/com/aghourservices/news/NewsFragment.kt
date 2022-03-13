@@ -76,8 +76,6 @@ class NewsFragment : BaseFragment() {
                     binding.swipe.isRefreshing = false
                     loadArticles(categoryId)
                 }, 1000)
-                mediaPlayer = MediaPlayer.create(requireContext(), R.raw.refresh)
-                mediaPlayer.start()
             }
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)

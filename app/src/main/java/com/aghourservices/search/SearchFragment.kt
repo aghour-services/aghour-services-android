@@ -15,6 +15,7 @@ import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.firebase_analytics.Event
+import com.aghourservices.interfaces.HideSoftKeyboard
 import com.aghourservices.interfaces.ShowSoftKeyboard
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult

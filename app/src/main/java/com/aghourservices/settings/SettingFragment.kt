@@ -91,18 +91,18 @@ class SettingFragment : BaseFragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.choose_theme_text))
         builder.setNegativeButton(R.string.cancelButton) { _, _ -> }
-        val styles = arrayOf("قيد التشغيل", "متوقف", "استخدام النظام الإفتراضي")
+        val styles = arrayOf("متوقف", "قيد التشغيل", "استخدام النظام الإفتراضي")
         val checkedItem = ThemePreference(requireContext()).darkMode
         builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
             when (which) {
                 0 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     ThemePreference(requireContext()).darkMode = 0
                     activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
                 1 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     ThemePreference(requireContext()).darkMode = 1
                     activity.delegate.applyDayNight()
                     dialog.dismiss()
