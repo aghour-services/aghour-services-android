@@ -48,7 +48,7 @@
     <string name="Choose">أختر التصنيف</string>
     <string name="news_fragment">آخر الأخبار</string>
     <string name="shareText">"قم بتحميل تطبيق أجهور الكبرى من خلال الرابط التالي https://play.google.com/store/apps/details?id=com.aghourservices"</string>
-    <string name="choose_theme_text">اختر شكل التطبيق</string>
+    <string name="choose_theme_text">تشغيل الوضع المظلم</string>
 
     <!--animation duration-->
     <string name="shortDuration">300</string>

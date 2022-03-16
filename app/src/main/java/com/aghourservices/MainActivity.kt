@@ -1,6 +1,10 @@
 package com.aghourservices
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -37,7 +41,6 @@ class MainActivity : BaseActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.show()
-        binding.bottomView.itemIconTintList = null
         val bottomNavView = binding.bottomView
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
@@ -57,6 +60,10 @@ class MainActivity : BaseActivity() {
             loadFragments(fragment, true)
             true
         }
+
+        if (!checkForInternet(this)) {
+            onSNACK(binding.root)
+        }
     }
 
     override fun onResume() {
@@ -67,6 +74,26 @@ class MainActivity : BaseActivity() {
     override fun onPause() {
         super.onPause()
         handler.removeCallbacks(runnable)
+    }
+
+    /** Check Internet Connection **/
+    private fun checkForInternet(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
     }
 
     override fun setTitle(title: CharSequence?) {
@@ -92,6 +119,11 @@ class MainActivity : BaseActivity() {
         val fragment = supportFragmentManager.fragments.last() as BaseFragment
         if (!fragment.onBackPressed()) {
             super.onBackPressed()
+        }
+        /** selected Home fragment **/
+        val selectedItemId = binding.bottomView.selectedItemId
+        if (selectedItemId != R.id.home) {
+            binding.bottomView.selectedItemId = R.id.home
         }
     }
 }

@@ -112,7 +112,7 @@ class CategoriesFragment : BaseFragment() {
                 binding.categoriesRecyclerview.adapter = adapter
                 progressBar()
 
-                notify(requireContext(),"لا يوجد إنترنت")
+//                notify(requireContext(),"لا يوجد إنترنت")
             }
         })
     }

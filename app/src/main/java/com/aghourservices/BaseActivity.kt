@@ -1,6 +1,9 @@
 package com.aghourservices
 
 import android.content.Context
+import android.graphics.Color
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -9,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.settings.ThemePreference
+import com.google.android.material.snackbar.Snackbar
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -34,5 +38,15 @@ open class BaseActivity : AppCompatActivity() {
             }
             ft.commit()
         }
+    }
+
+    fun onSNACK(view: View) {
+        val snackbar = Snackbar.make(view, "لا يوجد إنترنت", Snackbar.LENGTH_LONG)
+        val snackbarView = snackbar.view
+        snackbarView.setBackgroundColor(Color.BLACK)
+        val textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        textView.textSize = 18f
+        snackbar.show()
     }
 }

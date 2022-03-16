@@ -138,4 +138,5 @@
     <color name="dontShow">#2982C8</color>
     <color name="searchTxt">#4D4D4D</color>
     <color name="searchHint">#4D4D4D</color>
+    <color name="bottomBg">#FFFFFF</color>
 </resources>

@@ -117,23 +117,8 @@ class NewsFragment : BaseFragment() {
                 if (articleList.isEmpty()) {
                     noInternetConnection()
                 }
-                try {
-                    onSNACK(requireView())
-                } catch (e: Exception) {
-                }
             }
         })
-    }
-
-    fun onSNACK(view: View) {
-        val snackbar = Snackbar.make(view, "لا يوجد إنترنت", Snackbar.LENGTH_LONG)
-        val snackbarView = snackbar.view
-        snackbarView.setBackgroundColor(Color.BLACK)
-        val textView =
-            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
-        textView.setTextColor(Color.WHITE)
-        textView.textSize = 18f
-        snackbar.show()
     }
 
     private fun setAdapter(articleList: ArrayList<Article>) {

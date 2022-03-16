@@ -50,8 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include
-            layout="@layout/admob_banner"/>
+        <include layout="@layout/admob_banner" />
     </LinearLayout>
 
     <LinearLayout
@@ -70,16 +69,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bottom_nav_view_bg"
-            android:padding="2dp"
-            app:itemPaddingTop="4dp"
-            app:itemIconSize="30dp"
+            app:itemTextColor="@color/itemNavColor"
+            app:itemIconSize="28dp"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
             app:itemTextAppearanceInactive="@style/SegoeTextBold"
-            app:itemTextColor="@color/itemNavColor"
             app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_menu" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
