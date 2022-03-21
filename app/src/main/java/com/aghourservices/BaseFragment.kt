@@ -51,12 +51,7 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         val ft: FragmentTransaction = manager.beginTransaction()
 
         if (fragment != null) {
-            ft.setCustomAnimations(
-                R.anim.slide_in_right,
-                R.anim.slide_out_left,
-                R.anim.slide_in_left,
-                R.anim.slide_out_right
-            )
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             ft.replace(R.id.parent_container, fragment)
             if (stacked) {
                 ft.addToBackStack(backStateName)
@@ -119,10 +114,10 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
 
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 18.toFloat()
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18.toFloat()
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 18f
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18f
+//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+//        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)

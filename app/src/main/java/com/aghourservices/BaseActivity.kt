@@ -26,12 +26,7 @@ open class BaseActivity : AppCompatActivity() {
         val ft: FragmentTransaction = manager.beginTransaction()
 
         if (fragment != null) {
-            ft.setCustomAnimations(
-                R.anim.slide_in_right,
-                R.anim.slide_out_left,
-                R.anim.slide_in_left,
-                R.anim.slide_out_right
-            )
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             ft.replace(R.id.parent_container, fragment)
             if (stacked) {
                 ft.addToBackStack(backStateName)
@@ -44,7 +39,8 @@ open class BaseActivity : AppCompatActivity() {
         val snackbar = Snackbar.make(view, "لا يوجد إنترنت", Snackbar.LENGTH_LONG)
         val snackbarView = snackbar.view
         snackbarView.setBackgroundColor(Color.BLACK)
-        val textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        val textView =
+            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
         textView.setTextColor(Color.WHITE)
         textView.textSize = 18f
         snackbar.show()

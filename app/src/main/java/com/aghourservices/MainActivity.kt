@@ -45,8 +45,8 @@ class MainActivity : BaseActivity() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
+//        runnable = Runnable { interstitial.load(this@MainActivity) }
+//        handler.post(runnable)
 
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
@@ -60,21 +60,36 @@ class MainActivity : BaseActivity() {
             loadFragments(fragment, true)
             true
         }
-
-        if (!checkForInternet(this)) {
-            onSNACK(binding.root)
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 120000)
+
+        if (!checkForInternet(this)) {
+            notify(this, "لا يوجد إنترنت")
+        }
     }
 
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacks(runnable)
+    override fun onRestart() {
+        super.onRestart()
+        if (!checkForInternet(this)) {
+            notify(this, "لا يوجد إنترنت")
+        }
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        handler.postDelayed(runnable, 120000)
+//
+//        if (!checkForInternet(this)) {
+//            notify(this,"لا يوجد إنترنت")
+//        }
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        handler.removeCallbacks(runnable)
+//    }
 
     /** Check Internet Connection **/
     private fun checkForInternet(context: Context): Boolean {

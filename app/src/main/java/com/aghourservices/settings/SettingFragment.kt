@@ -117,8 +117,8 @@ class SettingFragment : BaseFragment() {
         }
         val dialog = builder.create()
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18.toFloat()
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18f
+//        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextAppearance(R.style.SegoeTextBold)
         }

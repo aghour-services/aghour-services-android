@@ -22,9 +22,8 @@
         <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashScreenTheme"
-            tools:ignore="LockedOrientationActivity">
+            android:screenOrientation="locked"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,22 +39,20 @@
         <activity
             android:name=".user.SignInActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:theme="@style/AddDataTheme"
-            tools:ignore="LockedOrientationActivity" />
+            android:screenOrientation="locked" />
         <activity
             android:name=".user.SignUpActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:theme="@style/AddDataTheme"
-            tools:ignore="LockedOrientationActivity" />
+            android:screenOrientation="locked"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@mipmap/ic_launcher" />
+            android:resource="@drawable/ic_launcher" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />

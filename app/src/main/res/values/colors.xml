@@ -15,8 +15,8 @@
     <color name="recyclerViewBg">#F3F3F3</color>
     <color name="splashScreenBg">#3C88C5</color>
     <color name="navHeaderBg">#387DB3</color>
-    <color name="userColor">#FFFFFF</color>
-    <color name="emailColor">#FFFFFF</color>
+    <color name="userNameColor">#121E27</color>
+    <color name="emailColor">#FF7070</color>
     <color name="phoneColor">#4CAF50</color>
     <color name="create_btn">#3073A8</color>
     <color name="create_btn_press">#205580</color>
@@ -88,7 +88,7 @@
     <color name="whiteTextColor">#fff</color>
     <color name="primaryTextColor">#00a5ff</color>
     <color name="progressBar">#49AEFF</color>
-    <color name="loginBkColor">#f0f0f0</color>
+    <color name="loginBkColor">#FFFFFF</color>
     <color name="whiteCardColor">#fff</color>
     <color name="about">#4B4B4B</color>
     <color name="notifyTitle">#454545</color>
@@ -121,7 +121,7 @@
     <color name="aboutUseApp">#20384B</color>
     <color name="createBtnBg">#FFFFFF</color>
     <color name="createBtnPress">#D5D5D5</color>
-    <color name="strokeColor">#000000</color>
+    <color name="strokeColor">#C4C4C4</color>
     <color name="spinnerTextColor">#162735</color>
     <color name="dropDown">#FFFFFF</color>
     <color name="spinnerRipple">#DBE5EF</color>
@@ -139,4 +139,10 @@
     <color name="searchTxt">#4D4D4D</color>
     <color name="searchHint">#4D4D4D</color>
     <color name="bottomBg">#FFFFFF</color>
+    <color name="skipBtnColor">#4CAF50</color>
+    <color name="createOrSignInAccountBg">#FFFFFF</color>
+    <color name="bg_signIn">#101920</color>
+    <color name="welcome">#FF5722</color>
+    <color name="log_out_bg">#FFABA4</color>
+    <color name="signOut">#FF3E3E</color>
 </resources>

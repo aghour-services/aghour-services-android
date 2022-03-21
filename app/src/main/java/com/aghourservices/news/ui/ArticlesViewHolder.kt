@@ -30,6 +30,10 @@ class ArticlesViewHolder(
     private val shareButton: TextView = itemView.findViewById(R.id.shareNews)
     private val newsCard: LinearLayout = itemView.findViewById(R.id.news_card_view)
 
+    init {
+        itemView.setOnClickListener(this)
+    }
+
     fun setNewsList(article: Article) {
         description.text = article.description
         date.text = article.created_at
@@ -53,12 +57,12 @@ class ArticlesViewHolder(
                     itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clip = ClipData.newPlainText("News", article.description)
                 clipboardManager.setPrimaryClip(clip)
-                Toast.makeText(itemView.context,"تم نسخ الخبر",Toast.LENGTH_SHORT).show()
+                Toast.makeText(itemView.context, "تم نسخ الخبر", Toast.LENGTH_SHORT).show()
             }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 20F
+//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 20f
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
                     .setTextAppearance(R.style.SegoeTextBold)

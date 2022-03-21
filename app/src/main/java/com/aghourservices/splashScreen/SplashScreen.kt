@@ -37,6 +37,7 @@ class SplashScreen : BaseActivity() {
                 }
                 Log.d("FCM", msg)
             }
+
         Handler(Looper.getMainLooper()).postDelayed({
             lateinit var intent: Intent
             val userInfo = UserInfo()
@@ -52,7 +53,7 @@ class SplashScreen : BaseActivity() {
 
             startActivity(intent)
             finish()
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }, 500)
     }
 

@@ -29,7 +29,7 @@
     <color name="skipBtnPress">#656464</color>
     <color name="addDataTxt">#FFFFFF</color>
     <color name="navHeaderBg">#1E262E</color>
-    <color name="create_btn">#1D252C</color>
+    <color name="create_btn">#263039</color>
     <color name="create_btn_press">#11161B</color>
     <color name="createAccountText">#FFFFFF</color>
     <color name="focusedBg">#10151B</color>
@@ -44,7 +44,7 @@
     <color name="backIconSelector">#36485A</color>
     <color name="swipeColor">#FFFFFF</color>
     <color name="swipeBg">#0F1317</color>
-    <color name="navDrawerBg">#191919</color>
+    <color name="navDrawerBg">#2E2E2E</color>
     <color name="firmsDescription">#CCCCCC</color>
     <color name="notifyTitle">#FFFFFF</color>
     <color name="notifyMessage">#6E6E6E</color>
@@ -71,8 +71,9 @@
     <color name="aboutUseApp">#FFFFFF</color>
     <color name="createBtnBg">#232323</color>
     <color name="createBtnPress">#303030</color>
-    <color name="strokeColor">#FFFFFF</color>
+    <color name="strokeColor">#474747</color>
     <color name="spinnerTextColor">#FFFFFF</color>
+    <color name="userNameColor">#FFFFFF</color>
     <color name="dropDown">#EDEDED</color>
     <color name="spinnerBg">#223445</color>
     <color name="spinnerRipple">#4D6C8A</color>
@@ -91,4 +92,10 @@
     <color name="checkBox">#B8BBBD</color>
     <color name="searchTxt">#0E0E0E</color>
     <color name="searchHint">#0E0E0E</color>
+    <color name="loginBkColor">#FFFFFF</color>
+    <color name="skipBtnColor">#54C158</color>
+    <color name="createOrSignInAccountBg">#142532</color>
+    <color name="bg_signIn">#F8F8F8</color>
+    <color name="signOut">#ED7474</color>
+
 </resources>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
+    app:cardBackgroundColor="@color/createOrSignInAccountBg"
     tools:context=".user.SignInActivity">
 
     <ScrollView
@@ -21,9 +22,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/ic_login_bk"
-                android:backgroundTint="@color/login_bk_tint" />
+                android:layout_gravity="center"
+                android:background="@drawable/ic_login_bk" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -41,18 +41,18 @@
                 android:id="@+id/textInputEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:hint="@string/login_email_hint"
                     android:background="@drawable/edt_text_background"
                     android:drawableRight="@drawable/ic_email"
                     android:gravity="left"
+                    android:hint="@string/login_email_hint"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:padding="14dp"
@@ -66,8 +66,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:passwordToggleEnabled="true"
                 app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/passToggle">
 
                 <EditText
@@ -75,9 +75,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:hint="@string/login_password_hint"
                     android:background="@drawable/edt_text_background"
                     android:gravity="left"
+                    android:hint="@string/login_password_hint"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -97,6 +97,7 @@
                 android:gravity="center"
                 android:text="تسجيل دخول"
                 android:textAlignment="center"
+                android:textColor="@color/loginBkColor"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -158,7 +159,7 @@
                     android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="center"
                     android:text="تخطي التسجيل"
-                    android:textColor="#429A45"
+                    android:textColor="@color/skipBtnColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
