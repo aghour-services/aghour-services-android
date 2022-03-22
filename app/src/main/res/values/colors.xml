@@ -91,9 +91,9 @@
     <color name="loginBkColor">#FFFFFF</color>
     <color name="whiteCardColor">#fff</color>
     <color name="about">#4B4B4B</color>
-    <color name="notifyTitle">#454545</color>
+    <color name="notifyTitle">#000000</color>
     <color name="notifyMessage">#808080</color>
-    <color name="notifyBg">#FFFFFF</color>
+    <color name="notifyBg">#E6EFF8</color>
     <color name="colorControl">#FFFFFF</color>
     <color name="textModeSwitch">#FFFFFF</color>
     <color name="textDismiss">#192835</color>

@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -45,8 +43,8 @@ class MainActivity : BaseActivity() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-//        runnable = Runnable { interstitial.load(this@MainActivity) }
-//        handler.post(runnable)
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
 
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
@@ -64,32 +62,19 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        handler.postDelayed(runnable, 120000)
 
         if (!checkForInternet(this)) {
-            notify(this, "لا يوجد إنترنت")
+            binding.notInternet.visibility = View.VISIBLE
+        } else {
+            binding.notInternet.visibility = View.GONE
         }
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        if (!checkForInternet(this)) {
-            notify(this, "لا يوجد إنترنت")
-        }
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable)
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        handler.postDelayed(runnable, 120000)
-//
-//        if (!checkForInternet(this)) {
-//            notify(this,"لا يوجد إنترنت")
-//        }
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        handler.removeCallbacks(runnable)
-//    }
 
     /** Check Internet Connection **/
     private fun checkForInternet(context: Context): Boolean {

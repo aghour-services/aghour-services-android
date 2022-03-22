@@ -22,8 +22,9 @@
         <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true"
-            android:screenOrientation="locked"
-            android:theme="@style/SplashScreenTheme">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreenTheme"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
