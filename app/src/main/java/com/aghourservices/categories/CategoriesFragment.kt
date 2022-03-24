@@ -1,14 +1,21 @@
 package com.aghourservices.categories
 
-import android.content.Context
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.TransitionDrawable
+import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.categories.api.ApiServices
@@ -25,6 +32,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class CategoriesFragment : BaseFragment() {
@@ -33,6 +41,7 @@ class CategoriesFragment : BaseFragment() {
     private lateinit var realm: Realm
     private lateinit var adapter: CategoriesAdapter
     private lateinit var categoryList: ArrayList<Category>
+    private lateinit var handler: Handler
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +74,7 @@ class CategoriesFragment : BaseFragment() {
         binding.categoriesRecyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(activity)
         binding.categoriesRecyclerview.layoutManager = linearLayoutManager
-        binding.categoriesRecyclerview.layoutManager = GridLayoutManager(activity, 2)
+        binding.categoriesRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     private fun loadCategoriesList() {
@@ -78,8 +87,7 @@ class CategoriesFragment : BaseFragment() {
                 call: Call<ArrayList<Category>?>,
                 response: Response<ArrayList<Category>?>,
             ) {
-                val responseBody = response.body()!!
-                categoryList = responseBody
+                categoryList = response.body()!!
                 realm.executeTransaction {
                     for (i in categoryList) {
                         try {
@@ -90,7 +98,7 @@ class CategoriesFragment : BaseFragment() {
                         }
                     }
                 }
-                adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
+                adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
                 progressBar()
             }
@@ -102,7 +110,6 @@ class CategoriesFragment : BaseFragment() {
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
                 progressBar()
-                Snackbar.make(requireContext(),binding.root, "لا يوجد إنترنت",Snackbar.LENGTH_SHORT).show()
             }
         })
     }
@@ -130,5 +137,19 @@ class CategoriesFragment : BaseFragment() {
     private fun progressBar() {
         binding.progressBar.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
+    }
+
+
+    override fun onBackPressed(): Boolean {
+        val layoutManager = binding.categoriesRecyclerview.layoutManager as LinearLayoutManager
+        when {
+            layoutManager.findFirstCompletelyVisibleItemPosition() == 0 -> {
+                requireActivity().finish()
+            }
+            else -> {
+                binding.categoriesRecyclerview.smoothScrollToPosition(0)
+            }
+        }
+        return true
     }
 }

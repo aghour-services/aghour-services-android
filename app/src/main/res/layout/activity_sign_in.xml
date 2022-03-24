@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
+    app:cardBackgroundColor="@color/createOrSignInAccountBg"
     tools:context=".user.SignInActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,8 +22,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_login_bk"
-                android:backgroundTint="@color/login_bk_tint" />
+                android:layout_gravity="center"
+                android:background="@drawable/ic_login_bk" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -30,10 +32,10 @@
                 android:layout_margin="15dp"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
-                android:textStyle="bold"
                 android:text="تسجيل الدخول"
                 android:textColor="@color/loginTxtColor"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
@@ -42,7 +44,7 @@
                 android:layout_marginTop="5dp"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,7 +68,7 @@
                 android:layout_marginTop="10dp"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/blue200">
+                app:passwordToggleTint="@color/passToggle">
 
                 <EditText
                     android:id="@+id/password"
@@ -84,53 +86,24 @@
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <Button
+                android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/btnLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/login_button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txtLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/segoe_ui_bold"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="تسجيل دخول"
-                    android:textColor="@color/btnSignInTxt"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btnLogin" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar_Login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:indeterminateTint="@color/white"
-                    android:scaleX="0.8"
-                    android:scaleY="0.8"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnLogin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/btnLogin"
-                    app:layout_constraintTop_toTopOf="@+id/btnLogin" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/login_button"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:gravity="center"
+                android:text="تسجيل دخول"
+                android:textAlignment="center"
+                android:textColor="@color/loginBkColor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -140,7 +113,7 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="1.5dp"
+                    android:layout_height="1dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@color/primaryTextColor" />
@@ -150,18 +123,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/cairo_bold"
-                    android:gravity="center"
-                    android:text="أو"
-                    android:padding="4dp"
                     android:layout_margin="4dp"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="أو"
                     android:textAlignment="center"
                     android:textColor="@color/blue200"
                     android:textSize="14sp" />
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="1.5dp"
+                    android:layout_height="1dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@color/primaryTextColor" />
@@ -172,55 +145,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <Button
+                    android:id="@+id/btn_use_app"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <Button
-                        android:id="@+id/btn_use_app"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/sign_up_buttons"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txtUseApp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/segoe_ui_bold"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:text="تخطي التسجيل"
-                        android:textColor="#429A45"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ProgressBar
-                        android:id="@+id/progressBar_UseApp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:indeterminateTint="@color/progressBar"
-                        android:scaleX="0.8"
-                        android:scaleY="0.8"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/sign_up_buttons"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:gravity="center"
+                    android:text="تخطي التسجيل"
+                    android:textColor="@color/skipBtnColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btn_register"
@@ -229,14 +174,15 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:textStyle="bold"
                     android:background="@drawable/sign_up_buttons"
                     android:fontFamily="@font/segoe_ui_bold"
                     android:text="انشاء حساب جديد"
                     android:textColor="#E91E63"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
+
             <include layout="@layout/admob_banner" />
         </LinearLayout>
     </ScrollView>

@@ -55,8 +55,8 @@
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:paddingRight="16dp"
-                    android:textColor="@color/about"
-                    android:textColorHint="@color/about"
+                    android:textColor="@color/searchTxt"
+                    android:textColorHint="@color/searchHint"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:textSize="16sp" />
 

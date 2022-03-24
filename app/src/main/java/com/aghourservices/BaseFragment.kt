@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -16,8 +18,8 @@ import com.aghourservices.cache.UserInfo
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.interfaces.ActivityFragmentCommunicator
 import com.aghourservices.user.SignInActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+
 
 open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     lateinit var bottomNavigationView: LinearLayout
@@ -32,7 +34,7 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     }
 
     fun notify(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun showBottomNav() {
@@ -48,14 +50,10 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     fun loadFragments(fragment: Fragment?, stacked: Boolean) {
         val backStateName: String = fragment?.javaClass.toString()
         val manager: FragmentManager = requireActivity().supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
+
         if (fragment != null) {
-            val ft: FragmentTransaction = manager.beginTransaction()
-            ft.setCustomAnimations(
-                R.anim.slide_in_right,
-                R.anim.slide_out_left,
-                R.anim.slide_in_left,
-                R.anim.slide_out_right
-            )
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             ft.replace(R.id.parent_container, fragment)
             if (stacked) {
                 ft.addToBackStack(backStateName)
@@ -65,7 +63,7 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     }
 
     fun shareApp() {
-        Event.sendFirebaseEvent("Share", "")
+        Event.sendFirebaseEvent("Share_App", "")
         val shareText = getString(R.string.shareText)
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -95,6 +93,28 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         }
     }
 
+    fun whatsApp(number: String) {
+        Event.sendFirebaseEvent("Whats_App", "")
+        val url = "https://api.whatsapp.com/send?phone=$number"
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
+
+    fun gmail() {
+        Event.sendFirebaseEvent("Gmail_App", "")
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse(getString(R.string.gmail_uri))
+        }
+        startActivity(emailIntent)
+    }
+
+    fun telegram() {
+        Event.sendFirebaseEvent("Telegram_App", "")
+        val telegram = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/aghourservices"))
+        startActivity(telegram)
+    }
+
     private fun logOut() {
         Event.sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(requireActivity())
@@ -110,14 +130,32 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(R.string.positiveButton) { _, _ ->
             logOut()
-            Event.sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
         }
         alertDialogBuilder.setNegativeButton(R.string.negativeButton) { _, _ ->
-            Event.sendFirebaseEvent("ALERT_STAY_ACTION", "")
+            Event.sendFirebaseEvent("STAY_ACTION", "")
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 16f
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 16f
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextAppearance(R.style.SegoeTextBold)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextAppearance(R.style.SegoeTextBold)
+        }
+    }
+
+    fun onSNACK(view: View, message: String) {
+        val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        val snackbarView = snackbar.view
+        snackbarView.setBackgroundColor(Color.BLACK)
+        val textView =
+            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        textView.textSize = 18f
+        snackbar.show()
     }
 }

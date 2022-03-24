@@ -14,7 +14,7 @@ class SearchResultAdapter(
     private val onItemClicked: (position: Int) -> Unit,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var itemsCountToShowAds = 2
+    private var itemsCountToShowAds = 1
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -25,12 +25,8 @@ class SearchResultAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val hold = holder as SearchResultViewHolder
-        val item = arrayList[position]
-        hold.name.text = item.name
-        hold.address.text = item.address
-        hold.description.text = item.description
-        hold.imageButton.text = item.phone_number
-        hold.categoryName.text = item.category_name
+        val searchResult = arrayList[position]
+        hold.setList(searchResult)
 
         if (getItemViewType(position) == 0) {
             NativeAdViewHolder(context, hold.adFrame)

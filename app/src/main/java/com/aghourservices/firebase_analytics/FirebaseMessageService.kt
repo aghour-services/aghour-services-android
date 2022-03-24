@@ -7,10 +7,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.aghourservices.MainActivity
 import com.aghourservices.R
+import com.aghourservices.news.NewsFragment
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -39,7 +41,6 @@ class FirebaseMessageService : FirebaseMessagingService() {
         remoteView.setTextViewText(R.id.message, message)
         return remoteView
     }
-
 
     //generate the notification
     @SuppressLint("UnspecifiedImmutableFlag")

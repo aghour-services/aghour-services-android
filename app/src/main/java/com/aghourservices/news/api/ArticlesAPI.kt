@@ -1,6 +1,5 @@
 package com.aghourservices.news.api
 
-import com.aghourservices.news.Article
 import retrofit2.http.GET
 import retrofit2.http.Query
 

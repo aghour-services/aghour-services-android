@@ -4,7 +4,7 @@ import com.google.gson.JsonObject
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
-
+import org.json.JSONObject
 
 @RealmClass
 open class Firm : RealmObject() {
@@ -16,6 +16,7 @@ open class Firm : RealmObject() {
     var description: String = ""
     var phone_number: String = ""
     var category_name: String = ""
+    var isFavorite: Boolean = false
 
     fun toJsonObject(): JsonObject {
         val firmObject = JsonObject()
@@ -28,6 +29,19 @@ open class Firm : RealmObject() {
 
         firmObject.add("firm", firmDetails)
         return firmObject
+    }
+
+    fun toJSONObject(): JSONObject {
+        val firmDetails = JSONObject()
+        firmDetails.put("id", id)
+        firmDetails.put("name", name)
+        firmDetails.put("category_id", category_id)
+        firmDetails.put("address", address)
+        firmDetails.put("description", description)
+        firmDetails.put("phone_number", phone_number)
+        firmDetails.put("category_name", category_name)
+        firmDetails.put("isFavorite", isFavorite)
+        return firmDetails
     }
 
     fun inValid(): Boolean {

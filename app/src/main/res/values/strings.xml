@@ -41,26 +41,36 @@
     <string name="data_added">"تم ارسال البيانات وسيتم الموافقة عليها فورا 😃"</string>
     <string name="no_internet">" عفوا لا يوجد انترنت 😑"</string>
     <string name="error_logIn">"خطأ في التسجيل يرجي اعادة المحاولة 😑"</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="categories_fragment">الرئيسية</string>
     <string name="about_fragment">معلومات عن التطبيق</string>
+    <string name="setting_fragment">الإعدادات والحساب</string>
     <string name="add_data_fragment">إضافة البيانات</string>
     <string name="Choose">أختر التصنيف</string>
     <string name="news_fragment">آخر الأخبار</string>
     <string name="shareText">"قم بتحميل تطبيق أجهور الكبرى من خلال الرابط التالي https://play.google.com/store/apps/details?id=com.aghourservices"</string>
-    <string name="choose_theme_text">اختر شكل التطبيق</string>
+    <string name="choose_theme_text">تشغيل الوضع المظلم</string>
 
     <!--animation duration-->
     <string name="shortDuration">300</string>
     <string name="mediumDuration">400</string>
     <string name="longDuration">700</string>
     <string name="title">تسجيل الخروج !</string>
-    <string name="message">أنت علي وشك تسجيل الخروج من حسابك ؟</string>
+    <string name="message">هل تريد تسجيل الخروج من حسابك؟</string>
     <string name="doneButton">تمام</string>
     <string name="positiveButton">نعم</string>
     <string name="negativeButton">لا</string>
+    <string name="cancelButton">إلغاء</string>
     <string name="settings_fragment">الإعدادات</string>
     <string name="selected_item">تم اختيار</string>
+    <string name="favorite_fragment">المفضلة</string>
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="news_share">نسخ الخبر</string>
+    <string name="whats_app_number">+201287303441</string>
+    <string name="gmail_uri">mailto:ahmedmgdi94@gmail.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

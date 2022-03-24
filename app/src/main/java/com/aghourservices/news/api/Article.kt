@@ -1,4 +1,4 @@
-package com.aghourservices.news
+package com.aghourservices.news.api
 
 import com.google.gson.JsonObject
 import io.realm.RealmObject
@@ -10,7 +10,7 @@ import io.realm.annotations.RealmClass
 open class Article : RealmObject() {
     @PrimaryKey
     var id: Int = 0
-    var description: String = ""
+    var description: String = "".trim()
     var created_at: String = ""
 
     fun toJsonObject(): JsonObject {

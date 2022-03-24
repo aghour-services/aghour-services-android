@@ -3,7 +3,7 @@
     android:color="@color/categoryCardPress">
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="4dp" />
+            <corners android:radius="5dp" />
             <solid android:color="@color/categoryCardBg" />
         </shape>
     </item>

@@ -33,6 +33,7 @@ open class Category(
             R.mipmap.lawyer,
             R.mipmap.library,
             R.mipmap.birds,
+            R.mipmap.people,
         )
         private val categories_name = arrayOf(
             "الأطباء",
@@ -54,6 +55,7 @@ open class Category(
             "محامين",
             "المكتبات",
             "عالم الطيور",
+            "شخصيات عامة",
         )
         var List: ArrayList<Category>? = null
             get() {

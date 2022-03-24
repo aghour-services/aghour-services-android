@@ -15,6 +15,8 @@ import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.firebase_analytics.Event
+import com.aghourservices.firms.ui.FirmsAdapter
+import com.aghourservices.interfaces.HideSoftKeyboard
 import com.aghourservices.interfaces.ShowSoftKeyboard
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
@@ -42,13 +44,9 @@ class SearchFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        hideBottomNav()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideBottomNav()
 
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
@@ -100,15 +98,18 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun setAdapter(searchResults: ArrayList<SearchResult>) {
-        if (searchResults.isEmpty()) {
-            binding.searchResultRecycler.visibility = View.GONE
-            return
+        try {
+            if (searchResults.isEmpty()) {
+                binding.searchResultRecycler.visibility = View.GONE
+                return
+            }
+            binding.searchResultRecycler.visibility = View.VISIBLE
+            adapter = SearchResultAdapter(requireContext(), searchResults) { position ->
+                onListItemClick(position)
+            }
+            binding.searchResultRecycler.adapter = adapter
+        } catch (e: Exception) {
         }
-        binding.searchResultRecycler.visibility = View.VISIBLE
-        adapter = SearchResultAdapter(requireContext(), searchResults) { position ->
-            onListItemClick(position)
-        }
-        binding.searchResultRecycler.adapter = adapter
     }
 
     private fun onListItemClick(position: Int) {

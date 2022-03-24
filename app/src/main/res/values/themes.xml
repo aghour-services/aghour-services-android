@@ -4,16 +4,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/itemNavColor</item>
         <!-- Status bar color. -->
         <item name="windowActionBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/navBarColor</item>
-    </style>
-
-    <style name="WindowAnimationTransition">
-        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
-        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
     <style name="Theme.LightApp.NoActionBar">
@@ -22,13 +19,11 @@
         <item name="colorControlNormal">@color/white</item>
     </style>
 
-    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar">
-    </style>
+    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar" />
 
     <style name="AddDataTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
         <item name="android:statusBarColor">@color/toolbarBg</item>
-        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="cardBackgroundColor">@color/createOrSignInAccountBg</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -39,6 +34,19 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:radioButtonStyle">@color/alertBtnBg</item>
+        <item name="android:textColorPrimary">@color/alertTxtColor</item>
+        <item name="fontFamily">@font/segoe_ui_bold</item>
+    </style>
+
+    <style name="my_dialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">0dp</item>
+        <item name="android:windowMinWidthMinor">0dp</item>
+        <item name="android:background">@drawable/news_card_ripple</item>
+        <item name="android:textColor">@color/dialogText</item>
+    </style>
+
     <!--All Text Font Style-->
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/cairo_black</item>
@@ -47,8 +55,11 @@
     <style name="SegoeTextRegular" parent="android:Widget.TextView">
         <item name="fontFamily">@font/segoe_ui_regular</item>
     </style>
+
     <style name="SegoeTextBold" parent="android:Widget.TextView">
         <item name="fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
     </style>
     <!--All Text Buttons Font Style-->
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">

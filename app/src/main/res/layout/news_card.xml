@@ -1,42 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    app:cardCornerRadius="6dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="4dp">
 
-    <LinearLayout
-        android:id="@+id/news_card_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="@color/news_bg"
+        android:background="@color/firmsBg"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/description"
+        <LinearLayout
+            android:id="@+id/news_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:gravity="right"
-            android:text="Description"
-            android:textColor="@color/newsDescription"
-            android:textIsSelectable="true"
-            android:textSize="24sp" />
+            android:orientation="vertical"
+            android:background="@drawable/news_card_ripple"
+            android:padding="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/date"
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:gravity="right"
+                android:text="Description"
+                android:textColor="@color/newsDescription"
+                android:textIsSelectable="false"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/cairo_bold"
+                android:gravity="right"
+                android:text="time"
+                android:textColor="@color/time"
+                android:textIsSelectable="false"
+                android:textSize="16sp" />
+
+            <FrameLayout
+                android:id="@+id/ad_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/news_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/cairo_bold"
-            android:gravity="right"
-            android:layout_marginTop="5dp"
-            android:text="time"
-            android:textColor="@color/time"
-            android:textIsSelectable="true"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/news_card_view">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#AEAEAE" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:gravity="right|center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/shareNews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:background="@drawable/share_ripple"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:gravity="center|right"
+                    android:padding="16dp"
+                    android:text="مشاركة"
+                    android:textAlignment="center"
+                    android:textColor="@color/shareText"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="#9A9A9A"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/shareNews"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

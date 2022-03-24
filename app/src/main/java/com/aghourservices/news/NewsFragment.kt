@@ -1,6 +1,9 @@
 package com.aghourservices.news
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,12 +11,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
-import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
+import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.ui.ArticlesAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -34,6 +38,7 @@ class NewsFragment : BaseFragment() {
     private lateinit var handler: Handler
     private lateinit var binding: FragmentNewsBinding
     private var categoryId = 0
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,15 +48,11 @@ class NewsFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        showBottomNav()
-    }
-
     @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.news_fragment)
+        showBottomNav()
 
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.show()
@@ -113,7 +114,6 @@ class NewsFragment : BaseFragment() {
                 articleList.addAll(result)
                 setAdapter(articleList)
                 stopShimmerAnimation()
-                Snackbar.make(requireContext(),binding.root, "لا يوجد إنترنت",Snackbar.LENGTH_SHORT).show()
                 if (articleList.isEmpty()) {
                     noInternetConnection()
                 }
@@ -123,13 +123,17 @@ class NewsFragment : BaseFragment() {
 
     private fun setAdapter(articleList: ArrayList<Article>) {
         try {
-            adapter = ArticlesAdapter(requireContext(), articleList)
+            adapter = ArticlesAdapter(requireContext(), articleList) { position ->
+                onListItemClick(position)
+            }
             binding.newsRecyclerview.adapter = adapter
         } catch (e: Exception) {
-
         }
     }
 
+    private fun onListItemClick(position: Int) {
+        val article = articleList[position]
+    }
 
     private fun init() {
         Realm.init(requireActivity())

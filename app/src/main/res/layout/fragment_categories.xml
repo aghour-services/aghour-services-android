@@ -13,8 +13,8 @@
         android:layout_gravity="center"
         android:indeterminateTint="@color/categoryProgressBar"
         android:progress="0"
-        android:scaleX="0.12"
-        android:scaleY="0.12"
+        android:scaleX="0.11"
+        android:scaleY="0.11"
         android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,7 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:background="@color/recyclerViewBg"
-        android:padding="5dp"
         tools:listitem="@layout/category_card" />
 </LinearLayout>

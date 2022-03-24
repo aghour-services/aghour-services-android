@@ -3,6 +3,7 @@ package com.aghourservices.interfaces
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AlertDialog
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
@@ -21,7 +22,11 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
+            }
+//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
         }
 
         fun noInternet(context: Context) {
@@ -32,7 +37,11 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
+            }
         }
 
         fun dataAdded(context: Context) {
@@ -43,8 +52,11 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
+            }
         }
-
     }
 }

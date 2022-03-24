@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -29,8 +30,9 @@
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/firmsShimmer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:forceDarkAllowed="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical"
         tools:targetApi="q">
 
@@ -61,6 +63,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -73,11 +76,12 @@
                 android:id="@+id/firmsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:visibility="gone"
                 android:background="@color/recyclerViewBg"
                 android:orientation="vertical"
-                android:visibility="gone"
                 tools:listitem="@layout/firms_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

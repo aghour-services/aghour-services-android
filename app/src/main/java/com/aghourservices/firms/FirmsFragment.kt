@@ -9,8 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -19,7 +17,7 @@ import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -27,6 +25,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
@@ -110,12 +109,13 @@ class FirmsFragment : BaseFragment() {
                 realm.executeTransaction {
                     for (i in firmsList) {
                         try {
-                            val firm = realm.createObject(Firm::class.java, i.id)
-                            firm.name = i.name
-                            firm.address = i.address
-                            firm.description = i.description
-                            firm.phone_number = i.phone_number
-                            firm.category_id = i.category_id
+                            
+                            val firm = realm.where(Firm::class.java).equalTo("id", i.id).findAll().first()
+                            if (firm != null) {
+                                i.isFavorite = firm.isFavorite
+                            }
+
+                            realm.createOrUpdateObjectFromJson(Firm::class.java, i.toJSONObject())
                         } catch (e: Exception) {
                         }
                     }
@@ -151,27 +151,49 @@ class FirmsFragment : BaseFragment() {
 
     private fun setAdapter(firmsList: ArrayList<Firm>) {
         try {
-            adapter = FirmsAdapter(requireContext(), firmsList) { position ->
-                onListItemClick(position)
+            adapter = FirmsAdapter(requireContext(), firmsList) { v, position ->
+                onListItemClick(v, position)
             }
             binding.firmsRecyclerview.adapter = adapter
         } catch (e: Exception) {
-
         }
     }
 
-    private fun onListItemClick(position: Int) {
+    private fun onListItemClick(v: View, position: Int) {
+        when (v.id) {
+            R.id.btnFav -> updateFavorite(position)
+            R.id.btnCall -> callPhone(position)
+        }
+    }
+
+    private fun callPhone(position: Int) {
         val firm = firmsList[position]
         val phoneNumber = firm.phone_number
         val eventName = "call_${firm.name}"
         Event.sendFirebaseEvent(eventName, phoneNumber)
-        callPhone(phoneNumber)
-    }
-
-    private fun callPhone(phoneNumber: String) {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
+    }
+
+    private fun updateFavorite(position: Int) {
+        var firm = firmsList[position]
+        val name = firm.name
+        if (!firm.isFavorite){
+            onSNACK(binding.firmsRecyclerview,"تم الإضافة الي المفضلة ❤")
+        } else{
+            onSNACK(binding.firmsRecyclerview,"تم الإزالة من المفضلة ❤")
+        }
+        var eventName = "fav_${name}"
+        if (firm.isFavorite) {
+            eventName = "unFav_${name}"
+        }
+        Event.sendFirebaseEvent(eventName, name)
+        realm.beginTransaction()
+        firm.isFavorite = !firm.isFavorite
+        firm = realm.createOrUpdateObjectFromJson(Firm::class.java, firm.toJSONObject())
+        realm.copyToRealmOrUpdate(firm)
+        realm.commitTransaction()
     }
 
     override fun onBackPressed(): Boolean {
@@ -182,6 +204,10 @@ class FirmsFragment : BaseFragment() {
                 return false
             }
             binding.noInternet.visibility == View.VISIBLE -> {
+                super.onBackPressed()
+                return false
+            }
+            binding.firmsShimmer.visibility == View.VISIBLE -> {
                 super.onBackPressed()
                 return false
             }

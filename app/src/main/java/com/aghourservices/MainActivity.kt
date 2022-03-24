@@ -1,24 +1,26 @@
 package com.aghourservices
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.PersistableBundle
-import android.util.Log
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.*
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
 import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
+import com.aghourservices.favorite.FavoriteFragment
 import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchFragment
 import com.aghourservices.settings.SettingFragment
 import com.google.android.gms.ads.AdView
+import io.realm.Realm
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,9 +38,7 @@ class MainActivity : BaseActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.show()
-        binding.bottomView.itemIconTintList = null
         val bottomNavView = binding.bottomView
-
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
@@ -55,18 +55,43 @@ class MainActivity : BaseActivity() {
                 R.id.settings -> fragment = SettingFragment()
             }
             loadFragments(fragment, true)
-            return@setOnItemSelectedListener true
+            true
         }
     }
 
     override fun onResume() {
         super.onResume()
         handler.postDelayed(runnable, 120000)
+        if (!checkForInternet(this)) {
+            binding.notInternet.visibility = View.VISIBLE
+        } else {
+            binding.notInternet.visibility = View.GONE
+        }
     }
 
     override fun onPause() {
         super.onPause()
         handler.removeCallbacks(runnable)
+    }
+
+    /** Check Internet Connection **/
+    private fun checkForInternet(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
     }
 
     override fun setTitle(title: CharSequence?) {
@@ -84,6 +109,9 @@ class MainActivity : BaseActivity() {
             R.id.settings -> {
                 loadFragments(SettingFragment(), true)
             }
+            R.id.favorite -> {
+                loadFragments(FavoriteFragment(), true)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -92,6 +120,11 @@ class MainActivity : BaseActivity() {
         val fragment = supportFragmentManager.fragments.last() as BaseFragment
         if (!fragment.onBackPressed()) {
             super.onBackPressed()
+        }
+        /** selected Home fragment **/
+        val selectedItemId = binding.bottomView.selectedItemId
+        if (selectedItemId != R.id.home) {
+            binding.bottomView.selectedItemId = R.id.home
         }
     }
 }

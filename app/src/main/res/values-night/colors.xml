@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="toolbarBg">#11161B</color>
+    <color name="toolbarBg">#1D242B</color>
     <color name="toolbarText">#FFFFFF</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
@@ -29,7 +29,7 @@
     <color name="skipBtnPress">#656464</color>
     <color name="addDataTxt">#FFFFFF</color>
     <color name="navHeaderBg">#1E262E</color>
-    <color name="create_btn">#1D252C</color>
+    <color name="create_btn">#263039</color>
     <color name="create_btn_press">#11161B</color>
     <color name="createAccountText">#FFFFFF</color>
     <color name="focusedBg">#10151B</color>
@@ -41,10 +41,10 @@
     <color name="itemNavColor">#FFFFFF</color>
     <color name="searchBg">#080B0E</color>
     <color name="backIconBg">#080B0E</color>
-    <color name="backIconSelector">#151C23</color>
+    <color name="backIconSelector">#36485A</color>
     <color name="swipeColor">#FFFFFF</color>
     <color name="swipeBg">#0F1317</color>
-    <color name="navDrawerBg">#191919</color>
+    <color name="navDrawerBg">#1D242B</color>
     <color name="firmsDescription">#CCCCCC</color>
     <color name="notifyTitle">#FFFFFF</color>
     <color name="notifyMessage">#6E6E6E</color>
@@ -52,7 +52,7 @@
     <color name="colorControl">#242424</color>
     <color name="textModeSwitch">#FFFFFF</color>
     <color name="backIconTint">#FFFFFF</color>
-    <color name="hint">#656565</color>
+    <color name="hint">#E0E0E0</color>
     <color name="textDismiss">#FAFAFA</color>
     <color name="dialogText">#FFFFFF</color>
     <color name="native_ad_bg">#193145</color>
@@ -64,17 +64,40 @@
     <color name="dialogItem">#151515</color>
     <color name="settings_back_bg">#11161B</color>
     <color name="settings_back_ripple">#4C6279</color>
-    <color name="lineView">#F6F6F6</color>
+    <color name="lineView">#1D2D39</color>
     <color name="bottomNavPress">#16222B</color>
     <color name="aboutApp">#FFFFFF</color>
-    <color name="scrollViewBg">#292929</color>
+    <color name="scrollViewBg">#151B20</color>
     <color name="aboutUseApp">#FFFFFF</color>
     <color name="createBtnBg">#232323</color>
     <color name="createBtnPress">#303030</color>
-    <color name="strokeColor">#FFFFFF</color>
+    <color name="strokeColor">#474747</color>
     <color name="spinnerTextColor">#FFFFFF</color>
+    <color name="userNameColor">#FFFFFF</color>
     <color name="dropDown">#EDEDED</color>
     <color name="spinnerBg">#223445</color>
     <color name="spinnerRipple">#4D6C8A</color>
+    <color name="alertBg">#2C2C2C</color>
+    <color name="alertTxtColor">#FFFFFF</color>
+    <color name="alertBtnBg">#F1F1F1</color>
+    <color name="dialogBg">#162835</color>
+    <color name="news_ripple">#2E4453</color>
+    <color name="firmsRipple">#20323E</color>
+    <color name="shareText">#FFFFFF</color>
+    <color name="shareRipple">#20323E</color>
+    <color name="edtTextBg">#444E57</color>
+    <color name="about">#E6E6E6</color>
+    <color name="passToggle">#C6C6C6</color>
+    <color name="dontShow">#E8E8E8</color>
+    <color name="checkBox">#B8BBBD</color>
+    <color name="searchTxt">#0E0E0E</color>
+    <color name="searchHint">#0E0E0E</color>
+    <color name="loginBkColor">#FFFFFF</color>
+    <color name="skipBtnColor">#54C158</color>
+    <color name="createOrSignInAccountBg">#142532</color>
+    <color name="bg_signIn">#F8F8F8</color>
+    <color name="signOut">#ED7474</color>
+    <color name="favColor">#D3D3D3</color>
+    <color name="noFav">#FFFFFF</color>
 
 </resources>
