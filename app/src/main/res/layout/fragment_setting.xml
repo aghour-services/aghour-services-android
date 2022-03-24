@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     android:background="@color/settingsBg"
     tools:context=".settings.SettingFragment">
 
@@ -46,30 +45,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsToolbar">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/back_btn"-->
-<!--            android:layout_width="52dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:layout_gravity="left"-->
-<!--            android:layout_margin="4dp"-->
-<!--            android:background="@drawable/back_setting_ripple"-->
-<!--            android:padding="10dp"-->
-<!--            android:src="@drawable/ic_back_settings"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
         <ImageView
             android:id="@+id/userIcon"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:src="@mipmap/user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,89 +67,87 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="90dp"
             android:background="@drawable/create_acount"
             android:elevation="15dp"
             android:fontFamily="@font/segoe_ui_regular"
-            android:gravity="center"
             android:text="انشاء حساب"
-            android:textAlignment="center"
             android:textColor="@color/createAccountText"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userIcon" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/lineView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <LinearLayout
             android:id="@+id/user_data_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            android:gravity="bottom"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
             android:orientation="vertical"
+            android:gravity="center"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/userIcon">
 
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/cairo_black"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:text="Mohamed Magdy"
                 android:textAlignment="center"
                 android:textColor="@color/userNameColor"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="2dp"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="mohamedmagdysaber@gmail.com"
                 android:textAlignment="center"
                 android:textColor="@color/emailColor"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/user_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:text="01287303441"
                 android:textAlignment="center"
                 android:textColor="@color/phoneColor"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.8dp"
-            android:background="@color/lineView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
@@ -170,6 +156,7 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -179,14 +166,11 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/share"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="start|center"
                     android:src="@mipmap/dark_mode" />
 
@@ -199,38 +183,7 @@
                     android:gravity="end"
                     android:text="الوضع المظلم"
                     android:textColor="@color/dialogText"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/facebook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/dialog_selector"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/share"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="start|center"
-                    android:src="@mipmap/facebook" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/segoe_ui_regular"
-                    android:gravity="end"
-                    android:text="صفحتنا علي الفيسبوك"
-                    android:textColor="@color/dialogText"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -241,14 +194,11 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/rate"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="start|center"
                     android:src="@mipmap/share" />
 
@@ -259,9 +209,9 @@
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end"
-                    android:text="شارك مع أصدقائك"
+                    android:text="شارك التطبيق مع أصدقائك"
                     android:textColor="@color/dialogText"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -272,14 +222,11 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/about"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="start"
                     android:src="@mipmap/star" />
 
@@ -292,25 +239,22 @@
                     android:gravity="end"
                     android:text="تقييم التطبيق"
                     android:textColor="@color/dialogText"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/about"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="49dp"
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/log_out"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="start"
                     android:src="@mipmap/about_us" />
 
@@ -323,46 +267,200 @@
                     android:gravity="end"
                     android:text="عن التطبيق"
                     android:textColor="@color/dialogText"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/settings_text"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/log_out"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/dialog_selector"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="1dp"
+                    android:src="@mipmap/exit" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="end|center"
+                    android:text="تسجيل الخروج"
+                    android:textColor="@color/signOut"
+                    android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/log_out"
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout8"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/log_out_setting"
-        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:weightSum="3"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.97">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <!--        <ImageView-->
-        <!--            android:layout_width="25dp"-->
-        <!--            android:layout_height="30dp"-->
-        <!--            android:layout_gravity="center"-->
-        <!--            android:layout_marginLeft="5dp"-->
-        <!--            android:src="@mipmap/exit" />-->
+        <View
+            android:id="@+id/view5"
+            android:layout_width="0dp"
+            android:layout_height="0.1dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.25"
+            android:background="@color/lineView" />
 
         <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="إتـصـل بـنـا"
+            android:textColor="#FFA013"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="0dp"
+            android:layout_height="0.1dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.25"
+            android:background="@color/lineView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/dialog_selector"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/facebook" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:text="فيسبوك"
+                android:textColor="#3B5998"
+                android:textSize="@dimen/settings_text"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/segoe_ui_regular"
-            android:gravity="center"
-            android:text="تسجيل الخروج"
-            android:textColor="@color/signOut"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginRight="20dp"
+            android:background="@drawable/dialog_selector"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/gmail" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center"
+                android:text="البريد"
+                android:textColor="#FF5722"
+                android:textSize="@dimen/settings_text"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/telegram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/dialog_selector"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/telegram" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center"
+                android:text="تليجرام"
+                android:textColor="#229ED9"
+                android:textSize="@dimen/settings_text"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/whatsApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/dialog_selector"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/whatsapp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center"
+                android:text="واتساب"
+                android:textColor="#4CAF50"
+                android:textSize="@dimen/settings_text"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

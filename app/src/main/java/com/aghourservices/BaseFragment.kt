@@ -2,7 +2,6 @@ package com.aghourservices
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,10 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.interfaces.ActivityFragmentCommunicator
 import com.aghourservices.user.SignInActivity
+
 
 open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
     lateinit var bottomNavigationView: LinearLayout
@@ -91,6 +90,28 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         }
     }
 
+    fun whatsApp(number: String) {
+        Event.sendFirebaseEvent("Whats_App", "")
+        val url = "https://api.whatsapp.com/send?phone=$number"
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
+
+    fun gmail() {
+        Event.sendFirebaseEvent("Gmail_App", "")
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse(getString(R.string.gmail_uri))
+        }
+        startActivity(emailIntent)
+    }
+
+    fun telegram() {
+        Event.sendFirebaseEvent("Telegram_App", "")
+        val telegram = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/aghourservices"))
+        startActivity(telegram)
+    }
+
     private fun logOut() {
         Event.sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(requireActivity())
@@ -106,16 +127,16 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(R.string.positiveButton) { _, _ ->
             logOut()
-            Event.sendFirebaseEvent("ALERT_LOGOUT_ACTION", "")
+            Event.sendFirebaseEvent("Sign_out", "")
         }
         alertDialogBuilder.setNegativeButton(R.string.negativeButton) { _, _ ->
-            Event.sendFirebaseEvent("ALERT_STAY_ACTION", "")
+            Event.sendFirebaseEvent("STAY_ACTION", "")
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
 
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 18f
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18f
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 16f
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 16f
 //        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
 //        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
 

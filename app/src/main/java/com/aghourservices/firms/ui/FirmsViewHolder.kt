@@ -1,11 +1,6 @@
 package com.aghourservices.firms.ui
 
-import android.content.ClipDescription
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.media.MediaPlayer
-import android.provider.Settings.System.getString
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -33,9 +28,7 @@ class FirmsViewHolder(
         address.text = firm.address
         description.text = firm.description
         callButton.text = firm.phone_number
-
         callButton.setOnClickListener(this)
-
         shareFirm.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
@@ -48,6 +41,7 @@ class FirmsViewHolder(
             }
             itemView.context.startActivity(Intent.createChooser(sendIntent, "شارك بواسطة.."))
         }
+
     }
 
     override fun onClick(v: View) {

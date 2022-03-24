@@ -50,4 +50,24 @@
         <item name="android:background">@drawable/news_card_ripple</item>
         <item name="android:textColor">@color/dialogText</item>
     </style>
+
+    <!--All Text Font Style-->
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/cairo_black</item>
+    </style>
+
+    <style name="SegoeTextRegular" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/segoe_ui_regular</item>
+    </style>
+
+    <style name="SegoeTextBold" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!--All Text Buttons Font Style-->
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/cairo_black</item>
+    </style>
+
 </resources>

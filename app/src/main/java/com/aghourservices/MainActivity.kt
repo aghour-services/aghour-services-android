@@ -16,6 +16,8 @@ import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
 import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
+import com.aghourservices.favorite.FavoriteFragment
+import com.aghourservices.favorite.local.FavoriteDatabase
 import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchFragment
@@ -43,8 +45,8 @@ class MainActivity : BaseActivity() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
+//        runnable = Runnable { interstitial.load(this@MainActivity) }
+//        handler.post(runnable)
 
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
@@ -62,8 +64,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 120000)
-
+//        handler.postDelayed(runnable, 120000)
         if (!checkForInternet(this)) {
             binding.notInternet.visibility = View.VISIBLE
         } else {
@@ -73,7 +74,7 @@ class MainActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        handler.removeCallbacks(runnable)
+//        handler.removeCallbacks(runnable)
     }
 
     /** Check Internet Connection **/
@@ -110,6 +111,9 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             R.id.settings -> {
                 loadFragments(SettingFragment(), true)
+            }
+            R.id.favorite -> {
+                loadFragments(FavoriteFragment(), true)
             }
         }
         return super.onOptionsItemSelected(item)

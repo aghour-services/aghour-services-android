@@ -97,5 +97,6 @@
     <color name="createOrSignInAccountBg">#142532</color>
     <color name="bg_signIn">#F8F8F8</color>
     <color name="signOut">#ED7474</color>
+    <color name="favColor">#D3D3D3</color>
 
 </resources>

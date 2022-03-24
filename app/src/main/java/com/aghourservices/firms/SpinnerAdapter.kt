@@ -22,9 +22,7 @@ class SpinnerAdapter(context: Context, category: List<Category>) :
     }
 
     private fun initView(position: Int, parent: ViewGroup): View {
-
         val category = getItem(position)
-
         val view = LayoutInflater.from(context).inflate(R.layout.spinner_items, parent, false)
         val categoryImage = view.findViewById<ImageView>(R.id.categoryImage)
         val categoryName = view.findViewById<TextView>(R.id.categoryName)

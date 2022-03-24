@@ -68,5 +68,9 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="news_share">نسخ الخبر</string>
+    <string name="whats_app_number">+201287303441</string>
+    <string name="gmail_uri">mailto:ahmedmgdi94@gmail.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

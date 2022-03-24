@@ -1,7 +1,6 @@
 package com.aghourservices.settings
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -44,6 +43,15 @@ class SettingFragment : BaseFragment() {
         }
         binding.facebook.setOnClickListener {
             facebook()
+        }
+        binding.email.setOnClickListener {
+            gmail()
+        }
+        binding.telegram.setOnClickListener {
+            telegram()
+        }
+        binding.whatsApp.setOnClickListener {
+            whatsApp(getString(R.string.whats_app_number))
         }
         binding.share.setOnClickListener {
             shareApp()

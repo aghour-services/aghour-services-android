@@ -145,4 +145,5 @@
     <color name="welcome">#FF5722</color>
     <color name="log_out_bg">#FFABA4</color>
     <color name="signOut">#FF3E3E</color>
+    <color name="favColor">#F5F5F5</color>
 </resources>

@@ -74,9 +74,8 @@
             android:padding="2dp"
             app:itemIconSize="30dp"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
-            app:itemTextAppearanceInactive="@style/SegoeTextBold"
-            app:itemTextColor="@color/itemNavColor"
-            app:labelVisibilityMode="unlabeled"
+            app:itemTextAppearanceInactive="@style/SegoeTextRegular"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_menu" />
     </LinearLayout>
 
