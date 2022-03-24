@@ -8,22 +8,19 @@ import android.os.*
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
 import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.favorite.FavoriteFragment
-import com.aghourservices.favorite.local.FavoriteDatabase
 import com.aghourservices.firms.AddDataFragment
 import com.aghourservices.news.NewsFragment
 import com.aghourservices.search.SearchFragment
 import com.aghourservices.settings.SettingFragment
 import com.google.android.gms.ads.AdView
-import com.google.android.material.navigation.NavigationView
+import io.realm.Realm
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -45,8 +42,8 @@ class MainActivity : BaseActivity() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-//        runnable = Runnable { interstitial.load(this@MainActivity) }
-//        handler.post(runnable)
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
 
         bottomNavView.setOnItemSelectedListener {
             var fragment: Fragment? = null
@@ -64,7 +61,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-//        handler.postDelayed(runnable, 120000)
+        handler.postDelayed(runnable, 120000)
         if (!checkForInternet(this)) {
             binding.notInternet.visibility = View.VISIBLE
         } else {
@@ -74,7 +71,7 @@ class MainActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-//        handler.removeCallbacks(runnable)
+        handler.removeCallbacks(runnable)
     }
 
     /** Check Internet Connection **/

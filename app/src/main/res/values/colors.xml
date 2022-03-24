@@ -11,7 +11,7 @@
     <color name="backIconSelector">#C4C4C4</color>
     <color name="searchViewBg">#CBE8FF</color>
     <color name="clear">#EC4949</color>
-    <color name="lineView">#3F3F3F</color>
+    <color name="lineView">#C5C5C5</color>
     <color name="recyclerViewBg">#F3F3F3</color>
     <color name="splashScreenBg">#3C88C5</color>
     <color name="navHeaderBg">#387DB3</color>
@@ -146,4 +146,5 @@
     <color name="log_out_bg">#FFABA4</color>
     <color name="signOut">#FF3E3E</color>
     <color name="favColor">#F5F5F5</color>
+    <color name="noFav">#152029</color>
 </resources>

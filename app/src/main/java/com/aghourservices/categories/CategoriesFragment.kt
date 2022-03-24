@@ -87,8 +87,7 @@ class CategoriesFragment : BaseFragment() {
                 call: Call<ArrayList<Category>?>,
                 response: Response<ArrayList<Category>?>,
             ) {
-                val responseBody = response.body()!!
-                categoryList = responseBody
+                categoryList = response.body()!!
                 realm.executeTransaction {
                     for (i in categoryList) {
                         try {
@@ -99,7 +98,7 @@ class CategoriesFragment : BaseFragment() {
                         }
                     }
                 }
-                adapter = CategoriesAdapter(responseBody) { position -> onListItemClick(position) }
+                adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
                 progressBar()
             }
@@ -111,8 +110,6 @@ class CategoriesFragment : BaseFragment() {
                 adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
                 binding.categoriesRecyclerview.adapter = adapter
                 progressBar()
-
-//                notify(requireContext(),"لا يوجد إنترنت")
             }
         })
     }

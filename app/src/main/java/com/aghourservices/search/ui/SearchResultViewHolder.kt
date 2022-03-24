@@ -24,7 +24,7 @@ class SearchResultViewHolder(
     var categoryName: TextView = itemView.findViewById(R.id.category_name)
     var callButton: Button = itemView.findViewById(R.id.btnCall)
     var shareFirm: TextView = itemView.findViewById(R.id.shareFirm)
-    var favorite: CheckBox = itemView.findViewById(R.id.fav)
+    var favorite: CheckBox = itemView.findViewById(R.id.btnFav)
 
     fun setList(searchResult: SearchResult) {
         name.text = searchResult.name

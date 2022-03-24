@@ -64,7 +64,7 @@
     <color name="dialogItem">#151515</color>
     <color name="settings_back_bg">#11161B</color>
     <color name="settings_back_ripple">#4C6279</color>
-    <color name="lineView">#F6F6F6</color>
+    <color name="lineView">#1D2D39</color>
     <color name="bottomNavPress">#16222B</color>
     <color name="aboutApp">#FFFFFF</color>
     <color name="scrollViewBg">#151B20</color>
@@ -98,5 +98,6 @@
     <color name="bg_signIn">#F8F8F8</color>
     <color name="signOut">#ED7474</color>
     <color name="favColor">#D3D3D3</color>
+    <color name="noFav">#FFFFFF</color>
 
 </resources>

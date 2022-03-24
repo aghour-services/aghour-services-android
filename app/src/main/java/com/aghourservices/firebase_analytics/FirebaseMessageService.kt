@@ -10,6 +10,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.news.NewsFragment
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -44,14 +45,9 @@ class FirebaseMessageService : FirebaseMessagingService() {
     //generate the notification
     @SuppressLint("UnspecifiedImmutableFlag")
     fun generateNotification(title: String, message: String) {
-        val intent = Intent(this, NewsFragment::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
-        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
-        } else {
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-        }
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
         var builder: NotificationCompat.Builder =
             NotificationCompat.Builder(applicationContext, channelId)

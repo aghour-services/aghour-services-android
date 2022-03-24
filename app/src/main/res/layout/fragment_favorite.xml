@@ -4,21 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:background="@color/recyclerViewBg"
     tools:context=".favorite.FavoriteFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoriteRecyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:listitem="@layout/favorite_card" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favoriteRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/firms_card" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
+        android:id="@+id/noFavItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:fontFamily="@font/segoe_ui_bold"
         android:gravity="center"
-        android:text="No Favorite Items"
-        android:textColor="#FF2525"
-        android:textSize="30sp" />
+        android:text="لا يوجد إعجابات 🙁"
+        android:textColor="@color/noFav"
+        android:textSize="25sp"
+        android:visibility="gone" />
 </FrameLayout>

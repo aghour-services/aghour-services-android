@@ -2,11 +2,13 @@ package com.aghourservices
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -16,6 +18,7 @@ import com.aghourservices.cache.UserInfo
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.interfaces.ActivityFragmentCommunicator
 import com.aghourservices.user.SignInActivity
+import com.google.android.material.snackbar.Snackbar
 
 
 open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
@@ -127,7 +130,6 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(R.string.positiveButton) { _, _ ->
             logOut()
-            Event.sendFirebaseEvent("Sign_out", "")
         }
         alertDialogBuilder.setNegativeButton(R.string.negativeButton) { _, _ ->
             Event.sendFirebaseEvent("STAY_ACTION", "")
@@ -137,8 +139,6 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 16f
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 16f
-//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
-//        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -146,5 +146,16 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
                 .setTextAppearance(R.style.SegoeTextBold)
         }
+    }
+
+    fun onSNACK(view: View, message: String) {
+        val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        val snackbarView = snackbar.view
+        snackbarView.setBackgroundColor(Color.BLACK)
+        val textView =
+            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        textView.textSize = 18f
+        snackbar.show()
     }
 }
