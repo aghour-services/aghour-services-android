@@ -109,15 +109,11 @@ class FirmsFragment : BaseFragment() {
                 realm.executeTransaction {
                     for (i in firmsList) {
                         try {
-                            val firmClass = realm.createObject(Firm::class.java, i.id)
-                            firmClass.name = i.name
-                            firmClass.address = i.address
-                            firmClass.description = i.description
-                            firmClass.phone_number = i.phone_number
-                            firmClass.category_id = i.category_id
-
-                            val firm = realm.where(Firm::class.java).equalTo("id", i.id).findAll().first()!!
-                            i.isFavorite = firm.isFavorite
+                            
+                            val firm = realm.where(Firm::class.java).equalTo("id", i.id).findAll().first()
+                            if (firm != null) {
+                                i.isFavorite = firm.isFavorite
+                            }
 
                             realm.createOrUpdateObjectFromJson(Firm::class.java, i.toJSONObject())
                         } catch (e: Exception) {
