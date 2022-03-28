@@ -31,15 +31,18 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <FrameLayout
-        android:id="@+id/parent_container"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/recyclerViewBg"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/linearAdMob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:navGraph="@navigation/bottom_nav_graph" />
 
     <LinearLayout
         android:id="@+id/linearAdMob"
@@ -60,8 +63,8 @@
         android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:background="@color/recyclerViewBg"
-        android:orientation="vertical"
         android:elevation="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/notInternet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -71,12 +74,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bottom_nav_view_bg"
-            android:padding="2dp"
-            app:itemIconSize="30dp"
+            android:padding="6dp"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
             app:itemTextAppearanceInactive="@style/SegoeTextRegular"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_menu" />
+            app:menu="@menu/bottom_nav_graph" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,7 +100,7 @@
             android:gravity="center"
             android:text="لا يـوجـد إنتـرنـت"
             android:textColor="@color/notifyTitle"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="@dimen/settings_text"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
+import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
@@ -28,8 +29,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class NewsFragment : BaseFragment() {
     private lateinit var adapter: ArticlesAdapter

@@ -1,8 +1,10 @@
 package com.aghourservices.firms
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +12,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.Category
+import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.firms.api.CreateFirm
 import com.aghourservices.interfaces.AlertDialog.Companion.dataAdded
@@ -27,8 +31,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class AddDataFragment : BaseFragment() {
     private lateinit var binding: FragmentAddDataBinding
@@ -46,12 +48,11 @@ class AddDataFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.add_data_fragment)
-
         hideUserAddData()
         showBottomNav()
-
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.show()
+        init()
 
         val bundle = arguments
         if (bundle != null) {
@@ -60,11 +61,28 @@ class AddDataFragment : BaseFragment() {
             Toast.makeText(requireActivity(), value1.toString(), Toast.LENGTH_SHORT).show()
             Toast.makeText(requireActivity(), value2, Toast.LENGTH_SHORT).show()
         }
-        init()
 
         binding.btnRegister.setOnClickListener {
-            startActivity(Intent(requireActivity(), SignUpActivity::class.java))
-            requireActivity().finish()
+            val alertDialogBuilder = AlertDialog.Builder(requireContext())
+            alertDialogBuilder.setTitle(getString(R.string.create_account_first))
+            alertDialogBuilder.setMessage(getString(R.string.should_create))
+            alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+            alertDialogBuilder.setCancelable(true)
+            alertDialogBuilder.setPositiveButton("إنشاء الان") { _, _ ->
+                startActivity(Intent(requireActivity(), SignUpActivity::class.java))
+                requireActivity().finish()
+            }
+            alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18f
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 18f
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setTextAppearance(R.style.SegoeTextBold)
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    .setTextAppearance(R.style.SegoeTextBold)
+            }
         }
     }
 
@@ -136,10 +154,10 @@ class AddDataFragment : BaseFragment() {
     }
 
     private fun setTextEmpty() {
-        binding.name.setText("")
-        binding.address.setText("")
-        binding.description.setText("")
-        binding.phoneNumber.setText("")
+        binding.name.text.clear()
+        binding.address.text.clear()
+        binding.description.text.clear()
+        binding.phoneNumber.text.clear()
     }
 
     private fun hideUserAddData() {

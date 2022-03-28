@@ -6,9 +6,9 @@
         <item name="android:statusBarColor">@color/toolbarBg</item>
         <item name="colorPrimary">@color/itemNavColor</item>
         <item name="windowActionBar">true</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <!-- Customize your theme here. -->
-        <item name="android:navigationBarColor">@color/navBarColor</item>
+        <item name="android:navigationBarColor">@color/navDrawerBg</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
 
     <style name="WindowAnimationTransition">

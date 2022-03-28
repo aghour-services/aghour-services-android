@@ -27,7 +27,7 @@ open class BaseActivity : AppCompatActivity() {
 
         if (fragment != null) {
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            ft.replace(R.id.parent_container, fragment)
+            ft.replace(R.id.fragmentContainerView, fragment)
             if (stacked) {
                 ft.addToBackStack(backStateName)
             }

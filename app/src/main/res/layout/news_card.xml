@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="4dp">
+    android:layout_marginBottom="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearCard"
@@ -20,8 +18,8 @@
             android:id="@+id/news_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@drawable/news_card_ripple"
+            android:orientation="vertical"
             android:padding="20dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +73,7 @@
                 android:background="#AEAEAE" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:gravity="right|center"
@@ -89,8 +87,8 @@
                     android:background="@drawable/share_ripple"
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/segoe_ui_bold"
-                    android:gravity="center|right"
-                    android:padding="16dp"
+                    android:gravity="center"
+                    android:padding="13dp"
                     android:text="مشاركة"
                     android:textAlignment="center"
                     android:textColor="@color/shareText"

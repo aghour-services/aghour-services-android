@@ -6,9 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="3dp"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="4dp">
+    android:layout_marginBottom="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -159,9 +157,9 @@
                     android:id="@+id/btnFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_margin="10dp"
                     android:button="@drawable/fav_selector"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -169,7 +167,7 @@
                 <TextView
                     android:id="@+id/shareFirm"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_gravity="right|center"
                     android:background="@drawable/share_ripple"
                     android:fontFamily="@font/segoe_ui_bold"
