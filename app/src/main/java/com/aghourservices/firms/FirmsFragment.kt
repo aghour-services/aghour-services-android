@@ -113,8 +113,7 @@ class FirmsFragment : BaseFragment() {
                 realm.executeTransaction {
                     for (i in firmsList) {
                         try {
-                            val firm =
-                                realm.where(Firm::class.java).equalTo("id", i.id).findAll().first()
+                            val firm = realm.where(Firm::class.java).equalTo("id", i.id).findFirst()
                             if (firm != null) {
                                 i.isFavorite = firm.isFavorite
                             }
