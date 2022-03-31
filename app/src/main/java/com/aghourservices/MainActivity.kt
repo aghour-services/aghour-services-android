@@ -39,13 +39,13 @@ class MainActivity : BaseActivity() {
         bottomNavView.setupWithNavController(navController)
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-//        runnable = Runnable { interstitial.load(this@MainActivity) }
-//        handler.post(runnable)
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
     }
 
     override fun onResume() {
         super.onResume()
-//        handler.postDelayed(runnable, 120000)
+        handler.postDelayed(runnable, 120000)
         if (!checkForInternet(this)) {
             binding.notInternet.visibility = View.VISIBLE
         } else {
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-//        handler.removeCallbacks(runnable)
+        handler.removeCallbacks(runnable)
     }
 
     /** Check Internet Connection **/
