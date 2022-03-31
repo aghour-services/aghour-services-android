@@ -18,8 +18,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
+import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.news.api.Article
-
 
 class ArticlesViewHolder(
     itemView: View, private val onItemClicked: (position: Int) -> Unit,
@@ -39,6 +39,7 @@ class ArticlesViewHolder(
         date.text = article.created_at
 
         shareButton.setOnClickListener {
+            Event.sendFirebaseEvent("Share_news", "")
             val shareIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(
@@ -61,7 +62,6 @@ class ArticlesViewHolder(
             }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 20f
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)

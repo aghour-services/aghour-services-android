@@ -17,6 +17,7 @@ import com.aghourservices.R
 import com.aghourservices.about.AboutFragment
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.FragmentSettingBinding
+import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.user.SignUpActivity
 
 class SettingFragment : BaseFragment() {
@@ -98,6 +99,7 @@ class SettingFragment : BaseFragment() {
     }
 
     private fun chooseThemeDialog() {
+        Event.sendFirebaseEvent("App_Theme", "")
         val activity = (requireActivity() as AppCompatActivity)
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.choose_theme_text))
