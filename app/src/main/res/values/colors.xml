@@ -147,4 +147,5 @@
     <color name="signOut">#FF3E3E</color>
     <color name="favColor">#F5F5F5</color>
     <color name="noFav">#152029</color>
+    <color name="adMobBg">#FFFFFF</color>
 </resources>

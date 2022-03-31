@@ -29,14 +29,14 @@ class FirmsAdapter(
         val hold = holder as FirmsViewHolder
         val firm = arrayList[position]
         hold.setList(firm)
-//        if (getItemViewType(position) == 0) {
-//            NativeAdViewHolder(context, hold.adFrame)
-//        }
+        if (getItemViewType(position) == 0) {
+            NativeAdViewHolder(context, hold.adFrame)
+        }
     }
 
-//    override fun getItemViewType(position: Int): Int {
-//        return (position + 1) % (itemsCountToShowAds + 1)
-//    }
+    override fun getItemViewType(position: Int): Int {
+        return (position + 1) % (itemsCountToShowAds + 1)
+    }
 
     override fun getItemCount(): Int {
         return itemsCount

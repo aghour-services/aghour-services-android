@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:navGraph="@navigation/bottom_nav_graph" />
+        app:navGraph="@navigation/mobile_navigation" />
 
     <LinearLayout
         android:id="@+id/linearAdMob"
@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:gravity="bottom"
+        android:background="@color/adMobBg"
         app:layout_constraintBottom_toTopOf="@+id/linearBottomNavVIew"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -78,7 +79,7 @@
             app:itemTextAppearanceActive="@style/SegoeTextBold"
             app:itemTextAppearanceInactive="@style/SegoeTextRegular"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_nav_graph" />
+            app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
 
     <LinearLayout
