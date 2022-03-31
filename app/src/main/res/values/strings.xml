@@ -49,7 +49,7 @@
     <string name="Choose">أختر التصنيف</string>
     <string name="news_fragment">آخر الأخبار</string>
     <string name="shareText">"قم بتحميل تطبيق أجهور الكبرى من خلال الرابط التالي https://play.google.com/store/apps/details?id=com.aghourservices"</string>
-    <string name="choose_theme_text">تشغيل الوضع المظلم</string>
+    <string name="choose_theme_text">أخـتيار مظهر للتطبيق</string>
 
     <!--animation duration-->
     <string name="shortDuration">300</string>
@@ -60,6 +60,7 @@
     <string name="doneButton">تمام</string>
     <string name="positiveButton">نعم</string>
     <string name="negativeButton">لا</string>
+    <string name="doneButtonMode">تطبيق</string>
     <string name="cancelButton">إلغاء</string>
     <string name="settings_fragment">الإعدادات</string>
     <string name="selected_item">تم اختيار</string>
@@ -72,5 +73,7 @@
     <string name="gmail_uri">mailto:ahmedmgdi94@gmail.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_account_first">إنشاء حساب 😃</string>
+    <string name="should_create">أنشئ حساب حتي تستطيع إضافة بيانات !</string>
 
 </resources>

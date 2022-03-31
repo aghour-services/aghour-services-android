@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.about.AboutFragment
@@ -38,7 +41,7 @@ class SettingFragment : BaseFragment() {
         binding.backBtn.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.darkMode.setOnClickListener {
+        binding.appTheme.setOnClickListener {
             chooseThemeDialog()
         }
         binding.facebook.setOnClickListener {
@@ -59,8 +62,9 @@ class SettingFragment : BaseFragment() {
         binding.rate.setOnClickListener {
             rateApp()
         }
-        binding.about.setOnClickListener {
-            loadFragments(AboutFragment(), true)
+        binding.aboutFragment.setOnClickListener {
+            val action = SettingFragmentDirections.actionSettingFragmentToAboutFragment()
+            findNavController().navigate(action)
         }
         binding.logOut.setOnClickListener {
             showOnCloseDialog(requireActivity())
@@ -70,7 +74,6 @@ class SettingFragment : BaseFragment() {
     private fun checkUser() {
         val userInfo = UserInfo()
         val user = userInfo.getUserData(requireActivity())
-
         if (userInfo.isUserLoggedIn(requireActivity())) {
             binding.btnRegister.visibility = View.GONE
             binding.userDataView.visibility = View.VISIBLE
@@ -99,24 +102,24 @@ class SettingFragment : BaseFragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.choose_theme_text))
         builder.setNegativeButton(R.string.cancelButton) { _, _ -> }
-        val styles = arrayOf("متوقف", "قيد التشغيل", "استخدام النظام الإفتراضي")
+        val styles = arrayOf("الوضع الإفتراضي للهاتف", "فـاتـح", "داكـن")
         val checkedItem = ThemePreference(requireContext()).darkMode
         builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
             when (which) {
                 0 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                     ThemePreference(requireContext()).darkMode = 0
                     activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
                 1 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     ThemePreference(requireContext()).darkMode = 1
                     activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
                 2 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     ThemePreference(requireContext()).darkMode = 2
                     activity.delegate.applyDayNight()
                     dialog.dismiss()
@@ -126,7 +129,6 @@ class SettingFragment : BaseFragment() {
         val dialog = builder.create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18f
-//        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextAppearance(R.style.SegoeTextBold)
         }

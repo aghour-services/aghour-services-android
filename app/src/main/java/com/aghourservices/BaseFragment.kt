@@ -47,21 +47,6 @@ open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
         bottomNavigationView.visibility = View.GONE
     }
 
-    fun loadFragments(fragment: Fragment?, stacked: Boolean) {
-        val backStateName: String = fragment?.javaClass.toString()
-        val manager: FragmentManager = requireActivity().supportFragmentManager
-        val ft: FragmentTransaction = manager.beginTransaction()
-
-        if (fragment != null) {
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            ft.replace(R.id.parent_container, fragment)
-            if (stacked) {
-                ft.addToBackStack(backStateName)
-            }
-            ft.commit()
-        }
-    }
-
     fun shareApp() {
         Event.sendFirebaseEvent("Share_App", "")
         val shareText = getString(R.string.shareText)

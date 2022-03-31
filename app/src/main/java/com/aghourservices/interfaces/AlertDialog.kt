@@ -26,7 +26,6 @@ interface AlertDialog {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
             }
-//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
         }
 
         fun noInternet(context: Context) {
@@ -37,7 +36,6 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
@@ -52,7 +50,6 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-//            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)

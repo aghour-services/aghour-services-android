@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
+import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.ui.FirmsAdapter
@@ -27,8 +28,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SearchFragment : BaseFragment() {
     private lateinit var searchResults: ArrayList<SearchResult>

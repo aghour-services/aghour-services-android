@@ -160,7 +160,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/darkMode"
+                android:id="@+id/appTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -181,7 +181,7 @@
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end"
-                    android:text="الوضع المظلم"
+                    android:text="مظهر التطبيق"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
@@ -244,7 +244,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/about"
+                android:id="@+id/aboutFragment"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
@@ -330,7 +330,7 @@
             android:textAlignment="center"
             android:text="إتـصـل بـنـا"
             android:textColor="#FFA013"
-            android:textSize="14sp" />
+            android:textSize="@dimen/settings_text" />
 
         <View
             android:id="@+id/view6"
@@ -361,7 +361,7 @@
             android:background="@drawable/dialog_selector"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="4dp">
 
             <ImageView
                 android:layout_width="30dp"
@@ -387,7 +387,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/dialog_selector"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="4dp">
 
             <ImageView
                 android:layout_width="30dp"
@@ -415,7 +415,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/dialog_selector"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="4dp">
 
             <ImageView
                 android:layout_width="30dp"
@@ -442,7 +442,7 @@
             android:layout_gravity="center"
             android:background="@drawable/dialog_selector"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="4dp">
 
             <ImageView
                 android:layout_width="30dp"

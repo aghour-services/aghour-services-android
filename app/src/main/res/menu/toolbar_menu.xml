@@ -5,13 +5,7 @@
     android:textDirection="rtl">
 
     <item
-        android:id="@+id/favorite"
-        android:icon="@drawable/bottom_nav_favorite"
-        android:title="@string/favorite_fragment"
-        app:showAsAction="ifRoom|collapseActionView" />
-
-    <item
-        android:id="@+id/settings"
+        android:id="@+id/settingFragment"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings_fragment"
         app:showAsAction="ifRoom|collapseActionView" />

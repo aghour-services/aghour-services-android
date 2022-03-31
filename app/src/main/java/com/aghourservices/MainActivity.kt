@@ -1,30 +1,26 @@
 package com.aghourservices
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
-import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.databinding.ActivityMainBinding
-import com.aghourservices.favorite.FavoriteFragment
-import com.aghourservices.firms.AddDataFragment
-import com.aghourservices.news.NewsFragment
-import com.aghourservices.search.SearchFragment
-import com.aghourservices.settings.SettingFragment
 import com.google.android.gms.ads.AdView
-import io.realm.Realm
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var toolbar: Toolbar
     private lateinit var adView: AdView
     private var handler = Handler(Looper.getMainLooper())
     private lateinit var runnable: Runnable
@@ -34,34 +30,22 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadFragments(CategoriesFragment(), false)
-        toolbar = binding.toolbar
+        val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.show()
         val bottomNavView = binding.bottomView
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        bottomNavView.setupWithNavController(navController)
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
-
-        bottomNavView.setOnItemSelectedListener {
-            var fragment: Fragment? = null
-            when (it.itemId) {
-                R.id.home -> fragment = CategoriesFragment()
-                R.id.search -> fragment = SearchFragment()
-                R.id.news -> fragment = NewsFragment()
-                R.id.addData -> fragment = AddDataFragment()
-                R.id.settings -> fragment = SettingFragment()
-            }
-            loadFragments(fragment, true)
-            true
-        }
+//        runnable = Runnable { interstitial.load(this@MainActivity) }
+//        handler.post(runnable)
     }
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 120000)
+//        handler.postDelayed(runnable, 120000)
         if (!checkForInternet(this)) {
             binding.notInternet.visibility = View.VISIBLE
         } else {
@@ -71,7 +55,7 @@ class MainActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        handler.removeCallbacks(runnable)
+//        handler.removeCallbacks(runnable)
     }
 
     /** Check Internet Connection **/
@@ -103,28 +87,18 @@ class MainActivity : BaseActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    @SuppressLint("InflateParams", "ResourceType")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.settings -> {
-                loadFragments(SettingFragment(), true)
-            }
-            R.id.favorite -> {
-                loadFragments(FavoriteFragment(), true)
-            }
+        if (item.itemId == R.id.settingFragment) {
+            val navController: NavController =
+                Navigation.findNavController(this@MainActivity, R.id.fragmentContainerView)
+            navController.navigate(R.id.settingFragment)
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onBackPressed() {
-        val fragment = supportFragmentManager.fragments.last() as BaseFragment
-        if (!fragment.onBackPressed()) {
-            super.onBackPressed()
-        }
-        /** selected Home fragment **/
-        val selectedItemId = binding.bottomView.selectedItemId
-        if (selectedItemId != R.id.home) {
-            binding.bottomView.selectedItemId = R.id.home
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = Navigation.findNavController(this@MainActivity, R.id.fragmentContainerView)
+        navController.navigateUp()
+        return super.onSupportNavigateUp()
     }
 }

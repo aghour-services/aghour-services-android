@@ -44,6 +44,7 @@ class FavoriteFragment : BaseFragment() {
         activity.supportActionBar?.show()
         init()
         load()
+        refresh()
     }
 
     private fun refresh() {

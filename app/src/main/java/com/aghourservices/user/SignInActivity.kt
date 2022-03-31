@@ -11,6 +11,7 @@ import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
+import com.aghourservices.constants.Constants.Companion.SIGN_IN_BASE_URL
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.user.api.SignInService
 import com.google.android.gms.ads.AdView
@@ -19,8 +20,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-private const val BASE_URL = "https://aghour-services.magdi.work/api/users/"
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
@@ -64,7 +63,7 @@ class SignInActivity : AppCompatActivity() {
         showProgressDialog()
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(SignInService::class.java)
+            .baseUrl(SIGN_IN_BASE_URL).build().create(SignInService::class.java)
         val retrofitData = retrofitBuilder.signIn(user.userObject())
 
 

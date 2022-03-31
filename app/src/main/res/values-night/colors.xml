@@ -5,7 +5,7 @@
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
     <color name="navBarColor">#000000</color>
-    <color name="recyclerViewBg">#101010</color>
+    <color name="recyclerViewBg">#151B20</color>
     <color name="splashScreenBg">#141F27</color>
     <color name="categoryName">#FFFFFF</color>
     <color name="categoryCardBg">#1B2025</color>
@@ -99,5 +99,6 @@
     <color name="signOut">#ED7474</color>
     <color name="favColor">#D3D3D3</color>
     <color name="noFav">#FFFFFF</color>
+    <color name="adMobBg">#1D242B</color>
 
 </resources>

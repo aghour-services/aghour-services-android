@@ -6,18 +6,18 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NavUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
+import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
-import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -25,9 +25,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-
-private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class FirmsFragment : BaseFragment() {
     private lateinit var adapter: FirmsAdapter
@@ -49,7 +46,8 @@ class FirmsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNav()
         val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.show()
+        activity.supportActionBar?.hide()
+
         try {
             init()
             loadFirms(categoryId)
@@ -57,7 +55,12 @@ class FirmsFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
         }
+
+        binding.backBtn.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
+
 
     private fun init() {
         Realm.init(requireActivity())
@@ -75,7 +78,8 @@ class FirmsFragment : BaseFragment() {
         if (bundle != null) {
             categoryId = bundle.getInt("category_id", 0)
             val categoryName = bundle.getString("category_name")
-            requireActivity().title = categoryName
+            val toolbarTv = binding.toolBarTv
+            toolbarTv.text = categoryName
         }
     }
 
@@ -109,8 +113,7 @@ class FirmsFragment : BaseFragment() {
                 realm.executeTransaction {
                     for (i in firmsList) {
                         try {
-                            
-                            val firm = realm.where(Firm::class.java).equalTo("id", i.id).findAll().first()
+                            val firm = realm.where(Firm::class.java).equalTo("id", i.id).findFirst()
                             if (firm != null) {
                                 i.isFavorite = firm.isFavorite
                             }
@@ -179,10 +182,10 @@ class FirmsFragment : BaseFragment() {
     private fun updateFavorite(position: Int) {
         var firm = firmsList[position]
         val name = firm.name
-        if (!firm.isFavorite){
-            onSNACK(binding.firmsRecyclerview,"تم الإضافة الي المفضلة ❤")
-        } else{
-            onSNACK(binding.firmsRecyclerview,"تم الإزالة من المفضلة ❤")
+        if (!firm.isFavorite) {
+            onSNACK(binding.firmsRecyclerview, "تم الإضافة الي المفضلة ❤")
+        } else {
+            onSNACK(binding.firmsRecyclerview, "تم الإزالة من المفضلة 😕")
         }
         var eventName = "fav_${name}"
         if (firm.isFavorite) {
@@ -211,15 +214,15 @@ class FirmsFragment : BaseFragment() {
                 super.onBackPressed()
                 return false
             }
-            else -> {
-                binding.swipe.isRefreshing = true
-                binding.firmsRecyclerview.smoothScrollToPosition(0)
-                handler.postDelayed({
-                    loadFirms(categoryId)
-                    binding.swipe.isRefreshing = false
-                }, 1000)
-                notify(requireContext(), "إضغط مرة اخري للخروج")
-            }
+//            else -> {
+//                binding.swipe.isRefreshing = true
+//                binding.firmsRecyclerview.smoothScrollToPosition(0)
+//                handler.postDelayed({
+//                    loadFirms(categoryId)
+//                    binding.swipe.isRefreshing = false
+//                }, 1000)
+//                notify(requireContext(), "إضغط مرة اخري للخروج")
+//            }
         }
         return true
     }

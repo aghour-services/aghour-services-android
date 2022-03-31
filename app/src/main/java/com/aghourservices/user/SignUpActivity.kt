@@ -23,12 +23,11 @@ import androidx.appcompat.app.AlertDialog
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
+import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import com.aghourservices.user.api.SignUpService
 import com.google.android.gms.ads.AdView
-
-private const val BASE_URL = "https://aghour-services.magdi.work/api/"
 
 class SignUpActivity : AppCompatActivity() {
 

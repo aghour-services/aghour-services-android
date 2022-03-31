@@ -12,13 +12,11 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.aghourservices.MainActivity
 import com.aghourservices.R
+import com.aghourservices.constants.Constants.Companion.channelId
+import com.aghourservices.constants.Constants.Companion.channelName
 import com.aghourservices.news.NewsFragment
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-
-
-const val channelId = "notification_channel"
-const val channelName = "com.aghourservices.firebase"
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class FirebaseMessageService : FirebaseMessagingService() {
