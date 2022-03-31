@@ -30,24 +30,22 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="right"
                 android:text="Description"
                 android:textColor="@color/newsDescription"
                 android:textIsSelectable="false"
-                android:textSize="24sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/cairo_bold"
                 android:gravity="right"
                 android:text="time"
                 android:textColor="@color/time"
                 android:textIsSelectable="false"
-                android:textSize="16sp" />
+                android:textSize="13sp" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"
@@ -85,15 +83,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center"
                     android:background="@drawable/share_ripple"
-                    android:drawablePadding="12dp"
-                    android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="center"
-                    android:padding="13dp"
+                    android:padding="11dp"
                     android:text="مشاركة"
                     android:textAlignment="center"
                     android:textColor="@color/shareText"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:textSize="14sp"
                     app:drawableLeftCompat="@drawable/ic_share"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

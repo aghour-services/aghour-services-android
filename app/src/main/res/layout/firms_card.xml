@@ -175,7 +175,7 @@
                     android:padding="12dp"
                     android:text="مشاركة"
                     android:textColor="@color/shareText"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:drawableLeftCompat="@drawable/ic_share"
                     app:layout_constraintBottom_toBottomOf="parent"
