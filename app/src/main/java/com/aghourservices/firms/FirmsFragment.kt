@@ -10,10 +10,13 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
+import com.aghourservices.categories.CategoriesFragmentArgs
 import com.aghourservices.constants.Constants.Companion.BASE_URL
+import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.ListFirms
@@ -31,8 +34,10 @@ class FirmsFragment : BaseFragment() {
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var realm: Realm
     private lateinit var handler: Handler
-    private var categoryId = 0
     private lateinit var binding: FragmentFirmsBinding
+
+    private val args: CategoriesFragmentArgs by navArgs()
+    private var categoryId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +58,6 @@ class FirmsFragment : BaseFragment() {
             loadFirms(categoryId)
             refresh()
         } catch (e: Exception) {
-            Log.e("Exception: ", e.message!!)
         }
 
         binding.backBtn.setOnClickListener {
@@ -74,13 +78,10 @@ class FirmsFragment : BaseFragment() {
         realm = Realm.getInstance(config)
         binding.firmsRecyclerview.setHasFixedSize(true)
         binding.firmsRecyclerview.layoutManager = LinearLayoutManager(requireActivity())
-        val bundle = arguments
-        if (bundle != null) {
-            categoryId = bundle.getInt("category_id", 0)
-            val categoryName = bundle.getString("category_name")
-            val toolbarTv = binding.toolBarTv
-            toolbarTv.text = categoryName
-        }
+        categoryId = args.categoryId
+        val categoryName = args.categoryName
+        val toolbarTv = binding.toolBarTv
+        toolbarTv.text = categoryName
     }
 
     private fun refresh() {
@@ -100,9 +101,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun loadFirms(categoryId: Int) {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(ListFirms::class.java)
+        val retrofitBuilder = RetrofitInstance.retrofit.create(ListFirms::class.java)
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(

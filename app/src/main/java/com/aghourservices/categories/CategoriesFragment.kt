@@ -18,6 +18,7 @@ import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
 import com.aghourservices.constants.Constants.Companion.BASE_URL
+import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.firms.FirmsFragment
 import io.realm.Realm
@@ -71,9 +72,7 @@ class CategoriesFragment : BaseFragment() {
     }
 
     private fun loadCategoriesList() {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(ApiServices::class.java)
+        val retrofitBuilder = RetrofitInstance.retrofit.create(ApiServices::class.java)
         val retrofitData = retrofitBuilder.loadCategoriesList()
         retrofitData.enqueue(object : Callback<ArrayList<Category>?> {
             override fun onResponse(
@@ -110,16 +109,12 @@ class CategoriesFragment : BaseFragment() {
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
         val categoryName = categoryList[position].name
-        val fragmentManager = requireActivity().supportFragmentManager
-        val arguments = Bundle()
-        arguments.putInt("category_id", categoryId)
-        arguments.putString("category_name", categoryName)
-        val firmsFragment = FirmsFragment()
-        firmsFragment.arguments = arguments
-        fragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.fragmentContainerView, firmsFragment)
-            .addToBackStack("Firms").commit()
+        val firmsFragment =
+            CategoriesFragmentDirections.actionCategoriesFragmentToFirmsFragment(
+                categoryId,
+                categoryName
+            )
+        findNavController().navigate(firmsFragment)
     }
 
     private fun progressBar() {
