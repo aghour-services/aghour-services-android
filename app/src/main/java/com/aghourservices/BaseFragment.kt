@@ -12,25 +12,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.firebase_analytics.Event
-import com.aghourservices.interfaces.ActivityFragmentCommunicator
 import com.aghourservices.user.SignInActivity
 import com.google.android.material.snackbar.Snackbar
 
 
-open class BaseFragment : Fragment(), ActivityFragmentCommunicator {
+open class BaseFragment : Fragment() {
     lateinit var bottomNavigationView: LinearLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Event.sendScreenName(this::class.simpleName.toString())
-    }
-
-    override fun onBackPressed(): Boolean {
-        return false
     }
 
     fun notify(context: Context, message: String) {

@@ -19,6 +19,7 @@ import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.Category
 import com.aghourservices.constants.Constants.Companion.BASE_URL
+import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.firms.api.CreateFirm
 import com.aghourservices.interfaces.AlertDialog.Companion.dataAdded
@@ -125,10 +126,7 @@ class AddDataFragment : BaseFragment() {
 
     private fun createFirm(firm: Firm) {
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build().create(CreateFirm::class.java)
+        val retrofitBuilder = RetrofitInstance.retrofit.create(CreateFirm::class.java)
         val retrofitData = retrofitBuilder.createFirm(firm.toJsonObject(), user.token)
         retrofitData.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {

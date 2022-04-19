@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
+import com.aghourservices.databinding.FirmsCardBinding
 import com.aghourservices.firms.Firm
 import com.aghourservices.firms.FirmsFragment
 
@@ -21,8 +22,8 @@ class FirmsAdapter(
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.firms_card, parent, false)
-        return FirmsViewHolder(view, onItemClicked)
+        val firmsCard = FirmsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FirmsViewHolder(firmsCard, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -30,7 +31,7 @@ class FirmsAdapter(
         val firm = arrayList[position]
         hold.setList(firm)
         if (getItemViewType(position) == 0) {
-            NativeAdViewHolder(context, hold.adFrame)
+            NativeAdViewHolder(context, hold.binding.adFrame)
         }
     }
 
