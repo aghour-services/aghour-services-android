@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_categoriesFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <argument
+            android:name="category_id"
+            app:argType="integer" />
+        <argument
+            android:name="category_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -66,5 +72,12 @@
         android:id="@+id/firmsFragment"
         android:name="com.aghourservices.firms.FirmsFragment"
         android:label="FirmsFragment" >
+        <argument
+            android:name="category_id"
+            app:argType="integer" />
+        <argument
+            android:name="category_name"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>
