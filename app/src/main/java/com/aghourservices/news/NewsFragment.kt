@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.constants.Constants.Companion.BASE_URL
+import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
@@ -82,9 +83,7 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun loadArticles(categoryId: Int) {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(ArticlesAPI::class.java)
+        val retrofitBuilder = RetrofitInstance.retrofit.create(ArticlesAPI::class.java)
         val retrofitData = retrofitBuilder.loadArticles(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Article>?> {
             @SuppressLint("NotifyDataSetChanged")

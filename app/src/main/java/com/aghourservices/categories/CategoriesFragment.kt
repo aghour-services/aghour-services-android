@@ -1,14 +1,10 @@
 package com.aghourservices.categories
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,17 +13,13 @@ import com.aghourservices.R
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
-import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentCategoriesBinding
-import com.aghourservices.firms.FirmsFragment
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
@@ -35,7 +27,6 @@ class CategoriesFragment : BaseFragment() {
     private lateinit var realm: Realm
     private lateinit var adapter: CategoriesAdapter
     private lateinit var categoryList: ArrayList<Category>
-    private lateinit var handler: Handler
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,17 +113,4 @@ class CategoriesFragment : BaseFragment() {
         binding.categoriesRecyclerview.visibility = View.VISIBLE
     }
 
-
-    override fun onBackPressed(): Boolean {
-        val layoutManager = binding.categoriesRecyclerview.layoutManager as LinearLayoutManager
-        when {
-            layoutManager.findFirstCompletelyVisibleItemPosition() == 0 -> {
-                requireActivity().finish()
-            }
-            else -> {
-                binding.categoriesRecyclerview.smoothScrollToPosition(0)
-            }
-        }
-        return true
-    }
 }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
+import com.aghourservices.databinding.NewsCardBinding
 import com.aghourservices.news.api.Article
 
 class ArticlesAdapter(
@@ -18,7 +19,8 @@ class ArticlesAdapter(
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.news_card, parent, false)
+        val view = NewsCardBinding.inflate(LayoutInflater.from(parent.context),parent,false
+        )
         return ArticlesViewHolder(view, onItemClicked)
     }
 
@@ -28,7 +30,7 @@ class ArticlesAdapter(
         hold.setNewsList(article)
 
         if (getItemViewType(position) == 0) {
-            NativeAdViewHolder(context, hold.adFrame)
+            NativeAdViewHolder(context, hold.binding.adFrame)
         }
     }
 

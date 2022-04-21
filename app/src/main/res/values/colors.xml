@@ -148,4 +148,5 @@
     <color name="favColor">#F5F5F5</color>
     <color name="noFav">#152029</color>
     <color name="adMobBg">#FFFFFF</color>
+    <color name="loading">#465D6E</color>
 </resources>
