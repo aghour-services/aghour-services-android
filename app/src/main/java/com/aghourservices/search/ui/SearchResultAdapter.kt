@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
+import com.aghourservices.databinding.SearchResultCardBinding
 import com.aghourservices.search.api.SearchResult
 
 class SearchResultAdapter(
@@ -18,9 +19,9 @@ class SearchResultAdapter(
     private var itemsCount = arrayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.search_result_card, parent, false)
-        return SearchResultViewHolder(view, onItemClicked)
+        val searchFirm =
+            SearchResultCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SearchResultViewHolder(searchFirm, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -29,7 +30,7 @@ class SearchResultAdapter(
         hold.setList(searchResult)
 
         if (getItemViewType(position) == 0) {
-            NativeAdViewHolder(context, hold.adFrame)
+            NativeAdViewHolder(context, hold.binding.adFrame)
         }
     }
 

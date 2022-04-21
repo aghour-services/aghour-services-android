@@ -14,6 +14,7 @@ import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.constants.Constants.Companion.BASE_URL
+import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.ui.FirmsAdapter
@@ -75,9 +76,7 @@ class SearchFragment : BaseFragment() {
     private fun search(text: String) {
         val eventName = "search_${text}"
         Event.sendFirebaseEvent(eventName, text)
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(ApiServices::class.java)
+        val retrofitBuilder = RetrofitInstance.retrofit.create(ApiServices::class.java)
 
         val retrofitData = retrofitBuilder.search(text)
         retrofitData.enqueue(object : Callback<ArrayList<SearchResult>?> {
