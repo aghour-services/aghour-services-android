@@ -1,10 +1,14 @@
 package com.aghourservices
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -15,6 +19,8 @@ import com.aghourservices.ads.Interstitial
 import com.aghourservices.check_network.CheckNetworkLiveData
 import com.aghourservices.databinding.ActivityMainBinding
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,6 +29,7 @@ class MainActivity : BaseActivity() {
     private lateinit var runnable: Runnable
     private val interstitial = Interstitial()
 
+    @SuppressLint("StringFormatInvalid")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -39,6 +46,25 @@ class MainActivity : BaseActivity() {
         Banner.show(this, adView)
         runnable = Runnable { interstitial.load(this@MainActivity) }
         handler.post(runnable)
+
+        //Generate Device Token
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            val token = task.result
+            Log.d("TAG", token)
+        })
+
+        val intent = intent
+        val message = intent.getStringExtra("message")
+        if(!message.isNullOrEmpty()) {
+            AlertDialog.Builder(this)
+                .setTitle("إشـعـار")
+                .setMessage(message)
+                .setPositiveButton("تـمـام") { _, _ -> }.show()
+        }
     }
 
     override fun onResume() {
