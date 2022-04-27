@@ -51,9 +51,6 @@ class SettingFragment : BaseFragment() {
         binding.email.setOnClickListener {
             gmail()
         }
-        binding.telegram.setOnClickListener {
-            telegram()
-        }
         binding.whatsApp.setOnClickListener {
             whatsApp(getString(R.string.whats_app_number))
         }
@@ -100,7 +97,6 @@ class SettingFragment : BaseFragment() {
 
     private fun chooseThemeDialog() {
         Event.sendFirebaseEvent("App_Theme", "")
-        val activity = (requireActivity() as AppCompatActivity)
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.choose_theme_text))
         builder.setNegativeButton(R.string.cancelButton) { _, _ -> }
@@ -111,28 +107,20 @@ class SettingFragment : BaseFragment() {
                 0 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                     ThemePreference(requireContext()).darkMode = 0
-                    activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
                 1 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     ThemePreference(requireContext()).darkMode = 1
-                    activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
                 2 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     ThemePreference(requireContext()).darkMode = 2
-                    activity.delegate.applyDayNight()
                     dialog.dismiss()
                 }
             }
         }
-        val dialog = builder.create()
-        dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18f
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextAppearance(R.style.SegoeTextBold)
-        }
+        builder.create().show()
     }
 }

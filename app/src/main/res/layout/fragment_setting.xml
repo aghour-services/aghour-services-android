@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg"
-        android:elevation="20dp"
+        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back_btn"
             android:layout_width="52dp"
             android:layout_height="48dp"
@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsToolbar">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/userIcon"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -109,7 +109,6 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
-                android:text="Mohamed Magdy"
                 android:textAlignment="center"
                 android:textColor="@color/userNameColor"
                 android:textSize="14sp" />
@@ -123,7 +122,6 @@
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="mohamedmagdysaber@gmail.com"
                 android:textAlignment="center"
                 android:textColor="@color/emailColor"
                 android:textSize="12sp" />
@@ -136,7 +134,6 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
-                android:text="01287303441"
                 android:textAlignment="center"
                 android:textColor="@color/phoneColor"
                 android:textSize="12sp" />
@@ -147,6 +144,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +154,6 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -166,9 +163,9 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/settingItempd">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="22dp"
                     android:layout_height="25dp"
                     android:layout_gravity="start|center"
@@ -194,7 +191,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/settingItempd">
 
                 <ImageView
                     android:layout_width="22dp"
@@ -222,9 +219,9 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/settingItempd">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="22dp"
                     android:layout_height="25dp"
                     android:layout_gravity="start"
@@ -250,9 +247,9 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/settingItempd">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="22dp"
                     android:layout_height="25dp"
                     android:layout_gravity="start"
@@ -278,14 +275,14 @@
                 android:layout_gravity="center"
                 android:background="@drawable/dialog_selector"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/settingItempd">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="22dp"
                     android:layout_height="23dp"
-                    android:layout_gravity="start"
+                    android:layout_gravity="start|center"
                     android:layout_marginLeft="1dp"
-                    android:src="@mipmap/exit" />
+                    android:src="@drawable/ic_exit" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -295,7 +292,7 @@
                     android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end|center"
                     android:text="تسجيل الخروج"
-                    android:textColor="@color/signOut"
+                    android:textColor="@color/dialogText"
                     android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -308,6 +305,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3"
+        android:padding="20dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -328,7 +326,7 @@
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="إتـصـل بـنـا"
+            android:text="تــواصــل مــعــنا"
             android:textColor="#FFA013"
             android:textSize="@dimen/settings_text" />
 
@@ -346,7 +344,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -355,15 +353,15 @@
 
         <LinearLayout
             android:id="@+id/facebook"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/dialog_selector"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/contact_us_ripple"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:padding="10dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -384,12 +382,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/dialog_selector"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/contact_us_ripple"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:padding="10dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -401,50 +399,22 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center"
-                android:text="البريد"
+                android:text="البريد الإلكتروني"
                 android:textColor="#FF5722"
                 android:textSize="@dimen/settings_text"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/telegram"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/dialog_selector"
-            android:orientation="vertical"
-            android:padding="4dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/telegram" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:gravity="center"
-                android:text="تليجرام"
-                android:textColor="#229ED9"
-                android:textSize="@dimen/settings_text"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/whatsApp"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/dialog_selector"
+            android:background="@drawable/contact_us_ripple"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:padding="10dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
