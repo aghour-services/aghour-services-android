@@ -1,6 +1,7 @@
 package com.aghourservices
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,6 +19,7 @@ import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
 import com.aghourservices.check_network.CheckNetworkLiveData
 import com.aghourservices.databinding.ActivityMainBinding
+import com.aghourservices.settings.SettingsActivity
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -25,7 +27,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adView: AdView
-    private var handler = Handler(Looper.getMainLooper())
+    private var handler = Handler(Looper.myLooper()!!)
     private lateinit var runnable: Runnable
     private val interstitial = Interstitial()
 
@@ -59,9 +61,9 @@ class MainActivity : BaseActivity() {
 
         val intent = intent
         val message = intent.getStringExtra("message")
-        if(!message.isNullOrEmpty()) {
+        if (!message.isNullOrEmpty()) {
             AlertDialog.Builder(this)
-                .setTitle("إشـعـار")
+                .setTitle("إشـعـار جديد")
                 .setMessage(message)
                 .setPositiveButton("تـمـام") { _, _ -> }.show()
         }
@@ -92,15 +94,16 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settingFragment) {
-            val navController: NavController = Navigation.findNavController(this@MainActivity, R.id.fragmentContainerView)
-            navController.navigate(R.id.settingFragment)
+        if (item.itemId == R.id.settingActivity) {
+            val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = Navigation.findNavController(this@MainActivity, R.id.fragmentContainerView)
+        val navController =
+            Navigation.findNavController(this@MainActivity, R.id.fragmentContainerView)
         navController.navigateUp()
         return super.onSupportNavigateUp()
     }

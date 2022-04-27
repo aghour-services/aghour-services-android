@@ -3,37 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/scrollViewBg"
-    tools:context=".about.AboutFragment">
+    android:orientation="vertical"
+    tools:context=".about.AboutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="20dp"
-        android:background="@color/toolbarBg">
+        android:background="@color/toolbarBg"
+        android:elevation="20dp">
 
         <ImageView
             android:id="@+id/back_btn"
-            android:layout_width="52dp"
-            android:layout_height="48dp"
-            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="left|center"
+            android:layout_margin="4dp"
             android:background="@drawable/about_app_back_ripple"
+            android:padding="12dp"
             android:src="@drawable/ic_back_settings" />
 
         <TextView
             android:id="@+id/toolBarTv"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:paddingRight="45dp"
+            android:layout_weight="1"
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
+            android:paddingRight="45dp"
             android:text="@string/about_fragment"
             android:textColor="@color/toolbarText"
-            android:textSize="22sp"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -113,8 +114,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
-                android:lineSpacingMultiplier="1.4"
                 android:fontFamily="@font/segoe_ui_bold"
+                android:lineSpacingMultiplier="1.4"
                 android:text="@string/free_app"
                 android:textAlignment="center"
                 android:textColor="@color/aboutApp"
@@ -142,8 +143,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
-                android:lineSpacingMultiplier="1.4"
                 android:fontFamily="@font/segoe_ui_bold"
+                android:lineSpacingMultiplier="1.4"
                 android:text="@string/contact_us"
                 android:textAlignment="center"
                 android:textColor="@color/aboutApp"
@@ -211,12 +212,12 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/segoe_ui_bold"
-                android:textStyle="bold"
                 android:text="هستفاد ايه لو عملت حساب علي التطبيق ؟"
                 android:textAlignment="center"
                 android:textColor="@color/aboutUseApp"
                 android:textIsSelectable="true"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -225,8 +226,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
-                android:lineSpacingMultiplier="1.2"
                 android:fontFamily="@font/segoe_ui_bold"
+                android:lineSpacingMultiplier="1.2"
                 android:text="@string/benefits_account"
                 android:textAlignment="center"
                 android:textColor="@color/aboutApp"
@@ -249,12 +250,12 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/segoe_ui_bold"
-                android:textStyle="bold"
                 android:text="تعال بقا نعرف نضيف بيانات ازاي بعد ما عملنا حساب ! 😃😉"
                 android:textAlignment="center"
                 android:textColor="@color/aboutUseApp"
                 android:textIsSelectable="true"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -262,9 +263,9 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:text="1- هتضغط علي اضافة بيانات كما هو موضح بالصورة اعلاه."
                 android:textAlignment="center"
-                android:fontFamily="@font/segoe_ui_bold"
                 android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -288,9 +289,9 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:text="@string/add_firm"
                 android:textAlignment="center"
-                android:fontFamily="@font/segoe_ui_bold"
                 android:textColor="@color/aboutApp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -342,4 +343,6 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/admob_banner" />
 </LinearLayout>

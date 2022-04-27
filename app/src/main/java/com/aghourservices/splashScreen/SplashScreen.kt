@@ -56,16 +56,18 @@ class SplashScreen : BaseActivity() {
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }, 500)
     }
-    fun checkTheme(){
+    private fun checkTheme(){
         when (ThemePreference(this).darkMode) {
             0 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
             1 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                setTheme(R.style.Theme_LightApp)
             }
             2 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                setTheme(R.style.Theme_DarkApp)
             }
         }
     }

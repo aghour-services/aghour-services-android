@@ -1,46 +1,37 @@
 package com.aghourservices.settings
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import com.aghourservices.BaseFragment
+import com.aghourservices.BaseActivity
 import com.aghourservices.R
-import com.aghourservices.about.AboutFragment
+import com.aghourservices.about.AboutActivity
+import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.databinding.FragmentSettingBinding
+import com.aghourservices.databinding.ActivitySettingsBinding
 import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.user.SignUpActivity
+import com.google.android.gms.ads.AdView
 
-class SettingFragment : BaseFragment() {
-    private lateinit var binding: FragmentSettingBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSettingBinding.inflate(layoutInflater)
-        return binding.root
-    }
+class SettingsActivity : BaseActivity() {
+    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var adView: AdView
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         checkUser()
         hideUserLogOut()
-        hideBottomNav()
+        supportActionBar?.hide()
 
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.hide()
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
 
         binding.backBtn.setOnClickListener {
-            requireActivity().onBackPressed()
+            this.onBackPressed()
         }
         binding.appTheme.setOnClickListener {
             chooseThemeDialog()
@@ -60,19 +51,19 @@ class SettingFragment : BaseFragment() {
         binding.rate.setOnClickListener {
             rateApp()
         }
-        binding.aboutFragment.setOnClickListener {
-            val action = SettingFragmentDirections.actionSettingFragmentToAboutFragment()
-            findNavController().navigate(action)
+        binding.aboutApp.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
         }
         binding.logOut.setOnClickListener {
-            showOnCloseDialog(requireActivity())
+            showOnCloseDialog(this)
         }
     }
 
     private fun checkUser() {
         val userInfo = UserInfo()
-        val user = userInfo.getUserData(requireActivity())
-        if (userInfo.isUserLoggedIn(requireActivity())) {
+        val user = userInfo.getUserData(this)
+        if (userInfo.isUserLoggedIn(this)) {
             binding.btnRegister.visibility = View.GONE
             binding.userDataView.visibility = View.VISIBLE
             binding.userName.text = user.name
@@ -81,13 +72,13 @@ class SettingFragment : BaseFragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            startActivity(Intent(requireActivity(), SignUpActivity::class.java))
-            requireActivity().finish()
+            startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
     }
 
     private fun hideUserLogOut() {
-        val isUserLogin = UserInfo().isUserLoggedIn(requireActivity())
+        val isUserLogin = UserInfo().isUserLoggedIn(this)
         if (isUserLogin) {
             binding.logOut.visibility = View.VISIBLE
         } else {
@@ -97,26 +88,32 @@ class SettingFragment : BaseFragment() {
 
     private fun chooseThemeDialog() {
         Event.sendFirebaseEvent("App_Theme", "")
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.choose_theme_text))
         builder.setNegativeButton(R.string.cancelButton) { _, _ -> }
-        val styles = arrayOf("الوضع الإفتراضي للهاتف", "فـاتـح", "داكـن")
-        val checkedItem = ThemePreference(requireContext()).darkMode
+        val styles = arrayOf(
+            getString(R.string.defaultTheme), getString(R.string.light), getString(
+                R.string.dark
+            )
+        )
+        val checkedItem = ThemePreference(this).darkMode
         builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
             when (which) {
                 0 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                    ThemePreference(requireContext()).darkMode = 0
+                    ThemePreference(this).darkMode = 0
                     dialog.dismiss()
                 }
                 1 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    ThemePreference(requireContext()).darkMode = 1
+                    setTheme(R.style.Theme_LightApp)
+                    ThemePreference(this).darkMode = 1
                     dialog.dismiss()
                 }
                 2 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    ThemePreference(requireContext()).darkMode = 2
+                    setTheme(R.style.Theme_DarkApp)
+                    ThemePreference(this).darkMode = 2
                     dialog.dismiss()
                 }
             }

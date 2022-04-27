@@ -18,7 +18,12 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.LightApp"
         tools:targetApi="s">
-
+        <activity
+            android:name=".about.AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true"
@@ -27,6 +32,7 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,13 +45,13 @@
         <activity
             android:name=".user.SignInActivity"
             android:exported="true"
-            android:theme="@style/AddDataTheme"
-            android:screenOrientation="locked" />
+            android:screenOrientation="locked"
+            android:theme="@style/AddDataTheme" />
         <activity
             android:name=".user.SignUpActivity"
             android:exported="true"
-            android:theme="@style/AddDataTheme"
-            android:screenOrientation="locked"/>
+            android:screenOrientation="locked"
+            android:theme="@style/AddDataTheme" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -62,8 +68,8 @@
 
         <service
             android:name=".firebase_analytics.FirebaseMessageService"
-            android:stopWithTask="false"
-            android:exported="false">
+            android:exported="false"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
