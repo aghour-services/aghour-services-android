@@ -70,10 +70,11 @@
     <string name="navigation_drawer_close">Close</string>
     <string name="news_share">نسخ الخبر</string>
     <string name="whats_app_number">+201287303441</string>
-    <string name="gmail_uri">mailto:ahmedmgdi94@gmail.com</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gmail_uri">mailto:aghourservices@gmail.com</string>
     <string name="create_account_first">إنشاء حساب 😃</string>
     <string name="should_create">أنشئ حساب حتي تستطيع إضافة بيانات !</string>
+    <string name="defaultTheme">الوضع الإفتراضي للهاتف</string>
+    <string name="light">فـاتـح</string>
+    <string name="dark">داكـن</string>
 
 </resources>

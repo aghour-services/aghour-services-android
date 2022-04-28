@@ -9,13 +9,16 @@
         android:id="@+id/categoriesFragment"
         android:name="com.aghourservices.categories.CategoriesFragment"
         android:label="Fragment Categories"
-        tools:layout="@layout/fragment_categories" >
+        tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_categoriesFragment_to_firmsFragment"
-            app:destination="@id/firmsFragment" />
+            app:destination="@id/firmsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
-            android:id="@+id/action_categoriesFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+            android:id="@+id/action_categoriesFragment_to_settingFragment"/>
         <argument
             android:name="category_id"
             app:argType="integer" />
@@ -31,47 +34,28 @@
     <fragment
         android:id="@+id/addDataFragment"
         android:name="com.aghourservices.firms.AddDataFragment"
-        android:label="AddDataFragment" >
-        <action
-            android:id="@+id/action_addDataFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+        android:label="AddDataFragment">
+        <action android:id="@+id/action_addDataFragment_to_settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.aghourservices.news.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" >
-        <action
-            android:id="@+id/action_newsFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+        tools:layout="@layout/fragment_news">
+        <action android:id="@+id/action_newsFragment_to_settingFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.aghourservices.settings.SettingFragment"
-        android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" >
-        <action
-            android:id="@+id/action_settingFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.aghourservices.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" >
-        <action
-            android:id="@+id/action_favoriteFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+        tools:layout="@layout/fragment_favorite">
+        <action android:id="@+id/action_favoriteFragment_to_settingFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/aboutFragment"
-        android:name="com.aghourservices.about.AboutFragment"
-        android:label="fragment_about"
-        tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/firmsFragment"
         android:name="com.aghourservices.firms.FirmsFragment"
-        android:label="FirmsFragment" >
+        android:label="FirmsFragment">
         <argument
             android:name="category_id"
             app:argType="integer" />

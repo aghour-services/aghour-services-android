@@ -87,12 +87,6 @@ open class BaseFragment : Fragment() {
         startActivity(emailIntent)
     }
 
-    fun telegram() {
-        Event.sendFirebaseEvent("Telegram_App", "")
-        val telegram = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/aghourservices"))
-        startActivity(telegram)
-    }
-
     private fun logOut() {
         Event.sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(requireActivity())

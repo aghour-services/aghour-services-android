@@ -2,11 +2,9 @@ package com.aghourservices.settings
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import com.aghourservices.constants.Constants.Companion.DARK_STATUS
 
 class ThemePreference(context: Context) {
-    companion object {
-        private const val DARK_STATUS = "Aghour_Dark_Mode"
-    }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
