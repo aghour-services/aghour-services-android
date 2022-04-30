@@ -136,7 +136,6 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/spinner"
-                android:elevation="10dp"
                 android:spinnerMode="dialog" />
 
             <Button
