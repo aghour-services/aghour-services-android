@@ -2,52 +2,21 @@ package com.aghourservices
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.categories.CategoriesFragment
 import com.aghourservices.firebase_analytics.Event
-import com.aghourservices.settings.ThemePreference
 import com.aghourservices.user.SignInActivity
-import com.google.android.material.snackbar.Snackbar
 
 open class BaseActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: LinearLayout
-
-    fun showBottomNav() {
-        bottomNavigationView = findViewById(R.id.linearBottomNavVIew)
-        bottomNavigationView.visibility = View.VISIBLE
-    }
-
-    fun hideBottomNav() {
-        bottomNavigationView = findViewById(R.id.linearBottomNavVIew)
-        bottomNavigationView.visibility = View.GONE
-    }
-
-    fun loadFragments(fragment: Fragment?, stacked: Boolean) {
-        val backStateName: String = fragment?.javaClass.toString()
-        val manager: FragmentManager = supportFragmentManager
-        val ft: FragmentTransaction = manager.beginTransaction()
-
-        if (fragment != null) {
-            ft.replace(R.id.fragmentContainerView, fragment)
-            if (stacked) {
-                ft.addToBackStack(backStateName)
-            }
-            ft.commit()
-        }
-    }
 
     fun shareApp() {
         Event.sendFirebaseEvent("Share_App", "")
@@ -104,7 +73,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showOnCloseDialog(context: Context) {
-        val alertDialogBuilder = AlertDialog.Builder(context)
+        val alertDialogBuilder = AlertDialog.Builder(context,R.style.AlertDialogTheme)
         alertDialogBuilder.setTitle(R.string.title)
         alertDialogBuilder.setMessage(R.string.message)
         alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
@@ -117,15 +86,5 @@ open class BaseActivity : AppCompatActivity() {
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
-
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 16f
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 16f
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextAppearance(R.style.SegoeTextBold)
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-                .setTextAppearance(R.style.SegoeTextBold)
-        }
     }
 }

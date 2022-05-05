@@ -1,4 +1,4 @@
-package com.aghourservices.user
+package com.aghourservices.user.api
 
 import com.google.gson.JsonObject
 

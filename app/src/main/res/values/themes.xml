@@ -6,7 +6,6 @@
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/navDrawerBg</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
-        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
     <style name="Theme.LightApp.NoActionBar">
@@ -31,9 +30,8 @@
     </style>
 
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:radioButtonStyle">@color/alertBtnBg</item>
-        <item name="android:textColorPrimary">@color/alertTxtColor</item>
         <item name="fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="my_dialog" parent="Theme.AppCompat.Dialog.Alert">
@@ -56,8 +54,7 @@
 
     <style name="SegoeTextBold" parent="android:Widget.TextView">
         <item name="fontFamily">@font/segoe_ui_bold</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">11sp</item>
         <item name="android:autoSizeMaxTextSize" tools:targetApi="o">25sp</item>
     </style>
     <!--All Text Buttons Font Style-->

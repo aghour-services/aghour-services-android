@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.aghourservices.MainActivity
-import com.aghourservices.R
 import com.aghourservices.ads.NativeAdViewHolder
 import com.aghourservices.databinding.FirmsCardBinding
-import com.aghourservices.firms.Firm
-import com.aghourservices.firms.FirmsFragment
+import com.aghourservices.firms.api.Firm
 
 class FirmsAdapter(
     val context: Context,

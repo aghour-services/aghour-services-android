@@ -3,7 +3,6 @@ package com.aghourservices.user
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
@@ -14,6 +13,7 @@ import com.aghourservices.cache.UserInfo
 import com.aghourservices.constants.Constants.Companion.SIGN_IN_BASE_URL
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.user.api.SignInService
+import com.aghourservices.user.api.User
 import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback

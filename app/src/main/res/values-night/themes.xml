@@ -11,19 +11,13 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
 
-    <style name="WindowAnimationTransition">
-        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
-        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
-    </style>
-
     <style name="Theme.DarkApp.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">@color/colorControl</item>
     </style>
 
-    <style name="CategoriesTheme" parent="Theme.DarkApp.NoActionBar">
-    </style>
+    <style name="CategoriesTheme" parent="Theme.DarkApp.NoActionBar" />
 
     <style name="AddDataTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/toolbarBg</item>
@@ -38,10 +32,9 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:radioButtonStyle">@color/alertBtnBg</item>
-        <item name="android:textColorPrimary">@color/alertTxtColor</item>
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="my_dialog" parent="Theme.AppCompat.Dialog.Alert">
@@ -62,9 +55,10 @@
 
     <style name="SegoeTextBold" parent="android:Widget.TextView">
         <item name="fontFamily">@font/segoe_ui_bold</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:autoSizeMaxTextSize" tools:targetApi="o">25sp</item>
     </style>
+
     <!--All Text Buttons Font Style-->
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">@font/cairo_black</item>
