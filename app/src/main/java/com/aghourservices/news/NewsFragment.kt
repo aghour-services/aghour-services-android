@@ -12,16 +12,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
+import com.aghourservices.cache.UserInfo
 import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentNewsBinding
+import com.aghourservices.firms.Firm
+import com.aghourservices.firms.api.CreateFirm
+import com.aghourservices.interfaces.AlertDialog
 import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
+import com.aghourservices.news.policies.UserAbility
 import com.aghourservices.news.ui.ArticlesAdapter
+import com.aghourservices.user.User
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -64,6 +71,36 @@ class NewsFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
         }
+    }
+
+    fun toViewUI(user: User) {
+        if(UserAbility(user).canPublish()) {
+            // view ui
+        }
+    }
+
+    private fun createArticle(article: Article) {
+        val user = UserInfo().getUserData(requireActivity())
+        val retrofitBuilder = RetrofitInstance.retrofit.create(CreateFirm::class.java)
+        val retrofitData = retrofitBuilder.createFirm(article.toJsonObject(), user.token)
+        retrofitData.enqueue(object : Callback<Firm> {
+            override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
+                AlertDialog.dataAdded(requireContext())
+                setTextEmpty()
+            }
+
+            override fun onFailure(call: Call<Firm>, t: Throwable) {
+                AlertDialog.noInternet(requireContext())
+            }
+        })
+    }
+
+    private fun setTextEmpty() {
+        Toast.makeText(context, "to be implemented", Toast.LENGTH_SHORT).show()
+//        binding.name.text.clear()
+//        binding.address.text.clear()
+//        binding.description.text.clear()
+//        binding.phoneNumber.text.clear()
     }
 
     private fun refresh() {

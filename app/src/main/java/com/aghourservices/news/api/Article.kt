@@ -14,12 +14,11 @@ open class Article : RealmObject() {
     var created_at: String = ""
 
     fun toJsonObject(): JsonObject {
-        val firmObject = JsonObject()
+        val articleObject = JsonObject()
         val article = JsonObject()
         article.addProperty("description", description)
-        article.addProperty("createdAt", created_at)
 
-        firmObject.add("article", article)
-        return firmObject
+        articleObject.add("article", article)
+        return articleObject
     }
 }
