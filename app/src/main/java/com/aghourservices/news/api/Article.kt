@@ -22,4 +22,7 @@ open class Article : RealmObject() {
         firmObject.add("article", article)
         return firmObject
     }
+    fun inValid(): Boolean {
+        return description.isEmpty()
+    }
 }

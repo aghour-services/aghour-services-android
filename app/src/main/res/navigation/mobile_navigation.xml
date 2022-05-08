@@ -17,8 +17,7 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
-        <action
-            android:id="@+id/action_categoriesFragment_to_settingFragment"/>
+        <action android:id="@+id/action_categoriesFragment_to_settingFragment" />
         <argument
             android:name="category_id"
             app:argType="integer" />
@@ -43,6 +42,13 @@
         android:label="fragment_news"
         tools:layout="@layout/fragment_news">
         <action android:id="@+id/action_newsFragment_to_settingFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_addArticleFragment"
+            app:destination="@id/addArticleFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
@@ -64,4 +70,9 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/addArticleFragment"
+        android:name="com.aghourservices.news.user_add_article.AddArticleFragment"
+        android:label="fragment_add_article"
+        tools:layout="@layout/fragment_add_article" />
 </navigation>
