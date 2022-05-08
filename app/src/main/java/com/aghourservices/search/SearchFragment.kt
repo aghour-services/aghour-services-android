@@ -1,24 +1,17 @@
 package com.aghourservices.search
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
-import com.aghourservices.R
-import com.aghourservices.ads.Banner
-import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.firebase_analytics.Event
-import com.aghourservices.firms.ui.FirmsAdapter
-import com.aghourservices.interfaces.HideSoftKeyboard
 import com.aghourservices.interfaces.ShowSoftKeyboard
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
@@ -27,8 +20,6 @@ import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchFragment : BaseFragment() {
     private lateinit var searchResults: ArrayList<SearchResult>
@@ -76,7 +67,7 @@ class SearchFragment : BaseFragment() {
     private fun search(text: String) {
         val eventName = "search_${text}"
         Event.sendFirebaseEvent(eventName, text)
-        val retrofitBuilder = RetrofitInstance.retrofit.create(ApiServices::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ApiServices::class.java)
 
         val retrofitData = retrofitBuilder.search(text)
         retrofitData.enqueue(object : Callback<ArrayList<SearchResult>?> {

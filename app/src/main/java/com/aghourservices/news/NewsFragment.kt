@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.firms.Firm
@@ -29,14 +28,11 @@ import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.policies.UserAbility
 import com.aghourservices.news.ui.ArticlesAdapter
 import com.aghourservices.user.User
-import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class NewsFragment : BaseFragment() {
     private lateinit var adapter: ArticlesAdapter
@@ -81,7 +77,7 @@ class NewsFragment : BaseFragment() {
 
     private fun createArticle(article: Article) {
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = RetrofitInstance.retrofit.create(CreateFirm::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(CreateFirm::class.java)
         val retrofitData = retrofitBuilder.createFirm(article.toJsonObject(), user.token)
         retrofitData.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
@@ -120,7 +116,7 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun loadArticles(categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance.retrofit.create(ArticlesAPI::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ArticlesAPI::class.java)
         val retrofitData = retrofitBuilder.loadArticles(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Article>?> {
             @SuppressLint("NotifyDataSetChanged")

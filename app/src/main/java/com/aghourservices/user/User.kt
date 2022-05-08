@@ -8,7 +8,7 @@ data class User(
     var email: String,
     var password: String,
     var token: String,
-    var role: String
+    var role: String = ""
 ) {
     fun userObject(): JsonObject {
         val userObject = JsonObject()

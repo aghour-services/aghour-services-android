@@ -8,14 +8,11 @@ import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.app.NavUtils
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.categories.CategoriesFragmentArgs
-import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
@@ -26,8 +23,6 @@ import io.realm.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class FirmsFragment : BaseFragment() {
     private lateinit var adapter: FirmsAdapter
@@ -101,7 +96,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun loadFirms(categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance.retrofit.create(ListFirms::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ListFirms::class.java)
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(
