@@ -50,11 +50,10 @@
         android:background="@drawable/edt_text_background"
         android:gravity="right"
         android:hint="إضافة خبر جديد في أجهور......."
-        android:importantForAutofill="no"
         android:inputType="text"
-        android:textSize="16sp"
         android:padding="15dp"
         android:textColorHint="@color/dialogText"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/send_article"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,4 +79,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,37 +62,7 @@ class NewsFragment : BaseFragment() {
         } catch (e: Exception) {
         }
     }
-
-    fun toViewUI(user: User) {
-        if(UserAbility(user).canPublish()) {
-            // view ui
-        }
-    }
-
-    private fun createArticle(article: Article) {
-        val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(CreateFirm::class.java)
-        val retrofitData = retrofitBuilder.createFirm(article.toJsonObject(), user.token)
-        retrofitData.enqueue(object : Callback<Firm> {
-            override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
-                AlertDialog.dataAdded(requireContext())
-                setTextEmpty()
-            }
-
-            override fun onFailure(call: Call<Firm>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
-            }
-        })
-    }
-
-    private fun setTextEmpty() {
-        Toast.makeText(context, "to be implemented", Toast.LENGTH_SHORT).show()
-//        binding.name.text.clear()
-//        binding.address.text.clear()
-//        binding.description.text.clear()
-//        binding.phoneNumber.text.clear()
-    }
-
+    
     private fun refresh() {
         try {
             handler = Handler(Looper.getMainLooper()!!)
@@ -117,29 +88,6 @@ class NewsFragment : BaseFragment() {
         if (UserAbility(user).canPublish()) {
             // view ui
         }
-    }
-
-    private fun createArticle(article: Article) {
-        val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = RetrofitInstance.retrofit.create(CreateArticle::class.java)
-        val retrofitData = retrofitBuilder.createArticle(article.toJsonObject(), user.token)
-        retrofitData.enqueue(object : Callback<Article> {
-            override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                AlertDialog.dataAdded(requireContext())
-                setTextEmpty()
-            }
-
-            override fun onFailure(call: Call<Article>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
-            }
-        })
-    }
-
-    private fun setTextEmpty() {
-//        binding.name.text.clear()
-//        binding.address.text.clear()
-//        binding.description.text.clear()
-//        binding.phoneNumber.text.clear()
     }
 
     private fun loadArticles(categoryId: Int) {

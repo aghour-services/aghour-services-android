@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.BaseFragment
 import com.aghourservices.cache.UserInfo
@@ -35,15 +36,13 @@ class AddArticleFragment : BaseFragment() {
             requireActivity().onBackPressed()
         }
 
-        val textArticle = binding.textArticle.text.toString()
-
-        val article = Article()
-        article.description = textArticle
-
         binding.sendArticle.setOnClickListener {
-            if (article.inValid()){
+            val article = Article()
+            article.description = binding.textArticle.text.toString()
+
+            if (article.inValid()) {
                 binding.textArticle.error = "أكتب الخبر أولا"
-            } else{
+            } else {
                 createArticle(article)
             }
         }
@@ -51,7 +50,8 @@ class AddArticleFragment : BaseFragment() {
 
     private fun createArticle(article: Article) {
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = RetrofitInstance.retrofit.create(CreateArticle::class.java)
+        val retrofitBuilder =
+            RetrofitInstance(requireActivity()).retrofit.create(CreateArticle::class.java)
         val retrofitData = retrofitBuilder.createArticle(article.toJsonObject(), user.token)
         retrofitData.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
