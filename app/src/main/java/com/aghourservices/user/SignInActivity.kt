@@ -3,7 +3,6 @@ package com.aghourservices.user
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
@@ -11,15 +10,13 @@ import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
 import com.aghourservices.cache.UserInfo
-import com.aghourservices.constants.Constants.Companion.SIGN_IN_BASE_URL
+import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.user.api.SignInService
 import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
@@ -61,9 +58,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun loginUser(user: User) {
         showProgressDialog()
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(SIGN_IN_BASE_URL).build().create(SignInService::class.java)
+        val retrofitBuilder = RetrofitInstance(this).retrofit.create(SignInService::class.java)
         val retrofitData = retrofitBuilder.signIn(user.userObject())
 
 

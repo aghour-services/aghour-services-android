@@ -62,6 +62,36 @@ class NewsFragment : BaseFragment() {
         }
     }
 
+    fun toViewUI(user: User) {
+        if(UserAbility(user).canPublish()) {
+            // view ui
+        }
+    }
+
+    private fun createArticle(article: Article) {
+        val user = UserInfo().getUserData(requireActivity())
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(CreateFirm::class.java)
+        val retrofitData = retrofitBuilder.createFirm(article.toJsonObject(), user.token)
+        retrofitData.enqueue(object : Callback<Firm> {
+            override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
+                AlertDialog.dataAdded(requireContext())
+                setTextEmpty()
+            }
+
+            override fun onFailure(call: Call<Firm>, t: Throwable) {
+                AlertDialog.noInternet(requireContext())
+            }
+        })
+    }
+
+    private fun setTextEmpty() {
+        Toast.makeText(context, "to be implemented", Toast.LENGTH_SHORT).show()
+//        binding.name.text.clear()
+//        binding.address.text.clear()
+//        binding.description.text.clear()
+//        binding.phoneNumber.text.clear()
+    }
+
     private fun refresh() {
         try {
             handler = Handler(Looper.getMainLooper()!!)
@@ -113,7 +143,7 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun loadArticles(categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance.retrofit.create(ArticlesAPI::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ArticlesAPI::class.java)
         val retrofitData = retrofitBuilder.loadArticles(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Article>?> {
             @SuppressLint("NotifyDataSetChanged")

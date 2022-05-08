@@ -1,16 +1,12 @@
 package com.aghourservices.firms
 
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +14,6 @@ import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.categories.api.Category
-import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.firms.api.CreateFirm
@@ -30,8 +25,6 @@ import io.realm.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class AddDataFragment : BaseFragment() {
     private lateinit var binding: FragmentAddDataBinding
@@ -126,7 +119,7 @@ class AddDataFragment : BaseFragment() {
 
     private fun createFirm(firm: Firm) {
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = RetrofitInstance.retrofit.create(CreateFirm::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(CreateFirm::class.java)
         val retrofitData = retrofitBuilder.createFirm(firm.toJsonObject(), user.token)
         retrofitData.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {

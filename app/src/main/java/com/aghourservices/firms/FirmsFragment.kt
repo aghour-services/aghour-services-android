@@ -97,7 +97,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun loadFirms(categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance.retrofit.create(ListFirms::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ListFirms::class.java)
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(
