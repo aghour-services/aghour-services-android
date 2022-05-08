@@ -8,10 +8,8 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -46,8 +44,8 @@ class MainActivity : BaseActivity() {
         bottomNavView.setupWithNavController(navController)
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
+//        runnable = Runnable { interstitial.load(this@MainActivity) }
+//        handler.post(runnable)
 
         //Generate Device Token
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -71,7 +69,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 120000)
+//        handler.postDelayed(runnable, 120000)
 
         val checkNetworkLiveData = CheckNetworkLiveData(application)
         checkNetworkLiveData.observe(this) { isConnected ->
@@ -81,7 +79,7 @@ class MainActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        handler.removeCallbacks(runnable)
+//        handler.removeCallbacks(runnable)
     }
 
     override fun setTitle(title: CharSequence?) {

@@ -21,4 +21,7 @@ open class Article : RealmObject() {
         articleObject.add("article", article)
         return articleObject
     }
+    fun inValid(): Boolean {
+        return description.isEmpty()
+    }
 }

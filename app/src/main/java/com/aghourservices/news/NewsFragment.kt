@@ -1,9 +1,6 @@
 package com.aghourservices.news
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.Color
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,20 +8,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentNewsBinding
-import com.aghourservices.firms.Firm
-import com.aghourservices.firms.api.CreateFirm
 import com.aghourservices.interfaces.AlertDialog
 import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
+import com.aghourservices.news.api.CreateArticle
 import com.aghourservices.news.policies.UserAbility
 import com.aghourservices.news.ui.ArticlesAdapter
 import com.aghourservices.user.User
@@ -41,7 +36,6 @@ class NewsFragment : BaseFragment() {
     private lateinit var handler: Handler
     private lateinit var binding: FragmentNewsBinding
     private var categoryId = 0
-    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +59,6 @@ class NewsFragment : BaseFragment() {
             loadArticles(categoryId)
             refresh()
         } catch (e: Exception) {
-            Log.e("Exception: ", e.message!!)
         }
     }
 
@@ -113,6 +106,40 @@ class NewsFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
         }
+
+        binding.addArticle.setOnClickListener {
+            val action = NewsFragmentDirections.actionNewsFragmentToAddArticleFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    fun toViewUI(user: User) {
+        if (UserAbility(user).canPublish()) {
+            // view ui
+        }
+    }
+
+    private fun createArticle(article: Article) {
+        val user = UserInfo().getUserData(requireActivity())
+        val retrofitBuilder = RetrofitInstance.retrofit.create(CreateArticle::class.java)
+        val retrofitData = retrofitBuilder.createArticle(article.toJsonObject(), user.token)
+        retrofitData.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {
+                AlertDialog.dataAdded(requireContext())
+                setTextEmpty()
+            }
+
+            override fun onFailure(call: Call<Article>, t: Throwable) {
+                AlertDialog.noInternet(requireContext())
+            }
+        })
+    }
+
+    private fun setTextEmpty() {
+//        binding.name.text.clear()
+//        binding.address.text.clear()
+//        binding.description.text.clear()
+//        binding.phoneNumber.text.clear()
     }
 
     private fun loadArticles(categoryId: Int) {
