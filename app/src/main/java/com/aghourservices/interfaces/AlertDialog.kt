@@ -1,7 +1,6 @@
 package com.aghourservices.interfaces
 
 import android.content.Context
-import android.os.Build
 import androidx.appcompat.app.AlertDialog
 import com.aghourservices.R
 
@@ -16,10 +15,7 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
-            }
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
 
         fun noInternet(context: Context) {
@@ -30,10 +26,7 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
-            }
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
 
         fun dataAdded(context: Context) {
@@ -44,20 +37,18 @@ interface AlertDialog {
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 20f
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextAppearance(R.style.SegoeTextBold)
-            }
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
+
         fun articleAdded(context: Context) {
             val alertDialogBuilder = AlertDialog.Builder(context)
-            alertDialogBuilder.setTitle(R.string.data_added)
+            alertDialogBuilder.setTitle(R.string.article_added)
             alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18F
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
     }
 }
