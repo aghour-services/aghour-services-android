@@ -15,8 +15,8 @@ android {
         applicationId "com.aghourservices"
         minSdk 21
         targetSdk 31
-        versionCode 20
-        versionName "5.7"
+        versionCode 21
+        versionName "5.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,6 +29,7 @@ android {
 
         release {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "false")
+            resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
 
             minifyEnabled true
             shrinkResources true
