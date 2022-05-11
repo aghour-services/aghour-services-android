@@ -51,7 +51,7 @@ class SignUpActivity : AppCompatActivity() {
                 binding.password.error = "اختر كلمة سر لا تقل عن 6 أحرف"
                 return@OnClickListener
             } else {
-                val user = User(name, mobile, email, password, "")
+                val user = User(name, mobile, email, password)
                 createUser(user)
             }
         })

@@ -8,22 +8,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
-import com.aghourservices.cache.UserInfo
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentNewsBinding
-import com.aghourservices.interfaces.AlertDialog
 import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
-import com.aghourservices.news.api.CreateArticle
-import com.aghourservices.news.policies.UserAbility
 import com.aghourservices.news.ui.ArticlesAdapter
-import com.aghourservices.user.User
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
@@ -81,12 +75,6 @@ class NewsFragment : BaseFragment() {
         binding.addArticle.setOnClickListener {
             val action = NewsFragmentDirections.actionNewsFragmentToAddArticleFragment()
             findNavController().navigate(action)
-        }
-    }
-
-    fun toViewUI(user: User) {
-        if (UserAbility(user).canPublish()) {
-            // view ui
         }
     }
 

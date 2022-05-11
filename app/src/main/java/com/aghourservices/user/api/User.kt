@@ -7,7 +7,7 @@ data class User(
     var mobile: String,
     var email: String,
     var password: String,
-    var token: String,
+    var token: String = "",
     var role: String = ""
 ) {
     fun userObject(): JsonObject {
