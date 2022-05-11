@@ -15,8 +15,8 @@ interface AlertDialog {
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
             alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
 
         fun noInternet(context: Context) {
@@ -26,8 +26,8 @@ interface AlertDialog {
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
             alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
 
         fun dataAdded(context: Context) {
@@ -36,12 +36,12 @@ interface AlertDialog {
             alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
             alertDialogBuilder.setCancelable(false)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ ->
-                var c = context as FragmentActivity
+                val c = context as FragmentActivity
                 c.onBackPressed()
             }
             val alertDialog = alertDialogBuilder.create()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
             alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
     }
 }
