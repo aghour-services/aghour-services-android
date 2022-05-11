@@ -6,6 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface SignInService {
-    @POST("sign_in")
+    @POST("users/sign_in")
     fun signIn(@Body user: JsonObject): Call<User>
 }

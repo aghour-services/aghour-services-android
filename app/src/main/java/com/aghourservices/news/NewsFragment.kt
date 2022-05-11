@@ -1,9 +1,6 @@
 package com.aghourservices.news
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.Color
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,25 +8,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
-import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.ArticlesAPI
 import com.aghourservices.news.ui.ArticlesAdapter
-import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class NewsFragment : BaseFragment() {
     private lateinit var adapter: ArticlesAdapter
@@ -38,7 +31,6 @@ class NewsFragment : BaseFragment() {
     private lateinit var handler: Handler
     private lateinit var binding: FragmentNewsBinding
     private var categoryId = 0
-    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,10 +54,9 @@ class NewsFragment : BaseFragment() {
             loadArticles(categoryId)
             refresh()
         } catch (e: Exception) {
-            Log.e("Exception: ", e.message!!)
         }
     }
-
+    
     private fun refresh() {
         try {
             handler = Handler(Looper.getMainLooper()!!)
@@ -80,10 +71,15 @@ class NewsFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e("Exception: ", e.message!!)
         }
+
+        binding.addArticle.setOnClickListener {
+            val action = NewsFragmentDirections.actionNewsFragmentToAddArticleFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun loadArticles(categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance.retrofit.create(ArticlesAPI::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ArticlesAPI::class.java)
         val retrofitData = retrofitBuilder.loadArticles(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Article>?> {
             @SuppressLint("NotifyDataSetChanged")

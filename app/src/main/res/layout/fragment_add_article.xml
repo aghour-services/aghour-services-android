@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/recyclerViewBg"
+    android:orientation="vertical"
+    android:theme="@style/AddDataTheme"
+    tools:context=".news.user_add_article.AddArticleFragment">
+
+    <LinearLayout
+        android:id="@+id/firmsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBg"
+        android:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_margin="4dp"
+            android:background="@drawable/about_app_back_ripple"
+            android:padding="10dp"
+            android:src="@drawable/ic_back_settings" />
+
+        <TextView
+            android:id="@+id/toolBarTv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="45dp"
+            android:text="إضافة خبر جديد"
+            android:textColor="@color/toolbarText"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/text_article"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:gravity="right"
+        android:hint="إضافة خبر جديد في أجهور ."
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColorHint="@color/dialogText"
+        android:textSize="@dimen/settings_text"
+        app:layout_constraintBottom_toTopOf="@+id/send_article"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firmsToolbar">
+
+        <requestFocus />
+    </EditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/send_article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        android:background="@drawable/edt_text_background"
+        android:drawableLeft="@drawable/ic_send"
+        android:elevation="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="40dp"
+        android:text="إضافة الخبر"
+        android:textColor="@color/dialogText"
+        android:textSize="@dimen/settings_text"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        android:background="@drawable/edt_text_background"
+        android:elevation="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="40dp"
+        android:text="يجب إنشاء حساب أولا"
+        android:textColor="@color/dialogText"
+        android:textSize="@dimen/settings_text"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -8,8 +8,6 @@ import com.aghourservices.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import com.aghourservices.cache.Settings
 import com.aghourservices.databinding.ActivitySignUpBinding
 import com.google.firebase.analytics.ktx.analytics
@@ -19,7 +17,7 @@ import android.app.Dialog
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
-import com.aghourservices.constants.Constants.Companion.BASE_URL
+import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import com.aghourservices.user.api.SignUpService
@@ -53,7 +51,7 @@ class SignUpActivity : AppCompatActivity() {
                 binding.password.error = "اختر كلمة سر لا تقل عن 6 أحرف"
                 return@OnClickListener
             } else {
-                val user = User(name, mobile, email, password, "")
+                val user = User(name, mobile, email, password)
                 createUser(user)
             }
         })
@@ -72,9 +70,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun createUser(user: User) {
         showProgressDialog()
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(SignUpService::class.java)
+        val retrofitBuilder = RetrofitInstance(this).retrofit.create(SignUpService::class.java)
         val retrofitData = retrofitBuilder.signUp(user.userObject())
 
         retrofitData.enqueue(object : Callback<User> {

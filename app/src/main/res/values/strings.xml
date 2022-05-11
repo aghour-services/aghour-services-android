@@ -38,7 +38,7 @@
          ومميزات تانية كتير هتكون متوفرة في التطبيق فيما بعد. 😃😎
     </string>
     <string name="add_firm">هتكتب فيها الاسم والعنوان ورقم التليفون، ووصف عن ما يقدمة المكان او اختصاص الدكتور (مثلا) ومتنساش تختار التصنيف.</string>
-    <string name="data_added">"تم ارسال البيانات وسيتم الموافقة عليها فورا 😃"</string>
+    <string name="data_added">"تم ارسال البيانات وسيتم الموافقة عليها قريبا  😃"</string>
     <string name="no_internet">" عفوا لا يوجد انترنت 😑"</string>
     <string name="error_logIn">"خطأ في التسجيل يرجي اعادة المحاولة 😑"</string>
     <string name="action_settings">Settings</string>
@@ -73,8 +73,12 @@
     <string name="gmail_uri">mailto:aghourservices@gmail.com</string>
     <string name="create_account_first">إنشاء حساب 😃</string>
     <string name="should_create">أنشئ حساب حتي تستطيع إضافة بيانات !</string>
+    <string name="should_to_add_article">أنشئ حساب حتي تستطيع إضافة أخبار !</string>
     <string name="defaultTheme">الوضع الإفتراضي للهاتف</string>
     <string name="light">فـاتـح</string>
     <string name="dark">داكـن</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_article">إضافة خبر جديد</string>
 
 </resources>

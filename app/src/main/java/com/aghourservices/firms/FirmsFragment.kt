@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,7 +63,6 @@ class FirmsFragment : BaseFragment() {
         }
     }
 
-
     private fun init() {
         Realm.init(requireActivity())
         val config = RealmConfiguration
@@ -97,7 +98,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun loadFirms(categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance.retrofit.create(ListFirms::class.java)
+        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ListFirms::class.java)
         val retrofitData = retrofitBuilder.loadFirms(categoryId)
         retrofitData.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(

@@ -24,10 +24,12 @@ android {
     buildTypes {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
+            resValue("string", "base_url", "https://aghour-services-staging.herokuapp.com/api/")
         }
 
         release {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "false")
+
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
