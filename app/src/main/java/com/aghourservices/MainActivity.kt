@@ -44,8 +44,8 @@ class MainActivity : BaseActivity() {
         bottomNavView.setupWithNavController(navController)
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-//        runnable = Runnable { interstitial.load(this@MainActivity) }
-//        handler.post(runnable)
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
 
         //Generate Device Token
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -69,7 +69,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-//        handler.postDelayed(runnable, 120000)
+        handler.postDelayed(runnable, 120000)
 
         val checkNetworkLiveData = CheckNetworkLiveData(application)
         checkNetworkLiveData.observe(this) { isConnected ->
@@ -79,7 +79,7 @@ class MainActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-//        handler.removeCallbacks(runnable)
+        handler.removeCallbacks(runnable)
     }
 
     override fun setTitle(title: CharSequence?) {
