@@ -76,7 +76,6 @@ class AddArticleFragment : BaseFragment() {
             alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE).textSize = 14f
             alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).textSize = 14f
         }
-
     }
 
     private fun createArticle(article: Article) {
@@ -86,7 +85,7 @@ class AddArticleFragment : BaseFragment() {
         val retrofitData = retrofitBuilder.createArticle(article.toJsonObject(), user.token)
         retrofitData.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                AlertDialog.articleAdded(requireContext())
+                AlertDialog.dataAdded(requireContext())
                 setTextEmpty()
             }
 
