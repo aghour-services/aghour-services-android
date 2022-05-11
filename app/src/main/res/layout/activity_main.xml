@@ -49,8 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:gravity="bottom"
         android:background="@color/adMobBg"
+        android:gravity="bottom"
         app:layout_constraintBottom_toTopOf="@+id/linearBottomNavVIew"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -77,7 +77,7 @@
             android:background="@drawable/bottom_nav_view_bg"
             android:padding="6dp"
             app:itemTextAppearanceActive="@style/SegoeTextBold"
-            app:itemTextAppearanceInactive="@style/SegoeTextRegular"
+            app:itemTextAppearanceInactive="@style/SegoeTextBold"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
@@ -85,10 +85,11 @@
     <LinearLayout
         android:id="@+id/notInternet"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:animateLayoutChanges="true"
         android:background="@color/notifyBg"
         android:elevation="20dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -101,7 +102,7 @@
             android:gravity="center"
             android:text="لا يـوجـد إنتـرنـت"
             android:textColor="@color/notifyTitle"
-            android:textSize="@dimen/settings_text"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

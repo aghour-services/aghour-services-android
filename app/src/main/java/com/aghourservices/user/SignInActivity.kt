@@ -13,6 +13,7 @@ import com.aghourservices.cache.UserInfo
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.user.api.SignInService
+import com.aghourservices.user.api.User
 import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback

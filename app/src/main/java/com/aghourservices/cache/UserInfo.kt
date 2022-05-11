@@ -2,8 +2,7 @@ package com.aghourservices.cache
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
-import com.aghourservices.user.User
+import com.aghourservices.user.api.User
 
 const val PREF_NAME = "user_data"
 const val NAME_KEY = "name"

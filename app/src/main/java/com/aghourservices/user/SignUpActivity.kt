@@ -21,6 +21,7 @@ import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import com.aghourservices.user.api.SignUpService
+import com.aghourservices.user.api.User
 import com.google.android.gms.ads.AdView
 
 class SignUpActivity : AppCompatActivity() {

@@ -18,6 +18,7 @@ import com.aghourservices.categories.CategoriesFragmentArgs
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.firebase_analytics.Event
+import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
 import io.realm.Realm

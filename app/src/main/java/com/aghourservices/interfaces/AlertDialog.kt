@@ -7,31 +7,31 @@ import com.aghourservices.R
 
 interface AlertDialog {
 
-    companion object{
+    companion object {
         fun errorLogin(context: Context) {
-            val alertDialogBuilder = AlertDialog.Builder(context)
+            val alertDialogBuilder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             alertDialogBuilder.setTitle(R.string.error_logIn)
             alertDialogBuilder.setIcon(R.mipmap.cloud)
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
-            alertDialog.show()
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
+            alertDialog.show()
         }
 
         fun noInternet(context: Context) {
-            val alertDialogBuilder = AlertDialog.Builder(context)
+            val alertDialogBuilder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             alertDialogBuilder.setTitle(R.string.no_internet)
             alertDialogBuilder.setIcon(R.mipmap.cloud)
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
-            alertDialog.show()
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
+            alertDialog.show()
         }
 
         fun dataAdded(context: Context) {
-            val alertDialogBuilder = AlertDialog.Builder(context)
+            val alertDialogBuilder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             alertDialogBuilder.setTitle(R.string.data_added)
             alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
             alertDialogBuilder.setCancelable(false)
@@ -40,8 +40,8 @@ interface AlertDialog {
                 c.onBackPressed()
             }
             val alertDialog = alertDialogBuilder.create()
-            alertDialog.show()
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
+            alertDialog.show()
         }
     }
 }

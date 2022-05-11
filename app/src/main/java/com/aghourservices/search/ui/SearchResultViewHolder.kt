@@ -1,16 +1,9 @@
 package com.aghourservices.search.ui
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.aghourservices.R
 import com.aghourservices.databinding.SearchResultCardBinding
-import com.aghourservices.firms.Firm
 import com.aghourservices.search.api.SearchResult
 
 class SearchResultViewHolder(

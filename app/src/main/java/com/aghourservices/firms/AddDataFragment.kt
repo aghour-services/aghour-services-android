@@ -17,6 +17,8 @@ import com.aghourservices.categories.api.Category
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.firms.api.CreateFirm
+import com.aghourservices.firms.api.Firm
+import com.aghourservices.firms.ui.SpinnerAdapter
 import com.aghourservices.interfaces.AlertDialog.Companion.dataAdded
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import com.aghourservices.user.SignUpActivity
