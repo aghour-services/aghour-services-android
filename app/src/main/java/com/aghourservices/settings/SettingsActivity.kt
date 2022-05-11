@@ -88,7 +88,7 @@ class SettingsActivity : BaseActivity() {
 
     private fun chooseThemeDialog() {
         Event.sendFirebaseEvent("App_Theme", "")
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
         builder.setTitle(getString(R.string.choose_theme_text))
         builder.setNegativeButton(R.string.cancelButton) { _, _ -> }
         val styles = arrayOf(
@@ -106,13 +106,11 @@ class SettingsActivity : BaseActivity() {
                 }
                 1 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    setTheme(R.style.Theme_LightApp)
                     ThemePreference(this).darkMode = 1
                     dialog.dismiss()
                 }
                 2 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    setTheme(R.style.Theme_DarkApp)
                     ThemePreference(this).darkMode = 2
                     dialog.dismiss()
                 }

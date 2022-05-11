@@ -2,15 +2,10 @@ package com.aghourservices.firms.ui
 
 import android.content.Intent
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.aghourservices.R
 import com.aghourservices.databinding.FirmsCardBinding
 import com.aghourservices.firebase_analytics.Event
-import com.aghourservices.firms.Firm
+import com.aghourservices.firms.api.Firm
 
 class FirmsViewHolder(
     val binding: FirmsCardBinding, private val onItemClicked: (v: View, position: Int) -> Unit,

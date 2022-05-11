@@ -10,17 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentFavoriteBinding
-import com.aghourservices.firms.Firm
+import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.FirmsAdapter
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import com.aghourservices.firebase_analytics.Event
-import com.google.android.material.snackbar.Snackbar
 
 class FavoriteFragment : BaseFragment() {
     private lateinit var realm: Realm

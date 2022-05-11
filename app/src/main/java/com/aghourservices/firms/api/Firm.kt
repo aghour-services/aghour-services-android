@@ -1,4 +1,4 @@
-package com.aghourservices.firms
+package com.aghourservices.firms.api
 
 import com.google.gson.JsonObject
 import io.realm.RealmObject

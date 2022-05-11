@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.aghourservices.categories.api.* { *; }
+-keep class com.aghourservices.firms.api.* { *; }
+-keep class com.aghourservices.news.api.* { *; }
+-keep class com.aghourservices.search.api.* { *; }
+-keep class com.aghourservices.user.api.* { *; }

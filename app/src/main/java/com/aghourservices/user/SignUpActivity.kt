@@ -15,11 +15,7 @@ import com.aghourservices.databinding.ActivitySignUpBinding
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
-import android.annotation.SuppressLint
 import android.app.Dialog
-import android.graphics.Color
-import android.text.Html
-import androidx.appcompat.app.AlertDialog
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
@@ -27,6 +23,7 @@ import com.aghourservices.constants.Constants.Companion.BASE_URL
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import com.aghourservices.user.api.SignUpService
+import com.aghourservices.user.api.User
 import com.google.android.gms.ads.AdView
 
 class SignUpActivity : AppCompatActivity() {
