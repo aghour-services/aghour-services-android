@@ -1,6 +1,8 @@
 package com.aghourservices.ads
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.aghourservices.R
@@ -25,12 +27,11 @@ class Interstitial {
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    Log.d(tag, "Ad was loaded.")
                     this@Interstitial.interstitialAd = interstitialAd
                     Toast.makeText(context, "سيظهر اعلان بعد 5 ثواني", Toast.LENGTH_SHORT).show()
-//                    Handler(Looper.getMainLooper()).postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
 //                        interstitialAd.show(context as Activity)
-//                    }, 5000)
+                    }, 5000)
                 }
             })
     }
