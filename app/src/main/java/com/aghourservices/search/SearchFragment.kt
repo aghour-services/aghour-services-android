@@ -1,12 +1,14 @@
 package com.aghourservices.search
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.constants.RetrofitInstance
@@ -24,7 +26,6 @@ import retrofit2.Response
 class SearchFragment : BaseFragment() {
     private lateinit var searchResults: ArrayList<SearchResult>
     private lateinit var adapter: SearchResultAdapter
-    private lateinit var adView: AdView
     private lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
@@ -60,18 +61,17 @@ class SearchFragment : BaseFragment() {
             }
         }
         binding.backBtn.setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().popBackStack()
         }
     }
 
     private fun search(text: String) {
         val eventName = "search_${text}"
         Event.sendFirebaseEvent(eventName, text)
-        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ApiServices::class.java)
-
-        val retrofitData = retrofitBuilder.search(text)
-        retrofitData.enqueue(object : Callback<ArrayList<SearchResult>?> {
-            @SuppressLint("NotifyDataSetChanged")
+        val retrofitBuilder =
+            activity?.let { RetrofitInstance(it).retrofit.create(ApiServices::class.java) }
+        val retrofitData = retrofitBuilder?.search(text)
+        retrofitData?.enqueue(object : Callback<ArrayList<SearchResult>?> {
             override fun onResponse(
                 call: Call<ArrayList<SearchResult>?>,
                 response: Response<ArrayList<SearchResult>?>,

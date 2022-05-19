@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
@@ -37,10 +38,12 @@ class AddArticleFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNav()
         hideUserAddData()
+
         val activity = (activity as AppCompatActivity)
         activity.supportActionBar?.hide()
+
         binding.backBtn.setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().popBackStack()
         }
 
         if (binding.textArticle.requestFocus()) {
@@ -80,10 +83,9 @@ class AddArticleFragment : BaseFragment() {
 
     private fun createArticle(article: Article) {
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder =
-            RetrofitInstance(requireActivity()).retrofit.create(CreateArticle::class.java)
-        val retrofitData = retrofitBuilder.createArticle(article.toJsonObject(), user.token)
-        retrofitData.enqueue(object : Callback<Article> {
+        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(CreateArticle::class.java) }
+        val retrofitData = retrofitBuilder?.createArticle(article.toJsonObject(), user.token)
+        retrofitData?.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
                 AlertDialog.dataAdded(requireContext())
                 setTextEmpty()

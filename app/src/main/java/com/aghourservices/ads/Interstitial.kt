@@ -1,13 +1,13 @@
 package com.aghourservices.ads
 
-import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.aghourservices.R
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
@@ -27,11 +27,10 @@ class Interstitial {
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    Log.d(tag, "Ad was loaded.")
                     this@Interstitial.interstitialAd = interstitialAd
                     Toast.makeText(context, "سيظهر اعلان بعد 5 ثواني", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
-                        interstitialAd.show(context as Activity)
+//                        interstitialAd.show(context as Activity)
                     }, 5000)
                 }
             })

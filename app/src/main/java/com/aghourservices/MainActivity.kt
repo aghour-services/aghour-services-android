@@ -11,7 +11,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
@@ -69,8 +71,11 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 120000)
 
+        val navController = findNavController(R.id.fragmentContainerView)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+
+        handler.postDelayed(runnable, 120000)
         val checkNetworkLiveData = CheckNetworkLiveData(application)
         checkNetworkLiveData.observe(this) { isConnected ->
             binding.notInternet.isVisible = !isConnected
@@ -93,7 +98,7 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.settingActivity) {
-            val intent = Intent(this,SettingsActivity::class.java)
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
         return super.onOptionsItemSelected(item)

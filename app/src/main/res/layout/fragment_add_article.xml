@@ -54,7 +54,6 @@
         android:gravity="right"
         android:hint="إضافة خبر جديد في أجهور ."
         android:importantForAutofill="no"
-        android:inputType="text"
         android:padding="15dp"
         android:textColorHint="@color/dialogText"
         android:textSize="@dimen/settings_text"
