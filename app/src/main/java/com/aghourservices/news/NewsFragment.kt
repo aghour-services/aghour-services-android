@@ -79,9 +79,9 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun loadArticles(categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ArticlesAPI::class.java)
-        val retrofitData = retrofitBuilder.loadArticles(categoryId)
-        retrofitData.enqueue(object : Callback<ArrayList<Article>?> {
+        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(ArticlesAPI::class.java) }
+        val retrofitData = retrofitBuilder?.loadArticles(categoryId)
+        retrofitData?.enqueue(object : Callback<ArrayList<Article>?> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ArrayList<Article>?>,

@@ -121,9 +121,9 @@ class AddDataFragment : BaseFragment() {
 
     private fun createFirm(firm: Firm) {
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(CreateFirm::class.java)
-        val retrofitData = retrofitBuilder.createFirm(firm.toJsonObject(), user.token)
-        retrofitData.enqueue(object : Callback<Firm> {
+        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(CreateFirm::class.java) }
+        val retrofitData = retrofitBuilder?.createFirm(firm.toJsonObject(), user.token)
+        retrofitData?.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
                 dataAdded(requireContext())
                 setTextEmpty()

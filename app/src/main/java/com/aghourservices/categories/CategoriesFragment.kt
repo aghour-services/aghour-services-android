@@ -63,9 +63,9 @@ class CategoriesFragment : BaseFragment() {
     }
 
     private fun loadCategoriesList() {
-        val retrofitBuilder = RetrofitInstance(requireActivity()).retrofit.create(ApiServices::class.java)
-        val retrofitData = retrofitBuilder.loadCategoriesList()
-        retrofitData.enqueue(object : Callback<ArrayList<Category>?> {
+        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(ApiServices::class.java) }
+        val retrofitData = retrofitBuilder?.loadCategoriesList()
+        retrofitData?.enqueue(object : Callback<ArrayList<Category>?> {
             override fun onResponse(
                 call: Call<ArrayList<Category>?>,
                 response: Response<ArrayList<Category>?>,
