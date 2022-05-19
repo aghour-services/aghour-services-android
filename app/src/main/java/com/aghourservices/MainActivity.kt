@@ -59,6 +59,8 @@ class MainActivity : BaseActivity() {
             Log.d("TAG", token)
         })
 
+
+        //Get Stored Notification from Firebase Class
         val intent = intent
         val message = intent.getStringExtra("message")
         if (!message.isNullOrEmpty()) {
