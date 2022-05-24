@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.aghourservices.R
 import com.aghourservices.categories.api.Category
+import com.squareup.picasso.Picasso
 
 class SpinnerAdapter(context: Context, category: List<Category>) :
     ArrayAdapter<Category>(context, 0, category) {
@@ -27,8 +28,9 @@ class SpinnerAdapter(context: Context, category: List<Category>) :
         val categoryImage = view.findViewById<ImageView>(R.id.categoryImage)
         val categoryName = view.findViewById<TextView>(R.id.categoryName)
 
-        categoryImage.setImageResource(category?.icon!!.toInt())
-        categoryName.text = category.name
+        Picasso.get().load(category?.icon).placeholder(R.drawable.ic_loading)
+            .error(R.drawable.ic_error).into(categoryImage)
+        categoryName.text = category?.name
 
         return view
     }

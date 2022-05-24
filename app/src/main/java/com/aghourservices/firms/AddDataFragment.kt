@@ -1,6 +1,5 @@
 package com.aghourservices.firms
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -31,7 +30,6 @@ import retrofit2.Response
 class AddDataFragment : BaseFragment() {
     private lateinit var binding: FragmentAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
-    private var progressDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -114,7 +112,7 @@ class AddDataFragment : BaseFragment() {
     }
 
     private fun spinnerAdapter() {
-        val spinnerAdapter = SpinnerAdapter(requireActivity(), Category.Categories.List!!)
+        val spinnerAdapter = SpinnerAdapter(requireActivity(), categoryList)
         val spinner = binding.spinner
         spinner.adapter = spinnerAdapter
     }
