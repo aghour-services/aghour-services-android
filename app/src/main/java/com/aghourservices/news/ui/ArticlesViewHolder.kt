@@ -28,6 +28,19 @@ class ArticlesViewHolder(
         binding.apply {
             description.text = article.description
             date.text = article.created_at
+            showMore.isChecked = false
+
+            showMore.setOnClickListener {
+                showMore.isChecked = !showMore.isChecked
+
+                if (showMore.isChecked) {
+                    description.maxLines = 1000
+                    showMore.text = "رؤية أقل"
+                } else {
+                    description.maxLines = 4
+                    showMore.text = "رؤية المزيد"
+                }
+            }
 
             shareNews.setOnClickListener {
                 Event.sendFirebaseEvent("Share_news", "")
@@ -41,6 +54,7 @@ class ArticlesViewHolder(
                 }
                 itemView.context.startActivity(Intent.createChooser(shareIntent, "شارك الخبر"))
             }
+
             newsCardView.setOnLongClickListener {
                 val alertDialogBuilder = AlertDialog.Builder(itemView.context, R.style.my_dialog)
                 alertDialogBuilder.setCancelable(true)
@@ -53,10 +67,10 @@ class ArticlesViewHolder(
                 }
                 val alertDialog = alertDialogBuilder.create()
                 alertDialog.show()
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 20f
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 16F
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                        .setTextAppearance(R.style.SegoeTextBold)
+                        .setTextAppearance(R.style.SegoeTextRegular)
                 }
                 return@setOnLongClickListener true
             }

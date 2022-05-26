@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginBottom="10dp">
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearCard"
@@ -31,10 +30,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
+                android:maxLines="5"
                 android:text="Description"
                 android:textColor="@color/newsDescription"
                 android:textIsSelectable="false"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
+
+            <CheckedTextView
+                android:id="@+id/showMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/show_more"
+                android:padding="14dp"
+                android:text="رؤية المزيد"
+                android:textColor="#75C2FF"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/date"
@@ -45,7 +56,10 @@
                 android:text="time"
                 android:textColor="@color/time"
                 android:textIsSelectable="false"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:drawablePadding="4dp"
+                app:drawableRightCompat="@android:drawable/ic_lock_idle_alarm"
+                app:drawableTint="@color/time" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"

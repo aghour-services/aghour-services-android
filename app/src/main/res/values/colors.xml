@@ -150,4 +150,6 @@
     <color name="adMobBg">#FFFFFF</color>
     <color name="loading">#465D6E</color>
     <color name="settingStroke">#E4E4E4</color>
+    <color name="showMoreRipple">#B5E8FF</color>
+    <color name="showMoreBg">#FFFFFF</color>
 </resources>
