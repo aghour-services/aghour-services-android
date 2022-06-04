@@ -152,4 +152,6 @@
     <color name="settingStroke">#E4E4E4</color>
     <color name="showMoreRipple">#B5E8FF</color>
     <color name="showMoreBg">#FFFFFF</color>
+    <color name="drawerToggle">#FFFFFF</color>
+    <color name="fabBg">#168EC4</color>
 </resources>

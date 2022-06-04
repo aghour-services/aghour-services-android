@@ -13,11 +13,10 @@
         <action
             android:id="@+id/action_categoriesFragment_to_firmsFragment"
             app:destination="@id/firmsFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-        <action android:id="@+id/action_categoriesFragment_to_settingFragment" />
+            app:enterAnim="@anim/fragment_enter"
+            app:exitAnim="@anim/fragment_exit"
+            app:popEnterAnim="@anim/fragment_enter_pop"
+            app:popExitAnim="@anim/fragment_exit_pop" />
         <argument
             android:name="category_id"
             app:argType="integer" />
@@ -30,38 +29,38 @@
         android:name="com.aghourservices.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+
     <fragment
         android:id="@+id/addDataFragment"
         android:name="com.aghourservices.firms.AddDataFragment"
-        android:label="AddDataFragment">
-        <action android:id="@+id/action_addDataFragment_to_settingFragment" />
-    </fragment>
+        android:label="AddDataFragment"
+        tools:layout="@layout/fragment_add_data" />
+
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.aghourservices.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news">
-        <action android:id="@+id/action_newsFragment_to_settingFragment" />
         <action
             android:id="@+id/action_newsFragment_to_addArticleFragment"
             app:destination="@id/addArticleFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/fragment_enter"
+            app:exitAnim="@anim/fragment_exit"
+            app:popEnterAnim="@anim/fragment_enter_pop"
+            app:popExitAnim="@anim/fragment_exit_pop" />
     </fragment>
 
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.aghourservices.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite">
-        <action android:id="@+id/action_favoriteFragment_to_settingFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_favorite" />
+
     <fragment
         android:id="@+id/firmsFragment"
         android:name="com.aghourservices.firms.FirmsFragment"
-        android:label="FirmsFragment">
+        android:label="FirmsFragment"
+        tools:layout="@layout/fragment_firms">
         <argument
             android:name="category_id"
             app:argType="integer" />
@@ -75,4 +74,50 @@
         android:name="com.aghourservices.news.user_add_article.AddArticleFragment"
         android:label="fragment_add_article"
         tools:layout="@layout/fragment_add_article" />
+
+    <action
+        android:id="@+id/action_categoriesFragment"
+        app:destination="@id/categoriesFragment"
+        app:enterAnim="@anim/fragment_enter"
+        app:exitAnim="@anim/fragment_exit"
+        app:popEnterAnim="@anim/fragment_enter_pop"
+        app:popExitAnim="@anim/fragment_exit_pop"
+        app:popUpTo="@id/categoriesFragment"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_searchFragment"
+        app:destination="@id/searchFragment"
+        app:enterAnim="@anim/fragment_enter"
+        app:exitAnim="@anim/fragment_exit"
+        app:popEnterAnim="@anim/fragment_enter_pop"
+        app:popExitAnim="@anim/fragment_exit_pop"
+        app:popUpTo="@id/categoriesFragment" />
+
+    <action
+        android:id="@+id/action_addDataFragment"
+        app:destination="@id/addDataFragment"
+        app:enterAnim="@anim/fragment_enter"
+        app:exitAnim="@anim/fragment_exit"
+        app:popEnterAnim="@anim/fragment_enter_pop"
+        app:popExitAnim="@anim/fragment_exit_pop"
+        app:popUpTo="@id/categoriesFragment" />
+
+    <action
+        android:id="@+id/action_favoriteFragment"
+        app:destination="@id/favoriteFragment"
+        app:enterAnim="@anim/fragment_enter"
+        app:exitAnim="@anim/fragment_exit"
+        app:popEnterAnim="@anim/fragment_enter_pop"
+        app:popExitAnim="@anim/fragment_exit_pop"
+        app:popUpTo="@id/categoriesFragment" />
+
+    <action
+        android:id="@+id/action_newsFragment"
+        app:destination="@id/newsFragment"
+        app:enterAnim="@anim/fragment_enter"
+        app:exitAnim="@anim/fragment_exit"
+        app:popEnterAnim="@anim/fragment_enter_pop"
+        app:popExitAnim="@anim/fragment_exit_pop"
+        app:popUpTo="@id/categoriesFragment" />
 </navigation>

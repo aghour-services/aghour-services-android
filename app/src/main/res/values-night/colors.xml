@@ -102,5 +102,7 @@
     <color name="adMobBg">#1D242B</color>
     <color name="settingStroke">#2D3A43</color>
     <color name="showMoreBg">#141F27</color>
+    <color name="drawerToggle">#FFFFFF</color>
+    <color name="fabBg">#343435</color>
 
 </resources>
