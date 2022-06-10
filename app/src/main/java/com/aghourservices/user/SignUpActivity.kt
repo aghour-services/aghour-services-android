@@ -1,6 +1,5 @@
 package com.aghourservices.user
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,14 +11,14 @@ import com.aghourservices.cache.Settings
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.constants.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignUpBinding
+import com.aghourservices.firebase_analytics.Event.Companion.sendFirebaseEvent
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
+import com.aghourservices.progressDialog.ProgressDialog.hideProgressDialog
+import com.aghourservices.progressDialog.ProgressDialog.showProgressDialog
 import com.aghourservices.user.api.SignUpService
 import com.aghourservices.user.api.User
 import com.google.android.gms.ads.AdView
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +27,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var adView: AdView
-    private var progressDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnUseApp.setOnClickListener {
             val settings = Settings()
-            showProgressDialog()
+            showProgressDialog(this)
             sendFirebaseEvent("SKIP_LOGIN", "")
             settings.doNotShowRigsterActivity(this)
             startActivity(Intent(this, MainActivity::class.java))
@@ -77,12 +75,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun createUser(user: User) {
-        showProgressDialog()
+        showProgressDialog(this)
         val retrofitBuilder = RetrofitInstance(this).retrofit.create(SignUpService::class.java)
         val retrofitData = retrofitBuilder.signUp(user.userObject())
 
         retrofitData.enqueue(object : Callback<User> {
-
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 201) {
                     errorLogin(this@SignUpActivity)
@@ -102,25 +99,6 @@ class SignUpActivity : AppCompatActivity() {
                 hideProgressDialog()
             }
         })
-    }
-
-    private fun sendFirebaseEvent(eventName: String, data: String) {
-        val firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.logEvent(eventName) {
-            param("data", data)
-        }
-    }
-
-    private fun showProgressDialog() {
-        progressDialog = Dialog(this)
-        progressDialog!!.setContentView(R.layout.dialog_custom_progress)
-        progressDialog!!.setCancelable(false)
-        progressDialog!!.show()
-    }
-
-    private fun hideProgressDialog() {
-        if (progressDialog != null)
-            progressDialog!!.dismiss()
     }
 
     override fun onBackPressed() {

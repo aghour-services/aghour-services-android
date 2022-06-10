@@ -20,6 +20,8 @@ import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.SpinnerAdapter
 import com.aghourservices.interfaces.AlertDialog.Companion.dataAdded
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
+import com.aghourservices.progressDialog.ProgressDialog.hideProgressDialog
+import com.aghourservices.progressDialog.ProgressDialog.showProgressDialog
 import com.aghourservices.user.SignUpActivity
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -118,8 +120,10 @@ class AddDataFragment : BaseFragment() {
     }
 
     private fun createFirm(firm: Firm) {
+        showProgressDialog(requireContext())
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(CreateFirm::class.java) }
+        val retrofitBuilder =
+            activity?.let { RetrofitInstance(it).retrofit.create(CreateFirm::class.java) }
         val retrofitData = retrofitBuilder?.createFirm(firm.toJsonObject(), user.token)
         retrofitData?.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
@@ -129,6 +133,7 @@ class AddDataFragment : BaseFragment() {
 
             override fun onFailure(call: Call<Firm>, t: Throwable) {
                 noInternet(requireContext())
+                hideProgressDialog()
             }
         })
     }
@@ -149,6 +154,7 @@ class AddDataFragment : BaseFragment() {
         binding.address.text.clear()
         binding.description.text.clear()
         binding.phoneNumber.text.clear()
+        hideProgressDialog()
     }
 
     private fun hideUserAddData() {

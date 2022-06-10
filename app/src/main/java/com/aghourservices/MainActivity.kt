@@ -7,7 +7,6 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -43,11 +42,11 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
 
-        /** Setup ActionBar With **/
+        //Setup ActionBar With Navigate Up
         val navController = findNavController(R.id.fragmentContainerView)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        handler.postDelayed(runnable, 120000)
+        handler.postDelayed(runnable, 10000)
 
         val checkNetworkLiveData = CheckNetworkLiveData(application)
         checkNetworkLiveData.observe(this) { isConnected ->
@@ -78,12 +77,9 @@ class MainActivity : BaseActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         bottomNavView.setupWithNavController(navController)
-
-
     }
 
     private fun firebase() {
-        //Generate Device Token
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w("TAG", "Fetching FCM registration token failed", task.exception)
@@ -92,16 +88,6 @@ class MainActivity : BaseActivity() {
             val token = task.result
             Log.d("TAG", token)
         })
-
-        //Get Stored Notification from Firebase Class
-        val intent = intent
-        val message = intent.getStringExtra("message")
-        if (!message.isNullOrEmpty()) {
-            AlertDialog.Builder(this)
-                .setTitle("إشـعـار جديد")
-                .setMessage(message)
-                .setPositiveButton("تـمـام") { _, _ -> }.show()
-        }
     }
 
     override fun setTitle(title: CharSequence?) {

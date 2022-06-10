@@ -1,6 +1,5 @@
 package com.aghourservices.news.user_add_article
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +16,8 @@ import com.aghourservices.interfaces.AlertDialog
 import com.aghourservices.interfaces.ShowSoftKeyboard
 import com.aghourservices.news.api.Article
 import com.aghourservices.news.api.CreateArticle
+import com.aghourservices.progressDialog.ProgressDialog.hideProgressDialog
+import com.aghourservices.progressDialog.ProgressDialog.showProgressDialog
 import com.aghourservices.user.SignUpActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +25,6 @@ import retrofit2.Response
 
 class AddArticleFragment : BaseFragment() {
     private lateinit var binding: FragmentAddArticleBinding
-    private var progressDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +51,7 @@ class AddArticleFragment : BaseFragment() {
         }
 
         binding.sendArticle.setOnClickListener {
-            showProgressDialog()
+            showProgressDialog(requireContext())
             val article = Article()
             article.description = binding.textArticle.text.toString()
 
@@ -83,7 +83,8 @@ class AddArticleFragment : BaseFragment() {
 
     private fun createArticle(article: Article) {
         val user = UserInfo().getUserData(requireActivity())
-        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(CreateArticle::class.java) }
+        val retrofitBuilder =
+            activity?.let { RetrofitInstance(it).retrofit.create(CreateArticle::class.java) }
         val retrofitData = retrofitBuilder?.createArticle(article.toJsonObject(), user.token)
         retrofitData?.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
@@ -111,17 +112,5 @@ class AddArticleFragment : BaseFragment() {
             binding.sendArticle.visibility = View.GONE
             binding.btnRegister.visibility = View.VISIBLE
         }
-    }
-
-    private fun showProgressDialog() {
-        progressDialog = Dialog(requireContext())
-        progressDialog!!.setContentView(R.layout.dialog_custom_progress)
-        progressDialog!!.setCancelable(false)
-        progressDialog!!.show()
-    }
-
-    private fun hideProgressDialog() {
-        if (progressDialog != null)
-            progressDialog!!.dismiss()
     }
 }

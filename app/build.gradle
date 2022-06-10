@@ -6,6 +6,7 @@ plugins {
     id 'realm-android'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -16,7 +17,7 @@ android {
         minSdk 21
         targetSdk 31
         versionCode 22
-        versionName "6"
+        versionName "6.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,7 +25,7 @@ android {
     buildTypes {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
-            resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
+            resValue("string", "base_url", "https://aghour-services-staging.herokuapp.com/api/")
         }
 
         release {
@@ -54,10 +55,10 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.7.0-alpha01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.7.0-alpha02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -65,8 +66,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Google Ads
-    implementation 'com.google.android.gms:play-services-ads:20.6.0'
-    implementation 'com.google.android.gms:play-services-ads-lite:20.6.0'
+    implementation 'com.google.android.gms:play-services-ads:21.0.0'
+    implementation 'com.google.android.gms:play-services-ads-lite:21.0.0'
 
     //Navigation Fragment
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
@@ -90,13 +91,14 @@ dependencies {
     //Retrofit & OKHttp
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
 
     //Firebase Analytics
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.4'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.5'
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.1.2'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'

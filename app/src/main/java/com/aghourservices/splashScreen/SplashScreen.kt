@@ -10,8 +10,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.BaseActivity
 import com.aghourservices.MainActivity
 import com.aghourservices.R
+import com.aghourservices.cache.Settings
+import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.ActivitySplashScreenBinding
 import com.aghourservices.settings.ThemePreference
+import com.aghourservices.user.SignUpActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 
@@ -31,7 +34,18 @@ class SplashScreen : BaseActivity() {
 
     private fun handler() {
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            lateinit var intent: Intent
+            val settings = Settings()
+            val user = UserInfo()
+
+            val skip = user.isUserLoggedIn(this) || settings.showRigsterActivity(this)
+
+            intent = if (skip) {
+                Intent(this, MainActivity::class.java)
+            } else {
+                Intent(this, SignUpActivity::class.java)
+            }
+            startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }, 500)
