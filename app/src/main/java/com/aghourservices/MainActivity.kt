@@ -34,9 +34,9 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        firebaseDeviceToken()
         setUpView()
         adView()
-        firebase()
     }
 
     override fun onResume() {
@@ -79,7 +79,7 @@ class MainActivity : BaseActivity() {
         bottomNavView.setupWithNavController(navController)
     }
 
-    private fun firebase() {
+    private fun firebaseDeviceToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w("TAG", "Fetching FCM registration token failed", task.exception)

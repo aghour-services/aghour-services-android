@@ -73,7 +73,7 @@ class SettingsActivity : BaseActivity() {
 
         binding.btnRegister.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
+            finishAffinity()
         }
     }
 
