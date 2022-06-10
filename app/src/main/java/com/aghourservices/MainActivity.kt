@@ -46,7 +46,7 @@ class MainActivity : BaseActivity() {
         val navController = findNavController(R.id.fragmentContainerView)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        handler.postDelayed(runnable, 10000)
+        handler.postDelayed(runnable, 120000)
 
         val checkNetworkLiveData = CheckNetworkLiveData(application)
         checkNetworkLiveData.observe(this) { isConnected ->
