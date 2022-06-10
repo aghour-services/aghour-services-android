@@ -1,6 +1,5 @@
 package com.aghourservices
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -27,28 +26,63 @@ import com.google.firebase.messaging.FirebaseMessaging
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adView: AdView
-    private var handler = Handler(Looper.myLooper()!!)
     private lateinit var runnable: Runnable
+
+    private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
 
-    @SuppressLint("StringFormatInvalid")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpView()
+        adView()
+        firebase()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        /** Setup ActionBar With **/
+        val navController = findNavController(R.id.fragmentContainerView)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+
+        handler.postDelayed(runnable, 120000)
+
+        val checkNetworkLiveData = CheckNetworkLiveData(application)
+        checkNetworkLiveData.observe(this) { isConnected ->
+            binding.notInternet.isVisible = !isConnected
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable)
+    }
+
+    private fun adView() {
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
+
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
+    }
+
+    private fun setUpView() {
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.show()
+
         val bottomNavView = binding.bottomView
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         bottomNavView.setupWithNavController(navController)
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
 
+
+    }
+
+    private fun firebase() {
         //Generate Device Token
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -59,7 +93,6 @@ class MainActivity : BaseActivity() {
             Log.d("TAG", token)
         })
 
-
         //Get Stored Notification from Firebase Class
         val intent = intent
         val message = intent.getStringExtra("message")
@@ -69,24 +102,6 @@ class MainActivity : BaseActivity() {
                 .setMessage(message)
                 .setPositiveButton("تـمـام") { _, _ -> }.show()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        val navController = findNavController(R.id.fragmentContainerView)
-        NavigationUI.setupActionBarWithNavController(this, navController)
-
-        handler.postDelayed(runnable, 120000)
-        val checkNetworkLiveData = CheckNetworkLiveData(application)
-        checkNetworkLiveData.observe(this) { isConnected ->
-            binding.notInternet.isVisible = !isConnected
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacks(runnable)
     }
 
     override fun setTitle(title: CharSequence?) {

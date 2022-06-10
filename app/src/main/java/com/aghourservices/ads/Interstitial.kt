@@ -1,5 +1,6 @@
 package com.aghourservices.ads
 
+import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -30,7 +31,7 @@ class Interstitial {
                     this@Interstitial.interstitialAd = interstitialAd
                     Toast.makeText(context, "سيظهر اعلان بعد 5 ثواني", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
-//                        interstitialAd.show(context as Activity)
+                        interstitialAd.show(context as Activity)
                     }, 5000)
                 }
             })

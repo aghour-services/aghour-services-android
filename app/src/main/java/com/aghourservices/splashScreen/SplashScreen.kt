@@ -6,16 +6,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.BaseActivity
 import com.aghourservices.MainActivity
 import com.aghourservices.R
-import com.aghourservices.cache.Settings
-import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.ActivitySplashScreenBinding
 import com.aghourservices.settings.ThemePreference
-import com.aghourservices.user.SignUpActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 
@@ -28,7 +24,20 @@ class SplashScreen : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        firebaseTopic()
+        handler()
 
+    }
+
+    private fun handler() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this, MainActivity::class.java))
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
+        }, 500)
+    }
+
+    private fun firebaseTopic() {
         Firebase.messaging.subscribeToTopic("News")
             .addOnCompleteListener { task ->
                 var msg = "Done"
@@ -37,26 +46,9 @@ class SplashScreen : BaseActivity() {
                 }
                 Log.d("FCM", msg)
             }
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            lateinit var intent: Intent
-            val userInfo = UserInfo()
-            val settings = Settings()
-
-            val skip = userInfo.isUserLoggedIn(this) || settings.showRigsterActivity(this)
-
-            intent = if (skip) {
-                Intent(this, MainActivity::class.java)
-            } else {
-                Intent(this, SignUpActivity::class.java)
-            }
-
-            startActivity(intent)
-            finish()
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-        }, 500)
     }
-    private fun checkTheme(){
+
+    private fun checkTheme() {
         when (ThemePreference(this).darkMode) {
             0 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
