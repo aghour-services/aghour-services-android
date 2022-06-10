@@ -125,10 +125,8 @@
                     android:layout_gravity="center"
                     android:layout_margin="4dp"
                     android:fontFamily="@font/segoe_ui_bold"
-                    android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="6dp"
                     android:text="أو"
-                    android:textAlignment="center"
                     android:textColor="@color/blue200"
                     android:textSize="14sp" />
 
@@ -156,16 +154,11 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/sign_up_buttons"
-                    android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="center"
                     android:text="تخطي التسجيل"
                     android:textColor="@color/skipBtnColor"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_register"
@@ -175,11 +168,10 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/sign_up_buttons"
-                    android:fontFamily="@font/segoe_ui_bold"
                     android:text="انشاء حساب جديد"
                     android:textColor="#E91E63"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    style="?android:attr/buttonBarButtonStyle" />
 
             </LinearLayout>
 

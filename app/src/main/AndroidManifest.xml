@@ -19,6 +19,10 @@
         android:theme="@style/Theme.LightApp"
         tools:targetApi="s">
         <activity
+            android:name=".firebase_analytics.notifications.DisplayNotificationsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".about.AboutActivity"
             android:exported="false" />
         <activity
@@ -61,7 +65,7 @@
             android:value="@bool/FIREBASE_ANALYTICS_DEACTIVATED" />
 
         <service
-            android:name=".firebase_analytics.FirebaseMessageService"
+            android:name=".firebase_analytics.notifications.FirebaseMessageService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

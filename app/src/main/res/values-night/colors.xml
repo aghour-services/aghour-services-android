@@ -5,10 +5,10 @@
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
     <color name="navBarColor">#000000</color>
-    <color name="recyclerViewBg">#151B20</color>
+    <color name="recyclerViewBg">#192025</color>
     <color name="splashScreenBg">#141F27</color>
     <color name="categoryName">#FFFFFF</color>
-    <color name="categoryCardBg">#1B2025</color>
+    <color name="categoryCardBg">#1D242B</color>
     <color name="categoryCardPress">#3D4851</color>
     <color name="categoryProgressBar">#FFFFFF</color>
     <color name="shimmerBg">#DADADA</color>
@@ -17,7 +17,7 @@
     <color name="news_bg">#141F27</color>
     <color name="newsDescription">#FFFFFF</color>
     <color name="time">#439446</color>
-    <color name="firmsBg">#141F27</color>
+    <color name="firmsBg">#151B20</color>
     <color name="firmName">#FFFFFF</color>
     <color name="callBg">#202932</color>
     <color name="callPress">#445668</color>
@@ -94,12 +94,16 @@
     <color name="searchHint">#0E0E0E</color>
     <color name="loginBkColor">#FFFFFF</color>
     <color name="skipBtnColor">#54C158</color>
-    <color name="createOrSignInAccountBg">#142532</color>
+    <color name="createOrSignInAccountBg">#151B20</color>
     <color name="bg_signIn">#F8F8F8</color>
     <color name="signOut">#ED7474</color>
     <color name="favColor">#D3D3D3</color>
     <color name="noFav">#FFFFFF</color>
     <color name="adMobBg">#1D242B</color>
     <color name="settingStroke">#2D3A43</color>
+    <color name="showMoreBg">#191F25</color>
+    <color name="drawerToggle">#FFFFFF</color>
+    <color name="fabBg">#2F3E4B</color>
+    <color name="signInLogo">#2B3A45</color>
 
 </resources>

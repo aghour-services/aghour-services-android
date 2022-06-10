@@ -102,12 +102,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="30dp"
-        android:elevation="20dp"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        android:backgroundTint="@color/toolbarBg"
+        android:layout_margin="15dp"
+        android:elevation="10dp"
         android:src="@drawable/ic_add"
+        app:backgroundTint="@color/fabBg"
         app:fabSize="normal"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

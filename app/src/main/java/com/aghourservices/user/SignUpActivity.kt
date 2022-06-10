@@ -1,28 +1,28 @@
 package com.aghourservices.user
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.aghourservices.cache.UserInfo
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import com.aghourservices.cache.Settings
-import com.aghourservices.databinding.ActivitySignUpBinding
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
-import android.app.Dialog
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.ads.Banner
+import com.aghourservices.cache.Settings
+import com.aghourservices.cache.UserInfo
 import com.aghourservices.constants.RetrofitInstance
+import com.aghourservices.databinding.ActivitySignUpBinding
 import com.aghourservices.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.interfaces.AlertDialog.Companion.noInternet
 import com.aghourservices.user.api.SignUpService
 import com.aghourservices.user.api.User
 import com.google.android.gms.ads.AdView
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -34,10 +34,16 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initUser()
+        adView()
+    }
 
+    private fun adView() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
+    }
 
+    private fun initUser() {
         binding.btnCreate.setOnClickListener(View.OnClickListener {
             val name = binding.name.text.toString()
             val mobile = binding.mobile.text.toString()
@@ -57,10 +63,12 @@ class SignUpActivity : AppCompatActivity() {
         })
 
         binding.btnUseApp.setOnClickListener {
+            val settings = Settings()
             showProgressDialog()
+            sendFirebaseEvent("SKIP_LOGIN", "")
+            settings.doNotShowRigsterActivity(this)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-            doNotShowAgain()
         }
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(this, SignInActivity::class.java))
@@ -96,14 +104,6 @@ class SignUpActivity : AppCompatActivity() {
         })
     }
 
-    private fun doNotShowAgain() {
-        val settings = Settings()
-        if (binding.doNotShowAgain.isChecked) {
-            sendFirebaseEvent("SKIP_LOGIN", "")
-            settings.doNotShowRigsterActivity(this)
-        }
-    }
-
     private fun sendFirebaseEvent(eventName: String, data: String) {
         val firebaseAnalytics = Firebase.analytics
         firebaseAnalytics.logEvent(eventName) {
@@ -111,15 +111,15 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun showProgressDialog(){
+    private fun showProgressDialog() {
         progressDialog = Dialog(this)
         progressDialog!!.setContentView(R.layout.dialog_custom_progress)
         progressDialog!!.setCancelable(false)
         progressDialog!!.show()
     }
 
-    private fun hideProgressDialog(){
-        if(progressDialog != null)
+    private fun hideProgressDialog() {
+        if (progressDialog != null)
             progressDialog!!.dismiss()
     }
 

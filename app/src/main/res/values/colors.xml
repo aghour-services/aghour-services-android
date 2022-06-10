@@ -138,7 +138,6 @@
     <color name="dontShow">#2982C8</color>
     <color name="searchTxt">#4D4D4D</color>
     <color name="searchHint">#4D4D4D</color>
-    <color name="bottomBg">#FFFFFF</color>
     <color name="skipBtnColor">#4CAF50</color>
     <color name="createOrSignInAccountBg">#FFFFFF</color>
     <color name="bg_signIn">#101920</color>
@@ -150,4 +149,10 @@
     <color name="adMobBg">#FFFFFF</color>
     <color name="loading">#465D6E</color>
     <color name="settingStroke">#E4E4E4</color>
+    <color name="showMoreRipple">#B5E8FF</color>
+    <color name="showMoreBg">#FFFFFF</color>
+    <color name="drawerToggle">#FFFFFF</color>
+    <color name="fabBg">#168EC4</color>
+
+    <color name="signInLogo">#2981C6</color>
 </resources>
