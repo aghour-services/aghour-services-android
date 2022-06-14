@@ -26,13 +26,13 @@ android {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("string", "base_url", "https://aghour-services-staging.herokuapp.com/api/")
-            resValue("string", "newsTopic", "News-Staging")
+            resValue("string", "news_topic", "News-Staging")
         }
 
         release {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "false")
             resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
-            resValue("string", "newsTopic", "News")
+            resValue("string", "news_topic", "News")
 
             minifyEnabled true
             shrinkResources true
