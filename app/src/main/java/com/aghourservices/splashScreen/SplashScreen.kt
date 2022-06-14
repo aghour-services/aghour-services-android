@@ -13,6 +13,7 @@ import com.aghourservices.R
 import com.aghourservices.cache.Settings
 import com.aghourservices.cache.UserInfo
 import com.aghourservices.databinding.ActivitySplashScreenBinding
+import com.aghourservices.firebase_analytics.notifications.DisplayNotificationsActivity
 import com.aghourservices.settings.ThemePreference
 import com.aghourservices.user.SignUpActivity
 import com.google.firebase.ktx.Firebase
@@ -23,18 +24,37 @@ class SplashScreen : BaseActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        checkTheme()
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkTheme()
         firebaseTopic()
         handler()
 
+        if (intent.extras != null) {
+            for (key in intent.extras!!.keySet()) {
+                val type = intent.extras!!.getString("type")
+
+                when (type) {
+                    "1" -> {
+                        val message = intent.extras!!.getString("newsKey")
+                        val displayIntent = Intent(this, DisplayNotificationsActivity::class.java)
+                        displayIntent.putExtra("notifyMessage", message)
+                        startActivity(displayIntent)
+                    }
+
+                }
+            }
+        }
+
+//        if (intent.extras != null) {
+//            val notificationIntent = Intent(this, DisplayNotificationsActivity::class.java)
+//            startActivity(notificationIntent)
+//        }
     }
 
     private fun handler() {
         Handler(Looper.getMainLooper()).postDelayed({
-            lateinit var intent: Intent
             val settings = Settings()
             val user = UserInfo()
 
@@ -52,7 +72,7 @@ class SplashScreen : BaseActivity() {
     }
 
     private fun firebaseTopic() {
-        Firebase.messaging.subscribeToTopic("News")
+        Firebase.messaging.subscribeToTopic(getString(R.string.newsTopic))
             .addOnCompleteListener { task ->
                 var msg = "Done"
                 if (!task.isSuccessful) {

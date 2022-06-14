@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -40,14 +39,9 @@ class NewsFragment : BaseFragment() {
         return binding.root
     }
 
-    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = getString(R.string.news_fragment)
         showBottomNav()
-
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.show()
 
         try {
             init()

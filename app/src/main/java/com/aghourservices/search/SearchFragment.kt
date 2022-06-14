@@ -40,9 +40,6 @@ class SearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNav()
 
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.hide()
-
         if (binding.searchText.requestFocus()) {
             ShowSoftKeyboard.show(requireActivity(), binding.searchText)
         }

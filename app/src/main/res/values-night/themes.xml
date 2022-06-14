@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.DarkApp" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.DarkApp" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
-        <item name="colorPrimary">@color/itemNavColor</item>
-        <item name="windowActionBar">true</item>
+        <item name="colorPrimary">@color/toolbarBg</item>
+        <item name="colorOnPrimary">@color/toolbarText</item>
+
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/navDrawerBg</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">false</item>
         <item name="drawerArrowStyle">@style/drawerToggle</item>
     </style>
 
-    <style name="Theme.DarkApp.NoActionBar">
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorControlNormal">@color/colorControl</item>
-    </style>
-
-    <style name="CategoriesTheme" parent="Theme.DarkApp.NoActionBar" />
-
     <style name="AddDataTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/toolbarBg</item>
+        <item name="android:navigationBarColor">@color/navDrawerBg</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">false</item>
         <item name="cardBackgroundColor">@color/createOrSignInAccountBg</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/splashScreenBg</item>
-        <item name="windowActionBar">true</item>
         <item name="android:windowBackground">@color/splashScreenBg</item>
+        <item name="windowActionBar">true</item>
         <item name="android:navigationBarColor">@color/navBarColor</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">false</item>
     </style>
 
     <style name="AlertDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">

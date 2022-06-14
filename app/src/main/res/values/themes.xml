@@ -1,24 +1,39 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application light theme. -->
-    <style name="Theme.LightApp" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.LightApp" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
+        <item name="colorPrimary">@color/toolbarBg</item>
+        <item name="titleTextColor">@color/toolbarText</item>
+        <item name="titleTextStyle">@style/SegoeTextBold</item>
+
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/navDrawerBg</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
         <item name="drawerArrowStyle">@style/drawerToggle</item>
     </style>
 
-    <style name="Theme.LightApp.NoActionBar">
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorControlNormal">@color/white</item>
+    <style name="showToolbar" parent="Theme.LightApp" >
+        <item name="android:statusBarColor">@color/toolbarBg</item>
+        <item name="android:navigationBarColor">@color/navDrawerBg</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
     </style>
 
-    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar" />
+    <style name="hideToolbar" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:statusBarColor">@color/toolbarBg</item>
+        <item name="android:navigationBarColor">@color/navDrawerBg</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
+
+    </style>
 
     <style name="AddDataTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/toolbarBg</item>
+        <item name="android:navigationBarColor">@color/navDrawerBg</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
         <item name="cardBackgroundColor">@color/createOrSignInAccountBg</item>
     </style>
 
@@ -27,6 +42,7 @@
         <item name="windowActionBar">true</item>
         <item name="android:windowBackground">@color/splashScreenBg</item>
         <item name="android:navigationBarColor">@color/splashScreenBg</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
@@ -45,6 +61,13 @@
     <style name="drawerToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/drawerToggle</item>
     </style>
+
+    <!--Custom the text on Bottom Navigation-->
+    <style name="BottomNavigationTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!--All Text Font Style-->
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/cairo_black</item>

@@ -11,9 +11,10 @@
     <color name="categoryCardBg">#1D242B</color>
     <color name="categoryCardPress">#3D4851</color>
     <color name="categoryProgressBar">#FFFFFF</color>
-    <color name="shimmerBg">#DADADA</color>
+    <color name="backSettingsIcon">#FFFFFF</color>
+    <color name="shimmerBg">#3A4449</color>
     <color name="clear">#EC4949</color>
-    <color name="shimmerColor">#232B33</color>
+    <color name="shimmerColor">#3C4E5C</color>
     <color name="news_bg">#141F27</color>
     <color name="newsDescription">#FFFFFF</color>
     <color name="time">#439446</color>
@@ -44,7 +45,7 @@
     <color name="backIconSelector">#36485A</color>
     <color name="swipeColor">#FFFFFF</color>
     <color name="swipeBg">#0F1317</color>
-    <color name="navDrawerBg">#1D242B</color>
+    <color name="navDrawerBg">#181F25</color>
     <color name="firmsDescription">#CCCCCC</color>
     <color name="notifyTitle">#FFFFFF</color>
     <color name="notifyMessage">#6E6E6E</color>
@@ -105,5 +106,6 @@
     <color name="drawerToggle">#FFFFFF</color>
     <color name="fabBg">#2F3E4B</color>
     <color name="signInLogo">#2B3A45</color>
+    <color name="appLogo">#FFFFFF</color>
 
 </resources>

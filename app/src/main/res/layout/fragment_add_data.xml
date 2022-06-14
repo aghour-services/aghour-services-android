@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/add_data_bg"
     android:gravity="center"
-    android:orientation="vertical"
-    android:theme="@style/AddDataTheme">
+    android:theme="@style/showToolbar"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"

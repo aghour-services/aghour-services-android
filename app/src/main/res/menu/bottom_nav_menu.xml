@@ -4,26 +4,26 @@
 
     <item
         android:id="@+id/categoriesFragment"
-        android:icon="@drawable/ic_home"
-        android:title="الرئيسية" />
+        android:icon="@drawable/selector_home"
+        android:title="@string/categories_fragment" />
 
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_search"
-        android:title="البحث"/>
+        android:icon="@drawable/selector_search"
+        android:title="@string/search_fragment"/>
 
     <item
         android:id="@+id/addDataFragment"
-        android:icon="@drawable/ic_add_box"
-        android:title="إضافة" />
+        android:icon="@drawable/selector_add_data"
+        android:title="@string/add_fragment" />
 
     <item
         android:id="@+id/favoriteFragment"
-        android:icon="@drawable/ic_fav_bottom_nav"
-        android:title="المفضلة"/>
+        android:icon="@drawable/selector_favorite"
+        android:title="@string/favorite_fragment"/>
 
     <item
         android:id="@+id/newsFragment"
-        android:icon="@drawable/ic__news_article"
-        android:title="الأخبار" />
+        android:icon="@drawable/selector_news"
+        android:title="@string/news" />
 </menu>

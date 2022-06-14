@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="toolbarBg">#4290CD</color>
-    <color name="toolbarText">#FFFFFF</color>
+    <color name="toolbarBg">#e1f5fe</color>
+    <color name="toolbarText">#263238</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
     <color name="itemNavColor">#FFFFFF</color>
@@ -12,9 +12,9 @@
     <color name="searchViewBg">#CBE8FF</color>
     <color name="clear">#EC4949</color>
     <color name="lineView">#C5C5C5</color>
-    <color name="recyclerViewBg">#FFFFFF</color>
-    <color name="splashScreenBg">#3C88C5</color>
-    <color name="navHeaderBg">#387DB3</color>
+    <color name="recyclerViewBg">#FCFDFF</color>
+    <color name="splashScreenBg">#e1f5fe</color>
+    <color name="navHeaderBg">#e1f5fe</color>
     <color name="userNameColor">#121E27</color>
     <color name="emailColor">#FF7070</color>
     <color name="phoneColor">#4CAF50</color>
@@ -23,7 +23,7 @@
     <color name="categoryName">#0E0E0E</color>
     <color name="firmName">#121A22</color>
     <color name="address">#3B8F45</color>
-    <color name="add_data_bg">#FFFFFF</color>
+    <color name="add_data_bg">#F4FCFF</color>
     <color name="add_data">#266CA3</color>
     <color name="edtIcons">#6D6D6D</color>
     <color name="spinnerBg">#B3BCC6</color>
@@ -31,15 +31,15 @@
     <color name="hint">#4B4B4B</color>
     <color name="black">#000000</color>
     <color name="navBarColor">#FFFFFF</color>
-    <color name="categoryProgressBar">#4290CD</color>
-    <color name="shimmerColor">#C5C5C5</color>
+    <color name="categoryProgressBar">#263238</color>
+    <color name="shimmerColor">#8BAAC5</color>
     <color name="news_bg">#ECECEC</color>
-    <color name="categoryCardBg">#FFFFFF</color>
+    <color name="categoryCardBg">#F1FBFF</color>
     <color name="categoryCardPress">#CFCFCF</color>
     <color name="shimmerBg">#FFFFFF</color>
     <color name="newsDescription">#203647</color>
     <color name="time">#439446</color>
-    <color name="firmsBg">#FFFFFF</color>
+    <color name="firmsBg">#FBFEFF</color>
     <color name="swipeBg">#FFFFFF</color>
     <color name="swipeColor">#59A5E1</color>
     <color name="callBg">#FFFFFF</color>
@@ -59,7 +59,7 @@
     <color name="loginTxtColor">#287ABB</color>
     <color name="signInTxt">#275F8C</color>
     <color name="btnSignInTxt">#FFFFFF</color>
-    <color name="navDrawerBg">#4290CD</color>
+    <color name="navDrawerBg">#DFEFFB</color>
     <color name="firmsDescription">#2E2E2E</color>
     <color name="checkBox">#2A76B3</color>
     <color name="passToggle">#578EBA</color>
@@ -98,7 +98,7 @@
     <color name="textModeSwitch">#FFFFFF</color>
     <color name="textDismiss">#192835</color>
     <color name="dialogText">#1E313F</color>
-    <color name="dialogItem">#FFFFFF</color>
+    <color name="dialogItem">#F4FCFF</color>
     <color name="dialogItemClick">#D5D5D5</color>
     <color name="newsHint">#B8B8B8</color>
     <color name="adColor">#49A64D</color>
@@ -107,14 +107,14 @@
     <color name="toggle_password">#2E6FA3</color>
     <color name="settingsToolbarBg">#F7F7F7</color>
     <color name="settingsToolbarTxt">#000000</color>
-    <color name="settingsBg">#FFFFFF</color>
+    <color name="settingsBg">#F4FCFF</color>
     <color name="dialogSettingItem">#FFFFFF</color>
     <color name="settings_back_bg">#F5F5F5F5</color>
     <color name="settings_back_ripple">#BCBCBC</color>
     <color name="changeThemeRipple">#C0C0C0</color>
     <color name="changeThemeBtnBg">#2E5574</color>
     <color name="bottomNavPress">#DFDFDF</color>
-    <color name="backSettingsIcon">#FFFFFF</color>
+    <color name="backSettingsIcon">#263238</color>
     <color name="backIconSettingRipple">#ADDBFF</color>
     <color name="aboutApp">#000000</color>
     <color name="scrollViewBg">#FFFFFF</color>
@@ -139,20 +139,21 @@
     <color name="searchTxt">#4D4D4D</color>
     <color name="searchHint">#4D4D4D</color>
     <color name="skipBtnColor">#4CAF50</color>
-    <color name="createOrSignInAccountBg">#FFFFFF</color>
+    <color name="createOrSignInAccountBg">#F4FCFF</color>
     <color name="bg_signIn">#101920</color>
     <color name="welcome">#FF5722</color>
     <color name="log_out_bg">#FFABA4</color>
     <color name="signOut">#FF3E3E</color>
     <color name="favColor">#F5F5F5</color>
     <color name="noFav">#152029</color>
-    <color name="adMobBg">#FFFFFF</color>
+    <color name="adMobBg">#e1f5fe</color>
     <color name="loading">#465D6E</color>
     <color name="settingStroke">#E4E4E4</color>
     <color name="showMoreRipple">#B5E8FF</color>
     <color name="showMoreBg">#FFFFFF</color>
-    <color name="drawerToggle">#FFFFFF</color>
+    <color name="drawerToggle">#263238</color>
     <color name="fabBg">#168EC4</color>
 
     <color name="signInLogo">#2981C6</color>
+    <color name="appLogo">#263238</color>
 </resources>

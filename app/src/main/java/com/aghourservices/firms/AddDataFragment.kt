@@ -43,11 +43,8 @@ class AddDataFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = getString(R.string.add_data_fragment)
         hideUserAddData()
         showBottomNav()
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.show()
         init()
 
         val bundle = arguments

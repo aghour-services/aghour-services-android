@@ -48,8 +48,6 @@ class FirmsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNav()
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.hide()
 
         try {
             init()

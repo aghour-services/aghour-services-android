@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/recyclerViewBg"
+    android:background="@color/settingsBg"
     android:orientation="vertical"
-    android:theme="@style/AddDataTheme"
+    android:theme="@style/hideToolbar"
     tools:context=".news.user_add_article.AddArticleFragment">
 
     <LinearLayout

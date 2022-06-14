@@ -26,11 +26,13 @@ android {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("string", "base_url", "https://aghour-services-staging.herokuapp.com/api/")
+            resValue("string", "newsTopic", "News-Staging")
         }
 
         release {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "false")
             resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
+            resValue("string", "newsTopic", "News")
 
             minifyEnabled true
             shrinkResources true
@@ -99,6 +101,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.1.2'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.5'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'

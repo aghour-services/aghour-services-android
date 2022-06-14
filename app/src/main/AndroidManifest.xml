@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -21,13 +22,25 @@
         <activity
             android:name=".firebase_analytics.notifications.DisplayNotificationsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AddDataTheme">
+
+            <intent-filter>
+                <action android:name="DisplayNotificationsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".about.AboutActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AddDataTheme" />
         <activity
             android:name=".settings.SettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AddDataTheme" />
         <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true"
@@ -44,7 +57,6 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/CategoriesTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".user.SignInActivity"
@@ -66,11 +78,16 @@
 
         <service
             android:name=".firebase_analytics.notifications.FirebaseMessageService"
-            android:exported="false">
+            android:directBootAware="true"
+            android:exported="false"
+            android:permission="com.google.android.c2dm.permission.SEND">
+
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
+
         </service>
     </application>
 

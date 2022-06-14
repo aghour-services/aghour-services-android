@@ -39,9 +39,6 @@ class AddArticleFragment : BaseFragment() {
         hideBottomNav()
         hideUserAddData()
 
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.hide()
-
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
         }

@@ -1,7 +1,7 @@
 package com.aghourservices.firebase_analytics.notifications
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.aghourservices.BaseActivity
 import com.aghourservices.databinding.ActivityDisplayNotificationsBinding
 
@@ -12,15 +12,18 @@ class DisplayNotificationsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDisplayNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initNotification()
+        initView()
     }
 
-    private fun initNotification() {
-        val intent: Intent = intent
-        val title = intent.getStringExtra("title")
-        val bodyMessage = intent.getStringExtra("bodyMessage")
+    private fun initView() {
+        supportActionBar?.hide()
 
-        binding.title.text = title
+        val title = "title"
+        val bodyMessage = intent.getStringExtra("newsKey")
+
+        Log.d("TAGS", "$title \n $bodyMessage")
+
+        binding.notifyTitle.text = title
         binding.bodyMessage.text = bodyMessage
 
         binding.backBtn.setOnClickListener {

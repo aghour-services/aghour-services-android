@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
-import com.aghourservices.R
 import com.aghourservices.categories.api.ApiServices
 import com.aghourservices.categories.api.Category
 import com.aghourservices.categories.ui.CategoriesAdapter
@@ -39,8 +37,6 @@ class CategoriesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showBottomNav()
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.show()
         init()
         loadCategoriesList()
     }
@@ -54,7 +50,6 @@ class CategoriesFragment : BaseFragment() {
             .allowWritesOnUiThread(true)
             .build()
         realm = Realm.getInstance(config)
-        requireActivity().title = getString(R.string.categories_fragment)
 
         binding.categoriesRecyclerview.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(activity)
@@ -112,5 +107,4 @@ class CategoriesFragment : BaseFragment() {
         binding.progressBar.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
     }
-
 }

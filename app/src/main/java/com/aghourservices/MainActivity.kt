@@ -11,7 +11,9 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
@@ -68,14 +70,21 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setUpView() {
-        val toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-        supportActionBar?.show()
-
         val bottomNavView = binding.bottomView
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.categoriesFragment,
+                R.id.searchFragment,
+                R.id.addDataFragment,
+                R.id.favoriteFragment,
+                R.id.newsFragment
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
     }
 
@@ -88,10 +97,6 @@ class MainActivity : BaseActivity() {
             val token = task.result
             Log.d("TAG", token)
         })
-    }
-
-    override fun setTitle(title: CharSequence?) {
-        binding.toolBarTv.text = title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

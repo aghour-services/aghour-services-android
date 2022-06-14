@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/hideToolbar"
+    tools:context=".firms.FirmsFragment">
 
     <LinearLayout
         android:id="@+id/firmsToolbar"
@@ -34,7 +36,7 @@
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
             android:paddingRight="45dp"
-            android:text="Firms Name"
+            tools:text="الأطباء"
             android:textColor="@color/toolbarText"
             android:textSize="22sp"
             android:textStyle="bold" />
