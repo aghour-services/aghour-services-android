@@ -18,7 +18,7 @@ class DisplayNotificationsActivity : BaseActivity() {
     private fun initNotification() {
         val intent: Intent = intent
         val title = intent.getStringExtra("title")
-        val bodyMessage = intent.getStringExtra("bodyMessage")
+        val bodyMessage = intent.getStringExtra("body")
 
         binding.title.text = title
         binding.bodyMessage.text = bodyMessage

@@ -28,8 +28,14 @@ class SplashScreen : BaseActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseTopic()
-        handler()
 
+
+        val extras = intent?.extras
+        if (extras != null) {
+            for (key in extras.keySet()) {
+                Log.d("Splash", "$key -> ${extras.get(key)}")
+            }
+        }
     }
 
     private fun handler() {
