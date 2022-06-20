@@ -7,7 +7,10 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -15,6 +18,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.ads.Banner
 import com.aghourservices.ads.Interstitial
+import com.aghourservices.categories.CategoriesFragmentDirections
 import com.aghourservices.check_network.CheckNetworkLiveData
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.settings.SettingsActivity
@@ -35,8 +39,22 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseDeviceToken()
-        setUpView()
+        val mainNavController = setupNavController()
         adView()
+        checkExtras(mainNavController)
+    }
+
+    private fun checkExtras(mainNavController: NavController) {
+        val newsTopic = getString(R.string.news_topic)
+        val extras = intent?.extras
+        if (extras != null) {
+            for (key in extras.keySet()) {
+                if (key == "from" && extras.get(key).toString().contains(newsTopic)) {
+                    val action = CategoriesFragmentDirections.actionCategoriesFragmentToNewsFragment()
+                    mainNavController.navigate(action)
+                }
+            }
+        }
     }
 
     override fun onResume() {
@@ -67,7 +85,7 @@ class MainActivity : BaseActivity() {
         handler.post(runnable)
     }
 
-    private fun setUpView() {
+    private fun setupNavController(): NavController {
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.show()
@@ -77,6 +95,8 @@ class MainActivity : BaseActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         bottomNavView.setupWithNavController(navController)
+
+        return navController
     }
 
     private fun firebaseDeviceToken() {

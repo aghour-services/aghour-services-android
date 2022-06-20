@@ -27,7 +27,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         val extras = intent?.extras
         if (extras != null) {
             for (key in extras.keySet()) {
-                Log.d("TAG", "$key -> ${extras.get(key)}")
+                Log.d("NotificationTAG", "$key -> ${extras.get(key)}")
             }
         }
     }
