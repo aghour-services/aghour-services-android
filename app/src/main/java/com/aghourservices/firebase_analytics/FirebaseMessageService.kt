@@ -1,14 +1,17 @@
-package com.aghourservices.firebase_analytics.notifications
+package com.aghourservices.firebase_analytics
 
-import android.app.*
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.constants.Constants.Companion.channelId
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -21,17 +24,6 @@ class FirebaseMessageService : FirebaseMessagingService() {
         Log.e("on new token", token)
     }
 
-    override fun handleIntent(intent: Intent?) {
-        super.handleIntent(intent)
-
-        val extras = intent?.extras
-        if (extras != null) {
-            for (key in extras.keySet()) {
-                Log.d("NotificationTAG", "$key -> ${extras.get(key)}")
-            }
-        }
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
@@ -39,17 +31,19 @@ class FirebaseMessageService : FirebaseMessagingService() {
         val title = remoteMessage.data["title"] ?: remoteMessage.notification?.title
         val body = remoteMessage.data["body"] ?: remoteMessage.notification?.body
 
-        val notificationIntent = Intent(this, DisplayNotificationsActivity::class.java)
+        val notificationIntent = Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
         notificationIntent.putExtra("title", title)
         notificationIntent.putExtra("body", body)
 
-        val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
-            addNextIntentWithParentStack(notificationIntent)
-            getPendingIntent(
-                0,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            notificationIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
         Notification.Builder(this, channelId)
         val notification: Notification = NotificationCompat.Builder(this, channelId)
@@ -60,7 +54,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
-            .setContentIntent(resultPendingIntent)
+            .setContentIntent(pendingIntent)
             .setStyle(NotificationCompat.BigTextStyle())
             .setColor(Color.BLUE)
             .setLights(Color.BLUE, 3000, 1000)

@@ -7,12 +7,9 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -23,14 +20,13 @@ import com.aghourservices.check_network.CheckNetworkLiveData
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.settings.SettingsActivity
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adView: AdView
     private lateinit var runnable: Runnable
-
     private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
 
@@ -38,38 +34,38 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        firebaseDeviceToken()
+
         val mainNavController = setupNavController()
-        adView()
         checkExtras(mainNavController)
+        firebaseDeviceToken()
+        adView()
     }
 
     private fun checkExtras(mainNavController: NavController) {
+        val extras = intent.extras
         val newsTopic = getString(R.string.news_topic)
-        val extras = intent?.extras
         if (extras != null) {
             for (key in extras.keySet()) {
                 if (key == "from" && extras.get(key).toString().contains(newsTopic)) {
-                    val action = CategoriesFragmentDirections.actionCategoriesFragmentToNewsFragment()
-                    mainNavController.navigate(action)
+                    mainNavController.navigate(
+                        CategoriesFragmentDirections.actionCategoriesFragmentToNewsFragment()
+                    )
                 }
             }
+        }
+
+        /** Check for notification foreground **/
+        if (intent.getStringExtra("body") != null) {
+            mainNavController.navigate(
+                CategoriesFragmentDirections.actionCategoriesFragmentToNewsFragment()
+            )
         }
     }
 
     override fun onResume() {
         super.onResume()
-
-        //Setup ActionBar With Navigate Up
-        val navController = findNavController(R.id.fragmentContainerView)
-        NavigationUI.setupActionBarWithNavController(this, navController)
-
+        checkNetwork()
         handler.postDelayed(runnable, 120000)
-
-        val checkNetworkLiveData = CheckNetworkLiveData(application)
-        checkNetworkLiveData.observe(this) { isConnected ->
-            binding.notInternet.isVisible = !isConnected
-        }
     }
 
     override fun onPause() {
@@ -77,10 +73,16 @@ class MainActivity : BaseActivity() {
         handler.removeCallbacks(runnable)
     }
 
+    private fun checkNetwork() {
+        val checkNetworkLiveData = CheckNetworkLiveData(application)
+        checkNetworkLiveData.observe(this) { isConnected ->
+            binding.notInternet.isVisible = !isConnected
+        }
+    }
+
     private fun adView() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-
         runnable = Runnable { interstitial.load(this@MainActivity) }
         handler.post(runnable)
     }
@@ -96,18 +98,17 @@ class MainActivity : BaseActivity() {
         val navController = navHostFragment.navController
         bottomNavView.setupWithNavController(navController)
 
+        /** Show the Up button in the action bar. **/
+        NavigationUI.setupActionBarWithNavController(this, navController)
+
         return navController
     }
 
     private fun firebaseDeviceToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             val token = task.result
             Log.d("TAG", token)
-        })
+        }
     }
 
     override fun setTitle(title: CharSequence?) {
