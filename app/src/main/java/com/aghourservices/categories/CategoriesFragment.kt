@@ -63,27 +63,31 @@ class CategoriesFragment : BaseFragment() {
     }
 
     private fun loadCategoriesList() {
-        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(ApiServices::class.java) }
+        val retrofitBuilder =
+            activity?.let { RetrofitInstance(it).retrofit.create(ApiServices::class.java) }
         val retrofitData = retrofitBuilder?.loadCategoriesList()
         retrofitData?.enqueue(object : Callback<ArrayList<Category>?> {
             override fun onResponse(
                 call: Call<ArrayList<Category>?>,
                 response: Response<ArrayList<Category>?>,
             ) {
-                categoryList = response.body()!!
-                realm.executeTransaction {
-                    for (i in categoryList) {
-                        try {
-                            val category = realm.createObject(Category::class.java, i.id)
-                            category.name = i.name
-                            category.icon = i.icon
-                        } catch (e: Exception) {
+                if (response.isSuccessful) {
+                    categoryList = response.body()!!
+                    realm.executeTransaction {
+                        for (i in categoryList) {
+                            try {
+                                val category = realm.createObject(Category::class.java, i.id)
+                                category.name = i.name
+                                category.icon = i.icon
+                            } catch (e: Exception) {
+                            }
                         }
                     }
+                    adapter =
+                        CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
+                    binding.categoriesRecyclerview.adapter = adapter
+                    progressBar()
                 }
-                adapter = CategoriesAdapter(categoryList) { position -> onListItemClick(position) }
-                binding.categoriesRecyclerview.adapter = adapter
-                progressBar()
             }
 
             override fun onFailure(call: Call<ArrayList<Category>?>, t: Throwable) {

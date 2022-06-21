@@ -23,6 +23,9 @@
         <argument
             android:name="category_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
