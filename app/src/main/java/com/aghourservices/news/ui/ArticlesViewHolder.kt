@@ -27,17 +27,17 @@ class ArticlesViewHolder(
 
         binding.apply {
             description.text = article.description
+
             date.text = article.created_at
             showMore.isChecked = false
 
             showMore.setOnClickListener {
                 showMore.isChecked = !showMore.isChecked
-
                 if (showMore.isChecked) {
                     description.maxLines = 1000
                     showMore.text = "رؤية أقل"
                 } else {
-                    description.maxLines = 4
+                    description.maxLines = 7
                     showMore.text = "رؤية المزيد"
                 }
             }

@@ -126,7 +126,7 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun onListItemClick(position: Int) {
-        val article = articleList[position]
+        articleList[position]
     }
 
     private fun init() {
