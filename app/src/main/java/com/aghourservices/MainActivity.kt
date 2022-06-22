@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.view.isVisible
@@ -20,7 +19,6 @@ import com.aghourservices.check_network.CheckNetworkLiveData
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.settings.SettingsActivity
 import com.google.android.gms.ads.AdView
-import com.google.firebase.messaging.FirebaseMessaging
 
 
 class MainActivity : BaseActivity() {
@@ -37,7 +35,6 @@ class MainActivity : BaseActivity() {
 
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
-        firebaseDeviceToken()
         adView()
     }
 
@@ -102,13 +99,6 @@ class MainActivity : BaseActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         return navController
-    }
-
-    private fun firebaseDeviceToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            val token = task.result
-            Log.d("TAG", token)
-        }
     }
 
     override fun setTitle(title: CharSequence?) {
