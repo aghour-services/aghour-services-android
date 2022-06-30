@@ -5,11 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
@@ -21,8 +21,7 @@ import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.api.ListFirms
 import com.aghourservices.firms.ui.FirmsAdapter
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import com.aghourservices.offline.RealmConfiguration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,10 +29,8 @@ import retrofit2.Response
 class FirmsFragment : BaseFragment() {
     private lateinit var adapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
-    private lateinit var realm: Realm
-    private lateinit var handler: Handler
     private lateinit var binding: FragmentFirmsBinding
-
+    private val handler = Handler(Looper.getMainLooper()!!)
     private val args: CategoriesFragmentArgs by navArgs()
     private var categoryId = 0
 
@@ -47,58 +44,41 @@ class FirmsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideBottomNav()
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.hide()
+        init()
+        loadFirms(categoryId)
+        refresh()
+    }
 
-        try {
-            init()
-            loadFirms(categoryId)
-            refresh()
-        } catch (e: Exception) {
-        }
-
-        binding.backBtn.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        val activity = activity as AppCompatActivity
+        activity.supportActionBar?.show()
     }
 
     private fun init() {
-        Realm.init(requireActivity())
-        val config = RealmConfiguration
-            .Builder()
-            .allowWritesOnUiThread(true)
-            .name("firm.realm")
-            .schemaVersion(1)
-            .deleteRealmIfMigrationNeeded()
-            .build()
-        realm = Realm.getInstance(config)
         binding.firmsRecyclerview.setHasFixedSize(true)
         binding.firmsRecyclerview.layoutManager = LinearLayoutManager(requireActivity())
         categoryId = args.categoryId
         val categoryName = args.categoryName
-        val toolbarTv = binding.toolBarTv
-        toolbarTv.text = categoryName
+        requireActivity().title = categoryName
     }
 
     private fun refresh() {
-        try {
-            handler = Handler(Looper.getMainLooper()!!)
-            binding.swipe.setColorSchemeResources(R.color.swipeColor)
-            binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
-            binding.swipe.setOnRefreshListener {
-                handler.postDelayed({
-                    binding.swipe.isRefreshing = false
-                    loadFirms(categoryId)
-                }, 1000)
-            }
-        } catch (e: Exception) {
-            Log.e("Exception: ", e.message!!)
+        binding.swipe.setColorSchemeResources(R.color.swipeColor)
+        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
+        binding.swipe.setOnRefreshListener {
+            handler.postDelayed({
+                binding.swipe.isRefreshing = false
+                loadFirms(categoryId)
+            }, 1000)
         }
     }
 
     private fun loadFirms(categoryId: Int) {
-        val retrofitBuilder = activity?.let { RetrofitInstance(it).retrofit.create(ListFirms::class.java) }
+        val realm = RealmConfiguration(requireContext()).realm
+
+        val retrofitBuilder =
+            activity?.let { RetrofitInstance(it).retrofit.create(ListFirms::class.java) }
         val retrofitData = retrofitBuilder?.loadFirms(categoryId)
         retrofitData?.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(
@@ -144,8 +124,8 @@ class FirmsFragment : BaseFragment() {
 
     private fun stopShimmerAnimation() {
         binding.firmsShimmer.stopShimmer()
-        binding.firmsShimmer.visibility = View.GONE
-        binding.firmsRecyclerview.visibility = View.VISIBLE
+        binding.firmsShimmer.isVisible = false
+        binding.firmsRecyclerview.isVisible = true
     }
 
     private fun setAdapter(firmsList: ArrayList<Firm>) {
@@ -176,6 +156,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun updateFavorite(position: Int) {
+        val realm = RealmConfiguration(requireContext()).realm
         var firm = firmsList[position]
         val name = firm.name
         if (!firm.isFavorite) {

@@ -29,8 +29,7 @@ class FirmsViewHolder(
                     action = Intent.ACTION_SEND
                     putExtra(
                         Intent.EXTRA_TEXT,
-                        "${firm.name} \n ${firm.address} \n ${firm.description} \n ${firm.phone_number} " +
-                                "\n تمت المشاركة من خلال تطبيق أجهور الكبرى للتحميل إضغط هنا -> shorturl.at/xG123 "
+                        "${firm.name} \n ${firm.address} \n ${firm.description} \n ${firm.phone_number} " + "\nتمت المشاركة من خلال تطبيق أجهور الكبرى "
                     )
                     type = "text/plain"
                 }

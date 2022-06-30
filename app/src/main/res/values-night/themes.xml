@@ -18,6 +18,13 @@
         <item name="colorControlNormal">@color/colorControl</item>
     </style>
 
+    <!--Custom the text on Bottom Navigation-->
+    <style name="BottomNavigationTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/segoe_ui_bold</item>
+    </style>
+
     <style name="CategoriesTheme" parent="Theme.DarkApp.NoActionBar" />
 
     <style name="AddDataTheme" parent="Theme.AppCompat.DayNight.NoActionBar">

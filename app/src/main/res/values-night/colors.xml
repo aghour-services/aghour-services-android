@@ -105,5 +105,7 @@
     <color name="drawerToggle">#FFFFFF</color>
     <color name="fabBg">#2F3E4B</color>
     <color name="signInLogo">#2B3A45</color>
+    <color name="unCheckedItem">#FFFFFF</color>
+    <color name="checkdItem">#669AC5</color>
 
 </resources>

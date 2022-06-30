@@ -36,10 +36,8 @@ class AddArticleFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideBottomNav()
         hideUserAddData()
-
-        val activity = (activity as AppCompatActivity)
+        val activity = activity as AppCompatActivity
         activity.supportActionBar?.hide()
 
         binding.backBtn.setOnClickListener {
@@ -64,21 +62,31 @@ class AddArticleFragment : BaseFragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            alertDialogBuilder.setTitle(getString(R.string.create_account_first))
-            alertDialogBuilder.setMessage(getString(R.string.should_create))
-            alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-            alertDialogBuilder.setCancelable(true)
-            alertDialogBuilder.setPositiveButton("إنشاء الان") { _, _ ->
-                startActivity(Intent(requireActivity(), SignUpActivity::class.java))
-                requireActivity().finish()
-            }
-            alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
-            val alertDialog = alertDialogBuilder.create()
-            alertDialog.show()
-            alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE).textSize = 14f
-            alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).textSize = 14f
+            showDialog()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val activity = activity as AppCompatActivity
+        activity.supportActionBar?.show()
+    }
+
+    private fun showDialog(){
+        val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle(getString(R.string.create_account_first))
+        alertDialogBuilder.setMessage(getString(R.string.should_create))
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton("إنشاء الان") { _, _ ->
+            startActivity(Intent(requireActivity(), SignUpActivity::class.java))
+            requireActivity().finish()
+        }
+        alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE).textSize = 14f
+        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).textSize = 14f
     }
 
     private fun createArticle(article: Article) {

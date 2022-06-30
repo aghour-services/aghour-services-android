@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.aghourservices.BaseActivity
 import com.aghourservices.MainActivity
 import com.aghourservices.R
 import com.aghourservices.cache.Settings
@@ -19,7 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 
 @SuppressLint("CustomSplashScreen")
-class SplashScreen : BaseActivity() {
+class SplashScreen : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,8 @@ class SplashScreen : BaseActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         checkTheme()
-        firebaseTopic()
         handler()
+        firebaseTopic()
     }
 
     private fun handler() {
@@ -44,16 +44,18 @@ class SplashScreen : BaseActivity() {
             } else {
                 Intent(this, SignUpActivity::class.java)
             }
+
             val extras = getIntent().extras
             if (extras != null) {
                 for (key in extras.keySet()) {
                     intent.putExtra(key.toString(), extras.get(key).toString())
                 }
             }
+
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
-        }, 100)
+        }, 500)
     }
 
     private fun firebaseTopic() {

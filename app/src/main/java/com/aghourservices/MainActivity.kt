@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -20,8 +21,7 @@ import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.settings.SettingsActivity
 import com.google.android.gms.ads.AdView
 
-
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adView: AdView
     private lateinit var runnable: Runnable

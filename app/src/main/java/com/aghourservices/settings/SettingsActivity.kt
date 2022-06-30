@@ -4,8 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.aghourservices.BaseActivity
+import com.aghourservices.Intents.facebook
+import com.aghourservices.Intents.gmail
+import com.aghourservices.Intents.rateApp
+import com.aghourservices.Intents.shareApp
+import com.aghourservices.Intents.showOnCloseDialog
+import com.aghourservices.Intents.whatsApp
 import com.aghourservices.R
 import com.aghourservices.about.AboutActivity
 import com.aghourservices.ads.Banner
@@ -15,7 +21,7 @@ import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.user.SignUpActivity
 import com.google.android.gms.ads.AdView
 
-class SettingsActivity : BaseActivity() {
+class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var adView: AdView
 
@@ -30,33 +36,35 @@ class SettingsActivity : BaseActivity() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
-        binding.backBtn.setOnClickListener {
-            this.onBackPressed()
-        }
-        binding.appTheme.setOnClickListener {
-            chooseThemeDialog()
-        }
-        binding.facebook.setOnClickListener {
-            facebook()
-        }
-        binding.email.setOnClickListener {
-            gmail()
-        }
-        binding.whatsApp.setOnClickListener {
-            whatsApp(getString(R.string.whats_app_number))
-        }
-        binding.share.setOnClickListener {
-            shareApp()
-        }
-        binding.rate.setOnClickListener {
-            rateApp()
-        }
-        binding.aboutApp.setOnClickListener {
-            val intent = Intent(this, AboutActivity::class.java)
-            startActivity(intent)
-        }
-        binding.logOut.setOnClickListener {
-            showOnCloseDialog(this)
+        binding.apply {
+            backBtn.setOnClickListener {
+                this@SettingsActivity.onBackPressed()
+            }
+            appTheme.setOnClickListener {
+                chooseThemeDialog()
+            }
+            facebook.setOnClickListener {
+                facebook(this@SettingsActivity)
+            }
+            email.setOnClickListener {
+                gmail(this@SettingsActivity)
+            }
+            whatsApp.setOnClickListener {
+                whatsApp(this@SettingsActivity, getString(R.string.whats_app_number))
+            }
+            share.setOnClickListener {
+                shareApp(this@SettingsActivity)
+            }
+            rate.setOnClickListener {
+                rateApp(this@SettingsActivity)
+            }
+            aboutApp.setOnClickListener {
+                val intent = Intent(this@SettingsActivity, AboutActivity::class.java)
+                startActivity(intent)
+            }
+            logOut.setOnClickListener {
+                showOnCloseDialog(this@SettingsActivity)
+            }
         }
     }
 

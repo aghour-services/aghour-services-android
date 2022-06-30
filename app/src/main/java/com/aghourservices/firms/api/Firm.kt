@@ -18,6 +18,7 @@ open class Firm : RealmObject() {
     var category_name: String = ""
     var isFavorite: Boolean = false
 
+    //Google jsonObject
     fun toJsonObject(): JsonObject {
         val firmObject = JsonObject()
         val firmDetails = JsonObject()
@@ -31,6 +32,7 @@ open class Firm : RealmObject() {
         return firmObject
     }
 
+    // Android Sdk JSONObject
     fun toJSONObject(): JSONObject {
         val firmDetails = JSONObject()
         firmDetails.put("id", id)

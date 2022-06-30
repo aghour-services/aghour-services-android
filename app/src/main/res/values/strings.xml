@@ -80,5 +80,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_article">إضافة خبر جديد</string>
+    <string name="menu_home">الرئيسية</string>
+    <string name="menu_search">البحث</string>
+    <string name="menu_add">إضافة</string>
+    <string name="menu_fav">المفضلة</string>
+    <string name="menu_news">الأخبار</string>
 
 </resources>

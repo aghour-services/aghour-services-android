@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.cache.UserInfo
@@ -45,9 +44,6 @@ class AddDataFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.add_data_fragment)
         hideUserAddData()
-        showBottomNav()
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.show()
         init()
 
         val bundle = arguments

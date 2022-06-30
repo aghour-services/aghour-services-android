@@ -38,7 +38,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         notificationIntent.putExtra("title", title)
         notificationIntent.putExtra("body", body)
 
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+        val pendingIntent = PendingIntent.getActivity(
             this,
             0,
             notificationIntent,

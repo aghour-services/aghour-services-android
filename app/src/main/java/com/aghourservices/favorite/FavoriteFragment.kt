@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.BaseFragment
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentFavoriteBinding
+import com.aghourservices.firebase_analytics.Event
 import com.aghourservices.firms.api.Firm
 import com.aghourservices.firms.ui.FirmsAdapter
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import com.aghourservices.firebase_analytics.Event
 
 class FavoriteFragment : BaseFragment() {
     private lateinit var realm: Realm
@@ -37,9 +37,6 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showBottomNav()
-        val activity = (activity as AppCompatActivity)
-        activity.supportActionBar?.show()
         init()
         load()
         refresh()
@@ -71,6 +68,8 @@ class FavoriteFragment : BaseFragment() {
             .deleteRealmIfMigrationNeeded()
             .build()
         realm = Realm.getInstance(config)
+
+
         requireActivity().title = getString(R.string.favorite_fragment)
         binding.favoriteRecyclerView.setHasFixedSize(true)
         binding.favoriteRecyclerView.layoutManager = LinearLayoutManager(requireActivity())

@@ -18,7 +18,6 @@ import com.aghourservices.interfaces.ShowSoftKeyboard
 import com.aghourservices.search.api.ApiServices
 import com.aghourservices.search.api.SearchResult
 import com.aghourservices.search.ui.SearchResultAdapter
-import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,9 +37,7 @@ class SearchFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideBottomNav()
-
-        val activity = (activity as AppCompatActivity)
+        val activity = activity as AppCompatActivity
         activity.supportActionBar?.hide()
 
         if (binding.searchText.requestFocus()) {
@@ -63,6 +60,12 @@ class SearchFragment : BaseFragment() {
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val activity = activity as AppCompatActivity
+        activity.supportActionBar?.show()
     }
 
     private fun search(text: String) {
