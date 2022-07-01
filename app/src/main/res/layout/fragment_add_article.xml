@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/recyclerViewBg"
     android:orientation="vertical"
-    android:theme="@style/AddDataTheme"
-    tools:context=".news.user_add_article.AddArticleFragment">
+    android:theme="@style/AddDataTheme">
 
     <LinearLayout
         android:id="@+id/firmsToolbar"
