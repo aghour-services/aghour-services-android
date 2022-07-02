@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.aghourservices.ui.home.fragment.CategoriesFragment"
-        android:label="Fragment Categories"
+        android:name="com.aghourservices.ui.fragment.CategoriesFragment"
+        android:label="@string/menu_home"
         tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_categoriesFragment_to_firmsFragment"
@@ -27,22 +27,23 @@
             android:id="@+id/action_categoriesFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.aghourservices.ui.search.fragment.SearchFragment"
-        android:label="fragment_search"
+        android:name="com.aghourservices.ui.fragment.SearchFragment"
+        android:label="@string/menu_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/addDataFragment"
-        android:name="com.aghourservices.ui.upload.fragment.AddDataFragment"
-        android:label="AddDataFragment"
+        android:name="com.aghourservices.ui.fragment.AddDataFragment"
+        android:label="@string/menu_add"
         tools:layout="@layout/fragment_add_data" />
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.aghourservices.ui.news.fragment.NewsFragment"
-        android:label="fragment_news"
+        android:name="com.aghourservices.ui.fragment.NewsFragment"
+        android:label="@string/menu_news"
         tools:layout="@layout/fragment_news">
         <action
             android:id="@+id/action_newsFragment_to_addArticleFragment"
@@ -55,13 +56,13 @@
 
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.aghourservices.ui.favourite.FavoriteFragment"
-        android:label="fragment_favorite"
+        android:name="com.aghourservices.ui.fragment.FavoriteFragment"
+        android:label="@string/menu_fav"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/firmsFragment"
-        android:name="com.aghourservices.ui.home.fragment.FirmsFragment"
+        android:name="com.aghourservices.ui.fragment.FirmsFragment"
         android:label="FirmsFragment"
         tools:layout="@layout/fragment_firms">
         <argument
@@ -72,10 +73,11 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+
     <fragment
         android:id="@+id/addArticleFragment"
-        android:name="com.aghourservices.ui.news.fragment.AddArticleFragment"
-        android:label="fragment_add_article"
+        android:name="com.aghourservices.ui.fragment.AddArticleFragment"
+        android:label="@string/add_article"
         tools:layout="@layout/fragment_add_article" />
 
     <action

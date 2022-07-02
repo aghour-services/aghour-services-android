@@ -5,9 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
-import com.aghourservices.ui.app.cache.UserInfo
-import com.aghourservices.ui.app.user.SignInActivity
+import com.aghourservices.ui.main.activity.SignInActivity
+import com.aghourservices.ui.main.cache.UserInfo
 
 object Intents {
 
@@ -58,7 +59,7 @@ object Intents {
         context.startActivity(emailIntent)
     }
 
-    private fun logOut(context: Context) {
+    fun logOut(context: Context) {
         Event.sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(context)
         context.startActivity(Intent(context, SignInActivity::class.java))
@@ -79,5 +80,19 @@ object Intents {
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+    }
+
+    fun checkTheme(context: Context) {
+        when (ThemePreference(context).darkMode) {
+            0 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+            1 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            2 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
     }
 }

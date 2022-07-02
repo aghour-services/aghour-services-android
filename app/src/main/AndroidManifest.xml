@@ -19,13 +19,13 @@
         android:theme="@style/Theme.LightApp"
         tools:targetApi="s">
         <activity
-            android:name=".ui.settings.AboutActivity"
+            android:name="com.aghourservices.ui.main.activity.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.settings.SettingsActivity"
+            android:name="com.aghourservices.ui.main.activity.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.app.main.activity.SplashScreen"
+            android:name="com.aghourservices.ui.main.activity.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme"
@@ -37,18 +37,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.app.main.activity.MainActivity"
+            android:name="com.aghourservices.ui.main.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/CategoriesTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.app.user.SignInActivity"
+            android:name=".ui.main.activity.SignInActivity"
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/AddDataTheme" />
         <activity
-            android:name=".ui.app.user.SignUpActivity"
+            android:name=".ui.main.activity.SignUpActivity"
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/AddDataTheme" />
@@ -61,7 +61,7 @@
             android:value="@bool/FIREBASE_ANALYTICS_DEACTIVATED" />
 
         <service
-            android:name=".ui.app.notification.FirebaseMessageService"
+            android:name=".ui.main.notification.FirebaseMessageService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

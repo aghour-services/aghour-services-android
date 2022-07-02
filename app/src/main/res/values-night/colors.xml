@@ -39,8 +39,8 @@
     <color name="signInTxt">#FFFFFF</color>
     <color name="loginTxtColor">#FFFFFF</color>
     <color name="itemNavColor">#FFFFFF</color>
-    <color name="searchBg">#080B0E</color>
-    <color name="backIconBg">#080B0E</color>
+    <color name="searchBg">#1A2027</color>
+    <color name="backIconBg">#1A2027</color>
     <color name="backIconSelector">#36485A</color>
     <color name="swipeColor">#FFFFFF</color>
     <color name="swipeBg">#0F1317</color>
