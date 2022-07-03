@@ -27,7 +27,7 @@ android {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
             resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
-            resValue("string", "news_topic", "News-Staging")
+            resValue("string", "news_topic", "News")
         }
 
         release {
@@ -41,17 +41,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    buildFeatures {
-        viewBinding true
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildFeatures {
+        viewBinding true
     }
     realm {
         syncEnabled = true
@@ -74,8 +72,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads-lite:21.0.0'
 
     //Navigation Fragment
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
 
     //Preference Shared
     implementation "androidx.preference:preference-ktx:1.2.0"
@@ -98,7 +96,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
 
     //Firebase Analytics
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.5'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.6'
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.1.2'

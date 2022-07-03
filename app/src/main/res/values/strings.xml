@@ -85,5 +85,10 @@
     <string name="menu_add">إضافة</string>
     <string name="menu_fav">المفضلة</string>
     <string name="menu_news">الأخبار</string>
+    <string name="copy_content_firm">copy_content_firm</string>
+    <string name="share_firm">مشاركة</string>
+    <string name="location_firm">location_firm</string>
+    <string name="description_firm">description_firm</string>
+    <string name="aghour_share_content">تمت المشاركة من خلال تطبيق أجهور الكبرى</string>
 
 </resources>

@@ -1,8 +1,13 @@
 package com.aghourservices.utils.helper
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.net.Uri
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -59,11 +64,75 @@ object Intents {
         context.startActivity(emailIntent)
     }
 
-    fun logOut(context: Context) {
+    private fun logOut(context: Context) {
         Event.sendFirebaseEvent("Sign_Out", "")
         UserInfo().clearUserData(context)
         context.startActivity(Intent(context, SignInActivity::class.java))
         (context as AppCompatActivity).finishAffinity()
+    }
+
+    fun copyNews(
+        description: String,
+        itemView: View
+    ) {
+        val clipboardManager =
+            itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText(
+            "Firms",
+            "$description \n ${itemView.context.getString(R.string.aghour_share_content)}"
+        )
+        clipboardManager.setPrimaryClip(clip)
+        Toast.makeText(itemView.context, "تم نسخ المحتوى", Toast.LENGTH_LONG).show()
+    }
+
+    fun copyFirm(
+        name: String,
+        address: String,
+        description: String,
+        phoneNumber: String,
+        itemView: View
+    ) {
+        val clipboardManager =
+            itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText(
+            "Firms",
+            "$name \n $address \n $description \n $phoneNumber \n ${itemView.context.getString(R.string.aghour_share_content)}"
+        )
+        clipboardManager.setPrimaryClip(clip)
+        Toast.makeText(itemView.context, "تم نسخ المحتوى", Toast.LENGTH_LONG).show()
+    }
+
+    fun shareFirm(
+        name: String,
+        address: String,
+        description: String,
+        phoneNumber: String,
+        itemView: View
+    ) {
+        val eventName = "Share_${name}"
+        Event.sendFirebaseEvent(eventName, "")
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "$name \n $address \n $description \n $phoneNumber \n ${itemView.context.getString(R.string.aghour_share_content)}"
+            )
+            type = "text/plain"
+        }
+        itemView.context.startActivity(Intent.createChooser(sendIntent, "شارك بواسطة.."))
+    }
+
+    fun shareNews(article: String, itemView: View) {
+        Event.sendFirebaseEvent("Share_news", "")
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "$article\n ${itemView.context.getString(R.string.aghour_share_content)}"
+            )
+            type = "text/plain"
+        }
+        itemView.context.startActivity(Intent.createChooser(shareIntent, "شارك الخبر.."))
     }
 
     fun showOnCloseDialog(context: Context) {

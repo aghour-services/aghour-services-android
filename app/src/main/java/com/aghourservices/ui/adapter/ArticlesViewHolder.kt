@@ -1,10 +1,10 @@
 package com.aghourservices.ui.adapter
 
-import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.databinding.NewsCardBinding
-import com.aghourservices.utils.helper.Event
+import com.aghourservices.utils.helper.Intents.copyNews
+import com.aghourservices.utils.helper.Intents.shareNews
 
 class ArticlesViewHolder(
     val binding: NewsCardBinding,
@@ -21,17 +21,12 @@ class ArticlesViewHolder(
             description.text = article.description
             date.text = article.created_at
 
+            copyNews.setOnClickListener {
+                copyNews(article.description, itemView)
+            }
+
             shareNews.setOnClickListener {
-                Event.sendFirebaseEvent("Share_news", "")
-                val shareIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(
-                        Intent.EXTRA_TEXT,
-                        article.description + "\n تمت المشاركة من خلال تطبيق أجهور الكبرى "
-                    )
-                    type = "text/plain"
-                }
-                itemView.context.startActivity(Intent.createChooser(shareIntent, "شارك الخبر.."))
+                shareNews(article.description, itemView)
             }
         }
     }
