@@ -37,7 +37,7 @@
                 tools:text="Name"
                 android:textAlignment="center"
                 android:textColor="@color/firmName"
-                android:textSize="23sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -64,7 +64,7 @@
                     tools:text="Address"
                     android:textAlignment="center"
                     android:textColor="@color/address"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
 
@@ -103,7 +103,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/firmsDescription"
                     android:textIsSelectable="true"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -163,8 +163,8 @@
                     android:id="@+id/btnFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingRight="4dp"
+                    android:layout_margin="6dp"
+                    android:paddingRight="6dp"
                     android:button="@drawable/fav_selector"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -175,7 +175,7 @@
                     android:id="@+id/view2"
                     android:layout_width="0.5dp"
                     android:layout_height="0dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginRight="12dp"
                     android:background="@color/lineView"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"

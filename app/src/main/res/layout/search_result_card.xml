@@ -37,7 +37,7 @@
                 android:text="Name"
                 android:textAlignment="center"
                 android:textColor="@color/firmName"
-                android:textSize="23sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:padding="6dp"
                 android:text="Category"
                 android:textColor="@color/firmName"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -76,7 +76,7 @@
                     android:text="Address"
                     android:textAlignment="center"
                     android:textColor="@color/address"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
 
@@ -113,7 +113,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/firmsDescription"
                     android:textIsSelectable="false"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -137,7 +137,7 @@
                 android:text="01207083552"
                 android:textAlignment="center"
                 android:textColor="@color/phoneColor"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"
@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_selector"
                     android:contentDescription="@string/copy_content_firm"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:src="@drawable/ic_content_copy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
