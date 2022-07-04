@@ -10,9 +10,15 @@
     </style>
 
     <style name="Theme.LightApp.NoActionBar">
-        <item name="windowActionBar">true</item>
+        <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <!--Custom the text on Bottom Navigation-->
+    <style name="BottomNavigationTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/segoe_ui_bold</item>
     </style>
 
     <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar" />

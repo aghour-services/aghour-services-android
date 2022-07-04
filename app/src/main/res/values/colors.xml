@@ -59,7 +59,7 @@
     <color name="loginTxtColor">#287ABB</color>
     <color name="signInTxt">#275F8C</color>
     <color name="btnSignInTxt">#FFFFFF</color>
-    <color name="navDrawerBg">#4290CD</color>
+    <color name="navDrawerBg">#F5FAFF</color>
     <color name="firmsDescription">#2E2E2E</color>
     <color name="checkBox">#2A76B3</color>
     <color name="passToggle">#578EBA</color>
@@ -155,4 +155,6 @@
     <color name="fabBg">#168EC4</color>
 
     <color name="signInLogo">#2981C6</color>
+    <color name="unCheckedItem">#1D2B35</color>
+    <color name="checkdItem">#1B79C5</color>
 </resources>

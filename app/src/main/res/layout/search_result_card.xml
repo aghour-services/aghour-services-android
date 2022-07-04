@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="6dp"
-    app:cardElevation="3dp">
+    app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:text="Name"
                 android:textAlignment="center"
                 android:textColor="@color/firmName"
-                android:textSize="23sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:padding="6dp"
                 android:text="Category"
                 android:textColor="@color/firmName"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -76,7 +76,7 @@
                     android:text="Address"
                     android:textAlignment="center"
                     android:textColor="@color/address"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
 
@@ -113,7 +113,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/firmsDescription"
                     android:textIsSelectable="false"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -137,7 +137,7 @@
                 android:text="01207083552"
                 android:textAlignment="center"
                 android:textColor="@color/phoneColor"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"
@@ -151,14 +151,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.1dp"
                 android:background="#AEAEAE" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -169,12 +168,24 @@
                 android:gravity="right|center"
                 android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/btnFav"
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0.5dp"
+                    android:layout_height="0dp"
+                    android:background="@color/lineView"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/copy_firm"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/copy_firm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:button="@drawable/fav_selector"
+                    android:background="@drawable/dialog_selector"
+                    android:contentDescription="@string/copy_content_firm"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_content_copy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -182,15 +193,15 @@
                 <TextView
                     android:id="@+id/shareFirm"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center"
+                    android:layout_height="0dp"
                     android:background="@drawable/share_ripple"
+                    android:drawablePadding="6dp"
                     android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:text="مشاركة"
+                    android:padding="10dp"
+                    android:text="@string/share_firm"
                     android:textColor="@color/shareText"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:drawableLeftCompat="@drawable/ic_share"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -198,16 +209,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="#9A9A9A"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btnFav"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

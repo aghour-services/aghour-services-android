@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/signUpBg"
     android:focusableInTouchMode="true"
-    app:cardBackgroundColor="@color/createOrSignInAccountBg"
-    tools:context=".user.SignUpActivity">
+    app:cardBackgroundColor="@color/createOrSignInAccountBg">
 
     <ScrollView
         android:layout_width="match_parent"

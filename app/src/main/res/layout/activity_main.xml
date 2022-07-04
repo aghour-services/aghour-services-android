@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -50,6 +49,7 @@
         android:layout_gravity="bottom"
         android:background="@color/adMobBg"
         android:gravity="bottom"
+        android:elevation="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearBottomNavVIew"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -61,8 +61,6 @@
         android:id="@+id/linearBottomNavVIew"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:background="@color/recyclerViewBg"
         android:elevation="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/notInternet"
@@ -73,10 +71,12 @@
             android:id="@+id/bottomView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bottom_nav_view_bg"
+            android:elevation="20dp"
             android:padding="6dp"
-            app:itemTextAppearanceActive="@style/SegoeTextBold"
-            app:itemTextAppearanceInactive="@style/SegoeTextBold"
+            android:background="@color/navDrawerBg"
+            app:itemTextColor="@color/btnv_tab_item"
+            app:itemIconTint="@color/btnv_tab_item"
+            style="@style/BottomNavigationTextStyle"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
@@ -88,7 +88,6 @@
         android:animateLayoutChanges="true"
         android:background="@color/notifyBg"
         android:elevation="20dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

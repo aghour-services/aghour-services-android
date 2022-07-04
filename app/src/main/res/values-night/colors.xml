@@ -39,8 +39,8 @@
     <color name="signInTxt">#FFFFFF</color>
     <color name="loginTxtColor">#FFFFFF</color>
     <color name="itemNavColor">#FFFFFF</color>
-    <color name="searchBg">#080B0E</color>
-    <color name="backIconBg">#080B0E</color>
+    <color name="searchBg">#1A2027</color>
+    <color name="backIconBg">#1A2027</color>
     <color name="backIconSelector">#36485A</color>
     <color name="swipeColor">#FFFFFF</color>
     <color name="swipeBg">#0F1317</color>
@@ -105,5 +105,7 @@
     <color name="drawerToggle">#FFFFFF</color>
     <color name="fabBg">#2F3E4B</color>
     <color name="signInLogo">#2B3A45</color>
+    <color name="unCheckedItem">#FFFFFF</color>
+    <color name="checkdItem">#669AC5</color>
 
 </resources>
