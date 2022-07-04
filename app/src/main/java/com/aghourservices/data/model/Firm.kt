@@ -2,6 +2,7 @@ package com.aghourservices.data.model
 
 import com.google.gson.JsonObject
 import io.realm.RealmObject
+import io.realm.annotations.Index
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 import org.json.JSONObject
@@ -10,6 +11,8 @@ import org.json.JSONObject
 open class Firm : RealmObject() {
     @PrimaryKey
     var id: Int = 0
+
+    @Index
     var category_id: Int = 0
     var name: String = ""
     var address: String = ""

@@ -8,8 +8,8 @@ import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignUpBinding
-import com.aghourservices.ui.main.cache.Settings
-import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.Settings.doNotShowRigsterActivity
+import com.aghourservices.ui.main.cache.UserInfo.saveUserData
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
@@ -59,10 +59,9 @@ class SignUpActivity : AppCompatActivity() {
         })
 
         binding.btnUseApp.setOnClickListener {
-            val settings = Settings()
             showProgressDialog(this)
             sendFirebaseEvent("SKIP_LOGIN", "")
-            settings.doNotShowRigsterActivity(this)
+            doNotShowRigsterActivity(this)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -83,9 +82,8 @@ class SignUpActivity : AppCompatActivity() {
                     hideProgressDialog()
                     return
                 }
-                val userInfo = UserInfo()
                 val responseUser = response.body() as User
-                userInfo.saveUserData(this@SignUpActivity, responseUser)
+                saveUserData(this@SignUpActivity, responseUser)
                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
                 hideProgressDialog()
                 finish()

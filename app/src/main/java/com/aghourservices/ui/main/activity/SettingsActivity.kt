@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
 import com.aghourservices.databinding.ActivitySettingsBinding
 import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getUserData
+import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.Intents.facebook
@@ -68,9 +70,8 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun checkUser() {
-        val userInfo = UserInfo()
-        val user = userInfo.getUserData(this)
-        if (userInfo.isUserLoggedIn(this)) {
+        val user = getUserData(this)
+        if (isUserLoggedIn(this)) {
             binding.btnRegister.visibility = View.GONE
             binding.userDataView.visibility = View.VISIBLE
             binding.userName.text = user.name
@@ -85,7 +86,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun hideUserLogOut() {
-        val isUserLogin = UserInfo().isUserLoggedIn(this)
+        val isUserLogin = isUserLoggedIn(this)
         if (isUserLogin) {
             binding.logOut.visibility = View.VISIBLE
         } else {

@@ -3,6 +3,7 @@ package com.aghourservices.ui.viewModel
 import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Category
 import com.aghourservices.data.request.RetrofitInstance
 import retrofit2.Call
@@ -14,7 +15,7 @@ class CategoriesViewModel : ViewModel() {
     var categoryList: ArrayList<Category> = ArrayList()
 
     fun loadCategories(context: Activity) {
-        val realm = com.aghourservices.data.db.RealmConfiguration(context).realm
+        val realm = RealmConfiguration(context).realm
         val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList()
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Category>> {

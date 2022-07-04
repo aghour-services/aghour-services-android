@@ -26,8 +26,8 @@ android {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
-            resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
-            resValue("string", "news_topic", "News")
+            resValue("string", "base_url", "https://aghour-services-staging.herokuapp.com/api/")
+            resValue("string", "news_topic", "News-Staging")
         }
 
         release {
@@ -88,7 +88,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //Lottie Animation
-    implementation 'com.airbnb.android:lottie:5.0.3'
+    implementation 'com.airbnb.android:lottie:5.2.0'
 
     //Retrofit & OKHttp
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -97,14 +97,14 @@ dependencies {
 
     //Firebase Analytics
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.6'
-    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.1.2'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     //ViewModel & LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"

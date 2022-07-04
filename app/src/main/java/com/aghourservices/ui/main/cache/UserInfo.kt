@@ -3,14 +3,14 @@ package com.aghourservices.ui.main.cache
 import android.content.Context
 import android.content.SharedPreferences
 import com.aghourservices.data.model.User
+import com.aghourservices.utils.helper.Constants.Companion.EMAIL_KEY
+import com.aghourservices.utils.helper.Constants.Companion.MOBILE_KEY
+import com.aghourservices.utils.helper.Constants.Companion.NAME_KEY
+import com.aghourservices.utils.helper.Constants.Companion.PREF_NAME
+import com.aghourservices.utils.helper.Constants.Companion.TOKEN_KEY
 
-const val PREF_NAME = "user_data"
-const val NAME_KEY = "name"
-const val MOBILE_KEY = "mobile"
-const val TOKEN_KEY = "token"
-const val EMAIL_KEY = "email"
 
-class UserInfo {
+object UserInfo {
     fun isUserLoggedIn(context: Context): Boolean {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val name = pref.getString(NAME_KEY, null)

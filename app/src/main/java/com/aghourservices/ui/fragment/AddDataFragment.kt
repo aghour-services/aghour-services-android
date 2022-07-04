@@ -15,7 +15,8 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.ui.adapter.SpinnerCategoriesAdapter
 import com.aghourservices.ui.main.activity.SignUpActivity
-import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getUserData
+import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.dataAdded
@@ -115,7 +116,7 @@ class AddDataFragment : BaseFragment() {
 
     private fun createFirm(firm: Firm) {
         showProgressDialog(requireContext())
-        val user = UserInfo().getUserData(requireActivity())
+        val user = getUserData(requireActivity())
         val retrofitBuilder =
             activity?.let {
                 RetrofitInstance(it).firmsApi.createFirm(
@@ -126,6 +127,7 @@ class AddDataFragment : BaseFragment() {
         retrofitBuilder?.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
                 dataAdded(requireContext())
+                hideProgressDialog()
                 setTextEmpty()
             }
 
@@ -152,11 +154,10 @@ class AddDataFragment : BaseFragment() {
         binding.address.text.clear()
         binding.description.text.clear()
         binding.phoneNumber.text.clear()
-        hideProgressDialog()
     }
 
     private fun hideUserAddData() {
-        val isUserLogin = UserInfo().isUserLoggedIn(requireActivity())
+        val isUserLogin = isUserLoggedIn(requireActivity())
         if (isUserLogin) {
             binding.btnAddData.visibility = View.VISIBLE
         } else {

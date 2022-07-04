@@ -20,8 +20,5 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.aghourservices.categories.api.* { *; }
--keep class com.aghourservices.firms.api.* { *; }
--keep class com.aghourservices.news.api.* { *; }
--keep class com.aghourservices.search.api.* { *; }
--keep class com.aghourservices.user.api.* { *; }
+-keep class com.aghourservices.data.api.* { *; }
+-keep class com.aghourservices.data.model.* { *; }

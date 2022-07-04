@@ -2,11 +2,10 @@ package com.aghourservices.ui.main.cache
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.aghourservices.utils.helper.Constants.Companion.PREFERENCE_NAME
+import com.aghourservices.utils.helper.Constants.Companion.SKIP_LOGIN_KEY
 
-const val PREFERENCE_NAME: String = "user_settings"
-const val SKIP_LOGIN_KEY: String = "skip_login"
-
-class Settings {
+object Settings {
 
     fun showRigsterActivity(context: Context): Boolean {
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)

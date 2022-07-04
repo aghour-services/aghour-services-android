@@ -15,6 +15,6 @@ object ProgressDialog {
     }
 
     fun hideProgressDialog() {
-        progressDialog.dismiss()
+        progressDialog.hide()
     }
 }

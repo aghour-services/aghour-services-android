@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.aghourservices.R
+import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentAddArticleBinding
 import com.aghourservices.ui.main.activity.SignUpActivity
-import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getUserData
+import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
@@ -46,7 +48,7 @@ class AddArticleFragment : BaseFragment() {
 
         binding.sendArticle.setOnClickListener {
             showProgressDialog(requireContext())
-            val article = com.aghourservices.data.model.Article()
+            val article = Article()
             article.description = binding.textArticle.text.toString()
 
             if (article.inValid()) {
@@ -85,25 +87,25 @@ class AddArticleFragment : BaseFragment() {
         alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).textSize = 14f
     }
 
-    private fun createArticle(article: com.aghourservices.data.model.Article) {
-        val user = UserInfo().getUserData(requireActivity())
+    private fun createArticle(article: Article) {
+        val user = getUserData(requireActivity())
         val retrofitBuilder = activity?.let {
             RetrofitInstance(it).newsApi.createArticle(
                 article.toJsonObject(),
                 user.token
             )
         }
-        retrofitBuilder?.enqueue(object : Callback<com.aghourservices.data.model.Article> {
+        retrofitBuilder?.enqueue(object : Callback<Article> {
             override fun onResponse(
-                call: Call<com.aghourservices.data.model.Article>,
-                response: Response<com.aghourservices.data.model.Article>
+                call: Call<Article>,
+                response: Response<Article>
             ) {
                 AlertDialog.dataAdded(requireContext())
                 setTextEmpty()
             }
 
             override fun onFailure(
-                call: Call<com.aghourservices.data.model.Article>,
+                call: Call<Article>,
                 t: Throwable
             ) {
                 AlertDialog.noInternet(requireContext())
@@ -118,7 +120,7 @@ class AddArticleFragment : BaseFragment() {
     }
 
     private fun hideUserAddData() {
-        val isUserLogin = UserInfo().isUserLoggedIn(requireActivity())
+        val isUserLogin = isUserLoggedIn(requireActivity())
         if (isUserLogin) {
             binding.sendArticle.visibility = View.VISIBLE
         } else {

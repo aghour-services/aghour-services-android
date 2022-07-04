@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
 import com.aghourservices.ui.main.activity.SignInActivity
-import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.clearUserData
 
 object Intents {
 
@@ -66,7 +66,7 @@ object Intents {
 
     private fun logOut(context: Context) {
         Event.sendFirebaseEvent("Sign_Out", "")
-        UserInfo().clearUserData(context)
+        clearUserData(context)
         context.startActivity(Intent(context, SignInActivity::class.java))
         (context as AppCompatActivity).finishAffinity()
     }
@@ -82,7 +82,7 @@ object Intents {
             "$description \n ${itemView.context.getString(R.string.aghour_share_content)}"
         )
         clipboardManager.setPrimaryClip(clip)
-        Toast.makeText(itemView.context, "تم نسخ المحتوى", Toast.LENGTH_LONG).show()
+        Toast.makeText(itemView.context, "تم نسخ الخبر", Toast.LENGTH_LONG).show()
     }
 
     fun copyFirm(
