@@ -33,10 +33,6 @@ class SearchResultAdapter(
         }
     }
 
-    fun setData(searchList:ArrayList<Search>){
-        this.searchList = searchList
-    }
-
     override fun getItemViewType(position: Int): Int {
         return (position + 1) % (itemsCountToShowAds + 1)
     }

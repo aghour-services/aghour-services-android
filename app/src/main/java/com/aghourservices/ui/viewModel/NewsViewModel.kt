@@ -14,7 +14,6 @@ class NewsViewModel : ViewModel() {
     var newsLiveData = MutableLiveData<ArrayList<Article>>()
     var newsList: ArrayList<Article> = ArrayList()
 
-
     fun loadArticles(context: Activity, categoryId: Int) {
         val realm = RealmConfiguration(context).realm
         val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles(categoryId)
@@ -41,8 +40,7 @@ class NewsViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                val result =
-                    realm.where(Article::class.java).findAll()
+                val result = realm.where(Article::class.java).findAll()
                 newsList = ArrayList()
                 newsList.addAll(result)
             }

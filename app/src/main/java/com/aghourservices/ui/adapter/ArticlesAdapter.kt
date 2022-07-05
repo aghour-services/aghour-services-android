@@ -32,11 +32,6 @@ class ArticlesAdapter(
         }
     }
 
-    fun setData(newsList: ArrayList<Article>) {
-        this.newsList = newsList
-        notifyDataSetChanged()
-    }
-
     override fun getItemViewType(position: Int): Int {
         return (position + 1) % (itemsCountToShowAds + 1)
     }

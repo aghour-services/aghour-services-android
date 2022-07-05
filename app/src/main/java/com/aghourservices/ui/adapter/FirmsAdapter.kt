@@ -23,11 +23,6 @@ class FirmsAdapter(
         return FirmsViewHolder(firmsCard, onItemClicked)
     }
 
-    fun setData(firms:ArrayList<Firm>){
-        this.firmsList = firms
-        notifyDataSetChanged()
-    }
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val hold = holder as FirmsViewHolder
         val firm = firmsList[position]

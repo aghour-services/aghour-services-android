@@ -35,12 +35,12 @@ class SearchFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkNetwork()
         hideBottomNavigation()
         hideToolbar()
         initRecyclerView()
         setUpViewModel()
         setSearchText()
-        checkNetwork()
     }
 
     private fun setSearchText() {
@@ -96,13 +96,10 @@ class SearchFragment : BaseFragment() {
     private fun checkNetwork() {
         val checkNetworkLiveData = activity?.application?.let { CheckNetworkLiveData(it) }
         checkNetworkLiveData?.observe(viewLifecycleOwner) { isConnected ->
-            binding.apply {
-                lottieAnimationView.isVisible = isConnected
-                noInternet.isVisible = !isConnected
-            }
+            binding.lottieAnimationView.isVisible = isConnected
+            binding.noInternet.isVisible = !isConnected
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

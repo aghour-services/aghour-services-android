@@ -44,34 +44,36 @@ class AddDataFragment : BaseFragment() {
     }
 
     private fun initUserClick() {
-        binding.btnRegister.setOnClickListener {
-            AlertDialog.createAccount(requireActivity())
-        }
-
-        binding.btnAddData.setOnClickListener(View.OnClickListener {
-            val selectedCategoryPosition = binding.spinner.selectedItemPosition
-            val selectedCategory = categoryList[selectedCategoryPosition]
-            val name = binding.name.text.toString()
-            val address = binding.address.text.toString()
-            val description = binding.description.text.toString()
-            val phoneNumber = binding.phoneNumber.text.toString()
-
-            firm.name = name
-            firm.address = address
-            firm.description = description
-            firm.phone_number = phoneNumber
-            firm.category_id = selectedCategory.id
-
-            if (firm.inValid()) {
-                binding.name.error = "الاسم"
-                binding.address.error = "العنوان"
-                binding.phoneNumber.error = "اكتب رقم التليفون"
-                binding.description.error = "اكتب وصف عن صاحب المكان"
-                return@OnClickListener
-            } else {
-                activity?.let { it1 -> addDataViewModel.createFirm(it1, firm) }
+        binding.apply {
+            btnRegister.setOnClickListener {
+                AlertDialog.createAccount(requireActivity())
             }
-        })
+
+            btnAddData.setOnClickListener(View.OnClickListener {
+                val selectedCategoryPosition = binding.spinner.selectedItemPosition
+                val selectedCategory = categoryList[selectedCategoryPosition]
+                val name = binding.name.text.toString()
+                val address = binding.address.text.toString()
+                val description = binding.description.text.toString()
+                val phoneNumber = binding.phoneNumber.text.toString()
+
+                firm.name = name
+                firm.address = address
+                firm.description = description
+                firm.phone_number = phoneNumber
+                firm.category_id = selectedCategory.id
+
+                if (firm.inValid()) {
+                    binding.name.error = "الاسم"
+                    binding.address.error = "العنوان"
+                    binding.phoneNumber.error = "اكتب رقم التليفون"
+                    binding.description.error = "اكتب وصف عن صاحب المكان"
+                    return@OnClickListener
+                } else {
+                    activity?.let { it1 -> addDataViewModel.createFirm(it1, firm) }
+                }
+            })
+        }
     }
 
     private fun spinnerAdapter() {

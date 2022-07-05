@@ -53,8 +53,7 @@ class NewsFragment : BaseFragment() {
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
             articleList = it
             newsAdapter =
-                ArticlesAdapter(requireContext(), it) { position -> onListItemClick() }
-            newsAdapter.setData(it)
+                ArticlesAdapter(requireContext(), it) { onListItemClick() }
             binding.newsRecyclerview.adapter = newsAdapter
             stopShimmerAnimation()
             if (articleList.isEmpty()) {

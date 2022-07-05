@@ -57,7 +57,6 @@ class FirmsFragment : BaseFragment() {
             firmsList = it
             firmsAdapter =
                 FirmsAdapter(requireContext(), it) { v, position -> onListItemClick(v, position) }
-            firmsAdapter.setData(it)
             binding.firmsRecyclerview.adapter = firmsAdapter
             stopShimmerAnimation()
             if (firmsList.isEmpty()) {
