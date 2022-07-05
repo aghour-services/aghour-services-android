@@ -9,23 +9,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Firm
-import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.ui.adapter.FirmsAdapter
+import com.aghourservices.ui.viewModel.FirmsViewModel
 import com.aghourservices.utils.helper.Event
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class FirmsFragment : BaseFragment() {
-    private lateinit var adapter: FirmsAdapter
+    private lateinit var firmsAdapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var binding: FragmentFirmsBinding
+    private lateinit var firmsViewModel: FirmsViewModel
     private val handler = Handler(Looper.getMainLooper()!!)
     private val args: CategoriesFragmentArgs by navArgs()
     private var categoryId = 0
@@ -42,13 +41,29 @@ class FirmsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
         initRecyclerView()
-        loadFirms(categoryId)
+        setupViewModel()
         refresh()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         showBottomNavigation()
+    }
+
+    private fun setupViewModel() {
+        firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
+        activity?.let { firmsViewModel.loadFirms(it, categoryId) }
+        firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
+            firmsList = it
+            firmsAdapter =
+                FirmsAdapter(requireContext(), it) { v, position -> onListItemClick(v, position) }
+            firmsAdapter.setData(it)
+            binding.firmsRecyclerview.adapter = firmsAdapter
+            stopShimmerAnimation()
+            if (firmsList.isEmpty()) {
+                noInternetConnection()
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -67,70 +82,23 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setOnRefreshListener {
             handler.postDelayed({
                 binding.swipe.isRefreshing = false
-                loadFirms(categoryId)
+                activity?.let { firmsViewModel.loadFirms(it, categoryId) }
             }, 1000)
         }
     }
 
-    private fun loadFirms(categoryId: Int) {
-        val realm = activity?.let { RealmConfiguration(it).realm }
-        val retrofitBuilder = activity?.let { RetrofitInstance(it).firmsApi.loadFirms(categoryId) }
-
-        retrofitBuilder?.enqueue(object : Callback<ArrayList<Firm>?> {
-            override fun onResponse(
-                call: Call<ArrayList<Firm>?>,
-                response: Response<ArrayList<Firm>?>,
-            ) {
-                firmsList = response.body()!!
-                realm?.executeTransaction {
-                    for (i in firmsList) {
-                        try {
-                            val firm = realm.where(Firm::class.java).equalTo("id", i.id).findFirst()
-                            if (firm != null) {
-                                i.isFavorite = firm.isFavorite
-                            }
-
-                            realm.createOrUpdateObjectFromJson(Firm::class.java, i.toJSONObject())
-                        } catch (e: Exception) {
-                        }
-                    }
-                }
-                setAdapter(firmsList)
-                stopShimmerAnimation()
-            }
-
-            override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result =
-                    realm?.where(Firm::class.java)?.equalTo("category_id", categoryId)?.findAll()!!
-                firmsList = ArrayList()
-                firmsList.addAll(result)
-                setAdapter(firmsList)
-                stopShimmerAnimation()
-                if (firmsList.isEmpty()) {
-                    noInternetConnection()
-                }
-            }
-        })
-    }
-
-    fun noInternetConnection() {
-        binding.noInternet.visibility = View.VISIBLE
-        binding.firmsRecyclerview.visibility = View.GONE
+    private fun noInternetConnection() {
+        binding.apply {
+            noInternet.isVisible = true
+            firmsRecyclerview.isVisible = false
+        }
     }
 
     private fun stopShimmerAnimation() {
-        binding.firmsShimmer.stopShimmer()
-        binding.firmsShimmer.isVisible = false
-        binding.firmsRecyclerview.isVisible = true
-    }
-
-    private fun setAdapter(firmsList: ArrayList<Firm>) {
-        try {
-            adapter = FirmsAdapter(requireContext(), firmsList) { v, position ->
-                onListItemClick(v, position)
-            }
-            binding.firmsRecyclerview.adapter = adapter
-        } catch (e: Exception) {
+        binding.apply {
+            firmsShimmer.stopShimmer()
+            firmsShimmer.isVisible = false
+            firmsRecyclerview.isVisible = true
         }
     }
 
@@ -152,7 +120,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun updateFavorite(position: Int) {
-        val realm = com.aghourservices.data.db.RealmConfiguration(requireContext()).realm
+        val realm = RealmConfiguration(requireContext()).realm
         var firm = firmsList[position]
         val name = firm.name
         if (!firm.isFavorite) {

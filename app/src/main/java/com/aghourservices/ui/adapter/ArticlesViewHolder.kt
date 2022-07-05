@@ -2,6 +2,7 @@ package com.aghourservices.ui.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
 import com.aghourservices.utils.helper.Intents.copyNews
 import com.aghourservices.utils.helper.Intents.shareNews
@@ -15,8 +16,7 @@ class ArticlesViewHolder(
         itemView.setOnClickListener(this)
     }
 
-    fun setNewsList(article: com.aghourservices.data.model.Article) {
-
+    fun setNewsList(article: Article) {
         binding.apply {
             description.text = article.description
             date.text = article.created_at

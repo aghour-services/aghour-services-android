@@ -6,23 +6,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.data.model.Search
-import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.ui.adapter.SearchResultAdapter
+import com.aghourservices.ui.viewModel.SearchViewModel
+import com.aghourservices.utils.helper.CheckNetworkLiveData
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SearchFragment : BaseFragment() {
-    private lateinit var searches: ArrayList<Search>
-    private lateinit var adapter: SearchResultAdapter
+    private lateinit var searchList: ArrayList<Search>
+    private lateinit var searchAdapter: SearchResultAdapter
     private lateinit var binding: FragmentSearchBinding
+    private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,28 +37,72 @@ class SearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
         hideToolbar()
+        initRecyclerView()
+        setUpViewModel()
+        setSearchText()
+        checkNetwork()
+    }
+
+    private fun setSearchText() {
+        val searchText = binding.searchText.text.toString()
 
         if (binding.searchText.requestFocus()) {
             ShowSoftKeyboard.show(requireActivity(), binding.searchText)
         }
 
-        binding.searchResultRecycler.setHasFixedSize(true)
-        binding.searchResultRecycler.layoutManager = LinearLayoutManager(requireActivity())
-
         binding.searchText.setOnClickListener {
-            search(binding.searchText.text.toString())
+            activity?.let { it1 -> searchViewModel.search(it1, searchText) }
         }
 
         binding.searchText.doOnTextChanged { text, _, _, _ ->
             val searchKeyWord = text.toString()
             if (searchKeyWord.length > 2) {
-                search(searchKeyWord)
+                activity?.let { searchViewModel.search(it, searchKeyWord) }
             }
         }
-        binding.backBtn.setOnClickListener {
-            findNavController().popBackStack()
+    }
+
+    private fun initRecyclerView() {
+        binding.apply {
+            searchResultRecycler.setHasFixedSize(true)
+            searchResultRecycler.layoutManager = LinearLayoutManager(activity)
+            backBtn.setOnClickListener { findNavController().popBackStack() }
         }
     }
+
+    private fun setUpViewModel() {
+        val searchText = binding.searchText.text.toString()
+
+        searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+        activity?.let { searchViewModel.search(it, searchText) }
+
+        searchViewModel.searchLiveData.observe(viewLifecycleOwner) {
+            searchList = it
+            searchAdapter = SearchResultAdapter(requireContext(), searchList) { position ->
+                onListItemClick(position)
+            }
+            binding.apply {
+                searchResultRecycler.isVisible = true
+                searchResultRecycler.adapter = searchAdapter
+            }
+
+            if (it.isEmpty()) {
+                binding.searchResultRecycler.isVisible = false
+                return@observe
+            }
+        }
+    }
+
+    private fun checkNetwork() {
+        val checkNetworkLiveData = activity?.application?.let { CheckNetworkLiveData(it) }
+        checkNetworkLiveData?.observe(viewLifecycleOwner) { isConnected ->
+            binding.apply {
+                lottieAnimationView.isVisible = isConnected
+                noInternet.isVisible = !isConnected
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -65,49 +110,11 @@ class SearchFragment : BaseFragment() {
         showToolbar()
     }
 
-    private fun search(text: String) {
-        val eventName = "search_${text}"
-        Event.sendFirebaseEvent(eventName, text)
-        val retrofitBuilder = activity?.let {
-            RetrofitInstance(it).searchApi.search(text)
-        }
-
-        retrofitBuilder?.enqueue(object : Callback<ArrayList<Search>?> {
-            override fun onResponse(
-                call: Call<ArrayList<Search>?>,
-                response: Response<ArrayList<Search>?>,
-            ) {
-                searches = response.body()!!
-                setAdapter(searches)
-            }
-
-            override fun onFailure(call: Call<ArrayList<Search>?>, t: Throwable) {
-                customView()
-            }
-        })
-    }
-
-    private fun setAdapter(searches: ArrayList<Search>) {
-        try {
-            if (searches.isEmpty()) {
-                binding.searchResultRecycler.visibility = View.GONE
-                return
-            }
-            binding.searchResultRecycler.visibility = View.VISIBLE
-            adapter = SearchResultAdapter(requireContext(), searches) { position ->
-                onListItemClick(position)
-            }
-            binding.searchResultRecycler.adapter = adapter
-        } catch (e: Exception) {
-        }
-    }
-
     private fun onListItemClick(position: Int) {
-        val firm = searches[position]
+        val firm = searchList[position]
         val phoneNumber = firm.phone_number
         val eventName = "call_${firm.name}"
         Event.sendFirebaseEvent(eventName, phoneNumber)
-
         callPhone(phoneNumber)
     }
 
@@ -115,10 +122,5 @@ class SearchFragment : BaseFragment() {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
-    }
-
-    fun customView() {
-        binding.lottieAnimationView.visibility = View.GONE
-        binding.noInternet.visibility = View.VISIBLE
     }
 }
