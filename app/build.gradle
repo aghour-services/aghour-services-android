@@ -26,7 +26,7 @@ android {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
-            resValue("string", "base_url", "https://aghour-services-staging.herokuapp.com/api/")
+            resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
             resValue("string", "news_topic", "News-Staging")
         }
 

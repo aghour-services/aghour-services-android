@@ -10,21 +10,21 @@ import com.aghourservices.utils.ads.NativeAdViewHolder
 
 class ArticlesAdapter(
     val context: Context,
-    private val arrayList: ArrayList<Article>,
+    private var newsList: ArrayList<Article>,
     private val onItemClicked: (position: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var itemsCountToShowAds = 2
-    private var itemsCount = arrayList.size
+    private var itemsCount = newsList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = NewsCardBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val view = NewsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticlesViewHolder(view, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val hold = holder as ArticlesViewHolder
-        val article = arrayList[position]
+        val article = newsList[position]
         hold.setNewsList(article)
 
         if (getItemViewType(position) == 0) {

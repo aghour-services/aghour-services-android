@@ -1,35 +1,25 @@
 package com.aghourservices.ui.fragment
 
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import com.aghourservices.R
+import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Firm
-import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentAddDataBinding
 import com.aghourservices.ui.adapter.SpinnerCategoriesAdapter
-import com.aghourservices.ui.main.activity.SignUpActivity
-import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
-import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
-import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.dataAdded
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
-import io.realm.Realm
-import io.realm.RealmConfiguration
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.aghourservices.ui.viewModel.AddDataViewModel
+import com.aghourservices.utils.interfaces.AlertDialog
 
 class AddDataFragment : BaseFragment() {
     private lateinit var binding: FragmentAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
+    private lateinit var addDataViewModel: AddDataViewModel
+    private val firm: Firm = Firm()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,69 +33,47 @@ class AddDataFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = getString(R.string.add_data_fragment)
         hideUserAddData()
-        init()
-
-        val bundle = arguments
-        if (bundle != null) {
-            val value1 = bundle.getInt("category_id", -1)
-            val value2 = bundle.getString("category_name", "")
-            Toast.makeText(requireActivity(), value1.toString(), Toast.LENGTH_SHORT).show()
-            Toast.makeText(requireActivity(), value2, Toast.LENGTH_SHORT).show()
-        }
-
-        binding.btnRegister.setOnClickListener {
-            val alertDialogBuilder = AlertDialog.Builder(requireContext())
-            alertDialogBuilder.setTitle(getString(R.string.create_account_first))
-            alertDialogBuilder.setMessage(getString(R.string.should_create))
-            alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-            alertDialogBuilder.setCancelable(true)
-            alertDialogBuilder.setPositiveButton("إنشاء الان") { _, _ ->
-                startActivity(Intent(requireActivity(), SignUpActivity::class.java))
-                requireActivity().finish()
-            }
-            alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
-            val alertDialog = alertDialogBuilder.create()
-            alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 18f
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 18f
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                    .setTextAppearance(R.style.SegoeTextBold)
-                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-                    .setTextAppearance(R.style.SegoeTextBold)
-            }
-        }
-    }
-
-    private fun init() {
+        initUserClick()
         loadCategories()
         spinnerAdapter()
+        setUpViewModel()
+    }
 
-        binding.btnAddData.setOnClickListener(View.OnClickListener {
-            val selectedCategoryPosition = binding.spinner.selectedItemPosition
-            val selectedCategory = categoryList[selectedCategoryPosition]
-            val name = binding.name.text.toString()
-            val address = binding.address.text.toString()
-            val description = binding.description.text.toString()
-            val phoneNumber = binding.phoneNumber.text.toString()
-            val firm = Firm()
+    private fun setUpViewModel() {
+        addDataViewModel = ViewModelProvider(this)[AddDataViewModel::class.java]
+    }
 
-            firm.name = name
-            firm.address = address
-            firm.description = description
-            firm.phone_number = phoneNumber
-            firm.category_id = selectedCategory.id
-
-            if (firm.inValid()) {
-                binding.name.error = "الاسم"
-                binding.address.error = "العنوان"
-                binding.phoneNumber.error = "اكتب رقم التليفون"
-                binding.description.error = "اكتب وصف عن صاحب المكان"
-                return@OnClickListener
-            } else {
-                createFirm(firm)
+    private fun initUserClick() {
+        binding.apply {
+            btnRegister.setOnClickListener {
+                AlertDialog.createAccount(requireActivity())
             }
-        })
+
+            btnAddData.setOnClickListener(View.OnClickListener {
+                val selectedCategoryPosition = binding.spinner.selectedItemPosition
+                val selectedCategory = categoryList[selectedCategoryPosition]
+                val name = binding.name.text.toString()
+                val address = binding.address.text.toString()
+                val description = binding.description.text.toString()
+                val phoneNumber = binding.phoneNumber.text.toString()
+
+                firm.name = name
+                firm.address = address
+                firm.description = description
+                firm.phone_number = phoneNumber
+                firm.category_id = selectedCategory.id
+
+                if (firm.inValid()) {
+                    binding.name.error = "الاسم"
+                    binding.address.error = "العنوان"
+                    binding.phoneNumber.error = "اكتب رقم التليفون"
+                    binding.description.error = "اكتب وصف عن صاحب المكان"
+                    return@OnClickListener
+                } else {
+                    activity?.let { it1 -> addDataViewModel.createFirm(it1, firm) }
+                }
+            })
+        }
     }
 
     private fun spinnerAdapter() {
@@ -114,46 +82,11 @@ class AddDataFragment : BaseFragment() {
         spinner.adapter = spinnerCategoriesAdapter
     }
 
-    private fun createFirm(firm: Firm) {
-        showProgressDialog(requireContext())
-        val user = getUserData(requireActivity())
-        val retrofitBuilder =
-            activity?.let {
-                RetrofitInstance(it).firmsApi.createFirm(
-                    firm.toJsonObject(),
-                    user.token
-                )
-            }
-        retrofitBuilder?.enqueue(object : Callback<Firm> {
-            override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
-                dataAdded(requireContext())
-                hideProgressDialog()
-                setTextEmpty()
-            }
-
-            override fun onFailure(call: Call<Firm>, t: Throwable) {
-                noInternet(requireContext())
-                hideProgressDialog()
-            }
-        })
-    }
-
     private fun loadCategories() {
-        Realm.init(requireContext())
-        val config = RealmConfiguration.Builder().name("offline.realm")
-            .deleteRealmIfMigrationNeeded().schemaVersion(1)
-            .allowWritesOnUiThread(true).build()
-        val categoryRealm = Realm.getInstance(config)
-        val result = categoryRealm.where(Category::class.java).findAll()
+        val realm = RealmConfiguration(requireContext()).realm
+        val result = realm.where(Category::class.java).findAll()
         categoryList = ArrayList()
         categoryList.addAll(result)
-    }
-
-    private fun setTextEmpty() {
-        binding.name.text.clear()
-        binding.address.text.clear()
-        binding.description.text.clear()
-        binding.phoneNumber.text.clear()
     }
 
     private fun hideUserAddData() {

@@ -79,10 +79,9 @@
             android:layout_marginTop="100dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView">
+            app:layout_constraintTop_toBottomOf="@+id/view">
 
             <ImageView
                 android:id="@+id/custom_toast_image"
@@ -106,6 +105,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"

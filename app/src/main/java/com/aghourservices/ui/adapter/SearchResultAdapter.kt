@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Search
-import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.databinding.SearchResultCardBinding
+import com.aghourservices.utils.ads.NativeAdViewHolder
 
 class SearchResultAdapter(
     val context: Context,
-    private val arrayList: ArrayList<Search>,
+    private var searchList: ArrayList<Search>,
     private val onItemClicked: (position: Int) -> Unit,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var itemsCountToShowAds = 1
-    private var itemsCount = arrayList.size
+    private var itemsCount = searchList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val searchFirm =
@@ -25,7 +25,7 @@ class SearchResultAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val hold = holder as SearchResultViewHolder
-        val searchResult = arrayList[position]
+        val searchResult = searchList[position]
         hold.setList(searchResult)
 
         if (getItemViewType(position) == 0) {

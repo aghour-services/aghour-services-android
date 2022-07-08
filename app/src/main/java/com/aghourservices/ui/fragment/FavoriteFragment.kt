@@ -8,21 +8,20 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
+import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Firm
 import com.aghourservices.databinding.FragmentFavoriteBinding
 import com.aghourservices.ui.adapter.FirmsAdapter
 import com.aghourservices.utils.helper.Event
-import io.realm.Realm
-import io.realm.RealmConfiguration
 
 class FavoriteFragment : BaseFragment() {
-    private lateinit var realm: Realm
-    lateinit var binding: FragmentFavoriteBinding
+    private lateinit var binding: FragmentFavoriteBinding
     private lateinit var firmsList: ArrayList<Firm>
-    private lateinit var adapter: FirmsAdapter
-    private lateinit var handler: Handler
+    private lateinit var favoriteAdapter: FirmsAdapter
+    private var handler = Handler(Looper.getMainLooper()!!)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,48 +33,37 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
-        load()
+        requireActivity().title = getString(R.string.favorite_fragment)
+        initRecyclerView()
+        loadFavorites()
         refresh()
     }
 
-    private fun refresh() {
-        handler = Handler(Looper.getMainLooper()!!)
-        binding.swipe.setColorSchemeResources(R.color.swipeColor)
-        binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
-        binding.swipe.setOnRefreshListener {
-            handler.postDelayed({
-                binding.swipe.isRefreshing = false
-                load()
-            }, 1000)
+    private fun initRecyclerView() {
+        binding.apply {
+            favoriteRecyclerView.setHasFixedSize(true)
+            favoriteRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
         }
     }
 
-    private fun init() {
-        Realm.init(requireActivity())
-        val config = RealmConfiguration
-            .Builder()
-            .allowWritesOnUiThread(true)
-            .name("offline.realm")
-            .schemaVersion(1)
-            .deleteRealmIfMigrationNeeded()
-            .build()
-        realm = Realm.getInstance(config)
-
-
-        requireActivity().title = getString(R.string.favorite_fragment)
-        binding.favoriteRecyclerView.setHasFixedSize(true)
-        binding.favoriteRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+    private fun refresh() {
+        binding.apply {
+            swipe.setColorSchemeResources(R.color.swipeColor)
+            swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
+            swipe.setOnRefreshListener {
+                handler.postDelayed({
+                    binding.swipe.isRefreshing = false
+                    loadFavorites()
+                }, 1000)
+            }
+        }
     }
 
     private fun setAdapter(firmsList: ArrayList<Firm>) {
-        try {
-            adapter = FirmsAdapter(requireContext(), firmsList) { v, position ->
-                onListItemClick(v, position)
-            }
-            binding.favoriteRecyclerView.adapter = adapter
-        } catch (e: Exception) {
+        favoriteAdapter = FirmsAdapter(requireContext(), firmsList) { v, position ->
+            onListItemClick(v, position)
         }
+        binding.favoriteRecyclerView.adapter = favoriteAdapter
     }
 
     private fun onListItemClick(v: View, position: Int) {
@@ -96,6 +84,7 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun updateFavorite(position: Int) {
+        val realm = activity?.let { RealmConfiguration(it).realm }
         var firm = firmsList[position]
         val name = firm.name
         if (!firm.isFavorite) {
@@ -108,20 +97,21 @@ class FavoriteFragment : BaseFragment() {
             eventName = "unFav_${name}"
         }
         Event.sendFirebaseEvent(eventName, name)
-        realm.beginTransaction()
+        realm?.beginTransaction()
         firm.isFavorite = !firm.isFavorite
-        firm = realm.createOrUpdateObjectFromJson(Firm::class.java, firm.toJSONObject())
+        firm = realm!!.createOrUpdateObjectFromJson(Firm::class.java, firm.toJSONObject())
         realm.copyToRealmOrUpdate(firm)
         realm.commitTransaction()
     }
 
-    private fun load() {
-        val result = realm.where(Firm::class.java).equalTo("isFavorite", true).findAll()
+    private fun loadFavorites() {
+        val realm = activity?.let { RealmConfiguration(it).realm }
+        val result = realm?.where(Firm::class.java)?.equalTo("isFavorite", true)?.findAll()!!
         firmsList = ArrayList()
         firmsList.addAll(result)
         setAdapter(firmsList)
         if (firmsList.isEmpty()) {
-            binding.noFavItems.visibility = View.VISIBLE
+            binding.noFavItems.isVisible = true
         }
     }
 }

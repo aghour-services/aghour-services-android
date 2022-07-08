@@ -37,7 +37,6 @@ class CategoriesFragment : BaseFragment() {
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryList = it
             categoryAdapter = CategoriesAdapter(it) { position -> onListItemClick(position) }
-            categoryAdapter.setData(it)
             binding.categoriesRecyclerview.adapter = categoryAdapter
             progressBar()
         }

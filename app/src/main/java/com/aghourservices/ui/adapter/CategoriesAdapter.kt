@@ -34,11 +34,5 @@ class CategoriesAdapter(
     override fun getItemCount(): Int {
         return categoryList.size
     }
-
-    fun setData(category: List<Category>) {
-        this.categoryList = category
-        notifyDataSetChanged()
-    }
-
 }
 
