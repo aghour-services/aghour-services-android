@@ -43,6 +43,7 @@ class NewsViewModel : ViewModel() {
                 val result = realm.where(Article::class.java).findAll()
                 newsList = ArrayList()
                 newsList.addAll(result)
+                newsLiveData.value = newsList
             }
         })
     }
