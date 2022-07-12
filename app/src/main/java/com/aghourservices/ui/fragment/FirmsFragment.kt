@@ -16,15 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Firm
+import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.ui.adapter.FirmsAdapter
+import com.aghourservices.ui.adapter.TagsAdapter
 import com.aghourservices.ui.viewModel.FirmsViewModel
 import com.aghourservices.utils.helper.Event
 
 class FirmsFragment : BaseFragment() {
     private lateinit var firmsAdapter: FirmsAdapter
-    private lateinit var tagsAdapter: FirmsAdapter
+    private lateinit var tagsAdapter: TagsAdapter
     private lateinit var firmsList: ArrayList<Firm>
+    private lateinit var tagsList: ArrayList<Tag>
     private lateinit var binding: FragmentFirmsBinding
     private lateinit var firmsViewModel: FirmsViewModel
     private val handler = Handler(Looper.getMainLooper()!!)
@@ -55,22 +58,21 @@ class FirmsFragment : BaseFragment() {
     private fun setupViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
         activity?.let { firmsViewModel.loadFirms(it, categoryId) }
+        activity?.let { firmsViewModel.loadTags(it, categoryId) }
+
+        firmsViewModel.tagsLiveData.observe(viewLifecycleOwner) {
+            tagsList = it
+            tagsAdapter = TagsAdapter(requireContext(), tagsList) { v, position ->
+                onListItemClick(v, position)
+            }
+        }
+
         firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
             firmsList = it
-            tagsAdapter = FirmsAdapter(requireContext(), it, 1) { v, position ->
-                onListItemClick(
-                    v,
-                    position
-                )
-            }
-
 
             firmsAdapter =
-                FirmsAdapter(requireContext(), it, 2) { v, position ->
-                    onListItemClick(
-                        v,
-                        position
-                    )
+                FirmsAdapter(requireContext(), it) { v, position ->
+                    onListItemClick(v, position)
                 }
 
             binding.apply {
@@ -121,8 +123,8 @@ class FirmsFragment : BaseFragment() {
         binding.apply {
             firmsShimmer.stopShimmer()
             firmsShimmer.isVisible = false
-            tagsRecyclerView.isVisible = true
             firmsRecyclerView.isVisible = true
+            tagsRecyclerView.visibility = View.VISIBLE
         }
     }
 

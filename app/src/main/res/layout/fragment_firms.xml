@@ -85,7 +85,7 @@
         android:elevation="6dp"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Firm
+import com.aghourservices.data.model.Tag
 import com.aghourservices.data.request.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,8 +14,9 @@ import retrofit2.Response
 class FirmsViewModel : ViewModel() {
     var firmsLiveData = MutableLiveData<ArrayList<Firm>>()
     var firmsList: ArrayList<Firm> = ArrayList()
-    var tagsLiveData = MutableLiveData<ArrayList<Firm>>()
-    var tagsList: ArrayList<Firm> = ArrayList()
+
+    var tagsLiveData = MutableLiveData<ArrayList<Tag>>()
+    var tagsList: ArrayList<Tag> = ArrayList()
 
     fun loadFirms(context: Activity, categoryId: Int) {
         val realm = RealmConfiguration(context).realm
@@ -59,19 +61,19 @@ class FirmsViewModel : ViewModel() {
     }
 
     fun loadTags(context: Activity, categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance(context).firmsApi.loadFirms(categoryId)
-        retrofitBuilder.enqueue(object : Callback<ArrayList<Firm>?> {
+        val retrofitBuilder = RetrofitInstance(context).tagsApi.loadTags(categoryId)
+        retrofitBuilder.enqueue(object : Callback<ArrayList<Tag>?> {
             override fun onResponse(
-                call: Call<ArrayList<Firm>?>,
-                response: Response<ArrayList<Firm>?>,
+                call: Call<ArrayList<Tag>?>,
+                response: Response<ArrayList<Tag>?>,
             ) {
                 if (response.isSuccessful) {
-                    firmsLiveData.value = response.body()
-                    firmsList = firmsLiveData.value!!
+                    tagsLiveData.value = response.body()
+                    tagsList = tagsLiveData.value!!
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {}
+            override fun onFailure(call: Call<ArrayList<Tag>?>, t: Throwable) {}
         })
     }
 }

@@ -60,7 +60,7 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun setAdapter(firmsList: ArrayList<Firm>) {
-        favoriteAdapter = FirmsAdapter(requireContext(), firmsList, 2) { v, position ->
+        favoriteAdapter = FirmsAdapter(requireContext(), firmsList) { v, position ->
             onListItemClick(v, position)
         }
         binding.favoriteRecyclerView.adapter = favoriteAdapter

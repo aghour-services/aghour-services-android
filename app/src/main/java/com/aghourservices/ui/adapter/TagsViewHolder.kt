@@ -1,26 +1,22 @@
 package com.aghourservices.ui.adapter
 
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.aghourservices.data.model.Firm
-import com.aghourservices.databinding.FirmsCardBinding
+import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.TagsCardBinding
-import com.aghourservices.utils.helper.Intents.copyFirm
-import com.aghourservices.utils.helper.Intents.shareFirm
 
 class TagsViewHolder(
     val binding: TagsCardBinding,
-    private var firmsList: ArrayList<Firm>,
+    private var tagsList: ArrayList<Tag>,
     private val onItemClicked: (v: View, position: Int) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
     fun setTagsList(position: Int) {
-        val firm = firmsList[position]
+        val tag = tagsList[position]
         binding.tagTv.setOnClickListener(this)
 
         binding.apply {
-            tagTv.text = firm.name
+            tagTv.text = tag.tag
         }
     }
 
