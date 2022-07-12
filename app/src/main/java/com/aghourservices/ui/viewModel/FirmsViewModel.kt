@@ -15,12 +15,9 @@ class FirmsViewModel : ViewModel() {
     var firmsLiveData = MutableLiveData<ArrayList<Firm>>()
     var firmsList: ArrayList<Firm> = ArrayList()
 
-    var tagsLiveData = MutableLiveData<ArrayList<Tag>>()
-    var tagsList: ArrayList<Tag> = ArrayList()
-
-    fun loadFirms(context: Activity, categoryId: Int) {
+    fun loadFirms(context: Activity, categoryId: Int, selectedTags: ArrayList<String>) {
         val realm = RealmConfiguration(context).realm
-        val retrofitBuilder = RetrofitInstance(context).firmsApi.loadFirms(categoryId)
+        val retrofitBuilder = RetrofitInstance(context).firmsApi.loadFirms(categoryId, selectedTags)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(
@@ -57,23 +54,6 @@ class FirmsViewModel : ViewModel() {
                 firmsList.addAll(result)
                 firmsLiveData.value = firmsList
             }
-        })
-    }
-
-    fun loadTags(context: Activity, categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance(context).tagsApi.loadTags(categoryId)
-        retrofitBuilder.enqueue(object : Callback<ArrayList<Tag>?> {
-            override fun onResponse(
-                call: Call<ArrayList<Tag>?>,
-                response: Response<ArrayList<Tag>?>,
-            ) {
-                if (response.isSuccessful) {
-                    tagsLiveData.value = response.body()
-                    tagsList = tagsLiveData.value!!
-                }
-            }
-
-            override fun onFailure(call: Call<ArrayList<Tag>?>, t: Throwable) {}
         })
     }
 }
