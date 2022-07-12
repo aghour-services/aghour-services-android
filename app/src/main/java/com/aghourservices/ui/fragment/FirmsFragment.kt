@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -22,6 +23,7 @@ import com.aghourservices.utils.helper.Event
 
 class FirmsFragment : BaseFragment() {
     private lateinit var firmsAdapter: FirmsAdapter
+    private lateinit var tagsAdapter: FirmsAdapter
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var binding: FragmentFirmsBinding
     private lateinit var firmsViewModel: FirmsViewModel
@@ -55,9 +57,26 @@ class FirmsFragment : BaseFragment() {
         activity?.let { firmsViewModel.loadFirms(it, categoryId) }
         firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
             firmsList = it
+            tagsAdapter = FirmsAdapter(requireContext(), it, 1) { v, position ->
+                onListItemClick(
+                    v,
+                    position
+                )
+            }
+
+
             firmsAdapter =
-                FirmsAdapter(requireContext(), it) { v, position -> onListItemClick(v, position) }
-            binding.firmsRecyclerview.adapter = firmsAdapter
+                FirmsAdapter(requireContext(), it, 2) { v, position ->
+                    onListItemClick(
+                        v,
+                        position
+                    )
+                }
+
+            binding.apply {
+                tagsRecyclerView.adapter = tagsAdapter
+                firmsRecyclerView.adapter = firmsAdapter
+            }
             stopShimmerAnimation()
             if (firmsList.isEmpty()) {
                 noInternetConnection()
@@ -67,8 +86,12 @@ class FirmsFragment : BaseFragment() {
 
     private fun initRecyclerView() {
         binding.apply {
-            firmsRecyclerview.setHasFixedSize(true)
-            firmsRecyclerview.layoutManager = LinearLayoutManager(requireActivity())
+            firmsRecyclerView.setHasFixedSize(true)
+            tagsRecyclerView.setHasFixedSize(true)
+            tagsRecyclerView.layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            firmsRecyclerView.layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
             categoryId = args.categoryId
             val categoryName = args.categoryName
             requireActivity().title = categoryName
@@ -89,7 +112,8 @@ class FirmsFragment : BaseFragment() {
     private fun noInternetConnection() {
         binding.apply {
             noInternet.isVisible = true
-            firmsRecyclerview.isVisible = false
+            tagsRecyclerView.isVisible = false
+            firmsRecyclerView.isVisible = false
         }
     }
 
@@ -97,7 +121,8 @@ class FirmsFragment : BaseFragment() {
         binding.apply {
             firmsShimmer.stopShimmer()
             firmsShimmer.isVisible = false
-            firmsRecyclerview.isVisible = true
+            tagsRecyclerView.isVisible = true
+            firmsRecyclerView.isVisible = true
         }
     }
 
@@ -105,7 +130,14 @@ class FirmsFragment : BaseFragment() {
         when (v.id) {
             R.id.btnFav -> updateFavorite(position)
             R.id.btnCall -> callPhone(position)
+            R.id.tagTv -> toastTags(position)
         }
+    }
+
+    private fun toastTags(position: Int) {
+        val firm = firmsList[position]
+        val name = firm.name
+        Toast.makeText(requireContext(), name, Toast.LENGTH_SHORT).show()
     }
 
     private fun callPhone(position: Int) {
@@ -123,9 +155,9 @@ class FirmsFragment : BaseFragment() {
         var firm = firmsList[position]
         val name = firm.name
         if (!firm.isFavorite) {
-            onSNACK(binding.firmsRecyclerview, "تم الإضافة الي المفضلة ❤")
+            onSNACK(binding.firmsRecyclerView, "تم الإضافة الي المفضلة ❤")
         } else {
-            onSNACK(binding.firmsRecyclerview, "تم الإزالة من المفضلة 😕")
+            onSNACK(binding.firmsRecyclerView, "تم الإزالة من المفضلة 😕")
         }
         var eventName = "fav_${name}"
         if (firm.isFavorite) {

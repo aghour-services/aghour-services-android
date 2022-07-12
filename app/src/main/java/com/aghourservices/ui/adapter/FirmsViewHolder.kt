@@ -8,10 +8,13 @@ import com.aghourservices.utils.helper.Intents.copyFirm
 import com.aghourservices.utils.helper.Intents.shareFirm
 
 class FirmsViewHolder(
-    val binding: FirmsCardBinding, private val onItemClicked: (v: View, position: Int) -> Unit,
+    val binding: FirmsCardBinding,
+    private var firmsList: ArrayList<Firm>,
+    private val onItemClicked: (v: View, position: Int) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-    fun setList(firm: Firm) {
+    fun setList(position: Int) {
+        val firm = firmsList[position]
         binding.btnCall.setOnClickListener(this)
         binding.btnFav.setOnClickListener(this)
 

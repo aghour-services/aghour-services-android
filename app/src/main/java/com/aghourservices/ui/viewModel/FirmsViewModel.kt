@@ -13,7 +13,8 @@ import retrofit2.Response
 class FirmsViewModel : ViewModel() {
     var firmsLiveData = MutableLiveData<ArrayList<Firm>>()
     var firmsList: ArrayList<Firm> = ArrayList()
-
+    var tagsLiveData = MutableLiveData<ArrayList<Firm>>()
+    var tagsList: ArrayList<Firm> = ArrayList()
 
     fun loadFirms(context: Activity, categoryId: Int) {
         val realm = RealmConfiguration(context).realm
@@ -54,6 +55,23 @@ class FirmsViewModel : ViewModel() {
                 firmsList.addAll(result)
                 firmsLiveData.value = firmsList
             }
+        })
+    }
+
+    fun loadTags(context: Activity, categoryId: Int) {
+        val retrofitBuilder = RetrofitInstance(context).firmsApi.loadFirms(categoryId)
+        retrofitBuilder.enqueue(object : Callback<ArrayList<Firm>?> {
+            override fun onResponse(
+                call: Call<ArrayList<Firm>?>,
+                response: Response<ArrayList<Firm>?>,
+            ) {
+                if (response.isSuccessful) {
+                    firmsLiveData.value = response.body()
+                    firmsList = firmsLiveData.value!!
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {}
         })
     }
 }
