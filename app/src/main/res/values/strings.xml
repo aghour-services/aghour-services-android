@@ -90,6 +90,6 @@
     <string name="location_firm">location_firm</string>
     <string name="description_firm">description_firm</string>
     <string name="aghour_share_content">تمت المشاركة من خلال تطبيق أجهور الكبرى</string>
-    <string name="no_intenet_connections">تأكد من اتصالك بالانترنت</string>
+    <string name="noInternetConnections">تأكد من اتصالك بالانترنت</string>
 
 </resources>

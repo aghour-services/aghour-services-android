@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cairo_bold"
-            android:text="@string/no_intenet_connections"
+            android:text="@string/noInternetConnections"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -76,6 +76,7 @@
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tagsRecyclerView"
