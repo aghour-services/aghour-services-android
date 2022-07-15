@@ -16,7 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="150dp"
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cairo_bold"
-            android:text="تأكد من اتصالك بالانترنت"
+            android:text="@string/no_intenet_connections"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -76,32 +77,40 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout9"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tagsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:background="@color/recyclerViewBg"
+        android:elevation="6dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/tags_card" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tagsRecyclerView">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/firmsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_marginTop="5dp"
+            android:background="@color/recyclerViewBg"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            tools:listitem="@layout/firms_card" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/firmsRecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@color/recyclerViewBg"
-                android:orientation="vertical"
-                android:visibility="invisible"
-                tools:listitem="@layout/firms_card" />
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

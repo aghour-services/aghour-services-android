@@ -8,6 +8,8 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -15,18 +17,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Firm
+import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.ui.adapter.FirmsAdapter
+import com.aghourservices.ui.adapter.TagsAdapter
 import com.aghourservices.ui.viewModel.FirmsViewModel
+import com.aghourservices.ui.viewModel.TagsViewModel
 import com.aghourservices.utils.helper.Event
 
 class FirmsFragment : BaseFragment() {
     private lateinit var firmsAdapter: FirmsAdapter
+    private lateinit var tagsAdapter: TagsAdapter
     private lateinit var firmsList: ArrayList<Firm>
+    private lateinit var tagsList: ArrayList<Tag>
     private lateinit var binding: FragmentFirmsBinding
     private lateinit var firmsViewModel: FirmsViewModel
+    private lateinit var tagsViewModel: TagsViewModel
     private val handler = Handler(Looper.getMainLooper()!!)
     private val args: CategoriesFragmentArgs by navArgs()
+    private var selectedTags = ArrayList<String>()
     private var categoryId = 0
 
     override fun onCreateView(
@@ -40,8 +49,9 @@ class FirmsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
-        initRecyclerView()
-        setupViewModel()
+        initViews()
+        setupFirmsViewModel()
+        setupTagsViewModel()
         refresh()
     }
 
@@ -50,29 +60,73 @@ class FirmsFragment : BaseFragment() {
         showBottomNavigation()
     }
 
-    private fun setupViewModel() {
+
+    private fun tagsAsParameter(): String {
+        return if (selectedTags.isEmpty()) {
+            return ""
+        } else {
+            selectedTags.joinToString(",")
+        }.toString()
+    }
+
+    private fun setupFirmsViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
-        activity?.let { firmsViewModel.loadFirms(it, categoryId) }
+
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
+
         firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
             firmsList = it
-            firmsAdapter =
-                FirmsAdapter(requireContext(), it) { v, position -> onListItemClick(v, position) }
-            binding.firmsRecyclerview.adapter = firmsAdapter
-            stopShimmerAnimation()
+
+            firmsAdapter = FirmsAdapter(requireContext(), it) { v, position ->
+                onFirmsItemClick(v, position)
+            }
+
             if (firmsList.isEmpty()) {
                 noInternetConnection()
+            }
+
+            binding.apply {
+                firmsRecyclerView.setHasFixedSize(true)
+
+                firmsRecyclerView.layoutManager =
+                    LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+
+                stopShimmerAnimation()
+                firmsRecyclerView.adapter = firmsAdapter
+            }
+
+
+        }
+    }
+
+    private fun setupTagsViewModel() {
+        tagsViewModel = ViewModelProvider(this)[TagsViewModel::class.java]
+
+        activity?.let { tagsViewModel.loadTags(it, categoryId) }
+
+        tagsViewModel.tagsLiveData.observe(viewLifecycleOwner) {
+            tagsList = it
+            tagsAdapter = TagsAdapter(requireContext(), tagsList) { v, position ->
+                onTagsItemClick(v as CheckBox, position)
+            }
+
+            binding.apply {
+                tagsRecyclerView.setHasFixedSize(true)
+                tagsRecyclerView.layoutManager =
+                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+
+                tagsRecyclerView.adapter = tagsAdapter
+                if (tagsList.isNotEmpty()) {
+                    tagsRecyclerView.visibility = View.VISIBLE
+                }
             }
         }
     }
 
-    private fun initRecyclerView() {
-        binding.apply {
-            firmsRecyclerview.setHasFixedSize(true)
-            firmsRecyclerview.layoutManager = LinearLayoutManager(requireActivity())
-            categoryId = args.categoryId
-            val categoryName = args.categoryName
-            requireActivity().title = categoryName
-        }
+    private fun initViews() {
+        categoryId = args.categoryId
+        val categoryName = args.categoryName
+        requireActivity().title = categoryName
     }
 
     private fun refresh() {
@@ -81,7 +135,7 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setOnRefreshListener {
             handler.postDelayed({
                 binding.swipe.isRefreshing = false
-                activity?.let { firmsViewModel.loadFirms(it, categoryId) }
+                activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
             }, 1000)
         }
     }
@@ -89,23 +143,41 @@ class FirmsFragment : BaseFragment() {
     private fun noInternetConnection() {
         binding.apply {
             noInternet.isVisible = true
-            firmsRecyclerview.isVisible = false
+            tagsRecyclerView.isVisible = false
+            firmsRecyclerView.isVisible = false
         }
+        stopShimmerAnimation()
     }
 
     private fun stopShimmerAnimation() {
         binding.apply {
             firmsShimmer.stopShimmer()
             firmsShimmer.isVisible = false
-            firmsRecyclerview.isVisible = true
+            firmsRecyclerView.isVisible = true
         }
     }
 
-    private fun onListItemClick(v: View, position: Int) {
+
+    private fun onTagsItemClick(v: CheckBox, position: Int) {
+        if (v.isChecked) {
+            selectedTags.add(tagsList[position].tag)
+        } else {
+            selectedTags.remove(tagsList[position].tag)
+        }
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
+    }
+
+    private fun onFirmsItemClick(v: View, position: Int) {
         when (v.id) {
             R.id.btnFav -> updateFavorite(position)
             R.id.btnCall -> callPhone(position)
         }
+    }
+
+    private fun toastTags(position: Int) {
+        val tag = tagsList[position]
+        val name = tag.tag
+        Toast.makeText(requireContext(), "Clicked $name", Toast.LENGTH_SHORT).show()
     }
 
     private fun callPhone(position: Int) {
@@ -123,9 +195,9 @@ class FirmsFragment : BaseFragment() {
         var firm = firmsList[position]
         val name = firm.name
         if (!firm.isFavorite) {
-            onSNACK(binding.firmsRecyclerview, "تم الإضافة الي المفضلة ❤")
+            onSNACK(binding.firmsRecyclerView, "تم الإضافة الي المفضلة ❤")
         } else {
-            onSNACK(binding.firmsRecyclerview, "تم الإزالة من المفضلة 😕")
+            onSNACK(binding.firmsRecyclerView, "تم الإزالة من المفضلة 😕")
         }
         var eventName = "fav_${name}"
         if (firm.isFavorite) {

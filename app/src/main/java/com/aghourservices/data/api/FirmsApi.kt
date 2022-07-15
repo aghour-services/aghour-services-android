@@ -10,5 +10,8 @@ interface FirmsApi {
     fun createFirm(@Body firm: JsonObject, @Header("TOKEN") token: String): Call<Firm>
 
     @GET("firms")
-    fun loadFirms(@Query("category_id") category_id: Int): Call<ArrayList<Firm>>
+    fun loadFirms(
+        @Query("category_id") category_id: Int,
+        @Query("tags") tags: String
+    ): Call<ArrayList<Firm>>
 }

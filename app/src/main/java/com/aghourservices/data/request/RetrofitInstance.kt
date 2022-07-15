@@ -49,4 +49,7 @@ class RetrofitInstance(context: Activity) {
     val userApi: UserApi by lazy {
         retrofit.create(UserApi::class.java)
     }
+    val tagsApi: TagApi by lazy {
+        retrofit.create(TagApi::class.java)
+    }
 }
