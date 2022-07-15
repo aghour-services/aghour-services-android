@@ -38,6 +38,7 @@
         <activity
             android:name="com.aghourservices.ui.main.activity.MainActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:theme="@style/CategoriesTheme"
             tools:ignore="LockedOrientationActivity" />

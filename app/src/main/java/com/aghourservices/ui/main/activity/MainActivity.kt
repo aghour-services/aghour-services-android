@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkNetwork() {
         val checkNetworkLiveData = CheckNetworkLiveData(application)
         checkNetworkLiveData.observe(this) { isConnected ->
-            binding.notInternet.isVisible = !isConnected
+            binding.noInternet.isVisible = !isConnected
         }
     }
 

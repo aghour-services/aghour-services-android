@@ -17,7 +17,7 @@
     <color name="navHeaderBg">#387DB3</color>
     <color name="userNameColor">#121E27</color>
     <color name="emailColor">#FF7070</color>
-    <color name="phoneColor">#4CAF50</color>
+    <color name="phoneColor">#FFFFFF</color>
     <color name="create_btn">#3073A8</color>
     <color name="create_btn_press">#205580</color>
     <color name="categoryName">#0E0E0E</color>
@@ -42,9 +42,9 @@
     <color name="firmsBg">#FFFFFF</color>
     <color name="swipeBg">#FFFFFF</color>
     <color name="swipeColor">#59A5E1</color>
-    <color name="callBg">#FFFFFF</color>
+    <color name="callBg">#42A64E</color>
     <color name="callStroke">#4CAF50</color>
-    <color name="callPress">#EFFDEF</color>
+    <color name="callPress">#3B9345</color>
     <color name="edtStroke">#1B1B1B</color>
     <color name="skipBtnStroke">#000000</color>
     <color name="skipBtnBg">#FFFFFF</color>
@@ -153,8 +153,9 @@
     <color name="showMoreBg">#FFFFFF</color>
     <color name="drawerToggle">#FFFFFF</color>
     <color name="fabBg">#168EC4</color>
-
     <color name="signInLogo">#2981C6</color>
     <color name="unCheckedItem">#1D2B35</color>
     <color name="checkdItem">#1B79C5</color>
+    <color name="tagUnChecked">#4290CD</color>
+    <color name="tagsColor">#FFFFFF</color>
 </resources>

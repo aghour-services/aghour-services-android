@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/toolbarBg"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/toolBarTv"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:gravity="end|center"
-            android:text="@string/app_name"
-            android:textColor="@color/toolbarText"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbarBg"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:id="@+id/toolBarTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:gravity="end|center"
+                android:text="@string/app_name"
+                android:textColor="@color/toolbarText"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:background="@color/recyclerViewBg"
         app:defaultNavHost="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toTopOf="@+id/linearAdMob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,23 +56,14 @@
         android:layout_gravity="bottom"
         android:background="@color/adMobBg"
         android:gravity="bottom"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         android:elevation="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearBottomNavVIew"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
 
         <include layout="@layout/admob_banner" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearBottomNavVIew"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:elevation="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/notInternet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomView"
@@ -79,28 +77,22 @@
             style="@style/BottomNavigationTextStyle"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/notInternet"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:animateLayoutChanges="true"
-        android:background="@color/notifyBg"
-        android:elevation="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/noInternet"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="35dp"
             android:layout_gravity="center"
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
-            android:text="لا يـوجـد إنتـرنـت"
+            android:visibility="gone"
+            android:background="@color/notifyBg"
+            android:padding="6dp"
+            android:elevation="10dp"
+            android:text="@string/no_internet_connection"
             android:textColor="@color/notifyTitle"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
