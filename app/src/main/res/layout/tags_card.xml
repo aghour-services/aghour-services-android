@@ -6,25 +6,25 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     app:cardBackgroundColor="@color/recyclerViewBg"
-    app:cardElevation="2dp"
     app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:elevation="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="10dp">
 
         <CheckBox
             android:id="@+id/tagTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="14dp"
             android:buttonTint="@color/dialogText"
+            android:fontFamily="casual"
+            android:padding="14dp"
             android:textColor="@color/dialogText"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:fontFamily="casual"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

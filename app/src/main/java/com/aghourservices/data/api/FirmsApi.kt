@@ -12,6 +12,6 @@ interface FirmsApi {
     @GET("firms")
     fun loadFirms(
         @Query("category_id") category_id: Int,
-        @Query("tags") tags: ArrayList<String>
+        @Query("tags") tags: String
     ): Call<ArrayList<Firm>>
 }

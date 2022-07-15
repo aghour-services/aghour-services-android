@@ -54,6 +54,7 @@ android {
     realm {
         syncEnabled = true
     }
+    namespace 'com.aghourservices'
 }
 
 dependencies {

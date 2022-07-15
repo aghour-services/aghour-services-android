@@ -63,10 +63,14 @@ class FirmsFragment : BaseFragment() {
     }
 
 
+    private fun tagsAsParameter(): String {
+        return selectedTags.joinToString(",")
+    }
+
     private fun setupFirmsViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
 
-        activity?.let { firmsViewModel.loadFirms(it, categoryId, selectedTags) }
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
 
         firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
             firmsList = it
@@ -129,7 +133,7 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setOnRefreshListener {
             handler.postDelayed({
                 binding.swipe.isRefreshing = false
-                activity?.let { firmsViewModel.loadFirms(it, categoryId, selectedTags) }
+                activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
             }, 1000)
         }
     }
@@ -158,7 +162,7 @@ class FirmsFragment : BaseFragment() {
         } else {
             selectedTags.remove(tagsList[position].tag)
         }
-        activity?.let { firmsViewModel.loadFirms(it, categoryId, selectedTags) }
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
     }
 
     private fun onFirmsItemClick(v: View, position: Int) {
