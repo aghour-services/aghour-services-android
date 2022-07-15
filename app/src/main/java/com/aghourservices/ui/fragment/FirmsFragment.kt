@@ -33,12 +33,10 @@ class FirmsFragment : BaseFragment() {
     private lateinit var binding: FragmentFirmsBinding
     private lateinit var firmsViewModel: FirmsViewModel
     private lateinit var tagsViewModel: TagsViewModel
-
     private val handler = Handler(Looper.getMainLooper()!!)
     private val args: CategoriesFragmentArgs by navArgs()
-    private var categoryId = 0
     private var selectedTags = ArrayList<String>()
-
+    private var categoryId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +62,11 @@ class FirmsFragment : BaseFragment() {
 
 
     private fun tagsAsParameter(): String {
-        return selectedTags.joinToString(",")
+        return if (selectedTags.isEmpty()) {
+            return ""
+        } else {
+            selectedTags.joinToString(",")
+        }.toString()
     }
 
     private fun setupFirmsViewModel() {
