@@ -11,128 +11,126 @@
         android:background="@color/recyclerViewBg">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingtoolbarly"
+            android:id="@+id/collapsingToolBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tagsRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="1dp"
-                android:visibility="gone"
-                android:background="@color/recyclerViewBg"
-                android:elevation="2dp"
-                android:orientation="horizontal"
-                android:paddingLeft="4dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="1"
-                tools:listitem="@layout/tags_card" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:id="@+id/noInternet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseCompoundDrawables">
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@mipmap/cloud"
-            tools:ignore="ContentDescription" />
-
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tagsRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/cairo_bold"
-            android:text="@string/noInternetConnections"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/firmsShimmer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:forceDarkAllowed="false"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="q">
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="1"
+            tools:listitem="@layout/tags_card" />
 
         <LinearLayout
+            android:id="@+id/noInternet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
 
-            <include layout="@layout/firms_shimmer" />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/cloud"
+                tools:ignore="ContentDescription" />
 
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
-            <include layout="@layout/firms_shimmer" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_bold"
+                android:text="@string/noInternetConnections"
+                android:textSize="14sp" />
         </LinearLayout>
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagsRecyclerView">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/firmsRecyclerView"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/firmsShimmer"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/recyclerViewBg"
+            android:layout_height="match_parent"
+            android:forceDarkAllowed="false"
             android:orientation="vertical"
-            android:visibility="invisible"
-            tools:listitem="@layout/firms_card" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="q">
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+                <include layout="@layout/firms_shimmer" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tagsRecyclerView">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/firmsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/recyclerViewBg"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                tools:listitem="@layout/firms_card" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
