@@ -36,26 +36,12 @@ class FavoriteFragment : BaseFragment() {
         requireActivity().title = getString(R.string.favorite_fragment)
         initRecyclerView()
         loadFavorites()
-        refresh()
     }
 
     private fun initRecyclerView() {
         binding.apply {
             favoriteRecyclerView.setHasFixedSize(true)
             favoriteRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
-        }
-    }
-
-    private fun refresh() {
-        binding.apply {
-            swipe.setColorSchemeResources(R.color.swipeColor)
-            swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
-            swipe.setOnRefreshListener {
-                handler.postDelayed({
-                    binding.swipe.isRefreshing = false
-                    loadFavorites()
-                }, 1000)
-            }
         }
     }
 
