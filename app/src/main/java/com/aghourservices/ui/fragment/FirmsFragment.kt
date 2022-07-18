@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -69,6 +68,28 @@ class FirmsFragment : BaseFragment() {
         }.toString()
     }
 
+    private fun setupTagsViewModel() {
+        tagsViewModel = ViewModelProvider(this)[TagsViewModel::class.java]
+
+        activity?.let { tagsViewModel.loadTags(it, categoryId) }
+
+        tagsViewModel.tagsLiveData.observe(viewLifecycleOwner) {
+            tagsList = it
+            tagsAdapter = TagsAdapter(requireContext(), tagsList) { v, position -> onTagsItemClick(v as CheckBox, position) }
+
+            binding.apply {
+                tagsRecyclerView.setHasFixedSize(true)
+                tagsRecyclerView.layoutManager =
+                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+
+                tagsRecyclerView.adapter = tagsAdapter
+                if (tagsList.isNotEmpty()) {
+                    tagsRecyclerView.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
     private fun setupFirmsViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
 
@@ -81,45 +102,18 @@ class FirmsFragment : BaseFragment() {
                 onFirmsItemClick(v, position)
             }
 
-            if (firmsList.isEmpty()) {
-                noInternetConnection()
-            }
-
             binding.apply {
                 firmsRecyclerView.setHasFixedSize(true)
 
                 firmsRecyclerView.layoutManager =
                     LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
-                stopShimmerAnimation()
                 firmsRecyclerView.adapter = firmsAdapter
             }
-
-
-        }
-    }
-
-    private fun setupTagsViewModel() {
-        tagsViewModel = ViewModelProvider(this)[TagsViewModel::class.java]
-
-        activity?.let { tagsViewModel.loadTags(it, categoryId) }
-
-        tagsViewModel.tagsLiveData.observe(viewLifecycleOwner) {
-            tagsList = it
-            tagsAdapter = TagsAdapter(requireContext(), tagsList) { v, position ->
-                onTagsItemClick(v as CheckBox, position)
+            if (firmsList.isEmpty()) {
+                noInternetConnection()
             }
-
-            binding.apply {
-                tagsRecyclerView.setHasFixedSize(true)
-                tagsRecyclerView.layoutManager =
-                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-
-                tagsRecyclerView.adapter = tagsAdapter
-                if (tagsList.isNotEmpty()) {
-                    tagsRecyclerView.visibility = View.VISIBLE
-                }
-            }
+            stopShimmerAnimation()
         }
     }
 
@@ -146,17 +140,16 @@ class FirmsFragment : BaseFragment() {
             tagsRecyclerView.isVisible = false
             firmsRecyclerView.isVisible = false
         }
-        stopShimmerAnimation()
     }
 
     private fun stopShimmerAnimation() {
         binding.apply {
             firmsShimmer.stopShimmer()
             firmsShimmer.isVisible = false
+            tagsRecyclerView.isVisible = true
             firmsRecyclerView.isVisible = true
         }
     }
-
 
     private fun onTagsItemClick(v: CheckBox, position: Int) {
         if (v.isChecked) {
@@ -172,12 +165,6 @@ class FirmsFragment : BaseFragment() {
             R.id.btnFav -> updateFavorite(position)
             R.id.btnCall -> callPhone(position)
         }
-    }
-
-    private fun toastTags(position: Int) {
-        val tag = tagsList[position]
-        val name = tag.tag
-        Toast.makeText(requireContext(), "Clicked $name", Toast.LENGTH_SHORT).show()
     }
 
     private fun callPhone(position: Int) {

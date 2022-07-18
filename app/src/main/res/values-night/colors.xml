@@ -19,8 +19,8 @@
     <color name="time">#439446</color>
     <color name="firmsBg">#151B20</color>
     <color name="firmName">#FFFFFF</color>
-    <color name="callBg">#202932</color>
-    <color name="callPress">#445668</color>
+    <color name="callBg">#378541</color>
+    <color name="callPress">#3F974A</color>
     <color name="edtStroke">#808F9E</color>
     <color name="add_data_bg">#1A2127</color>
     <color name="add_data">#FFFFFF</color>
@@ -107,5 +107,7 @@
     <color name="signInLogo">#2B3A45</color>
     <color name="unCheckedItem">#FFFFFF</color>
     <color name="checkdItem">#669AC5</color>
+    <color name="tagUnChecked">#2C3F4E</color>
+    <color name="tagsColor">#FFFFFF</color>
 
 </resources>

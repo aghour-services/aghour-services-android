@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/addDataFragment"
-        android:name="com.aghourservices.ui.fragment.AddDataFragment"
+        android:name="com.aghourservices.ui.fragment.upload.AddDataFragment"
         android:label="@string/menu_add"
         tools:layout="@layout/fragment_add_data" />
 
@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/addArticleFragment"
-        android:name="com.aghourservices.ui.fragment.AddArticleFragment"
+        android:name="com.aghourservices.ui.fragment.upload.AddArticleFragment"
         android:label="@string/add_article"
         tools:layout="@layout/fragment_add_article" />
 

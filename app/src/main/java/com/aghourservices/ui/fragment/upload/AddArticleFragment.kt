@@ -1,21 +1,20 @@
-package com.aghourservices.ui.fragment
+package com.aghourservices.ui.fragment.upload
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentAddArticleBinding
-import com.aghourservices.ui.main.activity.SignUpActivity
+import com.aghourservices.ui.fragment.BaseFragment
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
 import retrofit2.Callback
@@ -60,7 +59,7 @@ class AddArticleFragment : BaseFragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            showDialog()
+            createAccount(requireActivity())
         }
     }
 
@@ -68,23 +67,6 @@ class AddArticleFragment : BaseFragment() {
         super.onDestroy()
         showBottomNavigation()
         showToolbar()
-    }
-
-    private fun showDialog() {
-        val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        alertDialogBuilder.setTitle(getString(R.string.create_account_first))
-        alertDialogBuilder.setMessage(getString(R.string.should_create))
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton("إنشاء الان") { _, _ ->
-            startActivity(Intent(requireActivity(), SignUpActivity::class.java))
-            requireActivity().finish()
-        }
-        alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE).textSize = 14f
-        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).textSize = 14f
     }
 
     private fun createArticle(article: Article) {
