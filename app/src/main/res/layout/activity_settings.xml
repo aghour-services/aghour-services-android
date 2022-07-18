@@ -76,6 +76,7 @@
             android:textColor="@color/createAccountText"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +97,6 @@
             android:layout_margin="5dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +109,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
+                tools:text="Mohamed Magdy"
                 android:textAlignment="center"
                 android:textColor="@color/userNameColor"
                 android:textSize="14sp" />
@@ -122,6 +123,7 @@
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:maxLines="1"
+                tools:text="mohamedmagdysaber@gmail.com"
                 android:textAlignment="center"
                 android:textColor="@color/emailColor"
                 android:textSize="12sp" />
@@ -132,10 +134,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="3dp"
+                tools:text="01287303441"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/phoneColor"
+                android:textColor="@color/userPhone"
                 android:textSize="12sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

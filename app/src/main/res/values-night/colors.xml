@@ -109,5 +109,7 @@
     <color name="checkdItem">#669AC5</color>
     <color name="tagUnChecked">#2C3F4E</color>
     <color name="tagsColor">#FFFFFF</color>
+    <color name="edtAddArticle">#242D33</color>
+    <color name="strokeAddArticle">#2B3740</color>
 
 </resources>

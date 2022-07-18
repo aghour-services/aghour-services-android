@@ -75,7 +75,10 @@ class FirmsFragment : BaseFragment() {
 
         tagsViewModel.tagsLiveData.observe(viewLifecycleOwner) {
             tagsList = it
-            tagsAdapter = TagsAdapter(requireContext(), tagsList) { v, position -> onTagsItemClick(v as CheckBox, position) }
+            tagsAdapter = TagsAdapter(
+                requireContext(),
+                tagsList
+            ) { v, position -> onTagsItemClick(v as CheckBox, position) }
 
             binding.apply {
                 tagsRecyclerView.setHasFixedSize(true)
@@ -146,7 +149,6 @@ class FirmsFragment : BaseFragment() {
         binding.apply {
             firmsShimmer.stopShimmer()
             firmsShimmer.isVisible = false
-            tagsRecyclerView.isVisible = true
             firmsRecyclerView.isVisible = true
         }
     }

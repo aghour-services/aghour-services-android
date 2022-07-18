@@ -18,12 +18,6 @@
         android:theme="@style/Theme.LightApp"
         tools:targetApi="s">
         <activity
-            android:name="com.aghourservices.ui.main.activity.AboutActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.aghourservices.ui.main.activity.SettingsActivity"
-            android:exported="false" />
-        <activity
             android:name="com.aghourservices.ui.main.activity.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -38,9 +32,9 @@
         <activity
             android:name="com.aghourservices.ui.main.activity.MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:theme="@style/CategoriesTheme"
+            android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.main.activity.SignInActivity"
@@ -52,6 +46,12 @@
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/AddDataTheme" />
+        <activity
+            android:name="com.aghourservices.ui.main.activity.AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.aghourservices.ui.main.activity.SettingsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

@@ -72,7 +72,7 @@
     <color name="gray1">#E6E5E5</color>
     <color name="blue">#2F3F86</color>
     <color name="green">#1DA32E</color>
-    <color name="userPhone">#39C64B</color>
+    <color name="userPhone">#34B344</color>
     <color name="green1">#3B8F45</color>
     <color name="name_placeholder">#F8F8F7</color>
     <color name="item_name">#0c0c0c</color>
@@ -158,4 +158,6 @@
     <color name="checkdItem">#1B79C5</color>
     <color name="tagUnChecked">#4290CD</color>
     <color name="tagsColor">#FFFFFF</color>
+    <color name="edtAddArticle">#FFFFFF</color>
+    <color name="strokeAddArticle">#BABABA</color>
 </resources>
