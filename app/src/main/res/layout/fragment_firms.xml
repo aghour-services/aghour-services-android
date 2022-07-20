@@ -68,6 +68,7 @@
             android:orientation="horizontal"
             android:padding="8dp"
             android:visibility="gone"
+            android:padding="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +169,6 @@
                 android:layout_height="0dp"
                 android:background="@color/recyclerViewBg"
                 android:orientation="vertical"
-                android:visibility="invisible"
                 tools:listitem="@layout/firms_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
