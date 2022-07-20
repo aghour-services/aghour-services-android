@@ -61,7 +61,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun loginUser(user: User) {
         showProgressDialog(this)
-        val retrofitBuilder = RetrofitInstance().userApi.signIn(user.userObject())
+        val retrofitBuilder = RetrofitInstance(this).userApi.signIn(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
