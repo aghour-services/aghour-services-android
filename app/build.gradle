@@ -10,14 +10,14 @@ plugins {
 }
 
 android {
-    compileSdk 31
-    buildToolsVersion "30.0.3"
+    compileSdk 32
+    namespace 'com.aghourservices'
     defaultConfig {
         applicationId "com.aghourservices"
         minSdk 21
-        targetSdk 31
-        versionCode 25
-        versionName "6.6"
+        targetSdk 32
+        versionCode 26
+        versionName "7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,7 +26,7 @@ android {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
-            resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
+            resValue("string", "base_url", "https://aghour-services-staging.herokuapp.com/api/")
             resValue("string", "news_topic", "News-Staging")
         }
 
@@ -54,13 +54,12 @@ android {
     realm {
         syncEnabled = true
     }
-    namespace 'com.aghourservices'
 }
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.7.0-alpha02'
+    implementation 'com.google.android.material:material:1.7.0-alpha03'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
     testImplementation 'junit:junit:4.13.2'
@@ -69,8 +68,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Google Ads
-    implementation 'com.google.android.gms:play-services-ads:21.0.0'
-    implementation 'com.google.android.gms:play-services-ads-lite:21.0.0'
+    implementation 'com.google.android.gms:play-services-ads:21.1.0'
+    implementation 'com.google.android.gms:play-services-ads-lite:21.1.0'
 
     //Navigation Fragment
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
@@ -99,7 +98,7 @@ dependencies {
     //Firebase Analytics
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.6'
     implementation platform('com.google.firebase:firebase-bom:30.2.0')
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.1.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.1.2'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
 

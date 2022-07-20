@@ -97,8 +97,10 @@ class AddDataFragment : BaseFragment() {
             }
         retrofitBuilder?.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
-                dataAdded(requireContext())
-                setTextEmpty()
+                if (response.isSuccessful) {
+                    dataAdded(requireContext())
+                    setTextEmpty()
+                }
             }
 
             override fun onFailure(call: Call<Firm>, t: Throwable) {

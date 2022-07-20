@@ -5,20 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/recyclerViewBg">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,12 +17,18 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:visibility="gone"
+            android:padding="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="1"
             tools:listitem="@layout/tags_card" />
+
+        <View
+            android:id="@+id/lineView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lineView" />
 
         <LinearLayout
             android:id="@+id/noInternet"
@@ -114,7 +106,6 @@
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,10 +116,8 @@
                 android:id="@+id/firmsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="5dp"
                 android:background="@color/recyclerViewBg"
                 android:orientation="vertical"
-                android:visibility="invisible"
                 tools:listitem="@layout/firms_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
