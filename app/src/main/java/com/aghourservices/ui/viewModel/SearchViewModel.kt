@@ -1,5 +1,6 @@
 package com.aghourservices.ui.viewModel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Search
@@ -12,11 +13,11 @@ import retrofit2.Response
 class SearchViewModel : ViewModel() {
     var searchLiveData = MutableLiveData<ArrayList<Search>>()
 
-    fun search(text: String) {
+    fun search(context: Context, text: String) {
         val eventName = "search_${text}"
         Event.sendFirebaseEvent(eventName, text)
 
-        val retrofitBuilder = RetrofitInstance().searchApi.search(text)
+        val retrofitBuilder = RetrofitInstance(context).searchApi.search(text)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Search>?> {
             override fun onResponse(

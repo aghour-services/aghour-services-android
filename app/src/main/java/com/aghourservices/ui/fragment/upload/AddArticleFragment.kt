@@ -72,7 +72,7 @@ class AddArticleFragment : BaseFragment() {
     private fun createArticle(article: Article) {
         val user = getUserData(requireActivity())
         val retrofitBuilder = activity?.let {
-            RetrofitInstance().newsApi.createArticle(
+            RetrofitInstance(it).newsApi.createArticle(
                 article.toJsonObject(),
                 user.token
             )

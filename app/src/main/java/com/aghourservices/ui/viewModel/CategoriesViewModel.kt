@@ -16,7 +16,7 @@ class CategoriesViewModel : ViewModel() {
 
     fun loadCategories(context: Context) {
         val realm = RealmConfiguration(context).realm
-        val retrofitBuilder = RetrofitInstance().categoriesApi.loadCategoriesList()
+        val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList()
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Category>> {
             override fun onResponse(

@@ -16,7 +16,7 @@ class NewsViewModel : ViewModel() {
 
     fun loadArticles(context: Context, categoryId: Int) {
         val realm = RealmConfiguration(context).realm
-        val retrofitBuilder = RetrofitInstance().newsApi.loadArticles(categoryId)
+        val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles(categoryId)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Article>?> {
             override fun onResponse(

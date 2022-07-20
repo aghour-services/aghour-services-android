@@ -16,7 +16,7 @@ class FirmsViewModel : ViewModel() {
 
     fun loadFirms(context: Context, categoryId: Int, tagsAsParameter: String) {
         val realm = RealmConfiguration(context).realm
-        val retrofitBuilder = RetrofitInstance().firmsApi.loadFirms(categoryId, tagsAsParameter)
+        val retrofitBuilder = RetrofitInstance(context).firmsApi.loadFirms(categoryId, tagsAsParameter)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(

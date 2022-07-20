@@ -2,7 +2,6 @@ package com.aghourservices.utils.helper
 
 class Constants {
     companion object {
-        const val BASE_URL = "https://aghour-services-backend.herokuapp.com/api/"
         const val channelId = "FCM Channel"
         const val DARK_STATUS = "Aghour_Dark_Mode"
         const val PREFERENCE_NAME = "user_settings"
