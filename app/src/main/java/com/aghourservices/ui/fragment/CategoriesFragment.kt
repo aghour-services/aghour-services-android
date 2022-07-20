@@ -33,10 +33,15 @@ class CategoriesFragment : BaseFragment() {
 
     private fun setUpViewModel() {
         categoriesViewModel = ViewModelProvider(this)[CategoriesViewModel::class.java]
-        categoriesViewModel.loadCategories(activity!!)
+        activity?.let { categoriesViewModel.loadCategories(it) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryList = it
-            categoryAdapter = CategoriesAdapter(it) { position -> onListItemClick(position) }
+            categoryAdapter =
+                CategoriesAdapter(requireContext(), categoryList) { position ->
+                    onListItemClick(
+                        position
+                    )
+                }
             binding.categoriesRecyclerview.adapter = categoryAdapter
             progressBar()
         }
@@ -51,7 +56,6 @@ class CategoriesFragment : BaseFragment() {
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
-
 
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id

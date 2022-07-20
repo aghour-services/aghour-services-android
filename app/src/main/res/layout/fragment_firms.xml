@@ -10,12 +10,63 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/tagsShimmer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:forceDarkAllowed="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="q">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+                <include layout="@layout/tags_shimmer" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/lineView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tagsRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
+            android:padding="8dp"
             android:visibility="gone"
             android:padding="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -27,8 +78,9 @@
         <View
             android:id="@+id/lineView"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/lineView" />
+            android:layout_height="0.1dp"
+            android:background="@color/lineView"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/noInternet"
@@ -106,7 +158,6 @@
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

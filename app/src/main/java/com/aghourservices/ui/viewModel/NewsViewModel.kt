@@ -1,6 +1,6 @@
 package com.aghourservices.ui.viewModel
 
-import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.db.RealmConfiguration
@@ -14,7 +14,7 @@ class NewsViewModel : ViewModel() {
     var newsLiveData = MutableLiveData<ArrayList<Article>>()
     var newsList: ArrayList<Article> = ArrayList()
 
-    fun loadArticles(context: Activity, categoryId: Int) {
+    fun loadArticles(context: Context, categoryId: Int) {
         val realm = RealmConfiguration(context).realm
         val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles(categoryId)
 

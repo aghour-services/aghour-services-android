@@ -1,6 +1,6 @@
 package com.aghourservices.data.request
 
-import android.app.Activity
+import android.content.Context
 import com.aghourservices.R
 import com.aghourservices.data.api.*
 import okhttp3.OkHttpClient
@@ -9,8 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
-class RetrofitInstance(context: Activity) {
+class RetrofitInstance(context: Context) {
     private val baseUrl = context.getString(R.string.base_url)
 
     private val retrofit: Retrofit by lazy {
@@ -49,6 +48,7 @@ class RetrofitInstance(context: Activity) {
     val userApi: UserApi by lazy {
         retrofit.create(UserApi::class.java)
     }
+
     val tagsApi: TagApi by lazy {
         retrofit.create(TagApi::class.java)
     }

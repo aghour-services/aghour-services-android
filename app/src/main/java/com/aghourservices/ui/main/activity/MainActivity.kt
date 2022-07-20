@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkExtras(mainNavController: NavController) {
-        val extras = intent.extras
         val newsTopic = getString(R.string.news_topic)
+        val extras = intent.extras
         if (extras != null) {
             for (key in extras.keySet()) {
                 if (key == "from" && extras.get(key).toString().contains(newsTopic)) {

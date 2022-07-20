@@ -87,8 +87,10 @@ class FirmsFragment : BaseFragment() {
 
                 tagsRecyclerView.adapter = tagsAdapter
                 if (tagsList.isNotEmpty()) {
-                    tagsRecyclerView.visibility = View.VISIBLE
+                    tagsRecyclerView.isVisible = true
+                    lineView.isVisible = true
                 }
+                stopShimmerAnimation()
             }
         }
     }
@@ -148,6 +150,9 @@ class FirmsFragment : BaseFragment() {
     private fun stopShimmerAnimation() {
         binding.apply {
             firmsShimmer.stopShimmer()
+            tagsShimmer.stopShimmer()
+            tagsShimmer.isVisible = false
+            line.isVisible = false
             firmsShimmer.isVisible = false
             firmsRecyclerView.isVisible = true
         }

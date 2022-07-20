@@ -8,7 +8,8 @@ import android.widget.ArrayAdapter
 import com.aghourservices.R
 import com.aghourservices.data.model.Category
 import com.aghourservices.databinding.SpinnerItemsBinding
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class SpinnerCategoriesAdapter(context: Context, category: List<Category>) :
     ArrayAdapter<Category>(context, 0, category) {
@@ -27,8 +28,11 @@ class SpinnerCategoriesAdapter(context: Context, category: List<Category>) :
         val categoryImage = binding.categoryImage
         val categoryName = binding.categoryName
 
-        Picasso.get().load(category?.icon).placeholder(R.drawable.ic_loading)
-            .error(R.drawable.ic_error).into(categoryImage)
+        Glide.with(context)
+            .load(category?.icon)
+            .placeholder(R.drawable.ic_loading)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(categoryImage)
         categoryName.text = category?.name
 
         return binding.root

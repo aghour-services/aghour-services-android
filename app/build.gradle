@@ -35,7 +35,6 @@ android {
             resValue("bool", "ENABLE_ADS", "true")
             resValue("string", "base_url", "https://aghour-services-backend.herokuapp.com/api/")
             resValue("string", "news_topic", "News")
-
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -77,9 +76,6 @@ dependencies {
 
     //Preference Shared
     implementation "androidx.preference:preference-ktx:1.2.0"
-
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //Recycler, CardView & Shimmer Animation
     implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'

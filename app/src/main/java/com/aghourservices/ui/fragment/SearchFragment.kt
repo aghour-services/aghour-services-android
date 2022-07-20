@@ -51,7 +51,7 @@ class SearchFragment : BaseFragment() {
         }
 
         binding.searchText.setOnClickListener {
-            activity?.let { it1 -> searchViewModel.search(it1, searchText) }
+            activity?.let { it -> searchViewModel.search(it, searchText) }
         }
 
         binding.searchText.doOnTextChanged { text, _, _, _ ->
