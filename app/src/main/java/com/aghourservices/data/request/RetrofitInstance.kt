@@ -1,18 +1,14 @@
 package com.aghourservices.data.request
 
-import android.app.Activity
-import com.aghourservices.R
 import com.aghourservices.data.api.*
+import com.aghourservices.utils.helper.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
-class RetrofitInstance(context: Activity) {
-    private val baseUrl = context.getString(R.string.base_url)
-
+class RetrofitInstance {
     private val retrofit: Retrofit by lazy {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
@@ -25,7 +21,7 @@ class RetrofitInstance(context: Activity) {
 
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl(BASE_URL)
             .client(client)
             .build()
     }
@@ -49,6 +45,7 @@ class RetrofitInstance(context: Activity) {
     val userApi: UserApi by lazy {
         retrofit.create(UserApi::class.java)
     }
+
     val tagsApi: TagApi by lazy {
         retrofit.create(TagApi::class.java)
     }

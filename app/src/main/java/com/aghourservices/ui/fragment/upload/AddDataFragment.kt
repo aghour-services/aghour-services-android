@@ -90,7 +90,7 @@ class AddDataFragment : BaseFragment() {
         val user = getUserData(requireActivity())
         val retrofitBuilder =
             activity?.let {
-                RetrofitInstance(it).firmsApi.createFirm(
+                RetrofitInstance().firmsApi.createFirm(
                     firm.toJsonObject(),
                     user.token
                 )

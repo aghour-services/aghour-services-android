@@ -73,7 +73,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun createUser(user: User) {
         showProgressDialog(this)
-        val retrofitBuilder = RetrofitInstance(this).userApi.signUp(user.userObject())
+        val retrofitBuilder = RetrofitInstance().userApi.signUp(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {

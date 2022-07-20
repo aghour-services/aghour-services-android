@@ -55,9 +55,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun firebaseTopic() {
-        val newsTopic = getString(R.string.news_topic)
-
-        Firebase.messaging.subscribeToTopic(newsTopic)
+        Firebase.messaging.subscribeToTopic("News")
             .addOnCompleteListener { task ->
                 var msg = "Done"
                 if (!task.isSuccessful) {

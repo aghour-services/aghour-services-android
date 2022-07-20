@@ -71,7 +71,7 @@ class FirmsFragment : BaseFragment() {
     private fun setupTagsViewModel() {
         tagsViewModel = ViewModelProvider(this)[TagsViewModel::class.java]
 
-        activity?.let { tagsViewModel.loadTags(it, categoryId) }
+        activity?.let { tagsViewModel.loadTags(categoryId) }
 
         tagsViewModel.tagsLiveData.observe(viewLifecycleOwner) {
             tagsList = it
@@ -87,7 +87,8 @@ class FirmsFragment : BaseFragment() {
 
                 tagsRecyclerView.adapter = tagsAdapter
                 if (tagsList.isNotEmpty()) {
-                    tagsRecyclerView.visibility = View.VISIBLE
+                    tagsRecyclerView.isVisible = true
+                    lineView.isVisible = true
                 }
             }
         }
@@ -148,6 +149,9 @@ class FirmsFragment : BaseFragment() {
     private fun stopShimmerAnimation() {
         binding.apply {
             firmsShimmer.stopShimmer()
+            tagsShimmer.stopShimmer()
+            tagsShimmer.isVisible = false
+            line.isVisible = false
             firmsShimmer.isVisible = false
             firmsRecyclerView.isVisible = true
         }

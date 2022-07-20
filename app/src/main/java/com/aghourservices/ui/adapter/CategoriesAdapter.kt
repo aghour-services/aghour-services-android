@@ -1,14 +1,17 @@
 package com.aghourservices.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.Category
 import com.aghourservices.databinding.CategoryCardBinding
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class CategoriesAdapter(
+    private val context: Context,
     private var categoryList: List<Category>,
     private val onItemClicked: (position: Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -23,10 +26,12 @@ class CategoriesAdapter(
         val categoryItems = categoryList[position]
 
         holder.binding.apply {
-            Picasso.get().load(categoryItems.icon)
+            Glide.with(context)
+                .load(categoryItems.icon)
                 .placeholder(R.drawable.ic_loading)
-                .error(R.drawable.ic_error)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(categoryIcon)
+
             categoryTitleTv.text = categoryItems.name
         }
     }

@@ -51,13 +51,13 @@ class SearchFragment : BaseFragment() {
         }
 
         binding.searchText.setOnClickListener {
-            activity?.let { it1 -> searchViewModel.search(it1, searchText) }
+            activity?.let { it1 -> searchViewModel.search(searchText) }
         }
 
         binding.searchText.doOnTextChanged { text, _, _, _ ->
             val searchKeyWord = text.toString()
             if (searchKeyWord.length > 2) {
-                activity?.let { searchViewModel.search(it, searchKeyWord) }
+                activity?.let { searchViewModel.search(searchKeyWord) }
             }
         }
     }
@@ -74,7 +74,7 @@ class SearchFragment : BaseFragment() {
         val searchText = binding.searchText.text.toString()
 
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        activity?.let { searchViewModel.search(it, searchText) }
+        activity?.let { searchViewModel.search(searchText) }
 
         searchViewModel.searchLiveData.observe(viewLifecycleOwner) {
             searchList = it

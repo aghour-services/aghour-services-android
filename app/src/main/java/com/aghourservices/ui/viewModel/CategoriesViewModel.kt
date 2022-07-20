@@ -1,6 +1,6 @@
 package com.aghourservices.ui.viewModel
 
-import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.db.RealmConfiguration
@@ -14,9 +14,9 @@ class CategoriesViewModel : ViewModel() {
     val categoriesLiveData = MutableLiveData<ArrayList<Category>>()
     var categoryList: ArrayList<Category> = ArrayList()
 
-    fun loadCategories(context: Activity) {
+    fun loadCategories(context: Context) {
         val realm = RealmConfiguration(context).realm
-        val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList()
+        val retrofitBuilder = RetrofitInstance().categoriesApi.loadCategoriesList()
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Category>> {
             override fun onResponse(
