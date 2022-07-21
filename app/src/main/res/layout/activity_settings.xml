@@ -76,7 +76,6 @@
             android:textColor="@color/createAccountText"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,8 +94,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="5dp"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,10 +109,10 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
-                tools:text="Mohamed Magdy"
                 android:textAlignment="center"
                 android:textColor="@color/userNameColor"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Mohamed Magdy" />
 
             <TextView
                 android:id="@+id/user_email"
@@ -123,10 +123,10 @@
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:maxLines="1"
-                tools:text="mohamedmagdysaber@gmail.com"
                 android:textAlignment="center"
                 android:textColor="@color/emailColor"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="mohamedmagdysaber@gmail.com" />
 
             <TextView
                 android:id="@+id/user_mobile"
@@ -134,12 +134,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="3dp"
-                tools:text="01287303441"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/userPhone"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="01287303441" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -306,8 +306,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
         android:padding="20dp"
+        android:weightSum="3"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -327,8 +327,8 @@
             android:layout_weight="0.5"
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
-            android:textAlignment="center"
             android:text="تــواصــل مــعــنا"
+            android:textAlignment="center"
             android:textColor="#FFA013"
             android:textSize="@dimen/settings_text" />
 
@@ -344,11 +344,11 @@
 
     <LinearLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/linearAdMob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -381,7 +381,7 @@
 
         <LinearLayout
             android:id="@+id/email"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="30dp"
@@ -401,7 +401,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center"
-                android:text="البريد الإلكتروني"
+                android:text="البريد"
                 android:textColor="#FF5722"
                 android:textSize="@dimen/settings_text"
                 android:textStyle="bold" />

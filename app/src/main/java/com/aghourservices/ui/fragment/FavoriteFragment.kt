@@ -88,6 +88,7 @@ class FavoriteFragment : BaseFragment() {
         firm = realm!!.createOrUpdateObjectFromJson(Firm::class.java, firm.toJSONObject())
         realm.copyToRealmOrUpdate(firm)
         realm.commitTransaction()
+        loadFavorites()
     }
 
     private fun loadFavorites() {
