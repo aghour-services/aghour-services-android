@@ -17,6 +17,7 @@ class TagsViewHolder(
 
         binding.apply {
             tagTv.text = tag.tag
+            tagTv.isChecked = tag.isChecked
         }
     }
 

@@ -12,6 +12,7 @@ import android.widget.CheckBox
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.db.RealmConfiguration
@@ -83,7 +84,7 @@ class FirmsFragment : BaseFragment() {
             binding.apply {
                 tagsRecyclerView.setHasFixedSize(true)
                 tagsRecyclerView.layoutManager =
-                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+                    GridLayoutManager(requireActivity(), 2,LinearLayoutManager.HORIZONTAL, false)
 
                 tagsRecyclerView.adapter = tagsAdapter
                 if (tagsList.isNotEmpty()) {
@@ -159,12 +160,9 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun onTagsItemClick(v: CheckBox, position: Int) {
-        if (v.isChecked) {
-            selectedTags.add(tagsList[position].tag)
-        } else {
-            selectedTags.remove(tagsList[position].tag)
+        when (v.id) {
+            R.id.tagTv -> loadTags(position)
         }
-        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
     }
 
     private fun onFirmsItemClick(v: View, position: Int) {
@@ -182,6 +180,18 @@ class FirmsFragment : BaseFragment() {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
+    }
+
+    private fun loadTags(position: Int) {
+        val tag = tagsList[position]
+
+        if (!tag.isChecked) {
+            selectedTags.add(tagsList[position].tag)
+        } else {
+            selectedTags.remove(tagsList[position].tag)
+        }
+        tag.isChecked = !tag.isChecked
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
     }
 
     private fun updateFavorite(position: Int) {
