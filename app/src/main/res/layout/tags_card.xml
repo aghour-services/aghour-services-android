@@ -15,9 +15,9 @@
         android:background="@drawable/tag_selector"
         android:button="@null"
         android:gravity="center"
-        android:padding="12dp"
+        android:padding="10dp"
         android:textColor="@color/tagsColor"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         tools:text="Tags" />
 
