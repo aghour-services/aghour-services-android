@@ -1,13 +1,18 @@
 package com.aghourservices.data.model
 
-import io.realm.RealmObject
+import io.realm.RealmModel
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
+import io.realm.annotations.Required
 
 @RealmClass
-open class Category(
+open class Category : RealmModel {
     @PrimaryKey
-    var id: Int = 0,
-    var icon: String? = null,
-    var name: String? = null,
-) : RealmObject()
+    var id: Int = 0
+
+    @Required
+    var icon: String = ""
+
+    @Required
+    var name: String = ""
+}

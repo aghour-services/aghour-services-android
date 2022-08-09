@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Firm
 import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
@@ -23,6 +22,7 @@ import com.aghourservices.ui.adapter.TagsAdapter
 import com.aghourservices.ui.viewModel.FirmsViewModel
 import com.aghourservices.ui.viewModel.TagsViewModel
 import com.aghourservices.utils.helper.Event
+import io.realm.Realm
 
 class FirmsFragment : BaseFragment() {
     private lateinit var firmsAdapter: FirmsAdapter
@@ -214,7 +214,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun updateFavorite(position: Int) {
-        val realm = RealmConfiguration(requireContext()).realm
+        val realm = Realm.getDefaultInstance()
         var firm = firmsList[position]
         val name = firm.name
         if (!firm.isFavorite) {
