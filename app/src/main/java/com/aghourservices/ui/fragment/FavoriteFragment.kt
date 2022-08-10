@@ -11,11 +11,11 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Firm
 import com.aghourservices.databinding.FragmentFavoriteBinding
 import com.aghourservices.ui.adapter.FirmsAdapter
 import com.aghourservices.utils.helper.Event
+import io.realm.Realm
 
 class FavoriteFragment : BaseFragment() {
     private lateinit var binding: FragmentFavoriteBinding
@@ -70,7 +70,7 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun updateFavorite(position: Int) {
-        val realm = activity?.let { RealmConfiguration(it).realm }
+        val realm = Realm.getDefaultInstance()
         var firm = firmsList[position]
         val name = firm.name
         if (!firm.isFavorite) {
@@ -92,7 +92,7 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun loadFavorites() {
-        val realm = activity?.let { RealmConfiguration(it).realm }
+        val realm = Realm.getDefaultInstance()
         val result = realm?.where(Firm::class.java)?.equalTo("isFavorite", true)?.findAll()!!
         firmsList = ArrayList()
         firmsList.addAll(result)

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aghourservices.R
-import com.aghourservices.data.db.RealmConfiguration
 import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Firm
 import com.aghourservices.data.request.RetrofitInstance
@@ -19,6 +18,7 @@ import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.dataAdded
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
+import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -111,7 +111,7 @@ class AddDataFragment : BaseFragment() {
     }
 
     private fun loadCategories() {
-        val realm = RealmConfiguration(requireContext()).realm
+        val realm = Realm.getDefaultInstance()
         val result = realm.where(Category::class.java).findAll()
         categoryList = ArrayList()
         categoryList.addAll(result)

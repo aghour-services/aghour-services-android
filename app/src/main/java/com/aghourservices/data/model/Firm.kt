@@ -5,6 +5,7 @@ import io.realm.RealmObject
 import io.realm.annotations.Index
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
+import io.realm.annotations.Required
 import org.json.JSONObject
 
 @RealmClass
@@ -14,10 +15,20 @@ open class Firm : RealmObject() {
 
     @Index
     var category_id: Int = 0
+
+    @Required
     var name: String = ""
+
+    @Required
     var address: String = ""
+
+    @Required
     var description: String = ""
+
+    @Required
     var phone_number: String = ""
+
+    @Required
     var category_name: String = ""
     var isFavorite: Boolean = false
 
