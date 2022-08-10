@@ -52,7 +52,12 @@
         <activity
             android:name="com.aghourservices.ui.main.activity.SettingsActivity"
             android:exported="false" />
-
+        <activity
+            android:name="com.aghourservices.ui.main.activity.AddDataActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.aghourservices.ui.main.activity.AddArticleActivity"
+            android:exported="false" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />

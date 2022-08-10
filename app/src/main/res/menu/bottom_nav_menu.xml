@@ -9,17 +9,18 @@
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/search_selector"
-        android:title="@string/menu_search"/>
+        android:enabled="true"
+        android:title="@string/menu_search" />
 
     <item
         android:id="@+id/addDataFragment"
-        android:icon="@drawable/add_selector"
-        android:title="@string/menu_add" />
+        android:enabled="false"
+        android:title="" />
 
     <item
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/favorite_selector"
-        android:title="@string/menu_fav"/>
+        android:title="@string/menu_fav" />
 
     <item
         android:id="@+id/newsFragment"

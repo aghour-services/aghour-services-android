@@ -114,7 +114,7 @@
                     android:contentDescription="@string/description_firm" />
             </LinearLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCall"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
@@ -157,14 +157,12 @@
                 android:gravity="right|center"
                 android:orientation="horizontal">
 
-                <CheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/btnFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:paddingRight="6dp"
-                    android:button="@drawable/fav_selector"
                     android:gravity="center"
+                    android:button="@drawable/fav_selector"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -180,12 +178,12 @@
                     app:layout_constraintEnd_toStartOf="@+id/btnFav"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/copy_firm"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:src="@drawable/ic_content_copy"
-                    android:padding="12dp"
+                    android:padding="14dp"
                     android:background="@drawable/dialog_selector"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view2"

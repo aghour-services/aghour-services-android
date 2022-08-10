@@ -36,9 +36,9 @@
 
     <fragment
         android:id="@+id/addDataFragment"
-        android:name="com.aghourservices.ui.fragment.upload.AddDataFragment"
+        android:name="com.aghourservices.ui.main.activity.AddDataActivity"
         android:label="@string/menu_add"
-        tools:layout="@layout/fragment_add_data" />
+        tools:layout="@layout/activity_add_data" />
 
     <fragment
         android:id="@+id/newsFragment"
@@ -76,9 +76,9 @@
 
     <fragment
         android:id="@+id/addArticleFragment"
-        android:name="com.aghourservices.ui.fragment.upload.AddArticleFragment"
+        android:name="com.aghourservices.ui.main.activity.AddArticleFragment"
         android:label="@string/add_article"
-        tools:layout="@layout/fragment_add_article" />
+        tools:layout="@layout/activity_add_article" />
 
     <action
         android:id="@+id/action_categoriesFragment"

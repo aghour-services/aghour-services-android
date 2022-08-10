@@ -72,11 +72,6 @@ class NewsFragment : BaseFragment() {
                 activity?.let { newsViewModel.loadArticles(it, categoryId) }
             }, 1000)
         }
-
-        binding.addArticle.setOnClickListener {
-            val action = NewsFragmentDirections.actionNewsFragmentToAddArticleFragment()
-            findNavController().navigate(action)
-        }
     }
 
     private fun onListItemClick() {}
