@@ -12,7 +12,6 @@ import android.widget.CheckBox
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.db.RealmConfiguration
@@ -84,17 +83,28 @@ class FirmsFragment : BaseFragment() {
             binding.apply {
                 tagsRecyclerView.setHasFixedSize(true)
                 tagsRecyclerView.layoutManager =
-                    GridLayoutManager(requireActivity(), 2,LinearLayoutManager.HORIZONTAL, false)
-
+                    LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                 tagsRecyclerView.adapter = tagsAdapter
+
                 if (tagsList.isNotEmpty()) {
                     tagsRecyclerView.isVisible = true
                     lineView.isVisible = true
+//                    smoothScrolling()
                 }
                 stopShimmerAnimation()
             }
         }
     }
+
+//    private fun smoothScrolling() {
+//        handler.postDelayed({
+//            binding.tagsRecyclerView.smoothScrollToPosition(tagsList.size - 1)
+//        }, 1000)
+//
+//        handler.postDelayed({
+//            binding.tagsRecyclerView.smoothScrollToPosition(0)
+//        }, 4000)
+//    }
 
     private fun setupFirmsViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
@@ -134,6 +144,7 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             handler.postDelayed({
+                animationTagsLoading()
                 binding.swipe.isRefreshing = false
                 activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
             }, 1000)
@@ -183,6 +194,7 @@ class FirmsFragment : BaseFragment() {
     }
 
     private fun loadTags(position: Int) {
+        animationTagsLoading()
         val tag = tagsList[position]
 
         if (!tag.isChecked) {
@@ -192,6 +204,13 @@ class FirmsFragment : BaseFragment() {
         }
         tag.isChecked = !tag.isChecked
         activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
+    }
+
+    private fun animationTagsLoading() {
+        binding.apply {
+            firmsShimmer.isVisible = true
+            firmsShimmer.startShimmer()
+        }
     }
 
     private fun updateFavorite(position: Int) {
