@@ -3,12 +3,14 @@
     <item android:state_checked="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/callPress" />
+            <corners android:radius="20dp"/>
         </shape>
     </item>
 
     <item android:state_checked="false">
         <shape android:shape="rectangle">
             <solid android:color="@color/tagUnChecked" />
+            <corners android:radius="20dp"/>
         </shape>
     </item>
 </selector>

@@ -6,41 +6,47 @@
     android:layout_height="match_parent"
     android:background="@color/settingsBg">
 
-    <LinearLayout
-        android:id="@+id/settingsToolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/toolbarBg"
-        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center"
-            android:layout_margin="4dp"
-            android:background="@drawable/about_app_back_ripple"
-            android:padding="12dp"
-            android:src="@drawable/ic_back_settings" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/settingsToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbarBg">
 
-        <TextView
-            android:id="@+id/toolBarTv"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:gravity="center"
-            android:paddingRight="45dp"
-            android:text="@string/setting_fragment"
-            android:textColor="@color/toolbarText"
-            android:textSize="19sp"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_margin="4dp"
+                android:background="@drawable/about_app_back_ripple"
+                android:padding="12dp"
+                android:src="@drawable/ic_back_settings" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/toolBarTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:gravity="center"
+                android:paddingRight="45dp"
+                android:text="@string/setting_fragment"
+                android:textColor="@color/toolbarText"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout6"
@@ -50,7 +56,7 @@
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsToolbar">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/userIcon"
@@ -63,16 +69,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:maxHeight="48dp"
             android:layout_marginLeft="90dp"
             android:layout_marginRight="90dp"
             android:background="@drawable/create_acount"
-            android:elevation="15dp"
-            android:fontFamily="@font/segoe_ui_regular"
-            android:text="انشاء حساب"
+            android:text="@string/create_accountBtn"
             android:textColor="@color/createAccountText"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -178,9 +183,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end"
-                    android:text="مظهر التطبيق"
+                    android:text="@string/theme_app"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
@@ -195,7 +199,7 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/settingItempd">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="22dp"
                     android:layout_height="25dp"
                     android:layout_gravity="start|center"
@@ -206,9 +210,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end"
-                    android:text="شارك التطبيق مع أصدقائك"
+                    android:text="@string/share_app"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
@@ -234,9 +237,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end"
-                    android:text="تقييم التطبيق"
+                    android:text="@string/rate_app"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
@@ -262,9 +264,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end"
-                    android:text="عن التطبيق"
+                    android:text="@string/about_app"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
@@ -291,9 +292,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="end|center"
-                    android:text="تسجيل الخروج"
+                    android:text="@string/log_out"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/settings_text"
                     android:textStyle="bold" />
@@ -327,7 +327,7 @@
             android:layout_weight="0.5"
             android:fontFamily="@font/segoe_ui_bold"
             android:gravity="center"
-            android:text="تــواصــل مــعــنا"
+            android:text="@string/connect_us"
             android:textAlignment="center"
             android:textColor="#FFA013"
             android:textSize="@dimen/settings_text" />
@@ -373,7 +373,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoe_ui_regular"
-                android:text="فيسبوك"
+                android:text="@string/facebook"
                 android:textColor="#3B5998"
                 android:textSize="@dimen/settings_text"
                 android:textStyle="bold" />
@@ -401,7 +401,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center"
-                android:text="البريد"
+                android:text="@string/email"
                 android:textColor="#FF5722"
                 android:textSize="@dimen/settings_text"
                 android:textStyle="bold" />
@@ -428,7 +428,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center"
-                android:text="واتساب"
+                android:text="@string/whatsapp"
                 android:textColor="#4CAF50"
                 android:textSize="@dimen/settings_text"
                 android:textStyle="bold" />

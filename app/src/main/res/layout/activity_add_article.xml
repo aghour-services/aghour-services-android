@@ -42,7 +42,7 @@
 
     </LinearLayout>
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/text_article"
         android:layout_width="match_parent"
         android:layout_height="400dp"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/firmsToolbar">
 
         <requestFocus />
-    </EditText>
+    </androidx.appcompat.widget.AppCompatEditText>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/send_article"

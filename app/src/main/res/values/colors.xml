@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="toolbarBg">#4290CD</color>
-    <color name="toolbarText">#FFFFFF</color>
+    <color name="toolbarBg">#FFFFFF</color>
+    <color name="toolbarText">#26313A</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
     <color name="itemNavColor">#FFFFFF</color>
@@ -114,7 +114,7 @@
     <color name="changeThemeRipple">#C0C0C0</color>
     <color name="changeThemeBtnBg">#2E5574</color>
     <color name="bottomNavPress">#DFDFDF</color>
-    <color name="backSettingsIcon">#FFFFFF</color>
+    <color name="backSettingsIcon">#1B2227</color>
     <color name="backIconSettingRipple">#ADDBFF</color>
     <color name="aboutApp">#000000</color>
     <color name="scrollViewBg">#FFFFFF</color>
@@ -151,13 +151,16 @@
     <color name="settingStroke">#E4E4E4</color>
     <color name="showMoreRipple">#B5E8FF</color>
     <color name="showMoreBg">#FFFFFF</color>
-    <color name="drawerToggle">#FFFFFF</color>
+    <color name="drawerToggle">#232D35</color>
     <color name="fabBg">#168EC4</color>
     <color name="signInLogo">#2981C6</color>
-    <color name="unCheckedItem">#1D2B35</color>
+    <color name="unCheckedItem">#000000</color>
     <color name="checkdItem">#1B79C5</color>
-    <color name="tagUnChecked">#4290CD</color>
+    <color name="tagUnChecked">#72777C</color>
     <color name="tagsColor">#FFFFFF</color>
     <color name="edtAddArticle">#FFFFFF</color>
     <color name="strokeAddArticle">#BABABA</color>
+    <color name="settingIconColor">#151B20</color>
+    <color name="settings_icon_tint">#0F1316</color>
+    <color name="bottomAppBarBg">#FFFFFF</color>
 </resources>
