@@ -1,14 +1,11 @@
-package com.aghourservices.ui.fragment.upload
+package com.aghourservices.ui.main.activity
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
-import com.aghourservices.databinding.FragmentAddArticleBinding
-import com.aghourservices.ui.fragment.BaseFragment
+import com.aghourservices.databinding.ActivityAddArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
@@ -20,33 +17,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddArticleFragment : BaseFragment() {
-    private lateinit var binding: FragmentAddArticleBinding
+class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
+    private lateinit var binding: ActivityAddArticleBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAddArticleBinding.inflate(layoutInflater)
-        return (binding.root)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        hideBottomNavigation()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityAddArticleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         hideUserAddData()
-        hideToolbar()
 
         binding.backBtn.setOnClickListener {
-            findNavController().popBackStack()
+            onBackPressed()
         }
 
         if (binding.textArticle.requestFocus()) {
-            ShowSoftKeyboard.show(requireActivity(), binding.textArticle)
+            showKeyboard(this, binding.textArticle)
         }
 
         binding.sendArticle.setOnClickListener {
-            showProgressDialog(requireContext())
+            showProgressDialog(this)
             val article = Article()
             article.description = binding.textArticle.text.toString()
 
@@ -59,30 +48,23 @@ class AddArticleFragment : BaseFragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            createAccount(requireActivity())
+            createAccount(this)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        showBottomNavigation()
-        showToolbar()
     }
 
     private fun createArticle(article: Article) {
-        val user = getUserData(requireActivity())
-        val retrofitBuilder = activity?.let {
-            RetrofitInstance(it).newsApi.createArticle(
-                article.toJsonObject(),
-                user.token
-            )
-        }
-        retrofitBuilder?.enqueue(object : Callback<Article> {
+        val user = getUserData(this)
+        val retrofitBuilder = RetrofitInstance(this).newsApi.createArticle(
+            article.toJsonObject(),
+            user.token
+        )
+
+        retrofitBuilder.enqueue(object : Callback<Article> {
             override fun onResponse(
                 call: Call<Article>,
                 response: Response<Article>
             ) {
-                AlertDialog.dataAdded(requireContext())
+                AlertDialog.dataAdded(this@AddArticleActivity)
                 setTextEmpty()
             }
 
@@ -90,7 +72,7 @@ class AddArticleFragment : BaseFragment() {
                 call: Call<Article>,
                 t: Throwable
             ) {
-                AlertDialog.noInternet(requireContext())
+                AlertDialog.noInternet(this@AddArticleActivity)
                 hideProgressDialog()
             }
         })
@@ -102,7 +84,7 @@ class AddArticleFragment : BaseFragment() {
     }
 
     private fun hideUserAddData() {
-        val isUserLogin = isUserLoggedIn(requireActivity())
+        val isUserLogin = isUserLoggedIn(this@AddArticleActivity)
         if (isUserLogin) {
             binding.sendArticle.visibility = View.VISIBLE
         } else {

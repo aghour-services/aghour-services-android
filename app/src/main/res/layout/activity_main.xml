@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -28,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="end|center"
-                android:text="@string/app_name"
+                tools:text="@string/app_name"
                 android:textColor="@color/toolbarText"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -41,58 +42,52 @@
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:background="@color/recyclerViewBg"
         app:defaultNavHost="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toTopOf="@+id/linearAdMob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <LinearLayout
-        android:id="@+id/linearAdMob"
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/adMobBg"
-        android:elevation="20dp"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <include layout="@layout/admob_banner" />
+        app:fabCradleMargin="10dp"
+        android:backgroundTint="@color/recyclerViewBg"
+        app:fabCradleRoundedCornerRadius="50dp"
+        app:hideOnScroll="true"
+        tools:ignore="BottomAppBar">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomView"
-            style="@style/BottomNavigationTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/navDrawerBg"
+            android:layout_marginRight="20dp"
             android:elevation="20dp"
+            android:background="@android:color/transparent"
             android:padding="6dp"
             app:itemIconTint="@color/btnv_tab_item"
             app:itemTextColor="@color/btnv_tab_item"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
 
-        <TextView
-            android:id="@+id/noInternet"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:background="@color/notifyBg"
-            android:elevation="10dp"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:gravity="center"
-            android:padding="6dp"
-            android:text="@string/no_internet_connection"
-            android:textColor="@color/notifyTitle"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
-    </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="#405768"
+        android:src="@drawable/ic_add"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:layout_anchor="@id/bottomAppBar"
+        app:maxImageSize="35dp"
+        app:tint="@color/white"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

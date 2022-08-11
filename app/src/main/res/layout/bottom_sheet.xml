@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/dialogItem"
+    android:layout_gravity="center"
+    app:behavior_hideable="false"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:padding="10dp"
+            android:text="@string/add_data"
+            android:textColor="@color/dialogText"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/dismissSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sheet_selector"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/addDataBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_selector"
+            android:drawableLeft="@drawable/ic_add_box"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:gravity="left|center"
+            android:drawablePadding="20dp"
+            android:layout_marginTop="20dp"
+            android:padding="18dp"
+            android:text="@string/add_data"
+            android:textColor="@color/dialogText"
+            android:textSize="16sp"
+            app:drawableTint="#4CAF50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/addArticleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dialog_selector"
+            android:drawableLeft="@drawable/ic__news_article"
+            android:drawablePadding="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:gravity="left|center"
+            android:padding="18dp"
+            android:text="@string/write_new_article"
+            android:textColor="@color/dialogText"
+            android:textSize="16sp"
+            app:drawableTint="@color/dialogText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addDataBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

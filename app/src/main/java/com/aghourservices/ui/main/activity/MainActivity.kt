@@ -7,7 +7,8 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import androidx.appcompat.widget.AppCompatImageButton
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -16,14 +17,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.R
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
-import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.ads.Interstitial
-import com.aghourservices.utils.helper.CheckNetworkLiveData
-import com.google.android.gms.ads.AdView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adView: AdView
     private lateinit var runnable: Runnable
     private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
@@ -32,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        floatActionButton()
 
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
@@ -61,7 +60,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        checkNetwork()
         handler.postDelayed(runnable, 120000)
     }
 
@@ -70,16 +68,7 @@ class MainActivity : AppCompatActivity() {
         handler.removeCallbacks(runnable)
     }
 
-    private fun checkNetwork() {
-        val checkNetworkLiveData = CheckNetworkLiveData(application)
-        checkNetworkLiveData.observe(this) { isConnected ->
-            binding.noInternet.isVisible = !isConnected
-        }
-    }
-
     private fun adView() {
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
         runnable = Runnable { interstitial.load(this@MainActivity) }
         handler.post(runnable)
     }
@@ -90,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.show()
 
         val bottomNavView = binding.bottomView
+        bottomNavView.background = null
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
@@ -99,6 +89,33 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         return navController
+    }
+
+    private fun floatActionButton() {
+        binding.floatingActionButton.setOnClickListener {
+            val dialogSheet = layoutInflater.inflate(R.layout.bottom_sheet, null)
+            val addDataBtn = dialogSheet.findViewById(R.id.addDataBtn) as AppCompatTextView
+            val addArticleBtn = dialogSheet.findViewById(R.id.addArticleBtn) as AppCompatTextView
+            val dismissBtn = dialogSheet.findViewById(R.id.dismissSheet) as AppCompatImageButton
+
+            val bottomSheetDialog = BottomSheetDialog(this).apply {
+                setContentView(dialogSheet)
+                setCancelable(true)
+                show()
+            }
+
+            addDataBtn.setOnClickListener {
+                startActivity(Intent(this, AddDataActivity::class.java))
+                bottomSheetDialog.dismiss()
+            }
+            addArticleBtn.setOnClickListener {
+                startActivity(Intent(this, AddArticleActivity::class.java))
+                bottomSheetDialog.dismiss()
+            }
+            dismissBtn.setOnClickListener {
+                bottomSheetDialog.dismiss()
+            }
+        }
     }
 
     override fun setTitle(title: CharSequence?) {

@@ -19,7 +19,7 @@ import com.aghourservices.utils.helper.CheckNetworkLiveData
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 
-class SearchFragment : BaseFragment() {
+class SearchFragment : BaseFragment(),ShowSoftKeyboard {
     private lateinit var searchList: ArrayList<Search>
     private lateinit var searchAdapter: SearchResultAdapter
     private lateinit var binding: FragmentSearchBinding
@@ -47,7 +47,7 @@ class SearchFragment : BaseFragment() {
         val searchText = binding.searchText.text.toString()
 
         if (binding.searchText.requestFocus()) {
-            ShowSoftKeyboard.show(requireActivity(), binding.searchText)
+            showKeyboard(requireActivity(), binding.searchText)
         }
 
         binding.searchText.setOnClickListener {

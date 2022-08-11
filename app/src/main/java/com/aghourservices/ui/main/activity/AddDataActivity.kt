@@ -1,16 +1,14 @@
-package com.aghourservices.ui.fragment.upload
+package com.aghourservices.ui.main.activity
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
 import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Firm
 import com.aghourservices.data.request.RetrofitInstance
-import com.aghourservices.databinding.FragmentAddDataBinding
+import com.aghourservices.databinding.ActivityAddDataBinding
 import com.aghourservices.ui.adapter.SpinnerCategoriesAdapter
-import com.aghourservices.ui.fragment.BaseFragment
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
@@ -23,21 +21,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddDataFragment : BaseFragment() {
-    private lateinit var binding: FragmentAddDataBinding
+class AddDataActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAddDataBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = getString(R.string.add_data_fragment)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityAddDataBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        title = getString(R.string.add_data_fragment)
         hideUserAddData()
         loadCategories()
         spinnerAdapter()
@@ -48,7 +40,7 @@ class AddDataFragment : BaseFragment() {
         binding.apply {
 
             btnRegister.setOnClickListener {
-                createAccount(activity!!)
+                createAccount(this@AddDataActivity)
             }
 
             btnAddData.setOnClickListener(View.OnClickListener {
@@ -80,31 +72,28 @@ class AddDataFragment : BaseFragment() {
     }
 
     private fun spinnerAdapter() {
-        val spinnerCategoriesAdapter = SpinnerCategoriesAdapter(requireActivity(), categoryList)
+        val spinnerCategoriesAdapter = SpinnerCategoriesAdapter(this, categoryList)
         val spinner = binding.spinner
         spinner.adapter = spinnerCategoriesAdapter
     }
 
     private fun createFirm(firm: Firm) {
-        showProgressDialog(requireContext())
-        val user = getUserData(requireActivity())
-        val retrofitBuilder =
-            activity?.let {
-                RetrofitInstance(it).firmsApi.createFirm(
-                    firm.toJsonObject(),
-                    user.token
-                )
-            }
-        retrofitBuilder?.enqueue(object : Callback<Firm> {
+        showProgressDialog(this)
+        val user = getUserData(this)
+        val retrofitBuilder = RetrofitInstance(this).firmsApi.createFirm(
+            firm.toJsonObject(),
+            user.token
+        )
+        retrofitBuilder.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
                 if (response.isSuccessful) {
-                    dataAdded(requireContext())
+                    dataAdded(this@AddDataActivity)
                     setTextEmpty()
                 }
             }
 
             override fun onFailure(call: Call<Firm>, t: Throwable) {
-                noInternet(requireContext())
+                noInternet(this@AddDataActivity)
                 hideProgressDialog()
             }
         })
@@ -126,7 +115,7 @@ class AddDataFragment : BaseFragment() {
     }
 
     private fun hideUserAddData() {
-        val isUserLogin = isUserLoggedIn(requireActivity())
+        val isUserLogin = isUserLoggedIn(this)
         if (isUserLogin) {
             binding.btnAddData.visibility = View.VISIBLE
         } else {

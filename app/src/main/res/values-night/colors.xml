@@ -111,5 +111,6 @@
     <color name="tagsColor">#FFFFFF</color>
     <color name="edtAddArticle">#242D33</color>
     <color name="strokeAddArticle">#2B3740</color>
+    <color name="settings_icon_tint">#FFFFFF</color>
 
 </resources>
