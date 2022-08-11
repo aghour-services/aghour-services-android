@@ -16,7 +16,8 @@ class FirmsViewModel : ViewModel() {
     var firmsList: ArrayList<Firm> = ArrayList()
 
     fun loadFirms(context: Context, categoryId: Int, tagsAsParameter: String) {
-        val retrofitBuilder = RetrofitInstance(context).firmsApi.loadFirms(categoryId, tagsAsParameter)
+        val retrofitBuilder =
+            RetrofitInstance(context).firmsApi.loadFirms(categoryId, tagsAsParameter)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(
@@ -28,14 +29,19 @@ class FirmsViewModel : ViewModel() {
                     firmsList = firmsLiveData.value!!
 
                     realm.executeTransaction {
-                        realm.copyToRealmOrUpdate(firmsList)
+                        firmsList.forEach {
+                            val firm = realm.where(Firm::class.java).equalTo("id", it.id).findFirst()
+                            if (firm != null) {
+                                it.isFavorite = firm.isFavorite
+                            }
+                            realm.createOrUpdateObjectFromJson(Firm::class.java, it.toJSONObject())
+                        }
                     }
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<Firm>?>, t: Throwable) {
-                val result =
-                    realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
+                val result = realm.where(Firm::class.java).equalTo("category_id", categoryId).findAll()
                 firmsList = ArrayList()
                 firmsList.addAll(result)
                 firmsLiveData.value = firmsList
