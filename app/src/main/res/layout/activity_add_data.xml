@@ -4,37 +4,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/add_data_bg"
-    android:gravity="center"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:theme="@style/AddDataTheme">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/firmsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBg"
+        android:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_margin="4dp"
+            android:background="@drawable/about_app_back_ripple"
+            android:padding="10dp"
+            android:src="@drawable/ic_back_settings" />
+
+        <TextView
+            android:id="@+id/toolBarTv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="45dp"
+            android:text="@string/add_data_fragment"
+            android:textColor="@color/toolbarText"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo_black"
-                android:gravity="center"
-                android:text="إضافة بيانات"
-                android:textColor="@color/add_data"
-                android:textSize="22sp" />
-
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,21 +74,23 @@
                     android:background="@drawable/edt_text_background"
                     android:drawableRight="@drawable/ic_person"
                     android:gravity="left"
-                    android:hint="الاسم (دكتور، مطعم، صيدلية...الخ)"
+                    android:hint="@string/add_data_name"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
                     android:textColorHint="@color/hint"
                     android:textSize="18sp" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,7 +100,7 @@
                     android:background="@drawable/edt_text_background"
                     android:drawableRight="@drawable/ic_location"
                     android:gravity="left"
-                    android:hint="العنوان"
+                    android:hint="@string/address"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
@@ -79,12 +111,13 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +127,7 @@
                     android:background="@drawable/edt_text_background"
                     android:drawableRight="@drawable/ic_phone"
                     android:gravity="left"
-                    android:hint="رقم التليفون"
+                    android:hint="@string/phone_number"
                     android:inputType="phone|number"
                     android:maxLength="11"
                     android:maxLines="1"
@@ -104,6 +137,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -111,7 +145,7 @@
                 app:counterMaxLength="300"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
@@ -120,7 +154,7 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
                     android:gravity="left"
-                    android:hint="الوصف"
+                    android:hint="@string/description"
                     android:maxLength="300"
                     android:padding="14dp"
                     android:textColorHint="@color/hint"
@@ -132,49 +166,37 @@
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/spinner"
                 android:spinnerMode="dialog" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_add_data"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="44dp"
+                android:layout_margin="30dp"
                 android:background="@drawable/add_data_btn_bg"
-                android:elevation="8dp"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:text="إضافة البيانات"
+                android:maxHeight="48dp"
+                android:text="@string/add_data_fragment"
                 android:textColor="@color/addDataTxt"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="30dp"
                 android:background="@drawable/add_data_btn_bg"
-                android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center"
+                android:maxHeight="48dp"
                 android:padding="14dp"
-                android:elevation="10dp"
-                android:visibility="gone"
-                android:text="يجب إنشاء حساب أولا"
-                android:textAlignment="center"
+                android:text="@string/must_create_account"
                 android:textColor="@color/add_data"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -8,10 +8,9 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivityAddArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
+import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
-import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,30 +24,39 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         binding = ActivityAddArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         hideUserAddData()
+        initUserClick()
+        showSoftKeyboard()
+    }
 
-        binding.backBtn.setOnClickListener {
-            onBackPressed()
+    private fun showSoftKeyboard() {
+        binding.textArticle.apply {
+            requestFocus()
+            showKeyboard(this@AddArticleActivity, this)
         }
+    }
 
-        if (binding.textArticle.requestFocus()) {
-            showKeyboard(this, binding.textArticle)
-        }
-
-        binding.sendArticle.setOnClickListener {
-            showProgressDialog(this)
-            val article = Article()
-            article.description = binding.textArticle.text.toString()
-
-            if (article.inValid()) {
-                binding.textArticle.error = "أكتب الخبر أولا"
-                hideProgressDialog()
-            } else {
-                createArticle(article)
+    private fun initUserClick() {
+        binding.apply {
+            backBtn.setOnClickListener {
+                onBackPressed()
             }
-        }
 
-        binding.btnRegister.setOnClickListener {
-            createAccount(this)
+            sendArticle.setOnClickListener {
+                ProgressDialog.showProgressDialog(this@AddArticleActivity)
+                val article = Article()
+                article.description = binding.textArticle.text.toString()
+
+                if (article.inValid()) {
+                    binding.textArticle.error = "أكتب الخبر أولا"
+                    hideProgressDialog()
+                } else {
+                    createArticle(article)
+                }
+            }
+
+            btnRegister.setOnClickListener {
+                AlertDialog.createAccount(this@AddArticleActivity)
+            }
         }
     }
 

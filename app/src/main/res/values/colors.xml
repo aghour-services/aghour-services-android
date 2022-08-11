@@ -114,7 +114,7 @@
     <color name="changeThemeRipple">#C0C0C0</color>
     <color name="changeThemeBtnBg">#2E5574</color>
     <color name="bottomNavPress">#DFDFDF</color>
-    <color name="backSettingsIcon">#FFFFFF</color>
+    <color name="backSettingsIcon">#1B2227</color>
     <color name="backIconSettingRipple">#ADDBFF</color>
     <color name="aboutApp">#000000</color>
     <color name="scrollViewBg">#FFFFFF</color>
@@ -162,4 +162,5 @@
     <color name="strokeAddArticle">#BABABA</color>
     <color name="settingIconColor">#151B20</color>
     <color name="settings_icon_tint">#0F1316</color>
+    <color name="bottomAppBarBg">#FFFFFF</color>
 </resources>

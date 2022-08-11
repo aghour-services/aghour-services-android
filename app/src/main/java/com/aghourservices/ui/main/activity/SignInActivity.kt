@@ -7,10 +7,10 @@ import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignInBinding
-import com.aghourservices.ui.main.cache.Settings.doNotShowRigsterActivity
+import com.aghourservices.ui.main.cache.Settings
 import com.aghourservices.ui.main.cache.UserInfo.saveUserData
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
+import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.errorLogin
@@ -28,37 +28,44 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
-
-        binding.btnLogin.setOnClickListener {
-            val email = binding.email.text.toString()
-            val password = binding.password.text.toString()
-            val valid = email.isEmpty() || password.isEmpty()
-
-            if (valid) {
-                binding.email.error = "ادخل بريدك الالكتروني"
-                binding.password.error = "اكتب كلمة السر"
-            } else {
-                val user = User("", "", email, password, "")
-                loginUser(user)
-            }
-        }
-
-        binding.btnRegister.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
-        }
-        binding.btnUseApp.setOnClickListener {
-            showProgressDialog(this)
-            sendFirebaseEvent("SKIP_LOGIN", "")
-            doNotShowRigsterActivity(this)
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
+        initUserClick()
+        adView()
     }
 
+    private fun adView(){
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
+    }
+
+    private fun initUserClick(){
+        binding.apply {
+            btnLogin.setOnClickListener {
+                val email = binding.email.text.toString()
+                val password = binding.password.text.toString()
+                val valid = email.isEmpty() || password.isEmpty()
+
+                if (valid) {
+                    binding.email.error = "ادخل بريدك الالكتروني"
+                    binding.password.error = "اكتب كلمة السر"
+                } else {
+                    val user = User("", "", email, password, "")
+                    loginUser(user)
+                }
+            }
+
+            btnRegister.setOnClickListener {
+                startActivity(Intent(this@SignInActivity, SignUpActivity::class.java))
+                finish()
+            }
+            btnUseApp.setOnClickListener {
+                showProgressDialog(this@SignInActivity)
+                Event.sendFirebaseEvent("SKIP_LOGIN", "")
+                Settings.doNotShowRigsterActivity(this@SignInActivity)
+                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                finish()
+            }
+        }
+    }
     private fun loginUser(user: User) {
         showProgressDialog(this)
         val retrofitBuilder = RetrofitInstance(this).userApi.signIn(user.userObject())

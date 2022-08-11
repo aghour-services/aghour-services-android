@@ -39,6 +39,10 @@ class AddDataActivity : AppCompatActivity() {
     private fun initUserClicks() {
         binding.apply {
 
+            backBtn.setOnClickListener {
+                onBackPressed()
+            }
+
             btnRegister.setOnClickListener {
                 createAccount(this@AddDataActivity)
             }
@@ -107,10 +111,12 @@ class AddDataActivity : AppCompatActivity() {
     }
 
     private fun setTextEmpty() {
-        binding.name.text.clear()
-        binding.address.text.clear()
-        binding.description.text.clear()
-        binding.phoneNumber.text.clear()
+        binding.apply {
+            name.text?.clear()
+            address.text?.clear()
+            description.text?.clear()
+            phoneNumber.text?.clear()
+        }
         hideProgressDialog()
     }
 

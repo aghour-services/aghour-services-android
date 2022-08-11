@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
@@ -71,11 +70,6 @@ class NewsFragment : BaseFragment() {
                 binding.swipe.isRefreshing = false
                 activity?.let { newsViewModel.loadArticles(it, categoryId) }
             }, 1000)
-        }
-
-        binding.addArticle.setOnClickListener {
-            val action = NewsFragmentDirections.actionNewsFragmentToAddArticleFragment()
-            findNavController().navigate(action)
         }
     }
 

@@ -34,9 +34,8 @@
         <activity
             android:name="com.aghourservices.ui.main.activity.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:theme="@style/CategoriesTheme"
-            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.main.activity.SignInActivity"
@@ -50,15 +49,19 @@
             android:theme="@style/AddDataTheme" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AboutActivity"
+            android:theme="@style/AddDataTheme"
             android:exported="false" />
         <activity
             android:name="com.aghourservices.ui.main.activity.SettingsActivity"
+            android:theme="@style/AddDataTheme"
             android:exported="false" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AddDataActivity"
+            android:theme="@style/AddDataTheme"
             android:exported="false" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AddArticleActivity"
+            android:theme="@style/AddDataTheme"
             android:exported="false" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

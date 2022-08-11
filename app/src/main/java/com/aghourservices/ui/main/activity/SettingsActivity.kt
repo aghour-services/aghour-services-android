@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
 import com.aghourservices.databinding.ActivitySettingsBinding
-import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
@@ -30,13 +29,24 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpToolbar()
+        adView()
         checkUser()
         hideUserLogOut()
-        supportActionBar?.hide()
+        initUserClick()
+    }
 
+    private fun setUpToolbar(){
+        val toolbar = binding.settingsToolbar
+        setSupportActionBar(toolbar)
+    }
+
+    private fun adView(){
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
+    }
 
+    private fun initUserClick() {
         binding.apply {
             backBtn.setOnClickListener {
                 this@SettingsActivity.onBackPressed()
