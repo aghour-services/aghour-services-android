@@ -17,7 +17,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar" >
+    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar">
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
@@ -35,9 +35,18 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-        <item name="fontFamily">@font/segoe_ui_bold</item>
-        <item name="android:textSize">14sp</item>
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#f00</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#4CAF50</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="drawerToggle" parent="Widget.AppCompat.DrawerArrowToggle">
