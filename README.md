@@ -11,8 +11,9 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 
 | Mode  | Category list                                                          | Favorite list                                                         | Firms detail                                                          | Settings
 |-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Light | <img src="https://m7madmagdy.github.io/pages/lightCategory.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/lightFav.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/lightDoc.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/lightSettings.png" width="220"> 
-| Dark  | <img src="https://m7madmagdy.github.io/pages/darkCategory.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/darkFav.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/darkRestu.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/darkSettings.png" width="220"> 
+| Light | <img src="https://m7madmagdy.github.io/pages/1.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/3.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/2.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/4.png" width="220"> 
+
+| Dark  | <img src="https://m7madmagdy.github.io/pages/_1.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/_3.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/_2.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/_4.png" width="220"> 
 
 ## Architecture
 
