@@ -12,6 +12,7 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 | Mode  | Category list                                                          | Favorite list                                                         | Firms detail                                                          | Settings
 |-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | Light | <img src="https://m7madmagdy.github.io/pages/aghour%20images/1.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/aghour%20images/3.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/aghour%20images/2.png" width="220"> | <img src="https://m7madmagdy.github.io/pages/aghour%20images/4.png" width="220"> 
+| Dark  | <img src="https://m7madmagdy.github.io/pages/aghour%20images/5.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/aghour%20images/7.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/aghour%20images/6.png" width="220">  | <img src="https://m7madmagdy.github.io/pages/aghour%20images/8.png" width="220"> 
 
 ## Architecture
 
