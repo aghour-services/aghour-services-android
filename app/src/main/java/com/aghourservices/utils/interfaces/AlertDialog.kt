@@ -48,7 +48,7 @@ interface AlertDialog {
         }
 
         fun createAccount(context: Context) {
-            val alertDialogBuilder = AlertDialog.Builder(context)
+            val alertDialogBuilder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             alertDialogBuilder.setTitle(context.getString(R.string.create_account_first))
             alertDialogBuilder.setMessage(context.getString(R.string.should_create))
             alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
