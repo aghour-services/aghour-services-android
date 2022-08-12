@@ -55,7 +55,7 @@ interface AlertDialog {
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton("إنشاء الان") { _, _ ->
                 context.startActivity(Intent(context, SignUpActivity::class.java))
-                (context as AppCompatActivity).finish()
+                (context as AppCompatActivity).finishAffinity()
             }
             alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
             val alertDialog = alertDialogBuilder.create()
