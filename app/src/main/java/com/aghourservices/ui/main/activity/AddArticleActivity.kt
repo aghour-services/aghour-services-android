@@ -3,21 +3,25 @@ package com.aghourservices.ui.main.activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivityAddArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
+import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
+import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private lateinit var binding: ActivityAddArticleBinding
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,12 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         hideUserAddData()
         initUserClick()
         showSoftKeyboard()
+        adView()
+    }
+
+    private fun adView() {
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
     }
 
     private fun showSoftKeyboard() {

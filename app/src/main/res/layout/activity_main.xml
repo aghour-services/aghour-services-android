@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:background="@android:color/transparent"
-            android:padding="10dp"
+            android:padding="6dp"
             app:itemIconTint="@color/btnv_tab_item"
             app:itemTextColor="@color/btnv_tab_item"
             app:labelVisibilityMode="labeled"

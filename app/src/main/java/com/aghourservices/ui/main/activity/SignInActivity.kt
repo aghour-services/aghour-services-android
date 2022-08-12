@@ -7,10 +7,8 @@ import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignInBinding
-import com.aghourservices.ui.main.cache.Settings
 import com.aghourservices.ui.main.cache.UserInfo.saveUserData
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.errorLogin
@@ -55,13 +53,6 @@ class SignInActivity : AppCompatActivity() {
 
             btnRegister.setOnClickListener {
                 startActivity(Intent(this@SignInActivity, SignUpActivity::class.java))
-                finish()
-            }
-            btnUseApp.setOnClickListener {
-                showProgressDialog(this@SignInActivity)
-                Event.sendFirebaseEvent("SKIP_LOGIN", "")
-                Settings.doNotShowRigsterActivity(this@SignInActivity)
-                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                 finish()
             }
         }

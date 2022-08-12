@@ -29,16 +29,10 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpToolbar()
         adView()
         checkUser()
         hideUserLogOut()
         initUserClick()
-    }
-
-    private fun setUpToolbar(){
-        val toolbar = binding.settingsToolbar
-        setSupportActionBar(toolbar)
     }
 
     private fun adView(){

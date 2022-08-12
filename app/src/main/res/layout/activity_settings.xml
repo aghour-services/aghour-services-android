@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <LinearLayout
             android:id="@+id/settingsToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -32,7 +32,7 @@
 
             <TextView
                 android:id="@+id/toolBarTv"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -44,7 +44,7 @@
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
-        </androidx.appcompat.widget.Toolbar>
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -71,15 +71,16 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
             android:maxHeight="48dp"
-            android:layout_marginLeft="90dp"
-            android:layout_marginRight="90dp"
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:gravity="center"
             android:background="@drawable/create_acount"
             android:text="@string/create_accountBtn"
             android:textColor="@color/createAccountText"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

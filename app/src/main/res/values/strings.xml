@@ -117,5 +117,9 @@
     <string name="signIn">تسجيل دخول</string>
     <string name="skipLogin">تخطي التسجيل</string>
     <string name="create_new_account">إنشاء حساب جديد</string>
+    <string name="no_favorites_found">لا يوجد إعجابات 🙁</string>
+    <string name="check_network">تأكد من اتصالك بالانترنت</string>
+    <string name="search">بحث</string>
+    <string name="name">الأسم</string>
 
 </resources>

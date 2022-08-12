@@ -123,19 +123,19 @@
                     android:src="@mipmap/description" />
             </LinearLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCall"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="40dp"
                 android:layout_margin="20dp"
+                android:maxHeight="48dp"
                 android:background="@drawable/call_btn_selector"
                 android:drawableLeft="@drawable/ic_phone_call"
-                android:fontFamily="@font/cairo_bold"
                 android:padding="6dp"
                 tools:text="01207083552"
                 android:textAlignment="center"
                 android:textColor="@color/phoneColor"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"

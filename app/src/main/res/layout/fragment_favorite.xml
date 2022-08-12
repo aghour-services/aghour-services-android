@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/segoe_ui_bold"
         android:gravity="center"
-        android:text="لا يوجد إعجابات 🙁"
+        android:text="@string/no_favorites_found"
         android:textColor="@color/noFav"
         android:textSize="25sp"
         android:visibility="gone" />

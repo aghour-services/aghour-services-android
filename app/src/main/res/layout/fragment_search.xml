@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/back_btn"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
@@ -30,38 +30,43 @@
                 android:padding="8dp"
                 android:src="@drawable/ic_back" />
 
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtLayout"
-                android:layout_width="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
                 android:gravity="right|center"
                 app:endIconDrawable="@drawable/ic_clear"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/clear"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/search_view_background"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_search"
+                    android:drawablePadding="10dp"
+                    app:drawableTint="@color/black"
+                    android:background="@android:color/transparent"
                     android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="right|center"
-                    android:hint="بحث"
+                    android:hint="@string/search"
                     android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:paddingRight="16dp"
                     android:textColor="@color/searchTxt"
                     android:textColorHint="@color/searchHint"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:textSize="16sp" />
 
                 <requestFocus />
+
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
+
 
         <View
             android:id="@+id/view"
@@ -81,7 +86,8 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/custom_toast_image"
@@ -94,7 +100,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo_black"
-                android:text="تأكد من اتصالك بالانترنت"
+                android:text="@string/check_network"
+                android:textColor="@color/dialogText"
                 android:textSize="14sp" />
         </LinearLayout>
 

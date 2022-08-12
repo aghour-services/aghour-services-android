@@ -11,11 +11,13 @@ import com.aghourservices.databinding.ActivityAddDataBinding
 import com.aghourservices.ui.adapter.SpinnerCategoriesAdapter
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
+import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.dataAdded
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
+import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +26,7 @@ import retrofit2.Response
 class AddDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,12 @@ class AddDataActivity : AppCompatActivity() {
         loadCategories()
         spinnerAdapter()
         initUserClicks()
+        adView()
+    }
+
+    private fun adView() {
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
     }
 
     private fun initUserClicks() {
