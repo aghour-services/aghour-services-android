@@ -6,11 +6,11 @@
     <color name="searchIcon">#FFFFFF</color>
     <color name="itemNavColor">#FFFFFF</color>
     <color name="backIconTint">#FF000000</color>
-    <color name="searchBg">#F7F7F7</color>
-    <color name="backIconBg">#F7F7F7</color>
+    <color name="searchBg">#FFFFFF</color>
+    <color name="backIconBg">#FFFFFF</color>
     <color name="backIconSelector">#C4C4C4</color>
     <color name="searchViewBg">#CBE8FF</color>
-    <color name="clear">#EC4949</color>
+    <color name="clear">#C23939</color>
     <color name="lineView">#C5C5C5</color>
     <color name="recyclerViewBg">#FFFFFF</color>
     <color name="splashScreenBg">#3C88C5</color>
@@ -121,7 +121,7 @@
     <color name="aboutUseApp">#20384B</color>
     <color name="createBtnBg">#FFFFFF</color>
     <color name="createBtnPress">#D5D5D5</color>
-    <color name="strokeColor">#C4C4C4</color>
+    <color name="strokeColor">#DCDCDC</color>
     <color name="spinnerTextColor">#162735</color>
     <color name="dropDown">#FFFFFF</color>
     <color name="spinnerRipple">#DBE5EF</color>

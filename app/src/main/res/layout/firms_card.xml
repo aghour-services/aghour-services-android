@@ -90,7 +90,6 @@
 
                 <TextView
                     android:id="@+id/description"
-                    style="@style/Theme.Material3.Light"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center"
@@ -121,12 +120,10 @@
                 android:layout_margin="20dp"
                 android:background="@drawable/call_btn_selector"
                 android:drawableLeft="@drawable/ic_phone_call"
-                android:fontFamily="@font/cairo_bold"
                 android:padding="8dp"
                 tools:text="01207083552"
-                android:textAlignment="center"
                 android:textColor="@color/phoneColor"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"
@@ -171,7 +168,7 @@
                     android:id="@+id/view2"
                     android:layout_width="0.5dp"
                     android:layout_height="0dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="16dp"
                     android:background="@color/lineView"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"

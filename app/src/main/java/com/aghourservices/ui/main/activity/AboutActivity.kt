@@ -16,10 +16,6 @@ class AboutActivity : AppCompatActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.aboutToolbar.apply {
-            setSupportActionBar(this)
-        }
-
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
 
