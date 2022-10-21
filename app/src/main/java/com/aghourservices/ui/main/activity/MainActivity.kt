@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.R
 import com.aghourservices.databinding.ActivityMainBinding
+import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.utils.ads.Interstitial
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -93,26 +94,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun floatActionButton() {
         binding.floatingActionButton.setOnClickListener {
-            val dialogSheet = layoutInflater.inflate(R.layout.bottom_sheet, null)
-            val addDataBtn = dialogSheet.findViewById(R.id.addDataBtn) as AppCompatTextView
-            val addArticleBtn = dialogSheet.findViewById(R.id.addArticleBtn) as AppCompatTextView
-            val dismissBtn = dialogSheet.findViewById(R.id.dismissSheet) as AppCompatImageButton
+            val binding = BottomSheetBinding.inflate(layoutInflater)
 
             val bottomSheetDialog = BottomSheetDialog(this).apply {
-                setContentView(dialogSheet)
+                setContentView(binding.root)
                 setCancelable(true)
                 show()
             }
 
-            addDataBtn.setOnClickListener {
+            binding.addDataBtn.setOnClickListener {
                 startActivity(Intent(this, AddDataActivity::class.java))
                 bottomSheetDialog.dismiss()
             }
-            addArticleBtn.setOnClickListener {
+            binding.addArticleBtn.setOnClickListener {
                 startActivity(Intent(this, AddArticleActivity::class.java))
                 bottomSheetDialog.dismiss()
             }
-            dismissBtn.setOnClickListener {
+            binding.dismissSheet.setOnClickListener {
                 bottomSheetDialog.dismiss()
             }
         }

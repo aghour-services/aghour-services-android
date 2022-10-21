@@ -9,8 +9,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
 import com.aghourservices.databinding.ActivitySplashScreenBinding
-import com.aghourservices.ui.main.cache.Settings.showRigsterActivity
-import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.helper.Intents.checkTheme
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
@@ -31,15 +29,7 @@ class SplashScreen : AppCompatActivity() {
 
     private fun handler() {
         handler.postDelayed({
-            lateinit var intent: Intent
-
-            val skip = isUserLoggedIn(this) || showRigsterActivity(this)
-
-            intent = if (skip) {
-                Intent(this, MainActivity::class.java)
-            } else {
-                Intent(this, SignUpActivity::class.java)
-            }
+            val intent = Intent(this, MainActivity::class.java)
 
             val extras = getIntent().extras
             if (extras != null) {
