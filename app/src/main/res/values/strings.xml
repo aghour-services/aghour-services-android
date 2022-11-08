@@ -5,6 +5,7 @@
     <string name="ad_banner_unit_id">ca-app-pub-1747848120826315/1405022371</string>
     <string name="ad_native_unit_id">ca-app-pub-1747848120826315/1213450688</string>
     <string name="ad_interstitial_unit_id">ca-app-pub-1747848120826315/5313489556</string>
+    <string name="ad_rewarded_unit_id">ca-app-pub-1747848120826315/9232546748</string>
 
     <string name="login_email_hint">البريد الالكتروني</string>
     <string name="login_password_hint">كلمة السر</string>
@@ -121,5 +122,6 @@
     <string name="check_network">تأكد من اتصالك بالانترنت</string>
     <string name="search">بحث</string>
     <string name="name">الأسم</string>
+    <string name="support_application">إدعم التطبيق</string>
 
 </resources>

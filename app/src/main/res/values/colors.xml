@@ -161,6 +161,6 @@
     <color name="edtAddArticle">#FFFFFF</color>
     <color name="strokeAddArticle">#BABABA</color>
     <color name="settingIconColor">#151B20</color>
-    <color name="settings_icon_tint">#0F1316</color>
+    <color name="settings_icon_tint">#3E6888</color>
     <color name="bottomAppBarBg">#FFFFFF</color>
 </resources>

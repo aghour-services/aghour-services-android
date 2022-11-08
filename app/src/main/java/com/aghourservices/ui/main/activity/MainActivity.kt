@@ -7,8 +7,6 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -19,6 +17,7 @@ import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.utils.ads.Interstitial
+import com.aghourservices.utils.ads.RewardAd
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity() {
@@ -126,9 +125,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settingActivity) {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+        val rewardAd = RewardAd()
+        when (item.itemId) {
+            R.id.settingActivity -> startActivity(Intent(this, SettingsActivity::class.java))
+            R.id.supportApp -> rewardAd.loadRewardedAd(this)
         }
         return super.onOptionsItemSelected(item)
     }
