@@ -9,34 +9,37 @@ import android.widget.Toast
 import com.aghourservices.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback
 
 class RewardAd {
-    private var rewardedAd: RewardedAd? = null
+    private var rewardedAd: RewardedInterstitialAd? = null
     private val tag = "Reward Ad"
 
     fun loadRewardedAd(context: Context) {
         val adRequest = AdRequest.Builder().build()
         val unitId = context.getString(R.string.ad_rewarded_unit_id)
 
-        RewardedAd.load(context, unitId, adRequest, object : RewardedAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d(tag, adError.message)
-                rewardedAd = null
-            }
+        RewardedInterstitialAd.load(
+            context,
+            unitId,
+            adRequest,
+            object : RewardedInterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(tag, adError.message)
+                    Log.d(tag, unitId)
+                    rewardedAd = null
+                }
 
-            override fun onAdLoaded(rewardedAd: RewardedAd) {
-                Log.d(tag, "onAdLoaded...")
-                this@RewardAd.rewardedAd = rewardedAd
-                Toast.makeText(context, "سيظهر اعلان بعد 5 ثواني", Toast.LENGTH_SHORT).show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    rewardedAd.show(context as Activity) {
-                        Toast.makeText(context, "شكرا لك على دعم التطبيق", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }, 5000)
-            }
-        })
+                override fun onAdLoaded(rewardedAd: RewardedInterstitialAd) {
+                    Log.d(tag, "onAdLoaded...")
+                    this@RewardAd.rewardedAd = rewardedAd
+                }
+            })
+    }
+
+    fun showAd(context: Context) {
+        rewardedAd?.show(context as Activity) {
+        }
     }
 }

@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var runnable: Runnable
     private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
+    private val rewardAd = RewardAd()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
         adView()
+        rewardAd.loadRewardedAd(this)
     }
 
     private fun checkExtras(mainNavController: NavController) {
@@ -125,10 +127,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val rewardAd = RewardAd()
         when (item.itemId) {
             R.id.settingActivity -> startActivity(Intent(this, SettingsActivity::class.java))
-            R.id.supportApp -> rewardAd.loadRewardedAd(this)
+            R.id.supportApp -> rewardAd.showAd(this)
         }
         return super.onOptionsItemSelected(item)
     }

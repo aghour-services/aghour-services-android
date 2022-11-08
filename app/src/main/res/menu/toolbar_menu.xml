@@ -6,7 +6,6 @@
 
     <item
         android:id="@+id/supportApp"
-        android:icon="@mipmap/support"
         android:title="@string/support_application"
         app:showAsAction="ifRoom|collapseActionView" />
 
