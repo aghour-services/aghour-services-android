@@ -143,11 +143,9 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setColorSchemeResources(R.color.swipeColor)
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
-            handler.postDelayed({
-                animationTagsLoading()
-                binding.swipe.isRefreshing = false
-                activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
-            }, 1000)
+            animationTagsLoading()
+            binding.swipe.isRefreshing = false
+            activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
         }
     }
 

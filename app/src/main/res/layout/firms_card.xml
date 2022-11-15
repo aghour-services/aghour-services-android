@@ -181,7 +181,7 @@
                     android:layout_height="0dp"
                     android:src="@drawable/ic_content_copy"
                     android:padding="14dp"
-                    android:background="@drawable/dialog_selector"
+                    android:background="@drawable/share_ripple"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view2"
                     app:layout_constraintTop_toTopOf="parent"
