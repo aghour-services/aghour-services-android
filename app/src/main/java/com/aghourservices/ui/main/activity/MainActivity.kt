@@ -7,8 +7,7 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -19,6 +18,7 @@ import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.utils.ads.Interstitial
+import com.aghourservices.utils.ads.RewardAd
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity() {
@@ -26,15 +26,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var runnable: Runnable
     private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
+    private val rewardAd = RewardAd()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        floatActionButton()
-
+        rewardAd.loadRewardedAd(this)
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
+        floatActionButton()
+        rewardAd()
         adView()
     }
 
@@ -72,6 +74,13 @@ class MainActivity : AppCompatActivity() {
     private fun adView() {
         runnable = Runnable { interstitial.load(this@MainActivity) }
         handler.post(runnable)
+    }
+
+    private fun rewardAd() {
+        binding.supportApp.setOnClickListener {
+            rewardAd.showAd(this)
+            binding.supportApp.isVisible = false
+        }
     }
 
     private fun setupNavController(): NavController {
@@ -126,9 +135,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settingActivity) {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+        when (item.itemId) {
+            R.id.settingActivity -> startActivity(Intent(this, SettingsActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

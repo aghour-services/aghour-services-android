@@ -9,32 +9,48 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/toolbarBg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/toolBarTv"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:gravity="end|center"
-                tools:text="@string/app_name"
-                android:textColor="@color/toolbarText"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:background="@color/toolbarBg">
 
-        </androidx.appcompat.widget.Toolbar>
+                <TextView
+                    android:id="@+id/toolBarTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:gravity="end|center"
+                    android:maxLines="1"
+                    android:textColor="@color/toolbarText"
+                    android:textSize="20sp"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    tools:text="@string/app_name" />
+
+                <TextView
+                    android:id="@+id/supportApp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="10dp"
+                    android:maxLines="1"
+                    android:background="@drawable/dialog_selector"
+                    android:padding="10dp"
+                    android:text="@string/support_application"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -57,8 +73,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:fabCradleMargin="10dp"
         android:backgroundTint="@color/bottomAppBarBg"
+        app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp"
         app:hideOnScroll="true">
 
@@ -80,10 +96,10 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="#405768"
         android:src="@drawable/ic_add"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:backgroundTint="#405768"
         app:layout_anchor="@id/bottomAppBar"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:maxImageSize="35dp"
         app:tint="@color/white"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
