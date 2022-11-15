@@ -48,7 +48,7 @@
     <string name="no_internet">" عفوا لا يوجد انترنت 😑"</string>
     <string name="error_logIn">"خطأ في التسجيل يرجي اعادة المحاولة 😑"</string>
     <string name="action_settings">Settings</string>
-    <string name="categories_fragment">الرئيسية</string>
+    <string name="categories_fragment">الأقـسـام</string>
     <string name="about_fragment">معلومات عن التطبيق</string>
     <string name="setting_fragment">الإعدادات والحساب</string>
     <string name="add_data_fragment">إضافة البيانات</string>
@@ -56,6 +56,7 @@
     <string name="news_fragment">آخر الأخبار</string>
     <string name="shareText">"قم بتحميل تطبيق أجهور الكبرى من خلال الرابط التالي https://play.google.com/store/apps/details?id=com.aghourservices"</string>
     <string name="choose_theme_text">أخـتيار مظهر للتطبيق</string>
+    <string name="thanks_for_support">شكرا لك علي دعم التطبيق 💕 \n الإعلانات من أجل استمرار التطبيق مجاني</string>
 
     <!--animation duration-->
     <string name="shortDuration">300</string>
@@ -122,6 +123,6 @@
     <string name="check_network">تأكد من اتصالك بالانترنت</string>
     <string name="search">بحث</string>
     <string name="name">الأسم</string>
-    <string name="support_application">إدعم التطبيق</string>
+    <string name="support_application">إدعم التطبيق 💕</string>
 
 </resources>

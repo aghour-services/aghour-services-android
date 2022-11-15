@@ -5,11 +5,6 @@
     android:textDirection="rtl">
 
     <item
-        android:id="@+id/supportApp"
-        android:title="@string/support_application"
-        app:showAsAction="ifRoom|collapseActionView" />
-
-    <item
         android:id="@+id/settingActivity"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings_fragment"

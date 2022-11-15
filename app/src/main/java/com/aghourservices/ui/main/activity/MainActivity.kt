@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -31,12 +32,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        floatActionButton()
-
+        rewardAd.loadRewardedAd(this)
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
+        floatActionButton()
+        rewardAd()
         adView()
-        rewardAd.loadRewardedAd(this)
     }
 
     private fun checkExtras(mainNavController: NavController) {
@@ -73,6 +74,13 @@ class MainActivity : AppCompatActivity() {
     private fun adView() {
         runnable = Runnable { interstitial.load(this@MainActivity) }
         handler.post(runnable)
+    }
+
+    private fun rewardAd() {
+        binding.supportApp.setOnClickListener {
+            rewardAd.showAd(this)
+            binding.supportApp.isVisible = false
+        }
     }
 
     private fun setupNavController(): NavController {
@@ -129,7 +137,6 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.settingActivity -> startActivity(Intent(this, SettingsActivity::class.java))
-            R.id.supportApp -> rewardAd.showAd(this)
         }
         return super.onOptionsItemSelected(item)
     }
