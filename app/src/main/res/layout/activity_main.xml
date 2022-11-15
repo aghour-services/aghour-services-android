@@ -9,16 +9,18 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBg">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:background="@color/toolbarBg"
+            android:layout_height="?attr/actionBarSize">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/toolbarBg">
 
                 <TextView
@@ -28,9 +30,9 @@
                     android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="end|center"
                     android:maxLines="1"
+                    android:padding="4dp"
                     android:textColor="@color/toolbarText"
                     android:textSize="20sp"
-                    android:padding="4dp"
                     android:textStyle="bold"
                     tools:text="@string/app_name" />
 
@@ -40,11 +42,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center"
                     android:layout_marginRight="10dp"
+                    android:background="@drawable/category_selector"
                     android:maxLines="1"
-                    android:background="@drawable/dialog_selector"
                     android:padding="10dp"
                     android:text="@string/support_application"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dialogText"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 

@@ -66,10 +66,8 @@ class NewsFragment : BaseFragment() {
         binding.swipe.setColorSchemeResources(R.color.swipeColor)
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
-            handler.postDelayed({
-                binding.swipe.isRefreshing = false
-                activity?.let { newsViewModel.loadArticles(it, categoryId) }
-            }, 1000)
+            binding.swipe.isRefreshing = false
+            activity?.let { newsViewModel.loadArticles(it, categoryId) }
         }
     }
 
