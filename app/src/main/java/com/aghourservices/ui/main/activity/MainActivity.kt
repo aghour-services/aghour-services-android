@@ -19,6 +19,7 @@ import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.utils.ads.Interstitial
 import com.aghourservices.utils.ads.RewardAd
+import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity() {
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun rewardAd() {
         binding.supportApp.setOnClickListener {
+            sendFirebaseEvent("Support_App", "")
             rewardAd.showAd(this)
             binding.supportApp.isVisible = false
         }
