@@ -94,21 +94,42 @@
 
                 <TextView
                     android:id="@+id/shareNews"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center"
                     android:background="@drawable/share_ripple"
                     android:gravity="center"
                     android:padding="12dp"
                     android:text="@string/share_firm"
+                    android:drawablePadding="10dp"
                     android:textAlignment="center"
                     android:textColor="@color/shareText"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:drawableLeftCompat="@drawable/ic_share"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/view4"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/commentNews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:background="@drawable/share_ripple"
+                    android:drawableLeft="@drawable/ic__news_article"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/black"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="تعليق"
+                    android:textAlignment="center"
+                    android:textColor="@color/shareText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/view4"
+                    app:layout_constraintStart_toEndOf="@+id/shareNews"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
