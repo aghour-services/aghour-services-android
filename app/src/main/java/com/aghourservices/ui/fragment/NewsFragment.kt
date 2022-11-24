@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
@@ -71,7 +72,10 @@ class NewsFragment : BaseFragment() {
         }
     }
 
-    private fun onListItemClick() {}
+    private fun onListItemClick() {
+        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment()
+        findNavController().navigate(newsFragment)
+    }
 
     private fun noInternetConnection() {
         binding.apply {

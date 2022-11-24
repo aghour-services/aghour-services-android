@@ -13,7 +13,7 @@ class ArticlesViewHolder(
 ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
     init {
-        itemView.setOnClickListener(this)
+        binding.commentNews.setOnClickListener(this)
     }
 
     fun setNewsList(article: Article) {
@@ -21,8 +21,9 @@ class ArticlesViewHolder(
             description.text = article.description
             date.text = article.created_at
 
-            copyNews.setOnClickListener {
+            newsCardView.setOnLongClickListener {
                 copyNews(article.description, itemView)
+                true
             }
 
             shareNews.setOnClickListener {
