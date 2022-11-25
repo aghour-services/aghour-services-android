@@ -9,11 +9,12 @@ import com.aghourservices.utils.helper.Intents.shareNews
 
 class ArticlesViewHolder(
     val binding: NewsCardBinding,
-    private val onItemClicked: (position: Int) -> Unit,
+    private val onItemClicked: (v: View, position: Int) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
     init {
         binding.commentNews.setOnClickListener(this)
+        binding.newsCardView.setOnClickListener(this)
     }
 
     fun setNewsList(article: Article) {
@@ -32,8 +33,8 @@ class ArticlesViewHolder(
         }
     }
 
-    override fun onClick(p0: View?) {
-        onItemClicked(absoluteAdapterPosition)
+    override fun onClick(v: View) {
+        onItemClicked(v, absoluteAdapterPosition)
     }
 }
 

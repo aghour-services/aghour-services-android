@@ -77,7 +77,7 @@
     <color name="name_placeholder">#F8F8F7</color>
     <color name="item_name">#0c0c0c</color>
     <color name="description">#1a1a1a</color>
-    <color name="cursor">#214B6E</color>
+    <color name="cursor">#1A2229</color>
     <color name="timestamp">#C2C2C2</color>
     <color name="gray2">#E6E6E6</color>
     <color name="Gray">#DCDCDC</color>
@@ -132,7 +132,7 @@
     <color name="news_ripple">#C1BEBE</color>
     <color name="toastColor">#0C141A</color>
     <color name="firmsRipple">#E3E3E3</color>
-    <color name="shareText">#000000</color>
+    <color name="shareText">#35414D</color>
     <color name="shareRipple">#E4E4E4</color>
     <color name="favShadow">#A2A2A2</color>
     <color name="dontShow">#2982C8</color>

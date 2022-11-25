@@ -1,18 +1,24 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.aghourservices.data.model.Article
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.aghourservices.R
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentCommentsBinding
-import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
-import com.aghourservices.utils.helper.ProgressDialog
+import com.aghourservices.ui.viewModel.CommentsViewModel
+import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.interfaces.HideSoftKeyboard
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +26,9 @@ import retrofit2.Response
 
 class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
     private lateinit var binding: FragmentCommentsBinding
-    private val arguments : CommentsFragmentArgs by navArgs()
+    private lateinit var commentsAdapter: CommentsAdapter
+    private val commentsViewModel: CommentsViewModel by viewModels()
+    private val arguments: CommentsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,22 +40,61 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = "إضافة تعليق"
+        requireActivity().title = "التعليقات"
         hideBottomNavigation()
+        loadComments()
+        initRecyclerView()
+        initUserClick()
+        refresh()
+    }
 
+    private fun refresh() {
+        reloadingComments()
+        binding.refreshComments.setColorSchemeResources(R.color.swipeColor)
+        binding.refreshComments.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
+        binding.refreshComments.setOnRefreshListener {
+            binding.refreshComments.isRefreshing = false
+            loadComments()
+        }
+    }
+
+    private fun initUserClick() {
         binding.postComment.setOnClickListener {
+            showProgressBar()
             val comment = Comment()
             comment.body = binding.commentTv.text.toString()
 
             if (comment.inValid()) {
                 binding.commentTv.error = "أكتب تعليق"
+                hideProgressBar()
             } else {
                 postComment(comment)
             }
         }
+    }
 
-        if (binding.commentTv.requestFocus()){
-            showKeyboard(requireContext(), binding.commentTv)
+    private fun loadComments() {
+        commentsViewModel.loadComments(requireContext(), arguments.articleId)
+        commentsViewModel.commentsLivewData.observe(viewLifecycleOwner) {
+            commentsAdapter =
+                CommentsAdapter(requireContext(), it)
+            binding.commentsRecyclerView.adapter = commentsAdapter
+            stopShimmerAnimation()
+            if (it.isEmpty()) {
+                noComments()
+            }
+        }
+    }
+
+    private fun noComments() {
+        binding.noComments.isVisible = true
+        binding.nestedCommentsScroll.isVisible = false
+    }
+
+    private fun initRecyclerView() {
+        binding.commentsRecyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity)
         }
     }
 
@@ -62,18 +109,48 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-                Log.d("data", "onResponse: ${response.body()}")
 
                 if (response.isSuccessful) {
-                    Log.d("data", "onSuccess: ${response.body()}")
                     setTextEmpty()
+                    loadComments()
+                    HideSoftKeyboard.hide(requireContext(), binding.commentTv)
+                    binding.noComments.isVisible = false
+                    hideProgressBar()
                 }
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
-                Log.d("data", "onFailure: ${t.message}")
+                stopShimmerAnimation()
+                AlertDialog.noInternet(requireContext())
+                hideProgressBar()
             }
         })
+    }
+
+    private fun showProgressBar(){
+        binding.commentProgress.isVisible = true
+        binding.postComment.visibility = View.INVISIBLE
+    }
+
+    private fun hideProgressBar(){
+        binding.commentProgress.isVisible = false
+        binding.postComment.visibility = View.VISIBLE
+    }
+
+    private fun reloadingComments() {
+        binding.apply {
+            commentsShimmer.isVisible = true
+            commentsShimmer.startShimmer()
+        }
+        loadComments()
+    }
+
+    private fun stopShimmerAnimation() {
+        binding.apply {
+            commentsShimmer.stopShimmer()
+            commentsShimmer.isVisible = false
+            nestedCommentsScroll.isVisible = true
+        }
     }
 
     private fun setTextEmpty() {

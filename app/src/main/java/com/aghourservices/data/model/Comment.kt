@@ -11,7 +11,6 @@ open class Comment : RealmObject() {
     @PrimaryKey
     var id: Int = 0
     var body: String = ""
-    var name: String = ""
 
     fun toJsonObject(): JsonObject {
         val commentObject = JsonObject()

@@ -114,7 +114,7 @@
                     android:textColor="@color/shareText"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    app:drawableLeftCompat="@drawable/ic_comment"
+                    app:drawableLeftCompat="@drawable/ic_outline_comment"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
