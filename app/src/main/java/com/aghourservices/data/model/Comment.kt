@@ -6,12 +6,11 @@ import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 
 
-@RealmClass
-open class Comment : RealmObject() {
-    @PrimaryKey
-    var id: Int = 0
-    var body: String = ""
-
+data class Comment(
+    var id: Int = 0,
+    var body: String = "",
+    var user: User? = null
+) {
     fun toJsonObject(): JsonObject {
         val commentObject = JsonObject()
         val comment = JsonObject()

@@ -15,6 +15,7 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapter.CommentsAdapter
+import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.CommentsViewModel
 import com.aghourservices.utils.interfaces.AlertDialog
@@ -42,6 +43,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = "التعليقات"
         hideBottomNavigation()
+        hideUserData()
         loadComments()
         initRecyclerView()
         initUserClick()
@@ -70,6 +72,10 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
             } else {
                 postComment(comment)
             }
+        }
+
+        binding.btnRegister.setOnClickListener {
+            AlertDialog.createAccount(requireContext())
         }
     }
 
@@ -155,6 +161,17 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
 
     private fun setTextEmpty() {
         binding.commentTv.text!!.clear()
+    }
+
+    private fun hideUserData() {
+        val isUserLogin = UserInfo.isUserLoggedIn(requireContext())
+        if (isUserLogin) {
+            binding.commentsLayout.visibility = View.VISIBLE
+            binding.btnRegister.visibility = View.GONE
+        } else {
+            binding.commentsLayout.visibility = View.GONE
+            binding.btnRegister.visibility = View.VISIBLE
+        }
     }
 
     override fun onDestroyView() {
