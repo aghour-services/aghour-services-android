@@ -164,4 +164,5 @@
     <color name="settings_icon_tint">#3E6888</color>
     <color name="bottomAppBarBg">#FFFFFF</color>
     <color name="commentHint">#192127</color>
+    <color name="publish_article_btn">#3A8FD3</color>
 </resources>

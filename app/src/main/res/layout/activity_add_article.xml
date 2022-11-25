@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/recyclerViewBg"
     android:orientation="vertical"
     android:theme="@style/AddDataTheme">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/firmsToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg"
         android:elevation="6dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,59 +23,61 @@
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center"
-            android:layout_margin="4dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/about_app_back_ripple"
             android:padding="10dp"
             android:src="@drawable/ic_back_settings" />
 
         <TextView
             android:id="@+id/toolBarTv"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_toEndOf="@id/back_btn"
             android:gravity="center"
-            android:paddingRight="45dp"
+            android:padding="4dp"
             android:text="@string/add_article"
             android:textColor="@color/toolbarText"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/send_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/publish_article_btn"
+            android:fontFamily="sans-serif-black"
+            android:padding="10dp"
+            android:text="@string/publish_article"
+            android:textColor="@color/white"
+            android:textSize="@dimen/settings_text"
+            app:cornerRadius="20dp"
+            tools:ignore="RelativeOverlap" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    </RelativeLayout>
+
+    <EditText
         android:id="@+id/text_article"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:background="@drawable/edt_add_article"
+        android:background="@android:color/transparent"
         android:elevation="1dp"
         android:gravity="right"
         android:hint="@string/add_article_hint"
         android:importantForAutofill="no"
         android:padding="15dp"
         android:textColorHint="@color/dialogText"
-        android:textSize="@dimen/settings_text">
-
-        <requestFocus />
-    </androidx.appcompat.widget.AppCompatEditText>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/send_article"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="10dp"
-        android:background="@drawable/edt_text_background"
-        android:drawableLeft="@drawable/ic_send"
-        android:elevation="5dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="40dp"
-        android:text="@string/publish_article"
-        android:textColor="@color/dialogText"
-        android:textSize="@dimen/settings_text"
-        android:textStyle="bold" />
+        android:textSize="@dimen/settings_text" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"

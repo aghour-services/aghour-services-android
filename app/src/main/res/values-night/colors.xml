@@ -116,5 +116,6 @@
     <color name="backSettingsIcon">#FFFFFF</color>
     <color name="bottomAppBarBg">#1F272C</color>
     <color name="commentHint">#FFFFFF</color>
+    <color name="publish_article_btn">#2E3840</color>
 
 </resources>
