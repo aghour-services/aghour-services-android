@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
@@ -52,7 +53,7 @@ class NewsFragment : BaseFragment() {
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
             articleList = it
             newsAdapter =
-                ArticlesAdapter(requireContext(), it) { onListItemClick() }
+                ArticlesAdapter(requireContext(), it) { position -> onListItemClick(position) }
             binding.newsRecyclerview.adapter = newsAdapter
             stopShimmerAnimation()
             if (articleList.isEmpty()) {
@@ -71,7 +72,13 @@ class NewsFragment : BaseFragment() {
         }
     }
 
-    private fun onListItemClick() {}
+    private fun onListItemClick(position: Int) {
+        val articleId = articleList[position].id
+        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
+            articleId
+        )
+        findNavController().navigate(newsFragment)
+    }
 
     private fun noInternetConnection() {
         binding.apply {

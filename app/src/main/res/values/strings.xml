@@ -124,5 +124,7 @@
     <string name="search">بحث</string>
     <string name="name">الأسم</string>
     <string name="support_application">إدعم التطبيق 💕</string>
+    <string name="comment">تعليق</string>
+    <string name="write_a_comment">أكتب تعليق...</string>
 
 </resources>

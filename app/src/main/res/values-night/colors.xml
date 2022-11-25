@@ -115,5 +115,6 @@
     <color name="settings_icon_tint">#FFFFFF</color>
     <color name="backSettingsIcon">#FFFFFF</color>
     <color name="bottomAppBarBg">#1F272C</color>
+    <color name="commentHint">#192127</color>
 
 </resources>
