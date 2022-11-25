@@ -1,12 +1,18 @@
 package com.aghourservices.data.model
 
 import com.google.gson.JsonObject
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
 
-data class Comment(
-    var id: Int,
-    var body: String,
-    var name: String,
-){
+
+@RealmClass
+open class Comment : RealmObject() {
+    @PrimaryKey
+    var id: Int = 0
+    var body: String = ""
+    var name: String = ""
+
     fun toJsonObject(): JsonObject {
         val commentObject = JsonObject()
         val comment = JsonObject()

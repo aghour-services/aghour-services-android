@@ -117,5 +117,9 @@
         android:id="@+id/commentsFragment"
         tools:layout="@layout/fragment_comments"
         android:name="com.aghourservices.ui.fragment.CommentsFragment"
-        android:label="CommentsFragment" />
+        android:label="CommentsFragment" >
+        <argument
+            android:name="article_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

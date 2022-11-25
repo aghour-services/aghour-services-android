@@ -19,6 +19,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                tools:itemCount="5"
                 tools:listitem="@layout/news_card" />
 
         </androidx.core.widget.NestedScrollView>
@@ -26,16 +27,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/frame_layout"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:background="@drawable/dialog_selector"
             android:layout_alignParentBottom="true"
-            android:background="#F4F9FF"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:padding="6dp"
                 app:hintEnabled="false"
@@ -52,7 +55,6 @@
                     android:gravity="right"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:hint="@string/write_a_comment"
-                    android:inputType="textEmailAddress"
                     android:padding="12dp"
                     android:textColorHint="@color/commentHint"
                     android:textSize="14sp" />
@@ -64,8 +66,8 @@
             <ImageButton
                 android:id="@+id/postComment"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:background="@null"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_selector"
                 android:padding="10dp"
                 android:src="@drawable/ic_send"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -13,4 +13,10 @@ interface CommentsApi {
         @Header("TOKEN") token: String,
         @Body comment: JsonObject,
     ): Call<Comment>
+
+
+    @GET("articles/{article_id}/comments")
+    fun getAllComments(
+        @Path("article_id") articleId: Int,
+    ): Call<List<Comment>>
 }
