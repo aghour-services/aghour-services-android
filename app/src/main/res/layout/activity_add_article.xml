@@ -45,7 +45,7 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/text_article"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="200dp"
         android:layout_margin="10dp"
         android:background="@drawable/edt_add_article"
         android:elevation="1dp"
@@ -91,6 +91,6 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <include layout="@layout/admob_banner"/>
+    <include layout="@layout/admob_banner" />
 
 </LinearLayout>

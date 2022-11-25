@@ -33,7 +33,7 @@ class FirmsFragment : BaseFragment() {
     private lateinit var firmsViewModel: FirmsViewModel
     private lateinit var tagsViewModel: TagsViewModel
     private val handler = Handler(Looper.getMainLooper()!!)
-    private val args: CategoriesFragmentArgs by navArgs()
+    private val args: FirmsFragmentArgs by navArgs()
     private var selectedTags = ArrayList<String>()
     private var categoryId = 0
 
