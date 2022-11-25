@@ -1,6 +1,5 @@
 package com.aghourservices.data.api
 
-import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Comment
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -21,9 +20,4 @@ interface CommentsApi {
         @Body comment: JsonObject,
     ): Call<Comment>
 
-
-    @GET("articles/{article_id}/comments")
-    fun getAllComments(
-        @Path("article_id") articleId: Int,
-    ): Call<List<Comment>>
 }

@@ -5,13 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentCommentsBinding
+import com.aghourservices.ui.adapter.ArticlesAdapter
+import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
+import com.aghourservices.ui.viewModel.CommentsViewModel
+import com.aghourservices.ui.viewModel.NewsViewModel
 import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
@@ -20,7 +26,9 @@ import retrofit2.Response
 
 class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
     private lateinit var binding: FragmentCommentsBinding
-    private val arguments : CommentsFragmentArgs by navArgs()
+    private lateinit var commentsViewModel: CommentsViewModel
+    private lateinit var commentsAdapter: CommentsAdapter
+    private val arguments: CommentsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +42,8 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().title = "إضافة تعليق"
         hideBottomNavigation()
+        setUpViewModel()
+        initRecyclerView()
 
         binding.postComment.setOnClickListener {
             val comment = Comment()
@@ -43,11 +53,30 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                 binding.commentTv.error = "أكتب تعليق"
             } else {
                 postComment(comment)
+                commentsViewModel.loadComments(requireContext(), arguments.articleId)
             }
         }
 
-        if (binding.commentTv.requestFocus()){
+        if (binding.commentTv.requestFocus()) {
             showKeyboard(requireContext(), binding.commentTv)
+        }
+    }
+
+    private fun setUpViewModel() {
+        commentsViewModel = ViewModelProvider(this)[CommentsViewModel::class.java]
+        activity?.let { commentsViewModel.loadComments(it, arguments.articleId) }
+        commentsViewModel.commentsLivewData.observe(viewLifecycleOwner) {
+            commentsAdapter =
+                CommentsAdapter(requireContext(), it)
+            binding.commentsRecyclerView.adapter = commentsAdapter
+
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.commentsRecyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity)
         }
     }
 
