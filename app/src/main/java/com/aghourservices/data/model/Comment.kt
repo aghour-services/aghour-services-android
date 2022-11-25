@@ -6,7 +6,8 @@ data class Comment(
     var id: Int,
     var body: String,
     var name: String,
-){
+    var created_at: String = ""
+) {
     fun toJsonObject(): JsonObject {
         val commentObject = JsonObject()
         val comment = JsonObject()

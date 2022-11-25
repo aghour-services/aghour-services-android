@@ -17,12 +17,6 @@
             app:exitAnim="@anim/fragment_exit"
             app:popEnterAnim="@anim/fragment_enter_pop"
             app:popExitAnim="@anim/fragment_exit_pop" />
-        <argument
-            android:name="category_id"
-            app:argType="integer" />
-        <argument
-            android:name="category_name"
-            app:argType="string" />
         <action
             android:id="@+id/action_categoriesFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
@@ -45,7 +39,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -115,7 +109,12 @@
         app:popUpTo="@id/categoriesFragment" />
     <fragment
         android:id="@+id/commentsFragment"
-        tools:layout="@layout/fragment_comments"
         android:name="com.aghourservices.ui.fragment.CommentsFragment"
-        android:label="CommentsFragment" />
+        android:label="CommentsFragment"
+        tools:layout="@layout/fragment_comments">
+
+        <argument
+            android:name="article_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

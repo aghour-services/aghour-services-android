@@ -53,7 +53,7 @@ class NewsFragment : BaseFragment() {
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
             articleList = it
             newsAdapter =
-                ArticlesAdapter(requireContext(), it) { onListItemClick() }
+                ArticlesAdapter(requireContext(), it) { position -> onListItemClick(position) }
             binding.newsRecyclerview.adapter = newsAdapter
             stopShimmerAnimation()
             if (articleList.isEmpty()) {
@@ -72,8 +72,9 @@ class NewsFragment : BaseFragment() {
         }
     }
 
-    private fun onListItemClick() {
-        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment()
+    private fun onListItemClick(position: Int) {
+        val article = articleList[position]
+        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(article.id)
         findNavController().navigate(newsFragment)
     }
 

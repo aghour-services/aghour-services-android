@@ -17,9 +17,11 @@
             android:layout_alignParentTop="true">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/news_card" />
+                android:background="@color/black"
+                tools:listitem="@layout/comment_card" />
 
         </androidx.core.widget.NestedScrollView>
 
@@ -50,11 +52,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/comment_edt_bg"
                     android:gravity="right"
-                    android:textCursorDrawable="@drawable/cursor_color"
                     android:hint="@string/write_a_comment"
                     android:inputType="textEmailAddress"
                     android:padding="12dp"
-                    android:textColorHint="@color/commentHint"
                     android:textSize="14sp" />
 
                 <requestFocus />

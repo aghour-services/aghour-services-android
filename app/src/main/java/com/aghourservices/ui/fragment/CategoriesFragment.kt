@@ -22,8 +22,7 @@ class CategoriesFragment : BaseFragment() {
     private lateinit var categoryList: ArrayList<Category>
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCategoriesBinding.inflate(layoutInflater)
         setUpViewModel()
@@ -36,12 +35,9 @@ class CategoriesFragment : BaseFragment() {
         activity?.let { categoriesViewModel.loadCategories(it) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryList = it
-            categoryAdapter =
-                CategoriesAdapter(requireContext(), categoryList) { position ->
-                    onListItemClick(
-                        position
-                    )
-                }
+            categoryAdapter = CategoriesAdapter(requireContext(), categoryList) { position ->
+                onListItemClick(position)
+            }
             binding.categoriesRecyclerview.adapter = categoryAdapter
             progressBar()
         }
@@ -60,11 +56,9 @@ class CategoriesFragment : BaseFragment() {
     private fun onListItemClick(position: Int) {
         val categoryId = categoryList[position].id
         val categoryName = categoryList[position].name
-        val firmsFragment =
-            CategoriesFragmentDirections.actionCategoriesFragmentToFirmsFragment(
-                categoryId,
-                categoryName
-            )
+        val firmsFragment = CategoriesFragmentDirections.actionCategoriesFragmentToFirmsFragment(
+            categoryId, categoryName
+        )
         findNavController().navigate(firmsFragment)
     }
 
