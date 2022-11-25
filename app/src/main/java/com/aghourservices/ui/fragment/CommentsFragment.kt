@@ -18,6 +18,7 @@ import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.CommentsViewModel
+import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.HideSoftKeyboard
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
@@ -106,6 +107,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
 
     private fun postComment(comment: Comment) {
         val user = getUserData(requireContext())
+        val eventName = "${comment.user?.name}_Add_Comment"
 
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
             arguments.articleId,
@@ -122,6 +124,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                     HideSoftKeyboard.hide(requireContext(), binding.commentTv)
                     binding.noComments.isVisible = false
                     hideProgressBar()
+                    sendFirebaseEvent(eventName, "")
                 }
             }
 
@@ -133,12 +136,12 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         })
     }
 
-    private fun showProgressBar(){
+    private fun showProgressBar() {
         binding.commentProgress.isVisible = true
         binding.postComment.visibility = View.INVISIBLE
     }
 
-    private fun hideProgressBar(){
+    private fun hideProgressBar() {
         binding.commentProgress.isVisible = false
         binding.postComment.visibility = View.VISIBLE
     }
