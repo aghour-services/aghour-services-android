@@ -19,11 +19,12 @@
                 android:id="@+id/noComments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
                 android:background="@color/recyclerViewBg"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="120dp"
@@ -80,7 +81,7 @@
                 android:id="@+id/nested_comments_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/frame_layout"
+                android:layout_above="@+id/comments_layout"
                 android:layout_alignParentTop="true"
                 android:visibility="gone">
 
@@ -95,7 +96,7 @@
             </androidx.core.widget.NestedScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/frame_layout"
+                android:id="@+id/comments_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -147,13 +148,27 @@
                     android:id="@+id/comment_progress"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:visibility="invisible"
                     android:indeterminateTint="@color/progressBar"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/edt_text_background"
+                android:text="@string/create_account_to_publish"
+                android:textColor="@color/dialogText"
+                android:textSize="@dimen/settings_text"
+                android:textStyle="bold"/>
+
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
