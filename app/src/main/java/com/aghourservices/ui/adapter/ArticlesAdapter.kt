@@ -2,6 +2,7 @@ package com.aghourservices.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
@@ -11,7 +12,7 @@ import com.aghourservices.utils.ads.NativeAdViewHolder
 class ArticlesAdapter(
     val context: Context,
     private var newsList: ArrayList<Article>,
-    private val onItemClicked: (position: Int) -> Unit
+    private val onItemClicked: (v: View, position: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var itemsCountToShowAds = 2

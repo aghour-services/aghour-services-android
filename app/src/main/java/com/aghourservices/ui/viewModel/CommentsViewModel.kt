@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.utils.interfaces.AlertDialog
 import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class CommentsViewModel : ViewModel() {
-    private var realm: Realm = Realm.getDefaultInstance()
     val commentsLivewData = MutableLiveData<ArrayList<Comment>>()
     var commentList: ArrayList<Comment> = ArrayList()
 
@@ -31,7 +31,7 @@ class CommentsViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Comment>>, t: Throwable) {
-                Log.d("list-comment", "onFailure: ${t.message}")
+
             }
         })
     }

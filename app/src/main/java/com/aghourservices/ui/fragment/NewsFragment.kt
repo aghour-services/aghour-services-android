@@ -15,8 +15,9 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.viewModel.NewsViewModel
+import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 
-class NewsFragment : BaseFragment() {
+class NewsFragment : BaseFragment(), ShowSoftKeyboard {
     private lateinit var newsAdapter: ArticlesAdapter
     private lateinit var articleList: ArrayList<Article>
     private lateinit var handler: Handler
@@ -53,7 +54,7 @@ class NewsFragment : BaseFragment() {
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
             articleList = it
             newsAdapter =
-                ArticlesAdapter(requireContext(), it) { position -> onListItemClick(position) }
+                ArticlesAdapter(requireContext(), it) { v, position -> onListItemClick(v,position) }
             binding.newsRecyclerview.adapter = newsAdapter
             stopShimmerAnimation()
             if (articleList.isEmpty()) {
@@ -72,12 +73,23 @@ class NewsFragment : BaseFragment() {
         }
     }
 
-    private fun onListItemClick(position: Int) {
+    private fun onListItemClick(v: View, position: Int) {
         val articleId = articleList[position].id
-        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
-            articleId
-        )
-        findNavController().navigate(newsFragment)
+
+        when (v.id) {
+            R.id.news_card_view -> {
+                val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
+                    articleId
+                )
+                findNavController().navigate(newsFragment)
+            }
+            R.id.commentNews -> {
+                val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
+                    articleId
+                )
+                findNavController().navigate(newsFragment)
+            }
+        }
     }
 
     private fun noInternetConnection() {
