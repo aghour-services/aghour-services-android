@@ -21,6 +21,10 @@ import com.aghourservices.utils.ads.Interstitial
 import com.aghourservices.utils.ads.RewardAd
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.play.core.review.ReviewInfo
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.tasks.Task
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
     private val rewardAd = RewardAd()
+    private var reviewManager: ReviewManager? = null
+    private var reviewInfo: ReviewInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,25 @@ class MainActivity : AppCompatActivity() {
         floatActionButton()
         rewardAd()
         adView()
+        inAppRating()
+    }
+
+    private fun inAppRating() {
+        reviewManager = ReviewManagerFactory.create(this)
+        val request: Task<ReviewInfo> = reviewManager!!.requestReviewFlow()
+        request.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                reviewInfo = task.result
+            }
+        }
+//        TODO: Just for testing
+//        binding.button.setOnClickListener {
+//            val flow = reviewManager!!.launchReviewFlow(
+//                this@MainActivity,
+//                reviewInfo!!
+//            )
+//            flow.addOnCompleteListener { }
+//        }
     }
 
     private fun checkExtras(mainNavController: NavController) {
