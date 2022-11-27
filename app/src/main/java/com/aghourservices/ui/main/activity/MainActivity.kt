@@ -1,11 +1,16 @@
 package com.aghourservices.ui.main.activity
 
+import android.app.Activity
 import android.content.Intent
+import android.content.IntentSender
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
@@ -19,8 +24,16 @@ import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.utils.ads.Interstitial
 import com.aghourservices.utils.ads.RewardAd
+import com.aghourservices.utils.helper.Constants.Companion.APP_UPDATE_REQUEST_CODE
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallState
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
@@ -34,6 +47,23 @@ class MainActivity : AppCompatActivity() {
     private val rewardAd = RewardAd()
     private var reviewManager: ReviewManager? = null
     private var reviewInfo: ReviewInfo? = null
+    private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
+    private val appUpdatedListener: InstallStateUpdatedListener by lazy {
+        object : InstallStateUpdatedListener {
+            override fun onStateUpdate(installState: InstallState) {
+                when {
+                    installState.installStatus() == InstallStatus.DOWNLOADED -> popupDialogForCompleteUpdate()
+                    installState.installStatus() == InstallStatus.INSTALLED -> appUpdateManager.unregisterListener(
+                        this
+                    )
+                    else -> Log.d(
+                        "UpdateCheck",
+                        "InstallStateUpdatedListener: state: ${installState.installStatus()}"
+                    )
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         rewardAd()
         adView()
         inAppRating()
+        inAppUpdate()
     }
 
     private fun inAppRating() {
@@ -87,9 +118,67 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun inAppUpdate() {
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                try {
+                    val installType = when {
+                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> AppUpdateType.FLEXIBLE
+                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> AppUpdateType.IMMEDIATE
+                        else -> null
+                    }
+                    if (installType == AppUpdateType.FLEXIBLE) appUpdateManager.registerListener(
+                        appUpdatedListener
+                    )
+
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        installType!!,
+                        this,
+                        APP_UPDATE_REQUEST_CODE
+                    )
+                } catch (e: IntentSender.SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    private fun popupDialogForCompleteUpdate() {
+        val alertDialogBuilder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
+        alertDialogBuilder.setTitle("التطبيق جاهز للتثبيت")
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setPositiveButton("تثبيت الأن") { _, _ ->
+            appUpdateManager.completeUpdate()
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+        alertDialog.setCancelable(false)
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 14f
+    }
+
     override fun onResume() {
         super.onResume()
         handler.postDelayed(runnable, 120000)
+
+        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                popupDialogForCompleteUpdate()
+            }
+            try {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.FLEXIBLE,
+                        this,
+                        APP_UPDATE_REQUEST_CODE
+                    )
+                }
+            } catch (e: IntentSender.SendIntentException) {
+                e.printStackTrace()
+            }
+        }
     }
 
     override fun onPause() {
