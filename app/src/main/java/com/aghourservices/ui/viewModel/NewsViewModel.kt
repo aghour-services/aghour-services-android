@@ -15,8 +15,8 @@ class NewsViewModel : ViewModel() {
     var newsLiveData = MutableLiveData<ArrayList<Article>>()
     var newsList: ArrayList<Article> = ArrayList()
 
-    fun loadArticles(context: Context, categoryId: Int) {
-        val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles(categoryId)
+    fun loadArticles(context: Context) {
+        val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles()
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Article>?> {
             override fun onResponse(

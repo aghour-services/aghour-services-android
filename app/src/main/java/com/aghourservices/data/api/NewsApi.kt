@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface NewsApi {
     @GET("articles")
-    fun loadArticles(@Query("category_id") category_id: Int): Call<ArrayList<Article>>
+    fun loadArticles(): Call<ArrayList<Article>>
 
     @POST("articles")
     fun createArticle(@Body article: JsonObject, @Header("TOKEN") token: String): Call<Article>

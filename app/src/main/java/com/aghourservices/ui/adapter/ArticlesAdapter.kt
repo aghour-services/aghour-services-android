@@ -1,5 +1,6 @@
 package com.aghourservices.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,28 +9,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
 import com.aghourservices.utils.ads.NativeAdViewHolder
+import com.aghourservices.utils.helper.Intents
 
 class ArticlesAdapter(
-    val context: Context,
-    private var newsList: ArrayList<Article>,
     private val onItemClicked: (v: View, position: Int) -> Unit
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>() {
+    private var articleList: ArrayList<Article> = ArrayList()
     private var itemsCountToShowAds = 2
-    private var itemsCount = newsList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
         val view = NewsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticlesViewHolder(view, onItemClicked)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val hold = holder as ArticlesViewHolder
-        val article = newsList[position]
-        hold.setNewsList(article)
+    override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
+        val article = articleList[position]
+        holder.setNewsList(article)
 
         if (getItemViewType(position) == 0) {
-            NativeAdViewHolder(context, hold.binding.adFrame)
+            NativeAdViewHolder(holder.binding.root.context, holder.binding.adFrame)
         }
     }
 
@@ -38,6 +36,47 @@ class ArticlesAdapter(
     }
 
     override fun getItemCount(): Int {
-        return itemsCount
+        return articleList.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setArticles(articles: ArrayList<Article>) {
+        articleList = articles
+        notifyDataSetChanged()
+    }
+
+    fun getArticle(position: Int): Article {
+        return articleList[position]
+    }
+
+    inner class ArticlesViewHolder(
+        val binding: NewsCardBinding,
+        private val onItemClicked: (v: View, position: Int) -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        init {
+            binding.commentNews.setOnClickListener(this)
+            binding.newsCardView.setOnClickListener(this)
+        }
+
+        fun setNewsList(article: Article) {
+            binding.apply {
+                description.text = article.description
+                date.text = article.created_at
+
+                newsCardView.setOnLongClickListener {
+                    Intents.copyNews(article.description, itemView)
+                    true
+                }
+
+                shareNews.setOnClickListener {
+                    Intents.shareNews(article.description, itemView)
+                }
+            }
+        }
+
+        override fun onClick(v: View) {
+            onItemClicked(v, absoluteAdapterPosition)
+        }
     }
 }

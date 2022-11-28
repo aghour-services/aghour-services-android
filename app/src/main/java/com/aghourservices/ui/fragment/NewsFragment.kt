@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,16 +15,14 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
+import com.aghourservices.ui.factory.ArticlesViewModelFactory
 import com.aghourservices.ui.viewModel.NewsViewModel
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 
 class NewsFragment : BaseFragment(), ShowSoftKeyboard {
-    private lateinit var newsAdapter: ArticlesAdapter
-    private lateinit var articleList: ArrayList<Article>
-    private lateinit var handler: Handler
     private lateinit var binding: FragmentNewsBinding
-    private lateinit var newsViewModel: NewsViewModel
-    private var categoryId = 0
+    private val newsViewModel: NewsViewModel by viewModels { ArticlesViewModelFactory() }
+    private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,37 +43,33 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
     private fun initRecyclerView() {
         binding.apply {
             newsRecyclerview.setHasFixedSize(true)
+            newsRecyclerview.adapter = newsAdapter
             newsRecyclerview.layoutManager = LinearLayoutManager(activity)
         }
     }
 
     private fun setUpViewModel() {
-        newsViewModel = ViewModelProvider(this)[NewsViewModel::class.java]
-        activity?.let { newsViewModel.loadArticles(it, categoryId) }
-        newsViewModel.newsLiveData.observe(viewLifecycleOwner) {
-            articleList = it
-            newsAdapter =
-                ArticlesAdapter(requireContext(), it) { v, position -> onListItemClick(v,position) }
-            binding.newsRecyclerview.adapter = newsAdapter
+        newsViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
+            newsAdapter.setArticles(articles)
             stopShimmerAnimation()
-            if (articleList.isEmpty()) {
+            if (articles.isEmpty()) {
                 noInternetConnection()
             }
         }
+        newsViewModel.loadArticles(requireContext())
     }
 
     private fun refresh() {
-        handler = Handler(Looper.getMainLooper()!!)
         binding.swipe.setColorSchemeResources(R.color.swipeColor)
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            activity?.let { newsViewModel.loadArticles(it, categoryId) }
+            newsViewModel.loadArticles(requireContext())
         }
     }
 
     private fun onListItemClick(v: View, position: Int) {
-        val articleId = articleList[position].id
+        val articleId = newsAdapter.getArticle(position).id
 
         when (v.id) {
             R.id.news_card_view -> {

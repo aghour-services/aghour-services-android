@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,50 +13,43 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Category
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapter.CategoriesAdapter
+import com.aghourservices.ui.factory.CategoriesVIewModelFactory
 import com.aghourservices.ui.viewModel.CategoriesViewModel
 
 class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
-    private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var categoryAdapter: CategoriesAdapter
-    private lateinit var categoriesViewModel: CategoriesViewModel
-    private lateinit var categoryList: ArrayList<Category>
+    private val categoriesViewModel: CategoriesViewModel by viewModels { CategoriesVIewModelFactory() }
+    private val categoryAdapter = CategoriesAdapter { position -> onListItemClick(position) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCategoriesBinding.inflate(layoutInflater)
-        setUpViewModel()
         initRecyclerView()
+        setUpViewModel()
         return binding.root
     }
 
     private fun setUpViewModel() {
-        categoriesViewModel = ViewModelProvider(this)[CategoriesViewModel::class.java]
         activity?.let { categoriesViewModel.loadCategories(it) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
-            categoryList = it
-            categoryAdapter = CategoriesAdapter(requireContext(), categoryList) { position ->
-                onListItemClick(position)
-            }
-            binding.categoriesRecyclerview.adapter = categoryAdapter
+            categoryAdapter.setCategories(it)
             progressBar()
         }
     }
 
     private fun initRecyclerView() {
         requireActivity().title = getString(R.string.categories_fragment)
-        linearLayoutManager = LinearLayoutManager(activity)
         binding.categoriesRecyclerview.apply {
             setHasFixedSize(true)
-            layoutManager = linearLayoutManager
+            adapter = categoryAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
 
     private fun onListItemClick(position: Int) {
-        val categoryId = categoryList[position].id
-        val categoryName = categoryList[position].name
+        val categoryId = categoryAdapter.getCategory(position).id
+        val categoryName = categoryAdapter.getCategory(position).name
         val firmsFragment = CategoriesFragmentDirections.actionCategoriesFragmentToFirmsFragment(
             categoryId, categoryName
         )
