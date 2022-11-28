@@ -27,6 +27,13 @@ class NewsViewModel : ViewModel() {
                     newsLiveData.value = response.body()
                     newsList = newsLiveData.value!!
                     realm.executeTransaction {
+                        newsList.forEach {
+                            val article = realm.where(Article::class.java).equalTo("id", it.id).findFirst()
+                            if (article != null) {
+                                it.isFavorite = article.isFavorite
+                            }
+                            realm.createOrUpdateObjectFromJson(Article::class.java, it.toJSONObject())
+                        }
                         realm.copyToRealmOrUpdate(newsList)
                     }
                 }

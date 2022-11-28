@@ -4,9 +4,8 @@
     <item android:drawable="@drawable/ic_fav_clicked"
         android:state_checked="true" />
 
-
-    <item android:drawable="@drawable/ic_fav_shadow"
+    <item android:drawable="@drawable/ic_outline_favorie"
         android:state_checked="false" />
 
-    <item android:drawable="@drawable/ic_fav_shadow" />
+    <item android:drawable="@drawable/ic_outline_favorie" />
 </selector>

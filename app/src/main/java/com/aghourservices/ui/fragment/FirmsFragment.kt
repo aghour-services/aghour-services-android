@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
+import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Firm
 import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
@@ -213,22 +214,17 @@ class FirmsFragment : BaseFragment() {
 
     private fun updateFavorite(position: Int) {
         val realm = Realm.getDefaultInstance()
-        var firm = firmsList[position]
+        val firm = firmsList[position]
         val name = firm.name
-        if (!firm.isFavorite) {
-            onSNACK(binding.firmsRecyclerView, "تم الإضافة الي المفضلة ❤")
-        } else {
-            onSNACK(binding.firmsRecyclerView, "تم الإزالة من المفضلة 😕")
-        }
         var eventName = "fav_${name}"
         if (firm.isFavorite) {
             eventName = "unFav_${name}"
         }
         Event.sendFirebaseEvent(eventName, name)
-        realm.beginTransaction()
-        firm.isFavorite = !firm.isFavorite
-        firm = realm.createOrUpdateObjectFromJson(Firm::class.java, firm.toJSONObject())
-        realm.copyToRealmOrUpdate(firm)
-        realm.commitTransaction()
+
+        realm.executeTransaction {
+            firm.isFavorite = !firm.isFavorite
+            realm.createOrUpdateObjectFromJson(Article::class.java, firm.toJSONObject())
+        }
     }
 }
