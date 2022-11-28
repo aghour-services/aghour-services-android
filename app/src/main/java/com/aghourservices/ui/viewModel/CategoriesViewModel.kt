@@ -26,18 +26,32 @@ class CategoriesViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     categoriesLiveData.value = response.body()
                     categoryList = categoriesLiveData.value!!
-                    realm.executeTransaction {
-                       realm.copyToRealmOrUpdate(categoryList)
-                    }
+                    saveCategoriesToRealm(categoryList)
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<Category>>, t: Throwable) {
-                val categories = realm.where(Category::class.java).findAll()
-                categoryList = ArrayList()
-                categoryList.addAll(categories)
-                categoriesLiveData.value = categoryList
+                getCategoriesFromRealm()
             }
         })
+    }
+
+    private fun saveCategoriesToRealm(categoryList: ArrayList<Category>) {
+        realm.executeTransaction {
+            realm.copyToRealmOrUpdate(categoryList)
+        }
+    }
+
+    private fun getCategoriesFromRealm(): ArrayList<Category> {
+        val categories = realm.where(Category::class.java).findAll()
+        categoryList = ArrayList()
+        categoryList.addAll(categories)
+        categoriesLiveData.value = categoryList
+        return categoryList
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        realm.close()
     }
 }
