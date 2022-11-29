@@ -1,5 +1,6 @@
 package com.aghourservices.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapter.CommentsAdapter
+import com.aghourservices.ui.main.activity.SignInActivity
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.CommentsViewModel
@@ -125,6 +127,11 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                     binding.noComments.isVisible = false
                     hideProgressBar()
                     sendFirebaseEvent(eventName, "")
+                } else if (response.code() == 401) {
+                    createAccount()
+                    hideProgressBar()
+                } else {
+                    hideProgressBar()
                 }
             }
 
@@ -158,6 +165,26 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                 AlertDialog.noInternet(requireContext())
             }
         })
+    }
+
+    fun createAccount() {
+        val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext(),R.style.AlertDialogTheme)
+        alertDialogBuilder.setTitle("حدث خطأ ما")
+        alertDialogBuilder.setMessage("يرجى تسجيل الدخول مرة أخرى")
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton("تمام") { _, _ ->
+            logOut()
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).textSize = 14f
+    }
+
+    private fun logOut() {
+        sendFirebaseEvent("Sign_Out", "")
+        UserInfo.clearUserData(requireContext())
+        startActivity(Intent(requireContext(), SignInActivity::class.java))
     }
 
     private fun showProgressBar() {
