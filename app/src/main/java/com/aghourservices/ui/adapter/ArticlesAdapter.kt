@@ -15,7 +15,6 @@ class ArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
 ) : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>() {
     private var articleList: ArrayList<Article> = ArrayList()
-    private val realm: Realm = Realm.getDefaultInstance()
     private var itemsCountToShowAds = 4
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {

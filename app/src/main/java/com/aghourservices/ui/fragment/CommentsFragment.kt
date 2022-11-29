@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
@@ -26,9 +27,10 @@ import retrofit2.Response
 
 class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
     private lateinit var binding: FragmentCommentsBinding
-    private lateinit var commentsAdapter: CommentsAdapter
     private val commentsViewModel: CommentsViewModel by viewModels()
     private val arguments: CommentsFragmentArgs by navArgs()
+    private val commentsAdapter =
+        CommentsAdapter { view, position -> onCommentItemClick(view, position) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,9 +84,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
     private fun loadComments() {
         commentsViewModel.loadComments(requireContext(), arguments.articleId)
         commentsViewModel.commentsLivewData.observe(viewLifecycleOwner) {
-            commentsAdapter =
-                CommentsAdapter(requireContext(), it)
-            binding.commentsRecyclerView.adapter = commentsAdapter
+            commentsAdapter.setComments(it)
             stopShimmerAnimation()
             if (it.isEmpty()) {
                 noComments()
@@ -100,17 +100,18 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
     private fun initRecyclerView() {
         binding.commentsRecyclerView.apply {
             setHasFixedSize(true)
+            adapter = commentsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }
 
     private fun postComment(comment: Comment) {
-        val user = getUserData(requireContext())
+        val userDetails = getUserData(requireContext())
         val eventName = "${comment.user?.name}_Add_Comment"
 
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
             arguments.articleId,
-            user.token,
+            userDetails.token,
             comment.toJsonObject(),
         )
 
@@ -173,6 +174,22 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         } else {
             binding.commentsLayout.visibility = View.GONE
             binding.btnRegister.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onCommentItemClick(v: View, position: Int) {
+        val commentId = commentsAdapter.getComment(position).id
+        val commentBody = commentsAdapter.getComment(position).body
+
+        when (v.id) {
+            R.id.update_comment -> {
+                val action =
+                    CommentsFragmentDirections.actionCommentsFragmentToUpdateCommentFragment(
+                        arguments.articleId,
+                        commentId, commentBody
+                    )
+                findNavController().navigate(action)
+            }
         }
     }
 
