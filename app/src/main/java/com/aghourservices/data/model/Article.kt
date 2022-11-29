@@ -16,6 +16,7 @@ open class Article : RealmObject() {
     @Index
     var description: String = ""
     var created_at: String = ""
+    var name: String? = null
     var isFavorite: Boolean = false
 
     fun toJsonObject(): JsonObject {

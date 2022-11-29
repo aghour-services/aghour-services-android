@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="4dp">
+    android:layout_margin="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/news_card"
@@ -108,23 +108,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
+            <TextView
+                android:id="@+id/likes_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="100 إعجاب"
+                android:textSize="11sp"
+                android:visibility="gone"
+                android:layout_gravity="right"
+                android:layout_margin="10dp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
                 android:background="@color/lineView" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.checkbox.MaterialCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/news_favorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:button="@drawable/fav_selector"
-                    android:layout_marginRight="4dp"
-                    android:background="@drawable/comment_edt_bg"
-                    android:buttonTint="#CF1A1A"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@null"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/fav_selector"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

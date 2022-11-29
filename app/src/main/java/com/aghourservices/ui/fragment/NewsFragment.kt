@@ -21,6 +21,7 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel: NewsViewModel by viewModels { ArticlesViewModelFactory() }
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
+    private val realm: Realm = Realm.getDefaultInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,6 +83,12 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
                 )
                 findNavController().navigate(newsFragment)
             }
+            R.id.user_layout -> {
+                val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
+                    articleId
+                )
+                findNavController().navigate(newsFragment)
+            }
 
             R.id.news_favorite -> {
                 updateFavorite(position)
@@ -90,13 +97,12 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
     }
 
     private fun updateFavorite(position: Int) {
-        val realm = Realm.getDefaultInstance()
         val article = newsAdapter.getArticle(position)
         realm.executeTransaction {
             article.isFavorite = !article.isFavorite
             realm.createOrUpdateObjectFromJson(Article::class.java, article.toJSONObject())
         }
-        newsAdapter.notifyItemChanged(position)
+//        newsAdapter.notifyItemChanged(position)
     }
 
     private fun noInternetConnection() {

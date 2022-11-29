@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
-import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
+import io.realm.Realm
 
 class ArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
 ) : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>() {
     private var articleList: ArrayList<Article> = ArrayList()
+    private val realm: Realm = Realm.getDefaultInstance()
     private var itemsCountToShowAds = 4
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
@@ -58,12 +59,12 @@ class ArticlesAdapter(
             binding.commentTv.setOnClickListener(this)
             binding.newsCardView.setOnClickListener(this)
             binding.newsFavorite.setOnClickListener(this)
+            binding.userLayout.setOnClickListener(this)
         }
 
         fun setNewsList(article: Article) {
             binding.apply {
-                val user = getUserData(root.context)
-                userName.text = user.name
+                userName.text = article.name
                 description.text = article.description
                 date.text = article.created_at
                 newsFavorite.isChecked = article.isFavorite
@@ -78,6 +79,8 @@ class ArticlesAdapter(
 //                }
             }
         }
+
+
 
         override fun onClick(v: View) {
             onItemClicked(v, absoluteAdapterPosition)
