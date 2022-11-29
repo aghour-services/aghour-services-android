@@ -130,5 +130,8 @@
     <string name="no_comments_yet">لا توجد تعليقات 🧐</string>
     <string name="cancel_update">إلغاء</string>
     <string name="update_comment">تـعـديـل</string>
+    <string name="comments">الكومنتات</string>
+    <string name="comment_tv">الـتعليقـات</string>
+    <string name="add_a_comment">إضافة تعليق...</string>
 
 </resources>

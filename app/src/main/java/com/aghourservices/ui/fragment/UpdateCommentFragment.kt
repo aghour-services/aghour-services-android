@@ -34,6 +34,7 @@ class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
         super.onViewCreated(view, savedInstanceState)
         initScreenView()
         initUserClick()
+        hideBottomNavigation()
     }
 
     private fun initScreenView() {
@@ -48,15 +49,11 @@ class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
     private fun initUserClick() {
         binding.updateComment.setOnClickListener {
             updateComment()
-            val action =
-                UpdateCommentFragmentDirections.actionUpdateCommentFragmentToCommentsFragment(
-                    arguments.articleId
-                )
-            findNavController().navigate(action)
+            findNavController().navigateUp()
         }
 
         binding.cancelEdit.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigateUp()
         }
     }
 
@@ -87,8 +84,6 @@ class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
             }
         })
     }
-
-    private fun hideUserDetails() {}
 
     override fun onDestroyView() {
         super.onDestroyView()
