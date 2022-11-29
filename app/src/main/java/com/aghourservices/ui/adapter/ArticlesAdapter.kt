@@ -9,7 +9,6 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
-import io.realm.Realm
 
 class ArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
@@ -63,10 +62,9 @@ class ArticlesAdapter(
 
         fun setNewsList(article: Article) {
             binding.apply {
-                userName.text = article.name
+                userName.text = article.user?.name
                 description.text = article.description
                 date.text = article.created_at
-                newsFavorite.isChecked = article.isFavorite
 
                 description.setOnLongClickListener {
                     Intents.copyNews(article.description, itemView)

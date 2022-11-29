@@ -1,6 +1,7 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -107,14 +108,12 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
 
     private fun postComment(comment: Comment) {
         val userDetails = getUserData(requireContext())
-        val eventName = "${comment.user?.name}_Add_Comment"
-
+        val eventName = "Comment_Added"
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
             arguments.articleId,
             userDetails.token,
             comment.toJsonObject(),
         )
-
         retrofitBuilder.enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
 
@@ -132,6 +131,30 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                 stopShimmerAnimation()
                 AlertDialog.noInternet(requireContext())
                 hideProgressBar()
+            }
+        })
+    }
+
+    private fun deleteComment(position: Int) {
+        val userDetails = getUserData(requireContext())
+        val commentId = commentsAdapter.getComment(position).id
+
+        val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.deleteComment(
+            arguments.articleId,
+            commentId,
+            userDetails.token,
+        )
+
+        retrofitBuilder.enqueue(object : Callback<Comment> {
+            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
+                if (response.isSuccessful) {
+                    loadComments()
+                    Log.d("delete", "onResponse: ${response.body()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Comment>, t: Throwable) {
+                AlertDialog.noInternet(requireContext())
             }
         })
     }
@@ -186,9 +209,14 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                 val action =
                     CommentsFragmentDirections.actionCommentsFragmentToUpdateCommentFragment(
                         arguments.articleId,
-                        commentId, commentBody
+                        commentId,
+                        commentBody
                     )
                 findNavController().navigate(action)
+            }
+
+            R.id.delete_comment -> {
+                deleteComment(position)
             }
         }
     }

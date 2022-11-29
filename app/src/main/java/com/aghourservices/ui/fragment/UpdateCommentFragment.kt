@@ -12,11 +12,12 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentUpdateCommentBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UpdateCommentFragment : BaseFragment() {
+class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
     private var _binding: FragmentUpdateCommentBinding? = null
     private val binding get() = _binding!!
     private val arguments: UpdateCommentFragmentArgs by navArgs()
@@ -31,20 +32,26 @@ class UpdateCommentFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideBottomNavigation()
         initScreenView()
         initUserClick()
     }
 
     private fun initScreenView() {
+        requireActivity().title = "تعديل التعليق"
         binding.commentTv.setText(arguments.commentBody)
+
+        if (binding.commentTv.requestFocus()){
+            showKeyboard(requireContext(), binding.commentTv)
+        }
     }
 
     private fun initUserClick() {
         binding.updateComment.setOnClickListener {
             updateComment()
-            val action = UpdateCommentFragmentDirections.actionUpdateCommentFragmentToCommentsFragment(
-                    arguments.articleId)
+            val action =
+                UpdateCommentFragmentDirections.actionUpdateCommentFragmentToCommentsFragment(
+                    arguments.articleId
+                )
             findNavController().navigate(action)
         }
 
@@ -81,7 +88,7 @@ class UpdateCommentFragment : BaseFragment() {
         })
     }
 
-    private fun hideUserDetails(){}
+    private fun hideUserDetails() {}
 
     override fun onDestroyView() {
         super.onDestroyView()
