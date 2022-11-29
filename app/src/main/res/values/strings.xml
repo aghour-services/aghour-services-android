@@ -128,5 +128,7 @@
     <string name="comment">تعليق</string>
     <string name="write_a_comment">أكتب تعليق...</string>
     <string name="no_comments_yet">لا توجد تعليقات 🧐</string>
+    <string name="cancel_update">إلغاء</string>
+    <string name="update_comment">تـعـديـل</string>
 
 </resources>

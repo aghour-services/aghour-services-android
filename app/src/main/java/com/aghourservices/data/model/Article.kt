@@ -1,24 +1,15 @@
 package com.aghourservices.data.model
 
 import com.google.gson.JsonObject
-import io.realm.RealmObject
-import io.realm.annotations.Index
-import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
 import org.json.JSONObject
 
 
-@RealmClass
-open class Article : RealmObject() {
-    @PrimaryKey
-    var id: Int = 0
-
-    @Index
-    var description: String = ""
-    var created_at: String = ""
-    var name: String? = null
-    var isFavorite: Boolean = false
-
+data class Article(
+    var id: Int = 0,
+    var description: String = "",
+    var created_at: String = "",
+    var user: User? = null
+) {
     fun toJsonObject(): JsonObject {
         val articleObject = JsonObject()
         val article = JsonObject()
@@ -33,7 +24,6 @@ open class Article : RealmObject() {
         articleDetails.put("id", id)
         articleDetails.put("description", description)
         articleDetails.put("created_at", created_at)
-        articleDetails.put("isFavorite", isFavorite)
         return articleDetails
     }
 

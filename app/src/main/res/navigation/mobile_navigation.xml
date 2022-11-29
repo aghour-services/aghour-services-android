@@ -121,5 +121,26 @@
         <argument
             android:name="article_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_commentsFragment_to_updateCommentFragment"
+            app:destination="@id/updateCommentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCommentFragment"
+        tools:layout="@layout/fragment_update_comment"
+        android:name="com.aghourservices.ui.fragment.UpdateCommentFragment"
+        android:label="UpdateCommentFragment" >
+        <argument
+            android:name="article_id"
+            app:argType="integer" />
+        <argument
+            android:name="commentId"
+            app:argType="integer" />
+        <argument
+            android:name="commentBody"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_updateCommentFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
     </fragment>
 </navigation>

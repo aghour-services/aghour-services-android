@@ -1,9 +1,6 @@
 package com.aghourservices.data.model
 
 import com.google.gson.JsonObject
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
 
 
 data class Comment(
@@ -15,6 +12,7 @@ data class Comment(
         val commentObject = JsonObject()
         val comment = JsonObject()
         comment.addProperty("body", body)
+        comment.addProperty("user_name", user?.name)
         commentObject.add("comment", comment)
         return commentObject
     }

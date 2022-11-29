@@ -130,6 +130,7 @@
                     android:id="@+id/news_favorite"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:visibility="gone"
                     android:button="@null"
                     android:layout_marginRight="8dp"
                     android:background="@drawable/fav_selector"

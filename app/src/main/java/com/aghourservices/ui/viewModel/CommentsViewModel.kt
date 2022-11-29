@@ -1,14 +1,10 @@
 package com.aghourservices.ui.viewModel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
-import com.aghourservices.utils.interfaces.AlertDialog
-import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

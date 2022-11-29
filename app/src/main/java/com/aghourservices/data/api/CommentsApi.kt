@@ -20,4 +20,18 @@ interface CommentsApi {
         @Body comment: JsonObject,
     ): Call<Comment>
 
+    @PUT("articles/{article_id}/comments/{comment_id}")
+    fun updateComment(
+        @Path("article_id") articleId: Int,
+        @Path("comment_id") commentId: Int,
+        @Header("TOKEN") token: String,
+        @Body comment: JsonObject,
+    ): Call<Comment>
+
+    @DELETE("articles/{article_id}/comments/{comment_id}")
+    fun deleteComment(
+        @Path("article_id") articleId: Int,
+        @Path("comment_id") commentId: Int,
+        @Header("TOKEN") token: String,
+    ): Call<Comment>
 }

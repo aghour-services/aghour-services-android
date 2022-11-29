@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Firm
 import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
@@ -224,7 +223,7 @@ class FirmsFragment : BaseFragment() {
 
         realm.executeTransaction {
             firm.isFavorite = !firm.isFavorite
-            realm.createOrUpdateObjectFromJson(Article::class.java, firm.toJSONObject())
+            realm.createOrUpdateObjectFromJson(Firm::class.java, firm.toJSONObject())
         }
     }
 }
