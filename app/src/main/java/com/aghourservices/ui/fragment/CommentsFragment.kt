@@ -1,8 +1,6 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +47,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         initRecyclerView()
         initUserClick()
         refresh()
+        showKeyboard(requireContext(), binding.commentTv)
     }
 
     private fun refresh() {

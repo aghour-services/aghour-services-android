@@ -1,14 +1,11 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
@@ -18,11 +15,13 @@ import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.factory.ArticlesViewModelFactory
 import com.aghourservices.ui.viewModel.NewsViewModel
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
+import io.realm.Realm
 
 class NewsFragment : BaseFragment(), ShowSoftKeyboard {
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel: NewsViewModel by viewModels { ArticlesViewModelFactory() }
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
+    private val realm: Realm = Realm.getDefaultInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,13 +77,32 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
                 )
                 findNavController().navigate(newsFragment)
             }
-            R.id.commentNews -> {
+            R.id.comment_tv -> {
                 val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
                     articleId
                 )
                 findNavController().navigate(newsFragment)
             }
+            R.id.user_layout -> {
+                val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
+                    articleId
+                )
+                findNavController().navigate(newsFragment)
+            }
+
+            R.id.news_favorite -> {
+                updateFavorite(position)
+            }
         }
+    }
+
+    private fun updateFavorite(position: Int) {
+        val article = newsAdapter.getArticle(position)
+        realm.executeTransaction {
+            article.isFavorite = !article.isFavorite
+            realm.createOrUpdateObjectFromJson(Article::class.java, article.toJSONObject())
+        }
+//        newsAdapter.notifyItemChanged(position)
     }
 
     private fun noInternetConnection() {
