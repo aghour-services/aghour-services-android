@@ -34,6 +34,7 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
         initRecyclerView()
         setUpViewModel()
         refresh()
+        showBottomNavigation()
     }
 
     private fun initRecyclerView() {
@@ -66,24 +67,19 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
 
     private fun onListItemClick(v: View, position: Int) {
         val articleId = newsAdapter.getArticle(position).id
+        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(articleId)
 
         when (v.id) {
-            R.id.news_card_view -> {
-                val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
-                    articleId
-                )
-                findNavController().navigate(newsFragment)
-            }
-            R.id.comment_tv -> {
-                val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
-                    articleId
-                )
+            R.id.add_comment -> {
                 findNavController().navigate(newsFragment)
             }
             R.id.user_layout -> {
-                val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
-                    articleId
-                )
+                findNavController().navigate(newsFragment)
+            }
+            R.id.description -> {
+                findNavController().navigate(newsFragment)
+            }
+            R.id.latest_comment_card -> {
                 findNavController().navigate(newsFragment)
             }
         }

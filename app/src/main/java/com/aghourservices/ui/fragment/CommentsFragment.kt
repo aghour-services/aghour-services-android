@@ -27,7 +27,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
-    private lateinit var binding: FragmentCommentsBinding
+    private var _binding: FragmentCommentsBinding? = null
+    private val binding get() = _binding!!
     private val commentsViewModel: CommentsViewModel by viewModels()
     private val arguments: CommentsFragmentArgs by navArgs()
     private val commentsAdapter =
@@ -37,7 +38,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCommentsBinding.inflate(inflater, container, false)
+        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -223,6 +224,6 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        showBottomNavigation()
+        _binding = null
     }
 }

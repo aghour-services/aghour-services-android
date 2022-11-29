@@ -54,10 +54,12 @@ class ArticlesAdapter(
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
-            binding.commentTv.setOnClickListener(this)
+            binding.addComment.setOnClickListener(this)
             binding.newsCardView.setOnClickListener(this)
             binding.newsFavorite.setOnClickListener(this)
             binding.userLayout.setOnClickListener(this)
+            binding.description.setOnClickListener(this)
+            binding.latestCommentCard.setOnClickListener(this)
         }
 
         fun setNewsList(article: Article) {
@@ -70,6 +72,9 @@ class ArticlesAdapter(
                     Intents.copyNews(article.description, itemView)
                     true
                 }
+
+                name.text = article.latest_comment?.user?.name
+                body.text = article.latest_comment?.body
 
 //                shareNews.setOnClickListener {
 //                    Intents.shareNews(article.description, itemView)

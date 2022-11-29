@@ -8,7 +8,8 @@ data class Article(
     var id: Int = 0,
     var description: String = "",
     var created_at: String = "",
-    var user: User? = null
+    var user: User? = null,
+    var latest_comment: Comment? = null,
 ) {
     fun toJsonObject(): JsonObject {
         val articleObject = JsonObject()
