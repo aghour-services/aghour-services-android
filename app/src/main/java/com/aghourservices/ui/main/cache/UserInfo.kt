@@ -2,6 +2,7 @@ package com.aghourservices.ui.main.cache
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.aghourservices.data.model.Profile
 import com.aghourservices.data.model.User
 import com.aghourservices.utils.helper.Constants.Companion.EMAIL_KEY
 import com.aghourservices.utils.helper.Constants.Companion.MOBILE_KEY
@@ -23,7 +24,7 @@ object UserInfo {
         val mobile = pref.getString(MOBILE_KEY, "Default Mobile").toString()
         val email = pref.getString(EMAIL_KEY, "").toString()
         val token = pref.getString(TOKEN_KEY, "").toString()
-        return User(name, mobile, email, "", token)
+        return User(null, name, mobile, email, "", token)
     }
 
     fun saveUserData(context: Context, user: User) {
@@ -36,18 +37,18 @@ object UserInfo {
         editor.apply()
     }
 
-//    fun getID(context: Context): Profile {
-//        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-//        val id = pref.getInt("id", 0)
-//        return Profile(id)
-//    }
+    fun getUserID(context: Context): Profile {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val id = pref.getInt("id", 0)
+        return Profile(id)
+    }
 
-//    fun saveID(context: Context, id: Int) {
-//        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-//        val editor: SharedPreferences.Editor = pref.edit()
-//        editor.putInt("id", id)
-//        editor.apply()
-//    }
+    fun saveUserID(context: Context, id: Int) {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+        editor.putInt("id", id)
+        editor.apply()
+    }
 
     fun clearUserData(context: Context) {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

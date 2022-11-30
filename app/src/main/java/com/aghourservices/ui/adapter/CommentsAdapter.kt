@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Comment
 import com.aghourservices.databinding.CommentCardBinding
-import com.aghourservices.ui.main.cache.UserInfo.getUserData
+import com.aghourservices.ui.main.cache.UserInfo.getUserID
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 
 class CommentsAdapter(
@@ -46,7 +46,7 @@ class CommentsAdapter(
         private val onItemClicked: (v: View, position: Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         private val isUserLoggedIn = isUserLoggedIn(binding.root.context)
-        private val userData = getUserData(binding.root.context)
+        private val profile = getUserID(binding.root.context)
 
         init {
             binding.updateComment.setOnClickListener(this)
@@ -68,15 +68,14 @@ class CommentsAdapter(
                 }
             }
 
-            // returned null
-            Log.d("id", comment.profile?.id.toString())
-
-            if (comment.user?.name != userData.name) {
+            if (comment.user?.id != profile.id) {
                 binding.apply {
                     updateComment.visibility = View.GONE
                     deleteComment.visibility = View.GONE
                 }
             }
+
+            Log.d("profile", profile.id.toString())
         }
 
         override fun onClick(v: View?) {

@@ -1,6 +1,6 @@
 package com.aghourservices.data.model
 
 data class Profile(
-    var id: String = "",
+    var id: Int? = null,
     var name: String= "",
 )
