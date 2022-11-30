@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
@@ -73,9 +74,13 @@ class ArticlesAdapter(
                     true
                 }
 
-                name.text = article.latest_comment?.user?.name
-                body.text = article.latest_comment?.body
-
+                if (article.latest_comment?.user?.name == null || article.latest_comment?.body == null) {
+                    commentsCard.isVisible = false
+                } else {
+                    commentsCard.isVisible = true
+                    name.text = article.latest_comment?.user?.name
+                    body.text = article.latest_comment?.body
+                }
 //                shareNews.setOnClickListener {
 //                    Intents.shareNews(article.description, itemView)
 //                }
