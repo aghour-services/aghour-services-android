@@ -36,6 +36,19 @@ object UserInfo {
         editor.apply()
     }
 
+//    fun getID(context: Context): Profile {
+//        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+//        val id = pref.getInt("id", 0)
+//        return Profile(id)
+//    }
+
+//    fun saveID(context: Context, id: Int) {
+//        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+//        val editor: SharedPreferences.Editor = pref.edit()
+//        editor.putInt("id", id)
+//        editor.apply()
+//    }
+
     fun clearUserData(context: Context) {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         pref.edit().clear().apply()

@@ -68,6 +68,7 @@ class ArticlesAdapter(
                 userName.text = article.user?.name
                 description.text = article.description
                 date.text = article.created_at
+                commentTime.text = article.latest_comment?.created_at
 
                 description.setOnLongClickListener {
                     Intents.copyNews(article.description, itemView)
@@ -86,8 +87,6 @@ class ArticlesAdapter(
 //                }
             }
         }
-
-
 
         override fun onClick(v: View) {
             onItemClicked(v, absoluteAdapterPosition)
