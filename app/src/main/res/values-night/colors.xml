@@ -117,5 +117,6 @@
     <color name="bottomAppBarBg">#1F272C</color>
     <color name="commentHint">#FFFFFF</color>
     <color name="publish_article_btn">#2E3840</color>
+    <color name="lattest_comment_card">#2E3840</color>
 
 </resources>
