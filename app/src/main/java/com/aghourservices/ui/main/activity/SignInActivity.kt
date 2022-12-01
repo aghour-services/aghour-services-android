@@ -30,12 +30,12 @@ class SignInActivity : AppCompatActivity() {
         adView()
     }
 
-    private fun adView(){
+    private fun adView() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
     }
 
-    private fun initUserClick(){
+    private fun initUserClick() {
         binding.apply {
             btnLogin.setOnClickListener {
                 val email = binding.email.text.toString()
@@ -46,7 +46,7 @@ class SignInActivity : AppCompatActivity() {
                     binding.email.error = "ادخل بريدك الالكتروني"
                     binding.password.error = "اكتب كلمة السر"
                 } else {
-                    val user = User("", "", email, password, "")
+                    val user = User(null, "", "", email, password, "")
                     loginUser(user)
                 }
             }
@@ -57,6 +57,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun loginUser(user: User) {
         showProgressDialog(this)
         val retrofitBuilder = RetrofitInstance(this).userApi.signIn(user.userObject())

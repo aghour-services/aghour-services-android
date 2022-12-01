@@ -6,7 +6,9 @@ import com.google.gson.JsonObject
 data class Comment(
     var id: Int = 0,
     var body: String = "",
-    var user: User? = null
+    var created_at: String = "",
+    var user: User? = null,
+    var profile: Profile? = null
 ) {
     fun toJsonObject(): JsonObject {
         val commentObject = JsonObject()

@@ -1,12 +1,14 @@
 package com.aghourservices.ui.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Comment
 import com.aghourservices.databinding.CommentCardBinding
+import com.aghourservices.ui.main.cache.UserInfo.getUserID
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 
 class CommentsAdapter(
@@ -44,6 +46,7 @@ class CommentsAdapter(
         private val onItemClicked: (v: View, position: Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         private val isUserLoggedIn = isUserLoggedIn(binding.root.context)
+        private val profile = getUserID(binding.root.context)
 
         init {
             binding.updateComment.setOnClickListener(this)
@@ -55,6 +58,7 @@ class CommentsAdapter(
             binding.apply {
                 body.text = comment.body
                 userName.text = comment.user?.name
+                time.text = comment.created_at
             }
 
             if (!isUserLoggedIn) {
@@ -63,6 +67,15 @@ class CommentsAdapter(
                     deleteComment.visibility = View.GONE
                 }
             }
+
+            if (comment.user?.id != profile.id) {
+                binding.apply {
+                    updateComment.visibility = View.GONE
+                    deleteComment.visibility = View.GONE
+                }
+            }
+
+            Log.d("profile", profile.id.toString())
         }
 
         override fun onClick(v: View?) {

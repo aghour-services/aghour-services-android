@@ -17,8 +17,8 @@
             android:id="@+id/user_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:background="@drawable/news_card_ripple"
+            android:gravity="right"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,8 +36,8 @@
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="6dp"
                     android:fontFamily="sans-serif-black"
+                    android:paddingRight="6dp"
                     android:textColor="@color/dialogText"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -50,15 +50,15 @@
                     android:paddingTop="2dp"
                     android:paddingRight="10dp"
                     android:textColor="@color/time"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     app:drawableTint="@color/time"
                     tools:text="منذ ساعتين" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/user_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
                 android:src="@mipmap/user"
                 android:textSize="13sp"
                 tools:ignore="ContentDescription" />
@@ -114,11 +114,11 @@
                 android:id="@+id/likes_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="100 إعجاب"
+                android:layout_gravity="right"
+                android:layout_margin="10dp"
                 android:textSize="11sp"
                 android:visibility="gone"
-                android:layout_gravity="right"
-                android:layout_margin="10dp"/>
+                tools:text="100 إعجاب" />
 
             <View
                 android:layout_width="match_parent"
@@ -136,10 +136,10 @@
                     android:id="@+id/comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/comment_tv"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
                     android:textColor="@color/dialogText"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -149,8 +149,8 @@
                     android:id="@+id/latest_comment_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
                     android:background="@drawable/news_card_ripple"
+                    android:gravity="right"
                     android:orientation="horizontal"
                     android:padding="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -177,10 +177,10 @@
                                 android:id="@+id/name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/dialogText"
-                                android:textSize="13sp"
-                                android:textStyle="bold"
                                 android:fontFamily="sans-serif-black"
+                                android:textColor="@color/dialogText"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
                                 tools:text="Moahmed Magdy" />
 
                             <TextView
@@ -189,8 +189,18 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:textColor="@color/newsDescription"
-                                android:textSize="15sp"
+                                android:textSize="14sp"
                                 tools:text="Description" />
+
+                            <TextView
+                                android:id="@+id/comment_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="4dp"
+                                android:textColor="@color/time"
+                                android:textSize="11sp"
+                                app:drawableTint="@color/time"
+                                tools:text="منذ ساعتين" />
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
@@ -210,17 +220,17 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/news_favorite"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:visibility="gone"
-                    android:button="@null"
                     android:layout_marginRight="8dp"
                     android:background="@drawable/fav_selector"
+                    android:button="@null"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -230,13 +240,13 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
-                    android:elevation="1dp"
                     android:background="@drawable/add_comment_bg"
-                    android:textSize="12sp"
+                    android:elevation="1dp"
                     android:gravity="right|center"
                     android:paddingRight="12dp"
                     android:text="@string/add_a_comment"
                     android:textColor="@color/dialogText"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/news_favorite"
                     app:layout_constraintStart_toStartOf="parent"

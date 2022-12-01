@@ -12,6 +12,7 @@
         android:id="@+id/news_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/recyclerViewBg"
         android:gravity="right"
         android:orientation="horizontal"
         android:padding="10dp"
@@ -39,7 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dialogText"
-                    android:textSize="13sp"
+                    android:fontFamily="sans-serif-black"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="Moahmed Magdy" />
 
@@ -47,10 +49,20 @@
                     android:id="@+id/body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="4dp"
+                    android:padding="2dp"
                     android:textColor="@color/newsDescription"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     tools:text="Description" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/time"
+                    android:textSize="11sp"
+                    android:paddingTop="4dp"
+                    app:drawableTint="@color/time"
+                    tools:text="منذ ساعتين" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -79,16 +91,20 @@
         android:id="@+id/delete_comment"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/category_selector"
         android:padding="10dp"
-        android:src="@android:drawable/ic_delete"
+        android:src="@drawable/ic_baseline_delete_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/dialogText" />
+        app:tint="@color/deleteIcon" />
 
     <ImageView
         android:id="@+id/update_comment"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/category_selector"
         android:padding="10dp"
         android:src="@drawable/ic_baseline_edit_24"
         app:layout_constraintStart_toEndOf="@+id/delete_comment"

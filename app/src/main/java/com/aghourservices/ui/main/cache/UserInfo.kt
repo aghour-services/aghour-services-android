@@ -2,6 +2,7 @@ package com.aghourservices.ui.main.cache
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.aghourservices.data.model.Profile
 import com.aghourservices.data.model.User
 import com.aghourservices.utils.helper.Constants.Companion.EMAIL_KEY
 import com.aghourservices.utils.helper.Constants.Companion.MOBILE_KEY
@@ -23,7 +24,7 @@ object UserInfo {
         val mobile = pref.getString(MOBILE_KEY, "Default Mobile").toString()
         val email = pref.getString(EMAIL_KEY, "").toString()
         val token = pref.getString(TOKEN_KEY, "").toString()
-        return User(name, mobile, email, "", token)
+        return User(null, name, mobile, email, "", token)
     }
 
     fun saveUserData(context: Context, user: User) {
@@ -33,6 +34,19 @@ object UserInfo {
         editor.putString(MOBILE_KEY, user.mobile)
         editor.putString(EMAIL_KEY, user.email)
         editor.putString(TOKEN_KEY, user.token)
+        editor.apply()
+    }
+
+    fun getUserID(context: Context): Profile {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val id = pref.getInt("id", 0)
+        return Profile(id)
+    }
+
+    fun saveUserID(context: Context, id: Int) {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+        editor.putInt("id", id)
         editor.apply()
     }
 
