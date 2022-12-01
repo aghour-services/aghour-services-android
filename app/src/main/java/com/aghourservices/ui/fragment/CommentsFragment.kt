@@ -168,7 +168,8 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
     }
 
     fun createAccount() {
-        val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext(),R.style.AlertDialogTheme)
+        val alertDialogBuilder =
+            androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         alertDialogBuilder.setTitle("حدث خطأ ما")
         alertDialogBuilder.setMessage("يرجى تسجيل الدخول مرة أخرى")
         alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
@@ -244,9 +245,24 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
             }
 
             R.id.delete_comment -> {
-                deleteComment(position)
+                deleteCommentAlert(position)
             }
         }
+    }
+
+    private fun deleteCommentAlert(position: Int) {
+        val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle(getString(R.string.delete_comment))
+        alertDialogBuilder.setMessage(getString(R.string.are_you_sure_to_delete_comment))
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
+            deleteComment(position)
+        }
+        alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ ->
+            alertDialogBuilder.setCancelable(true)
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     override fun onDestroyView() {

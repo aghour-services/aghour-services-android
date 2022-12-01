@@ -154,7 +154,7 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edt_text_background"
                     android:gravity="left"
-                    android:hint="@string/description"
+                    android:hint="@string/desc"
                     android:maxLength="300"
                     android:padding="14dp"
                     android:textColorHint="@color/hint"

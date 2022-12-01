@@ -16,8 +16,8 @@ android {
         applicationId "com.aghourservices"
         minSdk 21
         targetSdk 32
-        versionCode 31
-        versionName "8"
+        versionCode 32
+        versionName "8.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

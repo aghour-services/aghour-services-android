@@ -133,5 +133,9 @@
     <string name="comments">الكومنتات</string>
     <string name="comment_tv">الـتعليقـات</string>
     <string name="add_a_comment">إضافة تعليق...</string>
+    <string name="desc">الوصف</string>
+    <string name="delete_comment">حذف التعليق</string>
+    <string name="are_you_sure_to_delete_comment">هل أنت متأكد من حذف التعليق؟</string>
+    <string name="delete">حذف</string>
 
 </resources>
