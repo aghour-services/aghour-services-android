@@ -11,13 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
-import com.aghourservices.ui.factory.ArticlesViewModelFactory
 import com.aghourservices.ui.viewModel.NewsViewModel
-import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 
-class NewsFragment : BaseFragment(), ShowSoftKeyboard {
+class NewsFragment : BaseFragment() {
     private lateinit var binding: FragmentNewsBinding
-    private val newsViewModel: NewsViewModel by viewModels { ArticlesViewModelFactory() }
+    private val newsViewModel: NewsViewModel by viewModels()
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
 
     override fun onCreateView(
@@ -25,27 +23,27 @@ class NewsFragment : BaseFragment(), ShowSoftKeyboard {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNewsBinding.inflate(layoutInflater)
+        requireActivity().title = getString(R.string.news_fragment)
+        initRecyclerView()
+        initNewsObserve()
+        refresh()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = getString(R.string.news_fragment)
-        initRecyclerView()
-        setUpViewModel()
-        refresh()
         showBottomNavigation()
     }
 
     private fun initRecyclerView() {
-        binding.apply {
-            newsRecyclerview.setHasFixedSize(true)
-            newsRecyclerview.adapter = newsAdapter
-            newsRecyclerview.layoutManager = LinearLayoutManager(activity)
+        binding.newsRecyclerview.apply {
+            setHasFixedSize(true)
+            adapter = newsAdapter
+            layoutManager = LinearLayoutManager(activity)
         }
     }
 
-    private fun setUpViewModel() {
+    private fun initNewsObserve() {
         newsViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
             newsAdapter.setArticles(articles)
             stopShimmerAnimation()

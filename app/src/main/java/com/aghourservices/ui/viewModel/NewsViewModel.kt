@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
-import com.aghourservices.utils.interfaces.AlertDialog
-import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,9 +27,7 @@ class NewsViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                AlertDialog.noInternet(context)
-            }
+            override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {}
         })
     }
 }
