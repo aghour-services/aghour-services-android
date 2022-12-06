@@ -5,20 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.data.model.Category
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapter.CategoriesAdapter
-import com.aghourservices.ui.factory.CategoriesVIewModelFactory
 import com.aghourservices.ui.viewModel.CategoriesViewModel
 
 class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
-    private val categoriesViewModel: CategoriesViewModel by viewModels { CategoriesVIewModelFactory() }
+    private val categoriesViewModel: CategoriesViewModel by viewModels()
     private val categoryAdapter = CategoriesAdapter { position -> onListItemClick(position) }
 
     override fun onCreateView(
@@ -26,11 +22,11 @@ class CategoriesFragment : BaseFragment() {
     ): View {
         binding = FragmentCategoriesBinding.inflate(layoutInflater)
         initRecyclerView()
-        setUpViewModel()
+        initCategoryObserve()
         return binding.root
     }
 
-    private fun setUpViewModel() {
+    private fun initCategoryObserve() {
         activity?.let { categoriesViewModel.loadCategories(it) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryAdapter.setCategories(it)
