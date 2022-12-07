@@ -1,6 +1,8 @@
 package com.aghourservices.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aghourservices.R
+import com.aghourservices.data.model.Device
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapter.CategoriesAdapter
 import com.aghourservices.ui.viewModel.CategoriesViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
@@ -26,12 +31,25 @@ class CategoriesFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getFirebaseInstanceToken()
+    }
+
     private fun initCategoryObserve() {
         activity?.let { categoriesViewModel.loadCategories(it) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryAdapter.setCategories(it)
             progressBar()
         }
+    }
+
+    @SuppressLint("HardwareIds")
+    private fun sendDevice(token: String) {
+        val deviceId =
+            Settings.Secure.getString(activity?.contentResolver, Settings.Secure.ANDROID_ID)
+        val device = Device(deviceId, token)
+        categoriesViewModel.sendDevice(requireContext(), device)
     }
 
     private fun initRecyclerView() {
@@ -55,5 +73,15 @@ class CategoriesFragment : BaseFragment() {
     private fun progressBar() {
         binding.progressBar.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
+    }
+
+    private fun getFirebaseInstanceToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            val token = task.result
+            sendDevice(token)
+        })
     }
 }
