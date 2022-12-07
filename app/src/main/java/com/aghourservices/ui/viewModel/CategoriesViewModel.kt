@@ -1,9 +1,11 @@
 package com.aghourservices.ui.viewModel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Category
+import com.aghourservices.data.model.Device
 import com.aghourservices.data.request.RetrofitInstance
 import io.realm.Realm
 import retrofit2.Call
@@ -14,6 +16,7 @@ class CategoriesViewModel : ViewModel() {
     private var realm: Realm = Realm.getDefaultInstance()
     val categoriesLiveData = MutableLiveData<ArrayList<Category>>()
     var categoryList: ArrayList<Category> = ArrayList()
+    val deviceData = MutableLiveData<Device>()
 
     fun loadCategories(context: Context) {
         val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList()
@@ -37,6 +40,22 @@ class CategoriesViewModel : ViewModel() {
                 categoryList = ArrayList()
                 categoryList.addAll(categories)
                 categoriesLiveData.value = categoryList
+            }
+        })
+    }
+
+    fun sendDevice(context: Context, device: Device) {
+        val retrofitBuilder = RetrofitInstance(context).userApi.sendDevice(device)
+        retrofitBuilder.enqueue(object : Callback<Device> {
+            override fun onResponse(call: Call<Device>, response: Response<Device>) {
+                if (response.isSuccessful) {
+                    deviceData.postValue(response.body())
+                    Log.d("response", "onResponse: ${response.body()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Device>, t: Throwable) {
+                Log.d("response", "onFailure: ${t.message}")
             }
         })
     }
