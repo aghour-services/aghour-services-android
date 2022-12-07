@@ -80,10 +80,10 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         }
 
         binding.articleDescription.setOnClickListener {
-            if (binding.articleDescription.maxLines == 6) {
+            if (binding.articleDescription.maxLines == 4) {
                 binding.articleDescription.maxLines = 100
             } else {
-                binding.articleDescription.maxLines = 6
+                binding.articleDescription.maxLines = 4
             }
         }
     }

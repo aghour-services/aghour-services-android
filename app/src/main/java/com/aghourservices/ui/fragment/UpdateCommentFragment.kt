@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
@@ -29,13 +28,12 @@ class UpdateCommentFragment : BottomSheetDialogFragment(), ShowSoftKeyboard {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUpdateCommentBinding.inflate(inflater, container, false)
-        initScreenView()
-        initUserClick()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initScreenView()
         initUpdateFragmentSheet()
     }
 
@@ -54,22 +52,20 @@ class UpdateCommentFragment : BottomSheetDialogFragment(), ShowSoftKeyboard {
         binding.backBtn.setOnClickListener {
             behavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
+
+        binding.updateComment.setOnClickListener {
+            updateComment()
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+
+        binding.cancelEdit.setOnClickListener {
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     private fun initScreenView() {
         binding.commentTv.setText(arguments.commentBody)
         binding.userName.text = arguments.commentUser
-    }
-
-    private fun initUserClick() {
-        binding.updateComment.setOnClickListener {
-            updateComment()
-            findNavController().navigateUp()
-        }
-
-        binding.cancelEdit.setOnClickListener {
-            findNavController().navigateUp()
-        }
     }
 
     private fun updateComment() {
