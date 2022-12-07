@@ -13,11 +13,13 @@ import com.aghourservices.databinding.FragmentUpdateCommentBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
+class UpdateCommentFragment : BottomSheetDialogFragment(), ShowSoftKeyboard {
     private var _binding: FragmentUpdateCommentBinding? = null
     private val binding get() = _binding!!
     private val arguments: UpdateCommentFragmentArgs by navArgs()
@@ -27,23 +29,36 @@ class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUpdateCommentBinding.inflate(inflater, container, false)
+        initScreenView()
+        initUserClick()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initScreenView()
-        initUserClick()
-        hideBottomNavigation()
+        initUpdateFragmentSheet()
+    }
+
+    private fun initUpdateFragmentSheet() {
+        val bottomSheet = dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+        val behavior = BottomSheetBehavior.from(bottomSheet!!).apply {
+            state = BottomSheetBehavior.STATE_EXPANDED
+            isHideable = true
+            skipCollapsed = true
+            isDraggable = true
+        }
+        val layoutParams = bottomSheet.layoutParams
+        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        bottomSheet.layoutParams = layoutParams
+
+        binding.backBtn.setOnClickListener {
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     private fun initScreenView() {
-        requireActivity().title = "تعديل التعليق"
         binding.commentTv.setText(arguments.commentBody)
-
-        if (binding.commentTv.requestFocus()){
-            showKeyboard(requireContext(), binding.commentTv)
-        }
+        binding.userName.text = arguments.commentUser
     }
 
     private fun initUserClick() {

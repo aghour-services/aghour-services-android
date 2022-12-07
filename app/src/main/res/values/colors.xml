@@ -165,6 +165,6 @@
     <color name="bottomAppBarBg">#FFFFFF</color>
     <color name="commentHint">#192127</color>
     <color name="publish_article_btn">#3A8FD3</color>
-    <color name="lattest_comment_card">#FFFFFF</color>
+    <color name="lattest_comment_card">#F7FBFF</color>
     <color name="deleteIcon">#FF3E3E</color>
 </resources>

@@ -137,5 +137,6 @@
     <string name="delete_comment">حذف التعليق</string>
     <string name="are_you_sure_to_delete_comment">هل أنت متأكد من حذف التعليق؟</string>
     <string name="delete">حذف</string>
+    <string name="edit_comment">تعديل التعليق</string>
 
 </resources>

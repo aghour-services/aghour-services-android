@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -41,19 +42,24 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCommentsBinding.inflate(inflater, container, false)
+        requireActivity().title = "التعليقات"
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        initRecyclerView()
+        initUserClick()
+        refresh()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = "التعليقات"
         hideBottomNavigation()
+        initArticleView()
         hideUserData()
+    }
+
+    override fun onResume() {
+        super.onResume()
         loadComments()
-        initRecyclerView()
-        initUserClick()
-        refresh()
-        showKeyboard(requireContext(), binding.commentTv)
     }
 
     private fun refresh() {
@@ -63,6 +69,22 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         binding.refreshComments.setOnRefreshListener {
             binding.refreshComments.isRefreshing = false
             loadComments()
+        }
+    }
+
+    private fun initArticleView(){
+        binding.apply {
+            articleUserName.text = arguments.userName
+            articleCreatedAt.text = arguments.time
+            articleDescription.text = arguments.description
+        }
+
+        binding.articleDescription.setOnClickListener {
+            if (binding.articleDescription.maxLines == 6) {
+                binding.articleDescription.maxLines = 100
+            } else {
+                binding.articleDescription.maxLines = 6
+            }
         }
     }
 
@@ -98,7 +120,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
 
     private fun noComments() {
         binding.noComments.isVisible = true
-        binding.nestedCommentsScroll.isVisible = false
+        binding.commentsRecyclerView.isVisible = false
     }
 
     private fun initRecyclerView() {
@@ -210,7 +232,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         binding.apply {
             commentsShimmer.stopShimmer()
             commentsShimmer.isVisible = false
-            nestedCommentsScroll.isVisible = true
+            commentsRecyclerView.isVisible = true
         }
     }
 
@@ -232,6 +254,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
     private fun onCommentItemClick(v: View, position: Int) {
         val commentId = commentsAdapter.getComment(position).id
         val commentBody = commentsAdapter.getComment(position).body
+        val commentUser = commentsAdapter.getComment(position).user?.name.toString()
 
         when (v.id) {
             R.id.update_comment -> {
@@ -239,7 +262,8 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                     CommentsFragmentDirections.actionCommentsFragmentToUpdateCommentFragment(
                         arguments.articleId,
                         commentId,
-                        commentBody
+                        commentBody,
+                        commentUser
                     )
                 findNavController().navigate(action)
             }
