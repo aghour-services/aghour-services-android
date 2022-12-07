@@ -121,11 +121,20 @@
         <argument
             android:name="article_id"
             app:argType="integer" />
+        <argument
+            android:name="user_name"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
         <action
             android:id="@+id/action_commentsFragment_to_updateCommentFragment"
             app:destination="@id/updateCommentFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/updateCommentFragment"
         tools:layout="@layout/fragment_update_comment"
         android:name="com.aghourservices.ui.fragment.UpdateCommentFragment"
@@ -139,8 +148,11 @@
         <argument
             android:name="commentBody"
             app:argType="string" />
+        <argument
+            android:name="commentUser"
+            app:argType="string" />
         <action
             android:id="@+id/action_updateCommentFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
-    </fragment>
+    </dialog>
 </navigation>

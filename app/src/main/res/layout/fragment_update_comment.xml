@@ -3,11 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/recyclerViewBg"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBg">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbarBg">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="@drawable/about_app_back_ripple"
+                android:src="@drawable/ic_back_settings" />
+
+            <TextView
+                android:id="@+id/toolBarTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:text="@string/edit_comment"
+                android:textColor="@color/toolbarText"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:paddingTop="30dp">
 
         <ImageView
             android:id="@+id/user_icon"
@@ -15,24 +57,35 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:src="@mipmap/user"
-            app:layout_constraintBottom_toTopOf="@+id/update_comment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/dialogText"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/user_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:text="Mohamed Magdy" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:padding="6dp"
+            android:padding="10dp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/update_comment"
             app:layout_constraintEnd_toStartOf="@+id/user_icon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/user_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/comment_tv"
@@ -40,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/comment_edt_bg"
                 android:gravity="right"
-                android:padding="12dp"
+                android:padding="16dp"
                 android:textColorHint="@color/commentHint"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:textSize="14sp" />
@@ -52,27 +105,29 @@
             android:id="@+id/update_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
             android:backgroundTint="#2E8FDC"
             android:fontFamily="sans-serif-black"
             android:padding="10dp"
-            android:textColor="@color/white"
-            android:layout_marginRight="10dp"
             android:text="@string/update_comment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputEmail" />
 
         <Button
             android:id="@+id/cancel_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2E8FDC"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@android:color/darker_gray"
             android:fontFamily="sans-serif-black"
             android:padding="10dp"
-            android:textColor="@color/white"
             android:text="@string/cancel_update"
-            android:layout_marginRight="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/update_comment" />
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/update_comment"
+            app:layout_constraintTop_toBottomOf="@+id/textInputEmail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

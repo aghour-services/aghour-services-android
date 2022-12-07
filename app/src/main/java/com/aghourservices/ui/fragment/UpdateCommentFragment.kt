@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
@@ -13,11 +12,13 @@ import com.aghourservices.databinding.FragmentUpdateCommentBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
+class UpdateCommentFragment : BottomSheetDialogFragment(), ShowSoftKeyboard {
     private var _binding: FragmentUpdateCommentBinding? = null
     private val binding get() = _binding!!
     private val arguments: UpdateCommentFragmentArgs by navArgs()
@@ -33,28 +34,38 @@ class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initScreenView()
-        initUserClick()
-        hideBottomNavigation()
+        initUpdateFragmentSheet()
     }
 
-    private fun initScreenView() {
-        requireActivity().title = "تعديل التعليق"
-        binding.commentTv.setText(arguments.commentBody)
-
-        if (binding.commentTv.requestFocus()){
-            showKeyboard(requireContext(), binding.commentTv)
+    private fun initUpdateFragmentSheet() {
+        val bottomSheet = dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+        val behavior = BottomSheetBehavior.from(bottomSheet!!).apply {
+            state = BottomSheetBehavior.STATE_EXPANDED
+            isHideable = true
+            skipCollapsed = true
+            isDraggable = true
         }
-    }
+        val layoutParams = bottomSheet.layoutParams
+        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        bottomSheet.layoutParams = layoutParams
 
-    private fun initUserClick() {
+        binding.backBtn.setOnClickListener {
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+
         binding.updateComment.setOnClickListener {
             updateComment()
-            findNavController().navigateUp()
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
         binding.cancelEdit.setOnClickListener {
-            findNavController().navigateUp()
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
+    }
+
+    private fun initScreenView() {
+        binding.commentTv.setText(arguments.commentBody)
+        binding.userName.text = arguments.commentUser
     }
 
     private fun updateComment() {
