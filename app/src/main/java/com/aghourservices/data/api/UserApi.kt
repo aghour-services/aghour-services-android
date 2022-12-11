@@ -21,5 +21,8 @@ interface UserApi {
     fun userProfile(@Header("TOKEN") token: String): Call<Profile>
 
     @POST("devices")
-    fun sendDevice(@Body device: Device): Call<Device>
+    fun sendDevice(
+        @Body device: Device,
+        @Header("deviceid") deviceId: String
+    ): Call<Device>
 }

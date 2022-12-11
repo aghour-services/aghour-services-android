@@ -1,10 +1,12 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
@@ -12,13 +14,11 @@ import com.aghourservices.databinding.FragmentUpdateCommentBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UpdateCommentFragment : BottomSheetDialogFragment(), ShowSoftKeyboard {
+class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
     private var _binding: FragmentUpdateCommentBinding? = null
     private val binding get() = _binding!!
     private val arguments: UpdateCommentFragmentArgs by navArgs()
@@ -28,44 +28,30 @@ class UpdateCommentFragment : BottomSheetDialogFragment(), ShowSoftKeyboard {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUpdateCommentBinding.inflate(inflater, container, false)
+        requireActivity().title = "تعديل التعليق"
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        initScreenView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initScreenView()
-        initUpdateFragmentSheet()
-    }
-
-    private fun initUpdateFragmentSheet() {
-        val bottomSheet = dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-        val behavior = BottomSheetBehavior.from(bottomSheet!!).apply {
-            state = BottomSheetBehavior.STATE_EXPANDED
-            isHideable = true
-            skipCollapsed = true
-            isDraggable = true
-        }
-        val layoutParams = bottomSheet.layoutParams
-        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-        bottomSheet.layoutParams = layoutParams
-
-        binding.backBtn.setOnClickListener {
-            behavior.state = BottomSheetBehavior.STATE_HIDDEN
-        }
-
-        binding.updateComment.setOnClickListener {
-            updateComment()
-            behavior.state = BottomSheetBehavior.STATE_HIDDEN
-        }
-
-        binding.cancelEdit.setOnClickListener {
-            behavior.state = BottomSheetBehavior.STATE_HIDDEN
-        }
+        showKeyboard(requireContext(), binding.commentTv)
+        hideBottomNavigation()
     }
 
     private fun initScreenView() {
         binding.commentTv.setText(arguments.commentBody)
         binding.userName.text = arguments.commentUser
+
+        binding.updateComment.setOnClickListener {
+            updateComment()
+            findNavController().navigateUp()
+        }
+
+        binding.cancelEdit.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun updateComment() {
@@ -82,15 +68,12 @@ class UpdateCommentFragment : BottomSheetDialogFragment(), ShowSoftKeyboard {
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-
                 if (response.isSuccessful) {
-                    Log.d("edit", "onResponse: ${response.body()}")
-                    Log.d("edit", "Updated Comment")
+                    Toast.makeText(requireContext(), "تم تعديل التعليق", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
-                Log.d("edit", "onFailure: ${t.message}")
                 AlertDialog.noInternet(requireContext())
             }
         })
