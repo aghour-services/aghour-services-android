@@ -152,6 +152,7 @@ class CommentsFragment : BaseFragment() {
                     binding.noComments.isVisible = false
                     hideProgressBar()
                     sendFirebaseEvent(eventName, "")
+                    loadComments()
                 } else if (response.code() == 401) {
                     createAccount()
                     hideProgressBar()
