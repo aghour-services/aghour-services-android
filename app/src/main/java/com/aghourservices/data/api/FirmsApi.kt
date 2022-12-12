@@ -7,11 +7,16 @@ import retrofit2.http.*
 
 interface FirmsApi {
     @POST("firms")
-    fun createFirm(@Body firm: JsonObject, @Header("TOKEN") token: String): Call<Firm>
+    fun createFirm(
+        @Body firm: JsonObject,
+        @Header("TOKEN") token: String,
+        @Header("deviceid") deviceId: String
+    ): Call<Firm>
 
     @GET("firms")
     fun loadFirms(
         @Query("category_id") category_id: Int,
-        @Query("tags") tags: String
+        @Query("tags") tags: String,
+        @Header("deviceid") deviceId: String
     ): Call<ArrayList<Firm>>
 }

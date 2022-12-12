@@ -3,8 +3,6 @@ package com.aghourservices.ui.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +20,7 @@ import com.aghourservices.ui.adapter.TagsAdapter
 import com.aghourservices.ui.viewModel.FirmsViewModel
 import com.aghourservices.ui.viewModel.TagsViewModel
 import com.aghourservices.utils.helper.Event
+import com.aghourservices.utils.helper.Intents
 import io.realm.Realm
 
 class FirmsFragment : BaseFragment() {
@@ -32,10 +31,11 @@ class FirmsFragment : BaseFragment() {
     private lateinit var binding: FragmentFirmsBinding
     private lateinit var firmsViewModel: FirmsViewModel
     private lateinit var tagsViewModel: TagsViewModel
-    private val handler = Handler(Looper.getMainLooper()!!)
     private val args: FirmsFragmentArgs by navArgs()
     private var selectedTags = ArrayList<String>()
     private var categoryId = 0
+    private val deviceId: String by lazy { Intents.getDeviceId(requireContext()) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,7 +109,7 @@ class FirmsFragment : BaseFragment() {
     private fun setupFirmsViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
 
-        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(), deviceId) }
 
         firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
             firmsList = it
@@ -145,7 +145,7 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setOnRefreshListener {
             animationTagsLoading()
             binding.swipe.isRefreshing = false
-            activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
+            activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(), deviceId) }
         }
     }
 
@@ -201,7 +201,7 @@ class FirmsFragment : BaseFragment() {
             selectedTags.remove(tagsList[position].tag)
         }
         tag.isChecked = !tag.isChecked
-        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter()) }
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(), deviceId) }
     }
 
     private fun animationTagsLoading() {

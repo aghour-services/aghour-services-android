@@ -3,8 +3,6 @@ package com.aghourservices.ui.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +19,6 @@ class FavoriteFragment : BaseFragment() {
     private lateinit var binding: FragmentFavoriteBinding
     private lateinit var firmsList: ArrayList<Firm>
     private lateinit var favoriteAdapter: FirmsAdapter
-    private var handler = Handler(Looper.getMainLooper()!!)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

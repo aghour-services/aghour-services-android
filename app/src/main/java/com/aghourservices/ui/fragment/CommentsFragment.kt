@@ -22,6 +22,7 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.CommentsViewModel
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
+import com.aghourservices.utils.helper.Intents.getDeviceId
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.HideSoftKeyboard
 import retrofit2.Call
@@ -35,6 +36,7 @@ class CommentsFragment : BaseFragment() {
     private val arguments: CommentsFragmentArgs by navArgs()
     private val commentsAdapter =
         CommentsAdapter { view, position -> onCommentItemClick(view, position) }
+    private val deviceId: String by lazy { getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,7 +109,7 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun loadComments() {
-        commentsViewModel.loadComments(requireContext(), arguments.articleId)
+        commentsViewModel.loadComments(requireContext(), arguments.articleId, deviceId)
         commentsViewModel.commentsLivewData.observe(viewLifecycleOwner) {
             commentsAdapter.setComments(it)
             stopShimmerAnimation()
@@ -137,6 +139,7 @@ class CommentsFragment : BaseFragment() {
             arguments.articleId,
             userDetails.token,
             comment.toJsonObject(),
+            deviceId
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
@@ -173,6 +176,7 @@ class CommentsFragment : BaseFragment() {
             arguments.articleId,
             commentId,
             userDetails.token,
+            deviceId
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {

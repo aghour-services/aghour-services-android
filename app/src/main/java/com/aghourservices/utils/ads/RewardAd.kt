@@ -3,11 +3,7 @@ package com.aghourservices.utils.ads
 import android.app.Activity
 import android.content.Context
 import android.util.Log
-import android.view.Gravity
-import android.widget.Toast
 import com.aghourservices.R
-import com.aghourservices.databinding.BottomSheetBinding
-import com.aghourservices.databinding.ThanksForSupportBinding
 import com.aghourservices.utils.helper.ProgressDialog.showThanksDialog
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError

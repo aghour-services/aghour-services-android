@@ -13,8 +13,9 @@ class CommentsViewModel : ViewModel() {
     val commentsLivewData = MutableLiveData<ArrayList<Comment>>()
     var commentList: ArrayList<Comment> = ArrayList()
 
-    fun loadComments(context: Context, articleId: Int) {
-        val retrofitBuilder = RetrofitInstance(context).commentsApi.loadComments(articleId)
+    fun loadComments(context: Context, articleId: Int, deviceId: String) {
+        val retrofitBuilder =
+            RetrofitInstance(context).commentsApi.loadComments(articleId, deviceId)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Comment>> {
             override fun onResponse(

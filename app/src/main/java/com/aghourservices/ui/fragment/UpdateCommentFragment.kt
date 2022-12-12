@@ -12,6 +12,7 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentUpdateCommentBinding
 import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
@@ -22,6 +23,7 @@ class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
     private var _binding: FragmentUpdateCommentBinding? = null
     private val binding get() = _binding!!
     private val arguments: UpdateCommentFragmentArgs by navArgs()
+    private val deviceId: String by lazy { Intents.getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +66,7 @@ class UpdateCommentFragment : BaseFragment(), ShowSoftKeyboard {
             arguments.commentId,
             userDetails.token,
             comment.toJsonObject(),
+            deviceId
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
