@@ -18,8 +18,8 @@ class CategoriesViewModel : ViewModel() {
     var categoryList: ArrayList<Category> = ArrayList()
     val deviceData = MutableLiveData<Device>()
 
-    fun loadCategories(context: Context) {
-        val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList()
+    fun loadCategories(context: Context, deviceId: String) {
+        val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList(deviceId)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Category>> {
             override fun onResponse(

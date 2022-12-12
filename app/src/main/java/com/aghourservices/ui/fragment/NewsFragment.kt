@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,11 +12,13 @@ import com.aghourservices.R
 import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.viewModel.NewsViewModel
+import com.aghourservices.utils.helper.Intents
 
 class NewsFragment : BaseFragment() {
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel: NewsViewModel by viewModels()
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
+    private val deviceId: String by lazy { Intents.getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +53,7 @@ class NewsFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        newsViewModel.loadArticles(requireContext())
+        newsViewModel.loadArticles(requireContext(), deviceId)
     }
 
     private fun refresh() {
@@ -60,7 +61,7 @@ class NewsFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            newsViewModel.loadArticles(requireContext())
+            newsViewModel.loadArticles(requireContext(), deviceId)
         }
     }
 
@@ -69,7 +70,12 @@ class NewsFragment : BaseFragment() {
         val userName = newsAdapter.getArticle(position).user?.name
         val time = newsAdapter.getArticle(position).created_at
         val description = newsAdapter.getArticle(position).description
-        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(articleId, userName!!, time, description)
+        val newsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
+            articleId,
+            userName!!,
+            time,
+            description
+        )
 
         when (v.id) {
             R.id.add_comment -> {

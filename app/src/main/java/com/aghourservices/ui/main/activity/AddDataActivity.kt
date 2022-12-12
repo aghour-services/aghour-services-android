@@ -12,6 +12,7 @@ import com.aghourservices.ui.adapter.SpinnerCategoriesAdapter
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
+import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
@@ -27,6 +28,7 @@ class AddDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
     private lateinit var adView: AdView
+    private val deviceId: String by lazy { Intents.getDeviceId(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +97,8 @@ class AddDataActivity : AppCompatActivity() {
         val user = getUserData(this)
         val retrofitBuilder = RetrofitInstance(this).firmsApi.createFirm(
             firm.toJsonObject(),
-            user.token
+            user.token,
+            deviceId
         )
         retrofitBuilder.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {

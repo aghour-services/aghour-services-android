@@ -2,7 +2,6 @@ package com.aghourservices.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.aghourservices.data.model.Device
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapter.CategoriesAdapter
 import com.aghourservices.ui.viewModel.CategoriesViewModel
+import com.aghourservices.utils.helper.Intents.getDeviceId
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -21,6 +21,7 @@ class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
     private val categoriesViewModel: CategoriesViewModel by viewModels()
     private val categoryAdapter = CategoriesAdapter { position -> onListItemClick(position) }
+    private val deviceId: String by lazy { getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,7 +38,7 @@ class CategoriesFragment : BaseFragment() {
     }
 
     private fun initCategoryObserve() {
-        activity?.let { categoriesViewModel.loadCategories(it) }
+        activity?.let { categoriesViewModel.loadCategories(it, deviceId) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryAdapter.setCategories(it)
             progressBar()
@@ -46,8 +47,6 @@ class CategoriesFragment : BaseFragment() {
 
     @SuppressLint("HardwareIds")
     private fun sendDevice(token: String) {
-        val deviceId =
-            Settings.Secure.getString(activity?.contentResolver, Settings.Secure.ANDROID_ID)
         val device = Device(deviceId, token)
         categoriesViewModel.sendDevice(requireContext(), device, deviceId)
     }

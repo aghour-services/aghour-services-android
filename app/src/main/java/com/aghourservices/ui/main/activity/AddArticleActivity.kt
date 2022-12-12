@@ -10,6 +10,7 @@ import com.aghourservices.databinding.ActivityAddArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
+import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
@@ -22,6 +23,7 @@ import retrofit2.Response
 class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private lateinit var binding: ActivityAddArticleBinding
     private lateinit var adView: AdView
+    private val deviceId: String by lazy { Intents.getDeviceId(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,20 +31,13 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         setContentView(binding.root)
         hideUserAddData()
         initUserClick()
-        showSoftKeyboard()
         adView()
+        showKeyboard(this, binding.textArticle)
     }
 
     private fun adView() {
         adView = findViewById(R.id.adView)
         Banner.show(this, adView)
-    }
-
-    private fun showSoftKeyboard() {
-        binding.textArticle.apply {
-            requestFocus()
-            showKeyboard(this@AddArticleActivity, this)
-        }
     }
 
     private fun initUserClick() {
@@ -74,7 +69,8 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         val user = getUserData(this)
         val retrofitBuilder = RetrofitInstance(this).newsApi.createArticle(
             article.toJsonObject(),
-            user.token
+            user.token,
+            deviceId
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

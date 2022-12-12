@@ -119,5 +119,6 @@
     <color name="publish_article_btn">#2E3840</color>
     <color name="lattest_comment_card">#2E3840</color>
     <color name="deleteIcon">#F44336</color>
+    <color name="add_article_btn">#FFFFFF</color>
 
 </resources>

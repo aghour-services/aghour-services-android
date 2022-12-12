@@ -13,11 +13,11 @@ import retrofit2.Response
 class SearchViewModel : ViewModel() {
     var searchLiveData = MutableLiveData<ArrayList<Search>>()
 
-    fun search(context: Context, text: String) {
+    fun search(context: Context, text: String, deviceId: String) {
         val eventName = "search_${text}"
         Event.sendFirebaseEvent(eventName, text)
 
-        val retrofitBuilder = RetrofitInstance(context).searchApi.search(text)
+        val retrofitBuilder = RetrofitInstance(context).searchApi.search(text, deviceId)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Search>?> {
             override fun onResponse(

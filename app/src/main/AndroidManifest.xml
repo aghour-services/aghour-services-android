@@ -60,10 +60,12 @@
         <activity
             android:name="com.aghourservices.ui.main.activity.AddDataActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AddDataTheme" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AddArticleActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AddDataTheme" />
 
         <meta-data

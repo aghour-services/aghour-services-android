@@ -17,13 +17,15 @@ import com.aghourservices.ui.adapter.SearchResultAdapter
 import com.aghourservices.ui.viewModel.SearchViewModel
 import com.aghourservices.utils.helper.CheckNetworkLiveData
 import com.aghourservices.utils.helper.Event
+import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 
-class SearchFragment : BaseFragment(),ShowSoftKeyboard {
+class SearchFragment : BaseFragment(), ShowSoftKeyboard {
     private lateinit var searchList: ArrayList<Search>
     private lateinit var searchAdapter: SearchResultAdapter
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchViewModel: SearchViewModel
+    private val deviceId: String by lazy { Intents.getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,13 +53,13 @@ class SearchFragment : BaseFragment(),ShowSoftKeyboard {
         }
 
         binding.searchText.setOnClickListener {
-            activity?.let { it -> searchViewModel.search(it, searchText) }
+            activity?.let { it -> searchViewModel.search(it, searchText, deviceId) }
         }
 
         binding.searchText.doOnTextChanged { text, _, _, _ ->
             val searchKeyWord = text.toString()
             if (searchKeyWord.length > 2) {
-                activity?.let { searchViewModel.search(it, searchKeyWord) }
+                activity?.let { searchViewModel.search(it, searchKeyWord, deviceId) }
             }
         }
     }
@@ -74,7 +76,7 @@ class SearchFragment : BaseFragment(),ShowSoftKeyboard {
         val searchText = binding.searchText.text.toString()
 
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        activity?.let { searchViewModel.search(it, searchText) }
+        activity?.let { searchViewModel.search(it, searchText, deviceId) }
 
         searchViewModel.searchLiveData.observe(viewLifecycleOwner) {
             searchList = it
