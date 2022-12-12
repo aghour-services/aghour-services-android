@@ -1,5 +1,6 @@
 package com.aghourservices.ui.main.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -46,8 +48,6 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var runnable: Runnable
-    private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
     private val rewardAd = RewardAd()
     private var reviewManager: ReviewManager? = null
@@ -185,7 +185,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 120000)
 
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
@@ -208,12 +207,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        handler.removeCallbacks(runnable)
     }
 
     private fun adView() {
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
+        Handler(Looper.getMainLooper()).postDelayed({
+            interstitial.load(this@MainActivity)
+        }, 10000)
     }
 
     private fun rewardAd() {
