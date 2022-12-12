@@ -49,7 +49,7 @@ class CategoriesFragment : BaseFragment() {
         val deviceId =
             Settings.Secure.getString(activity?.contentResolver, Settings.Secure.ANDROID_ID)
         val device = Device(deviceId, token)
-        categoriesViewModel.sendDevice(requireContext(), device)
+        categoriesViewModel.sendDevice(requireContext(), device, deviceId)
     }
 
     private fun initRecyclerView() {

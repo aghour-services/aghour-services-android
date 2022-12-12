@@ -2,11 +2,11 @@ package com.aghourservices.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -24,12 +24,11 @@ import com.aghourservices.ui.viewModel.CommentsViewModel
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.HideSoftKeyboard
-import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
+class CommentsFragment : BaseFragment() {
     private var _binding: FragmentCommentsBinding? = null
     private val binding get() = _binding!!
     private val commentsViewModel: CommentsViewModel by viewModels()
@@ -72,7 +71,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         }
     }
 
-    private fun initArticleView(){
+    private fun initArticleView() {
         binding.apply {
             articleUserName.text = arguments.userName
             articleCreatedAt.text = arguments.time
@@ -98,7 +97,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
                 binding.commentTv.error = "أكتب تعليق"
                 hideProgressBar()
             } else {
-                postComment(comment)
+                addComment(comment)
             }
         }
 
@@ -131,7 +130,7 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         }
     }
 
-    private fun postComment(comment: Comment) {
+    private fun addComment(comment: Comment) {
         val userDetails = getUserData(requireContext())
         val eventName = "Comment_Added"
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
@@ -139,12 +138,13 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
             userDetails.token,
             comment.toJsonObject(),
         )
+
         retrofitBuilder.enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
 
                 if (response.isSuccessful) {
                     setTextEmpty()
-                    loadComments()
+                    commentsAdapter.addComment(response.body()!!)
                     HideSoftKeyboard.hide(requireContext(), binding.commentTv)
                     binding.noComments.isVisible = false
                     hideProgressBar()
@@ -178,8 +178,8 @@ class CommentsFragment : BaseFragment(), ShowSoftKeyboard {
         retrofitBuilder.enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
                 if (response.isSuccessful) {
-                    loadComments()
-                    Log.d("delete", "onResponse: ${response.body()}")
+                    commentsAdapter.removeComment(position)
+                    Toast.makeText(requireContext(), "تم مسح التعليق", Toast.LENGTH_SHORT).show()
                 }
             }
 

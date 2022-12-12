@@ -45,7 +45,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -115,9 +115,9 @@
         app:popUpTo="@id/categoriesFragment" />
     <fragment
         android:id="@+id/commentsFragment"
-        tools:layout="@layout/fragment_comments"
         android:name="com.aghourservices.ui.fragment.CommentsFragment"
-        android:label="CommentsFragment" >
+        android:label="CommentsFragment"
+        tools:layout="@layout/fragment_comments">
         <argument
             android:name="article_id"
             app:argType="integer" />
@@ -132,13 +132,17 @@
             app:argType="string" />
         <action
             android:id="@+id/action_commentsFragment_to_updateCommentFragment"
-            app:destination="@id/updateCommentFragment" />
+            app:destination="@id/updateCommentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-    <dialog
+    <fragment
         android:id="@+id/updateCommentFragment"
-        tools:layout="@layout/fragment_update_comment"
         android:name="com.aghourservices.ui.fragment.UpdateCommentFragment"
-        android:label="UpdateCommentFragment" >
+        android:label="UpdateCommentFragment"
+        tools:layout="@layout/fragment_update_comment">
         <argument
             android:name="article_id"
             app:argType="integer" />
@@ -154,5 +158,5 @@
         <action
             android:id="@+id/action_updateCommentFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
-    </dialog>
+    </fragment>
 </navigation>

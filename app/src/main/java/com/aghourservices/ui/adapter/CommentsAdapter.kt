@@ -13,7 +13,7 @@ import com.aghourservices.ui.main.cache.UserInfo.getUserID
 class CommentsAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
 ) : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>() {
-    private var commentsList: ArrayList<Comment> = ArrayList()
+    var commentsList: ArrayList<Comment> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
         val view = CommentCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,6 +34,16 @@ class CommentsAdapter(
     fun setComments(comments: ArrayList<Comment>) {
         commentsList = comments
         notifyDataSetChanged()
+    }
+
+    fun addComment(comment: Comment) {
+        commentsList.add(comment)
+        notifyItemInserted(commentsList.size - 1)
+    }
+
+    fun removeComment(position: Int) {
+        commentsList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     fun getComment(position: Int): Comment {

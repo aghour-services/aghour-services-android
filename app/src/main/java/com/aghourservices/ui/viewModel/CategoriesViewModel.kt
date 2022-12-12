@@ -44,8 +44,8 @@ class CategoriesViewModel : ViewModel() {
         })
     }
 
-    fun sendDevice(context: Context, device: Device) {
-        val retrofitBuilder = RetrofitInstance(context).userApi.sendDevice(device)
+    fun sendDevice(context: Context, device: Device, deviceId: String) {
+        val retrofitBuilder = RetrofitInstance(context).userApi.sendDevice(device, deviceId)
         retrofitBuilder.enqueue(object : Callback<Device> {
             override fun onResponse(call: Call<Device>, response: Response<Device>) {
                 if (response.isSuccessful) {
