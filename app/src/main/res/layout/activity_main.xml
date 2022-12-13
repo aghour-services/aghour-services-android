@@ -36,20 +36,6 @@
                     android:textStyle="bold"
                     tools:text="@string/app_name" />
 
-                <TextView
-                    android:id="@+id/supportApp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/category_selector"
-                    android:maxLines="1"
-                    android:padding="10dp"
-                    android:text="@string/support_application"
-                    android:textColor="@color/dialogText"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
