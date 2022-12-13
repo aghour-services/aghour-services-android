@@ -37,7 +37,9 @@ class Interstitial {
                     this@Interstitial.interstitialAd = interstitialAd
                     Toast.makeText(context, "سيظهر اعلان بعد 5 ثواني", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
-                        interstitialAd.show(context as Activity)
+                        if (this@Interstitial.interstitialAd != null) {
+                            interstitialAd.show(context as Activity)
+                        }
                     }, 5000)
                 }
             })

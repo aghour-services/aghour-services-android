@@ -16,8 +16,8 @@ android {
         applicationId "com.aghourservices"
         minSdk 21
         targetSdk 33
-        versionCode 37
-        versionName "8.7"
+        versionCode 38
+        versionName "8.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -93,7 +93,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
 
     //Firebase Analytics
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
     implementation platform('com.google.firebase:firebase-bom:30.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.2.0'
