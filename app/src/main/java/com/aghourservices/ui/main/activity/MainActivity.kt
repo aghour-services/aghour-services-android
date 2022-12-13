@@ -1,6 +1,5 @@
 package com.aghourservices.ui.main.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
@@ -9,10 +8,8 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -28,7 +25,6 @@ import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.saveUserID
 import com.aghourservices.utils.ads.Interstitial
 import com.aghourservices.utils.helper.Constants.Companion.APP_UPDATE_REQUEST_CODE
-import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -199,10 +195,6 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     private fun adView() {
