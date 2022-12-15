@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
         floatActionButton()
-        adView()
         inAppRating()
         inAppUpdate()
         getUserProfile()
@@ -195,12 +194,6 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-    }
-
-    private fun adView() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            interstitial.load(this@MainActivity)
-        }, 10000)
     }
 
     private fun setupNavController(): NavController {
