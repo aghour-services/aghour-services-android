@@ -1,14 +1,12 @@
 package com.aghourservices.ui.main.activity
 
 import android.content.Intent
-import android.content.IntentSender
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -24,45 +22,21 @@ import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.saveUserID
 import com.aghourservices.utils.ads.Interstitial
-import com.aghourservices.utils.helper.Constants.Companion.APP_UPDATE_REQUEST_CODE
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.InstallState
-import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.review.ReviewInfo
-import com.google.android.play.core.review.ReviewManager
-import com.google.android.play.core.review.ReviewManagerFactory
-import com.google.android.play.core.tasks.Task
+import com.suddenh4x.ratingdialog.AppRating
+import com.suddenh4x.ratingdialog.preferences.RatingThreshold
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var runnable: Runnable
+    private var handler = Handler(Looper.myLooper()!!)
     private val interstitial = Interstitial()
-    private var reviewManager: ReviewManager? = null
-    private var reviewInfo: ReviewInfo? = null
-    private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
-    private val appUpdatedListener: InstallStateUpdatedListener by lazy {
-        object : InstallStateUpdatedListener {
-            override fun onStateUpdate(installState: InstallState) {
-                when {
-                    installState.installStatus() == InstallStatus.DOWNLOADED -> popupDialogForCompleteUpdate()
-                    installState.installStatus() == InstallStatus.INSTALLED -> appUpdateManager.unregisterListener(
-                        this
-                    )
-                    else -> Log.d(
-                        "UpdateCheck",
-                        "InstallStateUpdatedListener: state: ${installState.installStatus()}"
-                    )
-                }
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +48,23 @@ class MainActivity : AppCompatActivity() {
         inAppRating()
         inAppUpdate()
         getUserProfile()
+        interstitialAd()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        handler.postDelayed(runnable, 120000)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable)
+    }
+
+    private fun interstitialAd() {
+        runnable = Runnable { interstitial.load(this@MainActivity) }
+        handler.post(runnable)
     }
 
     private fun getUserProfile() {
@@ -85,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     saveUserID(this@MainActivity, profile?.id!!)
-                    Log.d("Profile", "onResponse: ${profile?.id}")
+                    Log.d("Profile", "onResponse: ${profile.id}")
                 }
             }
 
@@ -93,24 +84,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d("user", t.message.toString())
             }
         })
-    }
-
-    private fun inAppRating() {
-        reviewManager = ReviewManagerFactory.create(this)
-        val request: Task<ReviewInfo> = reviewManager!!.requestReviewFlow()
-        request.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                reviewInfo = task.result
-            }
-        }
-//        TODO: Just for testing
-//        binding.button.setOnClickListener {
-//            val flow = reviewManager!!.launchReviewFlow(
-//                this@MainActivity,
-//                reviewInfo!!
-//            )
-//            flow.addOnCompleteListener { }
-//        }
     }
 
     private fun checkExtras(mainNavController: NavController) {
@@ -134,64 +107,43 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun inAppRating() {
+        AppRating.Builder(this)
+            .setMinimumLaunchTimes(3)
+            .setMinimumDays(3)
+            .useGoogleInAppReview()
+            .setMinimumLaunchTimesToShowAgain(10)
+            .setMinimumDaysToShowAgain(7)
+            .setRatingThreshold(RatingThreshold.FOUR)
+            .showIfMeetsConditions()
+
+    }
+
     private fun inAppUpdate() {
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                try {
-                    val installType = when {
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> AppUpdateType.FLEXIBLE
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> AppUpdateType.IMMEDIATE
-                        else -> null
-                    }
-                    if (installType == AppUpdateType.FLEXIBLE) appUpdateManager.registerListener(
-                        appUpdatedListener
-                    )
-
-                    appUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        installType!!,
-                        this,
-                        APP_UPDATE_REQUEST_CODE
-                    )
-                } catch (e: IntentSender.SendIntentException) {
-                    e.printStackTrace()
-                }
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && (appUpdateInfo.clientVersionStalenessDays() ?: -1) >= 3
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    AppUpdateType.IMMEDIATE,
+                    this,
+                    0
+                )
             }
         }
     }
 
-    private fun popupDialogForCompleteUpdate() {
-        val alertDialogBuilder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
-        alertDialogBuilder.setTitle("التطبيق جاهز للتثبيت")
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-        alertDialogBuilder.setPositiveButton("تثبيت الأن") { _, _ ->
-            appUpdateManager.completeUpdate()
-        }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-        alertDialog.setCancelable(false)
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 14f
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                popupDialogForCompleteUpdate()
-            }
-            try {
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                    appUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        AppUpdateType.FLEXIBLE,
-                        this,
-                        APP_UPDATE_REQUEST_CODE
-                    )
-                }
-            } catch (e: IntentSender.SendIntentException) {
-                e.printStackTrace()
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0) {
+            if (resultCode != RESULT_OK) {
+                Log.e("MY_APP", "Update flow failed! Result code: $resultCode")
+                inAppUpdate()
             }
         }
     }
