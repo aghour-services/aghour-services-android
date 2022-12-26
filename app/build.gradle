@@ -16,8 +16,8 @@ android {
         applicationId "com.aghourservices"
         minSdk 21
         targetSdk 33
-        versionCode 39
-        versionName "9"
+        versionCode 41
+        versionName "9.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -58,7 +58,7 @@ android {
 dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.8.0-alpha03'
+    implementation 'com.google.android.material:material:1.8.0-beta01'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
     testImplementation 'junit:junit:4.13.2'
@@ -68,8 +68,8 @@ dependencies {
     implementation "androidx.core:core-ktx:1.9.0"
 
     //Google Ads
-    implementation 'com.google.android.gms:play-services-ads:21.3.0'
-    implementation 'com.google.android.gms:play-services-ads-lite:21.3.0'
+    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+    implementation 'com.google.android.gms:play-services-ads-lite:21.4.0'
 
     //Navigation Fragment
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -109,7 +109,10 @@ dependencies {
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-
+    // to avoid Android 12 errors
+    implementation 'androidx.work:work-runtime-ktx:2.8.0-rc01'
+    // in app rating
+    implementation 'com.suddenh4x.ratingdialog:awesome-app-rating:2.4.0'
     // Google Play
     implementation 'com.google.android.play:core:1.10.3'
 }
