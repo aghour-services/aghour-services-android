@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
+import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
 
@@ -69,6 +70,8 @@ class ArticlesAdapter(
         }
 
         fun setNewsList(article: Article) {
+            val profile = UserInfo.getUserID(binding.root.context)
+
             binding.apply {
                 userName.text = article.user?.name
                 description.text = article.description
@@ -86,6 +89,12 @@ class ArticlesAdapter(
                     commentsCard.isVisible = true
                     name.text = article.latest_comment?.user?.name
                     body.text = article.latest_comment?.body
+                }
+
+                if (article.user?.id != profile.id) {
+                    binding.apply {
+                        popupMenu.visibility = View.GONE
+                    }
                 }
             }
         }
