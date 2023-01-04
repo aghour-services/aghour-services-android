@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="6dp">
+    android:layout_marginBottom="4dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/news_card"
@@ -13,16 +14,30 @@
         android:layout_height="match_parent"
         android:background="@color/firmsBg">
 
+        <TextView
+            android:id="@+id/popup_menu"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:background="@drawable/news_card_ripple"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="@string/popup"
+            android:textColor="@color/dialogText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <LinearLayout
             android:id="@+id/user_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/news_card_ripple"
             android:gravity="right"
             android:orientation="horizontal"
-            android:padding="10dp"
+            android:paddingTop="16sp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/popup_menu"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -84,6 +99,8 @@
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autoLink="all"
+                    android:textColorLink="@color/textColorLink"
                     android:background="@drawable/news_card_ripple"
                     android:gravity="right"
                     android:padding="14dp"
@@ -160,8 +177,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/lattest_comment_card"
                         android:layout_margin="10dp"
+                        app:cardBackgroundColor="@color/lattest_comment_card"
                         app:cardCornerRadius="20dp">
 
                         <LinearLayout

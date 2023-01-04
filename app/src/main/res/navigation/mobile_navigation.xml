@@ -46,6 +46,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_newsFragment_to_editArticleFragment"
+            app:destination="@id/editArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -68,51 +75,6 @@
             app:nullable="true" />
     </fragment>
 
-    <action
-        android:id="@+id/action_categoriesFragment"
-        app:destination="@id/categoriesFragment"
-        app:enterAnim="@anim/fragment_enter"
-        app:exitAnim="@anim/fragment_exit"
-        app:popEnterAnim="@anim/fragment_enter_pop"
-        app:popExitAnim="@anim/fragment_exit_pop"
-        app:popUpTo="@id/categoriesFragment"
-        app:popUpToInclusive="true" />
-
-    <action
-        android:id="@+id/action_searchFragment"
-        app:destination="@id/searchFragment"
-        app:enterAnim="@anim/fragment_enter"
-        app:exitAnim="@anim/fragment_exit"
-        app:popEnterAnim="@anim/fragment_enter_pop"
-        app:popExitAnim="@anim/fragment_exit_pop"
-        app:popUpTo="@id/categoriesFragment" />
-
-    <action
-        android:id="@+id/action_addDataFragment"
-        app:destination="@id/addDataFragment"
-        app:enterAnim="@anim/fragment_enter"
-        app:exitAnim="@anim/fragment_exit"
-        app:popEnterAnim="@anim/fragment_enter_pop"
-        app:popExitAnim="@anim/fragment_exit_pop"
-        app:popUpTo="@id/categoriesFragment" />
-
-    <action
-        android:id="@+id/action_favoriteFragment"
-        app:destination="@id/favoriteFragment"
-        app:enterAnim="@anim/fragment_enter"
-        app:exitAnim="@anim/fragment_exit"
-        app:popEnterAnim="@anim/fragment_enter_pop"
-        app:popExitAnim="@anim/fragment_exit_pop"
-        app:popUpTo="@id/categoriesFragment" />
-
-    <action
-        android:id="@+id/action_newsFragment"
-        app:destination="@id/newsFragment"
-        app:enterAnim="@anim/fragment_enter"
-        app:exitAnim="@anim/fragment_exit"
-        app:popEnterAnim="@anim/fragment_enter_pop"
-        app:popExitAnim="@anim/fragment_exit_pop"
-        app:popUpTo="@id/categoriesFragment" />
     <fragment
         android:id="@+id/commentsFragment"
         android:name="com.aghourservices.ui.fragment.CommentsFragment"
@@ -140,9 +102,9 @@
     </fragment>
     <fragment
         android:id="@+id/updateCommentFragment"
-        android:name="com.aghourservices.ui.fragment.UpdateCommentFragment"
+        android:name="com.aghourservices.ui.fragment.EditCommentFragment"
         android:label="UpdateCommentFragment"
-        tools:layout="@layout/fragment_update_comment">
+        tools:layout="@layout/fragment_edit_comment">
         <argument
             android:name="article_id"
             app:argType="integer" />
@@ -158,5 +120,22 @@
         <action
             android:id="@+id/action_updateCommentFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editArticleFragment"
+        android:name="com.aghourservices.ui.fragment.EditArticleFragment"
+        android:label="EditArticleFragment"
+        tools:layout="@layout/fragment_edit_article">
+        <argument
+            android:name="articleId"
+            app:argType="integer" />
+
+        <argument
+            android:name="articleDescription"
+            app:argType="string" />
+
+        <argument
+            android:name="articleUserName"
+            app:argType="string" />
     </fragment>
 </navigation>

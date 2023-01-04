@@ -49,6 +49,11 @@ class ArticlesAdapter(
         return articleList[position]
     }
 
+    fun deleteArticle(position: Int) {
+        articleList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     inner class ArticlesViewHolder(
         val binding: NewsCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
@@ -58,7 +63,7 @@ class ArticlesAdapter(
             binding.addComment.setOnClickListener(this)
             binding.newsCardView.setOnClickListener(this)
             binding.newsFavorite.setOnClickListener(this)
-            binding.userLayout.setOnClickListener(this)
+            binding.popupMenu.setOnClickListener(this)
             binding.description.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
@@ -82,9 +87,6 @@ class ArticlesAdapter(
                     name.text = article.latest_comment?.user?.name
                     body.text = article.latest_comment?.body
                 }
-//                shareNews.setOnClickListener {
-//                    Intents.shareNews(article.description, itemView)
-//                }
             }
         }
 

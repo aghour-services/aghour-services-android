@@ -52,20 +52,19 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.button.MaterialButton
+
+            <Button
                 android:id="@+id/send_article"
-                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:fontFamily="sans-serif-black"
                 android:text="@string/publish_article"
-                android:textColor="@color/add_article_btn"
+                android:textColor="#008EFF"
                 android:textSize="17sp"
-                android:textStyle="bold"
-                app:rippleColor="@color/shareRipple"
-                app:strokeWidth="0dp"
-                tools:ignore="RelativeOverlap" />
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -75,13 +74,12 @@
             android:layout_height="match_parent"
             android:layout_above="@id/btn_register"
             android:layout_below="@id/firmsToolbar"
-            android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:elevation="1dp"
             android:gravity="right"
             android:hint="@string/add_article_hint"
             android:importantForAutofill="no"
-            android:padding="15dp"
+            android:padding="20dp"
             android:textColorHint="@color/dialogText"
             android:textCursorDrawable="@drawable/cursor_color"
             android:textSize="@dimen/settings_text">
