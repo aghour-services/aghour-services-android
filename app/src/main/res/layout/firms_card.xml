@@ -99,6 +99,8 @@
                     android:gravity="right|center"
                     android:padding="4dp"
                     tools:text="Description"
+                    android:autoLink="all"
+                    android:textColorLink="@color/textColorLink"
                     android:textAlignment="center"
                     android:textColor="@color/firmsDescription"
                     android:textIsSelectable="true"

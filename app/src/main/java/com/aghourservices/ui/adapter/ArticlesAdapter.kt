@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
+import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
 
@@ -49,6 +50,11 @@ class ArticlesAdapter(
         return articleList[position]
     }
 
+    fun deleteArticle(position: Int) {
+        articleList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     inner class ArticlesViewHolder(
         val binding: NewsCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
@@ -58,12 +64,14 @@ class ArticlesAdapter(
             binding.addComment.setOnClickListener(this)
             binding.newsCardView.setOnClickListener(this)
             binding.newsFavorite.setOnClickListener(this)
-            binding.userLayout.setOnClickListener(this)
+            binding.popupMenu.setOnClickListener(this)
             binding.description.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 
         fun setNewsList(article: Article) {
+            val profile = UserInfo.getUserID(binding.root.context)
+
             binding.apply {
                 userName.text = article.user?.name
                 description.text = article.description
@@ -82,9 +90,12 @@ class ArticlesAdapter(
                     name.text = article.latest_comment?.user?.name
                     body.text = article.latest_comment?.body
                 }
-//                shareNews.setOnClickListener {
-//                    Intents.shareNews(article.description, itemView)
-//                }
+
+                if (article.user?.id != profile.id) {
+                    binding.apply {
+                        popupMenu.visibility = View.GONE
+                    }
+                }
             }
         }
 

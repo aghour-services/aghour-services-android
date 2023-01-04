@@ -124,17 +124,20 @@
     <string name="search">بحث</string>
     <string name="name">الأسم</string>
     <string name="comment">تعليق</string>
-    <string name="write_a_comment">أكتب تعليق...</string>
+    <string name="write_a_comment">أكتب تعليق…</string>
     <string name="no_comments_yet">لا توجد تعليقات 🧐</string>
     <string name="cancel_update">إلغاء</string>
     <string name="update_comment">تـعـديـل</string>
     <string name="comments">الكومنتات</string>
     <string name="comment_tv">الـتعليقـات</string>
-    <string name="add_a_comment">إضافة تعليق...</string>
+    <string name="add_a_comment">إضافة تعليق…</string>
     <string name="desc">الوصف</string>
     <string name="delete_comment">حذف التعليق</string>
     <string name="are_you_sure_to_delete_comment">هل أنت متأكد من حذف التعليق؟</string>
     <string name="delete">حذف</string>
     <string name="edit_comment">تعديل التعليق</string>
+    <string name="edit">تـعـديـل</string>
+    <string name="popup">⋮</string>
+    <string name="delete_article"><font fgcolor="#ff2507">حــذف</font></string>
 
 </resources>

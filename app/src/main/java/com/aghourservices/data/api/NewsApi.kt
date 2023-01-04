@@ -17,4 +17,19 @@ interface NewsApi {
         @Header("TOKEN") token: String,
         @Header("deviceid") deviceId: String
     ): Call<Article>
+
+    @PUT("articles/{article_id}")
+    fun updateArticle(
+        @Path("article_id") articleId: Int,
+        @Header("TOKEN") token: String,
+        @Body article: JsonObject,
+        @Header("deviceid") deviceId: String
+    ): Call<Article>
+
+    @DELETE("articles/{article_id}")
+    fun deleteArticle(
+        @Path("article_id") articleId: Int,
+        @Header("TOKEN") token: String,
+        @Header("deviceid") deviceId: String
+    ): Call<Article>
 }
