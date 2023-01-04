@@ -1,13 +1,19 @@
 package com.aghourservices.ui.main.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -21,7 +27,6 @@ import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.saveUserID
-import com.aghourservices.utils.ads.Interstitial
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
@@ -33,38 +38,44 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var runnable: Runnable
-    private var handler = Handler(Looper.myLooper()!!)
-    private val interstitial = Interstitial()
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
+        getUserProfile()
         floatActionButton()
         inAppRating()
         inAppUpdate()
-        getUserProfile()
-        interstitialAd()
+        notificationPermission()
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        handler.postDelayed(runnable, 120000)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacks(runnable)
-    }
-
-    private fun interstitialAd() {
-        runnable = Runnable { interstitial.load(this@MainActivity) }
-        handler.post(runnable)
+    private fun notificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    this, Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    Log.e("NOTIFICATION", "onCreate: PERMISSION GRANTED")
+                }
+                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
+                    notificationDialog()
+                }
+                else -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        requestPermissionLauncher.launch(
+                            Manifest.permission.POST_NOTIFICATIONS
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun getUserProfile() {
@@ -190,6 +201,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun notificationDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
+        alertDialogBuilder.setTitle("السماح بظهور الإشعارات")
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton("سماح") { _, _ ->
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val uri: Uri = Uri.fromParts("package", packageName, null)
+            intent.data = uri
+            startActivity(intent)
+        }
+        alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 14f
+    }
+
     override fun setTitle(title: CharSequence?) {
         binding.toolBarTv.text = title
     }
@@ -211,5 +241,10 @@ class MainActivity : AppCompatActivity() {
             Navigation.findNavController(this@MainActivity, R.id.fragmentContainerView)
         navController.navigateUp()
         return super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
