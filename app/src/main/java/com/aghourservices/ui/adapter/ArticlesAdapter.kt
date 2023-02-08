@@ -65,7 +65,7 @@ class ArticlesAdapter(
             binding.newsCardView.setOnClickListener(this)
             binding.newsFavorite.setOnClickListener(this)
             binding.popupMenu.setOnClickListener(this)
-            binding.description.setOnClickListener(this)
+//            binding.description.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 

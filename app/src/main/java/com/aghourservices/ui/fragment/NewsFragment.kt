@@ -96,9 +96,9 @@ class NewsFragment : BaseFragment() {
             R.id.add_comment -> {
                 findNavController().navigate(commentsFragment)
             }
-            R.id.description -> {
-                findNavController().navigate(commentsFragment)
-            }
+//            R.id.description -> {
+//                findNavController().navigate(commentsFragment)
+//            }
             R.id.latest_comment_card -> {
                 findNavController().navigate(commentsFragment)
             }
