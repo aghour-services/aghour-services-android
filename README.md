@@ -11,14 +11,14 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 
 | Mode  | Category list                                                          | Favorite list                                                         | Firms detail                                                          | Settings
 |-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Light | <img src="https://m7madmagdy.github.io/profile/aghour%20images/1.png" width="220"> | <img src="https://m7madmagdy.github.io/profile/aghour%20images/3.png" width="220"> | <img src="https://m7madmagdy.github.io/profile/aghour%20images/2.png" width="220"> | <img src="https://m7madmagdy.github.io/profile/aghour%20images/4.png" width="220"> 
-| Dark  | <img src="https://m7madmagdy.github.io/profile/aghour%20images/5.png" width="220">  | <img src="https://m7madmagdy.github.io/profile/aghour%20images/7.png" width="220">  | <img src="https://m7madmagdy.github.io/profile/aghour%20images/6.png" width="220">  | <img src="https://m7madmagdy.github.io/profile/aghour%20images/8.png" width="220"> 
+| Light | <img src="https://m7madmagdy.github.io/server/aghour%20images/1.png" width="220"> | <img src="https://m7madmagdy.github.io/server/aghour%20images/3.png" width="220"> | <img src="https://m7madmagdy.github.io/server/aghour%20images/2.png" width="220"> | <img src="https://m7madmagdy.github.io/server/aghour%20images/4.png" width="220"> 
+| Dark  | <img src="https://m7madmagdy.github.io/server/aghour%20images/5.png" width="220">  | <img src="https://m7madmagdy.github.io/server/aghour%20images/7.png" width="220">  | <img src="https://m7madmagdy.github.io/server/aghour%20images/6.png" width="220">  | <img src="https://m7madmagdy.github.io/server/aghour%20images/8.png" width="220"> 
 
 ## Architecture
 
 The architecture of the application is based, apply and strictly complies with each of the following 5 points:
 
-<img src="https://m7madmagdy.github.io/profile/aghour%20images/ajhour.jpg" width="300" align="right" hspace="20">
+<img src="https://m7madmagdy.github.io/server/aghour%20images/ajhour.jpg" width="300" align="right" hspace="20">
 
 -   A single-activity architecture, using the [Navigation component](https://developer.android.com/guide/navigation/navigation-getting-started) to manage fragment operations.
 -   [Retrofit 2](https://square.github.io/retrofit/), A type-safe HTTP client for Android and Java.
