@@ -62,10 +62,8 @@ class ArticlesAdapter(
 
         init {
             binding.addComment.setOnClickListener(this)
-            binding.newsCardView.setOnClickListener(this)
-            binding.newsFavorite.setOnClickListener(this)
             binding.popupMenu.setOnClickListener(this)
-//            binding.description.setOnClickListener(this)
+            binding.userLayout.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 
