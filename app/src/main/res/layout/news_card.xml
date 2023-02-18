@@ -111,15 +111,14 @@
                 android:textIsSelectable="false"
                 android:textSize="16sp"
                 app:readMoreColor="@color/colorPrimary"
-                app:readMoreMaxLine="4"
-                app:readMoreText="...رؤية المزيد"
+                app:readMoreMaxLine="6"
+                app:readMoreText=" ...قراءة المزيد"
                 tools:text="@string/description" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@color/news_bg" />
         </LinearLayout>
 
