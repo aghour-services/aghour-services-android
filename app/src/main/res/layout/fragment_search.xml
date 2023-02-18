@@ -46,7 +46,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_search"
                     app:drawableTint="@color/dialogText"
                     android:drawablePadding="10dp"
@@ -59,7 +59,7 @@
                     android:textColor="@color/searchTxt"
                     android:textColorHint="@color/searchTxt"
                     android:textCursorDrawable="@drawable/cursor_color"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <requestFocus />
 

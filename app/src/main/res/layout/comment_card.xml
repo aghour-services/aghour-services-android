@@ -49,9 +49,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
+                    android:maxEms="14"
                     android:textColor="@color/newsDescription"
                     android:textSize="14sp"
-                    tools:text="Description" />
+                    tools:text="Comment" />
 
                 <TextView
                     android:id="@+id/time"
