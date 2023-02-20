@@ -5,7 +5,7 @@
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
     <color name="navBarColor">#000000</color>
-    <color name="recyclerViewBg">#192025</color>
+    <color name="recyclerViewBg">#171C20</color>
     <color name="splashScreenBg">#141F27</color>
     <color name="categoryName">#FFFFFF</color>
     <color name="categoryCardBg">#1D242B</color>

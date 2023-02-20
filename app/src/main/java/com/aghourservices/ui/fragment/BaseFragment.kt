@@ -10,17 +10,18 @@ import androidx.fragment.app.Fragment
 import com.aghourservices.R
 import com.aghourservices.utils.helper.Event
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 open class BaseFragment : Fragment() {
-    private lateinit var bottomNavigationView: BottomAppBar
+    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var fabButton: FloatingActionButton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Event.sendScreenName(this::class.simpleName.toString())
-        bottomNavigationView = activity?.findViewById(R.id.bottomAppBar) as BottomAppBar
+        bottomNavigationView = activity?.findViewById(R.id.bottomView) as BottomNavigationView
         fabButton = activity?.findViewById(R.id.floatingActionButton) as FloatingActionButton
 
     }
