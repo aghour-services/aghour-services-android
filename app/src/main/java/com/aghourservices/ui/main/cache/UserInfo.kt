@@ -50,6 +50,18 @@ object UserInfo {
         editor.apply()
     }
 
+    fun saveFCMToken(context: Context, fcmToken: String) {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+        editor.putString("fcmToken", fcmToken)
+        editor.apply()
+    }
+
+    fun getFCMToken(context: Context): String {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return pref.getString("fcmToken", "").toString()
+    }
+
     fun clearUserData(context: Context) {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         pref.edit().clear().apply()

@@ -23,7 +23,6 @@ class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
     private var _binding: FragmentEditCommentBinding? = null
     private val binding get() = _binding!!
     private val arguments: EditCommentFragmentArgs by navArgs()
-    private val deviceId: String by lazy { Intents.getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +65,7 @@ class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
             arguments.commentId,
             userDetails.token,
             comment.toJsonObject(),
-            deviceId
+            UserInfo.getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {

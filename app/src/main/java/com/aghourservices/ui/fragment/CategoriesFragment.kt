@@ -2,6 +2,7 @@ package com.aghourservices.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,10 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Device
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapter.CategoriesAdapter
+import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
+import com.aghourservices.ui.main.cache.UserInfo.getUserData
+import com.aghourservices.ui.main.cache.UserInfo.saveFCMToken
 import com.aghourservices.ui.viewModel.CategoriesViewModel
-import com.aghourservices.utils.helper.Intents.getDeviceId
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -21,7 +24,6 @@ class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
     private val categoriesViewModel: CategoriesViewModel by viewModels()
     private val categoryAdapter = CategoriesAdapter { position -> onListItemClick(position) }
-    private val deviceId: String by lazy { getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,21 +36,20 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getFirebaseInstanceToken()
+        sendDevice(getFCMToken(requireContext()))
     }
 
     private fun initCategoryObserve() {
-        activity?.let { categoriesViewModel.loadCategories(it, deviceId) }
+        activity?.let { categoriesViewModel.loadCategories(it, getFCMToken(requireContext())) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryAdapter.setCategories(it)
             progressBar()
         }
     }
 
-    @SuppressLint("HardwareIds")
     private fun sendDevice(token: String) {
-        val device = Device(deviceId, token)
-        categoriesViewModel.sendDevice(requireContext(), device, deviceId)
+        val device = Device(token)
+        categoriesViewModel.sendDevice(requireContext(), device, token)
     }
 
     private fun initRecyclerView() {
@@ -72,15 +73,5 @@ class CategoriesFragment : BaseFragment() {
     private fun progressBar() {
         binding.progressBar.visibility = View.GONE
         binding.categoriesRecyclerview.visibility = View.VISIBLE
-    }
-
-    private fun getFirebaseInstanceToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-            }
-            val token = task.result
-            sendDevice(token)
-        })
     }
 }

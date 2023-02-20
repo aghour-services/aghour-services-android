@@ -7,6 +7,7 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivityAddArticleBinding
+import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
@@ -23,7 +24,6 @@ import retrofit2.Response
 class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private lateinit var binding: ActivityAddArticleBinding
     private lateinit var adView: AdView
-    private val deviceId: String by lazy { Intents.getDeviceId(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +70,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         val retrofitBuilder = RetrofitInstance(this).newsApi.createArticle(
             article.toJsonObject(),
             user.token,
-            deviceId
+            UserInfo.getFCMToken(this)
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

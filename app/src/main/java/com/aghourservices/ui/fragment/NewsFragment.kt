@@ -18,7 +18,6 @@ import com.aghourservices.databinding.FragmentNewsBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.viewModel.NewsViewModel
-import com.aghourservices.utils.helper.Intents
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +26,6 @@ class NewsFragment : BaseFragment() {
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel: NewsViewModel by viewModels()
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
-    private val deviceId: String by lazy { Intents.getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +60,7 @@ class NewsFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        newsViewModel.loadArticles(requireContext(), deviceId)
+        newsViewModel.loadArticles(requireContext(), UserInfo.getFCMToken(requireContext()))
     }
 
     private fun refresh() {
@@ -70,7 +68,7 @@ class NewsFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            newsViewModel.loadArticles(requireContext(), deviceId)
+            newsViewModel.loadArticles(requireContext(), UserInfo.getFCMToken(requireContext()))
         }
     }
 
@@ -142,7 +140,7 @@ class NewsFragment : BaseFragment() {
         val retrofitBuilder = RetrofitInstance(requireContext()).newsApi.deleteArticle(
             articleId,
             userDetails.token,
-            deviceId
+            UserInfo.getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

@@ -10,13 +10,13 @@ interface FirmsApi {
     fun createFirm(
         @Body firm: JsonObject,
         @Header("TOKEN") token: String,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Firm>
 
     @GET("firms")
     fun loadFirms(
         @Query("category_id") category_id: Int,
         @Query("tags") tags: String,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<ArrayList<Firm>>
 }

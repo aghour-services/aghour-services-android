@@ -10,7 +10,7 @@ interface CommentsApi {
     @GET("articles/{article_id}/comments")
     fun loadComments(
         @Path("article_id") articleId: Int,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<ArrayList<Comment>>
 
 
@@ -19,7 +19,7 @@ interface CommentsApi {
         @Path("article_id") articleId: Int,
         @Header("TOKEN") token: String,
         @Body comment: JsonObject,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Comment>
 
     @PUT("articles/{article_id}/comments/{comment_id}")
@@ -28,7 +28,7 @@ interface CommentsApi {
         @Path("comment_id") commentId: Int,
         @Header("TOKEN") token: String,
         @Body comment: JsonObject,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Comment>
 
     @DELETE("articles/{article_id}/comments/{comment_id}")
@@ -36,6 +36,6 @@ interface CommentsApi {
         @Path("article_id") articleId: Int,
         @Path("comment_id") commentId: Int,
         @Header("TOKEN") token: String,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Comment>
 }
