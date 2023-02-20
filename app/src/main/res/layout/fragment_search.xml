@@ -30,12 +30,11 @@
                 android:padding="8dp"
                 android:src="@drawable/ic_back" />
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="right|center"
                 app:endIconDrawable="@drawable/ic_clear"
@@ -46,27 +45,25 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_search"
                     app:drawableTint="@color/dialogText"
                     android:drawablePadding="10dp"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/segoe_ui_bold"
+                    android:layout_gravity="center"
                     android:gravity="right|center"
+                    android:background="@android:color/transparent"
                     android:hint="@string/search"
                     android:imeOptions="actionDone"
-                    android:inputType="text"
                     android:textColor="@color/searchTxt"
                     android:textColorHint="@color/searchTxt"
                     android:textCursorDrawable="@drawable/cursor_color"
-                    android:textSize="14sp" />
+                    android:autofillHints="" />
 
                 <requestFocus />
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
 
         <View
             android:id="@+id/view"
