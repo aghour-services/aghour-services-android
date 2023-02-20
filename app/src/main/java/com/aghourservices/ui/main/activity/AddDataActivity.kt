@@ -9,6 +9,7 @@ import com.aghourservices.data.model.Firm
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivityAddDataBinding
 import com.aghourservices.ui.adapter.SpinnerCategoriesAdapter
+import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
@@ -28,7 +29,6 @@ class AddDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
     private lateinit var adView: AdView
-    private val deviceId: String by lazy { Intents.getDeviceId(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,7 +98,7 @@ class AddDataActivity : AppCompatActivity() {
         val retrofitBuilder = RetrofitInstance(this).firmsApi.createFirm(
             firm.toJsonObject(),
             user.token,
-            deviceId
+            UserInfo.getFCMToken(this)
         )
         retrofitBuilder.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {

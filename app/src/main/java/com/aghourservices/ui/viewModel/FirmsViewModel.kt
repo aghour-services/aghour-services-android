@@ -15,9 +15,9 @@ class FirmsViewModel : ViewModel() {
     var firmsLiveData = MutableLiveData<ArrayList<Firm>>()
     var firmsList: ArrayList<Firm> = ArrayList()
 
-    fun loadFirms(context: Context, categoryId: Int, tagsAsParameter: String, deviceId: String) {
+    fun loadFirms(context: Context, categoryId: Int, tagsAsParameter: String, fcmToken: String) {
         val retrofitBuilder =
-            RetrofitInstance(context).firmsApi.loadFirms(categoryId, tagsAsParameter, deviceId)
+            RetrofitInstance(context).firmsApi.loadFirms(categoryId, tagsAsParameter, fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(

@@ -22,7 +22,6 @@ class EditArticleFragment : BaseFragment(), ShowSoftKeyboard {
     private var _binding: FragmentEditArticleBinding? = null
     private val binding get() = _binding!!
     private val arguments: EditArticleFragmentArgs by navArgs()
-    private val deviceId: String by lazy { getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +62,7 @@ class EditArticleFragment : BaseFragment(), ShowSoftKeyboard {
             arguments.articleId,
             userDetails.token,
             article.toJsonObject(),
-            deviceId
+            UserInfo.getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

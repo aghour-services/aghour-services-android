@@ -19,6 +19,7 @@ import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.activity.SignInActivity
 import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.CommentsViewModel
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
@@ -36,7 +37,6 @@ class CommentsFragment : BaseFragment() {
     private val arguments: CommentsFragmentArgs by navArgs()
     private val commentsAdapter =
         CommentsAdapter { view, position -> onCommentItemClick(view, position) }
-    private val deviceId: String by lazy { getDeviceId(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,7 +109,7 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun loadComments() {
-        commentsViewModel.loadComments(requireContext(), arguments.articleId, deviceId)
+        commentsViewModel.loadComments(requireContext(), arguments.articleId, getFCMToken(requireContext()))
         commentsViewModel.commentsLivewData.observe(viewLifecycleOwner) {
             commentsAdapter.setComments(it)
             stopShimmerAnimation()
@@ -139,7 +139,7 @@ class CommentsFragment : BaseFragment() {
             arguments.articleId,
             userDetails.token,
             comment.toJsonObject(),
-            deviceId
+            getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
@@ -177,7 +177,7 @@ class CommentsFragment : BaseFragment() {
             arguments.articleId,
             commentId,
             userDetails.token,
-            deviceId
+            getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {

@@ -8,6 +8,6 @@ import retrofit2.http.Header
 interface CategoriesApi {
     @GET("categories")
     fun loadCategoriesList(
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<ArrayList<Category>>
 }

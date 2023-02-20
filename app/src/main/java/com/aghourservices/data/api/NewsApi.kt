@@ -8,14 +8,14 @@ import retrofit2.http.*
 interface NewsApi {
     @GET("articles")
     fun loadArticles(
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<ArrayList<Article>>
 
     @POST("articles")
     fun createArticle(
         @Body article: JsonObject,
         @Header("TOKEN") token: String,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Article>
 
     @PUT("articles/{article_id}")
@@ -23,13 +23,13 @@ interface NewsApi {
         @Path("article_id") articleId: Int,
         @Header("TOKEN") token: String,
         @Body article: JsonObject,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Article>
 
     @DELETE("articles/{article_id}")
     fun deleteArticle(
         @Path("article_id") articleId: Int,
         @Header("TOKEN") token: String,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Article>
 }

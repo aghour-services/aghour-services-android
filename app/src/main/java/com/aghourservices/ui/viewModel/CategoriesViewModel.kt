@@ -18,8 +18,8 @@ class CategoriesViewModel : ViewModel() {
     var categoryList: ArrayList<Category> = ArrayList()
     val deviceData = MutableLiveData<Device>()
 
-    fun loadCategories(context: Context, deviceId: String) {
-        val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList(deviceId)
+    fun loadCategories(context: Context, fcmToken: String) {
+        val retrofitBuilder = RetrofitInstance(context).categoriesApi.loadCategoriesList(fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Category>> {
             override fun onResponse(
@@ -44,8 +44,8 @@ class CategoriesViewModel : ViewModel() {
         })
     }
 
-    fun sendDevice(context: Context, device: Device, deviceId: String) {
-        val retrofitBuilder = RetrofitInstance(context).userApi.sendDevice(device, deviceId)
+    fun sendDevice(context: Context, device: Device, fcmToken: String) {
+        val retrofitBuilder = RetrofitInstance(context).userApi.sendDevice(device, fcmToken)
         retrofitBuilder.enqueue(object : Callback<Device> {
             override fun onResponse(call: Call<Device>, response: Response<Device>) {
                 if (response.isSuccessful) {

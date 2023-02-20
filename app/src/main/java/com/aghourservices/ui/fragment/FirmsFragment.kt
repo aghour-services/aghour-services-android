@@ -17,6 +17,7 @@ import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.ui.adapter.FirmsAdapter
 import com.aghourservices.ui.adapter.TagsAdapter
+import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.viewModel.FirmsViewModel
 import com.aghourservices.ui.viewModel.TagsViewModel
 import com.aghourservices.utils.helper.Event
@@ -34,7 +35,6 @@ class FirmsFragment : BaseFragment() {
     private val args: FirmsFragmentArgs by navArgs()
     private var selectedTags = ArrayList<String>()
     private var categoryId = 0
-    private val deviceId: String by lazy { Intents.getDeviceId(requireContext()) }
 
 
     override fun onCreateView(
@@ -109,7 +109,9 @@ class FirmsFragment : BaseFragment() {
     private fun setupFirmsViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
 
-        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(), deviceId) }
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(),
+            UserInfo.getFCMToken(requireContext())
+        ) }
 
         firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
             firmsList = it
@@ -145,7 +147,9 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setOnRefreshListener {
             animationTagsLoading()
             binding.swipe.isRefreshing = false
-            activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(), deviceId) }
+            activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(),
+                UserInfo.getFCMToken(requireContext())
+            ) }
         }
     }
 
@@ -201,7 +205,9 @@ class FirmsFragment : BaseFragment() {
             selectedTags.remove(tagsList[position].tag)
         }
         tag.isChecked = !tag.isChecked
-        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(), deviceId) }
+        activity?.let { firmsViewModel.loadFirms(it, categoryId, tagsAsParameter(),
+            UserInfo.getFCMToken(requireContext())
+        ) }
     }
 
     private fun animationTagsLoading() {

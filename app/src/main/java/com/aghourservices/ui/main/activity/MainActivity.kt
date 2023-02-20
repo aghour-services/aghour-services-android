@@ -13,6 +13,7 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -25,12 +26,16 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
+import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
+import com.aghourservices.ui.main.cache.UserInfo.saveFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.saveUserID
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.firebase.messaging.FirebaseMessaging
 import com.suddenh4x.ratingdialog.AppRating
 import com.suddenh4x.ratingdialog.preferences.RatingThreshold
 import retrofit2.Call
@@ -40,8 +45,6 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,27 +57,16 @@ class MainActivity : AppCompatActivity() {
         inAppRating()
         inAppUpdate()
         notificationPermission()
+        getFirebaseInstanceToken()
     }
 
     private fun notificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            when {
-                ContextCompat.checkSelfPermission(
-                    this, Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    Log.e("NOTIFICATION", "onCreate: PERMISSION GRANTED")
-                }
-                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
-                    notificationDialog()
-                }
-                else -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        requestPermissionLauncher.launch(
-                            Manifest.permission.POST_NOTIFICATIONS
-                        )
-                    }
-                }
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                99
+            )
         }
     }
 
@@ -201,23 +193,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun notificationDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
-        alertDialogBuilder.setTitle("السماح بظهور الإشعارات")
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton("سماح") { _, _ ->
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            val uri: Uri = Uri.fromParts("package", packageName, null)
-            intent.data = uri
-            startActivity(intent)
-        }
-        alertDialogBuilder.setNegativeButton(R.string.cancelButton) { _, _ -> }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).textSize = 14f
+    private fun getFirebaseInstanceToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            val token = task.result
+            saveFCMToken(this, token)
+        })
     }
 
     override fun setTitle(title: CharSequence?) {

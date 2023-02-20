@@ -9,6 +9,6 @@ interface SearchApi {
     @GET("search")
     fun search(
         @Query("keyword") searchKeyword: String,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): retrofit2.Call<ArrayList<Search>>
 }

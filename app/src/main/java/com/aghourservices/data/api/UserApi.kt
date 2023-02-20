@@ -23,6 +23,6 @@ interface UserApi {
     @POST("devices")
     fun sendDevice(
         @Body device: Device,
-        @Header("deviceid") deviceId: String
+        @Header("fcmToken") fcmToken: String
     ): Call<Device>
 }
