@@ -14,4 +14,5 @@
     <dimen name="settings_text">14sp</dimen>
     <dimen name="settingItempd">12dp</dimen>
     <dimen name="edt_sign_up">11dp</dimen>
+    <dimen name="line_view">0.5dp</dimen>
 </resources>

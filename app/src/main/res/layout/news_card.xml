@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginBottom="4dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -26,7 +28,7 @@
             android:gravity="center"
             android:text="@string/popup"
             android:textColor="@color/dialogText"
-            android:textSize="18sp" />
+            android:textSize="19sp" />
 
         <LinearLayout
             android:id="@+id/user_layout"
@@ -132,7 +134,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                android:layout_height="@dimen/line_view"
                 android:background="@color/lineView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -228,73 +230,103 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/likes_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/comments_layout"
-            android:layout_centerHorizontal="true"
-            android:background="?android:selectableItemBackground"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:gravity="right"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="100 إعجاب" />
-
         <View
             android:id="@+id/line1"
             android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:layout_below="@id/likes_count"
+            android:layout_height="@dimen/line_view"
+            android:layout_below="@id/comments_layout"
             android:background="@color/lineView" />
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
             android:layout_below="@id/line1">
 
-            <TextView
-                android:id="@+id/add_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/v_line"
-                android:background="?android:selectableItemBackground"
-                android:gravity="center"
-                android:paddingLeft="10dp"
-                android:text="@string/comment"
-                android:textColor="@color/dialogText"
-                android:textSize="14sp"
-                app:drawableLeftCompat="@drawable/ic_comment" />
-
-            <View
-                android:id="@+id/v_line"
-                android:layout_width="0.5dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:background="@color/lineView" />
-
             <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/like_btn"
+                android:id="@+id/like_article"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/v_line"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true"
-                android:background="?android:selectableItemBackground"
-                android:button="@drawable/like_selector"
+                android:button="@drawable/fav_selector"
+                android:tooltipText="تضامنا"
                 android:gravity="center"
-                android:text="@string/like"
-                android:textColor="@color/dialogText"
-                android:textSize="14sp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="o" />
 
-        </RelativeLayout>
+            <View
+                android:id="@+id/view2"
+                android:layout_width="@dimen/line_view"
+                android:layout_height="0dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/lineView"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/like_article"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/add_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/view3"
+                    android:tooltipText="@string/add_a_comment"
+                    android:background="@drawable/share_ripple"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="@string/comment"
+                    android:textColor="@color/shareText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_comment"
+                    tools:targetApi="o" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="@dimen/line_view"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/lineView"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:id="@+id/share_article"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:tooltipText="مشاركة الخبر"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toStartOf="@+id/view3"
+                    android:background="@drawable/share_ripple"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="@string/share_firm"
+                    android:textColor="@color/shareText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_share"
+                    tools:targetApi="o" />
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
