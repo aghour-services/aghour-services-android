@@ -139,5 +139,6 @@
     <string name="edit">تـعـديـل</string>
     <string name="popup">⋮</string>
     <string name="delete_article"><font fgcolor="#ff2507">حــذف</font></string>
+    <string name="like">أعجبني</string>
 
 </resources>

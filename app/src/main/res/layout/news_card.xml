@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    app:cardUseCompatPadding="true"
-    android:layout_marginBottom="4dp">
+    android:layout_marginBottom="4dp"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:id="@+id/news_card"
@@ -92,9 +92,9 @@
             android:id="@+id/article_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_below="@id/under_line"
             android:layout_centerHorizontal="true"
+            android:gravity="right"
             android:orientation="vertical">
 
             <kr.co.prnd.readmore.ReadMoreTextView
@@ -113,6 +113,7 @@
                 app:readMoreColor="@color/colorPrimary"
                 app:readMoreMaxLine="6"
                 app:readMoreText=" ...قراءة المزيد"
+                tools:maxLines="2"
                 tools:text="@string/description" />
 
             <FrameLayout
@@ -225,27 +226,75 @@
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
 
         <TextView
-            android:id="@+id/add_comment"
+            android:id="@+id/likes_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/comments_layout"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/add_comment_bg"
-            android:elevation="1dp"
-            android:gravity="right|center"
-            android:padding="12dp"
-            android:paddingRight="12dp"
-            android:text="@string/add_a_comment"
-            android:textColor="@color/dialogText"
-            android:textSize="12sp" />
+            android:background="?android:selectableItemBackground"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="100 إعجاب" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_below="@id/likes_count"
+            android:background="@color/lineView" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1">
+
+            <TextView
+                android:id="@+id/add_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/v_line"
+                android:background="?android:selectableItemBackground"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="@string/comment"
+                android:textColor="@color/dialogText"
+                android:textSize="14sp"
+                app:drawableLeftCompat="@drawable/ic_comment" />
+
+            <View
+                android:id="@+id/v_line"
+                android:layout_width="0.5dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:background="@color/lineView" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/like_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/v_line"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:background="?android:selectableItemBackground"
+                android:button="@drawable/like_selector"
+                android:gravity="center"
+                android:text="@string/like"
+                android:textColor="@color/dialogText"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
