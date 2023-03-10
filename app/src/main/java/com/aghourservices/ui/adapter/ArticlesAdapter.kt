@@ -64,11 +64,12 @@ class ArticlesAdapter(
             binding.addComment.setOnClickListener(this)
             binding.popupMenu.setOnClickListener(this)
             binding.userLayout.setOnClickListener(this)
-//            binding.likeArticle.setOnClickListener(this)
+            binding.likeArticle.setOnClickListener(this)
             binding.likesCount.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 
+        @SuppressLint("SetTextI18n")
         fun setNewsList(article: Article) {
             val profile = UserInfo.getUserID(binding.root.context)
 
@@ -76,7 +77,7 @@ class ArticlesAdapter(
                 userName.text = article.user?.name
                 description.text = article.description
                 date.text = article.created_at
-//                likeArticle.isChecked = article.liked
+                likeArticle.isChecked = article.liked
                 commentTime.text = article.latest_comment?.created_at
 
                 description.setOnLongClickListener {
