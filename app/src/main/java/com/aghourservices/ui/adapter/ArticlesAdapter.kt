@@ -65,7 +65,7 @@ class ArticlesAdapter(
             binding.popupMenu.setOnClickListener(this)
             binding.userLayout.setOnClickListener(this)
 //            binding.likeArticle.setOnClickListener(this)
-//            binding.likesCount.setOnClickListener(this)
+            binding.likesCount.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 
@@ -84,15 +84,15 @@ class ArticlesAdapter(
                     true
                 }
 
-//                shareArticle.setOnClickListener {
-//                    Intents.shareNews(article.description, itemView)
-//                }
-//
-//                if (article.likes_count < 1) {
-//                    likesCount.text = "لا توجد إعجابات"
-//                } else {
-//                    likesCount.text = "${article.likes_count} إعجاب"
-//                }
+                shareArticle.setOnClickListener {
+                    Intents.shareNews(article.description, itemView)
+                }
+
+                if (article.likes_count < 1) {
+                    likesCount.text = "لا توجد إعجابات"
+                } else {
+                    likesCount.text = "${article.likes_count} إعجاب"
+                }
 
                 if (article.latest_comment?.user?.name == null || article.latest_comment?.body == null) {
                     commentsCard.isVisible = false
