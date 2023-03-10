@@ -8,6 +8,9 @@ data class Article(
     var id: Int = 0,
     var description: String = "",
     var created_at: String = "",
+    var likes_count: Int = 0,
+    var comments_count: Int = 0,
+    var liked: Boolean = false,
     var user: User? = null,
     var latest_comment: Comment? = null,
 ) {

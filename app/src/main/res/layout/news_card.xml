@@ -26,9 +26,10 @@
             android:background="@drawable/news_card_ripple"
             android:fontFamily="sans-serif-black"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="@string/popup"
             android:textColor="@color/dialogText"
-            android:textSize="19sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/user_layout"
@@ -39,7 +40,7 @@
             android:background="?android:selectableItemBackground"
             android:gravity="right"
             android:orientation="horizontal"
-            android:paddingTop="16sp"
+            android:paddingTop="12sp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp">
 
@@ -68,7 +69,7 @@
                     android:paddingTop="2dp"
                     android:paddingRight="10dp"
                     android:textColor="@color/time"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:drawableTint="@color/time"
                     tools:text="منذ ساعتين" />
             </LinearLayout>
@@ -87,6 +88,7 @@
             android:id="@+id/under_line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/user_layout"
             android:background="@color/lineView" />
 
@@ -132,11 +134,6 @@
             android:layout_below="@id/article_layout"
             android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_view"
-                android:background="@color/lineView" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/comments_card"
                 android:layout_width="match_parent"
@@ -164,7 +161,7 @@
                     android:background="@drawable/news_card_ripple"
                     android:gravity="right"
                     android:orientation="horizontal"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/comments">
@@ -230,19 +227,68 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/article_count_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comments_layout"
+            android:layout_centerHorizontal="true"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/comments_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:padding="4dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/dialogText"
+                android:background="?android:selectableItemBackground"
+                android:textStyle="bold"
+                android:fontFamily="@font/segoe_ui_regular"
+                tools:text="2 تعليق" />
+
+            <TextView
+                android:id="@+id/dot"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:textSize="14sp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/dialogText"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:text="@string/dot" />
+
+            <TextView
+                android:id="@+id/likes_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:background="?android:selectableItemBackground"
+                android:textColor="@color/dialogText"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/segoe_ui_regular"
+                tools:text="100 إعجاب" />
+
+        </LinearLayout>
+
         <View
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_view"
-            android:layout_below="@id/comments_layout"
+            android:layout_below="@id/article_count_layout"
             android:background="@color/lineView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/like_article_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="2dp"
+            android:layout_below="@id/line1"
+            android:layout_centerHorizontal="true"
             android:paddingTop="2dp"
-            android:layout_below="@id/line1">
+            android:paddingBottom="2dp">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/like_article"
@@ -250,69 +296,26 @@
                 android:layout_height="wrap_content"
                 android:button="@drawable/fav_selector"
                 android:tooltipText="تضامنا"
-                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:targetApi="o" />
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="@dimen/line_view"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginRight="16dp"
-                android:background="@color/lineView"
-                android:orientation="vertical"
+                android:weightSum="2"
+                android:layout_marginRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/like_article"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/view2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/add_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/view3"
-                    android:tooltipText="@string/add_a_comment"
-                    android:background="@drawable/share_ripple"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="@string/comment"
-                    android:textColor="@color/shareText"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:drawableLeftCompat="@drawable/ic_comment"
-                    tools:targetApi="o" />
-
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="@dimen/line_view"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@color/lineView"
-                    android:orientation="vertical" />
-
-                <TextView
                     android:id="@+id/share_article"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:tooltipText="مشاركة الخبر"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_toStartOf="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:background="@drawable/share_ripple"
                     android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="center"
@@ -321,10 +324,27 @@
                     android:textColor="@color/shareText"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:tooltipText="مشاركة الخبر"
                     app:drawableLeftCompat="@drawable/ic_share"
                     tools:targetApi="o" />
 
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/add_comment"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/share_ripple"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="@string/comment"
+                    android:textColor="@color/shareText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:tooltipText="@string/add_a_comment"
+                    app:drawableLeftCompat="@drawable/ic_outline_comment"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
