@@ -121,5 +121,6 @@
     <color name="deleteIcon">#F44336</color>
     <color name="add_article_btn">#FFFFFF</color>
     <color name="textColorLink">#008EFF</color>
+    <color name="like_btn_tint">#FFFFFF</color>
 
 </resources>

@@ -116,6 +116,12 @@ class NewsFragment : BaseFragment() {
                 }
                 popup.show()
             }
+//            R.id.like_article -> {
+//                updateLikeArticle()
+//            }
+//            R.id.likes_count -> {
+//                Toast.makeText(requireContext(), "Likes Count", Toast.LENGTH_SHORT).show()
+//            }
         }
     }
 
@@ -155,6 +161,15 @@ class NewsFragment : BaseFragment() {
                 com.aghourservices.utils.interfaces.AlertDialog.noInternet(requireContext())
             }
         })
+    }
+
+    private fun updateLikeArticle(){
+        val isUserLoggedIn = UserInfo.isUserLoggedIn(requireContext())
+        if (!isUserLoggedIn){
+            Toast.makeText(requireContext(), "قم بإنشاء حساب أولا", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(requireContext(), "تم الإعجاب 💕", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun noInternetConnection() {

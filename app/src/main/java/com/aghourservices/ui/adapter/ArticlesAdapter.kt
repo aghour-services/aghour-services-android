@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.NewsCardBinding
 import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
 
@@ -64,6 +65,8 @@ class ArticlesAdapter(
             binding.addComment.setOnClickListener(this)
             binding.popupMenu.setOnClickListener(this)
             binding.userLayout.setOnClickListener(this)
+//            binding.likeArticle.setOnClickListener(this)
+//            binding.likesCount.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 
@@ -74,12 +77,23 @@ class ArticlesAdapter(
                 userName.text = article.user?.name
                 description.text = article.description
                 date.text = article.created_at
+//                likeArticle.isChecked = article.liked
                 commentTime.text = article.latest_comment?.created_at
 
                 description.setOnLongClickListener {
                     Intents.copyNews(article.description, itemView)
                     true
                 }
+
+//                shareArticle.setOnClickListener {
+//                    Intents.shareNews(article.description, itemView)
+//                }
+//
+//                if (article.likes_count < 1) {
+//                    likesCount.text = "لا توجد إعجابات"
+//                } else {
+//                    likesCount.text = "${article.likes_count} إعجاب"
+//                }
 
                 if (article.latest_comment?.user?.name == null || article.latest_comment?.body == null) {
                     commentsCard.isVisible = false

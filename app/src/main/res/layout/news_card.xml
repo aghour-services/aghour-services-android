@@ -5,8 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    app:cardUseCompatPadding="true"
-    android:layout_marginBottom="4dp">
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:id="@+id/news_card"
@@ -24,9 +26,10 @@
             android:background="@drawable/news_card_ripple"
             android:fontFamily="sans-serif-black"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="@string/popup"
             android:textColor="@color/dialogText"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/user_layout"
@@ -37,7 +40,7 @@
             android:background="?android:selectableItemBackground"
             android:gravity="right"
             android:orientation="horizontal"
-            android:paddingTop="16sp"
+            android:paddingTop="12sp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp">
 
@@ -66,7 +69,7 @@
                     android:paddingTop="2dp"
                     android:paddingRight="10dp"
                     android:textColor="@color/time"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:drawableTint="@color/time"
                     tools:text="منذ ساعتين" />
             </LinearLayout>
@@ -85,6 +88,7 @@
             android:id="@+id/under_line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/user_layout"
             android:background="@color/lineView" />
 
@@ -92,9 +96,9 @@
             android:id="@+id/article_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_below="@id/under_line"
             android:layout_centerHorizontal="true"
+            android:gravity="right"
             android:orientation="vertical">
 
             <kr.co.prnd.readmore.ReadMoreTextView
@@ -113,6 +117,7 @@
                 app:readMoreColor="@color/colorPrimary"
                 app:readMoreMaxLine="6"
                 app:readMoreText=" ...قراءة المزيد"
+                tools:maxLines="2"
                 tools:text="@string/description" />
 
             <FrameLayout
@@ -128,11 +133,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/article_layout"
             android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/lineView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/comments_card"
@@ -161,7 +161,7 @@
                     android:background="@drawable/news_card_ripple"
                     android:gravity="right"
                     android:orientation="horizontal"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/comments">
@@ -225,27 +225,128 @@
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/add_comment"
+        <LinearLayout
+            android:id="@+id/article_count_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/comments_layout"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/add_comment_bg"
-            android:elevation="1dp"
-            android:gravity="right|center"
-            android:padding="12dp"
-            android:paddingRight="12dp"
-            android:text="@string/add_a_comment"
-            android:textColor="@color/dialogText"
-            android:textSize="12sp" />
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/comments_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:padding="4dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/dialogText"
+                android:background="?android:selectableItemBackground"
+                android:textStyle="bold"
+                android:fontFamily="@font/segoe_ui_regular"
+                tools:text="2 تعليق" />
+
+            <TextView
+                android:id="@+id/dot"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:textSize="14sp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/dialogText"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:text="@string/dot" />
+
+            <TextView
+                android:id="@+id/likes_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:background="?android:selectableItemBackground"
+                android:textColor="@color/dialogText"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/segoe_ui_regular"
+                tools:text="100 إعجاب" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_view"
+            android:layout_below="@id/article_count_layout"
+            android:background="@color/lineView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/like_article_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/like_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/fav_selector"
+                android:tooltipText="تضامنا"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="o" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:weightSum="2"
+                android:layout_marginRight="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/like_article"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/share_article"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/share_ripple"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="@string/share_firm"
+                    android:textColor="@color/shareText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:tooltipText="مشاركة الخبر"
+                    app:drawableLeftCompat="@drawable/ic_share"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/add_comment"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/share_ripple"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="@string/comment"
+                    android:textColor="@color/shareText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:tooltipText="@string/add_a_comment"
+                    app:drawableLeftCompat="@drawable/ic_outline_comment"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
