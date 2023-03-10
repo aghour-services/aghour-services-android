@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
-import com.aghourservices.databinding.FragmentNewsBinding
+import com.aghourservices.databinding.FragmentArticlesBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.viewModel.NewsViewModel
@@ -22,8 +22,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NewsFragment : BaseFragment() {
-    private lateinit var binding: FragmentNewsBinding
+class ArticleFragment : BaseFragment() {
+    private lateinit var binding: FragmentArticlesBinding
     private val newsViewModel: NewsViewModel by viewModels()
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
 
@@ -31,7 +31,7 @@ class NewsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNewsBinding.inflate(layoutInflater)
+        binding = FragmentArticlesBinding.inflate(layoutInflater)
         requireActivity().title = getString(R.string.news_fragment)
         initRecyclerView()
         initNewsObserve()
@@ -77,14 +77,14 @@ class NewsFragment : BaseFragment() {
         val userName = newsAdapter.getArticle(position).user?.name!!
         val time = newsAdapter.getArticle(position).created_at
         val description = newsAdapter.getArticle(position).description
-        val commentsFragment = NewsFragmentDirections.actionNewsFragmentToCommentsFragment(
+        val commentsFragment = ArticleFragmentDirections.actionNewsFragmentToCommentsFragment(
             articleId,
             userName,
             time,
             description
         )
 
-        val editArticleFragment = NewsFragmentDirections.actionNewsFragmentToEditArticleFragment(
+        val editArticleFragment = ArticleFragmentDirections.actionNewsFragmentToEditArticleFragment(
             articleId,
             description,
             userName

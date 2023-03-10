@@ -36,9 +36,9 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.aghourservices.ui.fragment.NewsFragment"
+        android:name="com.aghourservices.ui.fragment.ArticleFragment"
         android:label="@string/menu_news"
-        tools:layout="@layout/fragment_news">
+        tools:layout="@layout/fragment_articles">
         <action
             android:id="@+id/action_newsFragment_to_commentsFragment"
             app:destination="@id/commentsFragment"

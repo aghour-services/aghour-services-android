@@ -19,33 +19,33 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
-            <include layout="@layout/news_shimmer" />
+            <include layout="@layout/article_shimmer" />
 
         </LinearLayout>
 
@@ -68,7 +68,7 @@
                 android:visibility="gone"
                 android:background="@color/recyclerViewBg"
                 android:orientation="vertical"
-                tools:listitem="@layout/news_card" />
+                tools:listitem="@layout/article_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
