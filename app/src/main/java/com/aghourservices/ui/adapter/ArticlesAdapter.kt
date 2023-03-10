@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
-import com.aghourservices.databinding.NewsCardBinding
+import com.aghourservices.databinding.ArticleCardBinding
 import com.aghourservices.ui.main.cache.UserInfo
-import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
 
@@ -20,7 +19,7 @@ class ArticlesAdapter(
     private var itemsCountToShowAds = 4
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
-        val view = NewsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticlesViewHolder(view, onItemClicked)
     }
 
@@ -57,7 +56,7 @@ class ArticlesAdapter(
     }
 
     inner class ArticlesViewHolder(
-        val binding: NewsCardBinding,
+        val binding: ArticleCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
