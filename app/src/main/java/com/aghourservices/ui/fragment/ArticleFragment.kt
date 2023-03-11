@@ -18,6 +18,8 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentArticlesBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
+import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.NewsViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +29,7 @@ class ArticleFragment : BaseFragment() {
     private lateinit var binding: FragmentArticlesBinding
     private val newsViewModel: NewsViewModel by viewModels()
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
+    private val userToken: String by lazy { getUserData(requireContext()).token }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +64,7 @@ class ArticleFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        newsViewModel.loadArticles(requireContext(), UserInfo.getFCMToken(requireContext()))
+        newsViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
     }
 
     private fun refresh() {
@@ -69,7 +72,7 @@ class ArticleFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            newsViewModel.loadArticles(requireContext(), UserInfo.getFCMToken(requireContext()))
+            newsViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
         }
     }
 
