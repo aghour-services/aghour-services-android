@@ -1,6 +1,7 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -116,12 +117,12 @@ class ArticleFragment : BaseFragment() {
                 }
                 popup.show()
             }
-//            R.id.like_article -> {
-//                updateLikeArticle()
-//            }
-//            R.id.likes_count -> {
-//                Toast.makeText(requireContext(), "Likes Count", Toast.LENGTH_SHORT).show()
-//            }
+            R.id.like_article -> {
+                likeArticle(position)
+            }
+            R.id.likes_count -> {
+                Toast.makeText(requireContext(), "Likes Count", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -137,7 +138,6 @@ class ArticleFragment : BaseFragment() {
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
-
 
     private fun deleteComment(position: Int) {
         val userDetails = UserInfo.getUserData(requireContext())
@@ -163,13 +163,26 @@ class ArticleFragment : BaseFragment() {
         })
     }
 
-    private fun updateLikeArticle(){
-        val isUserLoggedIn = UserInfo.isUserLoggedIn(requireContext())
-        if (!isUserLoggedIn){
-            Toast.makeText(requireContext(), "قم بإنشاء حساب أولا", Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(requireContext(), "تم الإعجاب 💕", Toast.LENGTH_SHORT).show()
-        }
+    private fun likeArticle(position: Int) {
+        val articleId = newsAdapter.getArticle(position).id
+        val token = UserInfo.getUserData(requireContext()).token
+        val retrofitInstance =
+            RetrofitInstance(requireContext()).likeApi.likeArticle(articleId, token)
+
+        retrofitInstance.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {
+                if (response.isSuccessful) {
+                    newsAdapter.getArticle(position).liked = true
+                    Log.d("LIKED", "onResponse: ${newsAdapter.getArticle(position).liked}")
+                    Toast.makeText(requireContext(), "تم الإعجاب 💕", Toast.LENGTH_SHORT).show()
+                    Log.d("LIKE", "onResponse: ${response.body()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Article>, t: Throwable) {
+                Log.e("LIKE", "onFailure: ${t.message}")
+            }
+        })
     }
 
     private fun noInternetConnection() {

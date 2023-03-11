@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Article
-import com.aghourservices.databinding.NewsCardBinding
+import com.aghourservices.databinding.ArticleCardBinding
 import com.aghourservices.ui.main.cache.UserInfo
-import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
 
@@ -20,7 +19,7 @@ class ArticlesAdapter(
     private var itemsCountToShowAds = 4
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
-        val view = NewsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticlesViewHolder(view, onItemClicked)
     }
 
@@ -57,7 +56,7 @@ class ArticlesAdapter(
     }
 
     inner class ArticlesViewHolder(
-        val binding: NewsCardBinding,
+        val binding: ArticleCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
@@ -65,11 +64,12 @@ class ArticlesAdapter(
             binding.addComment.setOnClickListener(this)
             binding.popupMenu.setOnClickListener(this)
             binding.userLayout.setOnClickListener(this)
-//            binding.likeArticle.setOnClickListener(this)
-//            binding.likesCount.setOnClickListener(this)
+            binding.likeArticle.setOnClickListener(this)
+            binding.likesCount.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 
+        @SuppressLint("SetTextI18n")
         fun setNewsList(article: Article) {
             val profile = UserInfo.getUserID(binding.root.context)
 
@@ -77,7 +77,7 @@ class ArticlesAdapter(
                 userName.text = article.user?.name
                 description.text = article.description
                 date.text = article.created_at
-//                likeArticle.isChecked = article.liked
+                likeArticle.isChecked = article.liked
                 commentTime.text = article.latest_comment?.created_at
 
                 description.setOnLongClickListener {
@@ -85,15 +85,15 @@ class ArticlesAdapter(
                     true
                 }
 
-//                shareArticle.setOnClickListener {
-//                    Intents.shareNews(article.description, itemView)
-//                }
-//
-//                if (article.likes_count < 1) {
-//                    likesCount.text = "لا توجد إعجابات"
-//                } else {
-//                    likesCount.text = "${article.likes_count} إعجاب"
-//                }
+                shareArticle.setOnClickListener {
+                    Intents.shareNews(article.description, itemView)
+                }
+
+                if (article.likes_count < 1) {
+                    likesCount.text = "لا توجد إعجابات"
+                } else {
+                    likesCount.text = "${article.likes_count} إعجاب"
+                }
 
                 if (article.latest_comment?.user?.name == null || article.latest_comment?.body == null) {
                     commentsCard.isVisible = false
