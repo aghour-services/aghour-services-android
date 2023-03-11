@@ -121,7 +121,7 @@ class ArticleFragment : BaseFragment() {
                 popup.show()
             }
             R.id.like_article -> {
-                likeArticle(position)
+                updateLikeArticle(position)
             }
             R.id.likes_count -> {
                 Toast.makeText(requireContext(), "Likes Count", Toast.LENGTH_SHORT).show()
@@ -166,19 +166,45 @@ class ArticleFragment : BaseFragment() {
         })
     }
 
+    private fun updateLikeArticle(position: Int) {
+        val article = newsAdapter.getArticle(position)
+
+        if (article.liked) {
+            unLikeArticle(position)
+        } else {
+            likeArticle(position)
+        }
+    }
+
     private fun likeArticle(position: Int) {
         val articleId = newsAdapter.getArticle(position).id
-        val token = UserInfo.getUserData(requireContext()).token
+        val token = getUserData(requireContext()).token
         val retrofitInstance =
             RetrofitInstance(requireContext()).likeApi.likeArticle(articleId, token)
 
         retrofitInstance.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
                 if (response.isSuccessful) {
-                    newsAdapter.getArticle(position).liked = true
-                    Log.d("LIKED", "onResponse: ${newsAdapter.getArticle(position).liked}")
-                    Toast.makeText(requireContext(), "تم الإعجاب 💕", Toast.LENGTH_SHORT).show()
-                    Log.d("LIKE", "onResponse: ${response.body()}")
+                    Toast.makeText(requireContext(), "Liked", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Article>, t: Throwable) {
+                Log.e("LIKE", "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    private fun unLikeArticle(position: Int) {
+        val articleId = newsAdapter.getArticle(position).id
+        val retrofitInstance =
+            RetrofitInstance(requireContext()).likeApi.unLikeArticle(articleId, userToken)
+
+        retrofitInstance.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {
+                if (response.isSuccessful) {
+                    initNewsObserve()
+                    Toast.makeText(requireContext(), "UnLike", Toast.LENGTH_SHORT).show()
                 }
             }
 
