@@ -17,7 +17,6 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentArticlesBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
-import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.NewsViewModel
@@ -122,6 +121,7 @@ class ArticleFragment : BaseFragment() {
             }
             R.id.like_article -> {
                 updateLikeArticle(position)
+                initNewsObserve()
             }
             R.id.likes_count -> {
                 Toast.makeText(requireContext(), "Likes Count", Toast.LENGTH_SHORT).show()
@@ -143,13 +143,13 @@ class ArticleFragment : BaseFragment() {
     }
 
     private fun deleteComment(position: Int) {
-        val userDetails = UserInfo.getUserData(requireContext())
+        val userDetails = getUserData(requireContext())
         val articleId = newsAdapter.getArticle(position).id
 
         val retrofitBuilder = RetrofitInstance(requireContext()).newsApi.deleteArticle(
             articleId,
             userDetails.token,
-            UserInfo.getFCMToken(requireContext())
+            getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {
@@ -177,15 +177,20 @@ class ArticleFragment : BaseFragment() {
     }
 
     private fun likeArticle(position: Int) {
-        val articleId = newsAdapter.getArticle(position).id
-        val token = getUserData(requireContext()).token
-        val retrofitInstance =
-            RetrofitInstance(requireContext()).likeApi.likeArticle(articleId, token)
+        val article = newsAdapter.getArticle(position)
+        article.liked = true
 
-        retrofitInstance.enqueue(object : Callback<Article> {
+        val retrofitInstance = RetrofitInstance(requireContext())
+        val likeApi = retrofitInstance.likeApi
+        val request = likeApi.likeArticle(article.id, userToken)
+
+        request.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(requireContext(), "Liked", Toast.LENGTH_SHORT).show()
+                    val updatedArticle = response.body()
+                    if (updatedArticle != null) {
+                        newsAdapter.updateArticle(position, updatedArticle)
+                    }
                 }
             }
 
@@ -196,15 +201,20 @@ class ArticleFragment : BaseFragment() {
     }
 
     private fun unLikeArticle(position: Int) {
-        val articleId = newsAdapter.getArticle(position).id
-        val retrofitInstance =
-            RetrofitInstance(requireContext()).likeApi.unLikeArticle(articleId, userToken)
+        val article = newsAdapter.getArticle(position)
+        article.liked = false
 
-        retrofitInstance.enqueue(object : Callback<Article> {
+        val retrofitInstance = RetrofitInstance(requireContext())
+        val likeApi = retrofitInstance.likeApi
+        val request = likeApi.unLikeArticle(article.id, userToken)
+
+        request.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
                 if (response.isSuccessful) {
-                    initNewsObserve()
-                    Toast.makeText(requireContext(), "UnLike", Toast.LENGTH_SHORT).show()
+                    val updatedArticle = response.body()
+                    if (updatedArticle != null) {
+                        newsAdapter.updateArticle(position, updatedArticle)
+                    }
                 }
             }
 
