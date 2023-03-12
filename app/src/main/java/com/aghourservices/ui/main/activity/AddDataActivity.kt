@@ -13,7 +13,6 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
@@ -55,7 +54,7 @@ class AddDataActivity : AppCompatActivity() {
             }
 
             btnRegister.setOnClickListener {
-                createAccount(this@AddDataActivity)
+                createAccount(this@AddDataActivity, "لإضافة بيانات أعمل حساب الأول")
             }
 
             btnAddData.setOnClickListener(View.OnClickListener {

@@ -47,10 +47,10 @@ interface AlertDialog {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).textSize = 14f
         }
 
-        fun createAccount(context: Context) {
+        fun createAccount(context: Context, message: String) {
             val alertDialogBuilder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             alertDialogBuilder.setTitle(context.getString(R.string.create_account_first))
-            alertDialogBuilder.setMessage(context.getString(R.string.should_create))
+            alertDialogBuilder.setMessage(message)
             alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
             alertDialogBuilder.setCancelable(true)
             alertDialogBuilder.setPositiveButton("إنشاء الان") { _, _ ->

@@ -123,9 +123,7 @@ class ArticleFragment : BaseFragment() {
                 updateLikeArticle(position)
                 initNewsObserve()
             }
-            R.id.likes_count -> {
-                Toast.makeText(requireContext(), "Likes Count", Toast.LENGTH_SHORT).show()
-            }
+            R.id.likes_count -> {}
         }
     }
 
@@ -169,7 +167,7 @@ class ArticleFragment : BaseFragment() {
     private fun updateLikeArticle(position: Int) {
         val article = newsAdapter.getArticle(position)
         if (userToken.isEmpty()){
-            com.aghourservices.utils.interfaces.AlertDialog.createAccount(requireContext())
+            com.aghourservices.utils.interfaces.AlertDialog.createAccount(requireContext(), "للإعجاب بالخبر يجب إنشاء حساب أولا")
         }else{
             if (article.liked) {
                 unLikeArticle(position)

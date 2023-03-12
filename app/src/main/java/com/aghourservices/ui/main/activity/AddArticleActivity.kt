@@ -11,7 +11,6 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
@@ -60,7 +59,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
             }
 
             btnRegister.setOnClickListener {
-                AlertDialog.createAccount(this@AddArticleActivity)
+                AlertDialog.createAccount(this@AddArticleActivity, "لإضافة خبر أعمل حساب الأول")
             }
         }
     }
