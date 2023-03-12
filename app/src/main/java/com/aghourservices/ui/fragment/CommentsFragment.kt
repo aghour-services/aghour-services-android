@@ -23,7 +23,6 @@ import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.CommentsViewModel
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
-import com.aghourservices.utils.helper.Intents.getDeviceId
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.HideSoftKeyboard
 import retrofit2.Call
@@ -104,7 +103,7 @@ class CommentsFragment : BaseFragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            AlertDialog.createAccount(requireContext())
+            AlertDialog.createAccount(requireContext(), "للتعليق أعمل حساب الأول")
         }
     }
 
