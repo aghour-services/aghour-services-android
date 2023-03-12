@@ -168,11 +168,14 @@ class ArticleFragment : BaseFragment() {
 
     private fun updateLikeArticle(position: Int) {
         val article = newsAdapter.getArticle(position)
-
-        if (article.liked) {
-            unLikeArticle(position)
-        } else {
-            likeArticle(position)
+        if (userToken.isEmpty()){
+            com.aghourservices.utils.interfaces.AlertDialog.createAccount(requireContext())
+        }else{
+            if (article.liked) {
+                unLikeArticle(position)
+            } else {
+                likeArticle(position)
+            }
         }
     }
 
