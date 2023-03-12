@@ -1,33 +1,26 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
-import com.aghourservices.data.model.Article
-import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentArticlesBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
-import com.aghourservices.ui.viewModel.NewsViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.aghourservices.ui.viewModel.ArticleViewModel
 
 class ArticleFragment : BaseFragment() {
     private lateinit var binding: FragmentArticlesBinding
-    private val newsViewModel: NewsViewModel by viewModels()
-    private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
+    private val articleViewModel: ArticleViewModel by viewModels()
+    private val articlesAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
     private val userToken: String by lazy { getUserData(requireContext()).token }
 
     override fun onCreateView(
@@ -51,19 +44,19 @@ class ArticleFragment : BaseFragment() {
         binding.newsRecyclerview.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
-            adapter = newsAdapter
+            adapter = articlesAdapter
         }
     }
 
     private fun initNewsObserve() {
-        newsViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
-            newsAdapter.setArticles(articles)
+        articleViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
+            articlesAdapter.setArticles(articles)
             stopShimmerAnimation()
             if (articles.isEmpty()) {
                 noInternetConnection()
             }
         }
-        newsViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
+        articleViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
     }
 
     private fun refresh() {
@@ -71,15 +64,15 @@ class ArticleFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            newsViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
+            articleViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
         }
     }
 
     private fun onListItemClick(v: View, position: Int) {
-        val articleId = newsAdapter.getArticle(position).id
-        val userName = newsAdapter.getArticle(position).user?.name!!
-        val time = newsAdapter.getArticle(position).created_at
-        val description = newsAdapter.getArticle(position).description
+        val articleId = articlesAdapter.getArticle(position).id
+        val userName = articlesAdapter.getArticle(position).user?.name!!
+        val time = articlesAdapter.getArticle(position).created_at
+        val description = articlesAdapter.getArticle(position).description
         val commentsFragment = ArticleFragmentDirections.actionNewsFragmentToCommentsFragment(
             articleId,
             userName,
@@ -133,96 +126,42 @@ class ArticleFragment : BaseFragment() {
         alertDialogBuilder.setMessage("أنت على وشك حذف الخبر")
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
-            deleteComment(position)
+            articleViewModel.deleteArticle(
+                requireContext(),
+                userToken,
+                articlesAdapter,
+                position
+            )
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ -> }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
 
-    private fun deleteComment(position: Int) {
-        val userDetails = getUserData(requireContext())
-        val articleId = newsAdapter.getArticle(position).id
-
-        val retrofitBuilder = RetrofitInstance(requireContext()).newsApi.deleteArticle(
-            articleId,
-            userDetails.token,
-            getFCMToken(requireContext())
-        )
-
-        retrofitBuilder.enqueue(object : Callback<Article> {
-            override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                if (response.isSuccessful) {
-                    newsAdapter.deleteArticle(position)
-                    Toast.makeText(requireContext(), "تم مسح الخبر", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Article>, t: Throwable) {
-                com.aghourservices.utils.interfaces.AlertDialog.noInternet(requireContext())
-            }
-        })
-    }
-
     private fun updateLikeArticle(position: Int) {
-        val article = newsAdapter.getArticle(position)
-        if (userToken.isEmpty()){
-            com.aghourservices.utils.interfaces.AlertDialog.createAccount(requireContext(), "للإعجاب بالخبر يجب إنشاء حساب أولا")
-        }else{
+        val article = articlesAdapter.getArticle(position)
+        if (userToken.isEmpty()) {
+            com.aghourservices.utils.interfaces.AlertDialog.createAccount(
+                requireContext(),
+                "للإعجاب بالخبر يجب إنشاء حساب أولا"
+            )
+        } else {
             if (article.liked) {
-                unLikeArticle(position)
+                articleViewModel.unLikeArticle(
+                    requireContext(),
+                    userToken,
+                    articlesAdapter,
+                    position
+                )
             } else {
-                likeArticle(position)
+                articleViewModel.likeArticle(
+                    requireContext(),
+                    userToken,
+                    articlesAdapter,
+                    position
+                )
             }
         }
-    }
-
-    private fun likeArticle(position: Int) {
-        val article = newsAdapter.getArticle(position)
-        article.liked = true
-
-        val retrofitInstance = RetrofitInstance(requireContext())
-        val likeApi = retrofitInstance.likeApi
-        val request = likeApi.likeArticle(article.id, userToken)
-
-        request.enqueue(object : Callback<Article> {
-            override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                if (response.isSuccessful) {
-                    val updatedArticle = response.body()
-                    if (updatedArticle != null) {
-                        newsAdapter.updateArticle(position, updatedArticle)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<Article>, t: Throwable) {
-                Log.e("LIKE", "onFailure: ${t.message}")
-            }
-        })
-    }
-
-    private fun unLikeArticle(position: Int) {
-        val article = newsAdapter.getArticle(position)
-        article.liked = false
-
-        val retrofitInstance = RetrofitInstance(requireContext())
-        val likeApi = retrofitInstance.likeApi
-        val request = likeApi.unLikeArticle(article.id, userToken)
-
-        request.enqueue(object : Callback<Article> {
-            override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                if (response.isSuccessful) {
-                    val updatedArticle = response.body()
-                    if (updatedArticle != null) {
-                        newsAdapter.updateArticle(position, updatedArticle)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<Article>, t: Throwable) {
-                Log.e("LIKE", "onFailure: ${t.message}")
-            }
-        })
     }
 
     private fun noInternetConnection() {
