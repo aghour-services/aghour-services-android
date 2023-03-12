@@ -8,6 +8,7 @@ import retrofit2.http.*
 interface NewsApi {
     @GET("articles")
     fun loadArticles(
+        @Header("TOKEN") userToken: String,
         @Header("fcmToken") fcmToken: String
     ): Call<ArrayList<Article>>
 

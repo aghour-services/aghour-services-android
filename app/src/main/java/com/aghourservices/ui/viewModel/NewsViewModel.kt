@@ -1,6 +1,7 @@
 package com.aghourservices.ui.viewModel
 
 import android.content.Context
+import androidx.browser.trusted.Token
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Article
@@ -13,8 +14,8 @@ class NewsViewModel : ViewModel() {
     var newsLiveData = MutableLiveData<ArrayList<Article>>()
     var newsList: ArrayList<Article> = ArrayList()
 
-    fun loadArticles(context: Context, fcmToken: String) {
-        val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles(fcmToken)
+    fun loadArticles(context: Context, userToken: String, fcmToken: String) {
+        val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles(userToken, fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Article>?> {
             override fun onResponse(

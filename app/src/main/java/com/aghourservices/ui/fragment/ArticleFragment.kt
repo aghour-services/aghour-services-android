@@ -17,7 +17,8 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentArticlesBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
-import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
+import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.NewsViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +28,7 @@ class ArticleFragment : BaseFragment() {
     private lateinit var binding: FragmentArticlesBinding
     private val newsViewModel: NewsViewModel by viewModels()
     private val newsAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
+    private val userToken: String by lazy { getUserData(requireContext()).token }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +63,7 @@ class ArticleFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        newsViewModel.loadArticles(requireContext(), UserInfo.getFCMToken(requireContext()))
+        newsViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
     }
 
     private fun refresh() {
@@ -69,7 +71,7 @@ class ArticleFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            newsViewModel.loadArticles(requireContext(), UserInfo.getFCMToken(requireContext()))
+            newsViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
         }
     }
 
@@ -118,7 +120,8 @@ class ArticleFragment : BaseFragment() {
                 popup.show()
             }
             R.id.like_article -> {
-                likeArticle(position)
+                updateLikeArticle(position)
+                initNewsObserve()
             }
             R.id.likes_count -> {
                 Toast.makeText(requireContext(), "Likes Count", Toast.LENGTH_SHORT).show()
@@ -140,13 +143,13 @@ class ArticleFragment : BaseFragment() {
     }
 
     private fun deleteComment(position: Int) {
-        val userDetails = UserInfo.getUserData(requireContext())
+        val userDetails = getUserData(requireContext())
         val articleId = newsAdapter.getArticle(position).id
 
         val retrofitBuilder = RetrofitInstance(requireContext()).newsApi.deleteArticle(
             articleId,
             userDetails.token,
-            UserInfo.getFCMToken(requireContext())
+            getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {
@@ -163,19 +166,55 @@ class ArticleFragment : BaseFragment() {
         })
     }
 
-    private fun likeArticle(position: Int) {
-        val articleId = newsAdapter.getArticle(position).id
-        val token = UserInfo.getUserData(requireContext()).token
-        val retrofitInstance =
-            RetrofitInstance(requireContext()).likeApi.likeArticle(articleId, token)
+    private fun updateLikeArticle(position: Int) {
+        val article = newsAdapter.getArticle(position)
 
-        retrofitInstance.enqueue(object : Callback<Article> {
+        if (article.liked) {
+            unLikeArticle(position)
+        } else {
+            likeArticle(position)
+        }
+    }
+
+    private fun likeArticle(position: Int) {
+        val article = newsAdapter.getArticle(position)
+        article.liked = true
+
+        val retrofitInstance = RetrofitInstance(requireContext())
+        val likeApi = retrofitInstance.likeApi
+        val request = likeApi.likeArticle(article.id, userToken)
+
+        request.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
                 if (response.isSuccessful) {
-                    newsAdapter.getArticle(position).liked = true
-                    Log.d("LIKED", "onResponse: ${newsAdapter.getArticle(position).liked}")
-                    Toast.makeText(requireContext(), "تم الإعجاب 💕", Toast.LENGTH_SHORT).show()
-                    Log.d("LIKE", "onResponse: ${response.body()}")
+                    val updatedArticle = response.body()
+                    if (updatedArticle != null) {
+                        newsAdapter.updateArticle(position, updatedArticle)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Article>, t: Throwable) {
+                Log.e("LIKE", "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    private fun unLikeArticle(position: Int) {
+        val article = newsAdapter.getArticle(position)
+        article.liked = false
+
+        val retrofitInstance = RetrofitInstance(requireContext())
+        val likeApi = retrofitInstance.likeApi
+        val request = likeApi.unLikeArticle(article.id, userToken)
+
+        request.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {
+                if (response.isSuccessful) {
+                    val updatedArticle = response.body()
+                    if (updatedArticle != null) {
+                        newsAdapter.updateArticle(position, updatedArticle)
+                    }
                 }
             }
 

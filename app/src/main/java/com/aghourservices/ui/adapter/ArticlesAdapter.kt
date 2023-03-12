@@ -55,6 +55,11 @@ class ArticlesAdapter(
         notifyItemRemoved(position)
     }
 
+    fun updateArticle(position: Int, updatedArticle: Article) {
+        articleList[position] = updatedArticle
+        notifyItemChanged (position)
+    }
+
     inner class ArticlesViewHolder(
         val binding: ArticleCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
