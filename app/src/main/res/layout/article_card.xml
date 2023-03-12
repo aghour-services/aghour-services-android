@@ -283,9 +283,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/line1"
-            android:layout_centerHorizontal="true"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp">
+            android:layout_centerHorizontal="true">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/like_article"
@@ -298,10 +296,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:targetApi="o" />
 
+            <View
+                android:id="@+id/v_line"
+                android:layout_width="@dimen/line_view"
+                android:layout_height="0dp"
+                android:background="@color/lineView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout9"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
+                android:id="@+id/linearLayout9"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:weightSum="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/like_article"
@@ -324,6 +332,15 @@
                     android:tooltipText="مشاركة الخبر"
                     app:drawableLeftCompat="@drawable/ic_share"
                     tools:targetApi="o" />
+
+                <View
+                    android:id="@+id/line_v"
+                    android:layout_width="@dimen/line_view"
+                    android:layout_height="wrap_content"
+                    android:background="@color/lineView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout9"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/add_comment"
