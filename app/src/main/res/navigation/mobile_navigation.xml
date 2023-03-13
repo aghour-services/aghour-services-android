@@ -53,6 +53,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_newsFragment_to_usersLikesFragment"
+            app:destination="@id/usersLikesFragment" />
     </fragment>
 
     <fragment
@@ -138,4 +141,24 @@
             android:name="articleUserName"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/usersLikesFragment"
+        tools:layout="@layout/fragment_users_likes"
+        android:name="com.aghourservices.ui.fragment.UsersLikesFragment"
+        android:label="UsersLikesFragment" >
+
+        <argument
+            android:name="article_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="likes_count"
+            app:argType="integer" />
+
+        <argument
+            android:name="article_liked"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+    </dialog>
 </navigation>

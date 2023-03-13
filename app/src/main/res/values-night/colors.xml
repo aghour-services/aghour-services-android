@@ -10,7 +10,7 @@
     <color name="categoryName">#FFFFFF</color>
     <color name="categoryCardBg">#1D242B</color>
     <color name="categoryCardPress">#3D4851</color>
-    <color name="categoryProgressBar">#FFFFFF</color>
+    <color name="progress_bar">#FFFFFF</color>
     <color name="shimmerBg">#DADADA</color>
     <color name="clear">#EC4949</color>
     <color name="shimmerColor">#2A323A</color>

@@ -29,7 +29,8 @@
             android:text="@string/popup"
             android:textColor="@color/dialogText"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/user_layout"
@@ -55,12 +56,13 @@
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-black"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="@font/segoe_ui_bold"
                     android:paddingRight="6dp"
                     android:textColor="@color/dialogText"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="Moahmed Magdy" />
+                    app:drawableLeftCompat="@drawable/ic_verified"
+                    tools:text="Mohamed Magdy" />
 
                 <TextView
                     android:id="@+id/date"
@@ -238,14 +240,18 @@
                 android:id="@+id/comments_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginRight="4dp"
                 android:background="?android:selectableItemBackground"
                 android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center"
                 android:padding="4dp"
                 android:textColor="@color/dialogText"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="2 تعليق" />
+                android:drawablePadding="4dp"
+                app:drawableRightCompat="@drawable/ic_comment"
+                tools:text="2" />
 
             <TextView
                 android:id="@+id/dot"
@@ -261,13 +267,18 @@
                 android:id="@+id/likes_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="?android:selectableItemBackground"
-                android:fontFamily="@font/segoe_ui_regular"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:gravity="center"
                 android:padding="4dp"
                 android:textColor="@color/dialogText"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="100 إعجاب" />
+                app:drawableRightCompat="@drawable/ic_fav_shadow"
+                app:drawableTint="#FF0000"
+                tools:text="3" />
 
         </LinearLayout>
 
