@@ -9,7 +9,8 @@ data class User(
     var email: String,
     var password: String,
     var token: String = "",
-    var role: String = ""
+    var role: String = "",
+    var is_verified: Boolean = false
 ) {
     fun userObject(): JsonObject {
         val userObject = JsonObject()

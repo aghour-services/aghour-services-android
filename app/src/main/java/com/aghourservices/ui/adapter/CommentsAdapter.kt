@@ -1,11 +1,13 @@
 package com.aghourservices.ui.adapter
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.aghourservices.R
 import com.aghourservices.data.model.Comment
 import com.aghourservices.databinding.CommentCardBinding
 import com.aghourservices.ui.main.cache.UserInfo.getUserID
@@ -69,6 +71,14 @@ class CommentsAdapter(
                 time.text = comment.created_at
             }
 
+            binding.userName.apply {
+                if (comment.user?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tooltipText = context.getString(R.string.verified)
+                } else {
+                    setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                }
+            }
+            
             if (comment.user?.id != profile.id) {
                 binding.apply {
                     updateComment.visibility = View.GONE

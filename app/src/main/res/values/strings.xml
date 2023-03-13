@@ -141,5 +141,6 @@
     <string name="delete_article"><font fgcolor="#ff2507">حــذف</font></string>
     <string name="like">أعجبني</string>
     <string name="dot">.</string>
+    <string name="verified">أدمن</string>
 
 </resources>
