@@ -20,7 +20,8 @@ import com.aghourservices.ui.viewModel.ArticleViewModel
 class ArticleFragment : BaseFragment() {
     private lateinit var binding: FragmentArticlesBinding
     private val articleViewModel: ArticleViewModel by viewModels()
-    private val articlesAdapter = ArticlesAdapter { view, position -> onListItemClick(view, position) }
+    private val articlesAdapter =
+        ArticlesAdapter { view, position -> onListItemClick(view, position) }
     private val userToken: String by lazy { getUserData(requireContext()).token }
 
     override fun onCreateView(
@@ -64,24 +65,28 @@ class ArticleFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            articleViewModel.loadArticles(requireContext(), userToken, getFCMToken(requireContext()))
+            articleViewModel.loadArticles(
+                requireContext(),
+                userToken,
+                getFCMToken(requireContext())
+            )
         }
     }
 
     private fun onListItemClick(v: View, position: Int) {
-        val articleId = articlesAdapter.getArticle(position).id
+        val article = articlesAdapter.getArticle(position)
         val userName = articlesAdapter.getArticle(position).user?.name!!
         val time = articlesAdapter.getArticle(position).created_at
         val description = articlesAdapter.getArticle(position).description
         val commentsFragment = ArticleFragmentDirections.actionNewsFragmentToCommentsFragment(
-            articleId,
+            article.id,
             userName,
             time,
             description
         )
 
         val editArticleFragment = ArticleFragmentDirections.actionNewsFragmentToEditArticleFragment(
-            articleId,
+            article.id,
             description,
             userName
         )
@@ -116,7 +121,15 @@ class ArticleFragment : BaseFragment() {
                 updateLikeArticle(position)
                 initNewsObserve()
             }
-            R.id.likes_count -> {}
+            R.id.likes_count -> {
+                val likesFragment =
+                    ArticleFragmentDirections.actionNewsFragmentToUsersLikesFragment(
+                        article.id,
+                        article.likes_count,
+                        article.liked
+                    )
+                findNavController().navigate(likesFragment)
+            }
         }
     }
 

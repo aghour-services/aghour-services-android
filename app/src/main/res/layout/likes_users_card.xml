@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/firmsBg"
+    app:cardCornerRadius="6dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/user_layout"
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:gravity="left"
+            android:padding="10dp"
+            android:textColor="@color/dialogText"
+            android:textSize="14sp"
+            app:drawableLeftCompat="@drawable/ic_verified"
+            tools:text="Mohamed Magdy" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/user" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

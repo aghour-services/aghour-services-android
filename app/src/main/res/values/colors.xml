@@ -31,7 +31,7 @@
     <color name="hint">#4B4B4B</color>
     <color name="black">#000000</color>
     <color name="navBarColor">#FFFFFF</color>
-    <color name="categoryProgressBar">#4290CD</color>
+    <color name="progress_bar">#000000</color>
     <color name="shimmerColor">#C5C5C5</color>
     <color name="news_bg">#ECECEC</color>
     <color name="categoryCardBg">#FFFFFF</color>
@@ -87,7 +87,6 @@
     <color name="colorAccent">#00A5FF</color>
     <color name="whiteTextColor">#fff</color>
     <color name="primaryTextColor">#00a5ff</color>
-    <color name="progressBar">#49AEFF</color>
     <color name="loginBkColor">#FFFFFF</color>
     <color name="whiteCardColor">#fff</color>
     <color name="about">#4B4B4B</color>
@@ -170,4 +169,5 @@
     <color name="add_article_btn">#2196F3</color>
     <color name="textColorLink">#008EFF</color>
     <color name="like_btn_tint">#000000</color>
+    <color name="favorite">#FF0000</color>
 </resources>

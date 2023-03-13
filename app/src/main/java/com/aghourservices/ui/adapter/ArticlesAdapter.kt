@@ -1,6 +1,7 @@
 package com.aghourservices.ui.adapter
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +58,7 @@ class ArticlesAdapter(
 
     fun updateArticle(position: Int, updatedArticle: Article) {
         articleList[position] = updatedArticle
-        notifyItemChanged (position)
+        notifyItemChanged(position)
     }
 
     inner class ArticlesViewHolder(
@@ -78,40 +79,49 @@ class ArticlesAdapter(
         fun setNewsList(article: Article) {
             val profile = UserInfo.getUserID(binding.root.context)
 
-            binding.apply {
-                userName.text = article.user?.name
-                description.text = article.description
-                date.text = article.created_at
-                likeArticle.isChecked = article.liked
-                commentTime.text = article.latest_comment?.created_at
+            binding.userName.apply {
+                text = article.user?.name
+                if (article.user?.id == 1 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tooltipText = "الحساب الرئيسي"
+                } else {
+                    setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                }
+            }
 
-                description.setOnLongClickListener {
+            binding.description.apply {
+                text = article.description
+                setOnLongClickListener {
                     Intents.copyNews(article.description, itemView)
                     true
                 }
+            }
 
-                shareArticle.setOnClickListener {
-                    Intents.shareNews(article.description, itemView)
-                }
+            binding.likesCount.text = article.likes_count.toString()
+            binding.date.text = article.created_at
+            binding.likeArticle.isChecked = article.liked
 
-                if (article.likes_count < 1) {
-                    likesCount.text = "لا توجد إعجابات"
+            binding.commentsCard.isVisible =
+                !article.latest_comment?.user?.name.isNullOrEmpty() && !article.latest_comment?.body.isNullOrEmpty()
+
+            if (binding.commentsCard.isVisible) {
+                binding.name.text = article.latest_comment?.user?.name
+                binding.body.text = article.latest_comment?.body
+                binding.commentTime.text = article.latest_comment?.created_at
+            }
+
+            binding.shareArticle.setOnClickListener {
+                Intents.shareNews(article.description, itemView)
+            }
+
+            if (article.user?.id == profile.id) {
+                binding.popupMenu.isVisible = true
+            }
+
+            if (article.likes_count > 0) {
+                binding.likesCount.text = if (article.liked) {
+                    "أنت و ${article.likes_count - 1} أخرين "
                 } else {
-                    likesCount.text = "${article.likes_count} إعجاب"
-                }
-
-                if (article.latest_comment?.user?.name == null || article.latest_comment?.body == null) {
-                    commentsCard.isVisible = false
-                } else {
-                    commentsCard.isVisible = true
-                    name.text = article.latest_comment?.user?.name
-                    body.text = article.latest_comment?.body
-                }
-
-                if (article.user?.id != profile.id) {
-                    binding.apply {
-                        popupMenu.visibility = View.GONE
-                    }
+                    article.likes_count.toString()
                 }
             }
         }
