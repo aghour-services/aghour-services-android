@@ -12,15 +12,10 @@
         android:orientation="horizontal"
         android:id="@+id/user_layout"
         android:layout_width="match_parent"
+        android:gravity="right"
         android:layout_height="wrap_content"
         android:background="?android:selectableItemBackground"
         android:padding="10dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/avatar_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@mipmap/user" />
 
         <TextView
             android:id="@+id/user_name"
@@ -32,8 +27,14 @@
             android:padding="10dp"
             android:textColor="@color/dialogText"
             android:textSize="14sp"
-            app:drawableRightCompat="@drawable/ic_verified"
+            app:drawableLeftCompat="@drawable/ic_verified"
             tools:text="Mohamed Magdy" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/user" />
 
     </LinearLayout>
 
