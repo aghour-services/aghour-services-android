@@ -92,7 +92,7 @@ class CommentsFragment : BaseFragment() {
         binding.postComment.setOnClickListener {
             showProgressBar()
             val comment = Comment()
-            comment.body = binding.commentTv.text.toString()
+            comment.body = binding.commentTv.text.toString().trim()
 
             if (comment.inValid()) {
                 binding.commentTv.error = "أكتب تعليق"

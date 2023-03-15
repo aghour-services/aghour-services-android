@@ -48,7 +48,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
             sendArticle.setOnClickListener {
                 ProgressDialog.showProgressDialog(this@AddArticleActivity)
                 val article = Article()
-                article.description = binding.textArticle.text.toString()
+                article.description = binding.textArticle.text.toString().trim()
 
                 if (article.inValid()) {
                     binding.textArticle.error = "أكتب الخبر أولا"

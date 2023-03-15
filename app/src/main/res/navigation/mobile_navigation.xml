@@ -54,8 +54,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_newsFragment_to_usersLikesFragment"
-            app:destination="@id/usersLikesFragment" />
+            android:id="@+id/action_newsFragment_to_commentsDialogSheet"
+            app:destination="@id/commentsDialogSheet" />
     </fragment>
 
     <fragment
@@ -142,9 +142,9 @@
             app:argType="string" />
     </fragment>
     <dialog
-        android:id="@+id/usersLikesFragment"
-        tools:layout="@layout/fragment_users_likes"
-        android:name="com.aghourservices.ui.fragment.UsersLikesFragment"
+        android:id="@+id/likesDialogSheet"
+        tools:layout="@layout/likes_dialog_sheet"
+        android:name="com.aghourservices.ui.fragment.LikesDialogSheet"
         android:label="UsersLikesFragment" >
 
         <argument
@@ -155,10 +155,27 @@
             android:name="likes_count"
             app:argType="integer" />
 
+    </dialog>
+    <dialog
+        android:id="@+id/commentsDialogSheet"
+        tools:layout="@layout/comments_dialog_sheet"
+        android:name="com.aghourservices.ui.fragment.CommentsDialogSheet"
+        android:label="CommentsDialogSheet" >
         <argument
-            android:name="article_liked"
-            app:argType="boolean"
-            android:defaultValue="false" />
-
+            android:name="articleId"
+            app:argType="integer" />
+        <argument
+            android:name="likesCount"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_commentsDialogSheet_to_likesDialogSheet"
+            app:destination="@id/likesDialogSheet" />
+        <action
+            android:id="@+id/action_commentsDialogSheet_to_updateCommentFragment"
+            app:destination="@id/updateCommentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </dialog>
 </navigation>

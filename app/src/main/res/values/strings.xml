@@ -142,5 +142,7 @@
     <string name="like">أعجبني</string>
     <string name="dot">.</string>
     <string name="verified">أدمن</string>
+    <string name="all_comments">كل التعليقات</string>
+    <string name="users_likes">الأشخاص المعجبون</string>
 
 </resources>

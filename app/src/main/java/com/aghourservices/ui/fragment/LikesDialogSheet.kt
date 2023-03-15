@@ -9,27 +9,27 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.data.model.User
 import com.aghourservices.data.request.RetrofitInstance
-import com.aghourservices.databinding.FragmentUsersLikesBinding
-import com.aghourservices.ui.adapter.UsersLikesAdapter
+import com.aghourservices.databinding.LikesDialogSheetBinding
+import com.aghourservices.ui.adapter.LikesAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UsersLikesFragment : BottomSheetDialogFragment() {
-    private var _binding: FragmentUsersLikesBinding? = null
+class LikesDialogSheet : BottomSheetDialogFragment() {
+    private var _binding: LikesDialogSheetBinding? = null
     private val binding get() = _binding!!
     private var behavior: BottomSheetBehavior<*>? = null
-    private val arguments: UsersLikesFragmentArgs by navArgs()
-    private val usersAdapter =
-        UsersLikesAdapter { view, position -> onUserClick(view, position) }
+    private val arguments: LikesDialogSheetArgs by navArgs()
+    private val likesAdapter =
+        LikesAdapter { view, position -> onUserClick(view, position) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUsersLikesBinding.inflate(inflater, container, false)
+        _binding = LikesDialogSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -57,7 +57,7 @@ class UsersLikesFragment : BottomSheetDialogFragment() {
         binding.usersRecyclerview.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
-            adapter = usersAdapter
+            adapter = likesAdapter
             likesCount()
         }
     }
@@ -65,14 +65,6 @@ class UsersLikesFragment : BottomSheetDialogFragment() {
     private fun likesCount() {
         val likesCount = arguments.likesCount
         binding.likesCount.text = likesCount.toString()
-
-        if (likesCount > 0) {
-            binding.likesCount.text = if (arguments.articleLiked) {
-                "أنت و ${likesCount - 1} أخرين "
-            } else {
-                likesCount.toString()
-            }
-        }
     }
 
     private fun getLikes() {
@@ -87,7 +79,7 @@ class UsersLikesFragment : BottomSheetDialogFragment() {
             ) {
                 if (response.isSuccessful) {
                     val users = response.body()!!
-                    usersAdapter.setUsers(users)
+                    likesAdapter.setUsers(users)
                     hideProgressBar()
 
                     if (users.isEmpty()) {

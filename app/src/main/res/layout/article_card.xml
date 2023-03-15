@@ -140,17 +140,13 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/comments"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/comment_tv"
-                    android:textColor="@color/dialogText"
-                    android:textSize="14sp"
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_view"
+                    android:background="@color/lineView"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
@@ -163,7 +159,7 @@
                     android:padding="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/comments">
+                    app:layout_constraintTop_toBottomOf="@+id/line">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
@@ -184,12 +180,12 @@
                                 android:id="@+id/name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:drawablePadding="6dp"
                                 android:fontFamily="sans-serif-black"
                                 android:textColor="@color/dialogText"
                                 android:textSize="14sp"
-                                app:drawableLeftCompat="@drawable/ic_verified"
-                                android:drawablePadding="6dp"
                                 android:textStyle="bold"
+                                app:drawableLeftCompat="@drawable/ic_verified"
                                 tools:text="Moahmed Magdy" />
 
                             <TextView
@@ -234,9 +230,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/comments_layout"
             android:layout_centerHorizontal="true"
+            android:background="?android:selectableItemBackground"
             android:gravity="right"
             android:orientation="horizontal"
-            android:padding="6dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/comments_count"
@@ -244,7 +241,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="4dp"
-                android:background="?android:selectableItemBackground"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center"
                 android:padding="4dp"
@@ -270,7 +266,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="?android:selectableItemBackground"
                 android:drawablePadding="4dp"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:gravity="center"

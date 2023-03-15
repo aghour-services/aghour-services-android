@@ -28,7 +28,7 @@ class CommentsViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Comment>>, t: Throwable) {
-
+                com.aghourservices.utils.interfaces.AlertDialog.noInternet(context)
             }
         })
     }

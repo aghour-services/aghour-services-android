@@ -12,7 +12,6 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentEditCommentBinding
 import com.aghourservices.ui.main.cache.UserInfo
-import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
@@ -58,7 +57,7 @@ class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
     private fun updateComment() {
         val comment = Comment()
         val userDetails = UserInfo.getUserData(requireContext())
-        comment.body = binding.commentTv.text.toString()
+        comment.body = binding.commentTv.text.toString().trim()
 
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.updateComment(
             arguments.articleId,
