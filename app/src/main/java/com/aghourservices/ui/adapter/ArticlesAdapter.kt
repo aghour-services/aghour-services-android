@@ -98,6 +98,7 @@ class ArticlesAdapter(
             }
 
             binding.likesCount.text = article.likes_count.toString()
+            binding.commentsCount.text = article.comments_count.toString()
             binding.date.text = article.created_at
             binding.likeArticle.isChecked = article.liked
 
