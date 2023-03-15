@@ -1,9 +1,13 @@
 package com.aghourservices.ui.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -18,6 +22,7 @@ import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModel.CommentsViewModel
+import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -39,9 +44,11 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = CommentsDialogSheetBinding.inflate(inflater, container, false)
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         initRecyclerView()
         loadComments()
         navigateToLikesDialog()
+        initCommentEdt()
         return binding.root
     }
 
@@ -145,6 +152,7 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
                 if (response.isSuccessful) {
                     commentsAdapter.removeComment(position)
+                    loadComments()
                     Toast.makeText(requireContext(), "تم مسح التعليق", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -168,5 +176,54 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+    }
+
+    private fun initCommentEdt() {
+        binding.commentEdt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val commentTxt = binding.commentEdt.text.toString().trim()
+
+                if (TextUtils.isEmpty(commentTxt)) {
+                    binding.commentBtn.isEnabled = false
+                } else {
+                    binding.commentBtn.isEnabled = true
+                    binding.commentBtn.setOnClickListener {
+                        val comment = Comment()
+                        comment.body = commentTxt
+                        postComment(comment)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun postComment(comment: Comment) {
+        val userDetails = UserInfo.getUserData(requireContext())
+        val eventName = "Comment_Added"
+        val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
+            arguments.articleId,
+            userDetails.token,
+            comment.toJsonObject(),
+            getFCMToken(requireContext())
+        )
+
+        retrofitBuilder.enqueue(object : Callback<Comment> {
+            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
+                if (response.isSuccessful) {
+                    binding.commentEdt.text.clear()
+                    commentsAdapter.addComment(response.body()!!)
+                    binding.noComments.isVisible = false
+                    Event.sendFirebaseEvent(eventName, "")
+                    loadComments()
+                }
+            }
+
+            override fun onFailure(call: Call<Comment>, t: Throwable) {
+                AlertDialog.noInternet(requireContext())
+            }
+        })
     }
 }

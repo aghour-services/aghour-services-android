@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/sheet_handling"
@@ -20,19 +21,19 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="6dp"
                 app:cardBackgroundColor="@color/dialogText"
                 app:cardCornerRadius="12dp" />
 
             <TextView
                 android:id="@+id/likes_count"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_below="@id/sheet_handling"
+                android:layout_gravity="center|right"
+                android:elevation="10dp"
                 android:background="?android:selectableItemBackground"
                 android:drawablePadding="4dp"
-                android:layout_below="@id/sheet_handling"
-                android:gravity="right"
+                android:gravity="right|center"
                 android:padding="10dp"
                 android:textColor="@color/dialogText"
                 app:drawableRightCompat="@drawable/ic_fav_shadow"
@@ -42,58 +43,109 @@
             <View
                 android:id="@+id/line_view"
                 android:layout_width="match_parent"
-                android:layout_below="@id/likes_count"
                 android:layout_height="@dimen/line_view"
-                android:background="@color/lineView"/>
-
-            <TextView
-                android:id="@+id/no_comments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_below="@id/likes_count"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="200dp"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:padding="16dp"
-                android:text="@string/no_comments_yet"
-                android:textColor="@color/dialogText"
-                android:textSize="22sp"
-                android:visibility="gone" />
+                android:background="@color/lineView" />
 
-            <TextView
-                android:id="@+id/all_comments_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line_view"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="right"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:text="@string/all_comments"
-                android:textColor="@color/dialogText"
-                android:textSize="16sp" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/all_comments_tv"
-                android:layout_centerHorizontal="true"
-                android:indeterminateTint="@color/progress_bar"
-                android:scaleX="0.8"
-                android:scaleY="0.8" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/comments_recycler_view"
+            <RelativeLayout
+                android:id="@+id/content_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/all_comments_tv"
-                tools:listitem="@layout/comment_card" />
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/comment_layout"
+                android:layout_below="@id/line_view"
+                android:layout_centerHorizontal="true"
+                android:background="@color/recyclerViewBg">
+
+                <TextView
+                    android:id="@+id/no_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="200dp"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:padding="16dp"
+                    android:text="@string/no_comments_yet"
+                    android:textColor="@color/dialogText"
+                    android:textSize="22sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/all_comments_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:padding="10dp"
+                    android:text="@string/all_comments"
+                    android:textColor="@color/dialogText"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/all_comments_tv"
+                    android:layout_centerHorizontal="true"
+                    android:indeterminateTint="@color/progress_bar"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/all_comments_tv"
+                    android:layout_centerHorizontal="true"
+                    tools:listitem="@layout/comment_card" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/comment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/firmsBg"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <EditText
+                    android:id="@+id/comment_edt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:autofillHints="yes"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:hint="@string/write_a_comment"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLines="5"
+                    android:padding="14dp"
+                    android:textSize="16sp" />
+
+                <requestFocus />
+
+                <Button
+                    android:id="@+id/comment_btn"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/ic_send"
+                    android:contentDescription="@string/write_a_comment"
+                    android:enabled="false" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </RelativeLayout>
 
