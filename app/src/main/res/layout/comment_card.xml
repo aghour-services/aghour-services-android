@@ -42,7 +42,9 @@
                     android:textColor="@color/dialogText"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    tools:text="Moahmed Magdy" />
+                    android:drawablePadding="4dp"
+                    tools:text="Moahmed Magdy"
+                    app:drawableLeftCompat="@drawable/ic_verified" />
 
                 <TextView
                     android:id="@+id/body"

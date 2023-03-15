@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.ArticleCardBinding
 import com.aghourservices.ui.main.cache.UserInfo
@@ -81,8 +82,8 @@ class ArticlesAdapter(
 
             binding.userName.apply {
                 text = article.user?.name
-                if (article.user?.id == 1 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    tooltipText = "الحساب الرئيسي"
+                if (article.user?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tooltipText = context.getString(R.string.verified)
                 } else {
                     setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                 }
@@ -104,7 +105,15 @@ class ArticlesAdapter(
                 !article.latest_comment?.user?.name.isNullOrEmpty() && !article.latest_comment?.body.isNullOrEmpty()
 
             if (binding.commentsCard.isVisible) {
-                binding.name.text = article.latest_comment?.user?.name
+                val commentUser = article.latest_comment?.user
+                binding.name.apply {
+                    text = commentUser?.name
+                    if (commentUser?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        tooltipText = context.getString(R.string.verified)
+                    } else {
+                        setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                    }
+                }
                 binding.body.text = article.latest_comment?.body
                 binding.commentTime.text = article.latest_comment?.created_at
             }

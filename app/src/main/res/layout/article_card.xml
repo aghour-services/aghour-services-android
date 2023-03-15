@@ -187,6 +187,8 @@
                                 android:fontFamily="sans-serif-black"
                                 android:textColor="@color/dialogText"
                                 android:textSize="14sp"
+                                app:drawableLeftCompat="@drawable/ic_verified"
+                                android:drawablePadding="6dp"
                                 android:textStyle="bold"
                                 tools:text="Moahmed Magdy" />
 

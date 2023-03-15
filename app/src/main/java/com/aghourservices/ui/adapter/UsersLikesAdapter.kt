@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.databinding.LikesUsersCardBinding
 
@@ -46,8 +47,8 @@ class UsersLikesAdapter(
         fun setUsersList(user: User) {
             binding.userName.apply {
                 text = user.name
-                if (user.id == 1 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    tooltipText = "الحساب الرئيسي"
+                if (user.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tooltipText = context.getString(R.string.verified)
                 } else {
                     setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                 }
