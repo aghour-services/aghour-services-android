@@ -84,7 +84,10 @@ class ArticleFragment : BaseFragment() {
             time,
             description
         )
-
+        val commentsDialogSheet = ArticleFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
+            article.id,
+            article.likes_count
+        )
         val editArticleFragment = ArticleFragmentDirections.actionNewsFragmentToEditArticleFragment(
             article.id,
             description,
@@ -121,14 +124,8 @@ class ArticleFragment : BaseFragment() {
                 updateLikeArticle(position)
                 initNewsObserve()
             }
-            R.id.likes_count -> {
-                val likesFragment =
-                    ArticleFragmentDirections.actionNewsFragmentToUsersLikesFragment(
-                        article.id,
-                        article.likes_count,
-                        article.liked
-                    )
-                findNavController().navigate(likesFragment)
+            R.id.article_count_layout -> {
+                findNavController().navigate(commentsDialogSheet)
             }
         }
     }

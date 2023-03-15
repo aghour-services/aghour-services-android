@@ -72,7 +72,7 @@ class ArticlesAdapter(
             binding.popupMenu.setOnClickListener(this)
             binding.userLayout.setOnClickListener(this)
             binding.likeArticle.setOnClickListener(this)
-            binding.likesCount.setOnClickListener(this)
+            binding.articleCountLayout.setOnClickListener(this)
             binding.latestCommentCard.setOnClickListener(this)
         }
 

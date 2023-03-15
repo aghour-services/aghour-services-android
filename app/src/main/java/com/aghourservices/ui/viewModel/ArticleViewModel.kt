@@ -31,7 +31,9 @@ class ArticleViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {}
+            override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
+                com.aghourservices.utils.interfaces.AlertDialog.noInternet(context)
+            }
         })
     }
 

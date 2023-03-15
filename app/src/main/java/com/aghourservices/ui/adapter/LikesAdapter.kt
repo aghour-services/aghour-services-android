@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.User
-import com.aghourservices.databinding.LikesUsersCardBinding
+import com.aghourservices.databinding.LikesCardBinding
 
-class UsersLikesAdapter(
+class LikesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
-) : RecyclerView.Adapter<UsersLikesAdapter.LikesUsersViewHolder>() {
+) : RecyclerView.Adapter<LikesAdapter.LikesUsersViewHolder>() {
     private var usersList: List<User> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikesUsersViewHolder {
-        val view = LikesUsersCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = LikesCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LikesUsersViewHolder(view, onItemClicked)
     }
 
@@ -35,7 +35,7 @@ class UsersLikesAdapter(
     }
 
     inner class LikesUsersViewHolder(
-        val binding: LikesUsersCardBinding,
+        val binding: LikesCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
