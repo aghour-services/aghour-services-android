@@ -9,10 +9,10 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/settingsToolbar"
@@ -73,11 +73,11 @@
             android:id="@+id/btn_register"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
+            android:background="@drawable/create_acount"
+            android:gravity="center"
             android:maxHeight="48dp"
             android:paddingLeft="35dp"
             android:paddingRight="35dp"
-            android:gravity="center"
-            android:background="@drawable/create_acount"
             android:text="@string/create_accountBtn"
             android:textColor="@color/createAccountText"
             android:textSize="14sp"
@@ -102,7 +102,6 @@
             android:layout_margin="5dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,15 +109,18 @@
 
             <TextView
                 android:id="@+id/user_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/segoe_ui_bold"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/cairo_black"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/userNameColor"
                 android:textSize="14sp"
-                tools:text="Mohamed Magdy" />
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_verified"
+                tools:text="محمد مجدي" />
 
             <TextView
                 android:id="@+id/user_email"
@@ -131,12 +133,12 @@
                 android:maxLines="1"
                 android:textAlignment="center"
                 android:textColor="@color/emailColor"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 tools:text="mohamedmagdysaber@gmail.com" />
 
             <TextView
                 android:id="@+id/user_mobile"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="3dp"
@@ -144,7 +146,7 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/userPhone"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 tools:text="01287303441" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
