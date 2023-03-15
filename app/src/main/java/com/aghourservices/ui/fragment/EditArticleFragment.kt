@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentEditArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo
-import com.aghourservices.utils.helper.Intents.getDeviceId
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import retrofit2.Call
@@ -56,7 +54,7 @@ class EditArticleFragment : BaseFragment(), ShowSoftKeyboard {
     private fun updateArticle() {
         val article = Article()
         val userDetails = UserInfo.getUserData(requireContext())
-        article.description = binding.articleTv.text.toString()
+        article.description = binding.articleTv.text.toString().trim()
 
         val retrofitBuilder = RetrofitInstance(requireContext()).newsApi.updateArticle(
             arguments.articleId,
@@ -67,9 +65,7 @@ class EditArticleFragment : BaseFragment(), ShowSoftKeyboard {
 
         retrofitBuilder.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(activity?.applicationContext, "تم تعديل الخبر", Toast.LENGTH_SHORT).show()
-                }
+                if (response.isSuccessful) { }
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
@@ -81,6 +77,5 @@ class EditArticleFragment : BaseFragment(), ShowSoftKeyboard {
     override fun onDestroyView() {
         super.onDestroyView()
         showBottomNavigation()
-        _binding = null
     }
 }
