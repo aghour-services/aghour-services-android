@@ -5,6 +5,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/toolbarBg</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>

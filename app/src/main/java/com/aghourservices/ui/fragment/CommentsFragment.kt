@@ -2,6 +2,9 @@ package com.aghourservices.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,11 +23,9 @@ import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.activity.SignInActivity
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
-import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.CommentsViewModel
 import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.aghourservices.utils.interfaces.AlertDialog
-import com.aghourservices.utils.interfaces.HideSoftKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +35,7 @@ class CommentsFragment : BaseFragment() {
     private val binding get() = _binding!!
     private val commentsViewModel: CommentsViewModel by viewModels()
     private val arguments: CommentsFragmentArgs by navArgs()
+    private val user by lazy { UserInfo.getUserData(requireContext()) }
     private val commentsAdapter =
         CommentsAdapter { view, position -> onCommentItemClick(view, position) }
 
@@ -45,7 +47,7 @@ class CommentsFragment : BaseFragment() {
         requireActivity().title = "التعليقات"
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         initRecyclerView()
-        initUserClick()
+        initCommentEdt()
         refresh()
         return binding.root
     }
@@ -54,7 +56,6 @@ class CommentsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
         initArticleView()
-        hideUserData()
     }
 
     override fun onResume() {
@@ -78,33 +79,32 @@ class CommentsFragment : BaseFragment() {
             articleCreatedAt.text = arguments.time
             articleDescription.text = arguments.description
         }
-
-//        binding.articleDescription.setOnClickListener {
-//            if (binding.articleDescription.maxLines == 4) {
-//                binding.articleDescription.maxLines = 100
-//            } else {
-//                binding.articleDescription.maxLines = 4
-//            }
-//        }
     }
 
-    private fun initUserClick() {
-        binding.postComment.setOnClickListener {
-            showProgressBar()
-            val comment = Comment()
-            comment.body = binding.commentTv.text.toString().trim()
+    private fun initCommentEdt() {
+        binding.commentEdt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
 
-            if (comment.inValid()) {
-                binding.commentTv.error = "أكتب تعليق"
-                hideProgressBar()
-            } else {
-                addComment(comment)
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val commentTxt = binding.commentEdt.text.toString().trim()
+
+                if (TextUtils.isEmpty(commentTxt)) {
+                    binding.commentBtn.isEnabled = false
+                } else {
+                    binding.commentBtn.isEnabled = true
+                    binding.commentBtn.setOnClickListener {
+                        if (user.token.isEmpty()) {
+                            AlertDialog.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
+                        } else {
+                            val comment = Comment()
+                            comment.body = commentTxt
+                            addComment(comment)
+                        }
+                    }
+                }
             }
-        }
-
-        binding.btnRegister.setOnClickListener {
-            AlertDialog.createAccount(requireContext(), "للتعليق أعمل حساب الأول")
-        }
+        })
     }
 
     private fun loadComments() {
@@ -132,11 +132,11 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun addComment(comment: Comment) {
-        val userDetails = getUserData(requireContext())
+        showProgressBar()
         val eventName = "Comment_Added"
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
             arguments.articleId,
-            userDetails.token,
+            user.token,
             comment.toJsonObject(),
             getFCMToken(requireContext())
         )
@@ -145,18 +145,12 @@ class CommentsFragment : BaseFragment() {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
 
                 if (response.isSuccessful) {
-                    setTextEmpty()
-                    commentsAdapter.addComment(response.body()!!)
-                    HideSoftKeyboard.hide(requireContext(), binding.commentTv)
+                    binding.commentEdt.text!!.clear()
                     binding.noComments.isVisible = false
-                    hideProgressBar()
+                    commentsAdapter.addComment(response.body()!!)
                     sendFirebaseEvent(eventName, "")
+                    hideProgressBar()
                     loadComments()
-                } else if (response.code() == 401) {
-                    createAccount()
-                    hideProgressBar()
-                } else {
-                    hideProgressBar()
                 }
             }
 
@@ -169,13 +163,12 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun deleteComment(position: Int) {
-        val userDetails = getUserData(requireContext())
         val commentId = commentsAdapter.getComment(position).id
 
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.deleteComment(
             arguments.articleId,
             commentId,
-            userDetails.token,
+            user.token,
             getFCMToken(requireContext())
         )
 
@@ -215,13 +208,17 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun showProgressBar() {
-        binding.commentProgress.isVisible = true
-        binding.postComment.visibility = View.INVISIBLE
+        binding.apply {
+            commentProgress.isVisible = true
+            commentBtn.isVisible = false
+        }
     }
 
     private fun hideProgressBar() {
-        binding.commentProgress.isVisible = false
-        binding.postComment.visibility = View.VISIBLE
+        binding.apply {
+            commentProgress.isVisible = false
+            commentBtn.isVisible = true
+        }
     }
 
     private fun reloadingComments() {
@@ -237,21 +234,6 @@ class CommentsFragment : BaseFragment() {
             commentsShimmer.stopShimmer()
             commentsShimmer.isVisible = false
             commentsRecyclerView.isVisible = true
-        }
-    }
-
-    private fun setTextEmpty() {
-        binding.commentTv.text!!.clear()
-    }
-
-    private fun hideUserData() {
-        val isUserLogin = UserInfo.isUserLoggedIn(requireContext())
-        if (isUserLogin) {
-            binding.commentsLayout.visibility = View.VISIBLE
-            binding.btnRegister.visibility = View.GONE
-        } else {
-            binding.commentsLayout.visibility = View.GONE
-            binding.btnRegister.visibility = View.VISIBLE
         }
     }
 

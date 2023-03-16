@@ -2,10 +2,10 @@ package com.aghourservices.ui.adapter
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.Comment
@@ -79,14 +79,12 @@ class CommentsAdapter(
                 }
             }
             
-            if (comment.user?.id != profile.id) {
+            if (comment.user?.id == profile.id) {
                 binding.apply {
-                    updateComment.visibility = View.GONE
-                    deleteComment.visibility = View.GONE
+                    updateComment.isVisible = true
+                    deleteComment.isVisible = true
                 }
             }
-
-            Log.d("profile", profile.id.toString())
         }
 
         override fun onClick(v: View?) {
