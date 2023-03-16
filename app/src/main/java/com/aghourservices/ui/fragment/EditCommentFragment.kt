@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Comment
@@ -69,9 +68,7 @@ class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(requireContext(), "تم تعديل التعليق", Toast.LENGTH_SHORT).show()
-                }
+                if (response.isSuccessful) { }
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
