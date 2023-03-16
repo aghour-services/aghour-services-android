@@ -1,6 +1,5 @@
 package com.aghourservices.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -20,7 +20,6 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapter.CommentsAdapter
-import com.aghourservices.ui.main.activity.SignInActivity
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModel.CommentsViewModel
@@ -186,27 +185,6 @@ class CommentsFragment : BaseFragment() {
         })
     }
 
-    fun createAccount() {
-        val alertDialogBuilder =
-            androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
-        alertDialogBuilder.setTitle("حدث خطأ ما")
-        alertDialogBuilder.setMessage("يرجى تسجيل الدخول مرة أخرى")
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
-        alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setPositiveButton("تمام") { _, _ ->
-            logOut()
-        }
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).textSize = 14f
-    }
-
-    private fun logOut() {
-        sendFirebaseEvent("Sign_Out", "")
-        UserInfo.clearUserData(requireContext())
-        startActivity(Intent(requireContext(), SignInActivity::class.java))
-    }
-
     private fun showProgressBar() {
         binding.apply {
             commentProgress.isVisible = true
@@ -238,24 +216,30 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun onCommentItemClick(v: View, position: Int) {
-        val commentId = commentsAdapter.getComment(position).id
-        val commentBody = commentsAdapter.getComment(position).body
-        val commentUser = commentsAdapter.getComment(position).user?.name.toString()
-
+        val comment = commentsAdapter.getComment(position)
+        val updateComment =
+            CommentsFragmentDirections.actionCommentsFragmentToUpdateCommentFragment(
+                arguments.articleId,
+                comment.id,
+                comment.body,
+                comment.user?.name.toString()
+            )
         when (v.id) {
-            R.id.update_comment -> {
-                val action =
-                    CommentsFragmentDirections.actionCommentsFragmentToUpdateCommentFragment(
-                        arguments.articleId,
-                        commentId,
-                        commentBody,
-                        commentUser
-                    )
-                findNavController().navigate(action)
-            }
-
-            R.id.delete_comment -> {
-                deleteCommentAlert(position)
+            R.id.popup_menu -> {
+                val popup = PopupMenu(requireContext(), v)
+                popup.inflate(R.menu.popup_menu)
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.edit -> {
+                            findNavController().navigate(updateComment)
+                        }
+                        R.id.delete -> {
+                            deleteCommentAlert(position)
+                        }
+                    }
+                    true
+                }
+                popup.show()
             }
         }
     }

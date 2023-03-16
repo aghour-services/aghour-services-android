@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -127,14 +128,22 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                 comment.body,
                 comment.user?.name.toString()
             )
-
         when (v.id) {
-            R.id.update_comment -> {
-                findNavController().navigate(updateComment)
-            }
-
-            R.id.delete_comment -> {
-                deleteCommentAlert(position)
+            R.id.popup_menu -> {
+                val popup = PopupMenu(requireContext(), v)
+                popup.inflate(R.menu.popup_menu)
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.edit -> {
+                            findNavController().navigate(updateComment)
+                        }
+                        R.id.delete -> {
+                            deleteCommentAlert(position)
+                        }
+                    }
+                    true
+                }
+                popup.show()
             }
         }
     }
