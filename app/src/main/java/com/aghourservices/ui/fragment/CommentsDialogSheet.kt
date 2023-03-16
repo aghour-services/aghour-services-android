@@ -36,6 +36,7 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
     private var behavior: BottomSheetBehavior<*>? = null
     private val arguments: CommentsDialogSheetArgs by navArgs()
     private val commentsViewModel: CommentsViewModel by viewModels()
+    private val user by lazy { UserInfo.getUserData(requireContext()) }
     private val commentsAdapter =
         CommentsAdapter { view, position -> onCommentClick(view, position) }
 
@@ -107,28 +108,29 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
     }
 
     private fun navigateToLikesDialog() {
-        val action = CommentsDialogSheetDirections.actionCommentsDialogSheetToLikesDialogSheet(
-            arguments.articleId,
-            arguments.likesCount
-        )
+        val likesDialogSheet =
+            CommentsDialogSheetDirections.actionCommentsDialogSheetToLikesDialogSheet(
+                arguments.articleId,
+                arguments.likesCount
+            )
         binding.likesCount.setOnClickListener {
-            findNavController().navigate(action)
+            findNavController().navigate(likesDialogSheet)
         }
     }
 
     private fun onCommentClick(v: View, position: Int) {
         val comment = commentsAdapter.getComment(position)
+        val updateComment =
+            CommentsDialogSheetDirections.actionCommentsDialogSheetToUpdateCommentFragment(
+                arguments.articleId,
+                comment.id,
+                comment.body,
+                comment.user?.name.toString()
+            )
 
         when (v.id) {
             R.id.update_comment -> {
-                val action =
-                    CommentsDialogSheetDirections.actionCommentsDialogSheetToUpdateCommentFragment(
-                        arguments.articleId,
-                        comment.id,
-                        comment.body,
-                        comment.user?.name.toString()
-                    )
-                findNavController().navigate(action)
+                findNavController().navigate(updateComment)
             }
 
             R.id.delete_comment -> {
@@ -138,13 +140,12 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
     }
 
     private fun deleteComment(position: Int) {
-        val userDetails = UserInfo.getUserData(requireContext())
         val commentId = commentsAdapter.getComment(position).id
 
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.deleteComment(
             arguments.articleId,
             commentId,
-            userDetails.token,
+            user.token,
             getFCMToken(requireContext())
         )
 
@@ -191,9 +192,13 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                 } else {
                     binding.commentBtn.isEnabled = true
                     binding.commentBtn.setOnClickListener {
-                        val comment = Comment()
-                        comment.body = commentTxt
-                        postComment(comment)
+                        if (user.token.isEmpty()) {
+                            AlertDialog.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
+                        } else {
+                            val comment = Comment()
+                            comment.body = commentTxt
+                            postComment(comment)
+                        }
                     }
                 }
             }
@@ -201,11 +206,11 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
     }
 
     private fun postComment(comment: Comment) {
-        val userDetails = UserInfo.getUserData(requireContext())
+        showCommentProgressBar()
         val eventName = "Comment_Added"
         val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
             arguments.articleId,
-            userDetails.token,
+            user.token,
             comment.toJsonObject(),
             getFCMToken(requireContext())
         )
@@ -217,13 +222,29 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                     commentsAdapter.addComment(response.body()!!)
                     binding.noComments.isVisible = false
                     Event.sendFirebaseEvent(eventName, "")
+                    hideCommentProgressBar()
                     loadComments()
                 }
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
                 AlertDialog.noInternet(requireContext())
+                hideCommentProgressBar()
             }
         })
+    }
+
+    private fun showCommentProgressBar() {
+        binding.apply {
+            commentProgress.isVisible = true
+            commentBtn.isVisible = false
+        }
+    }
+
+    private fun hideCommentProgressBar() {
+        binding.apply {
+            commentBtn.isVisible = true
+            commentProgress.isVisible = false
+        }
     }
 }
