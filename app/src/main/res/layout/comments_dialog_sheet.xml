@@ -30,9 +30,9 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_below="@id/sheet_handling"
                 android:layout_gravity="center|right"
-                android:elevation="10dp"
                 android:background="?android:selectableItemBackground"
                 android:drawablePadding="4dp"
+                android:elevation="10dp"
                 android:gravity="right|center"
                 android:padding="10dp"
                 android:textColor="@color/dialogText"
@@ -134,6 +134,14 @@
                     android:textSize="16sp" />
 
                 <requestFocus />
+
+                <ProgressBar
+                    android:id="@+id/comment_progress"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/comment_btn"
