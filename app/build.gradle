@@ -16,8 +16,8 @@ android {
         applicationId "com.aghourservices"
         minSdk 21
         targetSdk 33
-        versionCode 43
-        versionName "9.5"
+        versionCode 44
+        versionName "9.5.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

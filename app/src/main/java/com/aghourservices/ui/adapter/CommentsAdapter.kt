@@ -79,10 +79,10 @@ class CommentsAdapter(
                 }
             }
             
-            if (comment.user?.id == profile.id) {
+            if (comment.user?.id != profile.id) {
                 binding.apply {
-                    updateComment.isVisible = true
-                    deleteComment.isVisible = true
+                    updateComment.isVisible = false
+                    deleteComment.isVisible = false
                 }
             }
         }
