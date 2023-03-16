@@ -109,10 +109,10 @@ class ArticleFragment : BaseFragment() {
                 popup.inflate(R.menu.popup_menu)
                 popup.setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
-                        R.id.edit_article -> {
+                        R.id.edit -> {
                             findNavController().navigate(editArticleFragment)
                         }
-                        R.id.delete_article -> {
+                        R.id.delete -> {
                             deleteArticleDialog(position)
                         }
                     }

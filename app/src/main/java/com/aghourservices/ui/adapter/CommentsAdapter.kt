@@ -58,8 +58,7 @@ class CommentsAdapter(
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
-            binding.updateComment.setOnClickListener(this)
-            binding.deleteComment.setOnClickListener(this)
+            binding.popupMenu.setOnClickListener(this)
         }
 
         fun setCommentView(comment: Comment) {
@@ -78,12 +77,9 @@ class CommentsAdapter(
                     setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                 }
             }
-            
-            if (comment.user?.id != profile.id) {
-                binding.apply {
-                    updateComment.isVisible = false
-                    deleteComment.isVisible = false
-                }
+
+            if (comment.user?.id == profile.id) {
+                binding.popupMenu.isVisible = true
             }
         }
 
