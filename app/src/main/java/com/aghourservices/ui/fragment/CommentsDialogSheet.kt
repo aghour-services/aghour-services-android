@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,19 +16,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.model.Comment
-import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.CommentsDialogSheetBinding
 import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModel.CommentsViewModel
-import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CommentsDialogSheet : BottomSheetDialogFragment() {
     private var _binding: CommentsDialogSheetBinding? = null
@@ -92,12 +86,10 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
             arguments.articleId,
             getFCMToken(requireContext())
         )
-        commentsViewModel.commentsLivewData.observe(viewLifecycleOwner) {
+        commentsViewModel.commentsLiveData.observe(viewLifecycleOwner) {
             commentsAdapter.setComments(it)
             hideProgressBar()
-            if (it.isEmpty()) {
-                binding.noComments.isVisible = true
-            }
+            binding.noComments.isVisible = it.isEmpty()
         }
     }
 
@@ -148,38 +140,21 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         }
     }
 
-    private fun deleteComment(position: Int) {
-        val commentId = commentsAdapter.getComment(position).id
-
-        val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.deleteComment(
-            arguments.articleId,
-            commentId,
-            user.token,
-            getFCMToken(requireContext())
-        )
-
-        retrofitBuilder.enqueue(object : Callback<Comment> {
-            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-                if (response.isSuccessful) {
-                    commentsAdapter.removeComment(position)
-                    loadComments()
-                    Toast.makeText(requireContext(), "تم مسح التعليق", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Comment>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
-            }
-        })
-    }
-
     private fun deleteCommentAlert(position: Int) {
         val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle(getString(R.string.delete_comment))
         alertDialogBuilder.setMessage(getString(R.string.are_you_sure_to_delete_comment))
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
-            deleteComment(position)
+            val commentId = commentsAdapter.getComment(position).id
+            commentsViewModel.deleteComment(
+                requireContext(),
+                arguments.articleId,
+                commentId,
+                user.token,
+                position,
+                commentsAdapter
+            )
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ ->
             alertDialogBuilder.setCancelable(true)
@@ -216,32 +191,20 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
 
     private fun postComment(comment: Comment) {
         showCommentProgressBar()
-        val eventName = "Comment_Added"
-        val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
+        commentsViewModel.addComment(
+            requireContext(),
             arguments.articleId,
             user.token,
-            comment.toJsonObject(),
-            getFCMToken(requireContext())
+            commentsAdapter,
+            comment
         )
-
-        retrofitBuilder.enqueue(object : Callback<Comment> {
-            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-                if (response.isSuccessful) {
-                    binding.commentEdt.text.clear()
-                    commentsAdapter.addComment(response.body()!!)
-                    binding.noComments.isVisible = false
-                    Event.sendFirebaseEvent(eventName, "")
-                    hideCommentProgressBar()
-                    loadComments()
-                }
-            }
-
-            override fun onFailure(call: Call<Comment>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
-                hideCommentProgressBar()
-            }
-        })
+        commentsViewModel.addCommentLiveData.observe(viewLifecycleOwner) {
+            hideCommentProgressBar()
+            binding.commentEdt.text.clear()
+            loadComments()
+        }
     }
+
 
     private fun showCommentProgressBar() {
         binding.apply {

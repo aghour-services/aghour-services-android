@@ -82,7 +82,8 @@ class ArticleFragment : BaseFragment() {
             article.id,
             userName,
             time,
-            description
+            description,
+            article.user?.is_verified!!
         )
         val commentsDialogSheet = ArticleFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
             article.id,

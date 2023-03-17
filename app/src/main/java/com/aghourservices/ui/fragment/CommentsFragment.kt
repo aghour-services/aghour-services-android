@@ -1,5 +1,6 @@
 package com.aghourservices.ui.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -9,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,17 +17,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.model.Comment
-import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModel.CommentsViewModel
-import com.aghourservices.utils.helper.Event.Companion.sendFirebaseEvent
 import com.aghourservices.utils.interfaces.AlertDialog
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CommentsFragment : BaseFragment() {
     private var _binding: FragmentCommentsBinding? = null
@@ -74,7 +69,14 @@ class CommentsFragment : BaseFragment() {
 
     private fun initArticleView() {
         binding.apply {
-            articleUserName.text = arguments.userName
+            articleUserName.apply {
+                text = arguments.userName
+                if (arguments.isVerified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tooltipText = context.getString(R.string.verified)
+                } else {
+                    setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                }
+            }
             articleCreatedAt.text = arguments.time
             articleDescription.text = arguments.description
         }
@@ -98,7 +100,7 @@ class CommentsFragment : BaseFragment() {
                         } else {
                             val comment = Comment()
                             comment.body = commentTxt
-                            addComment(comment)
+                            postComment(comment)
                         }
                     }
                 }
@@ -106,20 +108,33 @@ class CommentsFragment : BaseFragment() {
         })
     }
 
-    private fun loadComments() {
-        commentsViewModel.loadComments(requireContext(), arguments.articleId, getFCMToken(requireContext()))
-        commentsViewModel.commentsLivewData.observe(viewLifecycleOwner) {
-            commentsAdapter.setComments(it)
-            stopShimmerAnimation()
-            if (it.isEmpty()) {
-                noComments()
-            }
+    private fun postComment(comment: Comment) {
+        showCommentProgressBar()
+        commentsViewModel.addComment(
+            requireContext(),
+            arguments.articleId,
+            user.token,
+            commentsAdapter,
+            comment
+        )
+        commentsViewModel.addCommentLiveData.observe(viewLifecycleOwner) {
+            hideCommentProgressBar()
+            binding.commentEdt.text.clear()
+            loadComments()
         }
     }
 
-    private fun noComments() {
-        binding.noComments.isVisible = true
-        binding.commentsRecyclerView.isVisible = false
+    private fun loadComments() {
+        commentsViewModel.loadComments(
+            requireContext(),
+            arguments.articleId,
+            getFCMToken(requireContext())
+        )
+        commentsViewModel.commentsLiveData.observe(viewLifecycleOwner) {
+            commentsAdapter.setComments(it)
+            stopShimmerAnimation()
+            binding.noComments.isVisible = it.isEmpty()
+        }
     }
 
     private fun initRecyclerView() {
@@ -130,72 +145,17 @@ class CommentsFragment : BaseFragment() {
         }
     }
 
-    private fun addComment(comment: Comment) {
-        showProgressBar()
-        val eventName = "Comment_Added"
-        val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.postComment(
-            arguments.articleId,
-            user.token,
-            comment.toJsonObject(),
-            getFCMToken(requireContext())
-        )
-
-        retrofitBuilder.enqueue(object : Callback<Comment> {
-            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-
-                if (response.isSuccessful) {
-                    binding.commentEdt.text!!.clear()
-                    binding.noComments.isVisible = false
-                    commentsAdapter.addComment(response.body()!!)
-                    sendFirebaseEvent(eventName, "")
-                    hideProgressBar()
-                    loadComments()
-                }
-            }
-
-            override fun onFailure(call: Call<Comment>, t: Throwable) {
-                stopShimmerAnimation()
-                AlertDialog.noInternet(requireContext())
-                hideProgressBar()
-            }
-        })
-    }
-
-    private fun deleteComment(position: Int) {
-        val commentId = commentsAdapter.getComment(position).id
-
-        val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.deleteComment(
-            arguments.articleId,
-            commentId,
-            user.token,
-            getFCMToken(requireContext())
-        )
-
-        retrofitBuilder.enqueue(object : Callback<Comment> {
-            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-                if (response.isSuccessful) {
-                    commentsAdapter.removeComment(position)
-                    Toast.makeText(requireContext(), "تم مسح التعليق", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Comment>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
-            }
-        })
-    }
-
-    private fun showProgressBar() {
+    private fun showCommentProgressBar() {
         binding.apply {
             commentProgress.isVisible = true
             commentBtn.isVisible = false
         }
     }
 
-    private fun hideProgressBar() {
+    private fun hideCommentProgressBar() {
         binding.apply {
-            commentProgress.isVisible = false
             commentBtn.isVisible = true
+            commentProgress.isVisible = false
         }
     }
 
@@ -250,7 +210,15 @@ class CommentsFragment : BaseFragment() {
         alertDialogBuilder.setMessage(getString(R.string.are_you_sure_to_delete_comment))
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
-            deleteComment(position)
+            val commentId = commentsAdapter.getComment(position).id
+            commentsViewModel.deleteComment(
+                requireContext(),
+                arguments.articleId,
+                commentId,
+                user.token,
+                position,
+                commentsAdapter
+            )
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ ->
             alertDialogBuilder.setCancelable(true)
