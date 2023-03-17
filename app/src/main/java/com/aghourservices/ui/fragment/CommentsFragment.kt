@@ -1,5 +1,6 @@
 package com.aghourservices.ui.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -68,7 +69,14 @@ class CommentsFragment : BaseFragment() {
 
     private fun initArticleView() {
         binding.apply {
-            articleUserName.text = arguments.userName
+            articleUserName.apply {
+                text = arguments.userName
+                if (arguments.isVerified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tooltipText = context.getString(R.string.verified)
+                } else {
+                    setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                }
+            }
             articleCreatedAt.text = arguments.time
             articleDescription.text = arguments.description
         }
