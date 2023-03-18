@@ -144,5 +144,9 @@
     <string name="verified">أدمن</string>
     <string name="all_comments">كل التعليقات</string>
     <string name="users_likes">الأشخاص المعجبون</string>
+    <string name="already_have_account_login">لديك حساب بالفعل؟  تسجيل دخول</string>
+    <string name="invalid_email">بريد إلكتروني غير صالح</string>
+    <string name="invalid_password">"أختر كلمة سر أكبر من 6 أحرف"</string>
+    <string name="invalid_name">الأسم مطلوب</string>
 
 </resources>

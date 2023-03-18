@@ -47,8 +47,7 @@
         <activity
             android:name=".ui.main.activity.SignUpActivity"
             android:exported="true"
-            android:screenOrientation="locked"
-            android:theme="@style/AddDataTheme" />
+            android:screenOrientation="locked"/>
         <activity
             android:name="com.aghourservices.ui.main.activity.AboutActivity"
             android:exported="false"

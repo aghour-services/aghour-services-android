@@ -4,6 +4,7 @@
     <color name="toolbarText">#26313A</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
+    <color name="start_icon_tint">#4E4E4E</color>
     <color name="itemNavColor">#FFFFFF</color>
     <color name="backIconTint">#FF000000</color>
     <color name="searchBg">#FFFFFF</color>
