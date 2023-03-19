@@ -50,7 +50,7 @@
     <color name="skipBtnStroke">#000000</color>
     <color name="skipBtnBg">#FFFFFF</color>
     <color name="skipBtnPress">#D5D5D5</color>
-    <color name="edtTextBg">#D2EBFF</color>
+    <color name="edt_box_bg">#F4F4F4</color>
     <color name="createAccountText">#1F79C0</color>
     <color name="focusedBg">#F8FCFF</color>
     <color name="signUpBg">#FFFFFF</color>

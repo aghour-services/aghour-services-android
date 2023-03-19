@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".data.db.RealmApp"
@@ -43,11 +43,12 @@
             android:name=".ui.main.activity.SignInActivity"
             android:exported="true"
             android:screenOrientation="locked"
-            android:theme="@style/AddDataTheme" />
+            android:theme="@style/CategoriesTheme" />
         <activity
             android:name=".ui.main.activity.SignUpActivity"
             android:exported="true"
-            android:screenOrientation="locked"/>
+            android:screenOrientation="locked"
+            android:theme="@style/CategoriesTheme" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AboutActivity"
             android:exported="false"
@@ -59,13 +60,13 @@
         <activity
             android:name="com.aghourservices.ui.main.activity.AddDataActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AddDataTheme" />
+            android:theme="@style/AddDataTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AddArticleActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AddDataTheme" />
+            android:theme="@style/AddDataTheme"
+            android:windowSoftInputMode="adjustResize" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

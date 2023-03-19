@@ -33,9 +33,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="CategoriesTheme" parent="Theme.LightApp.NoActionBar">
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-    </style>
+    <style name="CategoriesTheme" parent="Theme.LightApp" />
 
     <style name="AddDataTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/toolbarBg</item>
