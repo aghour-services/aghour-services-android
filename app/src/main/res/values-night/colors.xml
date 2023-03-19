@@ -4,6 +4,7 @@
     <color name="toolbarText">#FFFFFF</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
+    <color name="start_icon_tint">#F3F3F3</color>
     <color name="navBarColor">#000000</color>
     <color name="recyclerViewBg">#171C20</color>
     <color name="splashScreenBg">#141F27</color>
@@ -85,7 +86,7 @@
     <color name="firmsRipple">#20323E</color>
     <color name="shareText">#FFFFFF</color>
     <color name="shareRipple">#20323E</color>
-    <color name="edtTextBg">#444E57</color>
+    <color name="edt_box_bg">#222A30</color>
     <color name="about">#E6E6E6</color>
     <color name="passToggle">#C6C6C6</color>
     <color name="dontShow">#E8E8E8</color>

@@ -4,6 +4,7 @@
     <color name="toolbarText">#26313A</color>
     <color name="drawerIcon">#FFFFFF</color>
     <color name="searchIcon">#FFFFFF</color>
+    <color name="start_icon_tint">#4E4E4E</color>
     <color name="itemNavColor">#FFFFFF</color>
     <color name="backIconTint">#FF000000</color>
     <color name="searchBg">#FFFFFF</color>
@@ -49,7 +50,7 @@
     <color name="skipBtnStroke">#000000</color>
     <color name="skipBtnBg">#FFFFFF</color>
     <color name="skipBtnPress">#D5D5D5</color>
-    <color name="edtTextBg">#D2EBFF</color>
+    <color name="edt_box_bg">#F4F4F4</color>
     <color name="createAccountText">#1F79C0</color>
     <color name="focusedBg">#F8FCFF</color>
     <color name="signUpBg">#FFFFFF</color>
