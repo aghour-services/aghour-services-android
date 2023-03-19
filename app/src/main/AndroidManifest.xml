@@ -36,36 +36,36 @@
             android:name="com.aghourservices.ui.main.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/CategoriesTheme"
+            android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.main.activity.SignInActivity"
             android:exported="true"
             android:screenOrientation="locked"
-            android:theme="@style/CategoriesTheme" />
+            android:theme="@style/MainTheme" />
         <activity
             android:name=".ui.main.activity.SignUpActivity"
             android:exported="true"
             android:screenOrientation="locked"
-            android:theme="@style/CategoriesTheme" />
+            android:theme="@style/MainTheme" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AboutActivity"
             android:exported="false"
-            android:theme="@style/AddDataTheme" />
+            android:theme="@style/MainTheme" />
         <activity
             android:name="com.aghourservices.ui.main.activity.SettingsActivity"
             android:exported="false"
-            android:theme="@style/AddDataTheme" />
+            android:theme="@style/MainTheme" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AddDataActivity"
             android:exported="false"
-            android:theme="@style/AddDataTheme"
+            android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.aghourservices.ui.main.activity.AddArticleActivity"
             android:exported="false"
-            android:theme="@style/AddDataTheme"
+            android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustResize" />
 
         <meta-data

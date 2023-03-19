@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-
     <style name="Theme.DarkApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
-        <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/toolbarBg</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
         <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">false</item>
         <item name="drawerArrowStyle">@style/drawerToggle</item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
+        <item name="background">@color/recyclerViewBg</item>
     </style>
 
     <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
@@ -31,27 +29,7 @@
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
 
-    <style name="Theme.DarkApp.NoActionBar">
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorControlNormal">@color/colorControl</item>
-    </style>
-
-    <!--Custom the text on Bottom Navigation-->
-    <style name="BottomNavigationTextStyle">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="fontFamily">@font/segoe_ui_bold</item>
-    </style>
-
-    <style name="CategoriesTheme" parent="Theme.DarkApp.NoActionBar" />
-
-    <style name="AddDataTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/toolbarBg</item>
-        <item name="cardBackgroundColor">@color/createOrSignInAccountBg</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
-    </style>
+    <style name="MainTheme" parent="Theme.DarkApp" />
 
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/splashScreenBg</item>

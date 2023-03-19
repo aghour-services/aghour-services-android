@@ -14,8 +14,8 @@ import com.aghourservices.utils.helper.Constants.Companion.TOKEN_KEY
 object UserInfo {
     fun isUserLoggedIn(context: Context): Boolean {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val name = pref.getString(NAME_KEY, null)
-        return name != null
+        val token = pref.getString(TOKEN_KEY, null)
+        return token != null
     }
 
     fun getUserData(context: Context): User {
