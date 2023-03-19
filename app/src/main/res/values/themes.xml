@@ -1,7 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application light theme. -->
     <style name="Theme.LightApp" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/toolbarBg</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
@@ -28,18 +27,7 @@
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
 
-    <style name="Theme.LightApp.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="CategoriesTheme" parent="Theme.LightApp" />
-
-    <style name="AddDataTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/toolbarBg</item>
-        <item name="cardBackgroundColor">@color/createOrSignInAccountBg</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-    </style>
+    <style name="MainTheme" parent="Theme.LightApp" />
 
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/splashScreenBg</item>
