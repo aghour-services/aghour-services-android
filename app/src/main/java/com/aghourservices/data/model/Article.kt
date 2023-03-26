@@ -11,6 +11,7 @@ data class Article(
     var likes_count: Int = 0,
     var comments_count: Int = 0,
     var liked: Boolean = false,
+    var attachments: List<Attachment>? = null,
     var user: User? = null,
     var latest_comment: Comment? = null,
 ) {
