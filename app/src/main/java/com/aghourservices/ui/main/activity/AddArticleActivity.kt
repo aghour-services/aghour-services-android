@@ -1,6 +1,7 @@
 package com.aghourservices.ui.main.activity
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -31,9 +32,14 @@ import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import com.google.android.gms.ads.AdView
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private lateinit var binding: ActivityAddArticleBinding
@@ -41,28 +47,25 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private val isUserLogin by lazy { isUserLoggedIn(this@AddArticleActivity) }
     private val user by lazy { getUserData(this@AddArticleActivity) }
     private lateinit var permissions: Array<String>
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
+    private var imagePart: MultipartBody.Part? = null
+    private var isVerified: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         showKeyboard(this, binding.articleEdt)
-        initUserClick()
         adView()
         initPermissions()
         requestPermissions()
-        initUserClicks()
+        getUserProfile()
+        initUserClick()
     }
 
-    private fun initUserClicks(){
-        binding.addImageBtn.setOnClickListener {
-            if (!checkStoragePermission()) {
-                requestPermissions()
-            } else {
-                openGallery()
-            }
-        }
+    private fun adView() {
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
     }
 
     private fun openGallery() {
@@ -79,16 +82,25 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                GALLERY_CODE -> {
-                    imageUri = data?.data!!
-                    binding.articleImg.setImageURI(imageUri)
-                    binding.addImageBtn.text = "تغيير الصورة"
-                    Log.d("URI", "onActivityResult: $imageUri")
-                }
-            }
+        if (requestCode == GALLERY_CODE && resultCode == Activity.RESULT_OK) {
+            imageUri = data?.data!!
+            val file = File(getRealPathFromURI(imageUri!!)!!)
+            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            imagePart =
+                MultipartBody.Part.createFormData("article[attachment]", file.name, requestBody)
+            binding.articleImg.setImageURI(imageUri)
+            binding.addImageBtn.text = "تغيير الصورة"
         }
+    }
+
+    private fun getRealPathFromURI(uri: Uri): String? {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        cursor?.moveToFirst()
+        val columnIndex = cursor?.getColumnIndex(projection[0])
+        val filePath = cursor?.getString(columnIndex!!)
+        cursor?.close()
+        return filePath
     }
 
     private fun initPermissions() {
@@ -104,13 +116,6 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE)
     }
 
-    private fun checkCameraPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) == (PackageManager.PERMISSION_GRANTED)
-    }
-
     private fun checkStoragePermission(): Boolean {
         return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
             ContextCompat.checkSelfPermission(
@@ -122,12 +127,14 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         }
     }
 
-    private fun adView() {
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
-    }
-
     private fun initUserClick() {
+        binding.addImageBtn.setOnClickListener {
+            if (!checkStoragePermission()) {
+                requestPermissions()
+            } else {
+                openGallery()
+            }
+        }
         binding.backBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -158,10 +165,12 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
                         binding.publishBtn.isEnabled = true
                         binding.publishBtn.setOnClickListener {
                             if (!isUserLogin) {
-                                AlertDialog.createAccount(this@AddArticleActivity, "لإضافة خبر أعمل حساب الأول")
-                            }else{
-                                val article = Article()
-                                publishArticle(article)
+                                AlertDialog.createAccount(
+                                    this@AddArticleActivity,
+                                    "لإضافة خبر أعمل حساب الأول"
+                                )
+                            } else {
+                                createArticle(articleTxt)
                             }
                         }
                     }
@@ -169,18 +178,19 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
             })
         }
     }
-    private fun publishArticle(article: Article) {
-        showProgressDialog(this@AddArticleActivity)
-        article.description = binding.articleEdt.text.toString().trim()
-        createArticle(article)
-    }
 
-    private fun createArticle(article: Article) {
+    private fun createArticle(description: String) {
+        showProgressDialog(this@AddArticleActivity)
         val user = getUserData(this)
+
+        val descriptionBody =
+            description.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
+
         val retrofitBuilder = RetrofitInstance(this).newsApi.createArticle(
-            article.toJsonObject(),
             user.token,
-            UserInfo.getFCMToken(this)
+            UserInfo.getFCMToken(this),
+            descriptionBody,
+            imagePart
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {
@@ -188,12 +198,17 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
                 call: Call<Article>,
                 response: Response<Article>
             ) {
-                if (getProfile()){
-                    Toast.makeText(this@AddArticleActivity, "تم إضافة الخبر علطول عشان انت أدمن", Toast.LENGTH_SHORT).show()
-                }else{
-                    AlertDialog.dataAdded(this@AddArticleActivity)
+                if (response.isSuccessful) {
+                    if (isVerified == true) {
+                        Toast.makeText(this@AddArticleActivity, "تم إضافة الخبر", Toast.LENGTH_LONG).show()
+                        onBackPressedDispatcher.onBackPressed()
+                    } else {
+                        AlertDialog.dataAdded(this@AddArticleActivity)
+                    }
+                    setTextEmpty()
+                } else {
+                    hideProgressDialog()
                 }
-                setTextEmpty()
             }
 
             override fun onFailure(
@@ -206,25 +221,33 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         })
     }
 
-    private fun getProfile(): Boolean {
-        var profile = Profile()
+    private fun getUserProfile() {
         val retrofitInstance = RetrofitInstance(this).userApi.userProfile(user.token)
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(
                 call: Call<Profile>,
                 response: Response<Profile>
             ) {
-                profile = response.body()!!
+                if (response.isSuccessful) {
+                    val profile = response.body()
+                    isVerified = profile?.is_verified
+                    Log.d("USER", "onResponse: $isVerified")
+                    binding.userName.apply {
+                        text = profile?.name
+                        if (profile?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            tooltipText = context.getString(R.string.verified)
+                        } else {
+                            setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                        }
+                    }
+                }
             }
 
             override fun onFailure(
                 call: Call<Profile>,
                 t: Throwable
-            ) {
-                AlertDialog.noInternet(this@AddArticleActivity)
-            }
+            ) {}
         })
-        return profile.is_verified
     }
 
     private fun setTextEmpty() {

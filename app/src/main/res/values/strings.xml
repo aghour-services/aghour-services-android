@@ -151,5 +151,6 @@
     <string name="or">أو</string>
     <string name="not_have_account_register_now">ليس لديك حساب؟  أنشئ حساب</string>
     <string name="add_image">إضافة صورة</string>
+    <string name="clear_image">إزالة الصورة</string>
 
 </resources>

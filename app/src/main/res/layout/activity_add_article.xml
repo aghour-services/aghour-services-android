@@ -73,11 +73,42 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:id="@+id/user_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:paddingRight="6dp"
+                    android:textColor="@color/dialogText"
+                    android:textSize="16sp"
+                    app:drawableLeftCompat="@drawable/ic_verified"
+                    tools:text="Mohamed Magdy" />
+
+                <ImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:src="@mipmap/user"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/article_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
                 android:textColorHint="@color/toolbarText"
                 app:boxBackgroundColor="@color/edt_box_bg"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -92,18 +123,26 @@
                     android:gravity="right"
                     android:hint="@string/add_article_hint"
                     android:textColorHint="@color/dialogText"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <requestFocus />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/article_img"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@null"
-                android:scaleType="fitXY" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/article_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    tools:src="@mipmap/ic_launcher" />
+
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
