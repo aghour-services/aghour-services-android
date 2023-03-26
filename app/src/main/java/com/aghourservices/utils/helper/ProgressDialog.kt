@@ -2,19 +2,20 @@ package com.aghourservices.utils.helper
 
 import android.app.Dialog
 import android.content.Context
+import android.widget.TextView
 import com.aghourservices.R
 
-object ProgressDialog {
-    private lateinit var progressDialog: Dialog
+class ProgressDialog(context: Context) : Dialog(context) {
 
-    fun showProgressDialog(context: Context) {
-        progressDialog = Dialog(context)
-        progressDialog.setContentView(R.layout.dialog_custom_progress)
-        progressDialog.setCancelable(false)
-        progressDialog.show()
+    init {
+        setContentView(R.layout.dialog_progress)
+        setCancelable(false)
     }
 
-    fun hideProgressDialog() {
-        progressDialog.hide()
+    fun show(message: String) {
+        val loadingMessage = findViewById<TextView>(R.id.loading_tv)
+        loadingMessage.text = message
+        super.show()
     }
+
 }

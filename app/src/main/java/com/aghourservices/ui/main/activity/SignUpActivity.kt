@@ -18,8 +18,7 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignUpBinding
 import com.aghourservices.ui.main.cache.UserInfo.saveUserData
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
-import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
+import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
 import com.google.android.gms.ads.AdView
@@ -30,6 +29,7 @@ import retrofit2.Response
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var adView: AdView
+    private val progressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,26 +156,26 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun createUser(user: User) {
-        showProgressDialog(this)
+        progressDialog.show("جاري إنشاء الحساب")
         val retrofitBuilder = RetrofitInstance(this).userApi.signUp(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 201) {
                     errorLogin(this@SignUpActivity)
-                    hideProgressDialog()
+                    progressDialog.hide()
                     return
                 }
                 val responseUser = response.body() as User
                 saveUserData(this@SignUpActivity, responseUser)
                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-                hideProgressDialog()
+                progressDialog.hide()
                 finish()
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 noInternet(this@SignUpActivity)
-                hideProgressDialog()
+                progressDialog.hide()
             }
         })
     }

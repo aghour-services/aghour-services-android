@@ -27,8 +27,7 @@ import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
-import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
-import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
+import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import com.google.android.gms.ads.AdView
@@ -50,6 +49,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private var imageUri: Uri? = null
     private var imagePart: MultipartBody.Part? = null
     private var isVerified: Boolean? = null
+    private val progressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -180,7 +180,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     }
 
     private fun createArticle(description: String) {
-        showProgressDialog(this@AddArticleActivity)
+        progressDialog.show("جاري إضافة الخبر")
         val user = getUserData(this)
 
         val descriptionBody =
@@ -207,7 +207,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
                     }
                     setTextEmpty()
                 } else {
-                    hideProgressDialog()
+                    progressDialog.hide()
                 }
             }
 
@@ -216,7 +216,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
                 t: Throwable
             ) {
                 AlertDialog.noInternet(this@AddArticleActivity)
-                hideProgressDialog()
+                progressDialog.hide()
             }
         })
     }
@@ -252,6 +252,6 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
 
     private fun setTextEmpty() {
         binding.articleEdt.text!!.clear()
-        hideProgressDialog()
+        progressDialog.hide()
     }
 }
