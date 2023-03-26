@@ -156,7 +156,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun createUser(user: User) {
-        progressDialog.show("جاري إنشاء الحساب")
+        progressDialog.show(getString(R.string.creating_account))
         val retrofitBuilder = RetrofitInstance(this).userApi.signUp(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {

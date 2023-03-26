@@ -107,7 +107,6 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         permissions = arrayOf(
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_MEDIA_LOCATION,
         )
     }
@@ -180,7 +179,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     }
 
     private fun createArticle(description: String) {
-        progressDialog.show("جاري إضافة الخبر")
+        progressDialog.show(getString(R.string.creating_article))
         val user = getUserData(this)
 
         val descriptionBody =
@@ -200,7 +199,8 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
             ) {
                 if (response.isSuccessful) {
                     if (isVerified == true) {
-                        Toast.makeText(this@AddArticleActivity, "تم إضافة الخبر", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@AddArticleActivity, "تم إضافة الخبر", Toast.LENGTH_LONG)
+                            .show()
                         onBackPressedDispatcher.onBackPressed()
                     } else {
                         AlertDialog.dataAdded(this@AddArticleActivity)
@@ -215,6 +215,8 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
                 call: Call<Article>,
                 t: Throwable
             ) {
+                Log.d("FAILure", "onFailure: ${t.message}")
+                Toast.makeText(this@AddArticleActivity, t.message, Toast.LENGTH_SHORT).show()
                 AlertDialog.noInternet(this@AddArticleActivity)
                 progressDialog.hide()
             }
@@ -246,7 +248,8 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
             override fun onFailure(
                 call: Call<Profile>,
                 t: Throwable
-            ) {}
+            ) {
+            }
         })
     }
 

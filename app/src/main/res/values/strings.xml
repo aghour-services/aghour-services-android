@@ -152,5 +152,9 @@
     <string name="not_have_account_register_now">ليس لديك حساب؟  أنشئ حساب</string>
     <string name="add_image">إضافة صورة</string>
     <string name="clear_image">إزالة الصورة</string>
+    <string name="creating_account">جاري إنشاء الحساب…</string>
+    <string name="logging_in">جاري تسجيل الدخول…</string>
+    <string name="adding_data">جاري إضافة البيانات…</string>
+    <string name="creating_article">جاري إضافة الخبر…</string>
 
 </resources>

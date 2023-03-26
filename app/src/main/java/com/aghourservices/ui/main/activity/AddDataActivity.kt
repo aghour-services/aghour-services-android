@@ -92,7 +92,7 @@ class AddDataActivity : AppCompatActivity() {
     }
 
     private fun createFirm(firm: Firm) {
-        progressDialog.show("جاري إضافة البيانات")
+        progressDialog.show(getString(R.string.adding_data))
         val user = getUserData(this)
         val retrofitBuilder = RetrofitInstance(this).firmsApi.createFirm(
             firm.toJsonObject(),

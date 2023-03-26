@@ -144,7 +144,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun loginUser(user: User) {
-        progressDialog.show("جاري تسجيل الدخول")
+        progressDialog.show(getString(R.string.logging_in))
         val retrofitBuilder = RetrofitInstance(this).userApi.signIn(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {
