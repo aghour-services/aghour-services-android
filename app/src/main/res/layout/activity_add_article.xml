@@ -11,9 +11,8 @@
         android:id="@+id/firmsToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_centerHorizontal="true"
         android:background="@color/toolbarBg"
-        android:elevation="6dp"
+        android:elevation="4dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +60,6 @@
             app:iconGravity="end"
             app:iconSize="30dp" />
 
-
     </RelativeLayout>
 
     <ScrollView
@@ -79,8 +77,7 @@
                 android:id="@+id/article_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_height="300dp"
                 android:textColorHint="@color/toolbarText"
                 app:boxBackgroundColor="@color/edt_box_bg"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -100,39 +97,35 @@
                 <requestFocus />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/article_img"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="fitXY"
-                android:layout_weight="3"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@null"
-                tools:src="@mipmap/ic_launcher" />
-
-            <Button
-                android:id="@+id/add_image_btn"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:drawableLeft="@drawable/add_photo"
-                android:padding="12dp"
-                android:text="@string/add_image"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableTint="@color/white" />
-
-            <FrameLayout
-                android:id="@+id/ad_frame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true">
-
-                <include layout="@layout/admob_banner" />
-            </FrameLayout>
+                android:scaleType="fitXY" />
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/add_image_btn"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:drawableLeft="@drawable/add_photo"
+        android:padding="12dp"
+        android:text="@string/add_image"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:drawableTint="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/ad_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/admob_banner" />
+    </FrameLayout>
 </LinearLayout>

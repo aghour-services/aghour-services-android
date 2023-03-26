@@ -13,6 +13,7 @@ import com.aghourservices.databinding.ArticleCardBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
+import com.bumptech.glide.Glide
 
 class ArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
@@ -79,6 +80,20 @@ class ArticlesAdapter(
         @SuppressLint("SetTextI18n")
         fun setNewsList(article: Article) {
             val profile = UserInfo.getUserID(binding.root.context)
+            val imgurBaseURL = "https://i.imgur.com/"
+            val imageExtension = ".png"
+
+            article.attachments?.forEach { attachment ->
+                val imageType =
+                    attachment.type == "image/jpg" || attachment.type == "image/png" || attachment.type == "image/jpeg"
+                if (imageType) {
+                    val articleImage = imgurBaseURL + attachment.resource_id + imageExtension
+                    Glide.with(binding.root.context)
+                        .load(articleImage)
+                        .into(binding.articleImage)
+                    binding.articleImage.isVisible = true
+                }
+            }
 
             binding.userName.apply {
                 text = article.user?.name
@@ -129,7 +144,11 @@ class ArticlesAdapter(
 
             if (article.likes_count > 0) {
                 binding.likesCount.text = if (article.liked) {
-                    "أنت و ${article.likes_count - 1} أخرين "
+                    if(article.likes_count == 1) {
+                        "أنت"
+                    } else {
+                        "أنت و ${article.likes_count - 1} أخرين "
+                    }
                 } else {
                     article.likes_count.toString()
                 }
