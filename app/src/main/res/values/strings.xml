@@ -156,5 +156,6 @@
     <string name="logging_in">جاري تسجيل الدخول…</string>
     <string name="adding_data">جاري إضافة البيانات…</string>
     <string name="creating_article">جاري إضافة الخبر…</string>
+    <string name="publish">نشر</string>
 
 </resources>

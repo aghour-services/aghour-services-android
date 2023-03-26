@@ -27,6 +27,8 @@ import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
+import com.aghourservices.utils.helper.Intents
+import com.aghourservices.utils.helper.Intents.getRealPathFromURI
 import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
@@ -84,23 +86,14 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY_CODE && resultCode == Activity.RESULT_OK) {
             imageUri = data?.data!!
-            val file = File(getRealPathFromURI(imageUri!!)!!)
+            val file = File(getRealPathFromURI(this, imageUri!!)!!)
+            Intents.compressFile(this, file)
             val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             imagePart =
                 MultipartBody.Part.createFormData("article[attachment]", file.name, requestBody)
             binding.articleImg.setImageURI(imageUri)
             binding.addImageBtn.text = "تغيير الصورة"
         }
-    }
-
-    private fun getRealPathFromURI(uri: Uri): String? {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, projection, null, null, null)
-        cursor?.moveToFirst()
-        val columnIndex = cursor?.getColumnIndex(projection[0])
-        val filePath = cursor?.getString(columnIndex!!)
-        cursor?.close()
-        return filePath
     }
 
     private fun initPermissions() {

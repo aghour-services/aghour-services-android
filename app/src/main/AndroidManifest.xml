@@ -73,7 +73,7 @@
             android:name="com.aghourservices.ui.main.activity.AddArticleActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateVisible" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -81,11 +81,9 @@
         <meta-data
             android:name="firebase_analytics_collection_deactivated"
             android:value="@bool/FIREBASE_ANALYTICS_DEACTIVATED" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/aghour" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/splashScreenBg" />

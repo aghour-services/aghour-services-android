@@ -14,6 +14,7 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class ArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
@@ -85,6 +86,10 @@ class ArticlesAdapter(
                 binding.articleImage.isVisible = true
                 Glide.with(binding.root.context)
                     .load(attachment.resource_url)
+                    .placeholder(R.color.image_bg)
+                    .error(R.drawable.ic_error)
+                    .encodeQuality(100)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(binding.articleImage)
             }
 

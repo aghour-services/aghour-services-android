@@ -172,4 +172,5 @@
     <color name="like_btn_tint">#000000</color>
     <color name="favorite">#FF0000</color>
     <color name="image_bg">#D5D5D5</color>
+    <color name="settings_icon">#000000</color>
 </resources>

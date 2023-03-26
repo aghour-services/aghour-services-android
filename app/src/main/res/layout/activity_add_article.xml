@@ -50,15 +50,20 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/publish_btn"
             style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:enabled="false"
+            android:text="@string/publish"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:background="?android:selectableItemBackground"
             app:icon="@drawable/ic_send"
             app:iconGravity="end"
-            app:iconSize="30dp" />
+            app:iconPadding="10dp"
+            app:iconSize="30dp"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 

@@ -26,7 +26,7 @@ android {
         debug {
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
-            resValue("string", "base_url", "http://192.168.1.5:8090/api/")
+            resValue("string", "base_url", "http://192.168.1.12:8090/api/")
             resValue("string", "news_topic", "News-v2")
         }
 
@@ -117,5 +117,5 @@ dependencies {
     implementation 'com.google.android.play:core:1.10.3'
 
     implementation 'kr.co.prnd:readmore-textview:1.0.0'
-
+    implementation 'nl.joery.animatedbottombar:library:1.1.0'
 }

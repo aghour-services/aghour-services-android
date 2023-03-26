@@ -124,5 +124,6 @@
     <color name="textColorLink">#008EFF</color>
     <color name="like_btn_tint">#FFFFFF</color>
     <color name="image_bg">#2E3840</color>
+    <color name="settings_icon">#F4F4F4</color>
 
 </resources>

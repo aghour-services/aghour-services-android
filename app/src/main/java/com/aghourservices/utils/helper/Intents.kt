@@ -6,7 +6,10 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.provider.MediaStore
 import android.provider.Settings
 import android.view.View
 import android.widget.Toast
@@ -16,8 +19,58 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
 import com.aghourservices.ui.main.activity.SignInActivity
 import com.aghourservices.ui.main.cache.UserInfo.clearUserData
+import java.io.File
+import java.io.FileOutputStream
+
 
 object Intents {
+
+    fun getRealPathFromURI(context: Context, uri: Uri): String? {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(uri, projection, null, null, null)
+        cursor?.moveToFirst()
+        val columnIndex = cursor?.getColumnIndex(projection[0])
+        val filePath = cursor?.getString(columnIndex!!)
+        cursor?.close()
+        return filePath
+    }
+
+    fun compressFile(context: Context, file: File): File? {
+        return try {
+            val o = BitmapFactory.Options()
+            o.inJustDecodeBounds = true
+            BitmapFactory.decodeFile(file.path, o)
+
+            val REQUIRED_SIZE = 100
+            var scale = 1
+            while (o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                o.outHeight / scale / 2 >= REQUIRED_SIZE
+            ) {
+                scale *= 2
+            }
+
+            val o2 = BitmapFactory.Options()
+            o2.inSampleSize = scale
+            val selectedBitmap = BitmapFactory.decodeFile(file.path, o2)
+
+            val compressedFile = File.createTempFile("compressed_", ".jpg", context.cacheDir)
+            compressedFile.createNewFile()
+            val outputStream = FileOutputStream(compressedFile)
+
+            var quality = 100
+            var compressedSize = -1
+            while (compressedSize > 100 * 1024 || compressedSize == -1) {
+                selectedBitmap!!.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+                compressedSize = compressedFile.length().toInt()
+                quality -= 5
+            }
+
+            outputStream.close()
+            compressedFile
+        } catch (e: Exception) {
+            null
+        }
+    }
 
     fun shareApp(context: Context) {
         Event.sendFirebaseEvent("Share_App", "")

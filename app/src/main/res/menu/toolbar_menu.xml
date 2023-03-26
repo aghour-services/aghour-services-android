@@ -8,7 +8,7 @@
         android:id="@+id/settingActivity"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings_fragment"
-        app:iconTint="@color/settings_icon_tint"
+        app:iconTint="@color/settings_icon"
         app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>
