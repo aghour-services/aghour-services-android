@@ -80,19 +80,12 @@ class ArticlesAdapter(
         @SuppressLint("SetTextI18n")
         fun setNewsList(article: Article) {
             val profile = UserInfo.getUserID(binding.root.context)
-            val imgurBaseURL = "https://i.imgur.com/"
-            val imageExtension = ".png"
 
             article.attachments?.forEach { attachment ->
-                val imageType =
-                    attachment.type == "image/jpg" || attachment.type == "image/png" || attachment.type == "image/jpeg"
-                if (imageType) {
-                    val articleImage = imgurBaseURL + attachment.resource_id + imageExtension
-                    Glide.with(binding.root.context)
-                        .load(articleImage)
-                        .into(binding.articleImage)
-                    binding.articleImage.isVisible = true
-                }
+                binding.articleImage.isVisible = true
+                Glide.with(binding.root.context)
+                    .load(attachment.resource_url)
+                    .into(binding.articleImage)
             }
 
             binding.userName.apply {
@@ -144,7 +137,7 @@ class ArticlesAdapter(
 
             if (article.likes_count > 0) {
                 binding.likesCount.text = if (article.liked) {
-                    if(article.likes_count == 1) {
+                    if (article.likes_count == 1) {
                         "أنت"
                     } else {
                         "أنت و ${article.likes_count - 1} أخرين "
