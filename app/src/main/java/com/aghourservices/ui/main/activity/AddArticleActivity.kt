@@ -1,12 +1,16 @@
 package com.aghourservices.ui.main.activity
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -20,6 +24,7 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
+import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
@@ -36,6 +41,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private val isUserLogin by lazy { isUserLoggedIn(this@AddArticleActivity) }
     private val user by lazy { getUserData(this@AddArticleActivity) }
     private lateinit var permissions: Array<String>
+    private lateinit var imageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +52,44 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         adView()
         initPermissions()
         requestPermissions()
+        initUserClicks()
     }
 
+    private fun initUserClicks(){
+        binding.addImageBtn.setOnClickListener {
+            if (!checkStoragePermission()) {
+                requestPermissions()
+            } else {
+                openGallery()
+            }
+        }
+    }
+
+    private fun openGallery() {
+        val galleryIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Intent(MediaStore.ACTION_PICK_IMAGES)
+        } else {
+            Intent(Intent.ACTION_PICK)
+        }
+        galleryIntent.type = "image/*"
+        startActivityForResult(galleryIntent, GALLERY_CODE)
+    }
+
+    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            when (requestCode) {
+                GALLERY_CODE -> {
+                    imageUri = data?.data!!
+                    binding.articleImg.setImageURI(imageUri)
+                    binding.addImageBtn.text = "تغيير الصورة"
+                    Log.d("URI", "onActivityResult: $imageUri")
+                }
+            }
+        }
+    }
 
     private fun initPermissions() {
         permissions = arrayOf(

@@ -12,5 +12,6 @@ class Constants {
         const val TOKEN_KEY = "token"
         const val EMAIL_KEY = "email"
         const val REQUEST_CODE = 999
+        const val GALLERY_CODE = 8
     }
 }

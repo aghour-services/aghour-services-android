@@ -123,5 +123,6 @@
     <color name="add_article_btn">#FFFFFF</color>
     <color name="textColorLink">#008EFF</color>
     <color name="like_btn_tint">#FFFFFF</color>
+    <color name="image_bg">#2E3840</color>
 
 </resources>
