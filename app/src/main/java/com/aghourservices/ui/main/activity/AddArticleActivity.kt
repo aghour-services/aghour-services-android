@@ -1,11 +1,16 @@
 package com.aghourservices.ui.main.activity
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Profile
@@ -15,6 +20,7 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
+import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
 import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
@@ -29,6 +35,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private lateinit var adView: AdView
     private val isUserLogin by lazy { isUserLoggedIn(this@AddArticleActivity) }
     private val user by lazy { getUserData(this@AddArticleActivity) }
+    private lateinit var permissions: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +44,40 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         showKeyboard(this, binding.articleEdt)
         initUserClick()
         adView()
+        initPermissions()
+        requestPermissions()
+    }
+
+
+    private fun initPermissions() {
+        permissions = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_MEDIA_LOCATION,
+        )
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE)
+    }
+
+    private fun checkCameraPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == (PackageManager.PERMISSION_GRANTED)
+    }
+
+    private fun checkStoragePermission(): Boolean {
+        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == (PackageManager.PERMISSION_GRANTED)
+        } else {
+            true
+        }
     }
 
     private fun adView() {
