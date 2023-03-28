@@ -157,5 +157,7 @@
     <string name="adding_data">جاري إضافة البيانات…</string>
     <string name="creating_article">جاري إضافة الخبر…</string>
     <string name="publish">نشر</string>
+    <string name="create_article_failed">فشل إنشاء الخبر</string>
+    <string name="try_again">حاول مرة تانية.</string>
 
 </resources>

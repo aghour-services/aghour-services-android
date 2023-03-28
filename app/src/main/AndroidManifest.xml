@@ -13,9 +13,10 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name=".data.db.RealmApp"
+        android:name=".AghourApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="true"
@@ -70,7 +71,7 @@
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.aghourservices.ui.main.activity.AddArticleActivity"
+            android:name="com.aghourservices.ui.main.activity.CreateArticleActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="stateVisible" />
@@ -97,6 +98,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".utils.helper.CreateArticleService" />
     </application>
 
 </manifest>

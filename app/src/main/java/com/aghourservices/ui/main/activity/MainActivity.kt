@@ -2,19 +2,13 @@ package com.aghourservices.ui.main.activity
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -26,7 +20,6 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
-import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.saveFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.saveUserID
@@ -192,7 +185,7 @@ class MainActivity : AppCompatActivity() {
                 bottomSheetDialog.dismiss()
             }
             binding.addArticleBtn.setOnClickListener {
-                startActivity(Intent(this, AddArticleActivity::class.java))
+                startActivity(Intent(this, CreateArticleActivity::class.java))
                 bottomSheetDialog.dismiss()
             }
             binding.dismissSheet.setOnClickListener {

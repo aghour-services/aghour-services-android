@@ -12,12 +12,10 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
-import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivityAddArticleBinding
@@ -27,6 +25,7 @@ import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
+import com.aghourservices.utils.helper.CreateArticleService
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
 import com.aghourservices.utils.helper.ProgressDialog
@@ -36,33 +35,33 @@ import com.google.android.gms.ads.AdView
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
+class CreateArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     private lateinit var binding: ActivityAddArticleBinding
     private lateinit var adView: AdView
-    private val isUserLogin by lazy { isUserLoggedIn(this@AddArticleActivity) }
-    private val user by lazy { getUserData(this@AddArticleActivity) }
     private lateinit var permissions: Array<String>
+
+    private val isUserLogin by lazy { isUserLoggedIn(this@CreateArticleActivity) }
+    private val user by lazy { getUserData(this@CreateArticleActivity) }
+    private val progressDialog by lazy { ProgressDialog(this) }
     private var imageUri: Uri? = null
     private var imagePart: MultipartBody.Part? = null
     private var isVerified: Boolean? = null
-    private val progressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         showKeyboard(this, binding.articleEdt)
-        adView()
         initPermissions()
         requestPermissions()
         getUserProfile()
         initUserClick()
+        adView()
     }
 
     private fun adView() {
@@ -158,7 +157,7 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
                         binding.publishBtn.setOnClickListener {
                             if (!isUserLogin) {
                                 AlertDialog.createAccount(
-                                    this@AddArticleActivity,
+                                    this@CreateArticleActivity,
                                     "لإضافة خبر أعمل حساب الأول"
                                 )
                             } else {
@@ -172,48 +171,16 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
     }
 
     private fun createArticle(description: String) {
-        progressDialog.show(getString(R.string.creating_article))
-        val user = getUserData(this)
-
-        val descriptionBody =
-            description.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
-
-        val retrofitBuilder = RetrofitInstance(this).newsApi.createArticle(
+        val createArticleService = CreateArticleService()
+        createArticleService.publishArticle(
+            this@CreateArticleActivity,
             user.token,
-            UserInfo.getFCMToken(this),
-            descriptionBody,
-            imagePart
+            UserInfo.getFCMToken(this@CreateArticleActivity),
+            description,
+            imagePart,
+            isVerified
         )
-
-        retrofitBuilder.enqueue(object : Callback<Article> {
-            override fun onResponse(
-                call: Call<Article>,
-                response: Response<Article>
-            ) {
-                if (response.isSuccessful) {
-                    if (isVerified == true) {
-                        Toast.makeText(this@AddArticleActivity, "تم إضافة الخبر", Toast.LENGTH_LONG)
-                            .show()
-                        onBackPressedDispatcher.onBackPressed()
-                    } else {
-                        AlertDialog.dataAdded(this@AddArticleActivity)
-                    }
-                    setTextEmpty()
-                } else {
-                    progressDialog.hide()
-                }
-            }
-
-            override fun onFailure(
-                call: Call<Article>,
-                t: Throwable
-            ) {
-                Log.d("FAILure", "onFailure: ${t.message}")
-                Toast.makeText(this@AddArticleActivity, t.message, Toast.LENGTH_SHORT).show()
-                AlertDialog.noInternet(this@AddArticleActivity)
-                progressDialog.hide()
-            }
-        })
+        setArticleEmpty()
     }
 
     private fun getUserProfile() {
@@ -246,8 +213,9 @@ class AddArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
         })
     }
 
-    private fun setTextEmpty() {
+    private fun setArticleEmpty() {
         binding.articleEdt.text!!.clear()
-        progressDialog.hide()
+        binding.articleImg.setImageURI(null)
+        onBackPressedDispatcher.onBackPressed()
     }
 }
