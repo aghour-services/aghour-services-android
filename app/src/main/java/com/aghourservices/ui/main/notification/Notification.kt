@@ -13,7 +13,7 @@ object Notification {
     lateinit var notificationManager: NotificationManager
 
     fun sendNotification(context: Context, title: String, message: String): Notification {
-        val notification =  NotificationCompat.Builder(context, CHANNEL_ID)
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -21,7 +21,11 @@ object Notification {
             .setAutoCancel(true)
             .setSmallIcon(R.drawable.aghour)
 
-        notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            notification.foregroundServiceBehavior = Notification.FOREGROUND_SERVICE_IMMEDIATE
+        }
         return notification.build()
     }
 
