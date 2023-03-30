@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.request.RetrofitInstance
-import com.aghourservices.databinding.ActivityAddArticleBinding
+import com.aghourservices.databinding.ActivityCreateArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
@@ -28,9 +28,7 @@ import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.CreateArticleService
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
-import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog
-import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 import com.google.android.gms.ads.AdView
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -40,23 +38,20 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class CreateArticleActivity : AppCompatActivity(), ShowSoftKeyboard {
-    private lateinit var binding: ActivityAddArticleBinding
+class CreateArticleActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCreateArticleBinding
     private lateinit var adView: AdView
     private lateinit var permissions: Array<String>
-
     private val isUserLogin by lazy { isUserLoggedIn(this@CreateArticleActivity) }
     private val user by lazy { getUserData(this@CreateArticleActivity) }
-    private val progressDialog by lazy { ProgressDialog(this) }
     private var imageUri: Uri? = null
     private var imagePart: MultipartBody.Part? = null
     private var isVerified: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddArticleBinding.inflate(layoutInflater)
+        binding = ActivityCreateArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        showKeyboard(this, binding.articleEdt)
         initPermissions()
         requestPermissions()
         getUserProfile()

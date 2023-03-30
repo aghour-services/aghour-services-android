@@ -74,7 +74,7 @@
             android:name="com.aghourservices.ui.main.activity.CreateArticleActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
