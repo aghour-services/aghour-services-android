@@ -39,26 +39,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintBottom_toTopOf="@+id/bottomView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:navGraph="@navigation/mobile_navigation" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:padding="4dp"
-        android:background="@color/toolbarBg"
-        app:layout_constraintBottom_toTopOf="@+id/bottomView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <include layout="@layout/admob_banner" />
-
-    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomView"
@@ -78,15 +63,13 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:src="@drawable/ic_add"
-        app:backgroundTint="#405768"
-        android:layout_marginTop="4dp"
+        app:backgroundTint="@color/checkdItem"
         app:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomView"
+        app:layout_constraintBottom_toTopOf="@+id/bottomView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottomView"
         app:maxImageSize="35dp"
         app:tint="@color/white"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />

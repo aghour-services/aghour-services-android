@@ -23,8 +23,6 @@ import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.saveFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.saveUserID
-import com.aghourservices.utils.ads.Banner
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -40,7 +38,6 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +51,6 @@ class MainActivity : AppCompatActivity() {
         inAppUpdate()
         notificationPermission()
         getFirebaseInstanceToken()
-        adView()
-    }
-
-    private fun adView() {
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
     }
 
     private fun notificationPermission() {

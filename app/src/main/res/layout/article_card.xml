@@ -103,20 +103,27 @@
             android:gravity="right"
             android:orientation="vertical">
 
-            <TextView
+            <com.webtoonscorp.android.readmore.ReadMoreTextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
-                android:background="@drawable/news_card_ripple"
-                android:gravity="right"
-                android:maxEms="20"
-                android:padding="14dp"
-                android:textColor="@color/newsDescription"
-                android:textColorLink="@color/textColorLink"
-                android:textIsSelectable="false"
-                android:textSize="16sp"
-                tools:maxLines="4"
+                android:padding="12dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:readLessText="رؤية أقل"
+                app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:readLessTextColor="@color/colorPrimary"
+                app:readLessTextSize="16sp"
+                app:readLessTextStyle="bold"
+                app:readLessTypeface="normal"
+                app:readMoreMaxLines="3"
+                app:readMoreOverflow="ellipsis"
+                app:readMoreText="رؤية المزيد"
+                app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:readMoreTextColor="@color/colorPrimary"
+                app:readMoreTextSize="16sp"
+                app:readMoreTextStyle="bold"
+                app:readMoreTypeface="normal"
                 tools:text="@string/description" />
 
             <ImageView
@@ -125,9 +132,9 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@null"
-                android:visibility="gone"
                 android:scaleType="fitXY"
-                android:src="@color/image_bg"/>
+                android:src="@color/image_bg"
+                android:visibility="gone" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"
