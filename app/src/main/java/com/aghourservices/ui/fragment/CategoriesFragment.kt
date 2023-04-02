@@ -1,8 +1,6 @@
 package com.aghourservices.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +12,7 @@ import com.aghourservices.data.model.Device
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapter.CategoriesAdapter
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
-import com.aghourservices.ui.main.cache.UserInfo.getUserData
-import com.aghourservices.ui.main.cache.UserInfo.saveFCMToken
 import com.aghourservices.ui.viewModel.CategoriesViewModel
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 
 class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
@@ -40,7 +34,7 @@ class CategoriesFragment : BaseFragment() {
     }
 
     private fun initCategoryObserve() {
-        activity?.let { categoriesViewModel.loadCategories(it, getFCMToken(requireContext())) }
+        activity?.let { categoriesViewModel.loadCategories(getFCMToken(requireContext())) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryAdapter.setCategories(it)
             progressBar()
@@ -49,7 +43,7 @@ class CategoriesFragment : BaseFragment() {
 
     private fun sendDevice(token: String) {
         val device = Device(token)
-        categoriesViewModel.sendDevice(requireContext(), device, token)
+        categoriesViewModel.sendDevice(device, token)
     }
 
     private fun initRecyclerView() {

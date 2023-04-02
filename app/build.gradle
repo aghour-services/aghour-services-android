@@ -24,16 +24,16 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField "String", "BASE_URL", "\"https://aghour-services.magdi.work/api/\""
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
-            resValue("string", "base_url", "http://192.168.1.12:8090/api/")
             resValue("string", "news_topic", "News-v2")
         }
 
         release {
+            buildConfigField "String", "BASE_URL", "\"https://aghour-services.magdi.work/api/\""
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "false")
             resValue("bool", "ENABLE_ADS", "true")
-            resValue("string", "base_url", "http://192.168.1.12:8090/api/")
             resValue("string", "news_topic", "News-v2")
             minifyEnabled true
             shrinkResources true

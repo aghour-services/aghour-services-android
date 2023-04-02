@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Article
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.newsApi
 import com.aghourservices.databinding.FragmentEditArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.interfaces.AlertDialog
@@ -56,7 +56,7 @@ class EditArticleFragment : BaseFragment(), ShowSoftKeyboard {
         val userDetails = UserInfo.getUserData(requireContext())
         article.description = binding.articleTv.text.toString().trim()
 
-        val retrofitBuilder = RetrofitInstance(requireContext()).newsApi.updateArticle(
+        val retrofitBuilder = newsApi.updateArticle(
             arguments.articleId,
             userDetails.token,
             article.toJsonObject(),

@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getUserProfile() {
         val userData = getUserData(this)
-        val retrofitInstance = RetrofitInstance(this).userApi.userProfile(userData.token)
+        val retrofitInstance = userApi.userProfile(userData.token)
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 val profile = response.body()

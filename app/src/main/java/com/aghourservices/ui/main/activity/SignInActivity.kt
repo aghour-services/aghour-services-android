@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.User
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.ui.main.cache.UserInfo.saveUserData
 import com.aghourservices.utils.ads.Banner
@@ -145,7 +145,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun loginUser(user: User) {
         progressDialog.show(getString(R.string.logging_in))
-        val retrofitBuilder = RetrofitInstance(this).userApi.signIn(user.userObject())
+        val retrofitBuilder = userApi.signIn(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {

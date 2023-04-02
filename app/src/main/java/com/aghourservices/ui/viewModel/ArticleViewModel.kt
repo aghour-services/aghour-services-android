@@ -6,7 +6,8 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Article
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.likeApi
+import com.aghourservices.data.request.RetrofitInstance.newsApi
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import retrofit2.Call
@@ -18,7 +19,7 @@ class ArticleViewModel : ViewModel() {
     var newsList: ArrayList<Article> = ArrayList()
 
     fun loadArticles(context: Context, userToken: String, fcmToken: String) {
-        val retrofitBuilder = RetrofitInstance(context).newsApi.loadArticles(userToken, fcmToken)
+        val retrofitBuilder = newsApi.loadArticles(userToken, fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Article>?> {
             override fun onResponse(
@@ -45,7 +46,7 @@ class ArticleViewModel : ViewModel() {
     ) {
         val articleId = articlesAdapter.getArticle(position).id
 
-        val retrofitBuilder = RetrofitInstance(context).newsApi.deleteArticle(
+        val retrofitBuilder = newsApi.deleteArticle(
             articleId,
             userToken,
             UserInfo.getFCMToken(context)
@@ -66,7 +67,6 @@ class ArticleViewModel : ViewModel() {
     }
 
     fun likeArticle(
-        context: Context,
         userToken: String,
         articlesAdapter: ArticlesAdapter,
         position: Int
@@ -74,8 +74,6 @@ class ArticleViewModel : ViewModel() {
         val article = articlesAdapter.getArticle(position)
         article.liked = true
 
-        val retrofitInstance = RetrofitInstance(context)
-        val likeApi = retrofitInstance.likeApi
         val request = likeApi.likeArticle(article.id, userToken)
 
         request.enqueue(object : Callback<Article> {
@@ -95,16 +93,12 @@ class ArticleViewModel : ViewModel() {
     }
 
     fun unLikeArticle(
-        context: Context,
         userToken: String,
         articlesAdapter: ArticlesAdapter,
         position: Int
     ) {
         val article = articlesAdapter.getArticle(position)
         article.liked = false
-
-        val retrofitInstance = RetrofitInstance(context)
-        val likeApi = retrofitInstance.likeApi
         val request = likeApi.unLikeArticle(article.id, userToken)
 
         request.enqueue(object : Callback<Article> {

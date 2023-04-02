@@ -8,7 +8,7 @@ import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Comment
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.commentsApi
 import com.aghourservices.databinding.FragmentEditCommentBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.interfaces.AlertDialog
@@ -58,7 +58,7 @@ class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
         val userDetails = UserInfo.getUserData(requireContext())
         comment.body = binding.commentTv.text.toString().trim()
 
-        val retrofitBuilder = RetrofitInstance(requireContext()).commentsApi.updateComment(
+        val retrofitBuilder = commentsApi.updateComment(
             arguments.articleId,
             arguments.commentId,
             userDetails.token,

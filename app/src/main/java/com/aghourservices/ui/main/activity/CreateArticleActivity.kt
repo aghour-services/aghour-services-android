@@ -17,7 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityCreateArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
@@ -179,7 +179,7 @@ class CreateArticleActivity : AppCompatActivity() {
     }
 
     private fun getUserProfile() {
-        val retrofitInstance = RetrofitInstance(this).userApi.userProfile(user.token)
+        val retrofitInstance = userApi.userProfile(user.token)
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(
                 call: Call<Profile>,

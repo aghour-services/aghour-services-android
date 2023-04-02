@@ -159,14 +159,12 @@ class ArticleFragment : BaseFragment() {
         } else {
             if (article.liked) {
                 articleViewModel.unLikeArticle(
-                    requireContext(),
                     userToken,
                     articlesAdapter,
                     position
                 )
             } else {
                 articleViewModel.likeArticle(
-                    requireContext(),
                     userToken,
                     articlesAdapter,
                     position

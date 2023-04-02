@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
 import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Firm
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.firmsApi
 import com.aghourservices.databinding.ActivityAddDataBinding
 import com.aghourservices.ui.adapter.SpinnerCategoriesAdapter
 import com.aghourservices.ui.main.cache.UserInfo
@@ -94,7 +94,7 @@ class AddDataActivity : AppCompatActivity() {
     private fun createFirm(firm: Firm) {
         progressDialog.show(getString(R.string.adding_data))
         val user = getUserData(this)
-        val retrofitBuilder = RetrofitInstance(this).firmsApi.createFirm(
+        val retrofitBuilder = firmsApi.createFirm(
             firm.toJsonObject(),
             user.token,
             UserInfo.getFCMToken(this)
