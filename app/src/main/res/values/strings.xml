@@ -13,7 +13,7 @@
     <string name="aghour_logo">Aghour Logo</string>
     <string name="add_data">إضافة بيانات</string>
 
-    <string name="add_article_hint">إضافة خبر جديد في أجهور .</string>
+    <string name="add_article_hint">أكتب شيئا .</string>
     <string name="publish_article">نشر</string>
     <string name="use_app">
         من خلال استخدامك لتطبيق خدمات أجهور الكبرى هذا بمثابة دليل شامل للقرية، فالتطبيق يضم الكثير من التصنيفات
@@ -150,5 +150,14 @@
     <string name="invalid_name">الأسم مطلوب</string>
     <string name="or">أو</string>
     <string name="not_have_account_register_now">ليس لديك حساب؟  أنشئ حساب</string>
+    <string name="add_image">إضافة صورة</string>
+    <string name="clear_image">إزالة الصورة</string>
+    <string name="creating_account">جاري إنشاء الحساب…</string>
+    <string name="logging_in">جاري تسجيل الدخول…</string>
+    <string name="adding_data">جاري إضافة البيانات…</string>
+    <string name="creating_article">جاري إضافة الخبر…</string>
+    <string name="publish">نشر</string>
+    <string name="create_article_failed">فشل إنشاء الخبر</string>
+    <string name="try_again">حاول مرة تانية.</string>
 
 </resources>

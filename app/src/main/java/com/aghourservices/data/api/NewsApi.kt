@@ -2,6 +2,8 @@ package com.aghourservices.data.api
 
 import com.aghourservices.data.model.Article
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,11 +14,13 @@ interface NewsApi {
         @Header("fcmToken") fcmToken: String
     ): Call<ArrayList<Article>>
 
+    @Multipart
     @POST("articles")
     fun createArticle(
-        @Body article: JsonObject,
         @Header("TOKEN") token: String,
-        @Header("fcmToken") fcmToken: String
+        @Header("fcmToken") fcmToken: String,
+        @Part("article[description]") description: RequestBody,
+        @Part attachment: MultipartBody.Part?,
     ): Call<Article>
 
     @PUT("articles/{article_id}")

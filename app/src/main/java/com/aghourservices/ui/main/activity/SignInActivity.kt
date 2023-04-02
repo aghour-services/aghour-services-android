@@ -18,8 +18,7 @@ import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.ui.main.cache.UserInfo.saveUserData
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
-import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
+import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.errorLogin
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
 import com.google.android.gms.ads.AdView
@@ -30,6 +29,7 @@ import retrofit2.Response
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var adView: AdView
+    private val progressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,26 +144,26 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun loginUser(user: User) {
-        showProgressDialog(this)
+        progressDialog.show(getString(R.string.logging_in))
         val retrofitBuilder = RetrofitInstance(this).userApi.signIn(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.code() != 200) {
                     errorLogin(this@SignInActivity)
-                    hideProgressDialog()
+                    progressDialog.hide()
                     return
                 }
                 val responseUser = response.body() as User
                 saveUserData(this@SignInActivity, responseUser)
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-                hideProgressDialog()
+                progressDialog.hide()
                 finish()
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 noInternet(this@SignInActivity)
-                hideProgressDialog()
+                progressDialog.hide()
             }
         })
     }

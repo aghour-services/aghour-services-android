@@ -13,8 +13,7 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.ProgressDialog.hideProgressDialog
-import com.aghourservices.utils.helper.ProgressDialog.showProgressDialog
+import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.dataAdded
 import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
@@ -28,6 +27,7 @@ class AddDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
     private lateinit var adView: AdView
+    private val progressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,7 @@ class AddDataActivity : AppCompatActivity() {
         binding.apply {
 
             backBtn.setOnClickListener {
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             }
 
             btnRegister.setOnClickListener {
@@ -92,7 +92,7 @@ class AddDataActivity : AppCompatActivity() {
     }
 
     private fun createFirm(firm: Firm) {
-        showProgressDialog(this)
+        progressDialog.show(getString(R.string.adding_data))
         val user = getUserData(this)
         val retrofitBuilder = RetrofitInstance(this).firmsApi.createFirm(
             firm.toJsonObject(),
@@ -109,7 +109,7 @@ class AddDataActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Firm>, t: Throwable) {
                 noInternet(this@AddDataActivity)
-                hideProgressDialog()
+                progressDialog.hide()
             }
         })
     }
@@ -128,7 +128,7 @@ class AddDataActivity : AppCompatActivity() {
             description.text?.clear()
             phoneNumber.text?.clear()
         }
-        hideProgressDialog()
+        progressDialog.hide()
     }
 
     private fun hideUserAddData() {

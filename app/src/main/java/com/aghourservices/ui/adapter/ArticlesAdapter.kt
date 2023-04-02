@@ -13,6 +13,8 @@ import com.aghourservices.databinding.ArticleCardBinding
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.ads.NativeAdViewHolder
 import com.aghourservices.utils.helper.Intents
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class ArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
@@ -80,6 +82,17 @@ class ArticlesAdapter(
         fun setNewsList(article: Article) {
             val profile = UserInfo.getUserID(binding.root.context)
 
+            article.attachments?.forEach { attachment ->
+                binding.articleImage.isVisible = true
+                Glide.with(binding.root.context)
+                    .load(attachment.resource_url)
+                    .placeholder(R.color.image_bg)
+                    .error(R.drawable.ic_error)
+                    .encodeQuality(100)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.articleImage)
+            }
+
             binding.userName.apply {
                 text = article.user?.name
                 if (article.user?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -129,7 +142,11 @@ class ArticlesAdapter(
 
             if (article.likes_count > 0) {
                 binding.likesCount.text = if (article.liked) {
-                    "أنت و ${article.likes_count - 1} أخرين "
+                    if (article.likes_count == 1) {
+                        "أنت"
+                    } else {
+                        "أنت و ${article.likes_count - 1} أخرين "
+                    }
                 } else {
                     article.likes_count.toString()
                 }

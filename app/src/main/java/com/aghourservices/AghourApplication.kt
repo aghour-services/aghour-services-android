@@ -1,12 +1,14 @@
-package com.aghourservices.data.db
+package com.aghourservices
 
 import android.app.Application
+import com.aghourservices.ui.main.notification.Notification
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-class RealmApp: Application() {
+class AghourApplication: Application() {
     override fun onCreate() {
         super.onCreate()
+        Notification.createNotificationChannel(this)
 
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()

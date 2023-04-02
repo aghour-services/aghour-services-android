@@ -20,6 +20,9 @@ class RetrofitInstance(context: Context) {
             .addInterceptor(logging)
             .callTimeout(1, TimeUnit.MINUTES)
             .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
+            .retryOnConnectionFailure(true)
             .build()
 
         Retrofit.Builder()

@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.aghourservices.R
 import com.aghourservices.utils.helper.Event
-import com.google.android.material.bottomappbar.BottomAppBar
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -17,24 +17,36 @@ import com.google.android.material.snackbar.Snackbar
 open class BaseFragment : Fragment() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var fabButton: FloatingActionButton
+    lateinit var appCompactActivity: AppCompatActivity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Event.sendScreenName(this::class.simpleName.toString())
+        appCompactActivity = activity as AppCompatActivity
         bottomNavigationView = activity?.findViewById(R.id.bottomView) as BottomNavigationView
         fabButton = activity?.findViewById(R.id.floatingActionButton) as FloatingActionButton
+        clearGlideMemory()
+        backBtnIndicator()
+    }
 
+    private fun clearGlideMemory() {
+        Glide.get(requireContext()).clearMemory()
+    }
+
+    private fun backBtnIndicator() {
+        appCompactActivity.supportActionBar?.apply {
+            setHomeAsUpIndicator(R.drawable.ic_arrow)
+        }
     }
 
     fun showToolbar() {
-        val activity = activity as AppCompatActivity
-        activity.supportActionBar?.show()
+        appCompactActivity.supportActionBar?.apply { show() }
     }
 
     fun hideToolbar() {
-        val activity = activity as AppCompatActivity
-        activity.supportActionBar?.hide()
+        appCompactActivity.supportActionBar?.apply { hide() }
     }
+
 
     fun showBottomNavigation() {
         bottomNavigationView.isVisible = true

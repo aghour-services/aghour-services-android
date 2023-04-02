@@ -11,6 +11,9 @@ class Constants {
         const val MOBILE_KEY = "mobile"
         const val TOKEN_KEY = "token"
         const val EMAIL_KEY = "email"
-        const val APP_UPDATE_REQUEST_CODE = 999
+        const val REQUEST_CODE = 999
+        const val GALLERY_CODE = 8
+        const val CHANNEL_ID = "Create Article Service"
+        const val NOTIFICATION_ID = 12313
     }
 }

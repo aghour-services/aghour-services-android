@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/recyclerViewBg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/firmsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBg"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/about_app_back_ripple"
+            android:padding="10dp"
+            android:src="@drawable/ic_back_settings" />
+
+        <TextView
+            android:id="@+id/toolBarTv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/back_btn"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/add_article"
+            android:textColor="@color/toolbarText"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/publish_btn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:enabled="false"
+            android:text="@string/publish"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:background="?android:selectableItemBackground"
+            app:icon="@drawable/ic_send"
+            app:iconGravity="end"
+            app:iconPadding="10dp"
+            app:iconSize="30dp"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/user_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:paddingRight="6dp"
+                    android:textColor="@color/dialogText"
+                    android:textSize="16sp"
+                    app:drawableLeftCompat="@drawable/ic_verified"
+                    tools:text="Mohamed Magdy" />
+
+                <ImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:src="@mipmap/user"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/article_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="right"
+                android:hint="@string/add_article_hint"
+                android:padding="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColorHint="@color/dialogText"
+                android:textSize="16sp" />
+
+            <requestFocus />
+
+            <ImageView
+                android:id="@+id/article_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                tools:src="@mipmap/ic_launcher" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add_image_btn"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:drawableLeft="@drawable/add_photo"
+        android:padding="12dp"
+        android:text="@string/add_image"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:drawableTint="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/ad_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/admob_banner" />
+    </FrameLayout>
+</LinearLayout>
