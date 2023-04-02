@@ -18,7 +18,6 @@ import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.viewModel.SearchViewModel
 import com.aghourservices.utils.helper.CheckNetworkLiveData
 import com.aghourservices.utils.helper.Event
-import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.interfaces.ShowSoftKeyboard
 
 class SearchFragment : BaseFragment(), ShowSoftKeyboard {
@@ -53,16 +52,16 @@ class SearchFragment : BaseFragment(), ShowSoftKeyboard {
         }
 
         binding.searchText.setOnClickListener {
-            activity?.let { it -> searchViewModel.search(it, searchText,
-                UserInfo.getFCMToken(requireContext())
+            activity?.let { it -> searchViewModel.search(
+                searchText, UserInfo.getFCMToken(requireContext())
             ) }
         }
 
         binding.searchText.doOnTextChanged { text, _, _, _ ->
             val searchKeyWord = text.toString()
             if (searchKeyWord.length > 2) {
-                activity?.let { searchViewModel.search(it, searchKeyWord,
-                    UserInfo.getFCMToken(requireContext())
+                activity?.let { searchViewModel.search(
+                    searchKeyWord, UserInfo.getFCMToken(requireContext())
                 ) }
             }
         }
@@ -80,8 +79,8 @@ class SearchFragment : BaseFragment(), ShowSoftKeyboard {
         val searchText = binding.searchText.text.toString()
 
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        activity?.let { searchViewModel.search(it, searchText,
-            UserInfo.getFCMToken(requireContext())
+        activity?.let { searchViewModel.search(
+            searchText, UserInfo.getFCMToken(requireContext())
         ) }
 
         searchViewModel.searchLiveData.observe(viewLifecycleOwner) {

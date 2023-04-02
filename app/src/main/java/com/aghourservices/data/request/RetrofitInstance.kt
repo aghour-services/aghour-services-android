@@ -1,7 +1,6 @@
 package com.aghourservices.data.request
 
-import android.content.Context
-import com.aghourservices.R
+import com.aghourservices.BuildConfig
 import com.aghourservices.data.api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,8 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RetrofitInstance(context: Context) {
-    private val baseUrl = context.getString(R.string.base_url)
+object RetrofitInstance {
 
     private val retrofit: Retrofit by lazy {
         val logging = HttpLoggingInterceptor()
@@ -27,7 +25,7 @@ class RetrofitInstance(context: Context) {
 
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .build()
     }

@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Comment
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.commentsApi
 import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.helper.Event
@@ -22,8 +22,7 @@ class CommentsViewModel : ViewModel() {
     var addCommentList: Comment = Comment()
 
     fun loadComments(context: Context, articleId: Int, fcmToken: String) {
-        val retrofitBuilder =
-            RetrofitInstance(context).commentsApi.loadComments(articleId, fcmToken)
+        val retrofitBuilder = commentsApi.loadComments(articleId, fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Comment>> {
             override fun onResponse(
@@ -48,7 +47,7 @@ class CommentsViewModel : ViewModel() {
         commentsAdapter: CommentsAdapter,
         comment: Comment
     ) {
-        val retrofitBuilder = RetrofitInstance(context).commentsApi.postComment(
+        val retrofitBuilder = commentsApi.postComment(
             articleId,
             userToken,
             comment.toJsonObject(),
@@ -82,7 +81,7 @@ class CommentsViewModel : ViewModel() {
         commentsAdapter: CommentsAdapter
     ) {
 
-        val retrofitBuilder = RetrofitInstance(context).commentsApi.deleteComment(
+        val retrofitBuilder = commentsApi.deleteComment(
             articleId,
             commentId,
             userToken,

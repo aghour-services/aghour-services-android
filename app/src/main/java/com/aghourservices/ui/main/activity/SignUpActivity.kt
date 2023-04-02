@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.User
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySignUpBinding
 import com.aghourservices.ui.main.cache.UserInfo.saveUserData
 import com.aghourservices.utils.ads.Banner
@@ -157,7 +157,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun createUser(user: User) {
         progressDialog.show(getString(R.string.creating_account))
-        val retrofitBuilder = RetrofitInstance(this).userApi.signUp(user.userObject())
+        val retrofitBuilder = userApi.signUp(user.userObject())
 
         retrofitBuilder.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {

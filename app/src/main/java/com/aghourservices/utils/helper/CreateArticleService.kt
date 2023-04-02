@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.newsApi
 import com.aghourservices.ui.main.notification.Notification.notificationManager
 import com.aghourservices.ui.main.notification.Notification.sendNotification
 import com.aghourservices.utils.helper.Constants.Companion.NOTIFICATION_ID
@@ -32,7 +32,7 @@ class CreateArticleService : Service() {
     ) {
         val startIntent = Intent(context, CreateArticleService::class.java)
         val descriptionBody = description.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
-        val retrofitBuilder = RetrofitInstance(context).newsApi.createArticle(
+        val retrofitBuilder = newsApi.createArticle(
             userToken,
             fcmToken,
             descriptionBody,
@@ -66,7 +66,6 @@ class CreateArticleService : Service() {
 
         ContextCompat.startForegroundService(context, startIntent)
     }
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

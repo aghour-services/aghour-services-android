@@ -1,10 +1,9 @@
 package com.aghourservices.ui.viewModel
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Firm
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.firmsApi
 import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,9 +14,8 @@ class FirmsViewModel : ViewModel() {
     var firmsLiveData = MutableLiveData<ArrayList<Firm>>()
     var firmsList: ArrayList<Firm> = ArrayList()
 
-    fun loadFirms(context: Context, categoryId: Int, tagsAsParameter: String, fcmToken: String) {
-        val retrofitBuilder =
-            RetrofitInstance(context).firmsApi.loadFirms(categoryId, tagsAsParameter, fcmToken)
+    fun loadFirms(categoryId: Int, tagsAsParameter: String, fcmToken: String) {
+        val retrofitBuilder = firmsApi.loadFirms(categoryId, tagsAsParameter, fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Firm>?> {
             override fun onResponse(

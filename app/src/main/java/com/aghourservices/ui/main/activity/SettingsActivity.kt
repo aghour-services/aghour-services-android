@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySettingsBinding
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
@@ -101,7 +101,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun getProfile() {
-        val retrofitInstance = RetrofitInstance(this).userApi.userProfile(user.token)
+        val retrofitInstance = userApi.userProfile(user.token)
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {

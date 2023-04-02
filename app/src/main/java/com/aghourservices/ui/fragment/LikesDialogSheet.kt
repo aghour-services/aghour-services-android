@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.data.model.User
-import com.aghourservices.data.request.RetrofitInstance
+import com.aghourservices.data.request.RetrofitInstance.likeApi
 import com.aghourservices.databinding.LikesDialogSheetBinding
 import com.aghourservices.ui.adapter.LikesAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -68,7 +68,7 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
     }
 
     private fun getLikes() {
-        val retrofitBuilder = RetrofitInstance(requireContext()).likeApi.getLikes(
+        val retrofitBuilder = likeApi.getLikes(
             arguments.articleId,
         )
 
