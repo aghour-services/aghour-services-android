@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.request.RetrofitInstance.newsApi
 import com.aghourservices.ui.main.notification.Notification.notificationManager
@@ -40,31 +40,32 @@ class CreateArticleService : Service() {
         )
         retrofitBuilder.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                if (response.isSuccessful) {
+                Log.d("RESPONSE_CODE", "onResponse: ${response.code()}")
+                if (response.code() == 201) {
                     if (isVerified == true){
                         val updatedNotification =
-                            sendNotification(context, "ماشي يعم الأدمن 😃❤", "تم إنشاء الخبر بنجاح")
+                            sendNotification(context.applicationContext, "ماشي يعم الأدمن 😃❤", "تم إنشاء الخبر بنجاح")
                         notificationManager.notify(NOTIFICATION_ID, updatedNotification)
                     }else{
                         val updatedNotification =
-                            sendNotification(context, "تم إرسال الخبر", "هنراجع البيانات وهنضيفه في أقرب وقت")
+                            sendNotification(context.applicationContext, "تم إرسال الخبر", "هنراجع البيانات وهنضيفه في أقرب وقت")
                         notificationManager.notify(NOTIFICATION_ID, updatedNotification)
                     }
                 }else{
                     val updatedNotification =
-                        sendNotification(context, getString(R.string.create_article_failed), getString(R.string.try_again))
+                        sendNotification(context.applicationContext, "فشل إنشاء الخبر", "حاول مرة تانية.")
                     notificationManager.notify(NOTIFICATION_ID, updatedNotification)
                 }
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
                 val updatedNotification =
-                    sendNotification(context, getString(R.string.create_article_failed), getString(R.string.try_again))
+                    sendNotification(context.applicationContext, "فشل إنشاء الخبر", "لا يوجد إنترنت.")
                 notificationManager.notify(NOTIFICATION_ID, updatedNotification)
             }
         })
 
-        ContextCompat.startForegroundService(context, startIntent)
+        ContextCompat.startForegroundService(context.applicationContext, startIntent)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

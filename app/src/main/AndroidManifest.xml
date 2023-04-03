@@ -20,12 +20,13 @@
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.LightApp"
         android:usesCleartextTraffic="true"
-        tools:targetApi="s">
+        tools:targetApi="tiramisu">
         <activity
             android:name="com.aghourservices.ui.main.activity.SplashScreen"
             android:exported="true"
