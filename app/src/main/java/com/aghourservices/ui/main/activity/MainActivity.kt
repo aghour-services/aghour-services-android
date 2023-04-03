@@ -16,14 +16,13 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
-import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityMainBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragment.CategoriesFragmentDirections
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.saveFCMToken
-import com.aghourservices.ui.main.cache.UserInfo.saveUserID
+import com.aghourservices.ui.main.cache.UserInfo.saveProfile
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 val profile = response.body()
 
                 if (response.isSuccessful) {
-                    saveUserID(this@MainActivity, profile?.id!!)
+                    saveProfile(this@MainActivity, profile?.id!!, profile.name, profile.is_verified)
                     Log.d("Profile", "onResponse: ${profile.id}")
                 }
             }

@@ -80,7 +80,7 @@ class ArticlesAdapter(
 
         @SuppressLint("SetTextI18n")
         fun setNewsList(article: Article) {
-            val profile = UserInfo.getUserID(binding.root.context)
+            val profile = UserInfo.getProfile(binding.root.context)
 
             article.attachments?.forEach { attachment ->
                 binding.articleImage.isVisible = true

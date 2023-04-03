@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.Comment
 import com.aghourservices.databinding.CommentCardBinding
-import com.aghourservices.ui.main.cache.UserInfo.getUserID
+import com.aghourservices.ui.main.cache.UserInfo.getProfile
 
 class CommentsAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
@@ -62,7 +62,7 @@ class CommentsAdapter(
         }
 
         fun setCommentView(comment: Comment) {
-            val profile = getUserID(binding.root.context)
+            val profile = getProfile(binding.root.context)
 
             binding.apply {
                 body.text = comment.body

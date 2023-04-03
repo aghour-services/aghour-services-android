@@ -11,17 +11,19 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityCreateArticleBinding
 import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getProfile
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
+import com.aghourservices.ui.main.cache.UserInfo.saveProfile
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
@@ -44,6 +46,7 @@ class CreateArticleActivity : AppCompatActivity() {
     private lateinit var permissions: Array<String>
     private val isUserLogin by lazy { isUserLoggedIn(this@CreateArticleActivity) }
     private val user by lazy { getUserData(this@CreateArticleActivity) }
+    private val profile by lazy { getProfile(this@CreateArticleActivity) }
     private var imageUri: Uri? = null
     private var imagePart: MultipartBody.Part? = null
     private var isVerified: Boolean? = null
@@ -92,8 +95,8 @@ class CreateArticleActivity : AppCompatActivity() {
 
     private fun initPermissions() {
         permissions = arrayOf(
-            Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_MEDIA_LOCATION,
         )
     }
@@ -106,7 +109,7 @@ class CreateArticleActivity : AppCompatActivity() {
         return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
             ContextCompat.checkSelfPermission(
                 this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE
             ) == (PackageManager.PERMISSION_GRANTED)
         } else {
             true
@@ -187,14 +190,21 @@ class CreateArticleActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     val profile = response.body()
-                    isVerified = profile?.is_verified
-                    Log.d("USER", "onResponse: $isVerified")
-                    binding.userName.apply {
-                        text = profile?.name
-                        if (profile?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            tooltipText = context.getString(R.string.verified)
-                        } else {
-                            setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                    if (profile != null) {
+                        saveProfile(
+                            this@CreateArticleActivity,
+                            profile.id!!,
+                            profile.name,
+                            profile.is_verified
+                        )
+                        isVerified = profile.is_verified
+                        binding.userName.apply {
+                            text = profile.name
+                            if (profile.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                tooltipText = context.getString(R.string.verified)
+                            } else {
+                                setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                            }
                         }
                     }
                 }
@@ -204,6 +214,14 @@ class CreateArticleActivity : AppCompatActivity() {
                 call: Call<Profile>,
                 t: Throwable
             ) {
+                binding.userName.apply {
+                    text = profile.name
+                    if (profile.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        tooltipText = context.getString(R.string.verified)
+                    } else {
+                        setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                    }
+                }
             }
         })
     }

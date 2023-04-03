@@ -37,16 +37,20 @@ object UserInfo {
         editor.apply()
     }
 
-    fun getUserID(context: Context): Profile {
+    fun getProfile(context: Context): Profile {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val id = pref.getInt("id", 0)
-        return Profile(id)
+        val name = pref.getString("profile_name", "").toString()
+        val isVerified = pref.getBoolean("is_verified", false)
+        return Profile(id, name, isVerified)
     }
 
-    fun saveUserID(context: Context, id: Int) {
+    fun saveProfile(context: Context, id: Int, name: String, isVerified: Boolean) {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = pref.edit()
         editor.putInt("id", id)
+        editor.putString("profile_name", name)
+        editor.putBoolean("is_verified", isVerified)
         editor.apply()
     }
 

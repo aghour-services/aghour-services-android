@@ -11,8 +11,10 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.request.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySettingsBinding
+import com.aghourservices.ui.main.cache.UserInfo.getProfile
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
+import com.aghourservices.ui.main.cache.UserInfo.saveProfile
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.Intents.facebook
@@ -31,6 +33,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var adView: AdView
     private val user by lazy { getUserData(this) }
+    private val profile by lazy { getProfile(this) }
     private val isUserLogin by lazy { isUserLoggedIn(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,6 +111,12 @@ class SettingsActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val profile = response.body()
                     if (profile != null) {
+                        saveProfile(
+                            this@SettingsActivity,
+                            profile.id!!,
+                            profile.name,
+                            profile.is_verified
+                        )
                         binding.userName.apply {
                             text = profile.name
                             if (profile.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -116,7 +125,6 @@ class SettingsActivity : AppCompatActivity() {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                             }
                         }
-
                         binding.userMobile.text = user.mobile
                         binding.userEmail.text = user.email
                     }
@@ -124,6 +132,18 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
+                binding.apply {
+                    userMobile.text = user.mobile
+                    userEmail.text = user.email
+                }
+                binding.userName.apply {
+                    text = profile.name
+                    if (profile.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        tooltipText = context.getString(R.string.verified)
+                    } else {
+                        setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                    }
+                }
             }
         })
     }
