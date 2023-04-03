@@ -60,6 +60,7 @@ class CreateArticleActivity : AppCompatActivity() {
         getUserProfile()
         initUserClick()
         adView()
+        binding.userLayout.isVisible = isUserLogin
     }
 
     private fun adView() {
