@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", "\"http://192.168.1.12:8090/api/\""
+            buildConfigField "String", "BASE_URL", "\"https://aghour-services.magdi.work/api/\""
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
             resValue("string", "news_topic", "News-v2")
@@ -116,4 +116,6 @@ dependencies {
     // Google Play
     implementation 'com.google.android.play:core:1.10.3'
     implementation "com.webtoonscorp.android:readmore-view:1.3.2"
+
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }

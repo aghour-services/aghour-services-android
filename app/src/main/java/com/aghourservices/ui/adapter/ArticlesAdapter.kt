@@ -83,15 +83,14 @@ class ArticlesAdapter(
             val profile = UserInfo.getProfile(binding.root.context)
 
             article.attachments?.forEach { attachment ->
-                binding.articleImage.isVisible = true
                 Glide.with(binding.root.context)
                     .load(attachment.resource_url)
                     .placeholder(R.color.image_bg)
-                    .error(R.drawable.ic_error)
                     .encodeQuality(100)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(binding.articleImage)
             }
+            binding.articleImage.isVisible = article.attachments!!.isNotEmpty()
 
             binding.userName.apply {
                 text = article.user?.name
