@@ -21,6 +21,12 @@ interface NewsApi {
     @Header("fcmToken") fcmToken: String
     ): Call<Article>
 
+    @GET("articles/draft")
+    fun draftArticles(
+        @Header("TOKEN") userToken: String,
+        @Header("fcmToken") fcmToken: String
+    ): Call<ArrayList<Article>>
+
     @Multipart
     @POST("articles")
     fun createArticle(

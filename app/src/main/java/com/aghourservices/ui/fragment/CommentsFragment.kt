@@ -129,6 +129,8 @@ class CommentsFragment : BaseFragment() {
                                 .encodeQuality(100)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(articleImage)
+
+                            binding.articleImage.isVisible = attachment.resource_url.isNotEmpty()
                         }
                     }
                 }

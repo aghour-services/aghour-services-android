@@ -38,6 +38,26 @@ class ArticleViewModel : ViewModel() {
         })
     }
 
+    fun draftArticles(context: Context, userToken: String, fcmToken: String) {
+        val retrofitBuilder = newsApi.draftArticles(userToken, fcmToken)
+
+        retrofitBuilder.enqueue(object : Callback<ArrayList<Article>?> {
+            override fun onResponse(
+                call: Call<ArrayList<Article>?>,
+                response: Response<ArrayList<Article>?>,
+            ) {
+                if (response.isSuccessful) {
+                    newsLiveData.value = response.body()
+                    newsList = newsLiveData.value!!
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
+                com.aghourservices.utils.interfaces.AlertDialog.noInternet(context)
+            }
+        })
+    }
+
     fun deleteArticle(
         context: Context,
         userToken: String,

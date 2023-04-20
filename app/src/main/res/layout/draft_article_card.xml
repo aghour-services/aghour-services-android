@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp">
+
+    <RelativeLayout
+        android:id="@+id/news_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/firmsBg">
+
+        <LinearLayout
+            android:id="@+id/user_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="?android:selectableItemBackground"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingTop="12sp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:paddingRight="6dp"
+                    android:textColor="@color/dialogText"
+                    android:textSize="16sp"
+                    app:drawableLeftCompat="@drawable/ic_verified"
+                    tools:text="Mohamed Magdy" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/time"
+                    android:textSize="12sp"
+                    app:drawableTint="@color/time"
+                    tools:text="منذ ساعتين" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/user_icon"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@mipmap/user"
+                android:textSize="13sp"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/under_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/user_layout"
+            android:layout_centerHorizontal="true"
+            android:background="@color/lineView" />
+
+        <LinearLayout
+            android:id="@+id/article_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/under_line"
+            android:layout_centerHorizontal="true"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <com.webtoonscorp.android.readmore.ReadMoreTextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:background="?android:selectableItemBackground"
+                android:padding="12dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:readLessTextSize="16sp"
+                app:readLessTextStyle="bold"
+                app:readLessTypeface="normal"
+                app:readMoreMaxLines="4"
+                app:readMoreOverflow="ellipsis"
+                app:readMoreText="رؤية المزيد"
+                app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:readMoreTextColor="@color/colorPrimary"
+                app:readMoreTextSize="16sp"
+                app:readMoreTextStyle="bold"
+                app:readMoreTypeface="normal"
+                tools:text="@string/description" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/article_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@color/image_bg"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/publish_draft_article_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/article_layout"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/green"
+            android:drawableLeft="@drawable/ic_send"
+            android:padding="10dp"
+            android:text="@string/publish_article"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:drawableTint="@color/white" />
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

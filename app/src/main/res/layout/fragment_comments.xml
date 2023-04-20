@@ -130,10 +130,12 @@
                                 <com.github.chrisbanes.photoview.PhotoView
                                     android:id="@+id/article_image"
                                     android:layout_width="match_parent"
-                                    android:layout_height="380dp"
+                                    android:layout_height="wrap_content"
+                                    android:maxHeight="350dp"
                                     android:adjustViewBounds="true"
                                     android:contentDescription="@null"
                                     android:scaleType="fitXY"
+                                    android:visibility="gone"
                                     android:src="@color/image_bg" />
                             </LinearLayout>
 
