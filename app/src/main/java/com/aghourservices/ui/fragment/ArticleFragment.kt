@@ -76,15 +76,8 @@ class ArticleFragment : BaseFragment() {
     private fun onListItemClick(v: View, position: Int) {
         val article = articlesAdapter.getArticle(position)
         val userName = articlesAdapter.getArticle(position).user?.name!!
-        val time = articlesAdapter.getArticle(position).created_at
         val description = articlesAdapter.getArticle(position).description
-        val commentsFragment = ArticleFragmentDirections.actionNewsFragmentToCommentsFragment(
-            article.id,
-            userName,
-            time,
-            description,
-            article.user?.is_verified!!
-        )
+        val commentsFragment = ArticleFragmentDirections.actionNewsFragmentToCommentsFragment(article.id)
         val commentsDialogSheet = ArticleFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
             article.id,
             article.likes_count

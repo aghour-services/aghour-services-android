@@ -16,13 +16,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
+import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Comment
+import com.aghourservices.data.request.RetrofitInstance.newsApi
 import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapter.CommentsAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModel.CommentsViewModel
 import com.aghourservices.utils.interfaces.AlertDialog
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CommentsFragment : BaseFragment() {
     private var _binding: FragmentCommentsBinding? = null
@@ -42,6 +49,7 @@ class CommentsFragment : BaseFragment() {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         initRecyclerView()
         initCommentEdt()
+        showArticle()
         refresh()
         return binding.root
     }
@@ -49,7 +57,6 @@ class CommentsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
-        initArticleView()
     }
 
     override fun onResume() {
@@ -64,21 +71,6 @@ class CommentsFragment : BaseFragment() {
         binding.refreshComments.setOnRefreshListener {
             binding.refreshComments.isRefreshing = false
             loadComments()
-        }
-    }
-
-    private fun initArticleView() {
-        binding.apply {
-            articleUserName.apply {
-                text = arguments.userName
-                if (arguments.isVerified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    tooltipText = context.getString(R.string.verified)
-                } else {
-                    setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-                }
-            }
-            articleCreatedAt.text = arguments.time
-            articleDescription.text = arguments.description
         }
     }
 
@@ -104,6 +96,46 @@ class CommentsFragment : BaseFragment() {
                         }
                     }
                 }
+            }
+        })
+    }
+
+    private fun showArticle() {
+        val retrofitBuilder =
+            newsApi.showArticle(arguments.articleId, user.token, getFCMToken(requireContext()))
+
+        retrofitBuilder.enqueue(object : Callback<Article> {
+            override fun onResponse(
+                call: Call<Article>, response: Response<Article>
+            ) {
+                if (response.isSuccessful) {
+                    val article = response.body()
+                    binding.apply {
+                        articleUserName.apply {
+                            text = article?.user?.name
+                            if (article?.user?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                tooltipText = context.getString(R.string.verified)
+                            } else {
+                                setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                            }
+                        }
+                        articleCreatedAt.text = article?.created_at
+                        articleDescription.text = article?.description
+
+                        article?.attachments?.forEach { attachment ->
+                            Glide.with(articleImage)
+                                .load(attachment.resource_url)
+                                .placeholder(R.color.image_bg)
+                                .encodeQuality(100)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(articleImage)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Article>, t: Throwable) {
+                AlertDialog.noInternet(requireContext())
             }
         })
     }
@@ -193,6 +225,7 @@ class CommentsFragment : BaseFragment() {
                         R.id.edit -> {
                             findNavController().navigate(updateComment)
                         }
+
                         R.id.delete -> {
                             deleteCommentAlert(position)
                         }

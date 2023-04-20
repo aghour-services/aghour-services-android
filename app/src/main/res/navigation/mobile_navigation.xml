@@ -86,15 +86,6 @@
         <argument
             android:name="article_id"
             app:argType="integer" />
-        <argument
-            android:name="user_name"
-            app:argType="string" />
-        <argument
-            android:name="time"
-            app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
         <action
             android:id="@+id/action_commentsFragment_to_updateCommentFragment"
             app:destination="@id/updateCommentFragment"
@@ -102,9 +93,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="is_verified"
-            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/updateCommentFragment"
