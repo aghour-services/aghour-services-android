@@ -56,6 +56,13 @@
         <action
             android:id="@+id/action_newsFragment_to_commentsDialogSheet"
             app:destination="@id/commentsDialogSheet" />
+        <action
+            android:id="@+id/action_newsFragment_to_draftArticlesFragment"
+            app:destination="@id/draftArticlesFragment"
+            app:enterAnim="@anim/fragment_enter"
+            app:exitAnim="@anim/fragment_exit"
+            app:popEnterAnim="@anim/fragment_enter_pop"
+            app:popExitAnim="@anim/fragment_exit_pop" />
     </fragment>
 
     <fragment
@@ -86,15 +93,6 @@
         <argument
             android:name="article_id"
             app:argType="integer" />
-        <argument
-            android:name="user_name"
-            app:argType="string" />
-        <argument
-            android:name="time"
-            app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
         <action
             android:id="@+id/action_commentsFragment_to_updateCommentFragment"
             app:destination="@id/updateCommentFragment"
@@ -102,9 +100,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="is_verified"
-            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/updateCommentFragment"
@@ -146,9 +141,9 @@
     </fragment>
     <dialog
         android:id="@+id/likesDialogSheet"
-        tools:layout="@layout/likes_dialog_sheet"
         android:name="com.aghourservices.ui.fragment.LikesDialogSheet"
-        android:label="UsersLikesFragment" >
+        android:label="UsersLikesFragment"
+        tools:layout="@layout/likes_dialog_sheet">
 
         <argument
             android:name="article_id"
@@ -161,9 +156,9 @@
     </dialog>
     <dialog
         android:id="@+id/commentsDialogSheet"
-        tools:layout="@layout/comments_dialog_sheet"
         android:name="com.aghourservices.ui.fragment.CommentsDialogSheet"
-        android:label="CommentsDialogSheet" >
+        android:label="CommentsDialogSheet"
+        tools:layout="@layout/comments_dialog_sheet">
         <argument
             android:name="articleId"
             app:argType="integer" />
@@ -179,6 +174,10 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </dialog>
+    <fragment
+        android:id="@+id/draftArticlesFragment"
+        android:name="com.aghourservices.ui.fragment.DraftArticlesFragment"
+        android:label="الأخبار المؤجلة" />
 </navigation>

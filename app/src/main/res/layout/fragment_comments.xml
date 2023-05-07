@@ -104,21 +104,39 @@
                                 app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
                                 app:layout_constraintTop_toBottomOf="@+id/user_layout">
 
-                                <TextView
+                                <com.webtoonscorp.android.readmore.ReadMoreTextView
                                     android:id="@+id/article_description"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:autoLink="all"
                                     android:background="?android:selectableItemBackground"
-                                    android:gravity="right"
-                                    android:padding="14dp"
-                                    android:textColor="@color/newsDescription"
-                                    android:textColorLink="@color/textColorLink"
-                                    android:textIsSelectable="false"
-                                    android:textSize="16sp"
-                                    tools:maxLines="4"
+                                    android:padding="12dp"
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                    app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
+                                    app:readLessTextColor="@color/colorPrimary"
+                                    app:readLessTextSize="16sp"
+                                    app:readLessTextStyle="bold"
+                                    app:readLessTypeface="normal"
+                                    app:readMoreMaxLines="4"
+                                    app:readMoreOverflow="ellipsis"
+                                    app:readMoreText="رؤية المزيد"
+                                    app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
+                                    app:readMoreTextColor="@color/colorPrimary"
+                                    app:readMoreTextSize="16sp"
+                                    app:readMoreTextStyle="bold"
+                                    app:readMoreTypeface="normal"
                                     tools:text="@string/description" />
 
+                                <com.github.chrisbanes.photoview.PhotoView
+                                    android:id="@+id/article_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxHeight="350dp"
+                                    android:adjustViewBounds="true"
+                                    android:contentDescription="@null"
+                                    android:scaleType="fitXY"
+                                    android:visibility="gone"
+                                    android:src="@color/image_bg" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -131,6 +149,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/recyclerViewBg"
                         android:orientation="vertical"
+                        android:paddingTop="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

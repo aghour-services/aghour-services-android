@@ -11,11 +11,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
+import com.aghourservices.data.model.Profile
+import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentArticlesBinding
 import com.aghourservices.ui.adapter.ArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.viewModel.ArticleViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ArticleFragment : BaseFragment() {
     private lateinit var binding: FragmentArticlesBinding
@@ -32,6 +37,7 @@ class ArticleFragment : BaseFragment() {
         requireActivity().title = getString(R.string.news_fragment)
         initRecyclerView()
         initNewsObserve()
+        getProfile()
         refresh()
         return binding.root
     }
@@ -39,6 +45,10 @@ class ArticleFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showBottomNavigation()
+
+        binding.draftArticlesBtn.setOnClickListener {
+            findNavController().navigate(ArticleFragmentDirections.actionNewsFragmentToDraftArticlesFragment())
+        }
     }
 
     private fun initRecyclerView() {
@@ -76,15 +86,9 @@ class ArticleFragment : BaseFragment() {
     private fun onListItemClick(v: View, position: Int) {
         val article = articlesAdapter.getArticle(position)
         val userName = articlesAdapter.getArticle(position).user?.name!!
-        val time = articlesAdapter.getArticle(position).created_at
         val description = articlesAdapter.getArticle(position).description
-        val commentsFragment = ArticleFragmentDirections.actionNewsFragmentToCommentsFragment(
-            article.id,
-            userName,
-            time,
-            description,
-            article.user?.is_verified!!
-        )
+        val commentsFragment =
+            ArticleFragmentDirections.actionNewsFragmentToCommentsFragment(article.id)
         val commentsDialogSheet = ArticleFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
             article.id,
             article.likes_count
@@ -99,12 +103,15 @@ class ArticleFragment : BaseFragment() {
             R.id.add_comment -> {
                 findNavController().navigate(commentsFragment)
             }
+
             R.id.user_layout -> {
                 findNavController().navigate(commentsFragment)
             }
+
             R.id.latest_comment_card -> {
                 findNavController().navigate(commentsFragment)
             }
+
             R.id.popup_menu -> {
                 val popup = PopupMenu(requireContext(), v)
                 popup.inflate(R.menu.popup_menu)
@@ -113,6 +120,7 @@ class ArticleFragment : BaseFragment() {
                         R.id.edit -> {
                             findNavController().navigate(editArticleFragment)
                         }
+
                         R.id.delete -> {
                             deleteArticleDialog(position)
                         }
@@ -121,10 +129,12 @@ class ArticleFragment : BaseFragment() {
                 }
                 popup.show()
             }
+
             R.id.like_article -> {
                 updateLikeArticle(position)
                 initNewsObserve()
             }
+
             R.id.article_count_layout -> {
                 findNavController().navigate(commentsDialogSheet)
             }
@@ -186,5 +196,17 @@ class ArticleFragment : BaseFragment() {
             newsShimmer.isVisible = false
             newsRecyclerview.isVisible = true
         }
+    }
+
+    private fun getProfile() {
+        val retrofitInstance = RetrofitInstance.userApi.userProfile(userToken)
+
+        retrofitInstance.enqueue(object : Callback<Profile> {
+            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+                binding.draftArticlesBtn.isVisible = response.body()?.is_verified == true
+            }
+
+            override fun onFailure(call: Call<Profile>, t: Throwable) {}
+        })
     }
 }

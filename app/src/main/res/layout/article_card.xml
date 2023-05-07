@@ -105,15 +105,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
+                android:background="?android:selectableItemBackground"
                 android:padding="12dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:readLessText="رؤية أقل"
                 app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:readLessTextColor="@color/colorPrimary"
                 app:readLessTextSize="16sp"
                 app:readLessTextStyle="bold"
                 app:readLessTypeface="normal"
-                app:readMoreMaxLines="3"
+                app:readMoreMaxLines="4"
                 app:readMoreOverflow="ellipsis"
                 app:readMoreText="رؤية المزيد"
                 app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
@@ -123,15 +123,14 @@
                 app:readMoreTypeface="normal"
                 tools:text="@string/description" />
 
-            <ImageView
+            <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/article_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@null"
                 android:scaleType="fitXY"
-                android:src="@color/image_bg"
-                android:visibility="gone" />
+                android:src="@color/image_bg" />
 
             <FrameLayout
                 android:id="@+id/ad_frame"

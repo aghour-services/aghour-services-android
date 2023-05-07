@@ -9,35 +9,25 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
-import com.aghourservices.databinding.ArticleCardBinding
-import com.aghourservices.ui.main.cache.UserInfo
-import com.aghourservices.utils.ads.NativeAdViewHolder
+import com.aghourservices.databinding.DraftArticleCardBinding
 import com.aghourservices.utils.helper.Intents
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class ArticlesAdapter(
+class DraftArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
-) : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>() {
+) : RecyclerView.Adapter<DraftArticlesAdapter.ArticlesViewHolder>() {
     private var articleList: ArrayList<Article> = ArrayList()
-    private var itemsCountToShowAds = 4
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
-        val view = ArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view =
+            DraftArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticlesViewHolder(view, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
         val article = articleList[position]
         holder.setNewsList(article)
-
-        if (getItemViewType(position) == 0) {
-            NativeAdViewHolder(holder.binding.root.context, holder.binding.adFrame)
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return (position + 1) % (itemsCountToShowAds + 1)
     }
 
     override fun getItemCount(): Int {
@@ -65,23 +55,18 @@ class ArticlesAdapter(
     }
 
     inner class ArticlesViewHolder(
-        val binding: ArticleCardBinding,
+        val binding: DraftArticleCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
-            binding.addComment.setOnClickListener(this)
-            binding.popupMenu.setOnClickListener(this)
             binding.userLayout.setOnClickListener(this)
-            binding.likeArticle.setOnClickListener(this)
-            binding.articleCountLayout.setOnClickListener(this)
-            binding.latestCommentCard.setOnClickListener(this)
+            binding.publishDraftArticleBtn.setOnClickListener(this)
+            binding.draftArticlePopupMenu.setOnClickListener(this)
         }
 
         @SuppressLint("SetTextI18n")
         fun setNewsList(article: Article) {
-            val profile = UserInfo.getProfile(binding.root.context)
-
             article.attachments?.forEach { attachment ->
                 Glide.with(binding.root.context)
                     .load(attachment.resource_url)
@@ -109,47 +94,8 @@ class ArticlesAdapter(
                 }
             }
 
-            binding.likesCount.text = article.likes_count.toString()
-            binding.commentsCount.text = article.comments_count.toString()
             binding.date.text = article.created_at
-            binding.likeArticle.isChecked = article.liked
 
-            binding.commentsCard.isVisible =
-                !article.latest_comment?.user?.name.isNullOrEmpty() && !article.latest_comment?.body.isNullOrEmpty()
-
-            if (binding.commentsCard.isVisible) {
-                val commentUser = article.latest_comment?.user
-                binding.name.apply {
-                    text = commentUser?.name
-                    if (commentUser?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        tooltipText = context.getString(R.string.verified)
-                    } else {
-                        setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-                    }
-                }
-                binding.body.text = article.latest_comment?.body
-                binding.commentTime.text = article.latest_comment?.created_at
-            }
-
-            binding.shareArticle.setOnClickListener {
-                Intents.shareNews(article.description, itemView)
-            }
-
-            if (article.user?.id == profile.id) {
-                binding.popupMenu.isVisible = true
-            }
-
-            if (article.likes_count > 0) {
-                binding.likesCount.text = if (article.liked) {
-                    if (article.likes_count == 1) {
-                        "أنت"
-                    } else {
-                        "أنت و ${article.likes_count - 1} أخرين "
-                    }
-                } else {
-                    article.likes_count.toString()
-                }
-            }
         }
 
         override fun onClick(v: View) {

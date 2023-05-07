@@ -7,6 +7,7 @@ import org.json.JSONObject
 data class Article(
     var id: Int = 0,
     var description: String = "",
+    var status: String = "",
     var created_at: String = "",
     var likes_count: Int = 0,
     var comments_count: Int = 0,
@@ -19,6 +20,7 @@ data class Article(
         val articleObject = JsonObject()
         val article = JsonObject()
         article.addProperty("description", description)
+        article.addProperty("status", status)
         articleObject.add("article", article)
         return articleObject
     }
