@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
@@ -14,14 +16,14 @@ import com.aghourservices.databinding.FragmentDraftArticlesBinding
 import com.aghourservices.ui.adapter.DraftArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
-import com.aghourservices.ui.viewModel.ArticleViewModel
+import com.aghourservices.ui.viewModel.DraftArticlesViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DraftArticlesFragment : BaseFragment() {
     private lateinit var binding: FragmentDraftArticlesBinding
-    private val articleViewModel: ArticleViewModel by viewModels()
+    private val draftArticlesViewModel: DraftArticlesViewModel by viewModels()
     private val draftArticlesAdapter =
         DraftArticlesAdapter { view, position -> onListItemClick(view, position) }
     private val userToken: String by lazy { UserInfo.getUserData(requireContext()).token }
@@ -51,13 +53,13 @@ class DraftArticlesFragment : BaseFragment() {
     }
 
     private fun initDraftArticlesObserve() {
-        articleViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
+        draftArticlesViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
             draftArticlesAdapter.setArticles(articles)
             if (articles.isEmpty()) {
                 Toast.makeText(requireContext(), "لا توجد أخبار مؤجلة", Toast.LENGTH_SHORT).show()
             }
         }
-        articleViewModel.draftArticles(
+        draftArticlesViewModel.draftArticles(
             requireContext(),
             userToken,
             getFCMToken(requireContext())
@@ -70,6 +72,23 @@ class DraftArticlesFragment : BaseFragment() {
         when (v.id) {
             R.id.publish_draft_article_btn -> {
                 updateArticle(article, position)
+            }
+            R.id.popup_menu -> {
+                val popup = PopupMenu(requireContext(), v)
+                popup.inflate(R.menu.popup_menu)
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.edit -> {
+                            Toast.makeText(requireContext(), "Editing...", Toast.LENGTH_SHORT).show()
+                        }
+
+                        R.id.delete -> {
+                            deleteArticleDialog(position)
+                        }
+                    }
+                    true
+                }
+                popup.show()
             }
         }
     }
@@ -95,6 +114,24 @@ class DraftArticlesFragment : BaseFragment() {
                 Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun deleteArticleDialog(position: Int) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("حذف الخبر")
+        alertDialogBuilder.setMessage("أنت على وشك حذف الخبر")
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
+            draftArticlesViewModel.deleteArticle(
+                requireContext(),
+                userToken,
+                draftArticlesAdapter,
+                position
+            )
+        }
+        alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     override fun onDestroyView() {

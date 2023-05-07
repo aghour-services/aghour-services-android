@@ -132,10 +132,7 @@ object Intents {
     ) {
         val clipboardManager =
             itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText(
-            "Firms",
-            "$description \n ${itemView.context.getString(R.string.aghour_share_content)}"
-        )
+        val clip = ClipData.newPlainText("News", description)
         clipboardManager.setPrimaryClip(clip)
         Toast.makeText(itemView.context, "تم نسخ الخبر", Toast.LENGTH_LONG).show()
     }
@@ -151,7 +148,7 @@ object Intents {
             itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(
             "Firms",
-            "$name \n $address \n $description \n $phoneNumber \n ${itemView.context.getString(R.string.aghour_share_content)}"
+            "$name \n $address \n $description \n $phoneNumber"
         )
         clipboardManager.setPrimaryClip(clip)
         Toast.makeText(itemView.context, "تم نسخ المحتوى", Toast.LENGTH_LONG).show()

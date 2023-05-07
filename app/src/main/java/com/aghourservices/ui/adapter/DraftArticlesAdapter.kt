@@ -44,6 +44,16 @@ class DraftArticlesAdapter(
         return articleList[position]
     }
 
+    fun deleteArticle(position: Int) {
+        articleList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun updateArticle(position: Int, updatedArticle: Article) {
+        articleList[position] = updatedArticle
+        notifyItemChanged(position)
+    }
+
     inner class ArticlesViewHolder(
         val binding: DraftArticleCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
@@ -52,6 +62,7 @@ class DraftArticlesAdapter(
         init {
             binding.userLayout.setOnClickListener(this)
             binding.publishDraftArticleBtn.setOnClickListener(this)
+            binding.draftArticlePopupMenu.setOnClickListener(this)
         }
 
         @SuppressLint("SetTextI18n")

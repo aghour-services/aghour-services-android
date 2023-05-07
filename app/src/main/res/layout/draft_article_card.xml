@@ -12,11 +12,27 @@
         android:layout_height="wrap_content"
         android:background="@color/firmsBg">
 
+        <TextView
+            android:id="@+id/draft_article_popup_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/article_layout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/news_card_ripple"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="@string/popup"
+            android:textColor="@color/dialogText"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
         <LinearLayout
             android:id="@+id/user_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/draft_article_popup_menu"
             android:background="?android:selectableItemBackground"
             android:gravity="right"
             android:orientation="horizontal"
@@ -40,7 +56,6 @@
                     android:paddingRight="6dp"
                     android:textColor="@color/dialogText"
                     android:textSize="16sp"
-                    app:drawableLeftCompat="@drawable/ic_verified"
                     tools:text="Mohamed Magdy" />
 
                 <TextView
@@ -50,7 +65,7 @@
                     android:paddingTop="2dp"
                     android:paddingRight="10dp"
                     android:textColor="@color/time"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     app:drawableTint="@color/time"
                     tools:text="منذ ساعتين" />
             </LinearLayout>
@@ -60,7 +75,6 @@
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:src="@mipmap/user"
-                android:textSize="13sp"
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>
@@ -121,7 +135,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/article_layout"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/green"
             android:drawableLeft="@drawable/ic_send"
             android:padding="10dp"
