@@ -24,14 +24,13 @@ import com.aghourservices.ui.main.cache.UserInfo.getProfile
 import com.aghourservices.ui.main.cache.UserInfo.getUserData
 import com.aghourservices.ui.main.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.ui.main.cache.UserInfo.saveProfile
-import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.CreateArticleService
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
 import com.aghourservices.utils.interfaces.AlertDialog
-import com.google.android.gms.ads.AdView
+import com.yahiaangelo.markdownedittext.MarkdownEditText
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -42,7 +41,6 @@ import java.io.File
 
 class CreateArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateArticleBinding
-    private lateinit var adView: AdView
     private lateinit var permissions: Array<String>
     private val isUserLogin by lazy { isUserLoggedIn(this@CreateArticleActivity) }
     private val user by lazy { getUserData(this@CreateArticleActivity) }
@@ -59,13 +57,9 @@ class CreateArticleActivity : AppCompatActivity() {
         requestPermissions()
         getUserProfile()
         initUserClick()
-        adView()
         binding.userLayout.isVisible = isUserLogin
-    }
-
-    private fun adView() {
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
+        val markdownEditText = findViewById<MarkdownEditText>(R.id.article_edt)
+        markdownEditText.setStylesBar(binding.stylesBar)
     }
 
     private fun openGallery() {
