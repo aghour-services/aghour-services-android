@@ -13,7 +13,7 @@
     <color name="searchViewBg">#CBE8FF</color>
     <color name="clear">#C23939</color>
     <color name="lineView">#C5C5C5</color>
-    <color name="recyclerViewBg">#F4F4F4</color>
+    <color name="recyclerViewBg">#E6E6E6</color>
     <color name="splashScreenBg">#3C88C5</color>
     <color name="navHeaderBg">#387DB3</color>
     <color name="userNameColor">#121E27</color>

@@ -8,10 +8,16 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
+import com.aghourservices.data.model.Article
+import com.aghourservices.data.request.RetrofitInstance
 import com.aghourservices.databinding.FragmentDraftArticlesBinding
 import com.aghourservices.ui.adapter.DraftArticlesAdapter
 import com.aghourservices.ui.main.cache.UserInfo
+import com.aghourservices.ui.main.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModel.ArticleViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DraftArticlesFragment : BaseFragment() {
     private lateinit var binding: FragmentDraftArticlesBinding
@@ -54,12 +60,41 @@ class DraftArticlesFragment : BaseFragment() {
         articleViewModel.draftArticles(
             requireContext(),
             userToken,
-            UserInfo.getFCMToken(requireContext())
+            getFCMToken(requireContext())
         )
     }
 
     private fun onListItemClick(v: View, position: Int) {
         val article = draftArticlesAdapter.getArticle(position)
+
+        when (v.id) {
+            R.id.publish_draft_article_btn -> {
+                updateArticle(article, position)
+            }
+        }
+    }
+
+    private fun updateArticle(article: Article, position: Int) {
+        article.status = "published"
+        val retrofitInstance = RetrofitInstance.newsApi.updateArticle(
+            article.id,
+            userToken,
+            article.toJsonObject(),
+            getFCMToken(requireContext())
+        )
+
+        retrofitInstance.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(requireContext(), "تم نشر الخبر", Toast.LENGTH_SHORT).show()
+                    draftArticlesAdapter.notifyItemRemoved(position)
+                }
+            }
+
+            override fun onFailure(call: Call<Article>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onDestroyView() {

@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", "\"http://192.168.1.12:8090/api/\""
+            buildConfigField "String", "BASE_URL", "\"https://aghour-services.magdi.work/api/\""
             resValue("bool", "FIREBASE_ANALYTICS_DEACTIVATED", "true")
             resValue("bool", "ENABLE_ADS", "false")
             resValue("string", "news_topic", "News-v2")

@@ -55,16 +55,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/draft_articles_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="20dp"
+            android:layout_gravity="bottom"
+            android:backgroundTint="#F3DC16"
+            android:visibility="gone"
+            android:drawableLeft="@drawable/ic_drafts"
+            android:padding="10dp"
+            android:text="@string/draft_articles"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_below="@id/draft_articles_btn"
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:background="@color/recyclerViewBg"
                 android:orientation="vertical"
                 tools:listitem="@layout/article_card" />
@@ -72,22 +90,6 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/draft_articles_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:elevation="20dp"
-        android:layout_gravity="bottom"
-        android:backgroundTint="#F3DC16"
-        android:padding="10dp"
-        android:text="@string/draft_articles"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/noInternet"

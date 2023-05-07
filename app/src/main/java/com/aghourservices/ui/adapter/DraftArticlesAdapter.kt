@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.databinding.DraftArticleCardBinding
-import com.aghourservices.ui.main.cache.UserInfo
 import com.aghourservices.utils.helper.Intents
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -21,7 +20,8 @@ class DraftArticlesAdapter(
     private var articleList: ArrayList<Article> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
-        val view = DraftArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view =
+            DraftArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticlesViewHolder(view, onItemClicked)
     }
 
@@ -44,16 +44,6 @@ class DraftArticlesAdapter(
         return articleList[position]
     }
 
-    fun deleteArticle(position: Int) {
-        articleList.removeAt(position)
-        notifyItemRemoved(position)
-    }
-
-    fun updateArticle(position: Int, updatedArticle: Article) {
-        articleList[position] = updatedArticle
-        notifyItemChanged(position)
-    }
-
     inner class ArticlesViewHolder(
         val binding: DraftArticleCardBinding,
         private val onItemClicked: (v: View, position: Int) -> Unit,
@@ -66,8 +56,6 @@ class DraftArticlesAdapter(
 
         @SuppressLint("SetTextI18n")
         fun setNewsList(article: Article) {
-            val profile = UserInfo.getProfile(binding.root.context)
-
             article.attachments?.forEach { attachment ->
                 Glide.with(binding.root.context)
                     .load(attachment.resource_url)
