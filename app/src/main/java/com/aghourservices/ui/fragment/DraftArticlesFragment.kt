@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
 import com.aghourservices.data.model.Article
@@ -36,6 +38,7 @@ class DraftArticlesFragment : BaseFragment() {
         requireActivity().title = getString(R.string.draft_articles)
         initDraftArticlesObserve()
         initRecyclerView()
+        refreshDraftArticles()
         return binding.root
     }
 
@@ -44,6 +47,14 @@ class DraftArticlesFragment : BaseFragment() {
         hideBottomNavigation()
     }
 
+    private fun refreshDraftArticles() {
+        binding.swipeRefresh.setColorSchemeResources(R.color.swipeColor)
+        binding.swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            initDraftArticlesObserve()
+        }
+    }
     private fun initRecyclerView() {
         binding.newsRecyclerview.apply {
             setHasFixedSize(true)
@@ -55,8 +66,10 @@ class DraftArticlesFragment : BaseFragment() {
     private fun initDraftArticlesObserve() {
         draftArticlesViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
             draftArticlesAdapter.setArticles(articles)
-            if (articles.isEmpty()) {
-                Toast.makeText(requireContext(), "لا توجد أخبار مؤجلة", Toast.LENGTH_SHORT).show()
+            hideProgressBar()
+            if (articles.isEmpty()){
+                binding.lottieAnimationView.isVisible = true
+                onSNACK(binding.root, "لا توجد أخبار مؤجلة")
             }
         }
         draftArticlesViewModel.draftArticles(
@@ -66,20 +79,36 @@ class DraftArticlesFragment : BaseFragment() {
         )
     }
 
+    private fun hideProgressBar() {
+        binding.apply {
+            draftProgressBar.isVisible = false
+            newsRecyclerview.isVisible = true
+        }
+    }
+
+
     private fun onListItemClick(v: View, position: Int) {
         val article = draftArticlesAdapter.getArticle(position)
+        val description = draftArticlesAdapter.getArticle(position).description
+        val userName = draftArticlesAdapter.getArticle(position).user?.name!!
+
+        val editDraftArticleDialog = DraftArticlesFragmentDirections.actionDraftArticlesFragmentToEditDraftArticleFragment(
+            article.id,
+            description,
+            userName
+        )
 
         when (v.id) {
             R.id.publish_draft_article_btn -> {
                 updateArticle(article, position)
             }
-            R.id.popup_menu -> {
+            R.id.draft_article_popup_menu -> {
                 val popup = PopupMenu(requireContext(), v)
                 popup.inflate(R.menu.popup_menu)
                 popup.setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.edit -> {
-                            Toast.makeText(requireContext(), "Editing...", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(editDraftArticleDialog)
                         }
 
                         R.id.delete -> {
@@ -132,10 +161,5 @@ class DraftArticlesFragment : BaseFragment() {
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ -> }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        showBottomNavigation()
     }
 }

@@ -178,6 +178,32 @@
     </dialog>
     <fragment
         android:id="@+id/draftArticlesFragment"
+        tools:layout="@layout/fragment_draft_articles"
         android:name="com.aghourservices.ui.fragment.DraftArticlesFragment"
-        android:label="الأخبار المؤجلة" />
+        android:label="الأخبار المؤجلة" >
+        <action
+            android:id="@+id/action_draftArticlesFragment_to_editDraftArticleFragment"
+            app:destination="@id/editDraftArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/editDraftArticleFragment"
+        tools:layout="@layout/fragment_edit_draft_article"
+        android:name="com.aghourservices.ui.fragment.EditDraftArticleFragment"
+        android:label="تعديل الخبر" >
+        <argument
+            android:name="articleId"
+            app:argType="integer" />
+
+        <argument
+            android:name="articleDescription"
+            app:argType="string" />
+
+        <argument
+            android:name="articleUserName"
+            app:argType="string" />
+    </fragment>
 </navigation>

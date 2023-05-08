@@ -2,14 +2,44 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/recyclerViewBg"
     android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/newsRecyclerview"
+    
+    <ProgressBar
+        android:id="@+id/draft_progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/recyclerViewBg"
-        android:orientation="vertical"
-        tools:listitem="@layout/draft_article_card" />
+        android:scaleX="0.11"
+        android:scaleY="0.11"
+        android:indeterminateTint="@color/progress_bar"
+        android:layout_height="match_parent"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/newsRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/recyclerViewBg"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            tools:listitem="@layout/draft_article_card" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="20dp"
+        android:visibility="invisible"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_repeatMode="restart"
+        app:lottie_rawRes="@raw/nothing_here" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
