@@ -30,7 +30,6 @@ import com.aghourservices.utils.helper.CreateArticleService
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
 import com.aghourservices.utils.interfaces.AlertDialog
-import com.yahiaangelo.markdownedittext.MarkdownEditText
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -58,8 +57,6 @@ class CreateArticleActivity : AppCompatActivity() {
         getUserProfile()
         initUserClick()
         binding.userLayout.isVisible = isUserLogin
-        val markdownEditText = findViewById<MarkdownEditText>(R.id.article_edt)
-        markdownEditText.setStylesBar(binding.stylesBar)
     }
 
     private fun openGallery() {
