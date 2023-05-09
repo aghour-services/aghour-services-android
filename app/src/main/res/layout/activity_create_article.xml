@@ -108,7 +108,7 @@
 
             </LinearLayout>
 
-            <com.yahiaangelo.markdownedittext.MarkdownEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/article_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -138,8 +138,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/add_image_btn"
@@ -148,29 +147,13 @@
             android:text="@string/add_image"
             android:background="?android:selectableItemBackground"
             android:gravity="center"
-            android:padding="10dp"
-            android:layout_marginBottom="10dp"
+            android:padding="15dp"
+            android:layout_marginBottom="20dp"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             app:drawableLeftCompat="@drawable/add_photo"
             app:drawableTint="@color/colorPrimary" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/recyclerViewBg">
-
-            <com.yahiaangelo.markdownedittext.MarkdownStylesBar
-                android:id="@+id/styles_bar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:gravity="center">
-
-            </com.yahiaangelo.markdownedittext.MarkdownStylesBar>
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
     </LinearLayout>
 </LinearLayout>
