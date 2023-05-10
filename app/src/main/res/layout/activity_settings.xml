@@ -113,11 +113,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:drawablePadding="4dp"
-                android:fontFamily="@font/cairo_black"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/userNameColor"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_verified"
                 tools:text="محمد مجدي" />
