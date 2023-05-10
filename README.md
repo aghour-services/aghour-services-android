@@ -1,20 +1,24 @@
-# Aghour-Services-App 
+# Aghour Services
 
 [![Kotlin Version](https://img.shields.io/badge/kotlin-1.6.10-blue.svg)](http://kotlinlang.org/)
 [![Gradle](https://img.shields.io/badge/gradle-7.1.2-blue.svg)](https://lv.binarybabel.org/catalog/gradle/latest)
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
-
 Aghour Services App is a sample project that presents all services in this village such as Doctors,pharmacy, Restaurant...etc.
 
 The goal of the project is to demonstrate best practices, provide a set of guidelines, and present modern Android
 
-| Mode  | Category list                                                          | Favorite list                                                         | Firms detail                                                          | Settings
-|-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Light | <img src="https://m7madmagdy.github.io/server/aghour%20images/1.png" width="220"> | <img src="https://m7madmagdy.github.io/server/aghour%20images/3.png" width="220"> | <img src="https://m7madmagdy.github.io/server/aghour%20images/2.png" width="220"> | <img src="https://m7madmagdy.github.io/server/aghour%20images/4.png" width="220"> 
-| Dark  | <img src="https://m7madmagdy.github.io/server/aghour%20images/5.png" width="220">  | <img src="https://m7madmagdy.github.io/server/aghour%20images/7.png" width="220">  | <img src="https://m7madmagdy.github.io/server/aghour%20images/6.png" width="220">  | <img src="https://m7madmagdy.github.io/server/aghour%20images/8.png" width="220"> 
+# **Available for Android**
 
-## Architecture
+[<img src="https://i.imgur.com/heN9nOS.png" height="50">](https://play.google.com/store/apps/details?id=com.aghourservices)
+
+# **App Screenshots**
+
+<img src="https://i.imgur.com/9AM93ER.png" width="200"><img src="https://i.imgur.com/VJtb1t4.png" width="200">
+<img src="https://i.imgur.com/TOiJKWz.png" width="200"><img src="https://i.imgur.com/U0kIzeD.png" width="200">
+<img src="https://i.imgur.com/J5ydKqy.png" width="200">
+
+# Architecture
 
 The architecture of the application is based, apply and strictly complies with each of the following 5 points:
 
@@ -26,7 +30,7 @@ The architecture of the application is based, apply and strictly complies with e
 -   [Recyclerview](https://developer.android.com/jetpack/androidx/releases/recyclerview), Initialize all items from Server
 -   [Realm DB](https://realm.io/), Storing data with Realm Database.
    
-### Dependencies
+# Dependencies
 -  [Navigation View](https://developer.android.com/guide/navigation/navigation-getting-started)
 -  [Google Ads](https://ads.google.com/intl/en_eg/home/)
 -  [Firebase ANalytics](https://firebase.google.com/)
