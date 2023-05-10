@@ -14,9 +14,15 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 
 # **App Screenshots**
 
-<img src="https://i.imgur.com/9AM93ER.png" width="200"><img src="https://i.imgur.com/VJtb1t4.png" width="200">
-<img src="https://i.imgur.com/TOiJKWz.png" width="200"><img src="https://i.imgur.com/U0kIzeD.png" width="200">
-<img src="https://i.imgur.com/J5ydKqy.png" width="200">
+### **Light**
+<img src="https://i.imgur.com/9AM93ER.png" width="150"><img src="https://i.imgur.com/wqbfWI7.png" width="150">
+<img src="https://i.imgur.com/9wt5Cpd.png" width="150"><img src="https://i.imgur.com/VJtb1t4.png" width="150">
+<img src="https://i.imgur.com/TOiJKWz.png" width="150"><img src="https://i.imgur.com/J5ydKqy.png" width="150">
+
+### **Dark**
+<img src="https://i.imgur.com/i7jjZm9.png" width="150"><img src="https://i.imgur.com/iK4XZUK.png" width="150">
+<img src="https://i.imgur.com/zfITlkR.png" width="150"><img src="https://i.imgur.com/gArhEDM.png" width="150">
+<img src="https://i.imgur.com/DHu2p0F.png" width="150"><img src="https://i.imgur.com/QJGtAoE.png" width="150">
 
 # Architecture
 
