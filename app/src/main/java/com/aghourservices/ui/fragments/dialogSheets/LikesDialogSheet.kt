@@ -11,6 +11,7 @@ import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.databinding.LikesDialogSheetBinding
 import com.aghourservices.ui.adapters.LikesAdapter
+import com.aghourservices.utils.helper.AlertDialogs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import retrofit2.Call
@@ -89,7 +90,7 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
             }
 
             override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
-                com.aghourservices.utils.interfaces.AlertDialog.noInternet(requireContext())
+                AlertDialogs.noInternet(requireContext())
             }
         })
     }

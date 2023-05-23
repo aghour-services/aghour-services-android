@@ -18,8 +18,8 @@ import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.ProgressDialog
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.errorLogin
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
+import com.aghourservices.utils.helper.AlertDialogs.Companion.errorLogin
+import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
 import com.aghourservices.utils.services.cache.UserInfo.saveUserData
 import com.google.android.gms.ads.AdView
 import retrofit2.Call

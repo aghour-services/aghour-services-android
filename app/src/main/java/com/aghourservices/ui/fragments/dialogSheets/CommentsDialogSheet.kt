@@ -21,7 +21,7 @@ import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModels.CommentsViewModel
-import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.helper.AlertDialogs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -177,7 +177,7 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                     binding.commentBtn.isEnabled = true
                     binding.commentBtn.setOnClickListener {
                         if (user.token.isEmpty()) {
-                            AlertDialog.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
+                            AlertDialogs.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
                         } else {
                             val comment = Comment()
                             comment.body = commentTxt

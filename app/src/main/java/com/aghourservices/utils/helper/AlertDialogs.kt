@@ -1,4 +1,4 @@
-package com.aghourservices.utils.interfaces
+package com.aghourservices.utils.helper
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import com.aghourservices.R
 import com.aghourservices.ui.activites.SignUpActivity
 
-interface AlertDialog {
+class AlertDialogs {
 
     companion object {
         fun errorLogin(context: Context) {
@@ -40,7 +40,7 @@ interface AlertDialog {
             alertDialogBuilder.setCancelable(false)
             alertDialogBuilder.setPositiveButton(R.string.doneButton) { _, _ ->
                 val c = context as FragmentActivity
-                c.onBackPressed()
+                c.onBackPressedDispatcher.onBackPressed()
             }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()

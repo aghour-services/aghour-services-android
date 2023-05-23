@@ -20,7 +20,7 @@ class AboutActivity : AppCompatActivity() {
         Banner.show(this, adView)
 
         binding.backBtn.setOnClickListener {
-            this.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 }

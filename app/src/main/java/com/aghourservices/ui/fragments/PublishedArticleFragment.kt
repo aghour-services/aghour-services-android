@@ -162,7 +162,7 @@ class PublishedArticleFragment : BaseFragment() {
     private fun updateLikeArticle(position: Int) {
         val article = publishedArticlesAdapter.getArticle(position)
         if (userToken.isEmpty()) {
-            com.aghourservices.utils.interfaces.AlertDialog.createAccount(
+            com.aghourservices.utils.helper.AlertDialogs.createAccount(
                 requireContext(),
                 "للإعجاب بالخبر يجب إنشاء حساب أولا"
             )

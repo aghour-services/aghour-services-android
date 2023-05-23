@@ -9,6 +9,7 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.ui.adapters.PublishedArticlesAdapter
+import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,7 +34,7 @@ class PublishedArticleViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                com.aghourservices.utils.interfaces.AlertDialog.noInternet(context)
+                AlertDialogs.noInternet(context)
             }
         })
     }
@@ -53,7 +54,7 @@ class PublishedArticleViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                com.aghourservices.utils.interfaces.AlertDialog.noInternet(context)
+                AlertDialogs.noInternet(context)
             }
         })
     }
@@ -81,7 +82,7 @@ class PublishedArticleViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
-                com.aghourservices.utils.interfaces.AlertDialog.noInternet(context)
+                AlertDialogs.noInternet(context)
             }
         })
     }

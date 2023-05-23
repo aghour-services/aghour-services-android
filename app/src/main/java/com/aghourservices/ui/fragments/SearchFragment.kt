@@ -17,10 +17,10 @@ import com.aghourservices.ui.adapters.SearchResultAdapter
 import com.aghourservices.ui.viewModels.SearchViewModel
 import com.aghourservices.utils.helper.CheckNetworkLiveData
 import com.aghourservices.utils.helper.Event
-import com.aghourservices.utils.interfaces.ShowSoftKeyboard
+import com.aghourservices.utils.helper.Intents.showKeyboard
 import com.aghourservices.utils.services.cache.UserInfo
 
-class SearchFragment : BaseFragment(), ShowSoftKeyboard {
+class SearchFragment : BaseFragment() {
     private lateinit var searchList: ArrayList<Search>
     private lateinit var searchAdapter: SearchResultAdapter
     private lateinit var binding: FragmentSearchBinding
@@ -46,13 +46,11 @@ class SearchFragment : BaseFragment(), ShowSoftKeyboard {
 
     private fun setSearchText() {
         val searchText = binding.searchText.text.toString()
-
-        if (binding.searchText.requestFocus()) {
-            showKeyboard(requireActivity(), binding.searchText)
-        }
+        showKeyboard(requireActivity(), binding.searchText)
 
         binding.searchText.setOnClickListener {
-            activity?.let { it -> searchViewModel.search(
+            activity?.let {
+                searchViewModel.search(
                 searchText, UserInfo.getFCMToken(requireContext())
             ) }
         }

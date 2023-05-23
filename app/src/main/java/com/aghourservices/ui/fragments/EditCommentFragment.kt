@@ -4,20 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.network.RetrofitInstance.commentsApi
 import com.aghourservices.databinding.FragmentEditCommentBinding
-import com.aghourservices.utils.interfaces.AlertDialog
-import com.aghourservices.utils.interfaces.ShowSoftKeyboard
+import com.aghourservices.utils.helper.Intents.showKeyboard
+import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
+class EditCommentFragment : BaseFragment() {
     private var _binding: FragmentEditCommentBinding? = null
     private val binding get() = _binding!!
     private val arguments: EditCommentFragmentArgs by navArgs()
@@ -28,7 +27,6 @@ class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
     ): View {
         _binding = FragmentEditCommentBinding.inflate(inflater, container, false)
         requireActivity().title = "تعديل التعليق"
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         initScreenView()
         return binding.root
     }
@@ -72,7 +70,7 @@ class EditCommentFragment : BaseFragment(), ShowSoftKeyboard {
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
+                AlertDialogs.noInternet(requireContext())
             }
         })
     }

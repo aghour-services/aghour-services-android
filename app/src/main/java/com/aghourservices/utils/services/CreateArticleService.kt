@@ -3,10 +3,8 @@ package com.aghourservices.utils.services
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
@@ -63,12 +61,11 @@ class CreateArticleService : Service() {
                 } else {
                     val updatedNotification =
                         sendNotification(
-                            context.applicationContext,
-                            "فشل إنشاء الخبر",
-                            "حاول مرة تانية."
+                            context.applicationContext, "فشل إنشاء الخبر", response.message()
                         )
                     notificationManager.notify(NOTIFICATION_ID, updatedNotification)
-                    Log.d("ARTICLE_FAIL", "onResponse: ${response.code()} \n ${response.message()}")
+                    Log.d("ARTICLE", "onResponse: ${response.message()}")
+                    Log.d("ARTICLE", "onResponse: ${response.code()}")
                 }
             }
 
@@ -86,7 +83,6 @@ class CreateArticleService : Service() {
         ContextCompat.startForegroundService(context.applicationContext, startIntent)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         startForeground(
             NOTIFICATION_ID,

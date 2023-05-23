@@ -9,7 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentEditDraftArticleBinding
-import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import retrofit2.Call
@@ -71,7 +71,7 @@ class EditDraftArticleFragment : BaseFragment() {
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
+                AlertDialogs.noInternet(requireContext())
             }
         })
     }

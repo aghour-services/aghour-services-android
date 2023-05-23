@@ -23,7 +23,7 @@ import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
-import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.CreateArticleService
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
@@ -146,7 +146,7 @@ class CreateArticleActivity : AppCompatActivity() {
                         binding.publishBtn.isEnabled = true
                         binding.publishBtn.setOnClickListener {
                             if (!isUserLogin) {
-                                AlertDialog.createAccount(
+                                AlertDialogs.createAccount(
                                     this@CreateArticleActivity,
                                     "لإضافة خبر أعمل حساب الأول"
                                 )

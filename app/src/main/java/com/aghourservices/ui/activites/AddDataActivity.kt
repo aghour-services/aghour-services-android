@@ -14,9 +14,9 @@ import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.ProgressDialog
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.createAccount
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.dataAdded
-import com.aghourservices.utils.interfaces.AlertDialog.Companion.noInternet
+import com.aghourservices.utils.helper.AlertDialogs.Companion.createAccount
+import com.aghourservices.utils.helper.AlertDialogs.Companion.dataAdded
+import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import retrofit2.Call

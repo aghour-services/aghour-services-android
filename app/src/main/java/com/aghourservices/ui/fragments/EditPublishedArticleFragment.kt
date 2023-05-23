@@ -9,14 +9,14 @@ import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.databinding.FragmentEditPublishedArticleBinding
-import com.aghourservices.utils.interfaces.AlertDialog
-import com.aghourservices.utils.interfaces.ShowSoftKeyboard
+import com.aghourservices.utils.helper.Intents.showKeyboard
+import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EditPublishedArticleFragment : BaseFragment(), ShowSoftKeyboard {
+class EditPublishedArticleFragment : BaseFragment() {
     private var _binding: FragmentEditPublishedArticleBinding? = null
     private val binding get() = _binding!!
     private val arguments: EditPublishedArticleFragmentArgs by navArgs()
@@ -69,7 +69,7 @@ class EditPublishedArticleFragment : BaseFragment(), ShowSoftKeyboard {
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
+                AlertDialogs.noInternet(requireContext())
             }
         })
     }

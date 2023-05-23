@@ -24,7 +24,7 @@ import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModels.CommentsViewModel
-import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.helper.AlertDialogs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import retrofit2.Call
@@ -88,7 +88,7 @@ class CommentsFragment : BaseFragment() {
                     binding.commentBtn.isEnabled = true
                     binding.commentBtn.setOnClickListener {
                         if (user.token.isEmpty()) {
-                            AlertDialog.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
+                            AlertDialogs.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
                         } else {
                             val comment = Comment()
                             comment.body = commentTxt
@@ -137,7 +137,7 @@ class CommentsFragment : BaseFragment() {
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
-                AlertDialog.noInternet(requireContext())
+                AlertDialogs.noInternet(requireContext())
             }
         })
     }

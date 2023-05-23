@@ -8,7 +8,7 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.network.RetrofitInstance.commentsApi
 import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.utils.helper.Event
-import com.aghourservices.utils.interfaces.AlertDialog
+import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,7 +35,7 @@ class CommentsViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Comment>>, t: Throwable) {
-                AlertDialog.noInternet(context)
+                AlertDialogs.noInternet(context)
             }
         })
     }
@@ -67,7 +67,7 @@ class CommentsViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
-                AlertDialog.noInternet(context)
+                AlertDialogs.noInternet(context)
             }
         })
     }
@@ -97,7 +97,7 @@ class CommentsViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
-                AlertDialog.noInternet(context)
+                AlertDialogs.noInternet(context)
             }
         })
     }
