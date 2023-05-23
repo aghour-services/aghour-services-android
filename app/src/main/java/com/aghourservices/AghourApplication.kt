@@ -1,7 +1,7 @@
 package com.aghourservices
 
 import android.app.Application
-import com.aghourservices.ui.main.notification.Notification
+import com.aghourservices.utils.services.notifications.Notification
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
