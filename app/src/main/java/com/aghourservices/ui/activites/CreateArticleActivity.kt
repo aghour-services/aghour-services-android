@@ -19,11 +19,11 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityCreateArticleBinding
+import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
-import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.CreateArticleService
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
@@ -87,7 +87,6 @@ class CreateArticleActivity : AppCompatActivity() {
 
     private fun initPermissions() {
         permissions = arrayOf(
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_MEDIA_LOCATION,
         )

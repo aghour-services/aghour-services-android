@@ -19,7 +19,7 @@ object Notification {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setAutoCancel(true)
-            .setSmallIcon(R.drawable.notifi_badge)
+            .setSmallIcon(R.drawable.aghour)
 
         notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
