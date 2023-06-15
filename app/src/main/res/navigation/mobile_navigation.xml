@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.aghourservices.ui.fragment.CategoriesFragment"
+        android:name="com.aghourservices.ui.fragments.CategoriesFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_categories">
         <action
@@ -30,15 +30,15 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.aghourservices.ui.fragment.SearchFragment"
+        android:name="com.aghourservices.ui.fragments.SearchFragment"
         android:label="@string/menu_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.aghourservices.ui.fragment.ArticleFragment"
+        android:name="com.aghourservices.ui.fragments.PublishedArticleFragment"
         android:label="@string/menu_news"
-        tools:layout="@layout/fragment_articles">
+        tools:layout="@layout/fragment_published_articles">
         <action
             android:id="@+id/action_newsFragment_to_commentsFragment"
             app:destination="@id/commentsFragment"
@@ -67,13 +67,13 @@
 
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.aghourservices.ui.fragment.FavoriteFragment"
+        android:name="com.aghourservices.ui.fragments.FavoriteFragment"
         android:label="@string/menu_fav"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/firmsFragment"
-        android:name="com.aghourservices.ui.fragment.FirmsFragment"
+        android:name="com.aghourservices.ui.fragments.FirmsFragment"
         android:label="FirmsFragment"
         tools:layout="@layout/fragment_firms">
         <argument
@@ -87,7 +87,7 @@
 
     <fragment
         android:id="@+id/commentsFragment"
-        android:name="com.aghourservices.ui.fragment.CommentsFragment"
+        android:name="com.aghourservices.ui.fragments.CommentsFragment"
         android:label="CommentsFragment"
         tools:layout="@layout/fragment_comments">
         <argument
@@ -103,7 +103,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateCommentFragment"
-        android:name="com.aghourservices.ui.fragment.EditCommentFragment"
+        android:name="com.aghourservices.ui.fragments.EditCommentFragment"
         android:label="UpdateCommentFragment"
         tools:layout="@layout/fragment_edit_comment">
         <argument
@@ -124,9 +124,9 @@
     </fragment>
     <fragment
         android:id="@+id/editArticleFragment"
-        android:name="com.aghourservices.ui.fragment.EditArticleFragment"
+        android:name="com.aghourservices.ui.fragments.EditPublishedArticleFragment"
         android:label="EditArticleFragment"
-        tools:layout="@layout/fragment_edit_article">
+        tools:layout="@layout/fragment_edit_published_article">
         <argument
             android:name="articleId"
             app:argType="integer" />
@@ -141,7 +141,7 @@
     </fragment>
     <dialog
         android:id="@+id/likesDialogSheet"
-        android:name="com.aghourservices.ui.fragment.LikesDialogSheet"
+        android:name="com.aghourservices.ui.fragments.dialogSheets.LikesDialogSheet"
         android:label="UsersLikesFragment"
         tools:layout="@layout/likes_dialog_sheet">
 
@@ -156,7 +156,7 @@
     </dialog>
     <dialog
         android:id="@+id/commentsDialogSheet"
-        android:name="com.aghourservices.ui.fragment.CommentsDialogSheet"
+        android:name="com.aghourservices.ui.fragments.dialogSheets.CommentsDialogSheet"
         android:label="CommentsDialogSheet"
         tools:layout="@layout/comments_dialog_sheet">
         <argument
@@ -179,7 +179,7 @@
     <fragment
         android:id="@+id/draftArticlesFragment"
         tools:layout="@layout/fragment_draft_articles"
-        android:name="com.aghourservices.ui.fragment.DraftArticlesFragment"
+        android:name="com.aghourservices.ui.fragments.DraftArticlesFragment"
         android:label="الأخبار المؤجلة" >
         <action
             android:id="@+id/action_draftArticlesFragment_to_editDraftArticleFragment"
@@ -192,7 +192,7 @@
     <fragment
         android:id="@+id/editDraftArticleFragment"
         tools:layout="@layout/fragment_edit_draft_article"
-        android:name="com.aghourservices.ui.fragment.EditDraftArticleFragment"
+        android:name="com.aghourservices.ui.fragments.EditDraftArticleFragment"
         android:label="تعديل الخبر" >
         <argument
             android:name="articleId"

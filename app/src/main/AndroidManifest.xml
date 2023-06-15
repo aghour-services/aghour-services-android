@@ -3,15 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aghourservices">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
 
     <application
         android:name=".AghourApplication"
@@ -24,11 +27,11 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.LightApp"
+        android:theme="@style/MainTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
         <activity
-            android:name="com.aghourservices.ui.main.activity.SplashScreen"
+            android:name="com.aghourservices.ui.activites.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme"
@@ -40,37 +43,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aghourservices.ui.main.activity.MainActivity"
+            android:name="com.aghourservices.ui.activites.DashboardActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.main.activity.SignInActivity"
+            android:name=".ui.activites.SignInActivity"
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.main.activity.SignUpActivity"
+            android:name=".ui.activites.SignUpActivity"
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/MainTheme" />
         <activity
-            android:name="com.aghourservices.ui.main.activity.AboutActivity"
+            android:name="com.aghourservices.ui.activites.AboutActivity"
             android:exported="false"
             android:theme="@style/MainTheme" />
         <activity
-            android:name="com.aghourservices.ui.main.activity.SettingsActivity"
+            android:name="com.aghourservices.ui.activites.SettingsActivity"
             android:exported="false"
             android:theme="@style/MainTheme" />
         <activity
-            android:name="com.aghourservices.ui.main.activity.AddDataActivity"
+            android:name="com.aghourservices.ui.activites.AddDataActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.aghourservices.ui.main.activity.CreateArticleActivity"
+            android:name="com.aghourservices.ui.activites.CreateArticleActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="stateAlwaysVisible" />
@@ -89,7 +92,7 @@
             android:resource="@color/splashScreenBg" />
 
         <service
-            android:name=".ui.main.notification.FirebaseMessageService"
+            android:name=".utils.services.notifications.FirebaseMessageService"
             android:directBootAware="true"
             android:exported="false">
             <intent-filter>
@@ -97,7 +100,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".utils.helper.CreateArticleService" />
+        <service android:name=".utils.services.CreateArticleService" />
     </application>
 
 </manifest>
