@@ -98,6 +98,9 @@ class PublishedArticleFragment : BaseFragment() {
             description,
             userName
         )
+        val likesDialogSheet = PublishedArticleFragmentDirections.actionNewsFragmentToLikesDialogSheet(
+            article.id,
+        )
 
         when (v.id) {
             R.id.add_comment -> {
@@ -135,7 +138,10 @@ class PublishedArticleFragment : BaseFragment() {
                 initNewsObserve()
             }
 
-            R.id.article_count_layout -> {
+            R.id.likes_count -> {
+                findNavController().navigate(likesDialogSheet)
+            }
+            R.id.comments_count -> {
                 findNavController().navigate(commentsDialogSheet)
             }
         }

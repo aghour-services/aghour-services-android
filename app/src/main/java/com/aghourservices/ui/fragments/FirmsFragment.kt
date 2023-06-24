@@ -46,18 +46,11 @@ class FirmsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideBottomNavigation()
         initViews()
         setupFirmsViewModel()
         setupTagsViewModel()
         refresh()
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        showBottomNavigation()
-    }
-
 
     private fun tagsAsParameter(): String {
         return if (selectedTags.isEmpty()) {

@@ -5,35 +5,28 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.aghourservices.R
 import com.aghourservices.utils.helper.Event
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
 open class BaseFragment : Fragment() {
-    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var bottomViewContainer: ConstraintLayout
     lateinit var appCompactActivity: AppCompatActivity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Event.sendScreenName(this::class.simpleName.toString())
         appCompactActivity = activity as AppCompatActivity
-        bottomNavigationView = activity?.findViewById(R.id.bottomView) as BottomNavigationView
+        bottomViewContainer = activity?.findViewById(R.id.bottomViewContainer) as ConstraintLayout
         clearGlideMemory()
-        backBtnIndicator()
     }
 
     private fun clearGlideMemory() {
         Glide.get(requireContext()).clearMemory()
-    }
-
-    private fun backBtnIndicator() {
-        appCompactActivity.supportActionBar?.apply {
-            setHomeAsUpIndicator(R.drawable.ic_arrow)
-        }
     }
 
     fun showToolbar() {
@@ -46,11 +39,11 @@ open class BaseFragment : Fragment() {
 
 
     fun showBottomNavigation() {
-        bottomNavigationView.isVisible = true
+        bottomViewContainer.isVisible = true
     }
 
     fun hideBottomNavigation() {
-        bottomNavigationView.isVisible = false
+        bottomViewContainer.isVisible = false
     }
 
     fun onSNACK(view: View, message: String) {

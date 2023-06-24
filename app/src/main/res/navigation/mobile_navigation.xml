@@ -16,13 +16,10 @@
             app:enterAnim="@anim/fragment_enter"
             app:exitAnim="@anim/fragment_exit"
             app:popEnterAnim="@anim/fragment_enter_pop"
-            app:popExitAnim="@anim/fragment_exit_pop" />
-        <argument
-            android:name="category_id"
-            app:argType="integer" />
-        <argument
-            android:name="category_name"
-            app:argType="string" />
+            app:popExitAnim="@anim/fragment_exit_pop"
+            app:popUpTo="@id/categoriesFragment"
+            app:popUpToInclusive="false"
+            app:popUpToSaveState="true" />
         <action
             android:id="@+id/action_categoriesFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
@@ -63,6 +60,9 @@
             app:exitAnim="@anim/fragment_exit"
             app:popEnterAnim="@anim/fragment_enter_pop"
             app:popExitAnim="@anim/fragment_exit_pop" />
+        <action
+            android:id="@+id/action_newsFragment_to_likesDialogSheet"
+            app:destination="@id/likesDialogSheet" />
     </fragment>
 
     <fragment
@@ -118,9 +118,6 @@
         <argument
             android:name="commentUser"
             app:argType="string" />
-        <action
-            android:id="@+id/action_updateCommentFragment_to_commentsFragment"
-            app:destination="@id/commentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editArticleFragment"
@@ -149,10 +146,6 @@
             android:name="article_id"
             app:argType="integer" />
 
-        <argument
-            android:name="likes_count"
-            app:argType="integer" />
-
     </dialog>
     <dialog
         android:id="@+id/commentsDialogSheet"
@@ -166,9 +159,6 @@
             android:name="likesCount"
             app:argType="integer" />
         <action
-            android:id="@+id/action_commentsDialogSheet_to_likesDialogSheet"
-            app:destination="@id/likesDialogSheet" />
-        <action
             android:id="@+id/action_commentsDialogSheet_to_updateCommentFragment"
             app:destination="@id/updateCommentFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -178,9 +168,9 @@
     </dialog>
     <fragment
         android:id="@+id/draftArticlesFragment"
-        tools:layout="@layout/fragment_draft_articles"
         android:name="com.aghourservices.ui.fragments.DraftArticlesFragment"
-        android:label="الأخبار المؤجلة" >
+        android:label="الأخبار المؤجلة"
+        tools:layout="@layout/fragment_draft_articles">
         <action
             android:id="@+id/action_draftArticlesFragment_to_editDraftArticleFragment"
             app:destination="@id/editDraftArticleFragment"
@@ -191,9 +181,9 @@
     </fragment>
     <fragment
         android:id="@+id/editDraftArticleFragment"
-        tools:layout="@layout/fragment_edit_draft_article"
         android:name="com.aghourservices.ui.fragments.EditDraftArticleFragment"
-        android:label="تعديل الخبر" >
+        android:label="تعديل الخبر"
+        tools:layout="@layout/fragment_edit_draft_article">
         <argument
             android:name="articleId"
             app:argType="integer" />

@@ -14,34 +14,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbarBg"
+            android:elevation="@dimen/_2sdp"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@color/drawerToggle">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
+            <TextView
+                android:id="@+id/toolBarTv"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/toolbarBg"
-                android:elevation="@dimen/_2sdp"
-                app:navigationIcon="@drawable/ic_back"
-                app:navigationIconTint="@color/drawerToggle">
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_bold"
+                android:gravity="end|center"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                android:textColor="@color/toolbarText"
+                android:textStyle="bold"
+                tools:targetApi="o"
+                tools:text="@string/app_name" />
 
-                <TextView
-                    android:id="@+id/toolBarTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_bold"
-                    android:gravity="end|center"
-                    android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-                    android:textColor="@color/toolbarText"
-                    android:textStyle="bold"
-                    tools:targetApi="o"
-                    tools:text="@string/app_name" />
-
-            </com.google.android.material.appbar.MaterialToolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -51,40 +46,50 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_anchorGravity="center"
-        app:layout_constraintBottom_toTopOf="@id/bottomView"
+        app:layout_constraintBottom_toTopOf="@id/bottomViewContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_10sdp"
-        app:itemIconTint="@color/btnv_tab_item"
-        app:itemTextAppearanceActive="@style/ItemActiveIndicator"
-        app:itemTextColor="@color/btnv_tab_item"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <ImageButton
-        android:id="@+id/add_data_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:background="?android:selectableItemBackground"
-        android:elevation="@dimen/_10sdp"
-        android:src="@drawable/add_circle_outline"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/bottomView"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
-        app:tint="@color/checkdItem"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            app:itemIconTint="@color/btnv_tab_item"
+            app:itemTextAppearanceActive="@style/ItemActiveIndicator"
+            app:itemTextColor="@color/btnv_tab_item"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
+
+        <ImageButton
+            android:id="@+id/add_data_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="?android:selectableItemBackground"
+            android:elevation="@dimen/_10sdp"
+            android:src="@drawable/add_circle_outline"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/bottomView"
+            app:layout_constraintTop_toTopOf="@+id/bottomView"
+            app:tint="@color/checkdItem"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

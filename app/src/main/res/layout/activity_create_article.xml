@@ -40,7 +40,7 @@
             android:padding="@dimen/_4sdp"
             android:text="@string/add_article"
             android:textColor="@color/toolbarText"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             tools:ignore="RelativeOverlap" />
 
@@ -53,13 +53,13 @@
             android:layout_centerVertical="true"
             android:enabled="false"
             android:text="@string/publish"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:background="?android:selectableItemBackground"
             app:icon="@drawable/ic_send"
             app:iconGravity="end"
             app:iconPadding="@dimen/_10sdp"
-            app:iconSize="@dimen/_22sdp"
+            app:iconSize="@dimen/_18sdp"
             tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
