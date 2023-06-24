@@ -59,13 +59,7 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             adapter = likesAdapter
-            likesCount()
         }
-    }
-
-    private fun likesCount() {
-        val likesCount = arguments.likesCount
-        binding.likesCount.text = likesCount.toString()
     }
 
     private fun getLikes() {
@@ -81,6 +75,7 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
                 if (response.isSuccessful) {
                     val users = response.body()!!
                     likesAdapter.setUsers(users)
+                    binding.likesCount.text = users.size.toString()
                     hideProgressBar()
 
                     if (users.isEmpty()) {

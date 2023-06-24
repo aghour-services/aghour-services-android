@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg"
-        android:elevation="4dp"
+        android:elevation="@dimen/_2sdp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="2dp"
+            android:layout_margin="@dimen/_2sdp"
             android:background="@drawable/about_app_back_ripple"
-            android:padding="10dp"
+            android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_back_settings" />
 
         <TextView
@@ -40,10 +37,10 @@
             android:layout_gravity="center"
             android:layout_toEndOf="@id/back_btn"
             android:gravity="center"
-            android:padding="4dp"
+            android:padding="@dimen/_4sdp"
             android:text="@string/add_article"
             android:textColor="@color/toolbarText"
-            android:textSize="18sp"
+            android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             tools:ignore="RelativeOverlap" />
 
@@ -56,13 +53,13 @@
             android:layout_centerVertical="true"
             android:enabled="false"
             android:text="@string/publish"
-            android:textSize="16sp"
+            android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:background="?android:selectableItemBackground"
             app:icon="@drawable/ic_send"
             app:iconGravity="end"
-            app:iconPadding="10dp"
-            app:iconSize="30dp"
+            app:iconPadding="@dimen/_10sdp"
+            app:iconSize="@dimen/_18sdp"
             tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
@@ -84,25 +81,25 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="@dimen/_8sdp">
 
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:drawablePadding="6dp"
-                    android:fontFamily="@font/segoe_ui_bold"
-                    android:paddingRight="6dp"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:fontFamily="@font/noto_bold"
+                    android:paddingRight="@dimen/_4sdp"
                     android:textColor="@color/dialogText"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_14ssp"
                     app:drawableLeftCompat="@drawable/ic_verified"
-                    tools:text="Mohamed Magdy" />
+                    tools:text="أجهور الكبرى" />
 
                 <ImageView
                     android:id="@+id/user_icon"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:src="@mipmap/user"
                     tools:ignore="ContentDescription" />
 
@@ -112,13 +109,12 @@
                 android:id="@+id/article_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/_6sdp"
                 android:background="@android:color/transparent"
                 android:gravity="right"
                 android:hint="@string/add_article_hint"
-                android:lineSpacingMultiplier="1.8"
-                android:textSize="14sp"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:textSize="@dimen/_11ssp" />
 
             <requestFocus />
 
@@ -128,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@null"
+                android:maxHeight="@dimen/_300sdp"
                 android:scaleType="fitXY"
                 tools:src="@mipmap/ic_launcher" />
 
@@ -144,14 +141,13 @@
             android:id="@+id/add_image_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_image"
             android:background="?android:selectableItemBackground"
             android:gravity="center"
-            android:padding="15dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:padding="@dimen/_15sdp"
+            android:text="@string/add_image"
             android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
             app:drawableLeftCompat="@drawable/add_photo"
             app:drawableTint="@color/colorPrimary" />
 

@@ -18,10 +18,10 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Comment
 import com.aghourservices.databinding.CommentsDialogSheetBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
-import com.aghourservices.utils.services.cache.UserInfo
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
+import com.aghourservices.utils.services.cache.UserInfo
+import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -43,7 +43,6 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         initRecyclerView()
         loadComments()
-        navigateToLikesDialog()
         initCommentEdt()
         return binding.root
     }
@@ -97,17 +96,6 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         binding.apply {
             progressBar.isVisible = false
             commentsRecyclerView.isVisible = true
-        }
-    }
-
-    private fun navigateToLikesDialog() {
-        val likesDialogSheet =
-            CommentsDialogSheetDirections.actionCommentsDialogSheetToLikesDialogSheet(
-                arguments.articleId,
-                arguments.likesCount
-            )
-        binding.likesCount.setOnClickListener {
-            findNavController().navigate(likesDialogSheet)
         }
     }
 

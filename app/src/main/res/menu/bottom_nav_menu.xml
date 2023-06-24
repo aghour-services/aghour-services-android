@@ -13,6 +13,9 @@
         android:title="@string/menu_search" />
 
     <item
+        android:title="" />
+
+    <item
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/favorite_selector"
         android:title="@string/menu_fav" />

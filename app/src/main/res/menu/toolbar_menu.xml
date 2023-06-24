@@ -5,6 +5,13 @@
     android:textDirection="rtl">
 
     <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:iconTint="@color/settings_icon"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
         android:id="@+id/settingActivity"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings_fragment"

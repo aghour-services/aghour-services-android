@@ -131,12 +131,11 @@
                                     android:id="@+id/article_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:maxHeight="350dp"
                                     android:adjustViewBounds="true"
                                     android:contentDescription="@null"
+                                    android:maxHeight="@dimen/_350sdp"
                                     android:scaleType="fitXY"
-                                    android:visibility="gone"
-                                    android:src="@color/image_bg" />
+                                    tools:src="@mipmap/ic_launcher" />
                             </LinearLayout>
 
                         </LinearLayout>

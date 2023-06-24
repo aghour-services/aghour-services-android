@@ -75,4 +75,9 @@ class EditDraftArticleFragment : BaseFragment() {
             }
         })
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
