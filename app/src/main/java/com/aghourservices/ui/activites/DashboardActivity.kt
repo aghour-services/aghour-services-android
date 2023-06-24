@@ -162,7 +162,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun floatActionButton() {
-        binding.floatingActionButton.setOnClickListener {
+        binding.addDataBtn.setOnClickListener {
             val binding = BottomSheetBinding.inflate(layoutInflater)
 
             val bottomSheetDialog = BottomSheetDialog(this).apply {

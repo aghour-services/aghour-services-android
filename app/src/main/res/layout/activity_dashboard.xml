@@ -6,33 +6,43 @@
     android:layout_height="match_parent"
     android:background="@color/recyclerViewBg">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/toolbarBg"
-        android:elevation="4dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_back"
-        app:navigationIconTint="@color/drawerToggle">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/toolBarTv"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoSizeMaxTextSize="40sp"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:gravity="end|center"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-            android:textColor="@color/toolbarText"
-            android:textStyle="bold"
-            tools:targetApi="o"
-            tools:text="@string/app_name" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.appbar.MaterialToolbar>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/toolbarBg"
+                android:elevation="@dimen/_2sdp"
+                app:navigationIcon="@drawable/ic_back"
+                app:navigationIconTint="@color/drawerToggle">
+
+                <TextView
+                    android:id="@+id/toolBarTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_bold"
+                    android:gravity="end|center"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:textColor="@color/toolbarText"
+                    android:textStyle="bold"
+                    tools:targetApi="o"
+                    tools:text="@string/app_name" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -40,19 +50,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomView"
+        app:layout_anchorGravity="center"
+        app:layout_constraintBottom_toTopOf="@id/bottomView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:navGraph="@navigation/mobile_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/toolbarBg"
-        android:padding="8dp"
+        android:padding="@dimen/_10sdp"
         app:itemIconTint="@color/btnv_tab_item"
+        app:itemTextAppearanceActive="@style/ItemActiveIndicator"
         app:itemTextColor="@color/btnv_tab_item"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,17 +71,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+    <ImageButton
+        android:id="@+id/add_data_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/checkdItem"
-        app:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomView"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="?android:selectableItemBackground"
+        android:elevation="@dimen/_10sdp"
+        android:src="@drawable/add_circle_outline"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="35dp"
-        app:tint="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/bottomView"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
+        app:tint="@color/checkdItem"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

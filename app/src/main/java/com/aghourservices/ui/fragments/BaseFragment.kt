@@ -11,12 +11,10 @@ import com.aghourservices.R
 import com.aghourservices.utils.helper.Event
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 open class BaseFragment : Fragment() {
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var fabButton: FloatingActionButton
     lateinit var appCompactActivity: AppCompatActivity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,7 +22,6 @@ open class BaseFragment : Fragment() {
         Event.sendScreenName(this::class.simpleName.toString())
         appCompactActivity = activity as AppCompatActivity
         bottomNavigationView = activity?.findViewById(R.id.bottomView) as BottomNavigationView
-        fabButton = activity?.findViewById(R.id.floatingActionButton) as FloatingActionButton
         clearGlideMemory()
         backBtnIndicator()
     }
@@ -50,12 +47,10 @@ open class BaseFragment : Fragment() {
 
     fun showBottomNavigation() {
         bottomNavigationView.isVisible = true
-        fabButton.show()
     }
 
     fun hideBottomNavigation() {
         bottomNavigationView.isVisible = false
-        fabButton.hide()
     }
 
     fun onSNACK(view: View, message: String) {

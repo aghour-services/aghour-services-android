@@ -155,7 +155,7 @@
     <color name="fabBg">#168EC4</color>
     <color name="signInLogo">#2981C6</color>
     <color name="unCheckedItem">#000000</color>
-    <color name="checkdItem">#1B79C5</color>
+    <color name="checkdItem">#000000</color>
     <color name="tagUnChecked">#72777C</color>
     <color name="tagsColor">#FFFFFF</color>
     <color name="edtAddArticle">#FFFFFF</color>
