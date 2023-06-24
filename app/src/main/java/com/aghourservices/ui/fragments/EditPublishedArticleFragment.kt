@@ -9,8 +9,8 @@ import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.databinding.FragmentEditPublishedArticleBinding
-import com.aghourservices.utils.helper.Intents.showKeyboard
 import com.aghourservices.utils.helper.AlertDialogs
+import com.aghourservices.utils.helper.Intents.showKeyboard
 import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
@@ -72,10 +72,5 @@ class EditPublishedArticleFragment : BaseFragment() {
                 AlertDialogs.noInternet(requireContext())
             }
         })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        showBottomNavigation()
     }
 }

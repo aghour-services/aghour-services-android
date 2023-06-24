@@ -18,8 +18,8 @@
             app:popEnterAnim="@anim/fragment_enter_pop"
             app:popExitAnim="@anim/fragment_exit_pop"
             app:popUpTo="@id/categoriesFragment"
-            app:popUpToInclusive="false"
-            app:popUpToSaveState="true" />
+            app:popUpToSaveState="true"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_categoriesFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
@@ -49,7 +49,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_newsFragment_to_commentsDialogSheet"
             app:destination="@id/commentsDialogSheet" />

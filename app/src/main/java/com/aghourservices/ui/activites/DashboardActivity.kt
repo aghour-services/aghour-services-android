@@ -207,6 +207,11 @@ class DashboardActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.settingActivity -> startActivity(Intent(this, SettingsActivity::class.java))
+            R.id.searchFragment -> {
+                val navController =
+                    Navigation.findNavController(this@DashboardActivity, R.id.fragmentContainerView)
+                navController.navigate(R.id.searchFragment)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

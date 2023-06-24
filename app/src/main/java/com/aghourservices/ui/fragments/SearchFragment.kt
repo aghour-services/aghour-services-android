@@ -106,12 +106,6 @@ class SearchFragment : BaseFragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        showBottomNavigation()
-        showToolbar()
-    }
-
     private fun onListItemClick(position: Int) {
         val firm = searchList[position]
         val phoneNumber = firm.phone_number
@@ -124,5 +118,11 @@ class SearchFragment : BaseFragment() {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        showBottomNavigation()
+        showToolbar()
     }
 }
