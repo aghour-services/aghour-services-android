@@ -3,18 +3,14 @@ package com.aghourservices.ui.activites
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.isVisible
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySettingsBinding
-import com.aghourservices.utils.services.cache.UserInfo.getProfile
-import com.aghourservices.utils.services.cache.UserInfo.getUserData
-import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
-import com.aghourservices.utils.services.cache.UserInfo.saveProfile
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.Intents.facebook
@@ -24,6 +20,10 @@ import com.aghourservices.utils.helper.Intents.shareApp
 import com.aghourservices.utils.helper.Intents.showOnCloseDialog
 import com.aghourservices.utils.helper.Intents.whatsApp
 import com.aghourservices.utils.helper.ThemePreference
+import com.aghourservices.utils.services.cache.UserInfo.getProfile
+import com.aghourservices.utils.services.cache.UserInfo.getUserData
+import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
+import com.aghourservices.utils.services.cache.UserInfo.saveProfile
 import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback
@@ -85,15 +85,15 @@ class SettingsActivity : AppCompatActivity() {
     private fun checkUser() {
         if (isUserLogin) {
             binding.apply {
-                btnRegister.isVisible = false
-                userDataView.isVisible = true
-                logOut.isVisible = true
+                userLayout.visibility = View.VISIBLE
+                logOut.visibility = View.VISIBLE
             }
         } else {
             binding.apply {
-                btnRegister.isVisible = true
-                userDataView.isVisible = false
-                logOut.isVisible = false
+                stopShimmer()
+                createAccountLayout.visibility = View.VISIBLE
+                userLayout.visibility = View.INVISIBLE
+                logOut.visibility = View.GONE
             }
         }
 
@@ -109,6 +109,7 @@ class SettingsActivity : AppCompatActivity() {
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 if (response.isSuccessful) {
+                    stopShimmer()
                     val profile = response.body()
                     if (profile != null) {
                         saveProfile(
@@ -125,15 +126,16 @@ class SettingsActivity : AppCompatActivity() {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                             }
                         }
-                        binding.userMobile.text = user.mobile
+                        binding.userPhone.text = user.mobile
                         binding.userEmail.text = user.email
                     }
                 }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
+                stopShimmer()
                 binding.apply {
-                    userMobile.text = user.mobile
+                    userPhone.text = user.mobile
                     userEmail.text = user.email
                 }
                 binding.userName.apply {
@@ -172,11 +174,13 @@ class SettingsActivity : AppCompatActivity() {
                     ThemePreference(this).darkMode = 0
                     dialog.dismiss()
                 }
+
                 1 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     ThemePreference(this).darkMode = 1
                     dialog.dismiss()
                 }
+
                 2 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     ThemePreference(this).darkMode = 2
@@ -185,5 +189,12 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
         builder.create().show()
+    }
+
+    private fun stopShimmer() {
+        binding.apply {
+            profileShimmer.stopShimmer()
+            profileShimmer.visibility = View.INVISIBLE
+        }
     }
 }
