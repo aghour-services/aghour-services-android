@@ -209,7 +209,7 @@ class PublishedArticleFragment : BaseFragment() {
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-                binding.draftArticlesBtn.isVisible = response.body()?.is_verified == true
+                binding.draftArticlesBtn.isVisible = response.body()?.verified == true
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {}

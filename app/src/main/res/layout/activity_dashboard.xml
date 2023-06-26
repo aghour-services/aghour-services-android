@@ -10,34 +10,57 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/toolbarBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolbarContainer"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/toolbarBg"
-            android:elevation="@dimen/_2sdp"
-            app:menu="@menu/toolbar_menu"
-            app:navigationIcon="@drawable/ic_back"
-            app:navigationIconTint="@color/drawerToggle">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/toolBarTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_bold"
-                android:gravity="end|center"
-                android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-                android:textColor="@color/toolbarText"
-                android:textStyle="bold"
-                tools:targetApi="o"
-                tools:text="@string/app_name" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/toolbarBg"
+                app:layout_constraintEnd_toStartOf="@+id/profile_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/toolbar_menu"
+                android:layout_marginRight="@dimen/_4sdp"
+                app:navigationIcon="@drawable/ic_back"
+                app:navigationIconTint="@color/drawerToggle">
 
-        </com.google.android.material.appbar.MaterialToolbar>
+                <TextView
+                    android:id="@+id/toolBarTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_bold"
+                    android:gravity="end|center"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:textColor="@color/toolbarText"
+                    android:textStyle="bold"
+                    tools:targetApi="o"
+                    tools:text="@string/app_name" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                tools:src="@mipmap/user"
+                android:layout_margin="@dimen/_6sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -49,8 +72,10 @@
         app:layout_anchorGravity="center"
         app:layout_constraintBottom_toTopOf="@id/bottomViewContainer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/mobile_navigation" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,11 +105,11 @@
             android:id="@+id/add_data_btn"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:padding="@dimen/_10sdp"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/_2sdp"
             android:background="?android:selectableItemBackground"
             android:elevation="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
             android:src="@drawable/add_circle_outline"
             app:layout_constraintBottom_toBottomOf="@+id/bottomView"
             app:layout_constraintEnd_toEndOf="parent"

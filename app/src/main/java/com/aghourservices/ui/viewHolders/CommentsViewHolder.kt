@@ -28,7 +28,7 @@ class CommentsViewHolder(
         }
 
         binding.userName.apply {
-            if (comment.user?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (comment.user?.verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 tooltipText = context.getString(R.string.verified)
             } else {
                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)

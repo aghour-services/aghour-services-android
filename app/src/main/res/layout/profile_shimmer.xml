@@ -17,14 +17,14 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/avatar_image"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
             app:cardBackgroundColor="@android:color/darker_gray"
             app:cardCornerRadius="90dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="170dp"
-            android:layout_height="15dp"
+            android:layout_height="12dp"
             android:layout_marginTop="10dp"
             app:cardBackgroundColor="@android:color/darker_gray"
             app:cardCornerRadius="20dp" />

@@ -116,11 +116,11 @@ class SettingsActivity : AppCompatActivity() {
                             this@SettingsActivity,
                             profile.id!!,
                             profile.name,
-                            profile.is_verified
+                            profile.verified
                         )
                         binding.userName.apply {
                             text = profile.name
-                            if (profile.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 tooltipText = context.getString(R.string.verified)
                             } else {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
@@ -140,7 +140,7 @@ class SettingsActivity : AppCompatActivity() {
                 }
                 binding.userName.apply {
                     text = profile.name
-                    if (profile.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         tooltipText = context.getString(R.string.verified)
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)

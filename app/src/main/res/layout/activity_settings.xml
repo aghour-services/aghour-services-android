@@ -57,34 +57,56 @@
             android:id="@+id/user_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/first_line"
             android:layout_below="@id/appBarLayout"
             android:layout_centerHorizontal="true"
             android:elevation="@dimen/_10sdp"
             android:gravity="center"
             android:visibility="invisible"
             android:orientation="vertical"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_6sdp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center">
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/edit_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="@dimen/_6sdp"
+                    android:text="@string/edit_profile"
+                    android:textColor="@color/dialogText"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_edit"
+                    app:drawableTint="@color/dialogText" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar_image"
-                    android:layout_width="@dimen/_120sdp"
-                    android:layout_height="@dimen/_120sdp"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:background="@mipmap/user"
-                    android:src="@mipmap/user"
                     app:civ_border_color="@color/Gray"
-                    app:civ_border_width="5dp" />
+                    app:civ_border_width="5dp"
+                    tools:src="@mipmap/user" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/add_user_image_card"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
                     android:layout_alignRight="@id/avatar_image"
                     android:layout_alignBottom="@id/avatar_image"
                     android:layout_marginRight="@dimen/_2sdp"
@@ -113,7 +135,7 @@
                 android:drawablePadding="4dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/dialogText"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
                 app:drawableRightCompat="@drawable/ic_verified"
                 app:drawableTint="@color/colorPrimary"
@@ -144,14 +166,14 @@
             android:layout_below="@id/appBarLayout"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:visibility="invisible"
             android:orientation="vertical"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_10sdp"
+            android:visibility="invisible">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar"
-                android:layout_width="@dimen/_120sdp"
-                android:layout_height="@dimen/_120sdp"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:background="@mipmap/user"
                 android:src="@mipmap/user"
                 app:civ_border_color="@color/Gray"
@@ -180,152 +202,158 @@
             android:layout_gravity="center"
             android:background="@color/lineView" />
 
-        <LinearLayout
-            android:id="@+id/settings_items"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_above="@+id/contact_us"
             android:layout_below="@id/first_line"
             android:layout_centerHorizontal="true"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/appTheme"
+                android:id="@+id/settings_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/dialog_selector"
-                android:orientation="horizontal"
-                android:padding="@dimen/settingItempd">
+                android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="22dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="start|center"
-                    android:src="@mipmap/dark_mode" />
-
-                <TextView
+                <LinearLayout
+                    android:id="@+id/appTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:gravity="end"
-                    android:text="@string/theme_app"
-                    android:textColor="@color/dialogText"
-                    android:textSize="@dimen/settings_text"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:background="@drawable/dialog_selector"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/settingItempd">
 
-            <LinearLayout
-                android:id="@+id/share"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/dialog_selector"
-                android:orientation="horizontal"
-                android:padding="@dimen/settingItempd">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="22dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="start|center"
+                        android:src="@mipmap/dark_mode" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="22dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="start|center"
-                    android:src="@mipmap/share" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="end"
+                        android:text="@string/theme_app"
+                        android:textColor="@color/dialogText"
+                        android:textSize="@dimen/settings_text"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/share"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:gravity="end"
-                    android:text="@string/share_app"
-                    android:textColor="@color/dialogText"
-                    android:textSize="@dimen/settings_text"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:background="@drawable/dialog_selector"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/settingItempd">
 
-            <LinearLayout
-                android:id="@+id/rate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/dialog_selector"
-                android:orientation="horizontal"
-                android:padding="@dimen/settingItempd">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="22dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="start|center"
+                        android:src="@mipmap/share" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="22dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="start"
-                    android:src="@mipmap/star" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="end"
+                        android:text="@string/share_app"
+                        android:textColor="@color/dialogText"
+                        android:textSize="@dimen/settings_text"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/rate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:gravity="end"
-                    android:text="@string/rate_app"
-                    android:textColor="@color/dialogText"
-                    android:textSize="@dimen/settings_text"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:background="@drawable/dialog_selector"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/settingItempd">
 
-            <LinearLayout
-                android:id="@+id/about_app"
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                android:layout_gravity="center"
-                android:background="@drawable/dialog_selector"
-                android:orientation="horizontal"
-                android:padding="@dimen/settingItempd">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="22dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="start"
+                        android:src="@mipmap/star" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="22dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="start"
-                    android:src="@mipmap/about_us" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="end"
+                        android:text="@string/rate_app"
+                        android:textColor="@color/dialogText"
+                        android:textSize="@dimen/settings_text"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/about_app"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="49dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:gravity="end"
-                    android:text="@string/about_app"
-                    android:textColor="@color/dialogText"
-                    android:textSize="@dimen/settings_text"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:background="@drawable/dialog_selector"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/settingItempd">
 
-            <LinearLayout
-                android:id="@+id/log_out"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:background="@drawable/dialog_selector"
-                android:orientation="horizontal"
-                android:padding="@dimen/settingItempd">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="22dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="start"
+                        android:src="@mipmap/about_us" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="22dp"
-                    android:layout_height="23dp"
-                    android:layout_gravity="start|center"
-                    android:layout_marginLeft="1dp"
-                    android:src="@drawable/ic_exit" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="end"
+                        android:text="@string/about_app"
+                        android:textColor="@color/dialogText"
+                        android:textSize="@dimen/settings_text"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/log_out"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:gravity="end|center"
-                    android:text="@string/log_out"
-                    android:textColor="@color/dialogText"
-                    android:textSize="@dimen/settings_text"
-                    android:textStyle="bold" />
+                    android:background="@drawable/dialog_selector"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/settingItempd">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="22dp"
+                        android:layout_height="23dp"
+                        android:layout_gravity="start|center"
+                        android:layout_marginLeft="1dp"
+                        android:src="@drawable/ic_exit" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="end|center"
+                        android:text="@string/log_out"
+                        android:textColor="@color/dialogText"
+                        android:textSize="@dimen/settings_text"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
         <LinearLayout
             android:id="@+id/contact_us"
@@ -485,9 +513,9 @@
             android:id="@+id/profile_shimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/first_line"
             android:layout_below="@id/appBarLayout"
-            android:layout_centerHorizontal="true"
-            android:elevation="@dimen/_4sdp">
+            android:layout_centerHorizontal="true">
 
             <include layout="@layout/profile_shimmer" />
 

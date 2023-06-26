@@ -44,7 +44,7 @@ class PublishedArticlesViewHolder(
 
         binding.userName.apply {
             text = article.user?.name
-            if (article.user?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (article.user?.verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 tooltipText = context.getString(R.string.verified)
             } else {
                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
@@ -71,7 +71,7 @@ class PublishedArticlesViewHolder(
             val commentUser = article.latest_comment?.user
             binding.name.apply {
                 text = commentUser?.name
-                if (commentUser?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (commentUser?.verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     tooltipText = context.getString(R.string.verified)
                 } else {
                     setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
