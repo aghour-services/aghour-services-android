@@ -160,5 +160,6 @@
     <string name="create_article_failed">فشل إنشاء الخبر</string>
     <string name="try_again">حاول مرة تانية.</string>
     <string name="draft_articles">الأخبار المؤجلة</string>
+    <string name="edit_profile">تعديل</string>
 
 </resources>

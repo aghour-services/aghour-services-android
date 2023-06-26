@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:textAlignment="viewEnd"
-    android:textDirection="rtl">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
-        app:iconTint="@color/settings_icon"
-        app:showAsAction="ifRoom|collapseActionView" />
-
-    <item
-        android:id="@+id/settingActivity"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings_fragment"
         app:iconTint="@color/settings_icon"
         app:showAsAction="ifRoom|collapseActionView" />
 

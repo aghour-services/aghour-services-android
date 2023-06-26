@@ -21,7 +21,7 @@ class LikesViewHolder (
     fun setUsersList(user: User) {
         binding.userName.apply {
             text = user.name
-            if (user.is_verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (user.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 tooltipText = context.getString(R.string.verified)
             } else {
                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)

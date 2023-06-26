@@ -21,10 +21,10 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
-import com.aghourservices.utils.services.cache.UserInfo
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
+import com.aghourservices.utils.services.cache.UserInfo
+import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import retrofit2.Call
@@ -113,7 +113,7 @@ class CommentsFragment : BaseFragment() {
                     binding.apply {
                         articleUserName.apply {
                             text = article?.user?.name
-                            if (article?.user?.is_verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            if (article?.user?.verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 tooltipText = context.getString(R.string.verified)
                             } else {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
