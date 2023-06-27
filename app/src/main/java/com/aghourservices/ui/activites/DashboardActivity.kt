@@ -81,11 +81,20 @@ class DashboardActivity : AppCompatActivity() {
                     binding.profileImage.setOnClickListener {
                         startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
                     }
+                }else{
+                    binding.profileImage.setImageResource(R.mipmap.user)
+                    binding.profileImage.setOnClickListener {
+                        startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
+                    }
                 }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
                 Log.d("user", t.message.toString())
+                binding.profileImage.setImageResource(R.mipmap.user)
+                binding.profileImage.setOnClickListener {
+                    startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
+                }
             }
         })
     }
