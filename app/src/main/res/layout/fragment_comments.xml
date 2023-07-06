@@ -85,13 +85,11 @@
                                         tools:text="منذ ساعتين" />
                                 </LinearLayout>
 
-                                <ImageView
-                                    android:id="@+id/article_user_image"
-                                    android:layout_width="33dp"
-                                    android:layout_height="33dp"
-                                    android:src="@mipmap/user"
-                                    android:textSize="13sp"
-                                    tools:ignore="ContentDescription" />
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/avatar_image"
+                                    android:layout_width="@dimen/_24sdp"
+                                    android:layout_height="@dimen/_24sdp"
+                                    android:src="@mipmap/user" />
 
                             </LinearLayout>
 

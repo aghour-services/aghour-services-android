@@ -25,6 +25,8 @@ class DraftArticlesViewHolder(
 
     @SuppressLint("SetTextI18n")
     fun setArticlesList(article: Article) {
+        val avatarUrl = article.user?.url
+
         article.attachments?.forEach { attachment ->
             Glide.with(binding.root.context)
                 .load(attachment.resource_url)
@@ -54,6 +56,12 @@ class DraftArticlesViewHolder(
 
         binding.date.text = article.created_at
 
+        Glide.with(binding.root.context)
+            .load(avatarUrl)
+            .placeholder(R.mipmap.user)
+            .encodeQuality(100)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(binding.avatarImage)
     }
 
     override fun onClick(v: View) {

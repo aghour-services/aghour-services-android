@@ -88,6 +88,7 @@
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_11ssp"
                     android:textStyle="bold"
+                    android:visibility="invisible"
                     app:drawableLeftCompat="@drawable/ic_edit"
                     app:drawableTint="@color/dialogText" />
 

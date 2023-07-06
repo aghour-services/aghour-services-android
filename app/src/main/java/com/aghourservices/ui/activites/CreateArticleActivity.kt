@@ -30,6 +30,8 @@ import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -188,6 +190,11 @@ class CreateArticleActivity : AppCompatActivity() {
                             profile.name,
                             profile.verified
                         )
+                        Glide.with(this@CreateArticleActivity)
+                            .load(profile.url)
+                            .placeholder(R.mipmap.user)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(binding.avatarImage)
                         isVerified = profile.verified
                         binding.userName.apply {
                             text = profile.name

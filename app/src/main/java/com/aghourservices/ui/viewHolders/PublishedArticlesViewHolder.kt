@@ -2,6 +2,7 @@ package com.aghourservices.ui.viewHolders
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,9 @@ class PublishedArticlesViewHolder(
     @SuppressLint("SetTextI18n")
     fun setNewsList(article: Article) {
         val profile = UserInfo.getProfile(binding.root.context)
+        val avatarUrl = article.user?.url
+
+        Log.d("AVATAR", "setNewsList: $avatarUrl")
 
         article.attachments?.forEach { attachment ->
             Glide.with(binding.root.context)
@@ -79,6 +83,13 @@ class PublishedArticlesViewHolder(
             }
             binding.body.text = article.latest_comment?.body
             binding.commentTime.text = article.latest_comment?.created_at
+
+            Glide.with(binding.root.context)
+                .load(avatarUrl)
+                .placeholder(R.mipmap.user)
+                .encodeQuality(100)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.commentAvatar)
         }
 
         binding.shareArticle.setOnClickListener {
@@ -100,6 +111,13 @@ class PublishedArticlesViewHolder(
                 article.likes_count.toString()
             }
         }
+
+        Glide.with(binding.root.context)
+            .load(avatarUrl)
+            .placeholder(R.mipmap.user)
+            .encodeQuality(100)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(binding.avatarImage)
     }
 
     override fun onClick(v: View) {

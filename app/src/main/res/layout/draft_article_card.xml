@@ -70,12 +70,11 @@
                     tools:text="منذ ساعتين" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/user_icon"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:src="@mipmap/user"
-                tools:ignore="ContentDescription" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_image"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:background="@mipmap/user" />
 
         </LinearLayout>
 

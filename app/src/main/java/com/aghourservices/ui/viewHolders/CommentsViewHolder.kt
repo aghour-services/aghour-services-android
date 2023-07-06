@@ -8,6 +8,8 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Comment
 import com.aghourservices.databinding.CommentCardBinding
 import com.aghourservices.utils.services.cache.UserInfo
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class CommentsViewHolder(
     val binding: CommentCardBinding,
@@ -19,6 +21,7 @@ class CommentsViewHolder(
     }
 
     fun setCommentView(comment: Comment) {
+        val avatarUrl = comment.user?.url
         val profile = UserInfo.getProfile(binding.root.context)
 
         binding.apply {
@@ -38,6 +41,13 @@ class CommentsViewHolder(
         if (comment.user?.id == profile.id) {
             binding.popupMenu.isVisible = true
         }
+
+        Glide.with(binding.root.context)
+            .load(avatarUrl)
+            .placeholder(R.mipmap.user)
+            .encodeQuality(100)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(binding.avatarImage)
     }
 
     override fun onClick(v: View?) {
