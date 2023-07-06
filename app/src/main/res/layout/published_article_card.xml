@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_4sdp"
-                    android:fontFamily="@font/noto_bold"
+                    android:fontFamily="sans-serif-black"
                     android:textStyle="bold"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_13ssp"
@@ -70,13 +70,11 @@
                     tools:text="منذ ساعتين" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/user_icon"
-                android:layout_width="@dimen/_26sdp"
-                android:layout_height="@dimen/_26sdp"
-                android:src="@mipmap/user"
-                android:layout_marginTop="@dimen/_3sdp"
-                tools:ignore="ContentDescription" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_image"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:background="@mipmap/user" />
 
         </LinearLayout>
 
@@ -126,7 +124,6 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@null"
-                android:maxHeight="@dimen/_300sdp"
                 android:scaleType="fitXY"
                 android:src="@color/image_bg" />
 
@@ -198,7 +195,7 @@
                             app:cardBackgroundColor="@color/lattest_comment_card"
                             app:cardCornerRadius="@dimen/_8sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/icon"
+                            app:layout_constraintEnd_toStartOf="@+id/comment_avatar"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -223,7 +220,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="4dp"
-                                        android:fontFamily="@font/noto_bold"
+                                        android:fontFamily="sans-serif-black"
                                         android:textColor="@color/dialogText"
                                         android:textSize="@dimen/_10ssp"
                                         android:textStyle="bold"
@@ -265,12 +262,11 @@
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
 
-                        <ImageView
-                            android:id="@+id/icon"
-                            android:layout_width="@dimen/_23sdp"
-                            android:layout_height="@dimen/_23sdp"
-                            android:layout_margin="@dimen/_5sdp"
-                            android:src="@mipmap/user"
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/comment_avatar"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:background="@mipmap/user"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

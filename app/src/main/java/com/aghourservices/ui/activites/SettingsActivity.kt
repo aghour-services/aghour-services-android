@@ -24,6 +24,8 @@ import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback
@@ -118,6 +120,11 @@ class SettingsActivity : AppCompatActivity() {
                             profile.name,
                             profile.verified
                         )
+                        Glide.with(this@SettingsActivity)
+                            .load(profile.url)
+                            .placeholder(R.mipmap.user)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(binding.avatarImage)
                         binding.userName.apply {
                             text = profile.name
                             if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

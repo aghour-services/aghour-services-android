@@ -96,12 +96,11 @@
                     app:drawableLeftCompat="@drawable/ic_verified"
                     tools:text="أجهور الكبرى" />
 
-                <ImageView
-                    android:id="@+id/user_icon"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar_image"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
-                    android:src="@mipmap/user"
-                    tools:ignore="ContentDescription" />
+                    android:background="@mipmap/user" />
 
             </LinearLayout>
 

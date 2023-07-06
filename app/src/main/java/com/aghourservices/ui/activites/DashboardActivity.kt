@@ -52,6 +52,10 @@ class DashboardActivity : AppCompatActivity() {
         inAppUpdate()
         notificationPermission()
         getFirebaseInstanceToken()
+
+        binding.profileImage.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
+        }
     }
 
     private fun notificationPermission() {
@@ -77,24 +81,14 @@ class DashboardActivity : AppCompatActivity() {
                         .placeholder(R.mipmap.user)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.profileImage)
-
-                    binding.profileImage.setOnClickListener {
-                        startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
-                    }
                 }else{
                     binding.profileImage.setImageResource(R.mipmap.user)
-                    binding.profileImage.setOnClickListener {
-                        startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
-                    }
                 }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
                 Log.d("user", t.message.toString())
                 binding.profileImage.setImageResource(R.mipmap.user)
-                binding.profileImage.setOnClickListener {
-                    startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
-                }
             }
         })
     }

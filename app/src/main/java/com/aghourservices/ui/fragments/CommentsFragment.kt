@@ -130,8 +130,14 @@ class CommentsFragment : BaseFragment() {
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(articleImage)
 
-                            binding.articleImage.isVisible = attachment.resource_url.isNotEmpty()
+                            articleImage.isVisible = attachment.resource_url.isNotEmpty()
                         }
+                        Glide.with(requireContext())
+                            .load(article?.user?.url)
+                            .placeholder(R.mipmap.user)
+                            .encodeQuality(100)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(avatarImage)
                     }
                 }
             }

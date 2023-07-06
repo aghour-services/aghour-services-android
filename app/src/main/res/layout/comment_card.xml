@@ -15,7 +15,7 @@
         app:cardBackgroundColor="@color/lattest_comment_card"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/user_icon"
+        app:layout_constraintEnd_toStartOf="@+id/avatar_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -84,13 +84,11 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/user_icon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_margin="5dp"
-        android:src="@mipmap/user"
-        android:textSize="13sp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_image"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:background="@mipmap/user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

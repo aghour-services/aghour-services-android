@@ -10,6 +10,7 @@ data class User(
     var password: String,
     var token: String = "",
     var role: String = "",
+    var url: String = "",
     var verified: Boolean = false,
     var avatar: Avatar? = null,
 ) {
