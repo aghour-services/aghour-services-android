@@ -277,6 +277,13 @@ class SettingsActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     )
                         .show()
+                }else {
+                    progressDialog.dismiss()
+                    Toast.makeText(
+                        this@SettingsActivity,
+                        "فشل في تحديث الحساب",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
