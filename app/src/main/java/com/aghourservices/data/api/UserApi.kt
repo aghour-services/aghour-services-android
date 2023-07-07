@@ -12,6 +12,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 
 interface UserApi {
@@ -25,6 +26,17 @@ interface UserApi {
         @Part("user[email]") email: RequestBody,
         @Part("user[mobile]") mobile: RequestBody,
         @Part("user[password]") password: RequestBody,
+        @Part avatar: MultipartBody.Part?,
+    ): Call<User>
+
+    @Multipart
+    @PUT("users")
+    fun update(
+        @Header("TOKEN") token: String,
+        @Part("user[name]") name: RequestBody? = null,
+        @Part("user[email]") email: RequestBody? = null,
+        @Part("user[mobile]") mobile: RequestBody? = null,
+        @Part("user[password]") password: RequestBody? = null,
         @Part avatar: MultipartBody.Part?,
     ): Call<User>
 

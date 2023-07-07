@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun initUserClick() {
         binding.apply {
             backBtn.setOnClickListener {
-                this@SettingsActivity.onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             }
             appTheme.setOnClickListener {
                 chooseThemeDialog()
