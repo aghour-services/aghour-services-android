@@ -1,24 +1,36 @@
 package com.aghourservices.ui.activites
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
+import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySettingsBinding
 import com.aghourservices.utils.ads.Banner
+import com.aghourservices.utils.helper.Constants
 import com.aghourservices.utils.helper.Event
+import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.facebook
 import com.aghourservices.utils.helper.Intents.gmail
 import com.aghourservices.utils.helper.Intents.rateApp
 import com.aghourservices.utils.helper.Intents.shareApp
 import com.aghourservices.utils.helper.Intents.showOnCloseDialog
 import com.aghourservices.utils.helper.Intents.whatsApp
+import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.ThemePreference
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
@@ -27,23 +39,35 @@ import com.aghourservices.utils.services.cache.UserInfo.saveProfile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.ads.AdView
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySettingsBinding
+    private var _binding: ActivitySettingsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var adView: AdView
+    private lateinit var permissions: Array<String>
     private val user by lazy { getUserData(this) }
     private val profile by lazy { getProfile(this) }
     private val isUserLogin by lazy { isUserLoggedIn(this) }
+    private val progressDialog by lazy { ProgressDialog(this) }
+    private var avatarUri: Uri? = null
+    private var avatarPart: MultipartBody.Part? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        _binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        adView()
         initUserClick()
+        adView()
+        checkUser()
+        getProfile()
+        initPermissions()
     }
 
     private fun adView() {
@@ -80,6 +104,20 @@ class SettingsActivity : AppCompatActivity() {
             }
             logOut.setOnClickListener {
                 showOnCloseDialog(this@SettingsActivity)
+            }
+            avatarImage.setOnClickListener {
+                if (!checkStoragePermission()) {
+                    requestPermissions()
+                } else {
+                    openGallery()
+                }
+            }
+            addUserImage.setOnClickListener {
+                if (!checkStoragePermission()) {
+                    requestPermissions()
+                } else {
+                    openGallery()
+                }
             }
         }
     }
@@ -157,12 +195,6 @@ class SettingsActivity : AppCompatActivity() {
         })
     }
 
-    override fun onStart() {
-        checkUser()
-        getProfile()
-        super.onStart()
-    }
-
     private fun chooseThemeDialog() {
         Event.sendFirebaseEvent("App_Theme", "")
         val builder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
@@ -203,5 +235,82 @@ class SettingsActivity : AppCompatActivity() {
             profileShimmer.stopShimmer()
             profileShimmer.visibility = View.INVISIBLE
         }
+    }
+
+    private fun openGallery() {
+        val galleryIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Intent(MediaStore.ACTION_PICK_IMAGES)
+        } else {
+            Intent(Intent.ACTION_PICK)
+        }
+        galleryIntent.type = "image/*"
+        startActivityForResult(galleryIntent, Constants.GALLERY_CODE)
+    }
+
+    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Constants.GALLERY_CODE && resultCode == Activity.RESULT_OK) {
+            avatarUri = data?.data!!
+            val file = File(Intents.getRealPathFromURI(this, avatarUri!!)!!)
+            Intents.compressFile(this, file)
+            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            avatarPart =
+                MultipartBody.Part.createFormData("user[avatar]", file.name, requestBody)
+            binding.avatarImage.setImageURI(avatarUri)
+            updateProfileAvatar(avatarPart)
+        }
+    }
+
+    private fun updateProfileAvatar(avatarPart: MultipartBody.Part?) {
+        progressDialog.show("جار تحديث الحساب..")
+        val retrofitInstance = userApi.update(token = user.token, avatar = avatarPart)
+
+        retrofitInstance.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    progressDialog.dismiss()
+                    Toast.makeText(
+                        this@SettingsActivity,
+                        "تم تحديث الحساب بنجاح",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                progressDialog.dismiss()
+                Toast.makeText(this@SettingsActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun initPermissions() {
+        permissions = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_MEDIA_LOCATION,
+        )
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(this, permissions, Constants.REQUEST_CODE)
+    }
+
+    private fun checkStoragePermission(): Boolean {
+        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == (PackageManager.PERMISSION_GRANTED)
+        } else {
+            true
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
