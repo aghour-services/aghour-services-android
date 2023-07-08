@@ -20,10 +20,9 @@ import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityDashboardBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragments.CategoriesFragmentDirections
+import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -76,12 +75,8 @@ class DashboardActivity : AppCompatActivity() {
                 val profile = response.body()
 
                 if (response.isSuccessful) {
-                    Glide.with(this@DashboardActivity)
-                        .load(profile?.url)
-                        .placeholder(R.mipmap.user)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(binding.profileImage)
-                }else{
+                    loadProfileImage(this@DashboardActivity, profile?.url.toString(), binding.profileImage)
+                } else {
                     binding.profileImage.setImageResource(R.mipmap.user)
                 }
             }

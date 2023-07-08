@@ -56,12 +56,11 @@ class DraftArticlesViewHolder(
 
         binding.date.text = article.created_at
 
-        Glide.with(binding.root.context)
-            .load(avatarUrl)
-            .placeholder(R.mipmap.user)
-            .encodeQuality(100)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(binding.avatarImage)
+        Intents.loadProfileImage(
+            binding.root.context,
+            avatarUrl.toString(),
+            binding.avatarImage,
+        )
     }
 
     override fun onClick(v: View) {

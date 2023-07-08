@@ -24,6 +24,7 @@ import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.facebook
 import com.aghourservices.utils.helper.Intents.gmail
+import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.helper.Intents.rateApp
 import com.aghourservices.utils.helper.Intents.shareApp
 import com.aghourservices.utils.helper.Intents.showOnCloseDialog
@@ -34,8 +35,6 @@ import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.ads.AdView
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -155,11 +154,9 @@ class SettingsActivity : AppCompatActivity() {
                             profile.name,
                             profile.verified
                         )
-                        Glide.with(this@SettingsActivity)
-                            .load(profile.url)
-                            .placeholder(R.mipmap.user)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(binding.avatarImage)
+
+                        loadProfileImage(this@SettingsActivity, profile.url, binding.avatarImage)
+
                         binding.userName.apply {
                             text = profile.name
                             if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -167,6 +164,7 @@ class SettingsActivity : AppCompatActivity() {
                             } else {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                             }
+                            visibility = View.VISIBLE
                         }
                         binding.userPhone.text = user.mobile
                         binding.userEmail.text = user.email

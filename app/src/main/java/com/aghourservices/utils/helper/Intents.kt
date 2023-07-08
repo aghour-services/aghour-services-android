@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
 import com.aghourservices.ui.activites.SignInActivity
 import com.aghourservices.utils.services.cache.UserInfo.clearUserData
+import com.bumptech.glide.Glide
+import de.hdodenhof.circleimageview.CircleImageView
 import java.io.File
 import java.io.FileOutputStream
 
@@ -222,5 +224,13 @@ object Intents {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         view.requestFocus()
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    fun loadProfileImage(context: Context, imageUrl: String, profileImage: CircleImageView) {
+        Glide.with(context)
+            .load(imageUrl)
+            .placeholder(R.mipmap.user)
+            .encodeQuality(100)
+            .into(profileImage)
     }
 }
