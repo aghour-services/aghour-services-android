@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,7 +16,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
-import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySettingsBinding
 import com.aghourservices.utils.ads.Banner
@@ -30,8 +28,8 @@ import com.aghourservices.utils.helper.Intents.rateApp
 import com.aghourservices.utils.helper.Intents.shareApp
 import com.aghourservices.utils.helper.Intents.showOnCloseDialog
 import com.aghourservices.utils.helper.Intents.whatsApp
-import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.ThemePreference
+import com.aghourservices.utils.services.UserService
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
@@ -55,7 +53,6 @@ class SettingsActivity : AppCompatActivity() {
     private val user by lazy { getUserData(this) }
     private val profile by lazy { getProfile(this) }
     private val isUserLogin by lazy { isUserLoggedIn(this) }
-    private val progressDialog by lazy { ProgressDialog(this) }
     private var avatarUri: Uri? = null
     private var avatarPart: MultipartBody.Part? = null
 
@@ -259,39 +256,17 @@ class SettingsActivity : AppCompatActivity() {
             avatarPart =
                 MultipartBody.Part.createFormData("user[avatar]", file.name, requestBody)
             binding.avatarImage.setImageURI(avatarUri)
-            updateProfileAvatar(avatarPart)
+            updateProfileAvatar()
         }
     }
 
-    private fun updateProfileAvatar(avatarPart: MultipartBody.Part?) {
-        progressDialog.show("جار تحديث الحساب..")
-        val retrofitInstance = userApi.update(token = user.token, avatar = avatarPart)
-
-        retrofitInstance.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if (response.isSuccessful) {
-                    progressDialog.dismiss()
-                    Toast.makeText(
-                        this@SettingsActivity,
-                        "تم تحديث الحساب بنجاح",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }else {
-                    progressDialog.dismiss()
-                    Toast.makeText(
-                        this@SettingsActivity,
-                        "فشل في تحديث الحساب",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                progressDialog.dismiss()
-                Toast.makeText(this@SettingsActivity, t.message, Toast.LENGTH_SHORT).show()
-            }
-        })
+    private fun updateProfileAvatar() {
+        val userService = UserService()
+        userService.updateAvatar(
+            this@SettingsActivity,
+            user.token,
+            avatarPart,
+        )
     }
 
     private fun initPermissions() {
