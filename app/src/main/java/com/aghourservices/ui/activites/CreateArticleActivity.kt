@@ -25,7 +25,7 @@ import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
 import com.aghourservices.utils.helper.Intents.loadProfileImage
-import com.aghourservices.utils.services.CreateArticleService
+import com.aghourservices.utils.services.ArticleService
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
@@ -161,8 +161,8 @@ class CreateArticleActivity : AppCompatActivity() {
     }
 
     private fun createArticle(description: String) {
-        val createArticleService = CreateArticleService()
-        createArticleService.publishArticle(
+        val articleService = ArticleService()
+        articleService.create(
             this@CreateArticleActivity,
             user.token,
             UserInfo.getFCMToken(this@CreateArticleActivity),
