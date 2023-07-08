@@ -102,11 +102,8 @@ class SettingsActivity : AppCompatActivity() {
                 showOnCloseDialog(this@SettingsActivity)
             }
             avatarImage.setOnClickListener {
-                if (!checkStoragePermission()) {
-                    requestPermissions()
-                } else {
-                    openGallery()
-                }
+                val intent = Intent(this@SettingsActivity, FullScreenProfileActivity::class.java)
+                startActivity(intent)
             }
             addUserImage.setOnClickListener {
                 if (!checkStoragePermission()) {

@@ -230,6 +230,7 @@ object Intents {
         Glide.with(context)
             .load(imageUrl)
             .placeholder(R.mipmap.user)
+            .error(R.mipmap.user)
             .encodeQuality(100)
             .into(profileImage)
     }

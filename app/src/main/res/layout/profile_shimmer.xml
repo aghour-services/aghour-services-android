@@ -17,8 +17,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/avatar_image"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_110sdp"
             app:cardBackgroundColor="@android:color/darker_gray"
             app:cardCornerRadius="90dp" />
 
