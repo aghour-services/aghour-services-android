@@ -18,9 +18,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CreateArticleService : Service() {
+class ArticleService : Service() {
 
-    fun publishArticle(
+    fun create(
         context: Context,
         userToken: String,
         fcmToken: String,
@@ -28,7 +28,7 @@ class CreateArticleService : Service() {
         imagePart: MultipartBody.Part?,
         isVerified: Boolean? = null
     ) {
-        val startIntent = Intent(context, CreateArticleService::class.java)
+        val startIntent = Intent(context, ArticleService::class.java)
         val descriptionBody =
             description.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
         val retrofitBuilder = articlesApi.createArticle(
@@ -93,5 +93,10 @@ class CreateArticleService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
+    }
+
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        stopSelf()
     }
 }
