@@ -1,15 +1,20 @@
 package com.aghourservices.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.aghourservices.R
 import com.aghourservices.data.model.Comment
+import com.aghourservices.data.model.Profile
+import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.data.network.RetrofitInstance.commentsApi
 import com.aghourservices.databinding.FragmentEditCommentBinding
 import com.aghourservices.utils.helper.AlertDialogs
+import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.showKeyboard
 import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
@@ -39,8 +44,7 @@ class EditCommentFragment : BaseFragment() {
 
     private fun initScreenView() {
         binding.commentTv.setText(arguments.commentBody)
-        binding.userName.text = arguments.commentUser
-
+        getProfile()
         binding.updateComment.setOnClickListener {
             updateComment()
             findNavController().navigateUp()
@@ -66,11 +70,56 @@ class EditCommentFragment : BaseFragment() {
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
-                if (response.isSuccessful) { }
+                if (response.isSuccessful) {
+                }
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
                 AlertDialogs.noInternet(requireContext())
+            }
+        })
+    }
+
+    private fun getProfile() {
+        val user = UserInfo.getUserData(requireContext())
+        val retrofitInstance = RetrofitInstance.userApi.userProfile(user.token)
+
+        retrofitInstance.enqueue(object : Callback<Profile> {
+            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+                val profile = response.body()
+
+                if (response.isSuccessful && profile != null) {
+
+                    UserInfo.saveProfile(
+                        requireContext(),
+                        profile.id!!,
+                        profile.name,
+                        profile.verified
+                    )
+
+                    Intents.loadProfileImage(
+                        requireContext(),
+                        profile.url,
+                        binding.avatar
+                    )
+
+                    binding.userName.apply {
+                        text = profile.name
+                        if (!profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                        }
+                    }
+                } else {
+                    binding.userName.apply {
+                        text = user.name
+                    }
+                    binding.avatar.setImageResource(R.mipmap.user)
+                }
+            }
+
+            override fun onFailure(call: Call<Profile>, t: Throwable) {
+                binding.userName.apply { text = user.name }
+                binding.avatar.setImageResource(R.mipmap.user)
             }
         })
     }

@@ -24,14 +24,13 @@ import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
 import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
+import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.CreateArticleService
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -190,11 +189,11 @@ class CreateArticleActivity : AppCompatActivity() {
                             profile.name,
                             profile.verified
                         )
-                        Glide.with(this@CreateArticleActivity)
-                            .load(profile.url)
-                            .placeholder(R.mipmap.user)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(binding.avatarImage)
+                        loadProfileImage(
+                            this@CreateArticleActivity,
+                            profile.url,
+                            binding.avatarImage
+                        )
                         isVerified = profile.verified
                         binding.userName.apply {
                             text = profile.name

@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.Comment
 import com.aghourservices.databinding.CommentCardBinding
+import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class CommentsViewHolder(
     val binding: CommentCardBinding,
@@ -42,12 +41,11 @@ class CommentsViewHolder(
             binding.popupMenu.isVisible = true
         }
 
-        Glide.with(binding.root.context)
-            .load(avatarUrl)
-            .placeholder(R.mipmap.user)
-            .encodeQuality(100)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(binding.avatarImage)
+        loadProfileImage(
+            binding.root.context,
+            avatarUrl.toString(),
+            binding.avatarImage,
+        )
     }
 
     override fun onClick(v: View?) {

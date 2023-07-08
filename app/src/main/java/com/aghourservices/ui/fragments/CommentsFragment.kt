@@ -23,6 +23,7 @@ import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
+import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.bumptech.glide.Glide
@@ -132,12 +133,11 @@ class CommentsFragment : BaseFragment() {
 
                             articleImage.isVisible = attachment.resource_url.isNotEmpty()
                         }
-                        Glide.with(requireContext())
-                            .load(article?.user?.url)
-                            .placeholder(R.mipmap.user)
-                            .encodeQuality(100)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(avatarImage)
+                        loadProfileImage(
+                            requireContext(),
+                            article?.user?.url.toString(),
+                            avatarImage
+                        )
                     }
                 }
             }

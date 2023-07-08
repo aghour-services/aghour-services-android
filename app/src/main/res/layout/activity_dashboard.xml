@@ -53,7 +53,7 @@
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:background="?android:selectableItemBackgroundBorderless"
-                tools:src="@mipmap/user"
+                android:src="@mipmap/user"
                 android:layout_margin="@dimen/_6sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

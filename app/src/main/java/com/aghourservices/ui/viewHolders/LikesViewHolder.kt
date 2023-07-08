@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.databinding.LikesCardBinding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.aghourservices.utils.helper.Intents.loadProfileImage
 
 class LikesViewHolder (
     val binding: LikesCardBinding,
@@ -29,12 +28,11 @@ class LikesViewHolder (
                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
             }
         }
-        Glide.with(binding.root.context)
-            .load(user.url)
-            .placeholder(R.mipmap.user)
-            .encodeQuality(100)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(binding.avatarImage)
+        loadProfileImage(
+            binding.root.context,
+            user.url,
+            binding.avatarImage,
+        )
     }
 
     override fun onClick(v: View) {
