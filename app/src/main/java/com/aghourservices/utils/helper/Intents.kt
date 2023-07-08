@@ -226,7 +226,7 @@ object Intents {
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    fun loadProfileImage(context: Context, imageUrl: String, profileImage: CircleImageView) {
+    fun loadProfileImage(context: Context, imageUrl: String?, profileImage: CircleImageView) {
         Glide.with(context)
             .load(imageUrl)
             .placeholder(R.mipmap.user)

@@ -85,12 +85,11 @@ class PublishedArticlesViewHolder(
             binding.body.text = article.latest_comment?.body
             binding.commentTime.text = article.latest_comment?.created_at
 
-            Glide.with(binding.root.context)
-                .load(avatarUrl)
-                .placeholder(R.mipmap.user)
-                .encodeQuality(100)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(binding.commentAvatar)
+            loadProfileImage(
+                binding.root.context,
+                commentUser?.url,
+                binding.commentAvatar,
+            )
         }
 
         binding.shareArticle.setOnClickListener {

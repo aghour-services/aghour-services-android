@@ -19,10 +19,10 @@ class LikesViewHolder (
     }
 
     @SuppressLint("SetTextI18n")
-    fun setUsersList(user: User) {
+    fun setUsersList(user: User?) {
         binding.userName.apply {
-            text = user.name
-            if (user.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            text = user?.name
+            if (user?.verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 tooltipText = context.getString(R.string.verified)
             } else {
                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
@@ -30,7 +30,7 @@ class LikesViewHolder (
         }
         loadProfileImage(
             binding.root.context,
-            user.url,
+            user?.url,
             binding.avatarImage,
         )
     }
