@@ -74,7 +74,7 @@ class UserService : Service() {
             Constants.NOTIFICATION_ID,
             Notification.sendNotification(this, "إنتظر من فضلك...", "جار تحديث الصورة الشخصية...")
         )
-        return START_STICKY
+        return START_NOT_STICKY
     }
 
     override fun onBind(intent: Intent?): IBinder? {
