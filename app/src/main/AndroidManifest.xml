@@ -32,6 +32,7 @@
         android:theme="@style/MainTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
+
         <activity
             android:name=".ui.activites.SplashScreen"
             android:exported="true"
@@ -79,6 +80,10 @@
             android:exported="false"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activites.FullScreenProfileActivity"
+            android:exported="false"
+            android:theme="@style/MainTheme" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
