@@ -50,7 +50,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var adView: AdView
     private lateinit var permissions: Array<String>
     private val user by lazy { getUserData(this) }
-    private val profile by lazy { getProfile(this) }
     private val isUserLogin by lazy { isUserLoggedIn(this) }
     private var avatarUri: Uri? = null
     private var avatarPart: MultipartBody.Part? = null
@@ -101,17 +100,6 @@ class SettingsActivity : AppCompatActivity() {
             logOut.setOnClickListener {
                 showOnCloseDialog(this@SettingsActivity)
             }
-            avatarImage.setOnClickListener {
-                val intent = Intent(this@SettingsActivity, FullScreenProfileActivity::class.java)
-                startActivity(intent)
-            }
-            addUserImage.setOnClickListener {
-                if (!checkStoragePermission()) {
-                    requestPermissions()
-                } else {
-                    openGallery()
-                }
-            }
         }
     }
 
@@ -133,6 +121,22 @@ class SettingsActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
             finishAffinity()
+        }
+    }
+
+    private fun profileUserClicks() {
+        binding.apply {
+            avatarImage.setOnClickListener {
+                val intent = Intent(this@SettingsActivity, FullScreenProfileActivity::class.java)
+                startActivity(intent)
+            }
+            addUserImage.setOnClickListener {
+                if (!checkStoragePermission()) {
+                    requestPermissions()
+                } else {
+                    openGallery()
+                }
+            }
         }
     }
 
@@ -165,6 +169,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
                         binding.userPhone.text = user.mobile
                         binding.userEmail.text = user.email
+                        profileUserClicks()
                     }
                 }
             }
@@ -176,13 +181,14 @@ class SettingsActivity : AppCompatActivity() {
                     userEmail.text = user.email
                 }
                 binding.userName.apply {
-                    text = profile.name
-                    if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text = user.name
+                    if (user.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         tooltipText = context.getString(R.string.verified)
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                     }
                 }
+                profileUserClicks()
             }
         })
     }
@@ -284,10 +290,5 @@ class SettingsActivity : AppCompatActivity() {
         } else {
             true
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }
