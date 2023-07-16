@@ -49,6 +49,7 @@ class SettingsActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var adView: AdView
     private lateinit var permissions: Array<String>
+    private val profile by lazy { getProfile(this) }
     private val user by lazy { getUserData(this) }
     private val isUserLogin by lazy { isUserLoggedIn(this) }
     private var avatarUri: Uri? = null
@@ -167,8 +168,10 @@ class SettingsActivity : AppCompatActivity() {
                             }
                             visibility = View.VISIBLE
                         }
-                        binding.userPhone.text = user.mobile
-                        binding.userEmail.text = user.email
+                        binding.apply {
+                            userEmail.text = profile.email
+                            userPhone.text = profile.mobile
+                        }
                         profileUserClicks()
                     }
                 }
@@ -177,16 +180,17 @@ class SettingsActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Profile>, t: Throwable) {
                 stopShimmer()
                 binding.apply {
-                    userPhone.text = user.mobile
                     userEmail.text = user.email
+                    userPhone.text = user.mobile
                 }
                 binding.userName.apply {
-                    text = user.name
+                    text = profile.name
                     if (user.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         tooltipText = context.getString(R.string.verified)
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                     }
+                    visibility = View.VISIBLE
                 }
                 profileUserClicks()
             }
