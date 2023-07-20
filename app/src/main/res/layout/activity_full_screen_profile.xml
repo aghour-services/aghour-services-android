@@ -13,22 +13,21 @@
         <ImageButton
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
-            android:src="@drawable/ic_arrow"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
             android:background="?android:selectableItemBackgroundBorderless"
-            android:padding="@dimen/_20sdp"
+            android:padding="@dimen/_14sdp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_height="wrap_content"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/avatar_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_300sdp"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/user_name"
-            android:layout_alignParentTop="true"
+            android:layout_below="@id/back_btn"
             android:layout_centerHorizontal="true"
-            android:keepScreenOn="true"
-            android:src="@mipmap/user" />
+            android:src="@mipmap/user"/>
 
         <TextView
             android:id="@+id/user_name"

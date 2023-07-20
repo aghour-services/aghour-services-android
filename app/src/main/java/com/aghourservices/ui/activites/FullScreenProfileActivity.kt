@@ -4,11 +4,14 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.ActivityFullScreenProfileBinding
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,11 +49,13 @@ class FullScreenProfileActivity : AppCompatActivity() {
                     val profile = response.body()
                     if (profile != null) {
 
-                        loadProfileImage(
-                            this@FullScreenProfileActivity,
-                            profile.url,
-                            binding.avatarImage
-                        )
+                       Glide.with(this@FullScreenProfileActivity)
+                           .load(profile.url)
+                           .placeholder(R.mipmap.user)
+                           .error(R.mipmap.user)
+                           .encodeQuality(100)
+                           .diskCacheStrategy(DiskCacheStrategy.ALL)
+                           .into(binding.avatarImage)
 
                         binding.userName.apply {
                             text = profile.name
