@@ -99,7 +99,7 @@
                     android:layout_centerHorizontal="true"
                     android:background="@mipmap/user"
                     app:civ_border_color="@color/Gray"
-                    app:civ_border_width="5dp"
+                    app:civ_border_width="@dimen/_3sdp"
                     tools:src="@mipmap/user" />
 
                 <androidx.cardview.widget.CardView

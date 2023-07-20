@@ -92,14 +92,15 @@
                     android:fontFamily="@font/noto_bold"
                     android:paddingRight="@dimen/_4sdp"
                     android:textColor="@color/dialogText"
-                    android:textSize="@dimen/_14ssp"
+                    android:visibility="invisible"
+                    android:textSize="@dimen/_15ssp"
                     app:drawableLeftCompat="@drawable/ic_verified"
                     tools:text="أجهور الكبرى" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar_image"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_26sdp"
                     android:background="@mipmap/user" />
 
             </LinearLayout>
@@ -123,7 +124,6 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@null"
-                android:maxHeight="@dimen/_300sdp"
                 android:scaleType="fitXY"
                 tools:src="@mipmap/ic_launcher" />
 

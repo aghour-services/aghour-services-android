@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -202,6 +203,7 @@ class CreateArticleActivity : AppCompatActivity() {
                             } else {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                             }
+                            visibility = View.VISIBLE
                         }
                     }
                 }
@@ -218,6 +220,7 @@ class CreateArticleActivity : AppCompatActivity() {
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                     }
+                    visibility = View.VISIBLE
                 }
             }
         })

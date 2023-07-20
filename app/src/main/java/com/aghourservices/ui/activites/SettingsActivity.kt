@@ -185,7 +185,7 @@ class SettingsActivity : AppCompatActivity() {
                 }
                 binding.userName.apply {
                     text = profile.name
-                    if (user.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         tooltipText = context.getString(R.string.verified)
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)

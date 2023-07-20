@@ -45,7 +45,6 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
         val mainNavController = setupNavController()
         checkExtras(mainNavController)
-        getUserProfile()
         floatActionButton()
         inAppRating()
         inAppUpdate()
@@ -55,6 +54,11 @@ class DashboardActivity : AppCompatActivity() {
         binding.profileImage.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getUserProfile()
     }
 
     private fun notificationPermission() {
