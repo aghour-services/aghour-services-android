@@ -28,8 +28,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar_image"
-                    android:layout_width="@dimen/_110sdp"
-                    android:layout_height="@dimen/_110sdp"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:background="@mipmap/user"
@@ -47,9 +47,9 @@
                 android:drawablePadding="4dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/dialogText"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_18ssp"
                 android:textStyle="bold"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:drawableLeftCompat="@drawable/ic_verified"
                 app:drawableTint="@color/colorPrimary"
                 tools:text="Mohamed Magdy" />

@@ -21,6 +21,7 @@ class DraftArticlesViewHolder(
         binding.userLayout.setOnClickListener(this)
         binding.publishDraftArticleBtn.setOnClickListener(this)
         binding.draftArticlePopupMenu.setOnClickListener(this)
+        binding.userName.setOnClickListener(this)
     }
 
     @SuppressLint("SetTextI18n")

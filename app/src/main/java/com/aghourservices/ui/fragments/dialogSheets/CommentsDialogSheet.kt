@@ -101,6 +101,11 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
 
     private fun onCommentClick(v: View, position: Int) {
         val comment = commentsAdapter.getComment(position)
+        val user = commentsAdapter.getComment(position).user!!
+
+        val userProfile = CommentsDialogSheetDirections.actionCommentsDialogSheetToUserProfileFragment(
+            user.id!!
+        )
         val updateComment =
             CommentsDialogSheetDirections.actionCommentsDialogSheetToUpdateCommentFragment(
                 arguments.articleId,
@@ -124,6 +129,10 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                     true
                 }
                 popup.show()
+            }
+
+            R.id.user_name -> {
+                findNavController().navigate(userProfile)
             }
         }
     }
