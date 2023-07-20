@@ -4,7 +4,7 @@
 [![Gradle](https://img.shields.io/badge/gradle-7.1.2-blue.svg)](https://lv.binarybabel.org/catalog/gradle/latest)
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
-Aghour Services App is a sample project that presents all services in this village such as Doctors,pharmacy, Restaurant...etc.
+Aghour Services App is a sample project that presents all services in this village such as Doctors, pharmacies, Restaurants...etc.
 
 The goal of the project is to demonstrate best practices, provide a set of guidelines, and present modern Android
 
@@ -15,18 +15,18 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 # **App Screenshots**
 
 ### **Light**
-<img src="https://i.imgur.com/9AM93ER.png" width="130"><img src="https://i.imgur.com/wqbfWI7.png" width="130">
-<img src="https://i.imgur.com/9wt5Cpd.png" width="130"><img src="https://i.imgur.com/VJtb1t4.png" width="130">
-<img src="https://i.imgur.com/TOiJKWz.png" width="130"><img src="https://i.imgur.com/J5ydKqy.png" width="130">
+<img src="https://i.imgur.com/9AM93ER.png" width="130"><img src="https://i.imgur.com/kS5LTQY.png" width="130">
+<img src="https://i.imgur.com/9wt5Cpd.png" width="130"><img src="https://i.imgur.com/dcbUCd8.png" width="130">
+<img src="https://i.imgur.com/sotkLle.png" width="130"><img src="https://i.imgur.com/6vbm91k.png" width="130">
 
 ### **Dark**
-<img src="https://i.imgur.com/i7jjZm9.png" width="130"><img src="https://i.imgur.com/iK4XZUK.png" width="130">
-<img src="https://i.imgur.com/zfITlkR.png" width="130"><img src="https://i.imgur.com/gArhEDM.png" width="130">
-<img src="https://i.imgur.com/DHu2p0F.png" width="130"><img src="https://i.imgur.com/QJGtAoE.png" width="130">
+<img src="https://i.imgur.com/i7jjZm9.png" width="130"><img src="https://i.imgur.com/JKvaalI.png" width="130">
+<img src="https://i.imgur.com/zfITlkR.png" width="130"><img src="https://i.imgur.com/mBu4sgT.png" width="130">
+<img src="https://i.imgur.com/rypjUut.png" width="130"><img src="https://i.imgur.com/QTDBnqy.png" width="130">
 
 # Architecture
 
-The architecture of the application is based, apply and strictly complies with each of the following 5 points:
+The architecture of the application is based, applied, and strictly complies with each of the following 5 points:
 
 <img src="https://m7madmagdy.github.io/server/aghour%20images/ajhour.jpg" width="300" align="right" hspace="20">
 
