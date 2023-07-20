@@ -1,5 +1,6 @@
 package com.aghourservices.data.api
 
+import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Device
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.model.User
@@ -14,6 +15,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface UserApi {
     @POST("users/sign_in")
@@ -42,6 +44,11 @@ interface UserApi {
 
     @GET("users/profile")
     fun userProfile(@Header("TOKEN") token: String): Call<Profile>
+
+    @GET("users/{id}")
+    fun show(
+        @Path("id") id: Int,
+        @Header("fcmToken") fcmToken: String): Call<User>
 
     @POST("devices")
     fun sendDevice(

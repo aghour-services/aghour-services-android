@@ -85,24 +85,33 @@ class PublishedArticleFragment : BaseFragment() {
 
     private fun onListItemClick(v: View, position: Int) {
         val article = publishedArticlesAdapter.getArticle(position)
-        val userName = publishedArticlesAdapter.getArticle(position).user?.name!!
+        val user = publishedArticlesAdapter.getArticle(position).user!!
         val description = publishedArticlesAdapter.getArticle(position).description
+
         val commentsFragment =
             PublishedArticleFragmentDirections.actionNewsFragmentToCommentsFragment(article.id)
+
         val commentsDialogSheet =
             PublishedArticleFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
                 article.id,
                 article.likes_count
             )
+
         val editArticleFragment =
             PublishedArticleFragmentDirections.actionNewsFragmentToEditArticleFragment(
                 article.id,
                 description,
-                userName
+                user.name
             )
+
         val likesDialogSheet =
             PublishedArticleFragmentDirections.actionNewsFragmentToLikesDialogSheet(
                 article.id,
+            )
+
+        val userProfileFragment =
+            PublishedArticleFragmentDirections.actionNewsFragmentToUserProfileFragment(
+                user.id!!
             )
 
         when (v.id) {
@@ -147,6 +156,10 @@ class PublishedArticleFragment : BaseFragment() {
 
             R.id.comments_count -> {
                 findNavController().navigate(commentsDialogSheet)
+            }
+
+            R.id.user_name -> {
+                findNavController().navigate(userProfileFragment)
             }
         }
     }
