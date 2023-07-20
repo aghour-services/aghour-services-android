@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.databinding.LikesDialogSheetBinding
@@ -96,5 +98,16 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
         }
     }
 
-    private fun onUserClick(view: View, position: Int) {}
+    private fun onUserClick(view: View, position: Int) {
+        val user = likesAdapter.getUser(position)
+
+        val userProfile =
+            LikesDialogSheetDirections.actionLikesDialogSheetToUserProfileFragment(user.id!!)
+
+        when (view.id) {
+            R.id.user_layout -> {
+                findNavController().navigate(userProfile)
+            }
+        }
+    }
 }

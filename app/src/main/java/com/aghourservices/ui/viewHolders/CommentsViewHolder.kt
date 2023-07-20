@@ -17,6 +17,8 @@ class CommentsViewHolder(
 
     init {
         binding.popupMenu.setOnClickListener(this)
+        binding.userName.setOnClickListener(this)
+        binding.avatarImage.setOnClickListener(this)
     }
 
     fun setCommentView(comment: Comment) {

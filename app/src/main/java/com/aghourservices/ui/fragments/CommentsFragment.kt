@@ -217,6 +217,11 @@ class CommentsFragment : BaseFragment() {
 
     private fun onCommentItemClick(v: View, position: Int) {
         val comment = commentsAdapter.getComment(position)
+        val user = commentsAdapter.getComment(position).user!!
+
+        val userProfileFragment =
+            CommentsFragmentDirections.actionCommentsFragmentToUserProfileFragment(user.id!!)
+
         val updateComment =
             CommentsFragmentDirections.actionCommentsFragmentToUpdateCommentFragment(
                 arguments.articleId,
@@ -224,6 +229,15 @@ class CommentsFragment : BaseFragment() {
                 comment.body,
                 comment.user?.name.toString()
             )
+
+        binding.apply {
+            articleUserName.setOnClickListener {
+                findNavController().navigate(userProfileFragment)
+            }
+            avatarImage.setOnClickListener {
+                findNavController().navigate(userProfileFragment)
+            }
+        }
         when (v.id) {
             R.id.popup_menu -> {
                 val popup = PopupMenu(requireContext(), v)
@@ -241,6 +255,14 @@ class CommentsFragment : BaseFragment() {
                     true
                 }
                 popup.show()
+            }
+
+            R.id.user_name -> {
+                findNavController().navigate(userProfileFragment)
+            }
+
+            R.id.avatar_image -> {
+                findNavController().navigate(userProfileFragment)
             }
         }
     }

@@ -32,4 +32,8 @@ class LikesAdapter(
         usersList = users
         notifyDataSetChanged()
     }
+
+    fun getUser(position: Int): User {
+        return usersList[position]
+    }
 }

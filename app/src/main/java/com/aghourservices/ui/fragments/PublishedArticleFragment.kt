@@ -161,6 +161,10 @@ class PublishedArticleFragment : BaseFragment() {
             R.id.user_name -> {
                 findNavController().navigate(userProfileFragment)
             }
+
+            R.id.avatar_image -> {
+                findNavController().navigate(userProfileFragment)
+            }
         }
     }
 

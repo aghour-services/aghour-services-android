@@ -64,6 +64,7 @@ class UserProfileFragment : BaseFragment() {
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                     }
+                    visibility = View.VISIBLE
                 }
 
                 loadProfileImage(requireContext(), user?.url, binding.avatarImage)
