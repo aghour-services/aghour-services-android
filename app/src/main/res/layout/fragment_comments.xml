@@ -67,6 +67,7 @@
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="@dimen/_4sdp"
                                         android:textColor="@color/dialogText"
+                                        android:background="?android:selectableItemBackground"
                                         android:textSize="@dimen/_14ssp"
                                         android:textStyle="bold"
                                         app:drawableLeftCompat="@drawable/ic_verified"

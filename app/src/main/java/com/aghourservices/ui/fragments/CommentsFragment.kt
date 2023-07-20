@@ -238,6 +238,7 @@ class CommentsFragment : BaseFragment() {
                 findNavController().navigate(userProfileFragment)
             }
         }
+
         when (v.id) {
             R.id.popup_menu -> {
                 val popup = PopupMenu(requireContext(), v)
