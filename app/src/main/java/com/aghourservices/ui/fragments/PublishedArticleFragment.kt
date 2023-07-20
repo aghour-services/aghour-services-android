@@ -67,11 +67,7 @@ class PublishedArticleFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        publishedArticleViewModel.loadArticles(
-            requireContext(),
-            userToken,
-            getFCMToken(requireContext())
-        )
+        publishedArticleViewModel.loadArticles(binding, userToken, getFCMToken(requireContext()))
     }
 
     private fun refresh() {
@@ -80,7 +76,7 @@ class PublishedArticleFragment : BaseFragment() {
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
             publishedArticleViewModel.loadArticles(
-                requireContext(),
+                binding,
                 userToken,
                 getFCMToken(requireContext())
             )
@@ -91,23 +87,28 @@ class PublishedArticleFragment : BaseFragment() {
         val article = publishedArticlesAdapter.getArticle(position)
         val user = publishedArticlesAdapter.getArticle(position).user!!
         val description = publishedArticlesAdapter.getArticle(position).description
+
         val commentsFragment =
             PublishedArticleFragmentDirections.actionNewsFragmentToCommentsFragment(article.id)
+
         val commentsDialogSheet =
             PublishedArticleFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
                 article.id,
                 article.likes_count
             )
+
         val editArticleFragment =
             PublishedArticleFragmentDirections.actionNewsFragmentToEditArticleFragment(
                 article.id,
                 description,
                 user.name
             )
+
         val likesDialogSheet =
             PublishedArticleFragmentDirections.actionNewsFragmentToLikesDialogSheet(
                 article.id,
             )
+
         val userProfileFragment =
             PublishedArticleFragmentDirections.actionNewsFragmentToUserProfileFragment(
                 user.id!!

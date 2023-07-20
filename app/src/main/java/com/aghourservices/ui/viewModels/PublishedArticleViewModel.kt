@@ -3,12 +3,16 @@ package com.aghourservices.ui.viewModels
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
+import com.aghourservices.databinding.FragmentPublishedArticlesBinding
+import com.aghourservices.databinding.PublishedArticleCardBinding
 import com.aghourservices.ui.adapters.PublishedArticlesAdapter
+import com.aghourservices.ui.fragments.PublishedArticleFragment
 import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
@@ -19,7 +23,11 @@ class PublishedArticleViewModel : ViewModel() {
     var newsLiveData = MutableLiveData<ArrayList<Article>>()
     var newsList: ArrayList<Article> = ArrayList()
 
-    fun loadArticles(context: Context, userToken: String, fcmToken: String) {
+    fun loadArticles(
+        binding: FragmentPublishedArticlesBinding,
+        userToken: String,
+        fcmToken: String
+    ) {
         val retrofitBuilder = articlesApi.loadArticles(userToken, fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<ArrayList<Article>?> {
@@ -34,7 +42,10 @@ class PublishedArticleViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                AlertDialogs.noInternet(context)
+                binding.apply {
+                    newsShimmer.isVisible = false
+                    noInternet.isVisible = true
+                }
             }
         })
     }
@@ -53,9 +64,7 @@ class PublishedArticleViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {
-                AlertDialogs.noInternet(context)
-            }
+            override fun onFailure(call: Call<ArrayList<Article>?>, t: Throwable) {}
         })
     }
 
@@ -81,9 +90,7 @@ class PublishedArticleViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<Article>, t: Throwable) {
-                AlertDialogs.noInternet(context)
-            }
+            override fun onFailure(call: Call<Article>, t: Throwable) {}
         })
     }
 

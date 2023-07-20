@@ -35,7 +35,7 @@ class CommentsViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Comment>>, t: Throwable) {
-                AlertDialogs.noInternet(context)
+                Toast.makeText(context, "لا يوجد إنترنت", Toast.LENGTH_SHORT).show()
             }
         })
     }

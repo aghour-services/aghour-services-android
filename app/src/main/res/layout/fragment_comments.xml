@@ -58,17 +58,16 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
                                     android:gravity="right"
+                                    android:padding="@dimen/_2sdp"
                                     android:orientation="vertical">
 
                                     <TextView
                                         android:id="@+id/article_user_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:drawablePadding="4dp"
-                                        android:fontFamily="sans-serif-black"
-                                        android:paddingRight="6dp"
+                                        android:drawablePadding="@dimen/_4sdp"
                                         android:textColor="@color/dialogText"
-                                        android:textSize="18sp"
+                                        android:textSize="@dimen/_14ssp"
                                         android:textStyle="bold"
                                         app:drawableLeftCompat="@drawable/ic_verified"
                                         tools:text="Moahmed Magdy" />
@@ -77,18 +76,16 @@
                                         android:id="@+id/article_created_at"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:paddingTop="2dp"
-                                        android:paddingRight="10dp"
                                         android:textColor="@color/time"
-                                        android:textSize="14sp"
+                                        android:textSize="@dimen/_8ssp"
                                         app:drawableTint="@color/time"
                                         tools:text="منذ ساعتين" />
                                 </LinearLayout>
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:id="@+id/avatar_image"
-                                    android:layout_width="@dimen/_24sdp"
-                                    android:layout_height="@dimen/_24sdp"
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
                                     android:src="@mipmap/user" />
 
                             </LinearLayout>
@@ -102,27 +99,14 @@
                                 app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
                                 app:layout_constraintTop_toBottomOf="@+id/user_layout">
 
-                                <com.webtoonscorp.android.readmore.ReadMoreTextView
+                                <TextView
                                     android:id="@+id/article_description"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:autoLink="all"
                                     android:background="?android:selectableItemBackground"
-                                    android:padding="12dp"
+                                    android:padding="@dimen/_8sdp"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                                    app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
-                                    app:readLessTextColor="@color/colorPrimary"
-                                    app:readLessTextSize="16sp"
-                                    app:readLessTextStyle="bold"
-                                    app:readLessTypeface="normal"
-                                    app:readMoreMaxLines="4"
-                                    app:readMoreOverflow="ellipsis"
-                                    app:readMoreText="رؤية المزيد"
-                                    app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
-                                    app:readMoreTextColor="@color/colorPrimary"
-                                    app:readMoreTextSize="16sp"
-                                    app:readMoreTextStyle="bold"
-                                    app:readMoreTypeface="normal"
                                     tools:text="@string/description" />
 
                                 <com.github.chrisbanes.photoview.PhotoView
@@ -131,7 +115,6 @@
                                     android:layout_height="wrap_content"
                                     android:adjustViewBounds="true"
                                     android:contentDescription="@null"
-                                    android:maxHeight="@dimen/_350sdp"
                                     android:scaleType="fitXY"
                                     tools:src="@mipmap/ic_launcher" />
                             </LinearLayout>
@@ -272,8 +255,8 @@
                 <Button
                     android:id="@+id/comment_btn"
                     style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/ic_send"
                     android:contentDescription="@string/write_a_comment"

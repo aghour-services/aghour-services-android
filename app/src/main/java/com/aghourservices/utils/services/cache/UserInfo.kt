@@ -42,7 +42,7 @@ object UserInfo {
         val id = pref.getInt("id", 0)
         val name = pref.getString("profile_name", "").toString()
         val isVerified = pref.getBoolean("is_verified", false)
-        return Profile(id, name, "", isVerified)
+        return Profile(id, name, "", "", "", isVerified)
     }
 
     fun saveProfile(context: Context, id: Int, name: String, isVerified: Boolean) {

@@ -19,6 +19,7 @@ import com.aghourservices.R
 import com.aghourservices.ui.activites.SignInActivity
 import com.aghourservices.utils.services.cache.UserInfo.clearUserData
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.File
 import java.io.FileOutputStream
@@ -232,6 +233,7 @@ object Intents {
             .placeholder(R.mipmap.user)
             .error(R.mipmap.user)
             .encodeQuality(100)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profileImage)
     }
 }
