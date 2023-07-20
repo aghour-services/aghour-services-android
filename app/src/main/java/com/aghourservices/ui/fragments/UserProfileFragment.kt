@@ -70,12 +70,34 @@ class UserProfileFragment : BaseFragment() {
                 loadProfileImage(requireContext(), user?.url, binding.avatarImage)
 
                 requireActivity().title = user?.name
+                userClicks()
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(requireContext(), "لا يوجد إنترنت", Toast.LENGTH_SHORT).show()
+                userClicks()
             }
         })
+    }
+
+    private fun userClicks() {
+        binding.apply {
+            avatarImage.setOnClickListener {
+                val bundle = Bundle().apply { putInt("id", arguments.id) }
+                val intent =
+                    Intent(requireActivity(), FullScreenProfileActivity::class.java).apply {
+                        putExtras(bundle)
+                    }
+                startActivity(intent)
+            }
+
+            userName.setOnClickListener {
+                val intent = Intent(requireActivity(), FullScreenProfileActivity::class.java)
+                val bundle = Bundle()
+                bundle.putInt("id", arguments.id)
+                startActivity(intent, bundle)
+            }
+        }
     }
 
     override fun onDestroyView() {
