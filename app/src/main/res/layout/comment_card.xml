@@ -55,9 +55,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="4dp"
-                    android:fontFamily="sans-serif-black"
                     android:textColor="@color/dialogText"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
                     app:drawableLeftCompat="@drawable/ic_verified"
                     tools:text="Moahmed Magdy" />
@@ -67,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/time"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_8ssp"
                     tools:text="منذ ساعتين" />
 
                 <TextView
@@ -77,7 +76,7 @@
                     android:padding="2dp"
                     tools:text="@string/comment"
                     android:textColor="@color/newsDescription"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/_10ssp" />
 
             </LinearLayout>
 
@@ -86,8 +85,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar_image"
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
         android:background="@mipmap/user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
