@@ -1,31 +1,20 @@
 package com.aghourservices.ui.fragments
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.aghourservices.R
-import com.aghourservices.data.model.Profile
 import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance
-import com.aghourservices.databinding.ActivitySettingsBinding
-import com.aghourservices.databinding.FragmentCommentsBinding
 import com.aghourservices.databinding.FragmentUserProfileBinding
 import com.aghourservices.ui.activites.FullScreenProfileActivity
-import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.loadProfileImage
-import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
-import com.google.android.gms.ads.AdView
-import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -92,9 +81,10 @@ class UserProfileFragment : BaseFragment() {
             }
 
             userName.setOnClickListener {
-                val intent = Intent(requireActivity(), FullScreenProfileActivity::class.java)
-                val bundle = Bundle()
-                bundle.putInt("id", arguments.id)
+                val bundle = Bundle().apply { putInt("id", arguments.id) }
+                val intent = Intent(requireActivity(), FullScreenProfileActivity::class.java).apply {
+                    putExtras(bundle)
+                }
                 startActivity(intent, bundle)
             }
         }
