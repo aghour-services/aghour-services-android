@@ -1,5 +1,7 @@
 package com.aghourservices.ui.viewHolders
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.aghourservices.data.model.Firm
@@ -31,6 +33,10 @@ class FirmsViewHolder(
 
             shareFirm.setOnClickListener {
                 shareFirm(firm.name, firm.address, firm.description, firm.phone_number, itemView)
+            }
+
+            binding.ratingFirm.setOnRatingBarChangeListener { _, rating, _ ->
+                binding.btnRateFirm.isEnabled = rating > 0
             }
         }
     }
