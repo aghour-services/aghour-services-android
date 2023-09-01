@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/recyclerViewBg">
+    android:background="@color/main_bg">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -29,21 +29,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:menu="@menu/toolbar_menu"
-                android:layout_marginRight="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_8sdp"
                 app:navigationIcon="@drawable/ic_back"
                 app:navigationIconTint="@color/drawerToggle">
 
                 <TextView
                     android:id="@+id/toolBarTv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_bold"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoe_ui_bold"
                     android:gravity="left|center"
                     android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                     android:textColor="@color/toolbarText"
-                    android:textStyle="bold"
                     tools:targetApi="o"
+                    android:textSize="@dimen/_15ssp"
                     tools:text="@string/app_name" />
 
             </com.google.android.material.appbar.MaterialToolbar>
@@ -70,6 +69,8 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_anchorGravity="center"
+        android:background="@color/main_bg"
+        android:layout_marginBottom="@dimen/_1sdp"
         app:layout_constraintBottom_toTopOf="@id/bottomViewContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -91,10 +92,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/toolbarBg"
-            android:padding="@dimen/_2sdp"
-            app:itemIconTint="@color/btnv_tab_item"
-            app:itemTextAppearanceActive="@style/ItemActiveIndicator"
-            app:itemTextColor="@color/btnv_tab_item"
+            android:padding="@dimen/_4sdp"
+            app:itemIconTint="@color/bottom_nav_item_color"
+            app:itemTextColor="@color/bottom_nav_item_color"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +115,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/bottomView"
             app:layout_constraintTop_toTopOf="@+id/bottomView"
-            app:tint="@color/checkdItem"
+            app:tint="@color/bottom_nav_checked_item"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

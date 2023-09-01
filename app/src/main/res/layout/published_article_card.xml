@@ -20,12 +20,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/news_card_ripple"
-            android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:text="@string/popup"
             android:textColor="@color/dialogText"
             android:textSize="@dimen/_14sdp"
-            android:textStyle="bold"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -38,7 +36,7 @@
             android:background="?android:selectableItemBackground"
             android:gravity="right"
             android:orientation="horizontal"
-            android:padding="@dimen/_6sdp">
+            android:padding="@dimen/_4sdp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -46,7 +44,7 @@
                 android:layout_gravity="right|top"
                 android:gravity="right|top"
                 android:orientation="vertical"
-                android:padding="@dimen/_3sdp">
+                android:padding="@dimen/_2sdp">
 
                 <TextView
                     android:id="@+id/user_name"
@@ -55,18 +53,18 @@
                     android:background="?android:selectableItemBackground"
                     android:drawablePadding="@dimen/_4sdp"
                     android:textColor="@color/dialogText"
-                    android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/_11ssp"
+                    android:fontFamily="@font/segoe_ui_bold"
                     app:drawableLeftCompat="@drawable/ic_verified"
-                    tools:text="Mohamed Magdy" />
+                    tools:text="محمود داوود صالح" />
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/time"
-                    android:textSize="@dimen/_8ssp"
-                    app:drawableTint="@color/time"
+                    android:textColor="@color/bottom_nav_unChecked_item"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:textSize="@dimen/_6ssp"
                     tools:text="منذ ساعتين" />
             </LinearLayout>
 
@@ -105,17 +103,17 @@
                 android:padding="@dimen/_10sdp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
-                app:readLessTextColor="@color/colorPrimary"
+                app:readLessTextColor="@color/bottom_nav_unChecked_item"
                 app:readLessTextSize="@dimen/_14ssp"
                 app:readLessTextStyle="bold"
                 app:readLessTypeface="normal"
+                android:textSize="@dimen/_10ssp"
                 app:readMoreMaxLines="6"
                 app:readMoreOverflow="ellipsis"
                 app:readMoreText="قراءة المزيد"
                 app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
-                app:readMoreTextColor="@color/colorPrimary"
+                app:readMoreTextColor="@color/bottom_nav_unChecked_item"
                 app:readMoreTextSize="@dimen/_12ssp"
-                app:readMoreTextStyle="bold"
                 app:readMoreTypeface="normal"
                 tools:text="@string/description" />
 
@@ -214,25 +212,25 @@
                                     android:layout_gravity="right"
                                     android:gravity="right"
                                     android:orientation="vertical"
-                                    android:padding="10dp">
+                                    android:padding="@dimen/_6sdp">
 
                                     <TextView
                                         android:id="@+id/name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="4dp"
+                                        android:fontFamily="@font/segoe_ui_bold"
                                         android:textColor="@color/dialogText"
-                                        android:textSize="@dimen/_11ssp"
-                                        android:textStyle="bold"
+                                        android:textSize="@dimen/_10ssp"
                                         app:drawableLeftCompat="@drawable/ic_verified"
-                                        tools:text="Moahmed Magdy" />
+                                        tools:text="محمد مجدي" />
 
                                     <TextView
                                         android:id="@+id/comment_time"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/time"
-                                        android:textSize="@dimen/_8ssp"
+                                        android:textColor="@color/bottom_nav_unChecked_item"
+                                        android:textSize="@dimen/_6ssp"
                                         tools:text="منذ ساعتين" />
 
                                     <com.webtoonscorp.android.readmore.ReadMoreTextView
@@ -243,7 +241,7 @@
                                         android:autoLink="all"
                                         android:gravity="right"
                                         android:padding="@dimen/_2sdp"
-                                        android:textSize="@dimen/_10ssp"
+                                        android:textSize="@dimen/_8ssp"
                                         app:readLessTextColor="@color/colorPrimary"
                                         app:readLessTextSize="@dimen/_14ssp"
                                         app:readLessTextStyle="bold"

@@ -14,7 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
-import com.aghourservices.ui.activites.DashboardActivity
+import com.aghourservices.ui.activities.DashboardActivity
 import com.aghourservices.utils.helper.Constants.Companion.channelId
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

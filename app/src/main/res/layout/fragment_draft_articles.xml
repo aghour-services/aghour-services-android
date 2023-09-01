@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/recyclerViewBg"
+    android:background="@color/main_bg"
     android:layout_height="match_parent">
     
     <ProgressBar
@@ -23,7 +23,7 @@
             android:id="@+id/newsRecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/recyclerViewBg"
+            android:background="@color/main_bg"
             android:orientation="vertical"
             android:visibility="invisible"
             tools:listitem="@layout/draft_article_card" />

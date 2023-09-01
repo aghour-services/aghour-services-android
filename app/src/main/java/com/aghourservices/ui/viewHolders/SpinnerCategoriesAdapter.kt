@@ -30,7 +30,7 @@ class SpinnerCategoriesAdapter(context: Context, category: List<Category>) :
 
         Glide.with(context)
             .load(category?.icon)
-            .placeholder(R.drawable.ic_loading)
+            .placeholder(R.drawable.ic_download)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(categoryImage)
         categoryName.text = category?.name

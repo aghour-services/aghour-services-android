@@ -6,7 +6,7 @@
     <color name="searchIcon">#FFFFFF</color>
     <color name="start_icon_tint">#F3F3F3</color>
     <color name="navBarColor">#000000</color>
-    <color name="recyclerViewBg">#171C20</color>
+    <color name="main_bg">#171C20</color>
     <color name="splashScreenBg">#141F27</color>
     <color name="categoryName">#FFFFFF</color>
     <color name="categoryCardBg">#1D242B</color>
@@ -107,8 +107,8 @@
     <color name="drawerToggle">#FFFFFF</color>
     <color name="fabBg">#2F3E4B</color>
     <color name="signInLogo">#2B3A45</color>
-    <color name="unCheckedItem">#FFFFFF</color>
-    <color name="checkdItem">#FFFFFF</color>
+    <color name="bottom_nav_unChecked_item">#FFFFFF</color>
+    <color name="bottom_nav_checked_item">#FFFFFF</color>
     <color name="tagUnChecked">#2C3F4E</color>
     <color name="tagsColor">#FFFFFF</color>
     <color name="edtAddArticle">#242D33</color>

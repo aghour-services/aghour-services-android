@@ -54,7 +54,7 @@
                 android:layout_above="@+id/comment_layout"
                 android:layout_below="@id/line_view"
                 android:layout_centerHorizontal="true"
-                android:background="@color/recyclerViewBg">
+                android:background="@color/main_bg">
 
                 <TextView
                     android:id="@+id/no_comments"

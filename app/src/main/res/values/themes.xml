@@ -9,7 +9,7 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="drawerArrowStyle">@style/drawerToggle</item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
-        <item name="background">@color/recyclerViewBg</item>
+        <item name="background">@color/main_bg</item>
     </style>
 
     <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
@@ -53,10 +53,5 @@
 
     <style name="drawerToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/drawerToggle</item>
-    </style>
-
-    <style name="ItemActiveIndicator" parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/noto_bold</item>
-        <item name="itemTextColor">@color/btnv_tab_item</item>
     </style>
 </resources>

@@ -28,7 +28,7 @@ class CategoriesAdapter(
         holder.binding.apply {
             Glide.with(root.context)
                 .load(categoryItems.icon)
-                .placeholder(R.drawable.ic_loading)
+                .placeholder(R.drawable.ic_download)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(categoryIcon)
 

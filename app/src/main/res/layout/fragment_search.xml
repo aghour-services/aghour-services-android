@@ -131,7 +131,7 @@
                 android:id="@+id/searchResultRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/recyclerViewBg"
+                android:background="@color/main_bg"
                 android:visibility="gone"
                 tools:listitem="@layout/search_result_card" />
         </LinearLayout>

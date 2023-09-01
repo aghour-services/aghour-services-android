@@ -34,7 +34,7 @@
         tools:targetApi="tiramisu">
 
         <activity
-            android:name=".ui.activites.SplashScreen"
+            android:name=".ui.activities.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme"
@@ -46,42 +46,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activites.DashboardActivity"
+            android:name=".ui.activities.DashboardActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.activites.SignInActivity"
+            android:name=".ui.activities.SignInActivity"
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.activites.SignUpActivity"
+            android:name=".ui.activities.SignUpActivity"
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.activites.AboutActivity"
+            android:name=".ui.activities.AboutActivity"
             android:exported="false"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.activites.SettingsActivity"
+            android:name=".ui.activities.SettingsActivity"
             android:exported="false"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.activites.AddDataActivity"
+            android:name=".ui.activities.AddDataActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.activites.CreateArticleActivity"
+            android:name=".ui.activities.CreateArticleActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
-            android:name=".ui.activites.FullScreenProfileActivity"
+            android:name=".ui.activities.FullScreenProfileActivity"
             android:exported="false"
             android:theme="@style/MainTheme" />
 

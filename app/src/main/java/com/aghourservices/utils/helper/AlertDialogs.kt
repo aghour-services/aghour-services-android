@@ -6,7 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.aghourservices.R
-import com.aghourservices.ui.activites.SignUpActivity
+import com.aghourservices.ui.activities.SignUpActivity
 
 class AlertDialogs {
 

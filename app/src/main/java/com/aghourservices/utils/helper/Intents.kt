@@ -16,7 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
-import com.aghourservices.ui.activites.SignInActivity
+import com.aghourservices.ui.activities.SignInActivity
 import com.aghourservices.utils.services.cache.UserInfo.clearUserData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy

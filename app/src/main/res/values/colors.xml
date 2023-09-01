@@ -13,7 +13,7 @@
     <color name="searchViewBg">#CBE8FF</color>
     <color name="clear">#C23939</color>
     <color name="lineView">#C5C5C5</color>
-    <color name="recyclerViewBg">#F3F3F3</color>
+    <color name="main_bg">#EDEEEF</color>
     <color name="splashScreenBg">#44749c</color>
     <color name="navHeaderBg">#387DB3</color>
     <color name="userNameColor">#121E27</color>
@@ -154,8 +154,8 @@
     <color name="drawerToggle">#232D35</color>
     <color name="fabBg">#168EC4</color>
     <color name="signInLogo">#2981C6</color>
-    <color name="unCheckedItem">#323232</color>
-    <color name="checkdItem">#000000</color>
+    <color name="bottom_nav_checked_item">#000000</color>
+    <color name="bottom_nav_unChecked_item">#636363</color>
     <color name="tagUnChecked">#72777C</color>
     <color name="tagsColor">#FFFFFF</color>
     <color name="edtAddArticle">#FFFFFF</color>

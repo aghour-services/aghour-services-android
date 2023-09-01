@@ -12,7 +12,7 @@ import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentUserProfileBinding
-import com.aghourservices.ui.activites.FullScreenProfileActivity
+import com.aghourservices.ui.activities.FullScreenProfileActivity
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import retrofit2.Call
