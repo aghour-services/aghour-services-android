@@ -33,6 +33,8 @@ class FavoriteFragment : BaseFragment() {
         requireActivity().title = getString(R.string.favorite_fragment)
         initRecyclerView()
         loadFavorites()
+        showToolbar()
+        showBottomNavigation()
     }
 
     private fun initRecyclerView() {

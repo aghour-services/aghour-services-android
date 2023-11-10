@@ -31,6 +31,8 @@ class CategoriesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sendDevice(getFCMToken(requireContext()))
+        showBottomNavigation()
+        showToolbar()
     }
 
     private fun initCategoryObserve() {

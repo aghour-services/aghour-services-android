@@ -15,11 +15,8 @@
             app:destination="@id/firmsFragment"
             app:enterAnim="@anim/fragment_enter"
             app:exitAnim="@anim/fragment_exit"
-            app:launchSingleTop="true"
             app:popEnterAnim="@anim/fragment_enter_pop"
-            app:popExitAnim="@anim/fragment_exit_pop"
-            app:popUpTo="@id/categoriesFragment"
-            app:popUpToSaveState="true" />
+            app:popExitAnim="@anim/fragment_exit_pop" />
         <action
             android:id="@+id/action_categoriesFragment_to_newsFragment"
             app:destination="@id/newsFragment" />

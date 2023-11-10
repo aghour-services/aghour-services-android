@@ -37,11 +37,11 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkNetwork()
-        hideBottomNavigation()
-        hideToolbar()
         initRecyclerView()
         setUpViewModel()
         setSearchText()
+        hideToolbar()
+        hideBottomNavigation()
     }
 
     private fun setSearchText() {
@@ -118,11 +118,5 @@ class SearchFragment : BaseFragment() {
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNumber")
         startActivity(callIntent)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        showBottomNavigation()
-        showToolbar()
     }
 }

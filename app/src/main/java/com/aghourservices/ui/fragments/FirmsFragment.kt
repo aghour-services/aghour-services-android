@@ -17,10 +17,10 @@ import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.ui.adapters.FirmsAdapter
 import com.aghourservices.ui.adapters.TagsAdapter
-import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.ui.viewModels.FirmsViewModel
 import com.aghourservices.ui.viewModels.TagsViewModel
 import com.aghourservices.utils.helper.Event
+import com.aghourservices.utils.services.cache.UserInfo
 import io.realm.Realm
 
 class FirmsFragment : BaseFragment() {
@@ -50,6 +50,7 @@ class FirmsFragment : BaseFragment() {
         setupFirmsViewModel()
         setupTagsViewModel()
         refresh()
+        hideBottomNavigation()
     }
 
     private fun tagsAsParameter(): String {

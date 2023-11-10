@@ -2,10 +2,11 @@ package com.aghourservices
 
 import android.app.Application
 import com.aghourservices.utils.services.notifications.Notification
+import com.bumptech.glide.Glide
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-class AghourApplication: Application() {
+class AghourApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Notification.createNotificationChannel(this)
@@ -20,5 +21,14 @@ class AghourApplication: Application() {
             .build()
 
         Realm.setDefaultConfiguration(configuration)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        clearGlideMemory()
+    }
+
+    private fun clearGlideMemory() {
+        Glide.get(this).clearMemory()
     }
 }

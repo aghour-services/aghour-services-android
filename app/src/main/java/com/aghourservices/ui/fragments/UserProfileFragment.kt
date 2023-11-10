@@ -89,9 +89,4 @@ class UserProfileFragment : BaseFragment() {
             }
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        showBottomNavigation()
-    }
 }
