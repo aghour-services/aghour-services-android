@@ -40,6 +40,7 @@ class EditCommentFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         showKeyboard(requireContext(), binding.commentTv)
         hideBottomNavigation()
+        showToolbar()
     }
 
     private fun initScreenView() {

@@ -45,6 +45,7 @@ class DraftArticlesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
+        showToolbar()
     }
 
     private fun refreshDraftArticles() {

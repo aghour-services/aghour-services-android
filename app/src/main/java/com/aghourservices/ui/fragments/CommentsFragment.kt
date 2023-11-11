@@ -58,6 +58,7 @@ class CommentsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
+        showToolbar()
     }
 
     override fun onResume() {

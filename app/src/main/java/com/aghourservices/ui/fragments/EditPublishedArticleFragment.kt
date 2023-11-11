@@ -35,6 +35,7 @@ class EditPublishedArticleFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         showKeyboard(requireContext(), binding.root)
         hideBottomNavigation()
+        showToolbar()
     }
 
     private fun initScreenView() {

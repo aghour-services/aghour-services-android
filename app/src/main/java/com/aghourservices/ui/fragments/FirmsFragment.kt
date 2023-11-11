@@ -51,6 +51,7 @@ class FirmsFragment : BaseFragment() {
         setupTagsViewModel()
         refresh()
         hideBottomNavigation()
+        showToolbar()
     }
 
     private fun tagsAsParameter(): String {
