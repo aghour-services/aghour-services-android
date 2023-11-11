@@ -2,7 +2,7 @@ package com.aghourservices.utils.helper
 
 class Constants {
     companion object {
-        const val channelId = "FCM Channel"
+        const val FCM_CHANNEL = "FCM Channel"
         const val DARK_STATUS = "Aghour_Dark_Mode"
         const val PREFERENCE_NAME = "user_settings"
         const val SKIP_LOGIN_KEY = "skip_login"
@@ -15,5 +15,6 @@ class Constants {
         const val GALLERY_CODE = 8
         const val CHANNEL_ID = "Create Article Service"
         const val NOTIFICATION_ID = 12313
+        const val IMAGE_URL = "https://i.imgur.com/SZMmFmr.jpg"
     }
 }

@@ -99,7 +99,7 @@
             android:resource="@color/splashScreenBg" />
 
         <service
-            android:name=".utils.services.notifications.FirebaseMessageService"
+            android:name=".utils.services.notifications.FCMNotificationService"
             android:directBootAware="true"
             android:exported="false">
             <intent-filter>
