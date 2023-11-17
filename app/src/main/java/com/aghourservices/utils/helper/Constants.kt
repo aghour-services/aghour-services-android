@@ -15,6 +15,6 @@ class Constants {
         const val GALLERY_CODE = 8
         const val CHANNEL_ID = "Create Article Service"
         const val NOTIFICATION_ID = 12313
-        const val IMAGE_URL = "https://i.imgur.com/SZMmFmr.jpg"
+        const val IMAGE_URL = "https://i.imgur.com/iWNi7yO.png"
     }
 }
