@@ -13,6 +13,7 @@ import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapters.CategoriesAdapter
 import com.aghourservices.ui.viewModels.CategoriesViewModel
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
+import com.aghourservices.utils.services.cache.UserInfo.getUserData
 
 class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
@@ -30,7 +31,7 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sendDevice(getFCMToken(requireContext()))
+        sendDevice(getFCMToken(requireContext()), getUserData(requireContext()).token)
         showBottomNavigation()
         showToolbar()
     }
@@ -43,9 +44,9 @@ class CategoriesFragment : BaseFragment() {
         }
     }
 
-    private fun sendDevice(token: String) {
-        val device = Device(token)
-        categoriesViewModel.sendDevice(device, token)
+    private fun sendDevice(fcmToken: String, userToken: String) {
+        val device = Device(fcmToken)
+        categoriesViewModel.sendDevice(device, fcmToken, userToken)
     }
 
     private fun initRecyclerView() {

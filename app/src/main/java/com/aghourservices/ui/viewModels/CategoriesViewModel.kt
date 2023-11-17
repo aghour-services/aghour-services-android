@@ -44,8 +44,8 @@ class CategoriesViewModel : ViewModel() {
         })
     }
 
-    fun sendDevice(device: Device, fcmToken: String) {
-        val retrofitBuilder = userApi.sendDevice(device, fcmToken)
+    fun sendDevice(device: Device, fcmToken: String, userToken: String) {
+        val retrofitBuilder = userApi.sendDevice(device, fcmToken, userToken)
         retrofitBuilder.enqueue(object : Callback<Device> {
             override fun onResponse(call: Call<Device>, response: Response<Device>) {
                 if (response.isSuccessful) {

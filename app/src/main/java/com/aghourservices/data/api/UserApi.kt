@@ -1,6 +1,5 @@
 package com.aghourservices.data.api
 
-import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Device
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.model.User
@@ -53,6 +52,7 @@ interface UserApi {
     @POST("devices")
     fun sendDevice(
         @Body device: Device,
-        @Header("fcmToken") fcmToken: String
+        @Header("fcmToken") fcmToken: String,
+        @Header("TOKEN") userToken: String,
     ): Call<Device>
 }
