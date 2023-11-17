@@ -55,7 +55,6 @@ class EditDraftArticleFragment : BaseFragment() {
 
     private fun updateArticle() {
         val article = Article()
-        article.status = "draft"
         val articleDescription = binding.articleTv.text.toString().trim()
         article.description = articleDescription
 
