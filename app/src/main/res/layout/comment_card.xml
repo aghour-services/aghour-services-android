@@ -55,28 +55,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="4dp"
+                    android:fontFamily="@font/segoe_ui_bold"
                     android:textColor="@color/dialogText"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/_11ssp"
                     app:drawableLeftCompat="@drawable/ic_verified"
-                    tools:text="Moahmed Magdy" />
+                    tools:text="محمد مجدي" />
 
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/time"
-                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/bottom_nav_unChecked_item"
+                    android:textSize="@dimen/_7ssp"
                     tools:text="منذ ساعتين" />
 
-                <TextView
+                <com.webtoonscorp.android.readmore.ReadMoreTextView
                     android:id="@+id/body"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    tools:text="@string/comment"
-                    android:textColor="@color/newsDescription"
-                    android:textSize="@dimen/_10ssp" />
+                    android:layout_gravity="right"
+                    android:autoLink="all"
+                    android:gravity="right"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@color/dialogText"
+                    android:textSize="@dimen/_10ssp"
+                    app:readLessTextColor="@color/colorPrimary"
+                    app:readLessTextSize="@dimen/_10ssp"
+                    app:readLessTextStyle="bold"
+                    app:readLessTypeface="normal"
+                    app:readMoreMaxLines="3"
+                    app:readMoreOverflow="ellipsis"
+                    app:readMoreText="قراءة المزيد"
+                    app:readMoreTextColor="@color/colorPrimary"
+                    app:readMoreTextSize="@dimen/_10ssp"
+                    app:readMoreTextStyle="bold"
+                    app:readMoreTypeface="normal"
+                    tools:text="@string/comment" />
 
             </LinearLayout>
 

@@ -92,8 +92,8 @@
                     android:fontFamily="@font/noto_bold"
                     android:paddingRight="@dimen/_4sdp"
                     android:textColor="@color/dialogText"
+                    android:textSize="@dimen/_13ssp"
                     android:visibility="invisible"
-                    android:textSize="@dimen/_15ssp"
                     app:drawableLeftCompat="@drawable/ic_verified"
                     tools:text="أجهور الكبرى" />
 

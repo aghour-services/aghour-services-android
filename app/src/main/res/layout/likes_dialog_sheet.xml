@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:fillViewport="true"
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/sheet_handling"
@@ -47,7 +48,7 @@
             <RelativeLayout
                 android:id="@+id/content_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@id/line_view"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
@@ -99,6 +100,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/all_users_likes"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     tools:listitem="@layout/likes_card" />
             </RelativeLayout>
         </RelativeLayout>

@@ -66,7 +66,7 @@ class PublishedArticlesViewHolder(
             }
         }
 
-        binding.likesCount.text = article.likes_count.toString()
+        binding.likesCount.text = "${article.likes_count}إعجاب "
         binding.commentsCount.text = article.comments_count.toString()
         binding.date.text = article.created_at
         binding.likeArticle.isChecked = article.liked
@@ -100,18 +100,6 @@ class PublishedArticlesViewHolder(
 
         if (article.user?.id == profile.id) {
             binding.popupMenu.isVisible = true
-        }
-
-        if (article.likes_count > 0) {
-            binding.likesCount.text = if (article.liked) {
-                if (article.likes_count == 1) {
-                    "أنت"
-                } else {
-                    "أنت و ${article.likes_count - 1} أخرين "
-                }
-            } else {
-                article.likes_count.toString()
-            }
         }
 
        loadProfileImage(
