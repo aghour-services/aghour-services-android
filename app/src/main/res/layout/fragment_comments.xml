@@ -65,27 +65,28 @@
                                         android:id="@+id/article_user_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:drawablePadding="@dimen/_4sdp"
-                                        android:textColor="@color/dialogText"
                                         android:background="?android:selectableItemBackground"
-                                        android:textSize="@dimen/_14ssp"
-                                        android:textStyle="bold"
+                                        android:drawablePadding="@dimen/_4sdp"
+                                        android:fontFamily="@font/segoe_ui_bold"
+                                        android:textColor="@color/dialogText"
+                                        android:textSize="@dimen/_12ssp"
                                         app:drawableLeftCompat="@drawable/ic_verified"
-                                        tools:text="Moahmed Magdy" />
+                                        tools:text="محمود داوود صالح" />
 
                                     <TextView
                                         android:id="@+id/article_created_at"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/time"
-                                        android:textSize="@dimen/_8ssp"
-                                        app:drawableTint="@color/time"
+                                        android:layout_marginRight="@dimen/_2sdp"
+                                        android:textColor="@color/bottom_nav_unChecked_item"
+                                        android:textSize="@dimen/_7ssp"
                                         tools:text="منذ ساعتين" />
                                 </LinearLayout>
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:id="@+id/avatar_image"
                                     android:layout_width="@dimen/_25sdp"
+                                    android:layout_gravity="center"
                                     android:layout_height="@dimen/_25sdp"
                                     android:src="@mipmap/user" />
 
@@ -107,7 +108,8 @@
                                     android:autoLink="all"
                                     android:background="?android:selectableItemBackground"
                                     android:padding="@dimen/_8sdp"
-                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                    android:textSize="@dimen/_10ssp"
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                                     tools:text="@string/description" />
 
                                 <com.github.chrisbanes.photoview.PhotoView
@@ -130,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/main_bg"
                         android:orientation="vertical"
-                        android:paddingTop="10dp"
+                        android:paddingTop="@dimen/_8sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -141,10 +143,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
-                            android:padding="10dp"
+                            android:padding="@dimen/_6sdp"
                             android:text="@string/all_comments"
                             android:textColor="@color/dialogText"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/_12ssp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -168,12 +170,6 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:orientation="vertical">
-
-                                <include layout="@layout/comments_shimmer" />
-
-                                <include layout="@layout/comments_shimmer" />
-
-                                <include layout="@layout/comments_shimmer" />
 
                                 <include layout="@layout/comments_shimmer" />
 
