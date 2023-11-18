@@ -40,7 +40,6 @@ class FCMNotificationService : FirebaseMessagingService() {
         val articleId = data["article_id"]
         val articleImage = data["article_image"]
         val userAvatar = data["user_avatar"]
-        val userId = data["user_id"]
         val commentId = data["comment_id"]
 
         val notificationIntent = Intent(this, DashboardActivity::class.java).apply {
@@ -48,12 +47,7 @@ class FCMNotificationService : FirebaseMessagingService() {
         }
 
         val bundle = Bundle().apply {
-            putString("title", title)
-            putString("body", body)
             putString("article_id", articleId)
-            putString("article_image", articleImage)
-            putString("user_avatar", userAvatar)
-            putString("user_id", userId)
             putString("comment_id", commentId)
         }
         notificationIntent.putExtras(bundle)
