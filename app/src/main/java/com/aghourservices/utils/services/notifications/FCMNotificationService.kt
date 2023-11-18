@@ -7,14 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.ui.activities.DashboardActivity
 import com.aghourservices.utils.helper.Constants.Companion.FCM_CHANNEL
-import com.aghourservices.utils.helper.Constants.Companion.IMAGE_URL
 import com.bumptech.glide.Glide
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -26,19 +25,38 @@ class FCMNotificationService : FirebaseMessagingService() {
         Log.e("on new token", token)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
+        if (remoteMessage.data.isNotEmpty()) {
+            sendNotification(remoteMessage)
+        }
+    }
 
-        val title = remoteMessage.data["title"] ?: remoteMessage.notification?.title
-        val body = remoteMessage.data["body"] ?: remoteMessage.notification?.body
+    private fun sendNotification(remoteMessage: RemoteMessage) {
+        val data = remoteMessage.data
+
+        val title = data["title"]
+        val body = data["body"]
+        val articleId = data["article_id"]
+        val articleImage = data["article_image"]
+        val userAvatar = data["user_avatar"]
+        val userId = data["user_id"]
+        val commentId = data["comment_id"]
 
         val notificationIntent = Intent(this, DashboardActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
 
-        notificationIntent.putExtra("title", title)
-        notificationIntent.putExtra("body", body)
+        val bundle = Bundle().apply {
+            putString("title", title)
+            putString("body", body)
+            putString("article_id", articleId)
+            putString("article_image", articleImage)
+            putString("user_avatar", userAvatar)
+            putString("user_id", userId)
+            putString("comment_id", commentId)
+        }
+        notificationIntent.putExtras(bundle)
 
         val pendingIntent = PendingIntent.getActivity(
             this,
@@ -47,20 +65,19 @@ class FCMNotificationService : FirebaseMessagingService() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-//        val icon = BitmapFactory.decodeResource(
-//            this.resources,
-//            IMAGE_URL.toInt()
-//        )
-
         val notification = NotificationCompat.Builder(this, FCM_CHANNEL)
             .setContentTitle(title)
+            .setContentText(body)
             .setSmallIcon(R.drawable.aghour)
-            .setLights(NotificationCompat.FLAG_SHOW_LIGHTS, 3000, 1000)
+            .setLights(NotificationCompat.FLAG_SHOW_LIGHTS, 1000, 3000)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
-            .setLargeIcon(loadImageAsBitmap(this, IMAGE_URL))
-            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+            .setLargeIcon(loadImageAsBitmap(this, userAvatar.toString()))
+            .setStyle(
+                NotificationCompat.BigPictureStyle()
+                    .bigPicture(loadImageAsBitmap(this, articleImage.toString()))
+            )
             .setContentIntent(pendingIntent)
             .setColor(ContextCompat.getColor(this, R.color.splashScreenBg))
             .build()
