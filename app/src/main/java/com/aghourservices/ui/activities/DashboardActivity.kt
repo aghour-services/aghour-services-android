@@ -79,7 +79,11 @@ class DashboardActivity : AppCompatActivity() {
                 val profile = response.body()
 
                 if (response.isSuccessful) {
-                    loadProfileImage(this@DashboardActivity, profile?.url.toString(), binding.profileImage)
+                    loadProfileImage(
+                        this@DashboardActivity,
+                        profile?.url.toString(),
+                        binding.profileImage
+                    )
                 } else {
                     binding.profileImage.setImageResource(R.mipmap.user)
                 }
@@ -220,6 +224,11 @@ class DashboardActivity : AppCompatActivity() {
                 val navController =
                     Navigation.findNavController(this@DashboardActivity, R.id.fragmentContainerView)
                 navController.navigate(R.id.searchFragment)
+            }
+
+            R.id.notification_activity -> {
+                val intent = Intent(this, NotificationsActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
