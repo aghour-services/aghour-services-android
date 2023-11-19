@@ -6,6 +6,7 @@ import com.aghourservices.data.api.CategoriesApi
 import com.aghourservices.data.api.CommentsApi
 import com.aghourservices.data.api.FirmsApi
 import com.aghourservices.data.api.LikeApi
+import com.aghourservices.data.api.NotificationsApi
 import com.aghourservices.data.api.SearchApi
 import com.aghourservices.data.api.TagApi
 import com.aghourservices.data.api.UserApi
@@ -67,5 +68,9 @@ object RetrofitInstance {
 
     val likeApi: LikeApi by lazy {
         retrofit.create(LikeApi::class.java)
+    }
+
+    val notificationsApi: NotificationsApi by lazy {
+        retrofit.create(NotificationsApi::class.java)
     }
 }

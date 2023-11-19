@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/firmsBg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_avatar_tv"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/user" />
+
+            <TextView
+                android:id="@+id/time_ago_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/bottom_nav_unChecked_item"
+                android:textSize="@dimen/_7ssp"
+                tools:text="منذ ساعتين" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/user_avatar_tv"
+                android:layout_toEndOf="@+id/time_ago_tv"
+                android:padding="@dimen/_2sdp"
+                android:textColor="@color/dialogText"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
+                tools:text="تم إضافة خبر جديد بواسطة محمد مجدي" />
+
+            <TextView
+                android:id="@+id/body_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_tv"
+                android:layout_toStartOf="@+id/user_avatar_tv"
+                android:layout_toEndOf="@+id/time_ago_tv"
+                android:maxLength="200"
+                android:paddingRight="@dimen/_4sdp"
+                android:textColor="@color/dialogText"
+                android:textSize="@dimen/_9ssp"
+                tools:text="الخبر الفلاني العلاني البحبحاني" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/article_image_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/_10sdp"
+            android:visibility="gone"
+            tools:src="@mipmap/ajhour" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/lineView" />
+</LinearLayout>

@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -21,10 +23,15 @@ import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityDashboardBinding
 import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.fragments.CategoriesFragmentDirections
+import com.aghourservices.ui.viewModels.NotificationsViewModel
 import com.aghourservices.utils.helper.Intents.loadProfileImage
+import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
+import com.google.android.material.badge.ExperimentalBadgeUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
@@ -36,9 +43,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@ExperimentalBadgeUtils
 class DashboardActivity : AppCompatActivity() {
     private var _binding: ActivityDashboardBinding? = null
     private val binding get() = _binding!!
+    private val notificationsViewModel: NotificationsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +60,7 @@ class DashboardActivity : AppCompatActivity() {
         inAppUpdate()
         notificationPermission()
         getFirebaseInstanceToken()
+        notificationsCount()
 
         binding.profileImage.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
@@ -60,6 +70,28 @@ class DashboardActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         getUserProfile()
+    }
+
+    private fun notificationsCount(){
+        val fcmToken = getFCMToken(this)
+        val userToken = getUserData(this).token
+        notificationsViewModel.getNotifications(this, fcmToken, userToken)
+        notificationsViewModel.notificationsLiveData.observe(this) {
+            notificationBadge(it.size)
+        }
+    }
+
+    private fun notificationBadge(count: Int) {
+        val badgeDrawable = BadgeDrawable.create(this).apply {
+            isVisible = true
+            backgroundColor = ContextCompat.getColor(this@DashboardActivity, R.color.colorPrimary)
+            number = count
+        }
+        BadgeUtils.attachBadgeDrawable(
+            badgeDrawable,
+            binding.toolbar,
+            R.id.notification_activity
+        )
     }
 
     private fun notificationPermission() {
@@ -245,6 +277,11 @@ class DashboardActivity : AppCompatActivity() {
                 val navController =
                     Navigation.findNavController(this@DashboardActivity, R.id.fragmentContainerView)
                 navController.navigate(R.id.searchFragment)
+            }
+
+            R.id.notification_activity -> {
+                val intent = Intent(this, NotificationsActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
