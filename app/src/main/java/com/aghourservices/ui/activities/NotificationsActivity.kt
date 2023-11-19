@@ -52,11 +52,7 @@ class NotificationsActivity : AppCompatActivity() {
 
     private fun onListItemClick(position: Int) {
         val notification = notificationsAdapter.getNotification(position)
-        Toast.makeText(
-            this,
-            "${notification.notifiableId} ${notification.notifiableType}",
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this, notification.user?.name, Toast.LENGTH_SHORT).show()
     }
 
     private fun progressBar() {
