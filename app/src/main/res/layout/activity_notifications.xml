@@ -13,6 +13,8 @@
         android:background="@color/toolbarBg"
         android:elevation="@dimen/_4sdp"
         app:title="@string/notifications"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/drawerToggle"
         app:titleCentered="true" />
 
     <ProgressBar

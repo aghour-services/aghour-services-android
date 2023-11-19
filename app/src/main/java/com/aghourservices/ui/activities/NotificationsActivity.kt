@@ -25,8 +25,14 @@ class NotificationsActivity : AppCompatActivity() {
         setContentView(binding.root)
         initRecyclerView()
         initNotificationObserve()
+        handleOnBackPressed()
     }
 
+    private fun handleOnBackPressed() {
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
 
     private fun initNotificationObserve() {
         notificationsViewModel.getNotifications(this, fcmToken, userToken)
