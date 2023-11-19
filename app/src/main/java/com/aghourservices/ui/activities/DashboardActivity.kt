@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -79,7 +80,11 @@ class DashboardActivity : AppCompatActivity() {
                 val profile = response.body()
 
                 if (response.isSuccessful) {
-                    loadProfileImage(this@DashboardActivity, profile?.url.toString(), binding.profileImage)
+                    loadProfileImage(
+                        this@DashboardActivity,
+                        profile?.url.toString(),
+                        binding.profileImage
+                    )
                 } else {
                     binding.profileImage.setImageResource(R.mipmap.user)
                 }
@@ -93,23 +98,44 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun checkExtras(mainNavController: NavController) {
-        val newsTopic = getString(R.string.news_topic)
-        val extras = intent.extras
-        if (extras != null) {
-            for (key in extras.keySet()) {
-                if (key == "from" && extras.get(key).toString().contains(newsTopic)) {
-                    mainNavController.navigate(
-                        CategoriesFragmentDirections.actionCategoriesFragmentToNewsFragment()
-                    )
-                }
-            }
+        // Get data from Bundle
+        val bundle = intent.extras
+        val articleId = bundle?.getString("article_id")
+        val commentId = bundle?.getString("comment_id")
+
+        // Navigate to comments fragment
+        if (commentId != null && articleId != null) {
+            mainNavController.navigate(
+                CategoriesFragmentDirections.actionCategoriesFragmentToCommentsFragment(
+                    articleId.toInt()
+                )
+            )
         }
 
-        /** Check for notification foreground **/
-        if (intent.getStringExtra("body") != null) {
+        // Navigate to news fragment
+        if (commentId == null && articleId != null) {
+            mainNavController.navigate(R.id.newsFragment)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val mainNavController = setupNavController()
+        val bundle = intent?.extras
+        val articleId = bundle?.getString("article_id")
+        val commentId = bundle?.getString("comment_id")
+
+        // Navigate to comments fragment
+        if (commentId != null && articleId != null) {
             mainNavController.navigate(
-                CategoriesFragmentDirections.actionCategoriesFragmentToNewsFragment()
+                R.id.commentsFragment,
+                bundleOf("article_id" to articleId.toInt())
             )
+        }
+
+        // Navigate to news fragment
+        if (commentId == null && articleId != null) {
+            mainNavController.navigate(R.id.newsFragment)
         }
     }
 
@@ -122,7 +148,6 @@ class DashboardActivity : AppCompatActivity() {
             .setMinimumDaysToShowAgain(7)
             .setRatingThreshold(RatingThreshold.FOUR)
             .showIfMeetsConditions()
-
     }
 
     private fun inAppUpdate() {
