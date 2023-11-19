@@ -16,8 +16,8 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 
 ### **Light**
 <img src="https://i.imgur.com/9AM93ER.png" width="130"><img src="https://i.imgur.com/kS5LTQY.png" width="130">
-<img src="https://i.imgur.com/9wt5Cpd.png" width="130"><img src="https://i.imgur.com/dcbUCd8.png" width="130">
-<img src="https://i.imgur.com/sotkLle.png" width="130"><img src="https://i.imgur.com/6vbm91k.png" width="130">
+<img src="https://i.imgur.com/9wt5Cpd.png" width="130"><img src="https://i.imgur.com/iC22VWt.png" width="130">
+<img src="https://i.imgur.com/8DzQ6SX.png" width="130"><img src="https://i.imgur.com/6vbm91k.png" width="130">
 
 ### **Dark**
 <img src="https://i.imgur.com/i7jjZm9.png" width="130"><img src="https://i.imgur.com/JKvaalI.png" width="130">
