@@ -84,10 +84,6 @@
             android:name=".ui.activities.FullScreenProfileActivity"
             android:exported="false"
             android:theme="@style/MainTheme" />
-        <activity
-            android:name=".ui.activities.NotificationsActivity"
-            android:exported="false"
-            android:theme="@style/MainTheme" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

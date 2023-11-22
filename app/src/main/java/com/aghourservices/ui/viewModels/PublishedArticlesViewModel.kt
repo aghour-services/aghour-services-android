@@ -10,16 +10,13 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.databinding.FragmentPublishedArticlesBinding
-import com.aghourservices.databinding.PublishedArticleCardBinding
 import com.aghourservices.ui.adapters.PublishedArticlesAdapter
-import com.aghourservices.ui.fragments.PublishedArticleFragment
-import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PublishedArticleViewModel : ViewModel() {
+class PublishedArticlesViewModel : ViewModel() {
     var newsLiveData = MutableLiveData<ArrayList<Article>>()
     var newsList: ArrayList<Article> = ArrayList()
 

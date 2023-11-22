@@ -124,6 +124,7 @@ class DraftArticlesFragment : BaseFragment() {
     }
 
     private fun updateArticle(article: Article, position: Int) {
+        article.status = "published"
         val retrofitInstance = RetrofitInstance.articlesApi.updateArticle(
             article.id,
             userToken,
