@@ -25,10 +25,8 @@ import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.viewModels.NotificationsViewModel
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
-import com.aghourservices.utils.services.cache.UserInfo.getNotificationsCount
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
-import com.aghourservices.utils.services.cache.UserInfo.saveNotificationsCount
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
@@ -80,26 +78,14 @@ class DashboardActivity : AppCompatActivity() {
         val userToken = getUserData(this).token
         notificationsViewModel.getNotifications(this, fcmToken, userToken)
         notificationsViewModel.notificationsLiveData.observe(this) {
-            val actualCount = it.size
-            saveNotificationsCount(this, actualCount)
-            notificationBadge(actualCount)
+            notificationBadge()
         }
     }
 
-    private fun chooseNotificationBadgeCount(actualCount: Int) {
-        val savedCount = getNotificationsCount(this)
-        notificationsCount = if (savedCount < actualCount) {
-            actualCount - savedCount
-        } else {
-            0
-        }
-    }
-
-    private fun notificationBadge(count: Int) {
+    private fun notificationBadge() {
         val badgeDrawable = BadgeDrawable.create(this).apply {
-            isVisible = count > 0
+            isVisible = true
             backgroundColor = ContextCompat.getColor(this@DashboardActivity, R.color.clear)
-            chooseNotificationBadgeCount(count)
         }
         BadgeUtils.attachBadgeDrawable(
             badgeDrawable,
