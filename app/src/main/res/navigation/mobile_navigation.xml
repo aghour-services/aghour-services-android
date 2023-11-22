@@ -103,6 +103,7 @@
             app:argType="integer" />
         <argument
             android:name="comment_id"
+            android:defaultValue="0"
             app:argType="integer" />
         <action
             android:id="@+id/action_showOneArticleFragment_to_updateCommentFragment"

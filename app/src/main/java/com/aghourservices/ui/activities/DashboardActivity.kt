@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -24,8 +25,10 @@ import com.aghourservices.databinding.BottomSheetBinding
 import com.aghourservices.ui.viewModels.NotificationsViewModel
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
+import com.aghourservices.utils.services.cache.UserInfo.getNotificationsCount
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
+import com.aghourservices.utils.services.cache.UserInfo.saveNotificationsCount
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
@@ -46,13 +49,14 @@ class DashboardActivity : AppCompatActivity() {
     private var _binding: ActivityDashboardBinding? = null
     private val binding get() = _binding!!
     private val notificationsViewModel: NotificationsViewModel by viewModels()
+    private var notificationsCount: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupNavController()
-//        checkExtras(mainNavController)
+        val mainNavController = setupNavController()
+        checkExtras(mainNavController, intent)
         floatActionButton()
         inAppRating()
         inAppUpdate()
@@ -76,16 +80,26 @@ class DashboardActivity : AppCompatActivity() {
         val userToken = getUserData(this).token
         notificationsViewModel.getNotifications(this, fcmToken, userToken)
         notificationsViewModel.notificationsLiveData.observe(this) {
-            val size = it.size
-            notificationBadge(size, size > 0)
+            val actualCount = it.size
+            saveNotificationsCount(this, actualCount)
+            notificationBadge(actualCount)
         }
     }
 
-    private fun notificationBadge(count: Int, visible: Boolean) {
+    private fun chooseNotificationBadgeCount(actualCount: Int) {
+        val savedCount = getNotificationsCount(this)
+        notificationsCount = if (savedCount < actualCount) {
+            actualCount - savedCount
+        } else {
+            0
+        }
+    }
+
+    private fun notificationBadge(count: Int) {
         val badgeDrawable = BadgeDrawable.create(this).apply {
-            isVisible = visible
+            isVisible = count > 0
             backgroundColor = ContextCompat.getColor(this@DashboardActivity, R.color.clear)
-            number = count
+            chooseNotificationBadgeCount(count)
         }
         BadgeUtils.attachBadgeDrawable(
             badgeDrawable,
@@ -129,28 +143,23 @@ class DashboardActivity : AppCompatActivity() {
         })
     }
 
-//    private fun checkExtras(mainNavController: NavController) {
-//        // Get data from Bundle
-//        val bundle = intent.extras
-//        val articleId = bundle?.getString("article_id")
-//        val commentId = bundle?.getString("comment_id")
-//
-//        mainNavController.navigate(R.id.showArticleFragment)
-//        bundleOf("article_id" to articleId?.toInt())
-//        bundleOf("comment_id" to commentId?.toInt())
-//    }
-//
-//    override fun onNewIntent(intent: Intent?) {
-//        super.onNewIntent(intent)
-//        val mainNavController = setupNavController()
-//        val bundle = intent?.extras
-//        val articleId = bundle?.getString("article_id")
-//        val commentId = bundle?.getString("comment_id")
-//
-//        mainNavController.navigate(R.id.showArticleFragment)
-//        bundleOf("article_id" to articleId?.toInt())
-//        bundleOf("comment_id" to commentId?.toInt())
-//    }
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val mainNavController = setupNavController()
+        checkExtras(mainNavController, intent)
+    }
+
+    private fun checkExtras(mainNavController: NavController, intent: Intent?) {
+        val bundle = intent?.extras
+        val articleId = bundle?.getString("article_id")
+
+        if (articleId != null) {
+            mainNavController.navigate(
+                R.id.showOneArticleFragment,
+                bundleOf("article_id" to articleId.toInt())
+            )
+        }
+    }
 
     private fun inAppRating() {
         AppRating.Builder(this)

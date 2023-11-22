@@ -61,6 +61,18 @@ object UserInfo {
         editor.apply()
     }
 
+    fun saveNotificationsCount(context: Context, count: Int) {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+        editor.putInt("NotifySavedCount", count)
+        editor.apply()
+    }
+
+    fun getNotificationsCount(context: Context): Int {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return pref.getInt("NotifySavedCount", 0)
+    }
+
     fun getFCMToken(context: Context): String {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return pref.getString("fcmToken", "").toString()

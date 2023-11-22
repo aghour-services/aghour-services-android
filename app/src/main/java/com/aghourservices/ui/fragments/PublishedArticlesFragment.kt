@@ -90,10 +90,7 @@ class PublishedArticlesFragment : BaseFragment() {
         val description = publishedArticlesAdapter.getArticle(position).description
 
         val commentsFragment =
-            PublishedArticlesFragmentDirections.actionNewsFragmentToShowOneArticleFragment(
-                article.id,
-                0
-            )
+            PublishedArticlesFragmentDirections.actionNewsFragmentToShowOneArticleFragment(article.id,)
 
         val commentsDialogSheet =
             PublishedArticlesFragmentDirections.actionNewsFragmentToCommentsDialogSheet(

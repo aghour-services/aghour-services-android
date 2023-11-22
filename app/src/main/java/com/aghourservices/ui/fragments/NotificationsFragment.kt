@@ -77,7 +77,7 @@ class NotificationsFragment : BaseFragment() {
             "Article" -> {
                 val action =
                     NotificationsFragmentDirections.actionNotificationsFragmentToShowOneArticleFragment(
-                        notifiableId, 0
+                        notifiableId
                     )
                 findNavController().navigate(action)
             }
