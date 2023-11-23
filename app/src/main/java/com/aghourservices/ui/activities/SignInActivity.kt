@@ -10,23 +10,23 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.Patterns
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySignInBinding
+import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.AlertDialogs.Companion.errorLogin
 import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
+import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.services.cache.UserInfo.saveUserData
 import com.google.android.gms.ads.AdView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : BaseActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var adView: AdView
     private val progressDialog by lazy { ProgressDialog(this) }

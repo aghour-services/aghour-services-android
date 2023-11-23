@@ -1,36 +1,26 @@
 package com.aghourservices.ui.activities
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityCreateArticleBinding
+import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
-import com.aghourservices.utils.helper.Constants.Companion.REQUEST_CODE
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.ArticleService
-import com.aghourservices.utils.services.cache.UserInfo
-import com.aghourservices.utils.services.cache.UserInfo.getProfile
-import com.aghourservices.utils.services.cache.UserInfo.getUserData
-import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -40,12 +30,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class CreateArticleActivity : AppCompatActivity() {
+class CreateArticleActivity : BaseActivity() {
     private lateinit var binding: ActivityCreateArticleBinding
-    private lateinit var permissions: Array<String>
-    private val isUserLogin by lazy { isUserLoggedIn(this@CreateArticleActivity) }
-    private val user by lazy { getUserData(this@CreateArticleActivity) }
-    private val profile by lazy { getProfile(this@CreateArticleActivity) }
     private var imageUri: Uri? = null
     private var imagePart: MultipartBody.Part? = null
     private var isVerified: Boolean? = null
@@ -54,21 +40,11 @@ class CreateArticleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initPermissions()
-        requestPermissions()
+        initStoragePermissions()
+        requestStoragePermissions()
         getUserProfile()
         initUserClick()
         binding.userLayout.isVisible = isUserLogin
-    }
-
-    private fun openGallery() {
-        val galleryIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            Intent(MediaStore.ACTION_PICK_IMAGES)
-        } else {
-            Intent(Intent.ACTION_PICK)
-        }
-        galleryIntent.type = "image/*"
-        startActivityForResult(galleryIntent, GALLERY_CODE)
     }
 
     @Suppress("DEPRECATION")
@@ -87,32 +63,10 @@ class CreateArticleActivity : AppCompatActivity() {
         }
     }
 
-    private fun initPermissions() {
-        permissions = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_MEDIA_LOCATION,
-        )
-    }
-
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE)
-    }
-
-    private fun checkStoragePermission(): Boolean {
-        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == (PackageManager.PERMISSION_GRANTED)
-        } else {
-            true
-        }
-    }
-
     private fun initUserClick() {
         binding.addImageBtn.setOnClickListener {
             if (!checkStoragePermission()) {
-                requestPermissions()
+                requestStoragePermissions()
             } else {
                 openGallery()
             }
@@ -165,8 +119,8 @@ class CreateArticleActivity : AppCompatActivity() {
         val articleService = ArticleService()
         articleService.create(
             this@CreateArticleActivity,
-            user.token,
-            UserInfo.getFCMToken(this@CreateArticleActivity),
+            currentUser.token,
+            fcmToken,
             description,
             imagePart,
             isVerified
@@ -175,7 +129,7 @@ class CreateArticleActivity : AppCompatActivity() {
     }
 
     private fun getUserProfile() {
-        val retrofitInstance = userApi.userProfile(user.token)
+        val retrofitInstance = userApi.userProfile(currentUser.token)
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(
                 call: Call<Profile>,
@@ -214,8 +168,8 @@ class CreateArticleActivity : AppCompatActivity() {
                 t: Throwable
             ) {
                 binding.userName.apply {
-                    text = profile.name
-                    if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text = currentProfile.name
+                    if (currentProfile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         tooltipText = context.getString(R.string.verified)
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)

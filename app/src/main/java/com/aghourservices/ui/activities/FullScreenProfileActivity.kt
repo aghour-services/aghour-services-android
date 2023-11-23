@@ -2,26 +2,22 @@ package com.aghourservices.ui.activities
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.ActivityFullScreenProfileBinding
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
-import com.aghourservices.utils.services.cache.UserInfo.getUserData
+import com.aghourservices.ui.base.BaseActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FullScreenProfileActivity : AppCompatActivity() {
+class FullScreenProfileActivity : BaseActivity() {
     private lateinit var binding: ActivityFullScreenProfileBinding
-    private val user by lazy { getUserData(this) }
     private val bundle by lazy { intent.extras }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +29,6 @@ class FullScreenProfileActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-
-        Log.d("BUNDLE", bundle?.getInt("id").toString())
 
         if (bundle != null) {
             userProfile()
@@ -52,7 +46,7 @@ class FullScreenProfileActivity : AppCompatActivity() {
     }
 
     private fun currentUserProfile() {
-        val retrofitInstance = RetrofitInstance.userApi.userProfile(user.token)
+        val retrofitInstance = RetrofitInstance.userApi.userProfile(currentUser.token)
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
@@ -70,7 +64,7 @@ class FullScreenProfileActivity : AppCompatActivity() {
 
                         binding.userName.apply {
                             text = profile.name
-                            if (profile.verified == false && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            if (!profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                             }
                             visibility = View.VISIBLE
@@ -88,7 +82,7 @@ class FullScreenProfileActivity : AppCompatActivity() {
 
     private fun userProfile() {
         val userId = bundle?.getInt("id")
-        val retrofitInstance = RetrofitInstance.userApi.show(userId!!, getFCMToken(this))
+        val retrofitInstance = RetrofitInstance.userApi.show(userId!!, fcmToken)
 
         retrofitInstance.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {

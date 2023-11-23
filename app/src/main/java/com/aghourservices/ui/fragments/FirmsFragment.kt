@@ -17,10 +17,10 @@ import com.aghourservices.data.model.Tag
 import com.aghourservices.databinding.FragmentFirmsBinding
 import com.aghourservices.ui.adapters.FirmsAdapter
 import com.aghourservices.ui.adapters.TagsAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.FirmsViewModel
 import com.aghourservices.ui.viewModels.TagsViewModel
 import com.aghourservices.utils.helper.Event
-import com.aghourservices.utils.services.cache.UserInfo
 import io.realm.Realm
 
 class FirmsFragment : BaseFragment() {
@@ -103,9 +103,11 @@ class FirmsFragment : BaseFragment() {
     private fun setupFirmsViewModel() {
         firmsViewModel = ViewModelProvider(this)[FirmsViewModel::class.java]
 
-        activity?.let { firmsViewModel.loadFirms(
-            categoryId, tagsAsParameter(), UserInfo.getFCMToken(requireContext())
-        ) }
+        activity?.let {
+            firmsViewModel.loadFirms(
+                categoryId, tagsAsParameter(), fcmToken
+            )
+        }
 
         firmsViewModel.firmsLiveData.observe(viewLifecycleOwner) {
             firmsList = it
@@ -141,9 +143,11 @@ class FirmsFragment : BaseFragment() {
         binding.swipe.setOnRefreshListener {
             animationTagsLoading()
             binding.swipe.isRefreshing = false
-            activity?.let { firmsViewModel.loadFirms(
-                categoryId, tagsAsParameter(), UserInfo.getFCMToken(requireContext())
-            ) }
+            activity?.let {
+                firmsViewModel.loadFirms(
+                    categoryId, tagsAsParameter(), fcmToken
+                )
+            }
         }
     }
 
@@ -199,9 +203,11 @@ class FirmsFragment : BaseFragment() {
             selectedTags.remove(tagsList[position].tag)
         }
         tag.isChecked = !tag.isChecked
-        activity?.let { firmsViewModel.loadFirms(
-            categoryId, tagsAsParameter(), UserInfo.getFCMToken(requireContext())
-        ) }
+        activity?.let {
+            firmsViewModel.loadFirms(
+                categoryId, tagsAsParameter(), fcmToken
+            )
+        }
     }
 
     private fun animationTagsLoading() {

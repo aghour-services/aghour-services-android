@@ -13,8 +13,8 @@ import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentUserProfileBinding
 import com.aghourservices.ui.activities.FullScreenProfileActivity
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.utils.helper.Intents.loadProfileImage
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,7 +41,7 @@ class UserProfileFragment : BaseFragment() {
 
     private fun getProfile() {
         val retrofitInstance =
-            RetrofitInstance.userApi.show(arguments.id, getFCMToken(requireContext()))
+            RetrofitInstance.userApi.show(arguments.id, fcmToken)
 
         retrofitInstance.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {

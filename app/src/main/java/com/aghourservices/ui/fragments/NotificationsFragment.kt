@@ -9,16 +9,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.databinding.FragmentNotificationsBinding
 import com.aghourservices.ui.adapters.NotificationsAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.NotificationsViewModel
-import com.aghourservices.utils.services.cache.UserInfo
 
 class NotificationsFragment : BaseFragment() {
     private lateinit var binding: FragmentNotificationsBinding
     private val notificationsViewModel: NotificationsViewModel by viewModels()
     private val notificationsAdapter =
         NotificationsAdapter { position -> onListItemClick(position) }
-    val fcmToken by lazy { UserInfo.getFCMToken(requireContext()) }
-    val userToken by lazy { UserInfo.getUserData(requireContext()).token }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -44,7 +42,7 @@ class NotificationsFragment : BaseFragment() {
     }
 
     private fun initNotificationObserve() {
-        notificationsViewModel.getNotifications(requireContext(), fcmToken, userToken)
+        notificationsViewModel.getNotifications(requireContext(), fcmToken, currentUser.token)
         notificationsViewModel.notificationsLiveData.observe(viewLifecycleOwner) {
             notificationsAdapter.setNotifications(it)
             progressBar()

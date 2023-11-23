@@ -162,5 +162,6 @@
     <string name="draft_articles">الأخبار المؤجلة</string>
     <string name="edit_profile">تعديل</string>
     <string name="notifications">الإشعارات</string>
+    <string name="you">أنـت</string>
 
 </resources>

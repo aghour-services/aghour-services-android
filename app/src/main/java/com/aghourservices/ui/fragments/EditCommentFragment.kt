@@ -13,6 +13,7 @@ import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.data.network.RetrofitInstance.commentsApi
 import com.aghourservices.databinding.FragmentEditCommentBinding
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.helper.Intents
 import com.aghourservices.utils.helper.Intents.showKeyboard
@@ -58,15 +59,14 @@ class EditCommentFragment : BaseFragment() {
 
     private fun updateComment() {
         val comment = Comment()
-        val userDetails = UserInfo.getUserData(requireContext())
         comment.body = binding.commentTv.text.toString().trim()
 
         val retrofitBuilder = commentsApi.updateComment(
             arguments.articleId,
             arguments.commentId,
-            userDetails.token,
+            currentUser.token,
             comment.toJsonObject(),
-            UserInfo.getFCMToken(requireContext())
+            fcmToken
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
@@ -82,8 +82,7 @@ class EditCommentFragment : BaseFragment() {
     }
 
     private fun getProfile() {
-        val user = UserInfo.getUserData(requireContext())
-        val retrofitInstance = RetrofitInstance.userApi.userProfile(user.token)
+        val retrofitInstance = RetrofitInstance.userApi.userProfile(currentUser.token)
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
@@ -112,14 +111,14 @@ class EditCommentFragment : BaseFragment() {
                     }
                 } else {
                     binding.userName.apply {
-                        text = user.name
+                        text = currentUser.name
                     }
                     binding.avatar.setImageResource(R.mipmap.user)
                 }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
-                binding.userName.apply { text = user.name }
+                binding.userName.apply { text = currentUser.name }
                 binding.avatar.setImageResource(R.mipmap.user)
             }
         })
