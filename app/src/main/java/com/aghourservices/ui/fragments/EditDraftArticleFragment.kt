@@ -57,6 +57,11 @@ class EditDraftArticleFragment : BaseFragment() {
         val article = Article()
         val articleDescription = binding.articleTv.text.toString().trim()
         article.description = articleDescription
+        if(user.verified) {
+            article.status = "published"
+        } else {
+            article.status = "draft"
+        }
 
         val retrofitBuilder = RetrofitInstance.articlesApi.updateArticle(
             arguments.articleId,
@@ -66,9 +71,7 @@ class EditDraftArticleFragment : BaseFragment() {
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {
-            override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                if (response.isSuccessful) { }
-            }
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {}
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
                 AlertDialogs.noInternet(requireContext())

@@ -11,6 +11,8 @@ data class Notification(
     val notifiableId: Int,
     @SerializedName("notifiable_type")
     val notifiableType: String,
+    @SerializedName("article_id")
+    val articleId: Int? = null,
     @SerializedName("image_url")
     val articleImageUrl: String,
     @SerializedName("created_at")

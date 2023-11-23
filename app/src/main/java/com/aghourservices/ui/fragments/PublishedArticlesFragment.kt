@@ -15,16 +15,16 @@ import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentPublishedArticlesBinding
 import com.aghourservices.ui.adapters.PublishedArticlesAdapter
-import com.aghourservices.ui.viewModels.PublishedArticleViewModel
+import com.aghourservices.ui.viewModels.PublishedArticlesViewModel
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PublishedArticleFragment : BaseFragment() {
+class PublishedArticlesFragment : BaseFragment() {
     private lateinit var binding: FragmentPublishedArticlesBinding
-    private val publishedArticleViewModel: PublishedArticleViewModel by viewModels()
+    private val publishedArticlesViewModel: PublishedArticlesViewModel by viewModels()
     private val publishedArticlesAdapter =
         PublishedArticlesAdapter { view, position -> onListItemClick(view, position) }
     private val userToken: String by lazy { getUserData(requireContext()).token }
@@ -48,7 +48,7 @@ class PublishedArticleFragment : BaseFragment() {
         showToolbar()
 
         binding.draftArticlesBtn.setOnClickListener {
-            findNavController().navigate(PublishedArticleFragmentDirections.actionNewsFragmentToDraftArticlesFragment())
+            findNavController().navigate(PublishedArticlesFragmentDirections.actionNewsFragmentToDraftArticlesFragment())
         }
     }
 
@@ -61,14 +61,14 @@ class PublishedArticleFragment : BaseFragment() {
     }
 
     private fun initNewsObserve() {
-        publishedArticleViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
+        publishedArticlesViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
             publishedArticlesAdapter.setArticles(articles)
             stopShimmerAnimation()
             if (articles.isEmpty()) {
                 noInternetConnection()
             }
         }
-        publishedArticleViewModel.loadArticles(binding, userToken, getFCMToken(requireContext()))
+        publishedArticlesViewModel.loadArticles(binding, userToken, getFCMToken(requireContext()))
     }
 
     private fun refresh() {
@@ -76,7 +76,7 @@ class PublishedArticleFragment : BaseFragment() {
         binding.swipe.setProgressBackgroundColorSchemeResource(R.color.swipeBg)
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = false
-            publishedArticleViewModel.loadArticles(
+            publishedArticlesViewModel.loadArticles(
                 binding,
                 userToken,
                 getFCMToken(requireContext())
@@ -90,28 +90,28 @@ class PublishedArticleFragment : BaseFragment() {
         val description = publishedArticlesAdapter.getArticle(position).description
 
         val commentsFragment =
-            PublishedArticleFragmentDirections.actionNewsFragmentToCommentsFragment(article.id)
+            PublishedArticlesFragmentDirections.actionNewsFragmentToShowOneArticleFragment(article.id,)
 
         val commentsDialogSheet =
-            PublishedArticleFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
+            PublishedArticlesFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
                 article.id,
                 article.likes_count
             )
 
         val editArticleFragment =
-            PublishedArticleFragmentDirections.actionNewsFragmentToEditArticleFragment(
+            PublishedArticlesFragmentDirections.actionNewsFragmentToEditArticleFragment(
                 article.id,
                 description,
                 user.name
             )
 
         val likesDialogSheet =
-            PublishedArticleFragmentDirections.actionNewsFragmentToLikesDialogSheet(
+            PublishedArticlesFragmentDirections.actionNewsFragmentToLikesDialogSheet(
                 article.id,
             )
 
         val userProfileFragment =
-            PublishedArticleFragmentDirections.actionNewsFragmentToUserProfileFragment(
+            PublishedArticlesFragmentDirections.actionNewsFragmentToUserProfileFragment(
                 user.id!!
             )
 
@@ -175,7 +175,7 @@ class PublishedArticleFragment : BaseFragment() {
         alertDialogBuilder.setMessage("أنت على وشك حذف الخبر")
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
-            publishedArticleViewModel.deleteArticle(
+            publishedArticlesViewModel.deleteArticle(
                 requireContext(),
                 userToken,
                 publishedArticlesAdapter,
@@ -196,13 +196,13 @@ class PublishedArticleFragment : BaseFragment() {
             )
         } else {
             if (article.liked) {
-                publishedArticleViewModel.unLikeArticle(
+                publishedArticlesViewModel.unLikeArticle(
                     userToken,
                     publishedArticlesAdapter,
                     position
                 )
             } else {
-                publishedArticleViewModel.likeArticle(
+                publishedArticlesViewModel.likeArticle(
                     userToken,
                     publishedArticlesAdapter,
                     position

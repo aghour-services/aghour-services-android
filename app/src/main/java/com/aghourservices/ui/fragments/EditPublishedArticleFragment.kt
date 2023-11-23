@@ -20,6 +20,7 @@ class EditPublishedArticleFragment : BaseFragment() {
     private var _binding: FragmentEditPublishedArticleBinding? = null
     private val binding get() = _binding!!
     private val arguments: EditPublishedArticleFragmentArgs by navArgs()
+    private val user by lazy { UserInfo.getUserData(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,20 +55,17 @@ class EditPublishedArticleFragment : BaseFragment() {
 
     private fun updateArticle() {
         val article = Article()
-        val userDetails = UserInfo.getUserData(requireContext())
         article.description = binding.articleTv.text.toString().trim()
-
+        article.status = "published"
         val retrofitBuilder = articlesApi.updateArticle(
             arguments.articleId,
-            userDetails.token,
+            user.token,
             article.toJsonObject(),
             UserInfo.getFCMToken(requireContext())
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {
-            override fun onResponse(call: Call<Article>, response: Response<Article>) {
-                if (response.isSuccessful) { }
-            }
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {}
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
                 AlertDialogs.noInternet(requireContext())

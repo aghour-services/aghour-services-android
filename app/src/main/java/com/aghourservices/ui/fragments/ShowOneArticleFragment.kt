@@ -19,7 +19,7 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
-import com.aghourservices.databinding.FragmentCommentsBinding
+import com.aghourservices.databinding.FragmentShowOneArticleBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
@@ -32,11 +32,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CommentsFragment : BaseFragment() {
-    private var _binding: FragmentCommentsBinding? = null
+class ShowOneArticleFragment : BaseFragment() {
+    private var _binding: FragmentShowOneArticleBinding? = null
     private val binding get() = _binding!!
     private val commentsViewModel: CommentsViewModel by viewModels()
-    private val arguments: CommentsFragmentArgs by navArgs()
+    private val arguments: ShowOneArticleFragmentArgs by navArgs()
     private val user by lazy { UserInfo.getUserData(requireContext()) }
     private val commentsAdapter =
         CommentsAdapter { view, position -> onCommentItemClick(view, position) }
@@ -45,8 +45,7 @@ class CommentsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
-        requireActivity().title = "التعليقات"
+        _binding = FragmentShowOneArticleBinding.inflate(inflater, container, false)
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         initRecyclerView()
         initCommentEdt()
@@ -65,6 +64,14 @@ class CommentsFragment : BaseFragment() {
         super.onResume()
         loadComments()
     }
+
+//    private fun scrollToSpecificComment() {
+//        val commentId = arguments.commentId
+//        if (commentId > 0) {
+//            val position = commentsAdapter.getCommentPosition(commentId)
+//            binding.commentsRecyclerView.scrollToPosition(position)
+//        }
+//    }
 
     private fun refresh() {
         reloadingComments()
@@ -112,6 +119,7 @@ class CommentsFragment : BaseFragment() {
             ) {
                 if (response.isSuccessful) {
                     val article = response.body()
+                    requireActivity().title = article?.user?.name
                     binding.apply {
                         articleUserName.apply {
                             text = article?.user?.name
@@ -221,10 +229,10 @@ class CommentsFragment : BaseFragment() {
         val user = commentsAdapter.getComment(position).user!!
 
         val userProfileFragment =
-            CommentsFragmentDirections.actionCommentsFragmentToUserProfileFragment(user.id!!)
+            ShowOneArticleFragmentDirections.actionShowOneArticleFragmentToUserProfileFragment(user.id!!)
 
         val updateComment =
-            CommentsFragmentDirections.actionCommentsFragmentToUpdateCommentFragment(
+            ShowOneArticleFragmentDirections.actionShowOneArticleFragmentToUpdateCommentFragment(
                 arguments.articleId,
                 comment.id,
                 comment.body,

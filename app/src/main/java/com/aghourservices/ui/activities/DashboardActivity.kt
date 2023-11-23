@@ -22,7 +22,6 @@ import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityDashboardBinding
 import com.aghourservices.databinding.BottomSheetBinding
-import com.aghourservices.ui.fragments.CategoriesFragmentDirections
 import com.aghourservices.ui.viewModels.NotificationsViewModel
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
@@ -48,13 +47,14 @@ class DashboardActivity : AppCompatActivity() {
     private var _binding: ActivityDashboardBinding? = null
     private val binding get() = _binding!!
     private val notificationsViewModel: NotificationsViewModel by viewModels()
+    private var notificationsCount: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val mainNavController = setupNavController()
-        checkExtras(mainNavController)
+        checkExtras(mainNavController, intent)
         floatActionButton()
         inAppRating()
         inAppUpdate()
@@ -70,27 +70,27 @@ class DashboardActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         getUserProfile()
+        notificationsCount()
     }
 
-    private fun notificationsCount(){
+    private fun notificationsCount() {
         val fcmToken = getFCMToken(this)
         val userToken = getUserData(this).token
         notificationsViewModel.getNotifications(this, fcmToken, userToken)
         notificationsViewModel.notificationsLiveData.observe(this) {
-            notificationBadge(it.size)
+            notificationBadge()
         }
     }
 
-    private fun notificationBadge(count: Int) {
+    private fun notificationBadge() {
         val badgeDrawable = BadgeDrawable.create(this).apply {
             isVisible = true
-            backgroundColor = ContextCompat.getColor(this@DashboardActivity, R.color.colorPrimary)
-            number = count
+            backgroundColor = ContextCompat.getColor(this@DashboardActivity, R.color.clear)
         }
         BadgeUtils.attachBadgeDrawable(
             badgeDrawable,
             binding.toolbar,
-            R.id.notification_activity
+            R.id.notificationsFragment
         )
     }
 
@@ -129,45 +129,21 @@ class DashboardActivity : AppCompatActivity() {
         })
     }
 
-    private fun checkExtras(mainNavController: NavController) {
-        // Get data from Bundle
-        val bundle = intent.extras
-        val articleId = bundle?.getString("article_id")
-        val commentId = bundle?.getString("comment_id")
-
-        // Navigate to comments fragment
-        if (commentId != null && articleId != null) {
-            mainNavController.navigate(
-                CategoriesFragmentDirections.actionCategoriesFragmentToCommentsFragment(
-                    articleId.toInt()
-                )
-            )
-        }
-
-        // Navigate to news fragment
-        if (commentId == null && articleId != null) {
-            mainNavController.navigate(R.id.newsFragment)
-        }
-    }
-
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val mainNavController = setupNavController()
+        checkExtras(mainNavController, intent)
+    }
+
+    private fun checkExtras(mainNavController: NavController, intent: Intent?) {
         val bundle = intent?.extras
         val articleId = bundle?.getString("article_id")
-        val commentId = bundle?.getString("comment_id")
 
-        // Navigate to comments fragment
-        if (commentId != null && articleId != null) {
+        if (articleId != null) {
             mainNavController.navigate(
-                R.id.commentsFragment,
+                R.id.showOneArticleFragment,
                 bundleOf("article_id" to articleId.toInt())
             )
-        }
-
-        // Navigate to news fragment
-        if (commentId == null && articleId != null) {
-            mainNavController.navigate(R.id.newsFragment)
         }
     }
 
@@ -274,14 +250,15 @@ class DashboardActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.searchFragment -> {
-                val navController =
-                    Navigation.findNavController(this@DashboardActivity, R.id.fragmentContainerView)
-                navController.navigate(R.id.searchFragment)
+                val mainNavController = setupNavController()
+                mainNavController.navigate(R.id.searchFragment)
+                overridePendingTransition(R.anim.fragment_enter_pop, R.anim.fragment_exit_pop)
             }
 
-            R.id.notification_activity -> {
-                val intent = Intent(this, NotificationsActivity::class.java)
-                startActivity(intent)
+            R.id.notificationsFragment -> {
+                val mainNavController = setupNavController()
+                mainNavController.navigate(R.id.notificationsFragment)
+                overridePendingTransition(R.anim.fragment_enter_pop, R.anim.fragment_exit_pop)
             }
         }
         return super.onOptionsItemSelected(item)

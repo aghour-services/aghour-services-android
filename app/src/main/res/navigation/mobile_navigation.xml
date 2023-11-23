@@ -22,7 +22,7 @@
             app:destination="@id/newsFragment" />
         <action
             android:id="@+id/action_categoriesFragment_to_commentsFragment"
-            app:destination="@id/commentsFragment" />
+            app:destination="@id/showOneArticleFragment" />
     </fragment>
 
     <fragment
@@ -33,12 +33,12 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.aghourservices.ui.fragments.PublishedArticleFragment"
+        android:name="com.aghourservices.ui.fragments.PublishedArticlesFragment"
         android:label="@string/menu_news"
         tools:layout="@layout/fragment_published_articles">
         <action
-            android:id="@+id/action_newsFragment_to_commentsFragment"
-            app:destination="@id/commentsFragment"
+            android:id="@+id/action_newsFragment_to_showOneArticleFragment"
+            app:destination="@id/showOneArticleFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -94,22 +94,26 @@
     </fragment>
 
     <fragment
-        android:id="@+id/commentsFragment"
-        android:name="com.aghourservices.ui.fragments.CommentsFragment"
-        android:label="CommentsFragment"
-        tools:layout="@layout/fragment_comments">
+        android:id="@+id/showOneArticleFragment"
+        android:name="com.aghourservices.ui.fragments.ShowOneArticleFragment"
+        android:label=""
+        tools:layout="@layout/fragment_show_one_article">
         <argument
             android:name="article_id"
             app:argType="integer" />
+        <argument
+            android:name="comment_id"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
-            android:id="@+id/action_commentsFragment_to_updateCommentFragment"
+            android:id="@+id/action_showOneArticleFragment_to_updateCommentFragment"
             app:destination="@id/updateCommentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_commentsFragment_to_userProfileFragment"
+            android:id="@+id/action_showOneArticleFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment"
             app:enterAnim="@anim/fragment_enter"
             app:exitAnim="@anim/fragment_exit"
@@ -239,5 +243,18 @@
         <argument
             android:name="id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.aghourservices.ui.fragments.NotificationsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_notifications">
+        <action
+            android:id="@+id/action_notificationsFragment_to_showOneArticleFragment"
+            app:destination="@id/showOneArticleFragment"
+            app:enterAnim="@anim/fragment_enter"
+            app:exitAnim="@anim/fragment_exit"
+            app:popEnterAnim="@anim/fragment_enter_pop"
+            app:popExitAnim="@anim/fragment_exit_pop" />
     </fragment>
 </navigation>
