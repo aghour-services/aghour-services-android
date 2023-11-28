@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg"
-        android:elevation="@dimen/_4sdp"
+        android:elevation="@dimen/_1sdp"
         app:title="@string/notifications"
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="@color/drawerToggle"

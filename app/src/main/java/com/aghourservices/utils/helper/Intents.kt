@@ -190,10 +190,10 @@ object Intents {
     }
 
     fun showOnCloseDialog(context: Context) {
-        val alertDialogBuilder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+        val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle(R.string.title)
         alertDialogBuilder.setMessage(R.string.message)
-        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round)
+        alertDialogBuilder.setIcon(R.drawable.ic_logout_filled)
         alertDialogBuilder.setCancelable(true)
         alertDialogBuilder.setPositiveButton(R.string.positiveButton) { _, _ ->
             logOut(context)

@@ -14,25 +14,19 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.FragmentCurrentUserBinding
-import com.aghourservices.ui.activities.AboutActivity
 import com.aghourservices.ui.activities.FullScreenProfileActivity
 import com.aghourservices.ui.activities.SignUpActivity
 import com.aghourservices.ui.base.BaseFragment
-import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Constants
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.Intents
-import com.aghourservices.utils.helper.Intents.facebook
-import com.aghourservices.utils.helper.Intents.gmail
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.helper.Intents.rateApp
 import com.aghourservices.utils.helper.Intents.shareApp
 import com.aghourservices.utils.helper.Intents.showOnCloseDialog
-import com.aghourservices.utils.helper.Intents.whatsApp
 import com.aghourservices.utils.helper.ThemePreference
 import com.aghourservices.utils.services.UserService
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
-import com.google.android.gms.ads.AdView
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -46,7 +40,6 @@ class CurrentUserFragment : BaseFragment() {
     private val binding get() = _binding!!
     private var avatarUri: Uri? = null
     private var avatarPart: MultipartBody.Part? = null
-    private lateinit var adView: AdView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -67,13 +60,7 @@ class CurrentUserFragment : BaseFragment() {
         }
         showBottomNavigation()
         showToolbar()
-        adView()
         initStoragePermissions()
-    }
-
-    private fun adView() {
-        adView = requireActivity().findViewById(R.id.adView)
-        Banner.show(requireContext(), adView)
     }
 
     private fun initUserClick() {
@@ -81,27 +68,26 @@ class CurrentUserFragment : BaseFragment() {
             appTheme.setOnClickListener {
                 chooseThemeDialog()
             }
-            facebook.setOnClickListener {
-                facebook(requireContext())
-            }
-            email.setOnClickListener {
-                gmail(requireContext())
-            }
-            whatsApp.setOnClickListener {
-                whatsApp(requireContext(), getString(R.string.whats_app_number))
-            }
             share.setOnClickListener {
                 shareApp(requireContext())
             }
             rate.setOnClickListener {
                 rateApp(requireContext())
             }
-            aboutApp.setOnClickListener {
-                val intent = Intent(requireContext(), AboutActivity::class.java)
-                startActivity(intent)
-            }
             logOut.setOnClickListener {
                 showOnCloseDialog(requireContext())
+            }
+        }
+
+        binding.apply {
+            facebook.setOnClickListener {
+                Intents.facebook(requireContext())
+            }
+            email.setOnClickListener {
+                Intents.gmail(requireContext())
+            }
+            whatsApp.setOnClickListener {
+                Intents.whatsApp(requireContext(), getString(R.string.whats_app_number))
             }
         }
     }

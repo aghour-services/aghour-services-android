@@ -20,7 +20,7 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityDashboardBinding
-import com.aghourservices.databinding.BottomSheetBinding
+import com.aghourservices.databinding.PostOrDataBottomSheetBinding
 import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.ui.viewModels.NotificationsViewModel
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
@@ -163,7 +163,7 @@ class DashboardActivity : BaseActivity() {
 
     private fun floatActionButton() {
         binding.addDataBtn.setOnClickListener {
-            val binding = BottomSheetBinding.inflate(layoutInflater)
+            val binding = PostOrDataBottomSheetBinding.inflate(layoutInflater)
 
             val bottomSheetDialog = BottomSheetDialog(this).apply {
                 setContentView(binding.root)
@@ -179,7 +179,7 @@ class DashboardActivity : BaseActivity() {
                 startActivity(Intent(this, CreateArticleActivity::class.java))
                 bottomSheetDialog.dismiss()
             }
-            binding.dismissSheet.setOnClickListener {
+            binding.closeSheetBtn.setOnClickListener {
                 bottomSheetDialog.dismiss()
             }
         }

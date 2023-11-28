@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     android:background="@color/main_bg">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -12,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg"
-        android:elevation="@dimen/_2sdp"
+        android:elevation="@dimen/_1sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/toolbar_menu"
@@ -39,6 +38,7 @@
         android:id="@+id/bottomViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -64,7 +64,7 @@
             android:layout_gravity="center"
             android:background="?android:selectableItemBackground"
             android:elevation="@dimen/_20sdp"
-            android:padding="@dimen/_10sdp"
+            android:padding="@dimen/_8sdp"
             android:src="@drawable/add_circle_outline"
             app:layout_constraintBottom_toBottomOf="@+id/bottomView"
             app:layout_constraintEnd_toEndOf="parent"

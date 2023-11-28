@@ -24,8 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_margin="@dimen/_2sdp"
-            android:background="@drawable/about_app_back_ripple"
+            android:background="?android:selectableItemBackgroundBorderless"
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_back_settings" />
 
@@ -40,9 +39,8 @@
             android:padding="@dimen/_4sdp"
             android:text="@string/add_article"
             android:textColor="@color/toolbarText"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold"
-            tools:ignore="RelativeOverlap" />
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/publish_btn"
