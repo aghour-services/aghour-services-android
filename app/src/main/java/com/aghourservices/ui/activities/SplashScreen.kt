@@ -30,6 +30,10 @@ class SplashScreen : AppCompatActivity() {
     private fun handler() {
         handler.postDelayed({
             val intent = Intent(this, DashboardActivity::class.java)
+            val extras = getIntent().extras
+            if (extras != null) {
+                intent.putExtras(extras)
+            }
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
