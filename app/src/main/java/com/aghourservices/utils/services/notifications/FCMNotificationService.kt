@@ -1,5 +1,6 @@
 package com.aghourservices.utils.services.notifications
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -19,6 +20,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class FCMNotificationService : FirebaseMessagingService() {
+    lateinit var notificationManager: NotificationManager
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
@@ -52,20 +54,17 @@ class FCMNotificationService : FirebaseMessagingService() {
         }
         notificationIntent.putExtras(bundle)
 
-        val pendingIntent = PendingIntent.getActivity(
+        val pendingIntent =  PendingIntent.getActivity(
             this,
             0,
             notificationIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val notification = NotificationCompat.Builder(this, FCM_CHANNEL)
             .setContentTitle(title)
             .setContentText(body)
             .setSmallIcon(R.drawable.aghour)
-            .setLights(NotificationCompat.FLAG_SHOW_LIGHTS, 1000, 3000)
-            .setDefaults(NotificationCompat.DEFAULT_ALL)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setLargeIcon(loadImageAsBitmap(this, userAvatar.toString()))
             .setStyle(
@@ -76,7 +75,7 @@ class FCMNotificationService : FirebaseMessagingService() {
             .setColor(ContextCompat.getColor(this, R.color.splashScreenBg))
             .build()
 
-        val notificationManager =
+        notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(FCM_CHANNEL, 0, notification)
     }
@@ -87,9 +86,11 @@ class FCMNotificationService : FirebaseMessagingService() {
                 FCM_CHANNEL, FCM_CHANNEL,
                 NotificationManager.IMPORTANCE_HIGH
             )
+            notificationChannel.description = FCM_CHANNEL
+            notificationChannel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             notificationChannel.setShowBadge(true)
 
-            val notificationManager =
+            notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(notificationChannel)
         }

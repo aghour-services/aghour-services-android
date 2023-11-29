@@ -142,8 +142,8 @@
                 <Button
                     android:id="@+id/comment_btn"
                     style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/ic_send"
                     android:contentDescription="@string/write_a_comment"
