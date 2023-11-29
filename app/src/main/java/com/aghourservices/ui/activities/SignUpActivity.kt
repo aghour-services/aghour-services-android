@@ -1,14 +1,10 @@
 package com.aghourservices.ui.activities
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -16,13 +12,12 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.Patterns
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySignUpBinding
+import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.AlertDialogs.Companion.errorLogin
 import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
@@ -40,10 +35,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : BaseActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var adView: AdView
-    private lateinit var permissions: Array<String>
     private val progressDialog by lazy { ProgressDialog(this) }
     private var avatarUri: Uri? = null
     private var avatarPart: MultipartBody.Part? = null
@@ -56,8 +50,8 @@ class SignUpActivity : AppCompatActivity() {
         initUserValidations()
         initUserLogin()
         adView()
-        initPermissions()
-        requestPermissions()
+        initStoragePermissions()
+        requestStoragePermissions()
         initUserClicks()
     }
 
@@ -210,14 +204,14 @@ class SignUpActivity : AppCompatActivity() {
     private fun initUserClicks() {
         binding.avatarImage.setOnClickListener {
             if (!checkStoragePermission()) {
-                requestPermissions()
+                requestStoragePermissions()
             } else {
                 openGallery()
             }
         }
         binding.addUserImage.setOnClickListener {
             if (!checkStoragePermission()) {
-                requestPermissions()
+                requestStoragePermissions()
             } else {
                 openGallery()
             }
@@ -259,16 +253,6 @@ class SignUpActivity : AppCompatActivity() {
         return value.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
     }
 
-    private fun openGallery() {
-        val galleryIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            Intent(MediaStore.ACTION_PICK_IMAGES)
-        } else {
-            Intent(Intent.ACTION_PICK)
-        }
-        galleryIntent.type = "image/*"
-        startActivityForResult(galleryIntent, Constants.GALLERY_CODE)
-    }
-
     @Suppress("DEPRECATION")
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -281,28 +265,6 @@ class SignUpActivity : AppCompatActivity() {
             avatarPart =
                 MultipartBody.Part.createFormData("user[avatar]", file.name, requestBody)
             binding.avatarImage.setImageURI(avatarUri)
-        }
-    }
-
-    private fun initPermissions() {
-        permissions = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_MEDIA_LOCATION,
-        )
-    }
-
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(this, permissions, Constants.REQUEST_CODE)
-    }
-
-    private fun checkStoragePermission(): Boolean {
-        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == (PackageManager.PERMISSION_GRANTED)
-        } else {
-            true
         }
     }
 

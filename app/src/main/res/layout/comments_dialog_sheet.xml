@@ -20,25 +20,40 @@
                 android:layout_height="4dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/_2sdp"
                 app:cardBackgroundColor="@color/dialogText"
                 app:cardCornerRadius="12dp" />
 
             <TextView
                 android:id="@+id/likes_count"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_below="@id/sheet_handling"
+                android:layout_alignParentRight="true"
                 android:layout_gravity="center|right"
                 android:background="?android:selectableItemBackground"
                 android:drawablePadding="4dp"
                 android:elevation="10dp"
                 android:gravity="right|center"
-                android:padding="10dp"
+                android:padding="@dimen/_10sdp"
                 android:textColor="@color/dialogText"
                 app:drawableRightCompat="@drawable/ic_fav_shadow"
                 app:drawableTint="#FF0000"
                 tools:text="1,000,000" />
+
+            <TextView
+                android:id="@+id/all_comments_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_below="@id/sheet_handling"
+                android:layout_toLeftOf="@id/likes_count"
+                android:gravity="left|center"
+                android:layout_alignParentLeft="true"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/all_comments"
+                android:textColor="@color/dialogText"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/line_view"
@@ -53,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/comment_layout"
                 android:layout_below="@id/line_view"
-                android:layout_centerHorizontal="true"
                 android:background="@color/main_bg">
 
                 <TextView
@@ -70,28 +84,11 @@
                     android:textSize="22sp"
                     android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/all_comments_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="right"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:padding="10dp"
-                    android:text="@string/all_comments"
-                    android:textColor="@color/dialogText"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/all_comments_tv"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
                     android:indeterminateTint="@color/progress_bar"
                     android:scaleX="0.8"
                     android:scaleY="0.8" />
@@ -100,7 +97,6 @@
                     android:id="@+id/comments_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/all_comments_tv"
                     android:layout_centerHorizontal="true"
                     tools:listitem="@layout/comment_card" />
 
@@ -146,8 +142,8 @@
                 <Button
                     android:id="@+id/comment_btn"
                     style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/ic_send"
                     android:contentDescription="@string/write_a_comment"

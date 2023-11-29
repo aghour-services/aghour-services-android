@@ -7,8 +7,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:fillViewport="true"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -18,18 +18,32 @@
                 android:id="@+id/sheet_handling"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="4dp"
                 app:cardBackgroundColor="@color/dialogText"
                 app:cardCornerRadius="12dp" />
 
             <TextView
-                android:id="@+id/likes_count"
-                android:layout_width="match_parent"
+                android:id="@+id/all_users_likes"
+                android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_below="@id/sheet_handling"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/likes_count"
+                android:gravity="left|center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/users_likes"
+                android:textColor="@color/dialogText"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/likes_count"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_below="@id/sheet_handling"
+                android:layout_alignParentRight="true"
                 android:layout_gravity="center|right"
-                android:layout_marginTop="5dp"
                 android:drawablePadding="4dp"
                 android:gravity="center|right"
                 android:padding="10dp"
@@ -55,26 +69,9 @@
                 android:background="@color/main_bg">
 
                 <TextView
-                    android:id="@+id/all_users_likes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="right"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:padding="10dp"
-                    android:text="@string/users_likes"
-                    android:textColor="@color/dialogText"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/no_likes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/all_users_likes"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="200dp"
@@ -89,8 +86,7 @@
                     android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/all_users_likes"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
                     android:indeterminateTint="@color/progress_bar"
                     android:scaleX="0.8"
                     android:scaleY="0.8" />
@@ -99,9 +95,7 @@
                     android:id="@+id/users_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/all_users_likes"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
                     tools:listitem="@layout/likes_card" />
             </RelativeLayout>
         </RelativeLayout>

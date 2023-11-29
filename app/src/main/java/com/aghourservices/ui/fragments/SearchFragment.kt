@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.data.model.Search
 import com.aghourservices.databinding.FragmentSearchBinding
 import com.aghourservices.ui.adapters.SearchResultAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.SearchViewModel
 import com.aghourservices.utils.helper.CheckNetworkLiveData
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.Intents.showKeyboard
-import com.aghourservices.utils.services.cache.UserInfo
 
 class SearchFragment : BaseFragment() {
     private lateinit var searchList: ArrayList<Search>
@@ -51,7 +51,7 @@ class SearchFragment : BaseFragment() {
         binding.searchText.setOnClickListener {
             activity?.let {
                 searchViewModel.search(
-                searchText, UserInfo.getFCMToken(requireContext())
+                searchText, fcmToken
             ) }
         }
 
@@ -59,7 +59,7 @@ class SearchFragment : BaseFragment() {
             val searchKeyWord = text.toString()
             if (searchKeyWord.length > 2) {
                 activity?.let { searchViewModel.search(
-                    searchKeyWord, UserInfo.getFCMToken(requireContext())
+                    searchKeyWord, fcmToken
                 ) }
             }
         }
@@ -78,7 +78,7 @@ class SearchFragment : BaseFragment() {
 
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         activity?.let { searchViewModel.search(
-            searchText, UserInfo.getFCMToken(requireContext())
+            searchText, fcmToken
         ) }
 
         searchViewModel.searchLiveData.observe(viewLifecycleOwner) {

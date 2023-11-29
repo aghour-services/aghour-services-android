@@ -9,9 +9,8 @@ import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentEditDraftArticleBinding
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.utils.helper.AlertDialogs
-import com.aghourservices.utils.services.cache.UserInfo
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +19,6 @@ class EditDraftArticleFragment : BaseFragment() {
     private var _binding: FragmentEditDraftArticleBinding? = null
     private val binding get() = _binding!!
     private val arguments: EditDraftArticleFragmentArgs by navArgs()
-    private val user by lazy { UserInfo.getUserData(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +55,7 @@ class EditDraftArticleFragment : BaseFragment() {
         val article = Article()
         val articleDescription = binding.articleTv.text.toString().trim()
         article.description = articleDescription
-        if(user.verified) {
+        if(currentUser.verified) {
             article.status = "published"
         } else {
             article.status = "draft"
@@ -65,9 +63,9 @@ class EditDraftArticleFragment : BaseFragment() {
 
         val retrofitBuilder = RetrofitInstance.articlesApi.updateArticle(
             arguments.articleId,
-            user.token,
+            currentUser.token,
             article.toJsonObject(),
-            getFCMToken(requireContext())
+            fcmToken
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

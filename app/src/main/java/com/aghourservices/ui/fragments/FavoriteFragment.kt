@@ -12,6 +12,7 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Firm
 import com.aghourservices.databinding.FragmentFavoriteBinding
 import com.aghourservices.ui.adapters.FirmsAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.utils.helper.Event
 import io.realm.Realm
 

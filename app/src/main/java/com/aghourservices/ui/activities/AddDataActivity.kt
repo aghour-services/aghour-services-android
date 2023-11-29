@@ -2,28 +2,25 @@ package com.aghourservices.ui.activities
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.aghourservices.R
 import com.aghourservices.data.model.Category
 import com.aghourservices.data.model.Firm
 import com.aghourservices.data.network.RetrofitInstance.firmsApi
 import com.aghourservices.databinding.ActivityAddDataBinding
+import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.ui.viewHolders.SpinnerCategoriesAdapter
-import com.aghourservices.utils.services.cache.UserInfo
-import com.aghourservices.utils.services.cache.UserInfo.getUserData
-import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
 import com.aghourservices.utils.ads.Banner
-import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.helper.AlertDialogs.Companion.createAccount
 import com.aghourservices.utils.helper.AlertDialogs.Companion.dataAdded
 import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
+import com.aghourservices.utils.helper.ProgressDialog
 import com.google.android.gms.ads.AdView
 import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddDataActivity : AppCompatActivity() {
+class AddDataActivity : BaseActivity() {
     private lateinit var binding: ActivityAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
     private lateinit var adView: AdView
@@ -93,11 +90,10 @@ class AddDataActivity : AppCompatActivity() {
 
     private fun createFirm(firm: Firm) {
         progressDialog.show(getString(R.string.adding_data))
-        val user = getUserData(this)
         val retrofitBuilder = firmsApi.createFirm(
             firm.toJsonObject(),
-            user.token,
-            UserInfo.getFCMToken(this)
+            currentUser.token,
+            fcmToken
         )
         retrofitBuilder.enqueue(object : Callback<Firm> {
             override fun onResponse(call: Call<Firm>, response: Response<Firm>) {
@@ -132,7 +128,6 @@ class AddDataActivity : AppCompatActivity() {
     }
 
     private fun hideUserAddData() {
-        val isUserLogin = isUserLoggedIn(this)
         if (isUserLogin) {
             binding.btnAddData.visibility = View.VISIBLE
         } else {

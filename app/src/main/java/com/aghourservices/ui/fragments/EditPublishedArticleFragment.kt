@@ -9,9 +9,9 @@ import androidx.navigation.fragment.navArgs
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.databinding.FragmentEditPublishedArticleBinding
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.helper.Intents.showKeyboard
-import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +20,6 @@ class EditPublishedArticleFragment : BaseFragment() {
     private var _binding: FragmentEditPublishedArticleBinding? = null
     private val binding get() = _binding!!
     private val arguments: EditPublishedArticleFragmentArgs by navArgs()
-    private val user by lazy { UserInfo.getUserData(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,9 +58,9 @@ class EditPublishedArticleFragment : BaseFragment() {
         article.status = "published"
         val retrofitBuilder = articlesApi.updateArticle(
             arguments.articleId,
-            user.token,
+            currentUser.token,
             article.toJsonObject(),
-            UserInfo.getFCMToken(requireContext())
+            fcmToken
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

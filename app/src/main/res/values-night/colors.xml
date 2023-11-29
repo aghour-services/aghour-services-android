@@ -6,7 +6,7 @@
     <color name="searchIcon">#FFFFFF</color>
     <color name="start_icon_tint">#F3F3F3</color>
     <color name="navBarColor">#000000</color>
-    <color name="main_bg">#171C20</color>
+    <color name="main_bg">#1B2025</color>
     <color name="splashScreenBg">#141F27</color>
     <color name="categoryName">#FFFFFF</color>
     <color name="categoryCardBg">#1D242B</color>
@@ -98,7 +98,7 @@
     <color name="skipBtnColor">#54C158</color>
     <color name="createOrSignInAccountBg">#151B20</color>
     <color name="bg_signIn">#F8F8F8</color>
-    <color name="signOut">#ED7474</color>
+    <color name="signOut">#D23131</color>
     <color name="favColor">#D3D3D3</color>
     <color name="noFav">#FFFFFF</color>
     <color name="adMobBg">#1D242B</color>
@@ -126,4 +126,6 @@
     <color name="image_bg">#2E3840</color>
     <color name="settings_icon">#F4F4F4</color>
 
+    <color name="not_pressed_color">#252A2F</color>
+    <color name="pressed_color">#30373D</color>
 </resources>

@@ -7,9 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.network.RetrofitInstance.commentsApi
 import com.aghourservices.ui.adapters.CommentsAdapter
-import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.AlertDialogs
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
+import com.aghourservices.utils.helper.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,13 +44,14 @@ class CommentsViewModel : ViewModel() {
         articleId: Int,
         userToken: String,
         commentsAdapter: CommentsAdapter,
-        comment: Comment
+        comment: Comment,
+        fcmToken: String
     ) {
         val retrofitBuilder = commentsApi.postComment(
             articleId,
             userToken,
             comment.toJsonObject(),
-            getFCMToken(context)
+            fcmToken
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {
@@ -78,14 +78,15 @@ class CommentsViewModel : ViewModel() {
         commentId: Int,
         userToken: String,
         position: Int,
-        commentsAdapter: CommentsAdapter
+        commentsAdapter: CommentsAdapter,
+        fcmToken: String
     ) {
 
         val retrofitBuilder = commentsApi.deleteComment(
             articleId,
             commentId,
             userToken,
-            getFCMToken(context)
+            fcmToken
         )
 
         retrofitBuilder.enqueue(object : Callback<Comment> {

@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/firmsFragment"
         android:name="com.aghourservices.ui.fragments.FirmsFragment"
-        android:label="FirmsFragment"
+        android:label=""
         tools:layout="@layout/fragment_firms">
         <argument
             android:name="category_id"
@@ -123,7 +123,7 @@
     <fragment
         android:id="@+id/updateCommentFragment"
         android:name="com.aghourservices.ui.fragments.EditCommentFragment"
-        android:label="UpdateCommentFragment"
+        android:label=""
         tools:layout="@layout/fragment_edit_comment">
         <argument
             android:name="article_id"
@@ -141,7 +141,7 @@
     <fragment
         android:id="@+id/editArticleFragment"
         android:name="com.aghourservices.ui.fragments.EditPublishedArticleFragment"
-        android:label="EditArticleFragment"
+        android:label=""
         tools:layout="@layout/fragment_edit_published_article">
         <argument
             android:name="articleId"
@@ -158,7 +158,7 @@
     <dialog
         android:id="@+id/likesDialogSheet"
         android:name="com.aghourservices.ui.fragments.dialogSheets.LikesDialogSheet"
-        android:label="UsersLikesFragment"
+        android:label=""
         tools:layout="@layout/likes_dialog_sheet">
 
         <argument
@@ -176,7 +176,7 @@
     <dialog
         android:id="@+id/commentsDialogSheet"
         android:name="com.aghourservices.ui.fragments.dialogSheets.CommentsDialogSheet"
-        android:label="CommentsDialogSheet"
+        android:label=""
         tools:layout="@layout/comments_dialog_sheet">
         <argument
             android:name="articleId"
@@ -257,4 +257,9 @@
             app:popEnterAnim="@anim/fragment_enter_pop"
             app:popExitAnim="@anim/fragment_exit_pop" />
     </fragment>
+    <fragment
+        android:id="@+id/currentUserFragment"
+        tools:layout="@layout/fragment_current_user"
+        android:name="com.aghourservices.ui.fragments.CurrentUserFragment"
+        android:label="" />
 </navigation>

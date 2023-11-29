@@ -11,7 +11,7 @@
     <string name="login_password_hint">كلمة السر</string>
     <string name="login_signup_hint">ليس لديك حساب ؟ سجل الأن</string>
     <string name="aghour_logo">Aghour Logo</string>
-    <string name="add_data">إضافة بيانات</string>
+    <string name="add_data">بـيـانـات (مطعم-دكتور....إلخ)</string>
 
     <string name="add_article_hint">أكتب شيئا .</string>
     <string name="publish_article">نشر الخبر</string>
@@ -87,7 +87,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_article">إضافة خبر</string>
-    <string name="write_new_article">أكتب خبر جديد</string>
+    <string name="write_new_article">
+        خـبـر جـديـد
+    </string>
 
     <string name="menu_home">الرئيسية</string>
     <string name="menu_search">البحث</string>
@@ -162,5 +164,6 @@
     <string name="draft_articles">الأخبار المؤجلة</string>
     <string name="edit_profile">تعديل</string>
     <string name="notifications">الإشعارات</string>
+    <string name="you">أنـت</string>
 
 </resources>

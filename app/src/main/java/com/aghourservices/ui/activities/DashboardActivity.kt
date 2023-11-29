@@ -1,14 +1,13 @@
 package com.aghourservices.ui.activities
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -21,33 +20,23 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityDashboardBinding
-import com.aghourservices.databinding.BottomSheetBinding
+import com.aghourservices.databinding.PostOrDataBottomSheetBinding
+import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.ui.viewModels.NotificationsViewModel
-import com.aghourservices.utils.helper.Intents.loadProfileImage
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
-import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
-import com.google.android.material.badge.ExperimentalBadgeUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.messaging.FirebaseMessaging
-import com.suddenh4x.ratingdialog.AppRating
-import com.suddenh4x.ratingdialog.preferences.RatingThreshold
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-@ExperimentalBadgeUtils
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : BaseActivity() {
     private var _binding: ActivityDashboardBinding? = null
     private val binding get() = _binding!!
     private val notificationsViewModel: NotificationsViewModel by viewModels()
-    private var notificationsCount: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +51,9 @@ class DashboardActivity : AppCompatActivity() {
         getFirebaseInstanceToken()
         notificationsCount()
 
-        binding.profileImage.setOnClickListener {
-            startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
-        }
+//        binding.profileImage.setOnClickListener {
+//            startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
+//        }
     }
 
     override fun onResume() {
@@ -74,14 +63,13 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun notificationsCount() {
-        val fcmToken = getFCMToken(this)
-        val userToken = getUserData(this).token
-        notificationsViewModel.getNotifications(this, fcmToken, userToken)
+        notificationsViewModel.getNotifications(this, fcmToken, currentUser.token)
         notificationsViewModel.notificationsLiveData.observe(this) {
             notificationBadge()
         }
     }
 
+    @SuppressLint("UnsafeOptInUsageError")
     private fun notificationBadge() {
         val badgeDrawable = BadgeDrawable.create(this).apply {
             isVisible = true
@@ -105,26 +93,25 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun getUserProfile() {
-        val userData = getUserData(this)
-        val retrofitInstance = userApi.userProfile(userData.token)
+        val retrofitInstance = userApi.userProfile(currentUser.token)
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 val profile = response.body()
 
-                if (response.isSuccessful) {
-                    loadProfileImage(
-                        this@DashboardActivity,
-                        profile?.url.toString(),
-                        binding.profileImage
-                    )
-                } else {
-                    binding.profileImage.setImageResource(R.mipmap.user)
-                }
+//                if (response.isSuccessful) {
+//                    loadProfileImage(
+//                        this@DashboardActivity,
+//                        profile?.url.toString(),
+//                        binding.profileImage
+//                    )
+//                } else {
+//                    binding.profileImage.setImageResource(R.mipmap.user)
+//                }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
-                Log.d("user", t.message.toString())
-                binding.profileImage.setImageResource(R.mipmap.user)
+//                Log.d("user", t.message.toString())
+//                binding.profileImage.setImageResource(R.mipmap.user)
             }
         })
     }
@@ -147,41 +134,11 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun inAppRating() {
-        AppRating.Builder(this)
-            .setMinimumLaunchTimes(3)
-            .setMinimumDays(3)
-            .useGoogleInAppReview()
-            .setMinimumLaunchTimesToShowAgain(10)
-            .setMinimumDaysToShowAgain(7)
-            .setRatingThreshold(RatingThreshold.FOUR)
-            .showIfMeetsConditions()
-    }
-
-    private fun inAppUpdate() {
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && (appUpdateInfo.clientVersionStalenessDays() ?: -1) >= 3
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
-            ) {
-                appUpdateManager.startUpdateFlowForResult(
-                    appUpdateInfo,
-                    AppUpdateType.IMMEDIATE,
-                    this,
-                    0
-                )
-            }
-        }
-    }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0) {
             if (resultCode != RESULT_OK) {
-                Log.e("MY_APP", "Update flow failed! Result code: $resultCode")
                 inAppUpdate()
             }
         }
@@ -206,7 +163,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun floatActionButton() {
         binding.addDataBtn.setOnClickListener {
-            val binding = BottomSheetBinding.inflate(layoutInflater)
+            val binding = PostOrDataBottomSheetBinding.inflate(layoutInflater)
 
             val bottomSheetDialog = BottomSheetDialog(this).apply {
                 setContentView(binding.root)
@@ -222,7 +179,7 @@ class DashboardActivity : AppCompatActivity() {
                 startActivity(Intent(this, CreateArticleActivity::class.java))
                 bottomSheetDialog.dismiss()
             }
-            binding.dismissSheet.setOnClickListener {
+            binding.closeSheetBtn.setOnClickListener {
                 bottomSheetDialog.dismiss()
             }
         }
@@ -239,7 +196,8 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     override fun setTitle(title: CharSequence?) {
-        binding.toolBarTv.text = title
+        super.setTitle(title)
+        binding.toolbar.title = title
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

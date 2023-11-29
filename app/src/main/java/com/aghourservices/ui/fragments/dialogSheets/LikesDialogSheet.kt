@@ -48,7 +48,8 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
             dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
         behavior = BottomSheetBehavior.from(bottomSheet!!).apply {
             state = BottomSheetBehavior.STATE_EXPANDED
-            isHideable = true
+            isHideable = false
+            isDraggable = false
         }
 
         val layoutParams = bottomSheet.layoutParams

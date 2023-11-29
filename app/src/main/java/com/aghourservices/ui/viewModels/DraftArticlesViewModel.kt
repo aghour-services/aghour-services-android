@@ -8,7 +8,6 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.ui.adapters.DraftArticlesAdapter
 import com.aghourservices.utils.helper.AlertDialogs
-import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,14 +40,15 @@ class DraftArticlesViewModel : ViewModel() {
         context: Context,
         userToken: String,
         draftArticlesAdapter: DraftArticlesAdapter,
-        position: Int
+        position: Int,
+        fcmToken: String,
     ) {
         val articleId = draftArticlesAdapter.getArticle(position).id
 
         val retrofitBuilder = articlesApi.deleteArticle(
             articleId,
             userToken,
-            UserInfo.getFCMToken(context)
+            fcmToken,
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

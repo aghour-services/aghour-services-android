@@ -15,9 +15,8 @@ import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentPublishedArticlesBinding
 import com.aghourservices.ui.adapters.PublishedArticlesAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.PublishedArticlesViewModel
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
-import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +26,6 @@ class PublishedArticlesFragment : BaseFragment() {
     private val publishedArticlesViewModel: PublishedArticlesViewModel by viewModels()
     private val publishedArticlesAdapter =
         PublishedArticlesAdapter { view, position -> onListItemClick(view, position) }
-    private val userToken: String by lazy { getUserData(requireContext()).token }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +66,7 @@ class PublishedArticlesFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        publishedArticlesViewModel.loadArticles(binding, userToken, getFCMToken(requireContext()))
+        publishedArticlesViewModel.loadArticles(binding, currentUser.token, fcmToken)
     }
 
     private fun refresh() {
@@ -78,8 +76,8 @@ class PublishedArticlesFragment : BaseFragment() {
             binding.swipe.isRefreshing = false
             publishedArticlesViewModel.loadArticles(
                 binding,
-                userToken,
-                getFCMToken(requireContext())
+                currentUser.token,
+                fcmToken
             )
         }
     }
@@ -90,7 +88,7 @@ class PublishedArticlesFragment : BaseFragment() {
         val description = publishedArticlesAdapter.getArticle(position).description
 
         val commentsFragment =
-            PublishedArticlesFragmentDirections.actionNewsFragmentToShowOneArticleFragment(article.id,)
+            PublishedArticlesFragmentDirections.actionNewsFragmentToShowOneArticleFragment(article.id)
 
         val commentsDialogSheet =
             PublishedArticlesFragmentDirections.actionNewsFragmentToCommentsDialogSheet(
@@ -177,9 +175,10 @@ class PublishedArticlesFragment : BaseFragment() {
         alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
             publishedArticlesViewModel.deleteArticle(
                 requireContext(),
-                userToken,
+                currentUser.token,
                 publishedArticlesAdapter,
-                position
+                position,
+                fcmToken
             )
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ -> }
@@ -189,7 +188,7 @@ class PublishedArticlesFragment : BaseFragment() {
 
     private fun updateLikeArticle(position: Int) {
         val article = publishedArticlesAdapter.getArticle(position)
-        if (userToken.isEmpty()) {
+        if (currentUser.token.isEmpty()) {
             com.aghourservices.utils.helper.AlertDialogs.createAccount(
                 requireContext(),
                 "للإعجاب بالخبر يجب إنشاء حساب أولا"
@@ -197,13 +196,13 @@ class PublishedArticlesFragment : BaseFragment() {
         } else {
             if (article.liked) {
                 publishedArticlesViewModel.unLikeArticle(
-                    userToken,
+                    currentUser.token,
                     publishedArticlesAdapter,
                     position
                 )
             } else {
                 publishedArticlesViewModel.likeArticle(
-                    userToken,
+                    currentUser.token,
                     publishedArticlesAdapter,
                     position
                 )
@@ -227,7 +226,7 @@ class PublishedArticlesFragment : BaseFragment() {
     }
 
     private fun getProfile() {
-        val retrofitInstance = RetrofitInstance.userApi.userProfile(userToken)
+        val retrofitInstance = RetrofitInstance.userApi.userProfile(currentUser.token)
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {

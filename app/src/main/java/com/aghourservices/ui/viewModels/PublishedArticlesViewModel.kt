@@ -7,11 +7,10 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Article
-import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
+import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.databinding.FragmentPublishedArticlesBinding
 import com.aghourservices.ui.adapters.PublishedArticlesAdapter
-import com.aghourservices.utils.services.cache.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,14 +68,15 @@ class PublishedArticlesViewModel : ViewModel() {
         context: Context,
         userToken: String,
         publishedArticlesAdapter: PublishedArticlesAdapter,
-        position: Int
+        position: Int,
+        fcmToken: String
     ) {
         val articleId = publishedArticlesAdapter.getArticle(position).id
 
         val retrofitBuilder = articlesApi.deleteArticle(
             articleId,
             userToken,
-            UserInfo.getFCMToken(context)
+            fcmToken
         )
 
         retrofitBuilder.enqueue(object : Callback<Article> {

@@ -16,9 +16,8 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentDraftArticlesBinding
 import com.aghourservices.ui.adapters.DraftArticlesAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.DraftArticlesViewModel
-import com.aghourservices.utils.services.cache.UserInfo
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +27,6 @@ class DraftArticlesFragment : BaseFragment() {
     private val draftArticlesViewModel: DraftArticlesViewModel by viewModels()
     private val draftArticlesAdapter =
         DraftArticlesAdapter { view, position -> onListItemClick(view, position) }
-    private val userToken: String by lazy { UserInfo.getUserData(requireContext()).token }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +54,7 @@ class DraftArticlesFragment : BaseFragment() {
             initDraftArticlesObserve()
         }
     }
+
     private fun initRecyclerView() {
         binding.newsRecyclerview.apply {
             setHasFixedSize(true)
@@ -68,15 +67,15 @@ class DraftArticlesFragment : BaseFragment() {
         draftArticlesViewModel.newsLiveData.observe(viewLifecycleOwner) { articles ->
             draftArticlesAdapter.setArticles(articles)
             hideProgressBar()
-            if (articles.isEmpty()){
+            if (articles.isEmpty()) {
                 binding.lottieAnimationView.isVisible = true
                 onSNACK(binding.root, "لا توجد أخبار مؤجلة")
             }
         }
         draftArticlesViewModel.draftArticles(
             requireContext(),
-            userToken,
-            getFCMToken(requireContext())
+            currentUser.token,
+            fcmToken
         )
     }
 
@@ -93,16 +92,18 @@ class DraftArticlesFragment : BaseFragment() {
         val description = draftArticlesAdapter.getArticle(position).description
         val userName = draftArticlesAdapter.getArticle(position).user?.name!!
 
-        val editDraftArticleDialog = DraftArticlesFragmentDirections.actionDraftArticlesFragmentToEditDraftArticleFragment(
-            article.id,
-            description,
-            userName
-        )
+        val editDraftArticleDialog =
+            DraftArticlesFragmentDirections.actionDraftArticlesFragmentToEditDraftArticleFragment(
+                article.id,
+                description,
+                userName
+            )
 
         when (v.id) {
             R.id.publish_draft_article_btn -> {
                 updateArticle(article, position)
             }
+
             R.id.draft_article_popup_menu -> {
                 val popup = PopupMenu(requireContext(), v)
                 popup.inflate(R.menu.popup_menu)
@@ -127,9 +128,9 @@ class DraftArticlesFragment : BaseFragment() {
         article.status = "published"
         val retrofitInstance = RetrofitInstance.articlesApi.updateArticle(
             article.id,
-            userToken,
+            currentUser.token,
             article.toJsonObject(),
-            getFCMToken(requireContext())
+            fcmToken
         )
 
         retrofitInstance.enqueue(object : Callback<Article> {
@@ -154,9 +155,10 @@ class DraftArticlesFragment : BaseFragment() {
         alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
             draftArticlesViewModel.deleteArticle(
                 requireContext(),
-                userToken,
+                currentUser.token,
                 draftArticlesAdapter,
-                position
+                position,
+                fcmToken
             )
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ -> }

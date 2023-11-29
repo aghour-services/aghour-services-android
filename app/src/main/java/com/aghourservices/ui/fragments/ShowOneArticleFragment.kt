@@ -21,11 +21,10 @@ import com.aghourservices.data.model.Comment
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
 import com.aghourservices.databinding.FragmentShowOneArticleBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.helper.Intents.loadProfileImage
-import com.aghourservices.utils.services.cache.UserInfo
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import retrofit2.Call
@@ -37,7 +36,6 @@ class ShowOneArticleFragment : BaseFragment() {
     private val binding get() = _binding!!
     private val commentsViewModel: CommentsViewModel by viewModels()
     private val arguments: ShowOneArticleFragmentArgs by navArgs()
-    private val user by lazy { UserInfo.getUserData(requireContext()) }
     private val commentsAdapter =
         CommentsAdapter { view, position -> onCommentItemClick(view, position) }
 
@@ -96,7 +94,7 @@ class ShowOneArticleFragment : BaseFragment() {
                 } else {
                     binding.commentBtn.isEnabled = true
                     binding.commentBtn.setOnClickListener {
-                        if (user.token.isEmpty()) {
+                        if (currentUser.token.isEmpty()) {
                             AlertDialogs.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
                         } else {
                             val comment = Comment()
@@ -111,7 +109,7 @@ class ShowOneArticleFragment : BaseFragment() {
 
     private fun showArticle() {
         val retrofitBuilder =
-            articlesApi.showArticle(arguments.articleId, user.token, getFCMToken(requireContext()))
+            articlesApi.showArticle(arguments.articleId, currentUser.token, fcmToken)
 
         retrofitBuilder.enqueue(object : Callback<Article> {
             override fun onResponse(
@@ -162,9 +160,10 @@ class ShowOneArticleFragment : BaseFragment() {
         commentsViewModel.addComment(
             requireContext(),
             arguments.articleId,
-            user.token,
+            currentUser.token,
             commentsAdapter,
-            comment
+            comment,
+            fcmToken
         )
         commentsViewModel.addCommentLiveData.observe(viewLifecycleOwner) {
             hideCommentProgressBar()
@@ -177,7 +176,7 @@ class ShowOneArticleFragment : BaseFragment() {
         commentsViewModel.loadComments(
             requireContext(),
             arguments.articleId,
-            getFCMToken(requireContext())
+            fcmToken
         )
         commentsViewModel.commentsLiveData.observe(viewLifecycleOwner) {
             commentsAdapter.setComments(it)
@@ -288,9 +287,10 @@ class ShowOneArticleFragment : BaseFragment() {
                 requireContext(),
                 arguments.articleId,
                 commentId,
-                user.token,
+                currentUser.token,
                 position,
-                commentsAdapter
+                commentsAdapter,
+                fcmToken
             )
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ ->

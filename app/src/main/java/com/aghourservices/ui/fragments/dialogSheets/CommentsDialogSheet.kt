@@ -20,8 +20,8 @@ import com.aghourservices.databinding.CommentsDialogSheetBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
-import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
+import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -31,7 +31,8 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
     private var behavior: BottomSheetBehavior<*>? = null
     private val arguments: CommentsDialogSheetArgs by navArgs()
     private val commentsViewModel: CommentsViewModel by viewModels()
-    private val user by lazy { UserInfo.getUserData(requireContext()) }
+    private val currentUser by lazy { getUserData(requireContext()) }
+    private val fcmToken by lazy { getFCMToken(requireContext()) }
     private val commentsAdapter =
         CommentsAdapter { view, position -> onCommentClick(view, position) }
 
@@ -57,7 +58,8 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
             dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
         behavior = BottomSheetBehavior.from(bottomSheet!!).apply {
             state = BottomSheetBehavior.STATE_EXPANDED
-            isHideable = true
+            isHideable = false
+            isDraggable = false
         }
 
         val layoutParams = bottomSheet.layoutParams
@@ -83,7 +85,7 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         commentsViewModel.loadComments(
             requireContext(),
             arguments.articleId,
-            getFCMToken(requireContext())
+            fcmToken
         )
         commentsViewModel.commentsLiveData.observe(viewLifecycleOwner) {
             commentsAdapter.setComments(it)
@@ -148,9 +150,10 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                 requireContext(),
                 arguments.articleId,
                 commentId,
-                user.token,
+                currentUser.token,
                 position,
-                commentsAdapter
+                commentsAdapter,
+                fcmToken
             )
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ ->
@@ -173,7 +176,7 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                 } else {
                     binding.commentBtn.isEnabled = true
                     binding.commentBtn.setOnClickListener {
-                        if (user.token.isEmpty()) {
+                        if (currentUser.token.isEmpty()) {
                             AlertDialogs.createAccount(requireContext(), "للتعليق أنشئ حساب أولا")
                         } else {
                             val comment = Comment()
@@ -191,9 +194,10 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         commentsViewModel.addComment(
             requireContext(),
             arguments.articleId,
-            user.token,
+            currentUser.token,
             commentsAdapter,
-            comment
+            comment,
+            fcmToken
         )
         commentsViewModel.addCommentLiveData.observe(viewLifecycleOwner) {
             hideCommentProgressBar()

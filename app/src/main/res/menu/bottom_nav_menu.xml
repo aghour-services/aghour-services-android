@@ -7,21 +7,19 @@
         android:title="@string/menu_home" />
 
     <item
-        android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_search"
-        android:enabled="true"
-        android:title="@string/menu_search" />
-
-    <item
-        android:title="" />
-
-    <item
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/favorite_selector"
         android:title="@string/menu_fav" />
+
+    <item android:title="" />
 
     <item
         android:id="@+id/newsFragment"
         android:icon="@drawable/article_selector"
         android:title="@string/menu_news" />
+
+    <item
+        android:id="@+id/currentUserFragment"
+        android:icon="@drawable/account_selector"
+        android:title="@string/you" />
 </menu>

@@ -299,13 +299,13 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="@dimen/_8sdp"
                     android:background="?android:selectableItemBackground"
                     android:drawablePadding="@dimen/_6sdp"
                     android:gravity="left|center"
+                    android:padding="@dimen/_8sdp"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_10ssp"
-                    app:drawableLeftCompat="@drawable/ic_comment"
+                    app:drawableLeftCompat="@drawable/ic_outline_comment"
                     tools:text="2 تعليق" />
 
                 <TextView
@@ -315,8 +315,8 @@
                     android:layout_weight="1"
                     android:background="?android:selectableItemBackground"
                     android:drawablePadding="@dimen/_6sdp"
-                    android:padding="@dimen/_8sdp"
                     android:gravity="right|center"
+                    android:padding="@dimen/_8sdp"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_10ssp"
                     tools:text="أنت و 5 أخرون" />
@@ -336,8 +336,8 @@
             android:id="@+id/like_article_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_below="@id/line1"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true">
 
             <androidx.appcompat.widget.AppCompatCheckBox
@@ -386,7 +386,8 @@
                     android:textStyle="bold"
                     android:tooltipText="مشاركة الخبر"
                     app:drawableLeftCompat="@drawable/ic_share"
-                    tools:targetApi="o" />
+                    tools:targetApi="o"
+                    app:drawableTint="@color/dialogText" />
 
                 <View
                     android:id="@+id/line_v"
@@ -407,10 +408,10 @@
                     android:paddingLeft="10dp"
                     android:text="@string/comment"
                     android:textColor="@color/shareText"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_10ssp"
                     android:textStyle="bold"
                     android:tooltipText="@string/add_a_comment"
-                    app:drawableLeftCompat="@drawable/ic_outline_comment"
+                    app:drawableLeftCompat="@drawable/ic_comment"
                     tools:targetApi="o" />
 
             </LinearLayout>

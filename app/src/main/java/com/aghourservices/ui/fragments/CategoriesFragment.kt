@@ -11,9 +11,8 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Device
 import com.aghourservices.databinding.FragmentCategoriesBinding
 import com.aghourservices.ui.adapters.CategoriesAdapter
+import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.CategoriesViewModel
-import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
-import com.aghourservices.utils.services.cache.UserInfo.getUserData
 
 class CategoriesFragment : BaseFragment() {
     private lateinit var binding: FragmentCategoriesBinding
@@ -31,13 +30,13 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sendDevice(getFCMToken(requireContext()), getUserData(requireContext()).token)
+        sendDevice(fcmToken, currentUser.token)
         showBottomNavigation()
         showToolbar()
     }
 
     private fun initCategoryObserve() {
-        activity?.let { categoriesViewModel.loadCategories(getFCMToken(requireContext())) }
+        activity?.let { categoriesViewModel.loadCategories(fcmToken) }
         categoriesViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             categoryAdapter.setCategories(it)
             progressBar()

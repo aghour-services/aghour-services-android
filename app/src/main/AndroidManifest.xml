@@ -67,7 +67,7 @@
             android:exported="false"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.activities.SettingsActivity"
+            android:name=".ui.fragments.CurrentUserFragment"
             android:exported="false"
             android:theme="@style/MainTheme" />
         <activity
