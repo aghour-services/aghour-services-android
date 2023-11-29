@@ -57,8 +57,9 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         val bottomSheet =
             dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
         behavior = BottomSheetBehavior.from(bottomSheet!!).apply {
-            state = BottomSheetBehavior.STATE_COLLAPSED
-            isHideable = true
+            state = BottomSheetBehavior.STATE_EXPANDED
+            isHideable = false
+            isDraggable = false
         }
 
         val layoutParams = bottomSheet.layoutParams

@@ -78,7 +78,7 @@
                     android:gravity="right"
                     android:padding="@dimen/_2sdp"
                     android:textColor="@color/dialogText"
-                    android:textSize="@dimen/_10ssp"
+                    android:textSize="@dimen/_8ssp"
                     app:readLessTextColor="@color/colorPrimary"
                     app:readLessTextSize="@dimen/_10ssp"
                     app:readLessTextStyle="bold"
