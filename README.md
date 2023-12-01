@@ -21,14 +21,14 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 
 ### **Dark**
 <img src="https://i.imgur.com/i7jjZm9.png" width="130"><img src="https://i.imgur.com/JKvaalI.png" width="130">
-<img src="https://i.imgur.com/zfITlkR.png" width="130"><img src="https://i.imgur.com/mBu4sgT.png" width="130">
-<img src="https://i.imgur.com/rypjUut.png" width="130"><img src="https://i.imgur.com/QTDBnqy.png" width="130">
+<img src="https://i.imgur.com/zfITlkR.png" width="130"><img src="https://i.imgur.com/Ch5ua8N.png" width="130">
+<img src="https://i.imgur.com/fbEoXVr.png" width="130"><img src="https://i.imgur.com/uJqdN4B.png" width="130">
 
 # Architecture
 
 The architecture of the application is based, applied, and strictly complies with each of the following 5 points:
 
-<img src="https://m7madmagdy.github.io/server/aghour%20images/ajhour.jpg" width="300" align="right" hspace="20">
+<img src="https://i.imgur.com/0U41ISJ.png" width="300" align="right" hspace="20">
 
 -   A single-activity architecture, using the [Navigation component](https://developer.android.com/guide/navigation/navigation-getting-started) to manage fragment operations.
 -   [Retrofit 2](https://square.github.io/retrofit/), A type-safe HTTP client for Android and Java.
