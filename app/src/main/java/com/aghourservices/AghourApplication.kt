@@ -20,6 +20,7 @@ class AghourApplication : Application() {
             .schemaVersion(1)
             .allowWritesOnUiThread(true)
             .allowQueriesOnUiThread(true)
+            .deleteRealmIfMigrationNeeded()
             .build()
 
         Realm.setDefaultConfiguration(configuration)

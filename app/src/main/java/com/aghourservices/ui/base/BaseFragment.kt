@@ -22,8 +22,11 @@ import com.aghourservices.utils.helper.HasToolbar
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
+import com.stfalcon.imageviewer.StfalconImageViewer
 
 open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
     private lateinit var bottomNavigation: ConstraintLayout
@@ -51,6 +54,19 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
         textView.setTextColor(Color.WHITE)
         textView.textSize = 18f
         snackBar.show()
+    }
+
+    fun fullScreenAvatar(avatar: String?) {
+        StfalconImageViewer.Builder(
+            requireContext(),
+            arrayListOf(avatar)
+        ) { imageView, image ->
+            Glide.with(requireContext())
+                .load(image)
+                .placeholder(R.mipmap.user)
+                .error(R.mipmap.user)
+                .into(imageView)
+        }.show()
     }
 
     override fun showBottomNavigation() {

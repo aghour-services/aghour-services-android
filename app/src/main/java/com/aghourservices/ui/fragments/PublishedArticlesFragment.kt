@@ -1,6 +1,7 @@
 package com.aghourservices.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -108,11 +109,6 @@ class PublishedArticlesFragment : BaseFragment() {
                 article.id,
             )
 
-        val userProfileFragment =
-            PublishedArticlesFragmentDirections.actionNewsFragmentToUserProfileFragment(
-                user.id!!
-            )
-
         when (v.id) {
             R.id.add_comment -> {
                 findNavController().navigate(commentsFragment)
@@ -157,12 +153,14 @@ class PublishedArticlesFragment : BaseFragment() {
                 findNavController().navigate(commentsDialogSheet)
             }
 
-            R.id.user_name -> {
-                findNavController().navigate(userProfileFragment)
+            R.id.avatar_image -> {
+                fullScreenAvatar(user.url)
+
+                Log.d("USER_AVATAR", "onListItemClick: ${user.url}")
             }
 
-            R.id.avatar_image -> {
-                findNavController().navigate(userProfileFragment)
+            R.id.article_image -> {
+                fullScreenAvatar(article.attachments?.last()?.resource_url)
             }
         }
     }

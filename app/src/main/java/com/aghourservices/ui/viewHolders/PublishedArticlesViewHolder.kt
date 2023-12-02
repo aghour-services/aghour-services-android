@@ -29,6 +29,7 @@ class PublishedArticlesViewHolder(
         binding.commentsCount.setOnClickListener(this)
         binding.userName.setOnClickListener(this)
         binding.avatarImage.setOnClickListener(this)
+        binding.articleImage.setOnClickListener(this)
     }
 
     @SuppressLint("SetTextI18n")

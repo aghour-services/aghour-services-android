@@ -102,29 +102,23 @@
                 android:autoLink="all"
                 android:background="?android:selectableItemBackground"
                 android:padding="@dimen/_10sdp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textSize="@dimen/_11ssp"
-                app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
-                app:readLessTextColor="@color/bottom_nav_unChecked_item"
-                app:readLessTextSize="@dimen/_14ssp"
-                app:readLessTextStyle="bold"
-                app:readLessTypeface="normal"
                 app:readMoreMaxLines="6"
                 app:readMoreOverflow="ellipsis"
                 app:readMoreText="قراءة المزيد"
                 app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:readMoreTextColor="@color/bottom_nav_unChecked_item"
                 app:readMoreTextSize="@dimen/_12ssp"
-                app:readMoreTypeface="normal"
                 tools:text="@string/description" />
 
-            <com.github.chrisbanes.photoview.PhotoView
+            <ImageView
                 android:id="@+id/article_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
                 android:contentDescription="@null"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@color/image_bg" />
 
             <FrameLayout
@@ -300,11 +294,11 @@
                     android:layout_weight="1"
                     android:background="?android:selectableItemBackground"
                     android:drawablePadding="@dimen/_6sdp"
+                    android:fontFamily="@font/segoe_ui_regular"
                     android:gravity="left|center"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_10ssp"
-                    android:fontFamily="@font/segoe_ui_regular"
                     tools:text="2 تعليق" />
 
                 <TextView
@@ -314,8 +308,8 @@
                     android:layout_weight="1"
                     android:background="?android:selectableItemBackground"
                     android:drawablePadding="@dimen/_6sdp"
-                    android:gravity="right|center"
                     android:fontFamily="@font/segoe_ui_regular"
+                    android:gravity="right|center"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_10ssp"
