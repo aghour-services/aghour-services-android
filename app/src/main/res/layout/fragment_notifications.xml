@@ -8,14 +8,16 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Widget.App.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg"
         android:elevation="@dimen/_1sdp"
-        app:title="@string/notifications"
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="@color/drawerToggle"
-        app:titleCentered="true" />
+        app:title="@string/notifications"
+        app:titleCentered="true"
+        app:titleTextColor="@color/toolbarText" />
 
     <ProgressBar
         android:id="@+id/progressBar"

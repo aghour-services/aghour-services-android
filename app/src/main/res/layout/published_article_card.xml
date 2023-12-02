@@ -11,8 +11,7 @@
         android:id="@+id/news_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/firmsBg"
-        android:padding="@dimen/_2sdp">
+        android:background="@color/firmsBg">
 
         <TextView
             android:id="@+id/popup_menu"
@@ -25,7 +24,7 @@
             android:gravity="center"
             android:text="@string/popup"
             android:textColor="@color/dialogText"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_18sdp"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -56,7 +55,7 @@
                     android:drawablePadding="@dimen/_4sdp"
                     android:fontFamily="@font/segoe_ui_bold"
                     android:textColor="@color/dialogText"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_13ssp"
                     app:drawableLeftCompat="@drawable/ic_verified"
                     tools:text="محمود داوود صالح" />
 
@@ -66,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/_2sdp"
                     android:textColor="@color/bottom_nav_unChecked_item"
-                    android:textSize="@dimen/_7ssp"
+                    android:textSize="@dimen/_9ssp"
                     tools:text="منذ ساعتين" />
             </LinearLayout>
 
@@ -104,7 +103,7 @@
                 android:background="?android:selectableItemBackground"
                 android:padding="@dimen/_10sdp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textSize="@dimen/_10ssp"
+                android:textSize="@dimen/_11ssp"
                 app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:readLessTextColor="@color/bottom_nav_unChecked_item"
                 app:readLessTextSize="@dimen/_14ssp"
@@ -222,7 +221,7 @@
                                         android:drawablePadding="4dp"
                                         android:fontFamily="@font/segoe_ui_bold"
                                         android:textColor="@color/dialogText"
-                                        android:textSize="@dimen/_11ssp"
+                                        android:textSize="@dimen/_12ssp"
                                         app:drawableLeftCompat="@drawable/ic_verified"
                                         tools:text="محمد مجدي" />
 
@@ -231,7 +230,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/bottom_nav_unChecked_item"
-                                        android:textSize="@dimen/_7ssp"
+                                        android:textSize="@dimen/_9ssp"
                                         tools:text="منذ ساعتين" />
 
                                     <com.webtoonscorp.android.readmore.ReadMoreTextView
@@ -305,7 +304,7 @@
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_10ssp"
-                    app:drawableLeftCompat="@drawable/ic_outline_comment"
+                    android:fontFamily="@font/segoe_ui_regular"
                     tools:text="2 تعليق" />
 
                 <TextView
@@ -316,6 +315,7 @@
                     android:background="?android:selectableItemBackground"
                     android:drawablePadding="@dimen/_6sdp"
                     android:gravity="right|center"
+                    android:fontFamily="@font/segoe_ui_regular"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/dialogText"
                     android:textSize="@dimen/_10ssp"
@@ -371,23 +371,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/share_article"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/share_ripple"
-                    android:fontFamily="@font/segoe_ui_bold"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableLeft="@drawable/ic_share_small"
                     android:gravity="center"
                     android:padding="@dimen/_4sdp"
                     android:text="@string/share_firm"
                     android:textColor="@color/shareText"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/_9ssp"
                     android:tooltipText="مشاركة الخبر"
-                    app:drawableLeftCompat="@drawable/ic_share"
-                    tools:targetApi="o"
-                    app:drawableTint="@color/dialogText" />
+                    app:drawableTint="@color/dialogText"
+                    tools:targetApi="o" />
 
                 <View
                     android:id="@+id/line_v"
@@ -398,20 +396,20 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout9"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/add_comment"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/share_ripple"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableLeft="@drawable/ic_comment_small"
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:text="@string/comment"
                     android:textColor="@color/shareText"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/_9ssp"
                     android:tooltipText="@string/add_a_comment"
-                    app:drawableLeftCompat="@drawable/ic_comment"
+                    app:drawableTint="@color/dialogText"
                     tools:targetApi="o" />
 
             </LinearLayout>

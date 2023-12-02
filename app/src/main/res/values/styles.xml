@@ -11,14 +11,14 @@
         <item name="cornerSize">20dp</item>
     </style>
 
-    <style name="TextAppearance.Shrine.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/poppins_semibold</item>
-        <item name="android:fontFamily">@font/poppins_semibold</item>
+    <style name="ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:fontFamily">@font/seg_ui_semibold</item>
     </style>
 
     <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">@font/poppins_semibold</item>
-        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/seg_ui_semibold</item>
+        <item name="android:fontFamily">@font/seg_ui_semibold</item>
     </style>
 
 </resources>

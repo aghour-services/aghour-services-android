@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animationCache="true"
+    android:animateLayoutChanges="true"
     android:background="@color/main_bg">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -17,8 +19,9 @@
         app:menu="@menu/toolbar_menu"
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="@color/drawerToggle"
+        app:titleTextColor="@color/toolbarText"
         app:title="@string/app_name"
-        app:titleTextAppearance="@style/TextAppearance.Material3.ActionBar.Title" />
+        style="@style/Widget.App.Toolbar" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"

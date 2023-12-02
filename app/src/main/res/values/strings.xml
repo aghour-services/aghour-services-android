@@ -165,5 +165,6 @@
     <string name="edit_profile">تعديل</string>
     <string name="notifications">الإشعارات</string>
     <string name="you">أنـت</string>
+    <string name="general_settings">الإعدادات العامة</string>
 
 </resources>

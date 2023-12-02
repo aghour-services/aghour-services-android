@@ -24,7 +24,6 @@ class FullScreenProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFullScreenProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        fullScreenActivity()
 
         binding.backBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -35,14 +34,6 @@ class FullScreenProfileActivity : BaseActivity() {
         } else {
             currentUserProfile()
         }
-    }
-
-    private fun fullScreenActivity() {
-        supportActionBar?.hide()
-        val decorView = window.decorView
-        val uiOptions = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN)
-        decorView.systemUiVisibility = uiOptions
     }
 
     private fun currentUserProfile() {

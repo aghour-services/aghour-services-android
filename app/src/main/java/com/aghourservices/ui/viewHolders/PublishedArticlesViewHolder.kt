@@ -2,7 +2,6 @@ package com.aghourservices.ui.viewHolders
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -34,10 +33,9 @@ class PublishedArticlesViewHolder(
 
     @SuppressLint("SetTextI18n")
     fun setNewsList(article: Article) {
-        val profile = UserInfo.getProfile(binding.root.context)
-        val avatarUrl = article.user?.url
+        val currentUser by lazy { UserInfo.getUserData(binding.root.context.applicationContext) }
 
-        Log.d("AVATAR", "setNewsList: $avatarUrl")
+        val avatarUrl = article.user?.url
 
         article.attachments?.forEach { attachment ->
             Glide.with(binding.root.context)
@@ -48,6 +46,18 @@ class PublishedArticlesViewHolder(
                 .into(binding.articleImage)
         }
         binding.articleImage.isVisible = article.attachments!!.isNotEmpty()
+
+        // Likes & Comments
+        binding.apply {
+            likesCount.isVisible = article.likes_count > 0
+            if (article.comments_count < 1) {
+                commentsCount.text = "لا توجد تعليقات"
+            } else {
+                commentsCount.text = article.comments_count.toString()
+            }
+            likesCount.text = "${article.likes_count} إعجاب"
+            likeArticle.isChecked = article.liked
+        }
 
         binding.userName.apply {
             text = article.user?.name
@@ -66,10 +76,7 @@ class PublishedArticlesViewHolder(
             }
         }
 
-        binding.likesCount.text = "${article.likes_count} إعجاب"
-        binding.commentsCount.text = article.comments_count.toString()
         binding.date.text = article.created_at
-        binding.likeArticle.isChecked = article.liked
 
         binding.commentsCard.isVisible =
             !article.latest_comment?.user?.name.isNullOrEmpty() && !article.latest_comment?.body.isNullOrEmpty()
@@ -98,15 +105,13 @@ class PublishedArticlesViewHolder(
             Intents.shareNews(article.description, itemView)
         }
 
-        if (article.user?.id == profile.id) {
-            binding.popupMenu.isVisible = true
-        }
+        binding.popupMenu.isVisible = article.user?.id == currentUser.id
 
-       loadProfileImage(
+        loadProfileImage(
             binding.root.context,
             avatarUrl.toString(),
             binding.avatarImage,
-       )
+        )
     }
 
     override fun onClick(v: View) {
