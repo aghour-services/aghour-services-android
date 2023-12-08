@@ -133,18 +133,23 @@ class CurrentUserFragment : BaseFragment() {
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+                val profile = response.body()
+
                 if (response.isSuccessful) {
                     stopShimmer()
-                    val profile = response.body()
                     if (profile != null) {
                         saveProfile(
-                            requireContext(),
+                            requireContext().applicationContext,
                             profile.id!!,
                             profile.name,
                             profile.verified
                         )
 
-                        loadProfileImage(requireContext(), profile.url, binding.avatarImage)
+                        loadProfileImage(
+                            requireContext().applicationContext,
+                            profile.url,
+                            binding.avatarImage
+                        )
                         currentUserAvatar = profile.url
                         binding.userName.apply {
                             text = profile.name
