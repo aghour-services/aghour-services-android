@@ -78,7 +78,8 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
             Glide.with(requireContext())
                 .load(image)
                 .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
+                .error(R.mipmap.user)
+                .fitCenter()
                 .into(imageView)
         }
             .withHiddenStatusBar(false)
@@ -100,8 +101,9 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
         ) { imageView, image ->
             Glide.with(requireContext())
                 .load(image)
-                .placeholder(R.color.image_bg)
+                .placeholder(R.drawable.image_placeholder)
                 .error(R.drawable.image_placeholder)
+                .fitCenter()
                 .into(imageView)
         }
             .withHiddenStatusBar(false)

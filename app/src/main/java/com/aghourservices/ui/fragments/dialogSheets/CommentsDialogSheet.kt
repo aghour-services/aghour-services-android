@@ -20,6 +20,7 @@ import com.aghourservices.databinding.CommentsDialogSheetBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
+import com.aghourservices.utils.helper.Intents.fullScreenAvatar
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -105,9 +106,6 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         val comment = commentsAdapter.getComment(position)
         val user = commentsAdapter.getComment(position).user!!
 
-        val userProfile = CommentsDialogSheetDirections.actionCommentsDialogSheetToUserProfileFragment(
-            user.id!!
-        )
         val updateComment =
             CommentsDialogSheetDirections.actionCommentsDialogSheetToUpdateCommentFragment(
                 arguments.articleId,
@@ -124,6 +122,7 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
                         R.id.edit -> {
                             findNavController().navigate(updateComment)
                         }
+
                         R.id.delete -> {
                             deleteCommentAlert(position)
                         }
@@ -134,7 +133,11 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
             }
 
             R.id.user_name -> {
-                findNavController().navigate(userProfile)
+                fullScreenAvatar(requireContext(), user.url, user.name)
+            }
+
+            R.id.avatar_image -> {
+                fullScreenAvatar(requireContext(), user.url, user.name)
             }
         }
     }

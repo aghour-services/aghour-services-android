@@ -1,5 +1,6 @@
 package com.aghourservices.utils.helper
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -7,19 +8,25 @@ import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.aghourservices.R
+import com.aghourservices.databinding.AvatarOverlayViewBinding
 import com.aghourservices.ui.activities.SignInActivity
 import com.aghourservices.utils.services.cache.UserInfo.clearUserData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.stfalcon.imageviewer.StfalconImageViewer
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.File
 import java.io.FileOutputStream
@@ -235,5 +242,40 @@ object Intents {
             .encodeQuality(100)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profileImage)
+    }
+
+    @SuppressLint("InflateParams")
+    fun fullScreenAvatar(context: Context, imageUrl: String?, userName: String?) {
+        val binding = AvatarOverlayViewBinding.bind(
+            LayoutInflater.from(context).inflate(
+                R.layout.avatar_overlay_view,
+                null
+            )
+        )
+
+        val closeButton: ImageButton = binding.overlayClose
+        val overlayName: TextView = binding.overlayText
+        overlayName.text = userName
+
+        val viewer = StfalconImageViewer.Builder(
+            context,
+            arrayListOf(imageUrl)
+        ) { imageView, image ->
+            Glide.with(context)
+                .load(image)
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.mipmap.user)
+                .into(imageView)
+        }
+            .withHiddenStatusBar(false)
+            .allowSwipeToDismiss(true)
+            .allowZooming(true)
+            .withOverlayView(binding.root)
+            .withBackgroundColor(Color.BLACK)
+            .show(true)
+
+        closeButton.setOnClickListener {
+            viewer.close()
+        }
     }
 }

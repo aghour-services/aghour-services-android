@@ -61,7 +61,7 @@ class PublishedArticlesViewHolder(
             if (article.comments_count < 1) {
                 commentsCount.text = "لا توجد تعليقات"
             } else {
-                commentsCount.text = article.comments_count.toString()
+                commentsCount.text = "${article.comments_count} تعليق"
             }
             likesCount.text = "${article.likes_count} إعجاب"
             likeArticle.isChecked = article.liked
