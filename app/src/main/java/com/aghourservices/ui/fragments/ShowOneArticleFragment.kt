@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -145,12 +146,21 @@ class ShowOneArticleFragment : BaseFragment() {
                             article?.user?.url.toString(),
                             avatarImage
                         )
+
+                        binding.apply {
+                            avatarImage.setOnClickListener {
+                                fullScreenAvatar(
+                                    article?.user?.url,
+                                    article?.user?.name
+                                )
+                            }
+                        }
                     }
                 }
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
-                AlertDialogs.noInternet(requireContext())
+                Toast.makeText(requireContext(), "لا يوجد إنترنت", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -227,9 +237,6 @@ class ShowOneArticleFragment : BaseFragment() {
         val comment = commentsAdapter.getComment(position)
         val user = commentsAdapter.getComment(position).user!!
 
-        val userProfileFragment =
-            ShowOneArticleFragmentDirections.actionShowOneArticleFragmentToUserProfileFragment(user.id!!)
-
         val updateComment =
             ShowOneArticleFragmentDirections.actionShowOneArticleFragmentToUpdateCommentFragment(
                 arguments.articleId,
@@ -239,11 +246,8 @@ class ShowOneArticleFragment : BaseFragment() {
             )
 
         binding.apply {
-            articleUserName.setOnClickListener {
-                findNavController().navigate(userProfileFragment)
-            }
             avatarImage.setOnClickListener {
-                findNavController().navigate(userProfileFragment)
+                fullScreenAvatar(user.url, user.name)
             }
         }
 
@@ -266,12 +270,8 @@ class ShowOneArticleFragment : BaseFragment() {
                 popup.show()
             }
 
-            R.id.user_name -> {
-                findNavController().navigate(userProfileFragment)
-            }
-
             R.id.avatar_image -> {
-                findNavController().navigate(userProfileFragment)
+                fullScreenAvatar(user.url, user.name)
             }
         }
     }

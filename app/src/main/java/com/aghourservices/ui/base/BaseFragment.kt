@@ -8,13 +8,16 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.aghourservices.R
+import com.aghourservices.databinding.AvatarOverlayViewBinding
 import com.aghourservices.utils.helper.Constants
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.HasBottomNavigation
@@ -22,8 +25,10 @@ import com.aghourservices.utils.helper.HasToolbar
 import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
+import com.stfalcon.imageviewer.StfalconImageViewer
 
 open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
     private lateinit var bottomNavigation: ConstraintLayout
@@ -51,6 +56,61 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
         textView.setTextColor(Color.WHITE)
         textView.textSize = 18f
         snackBar.show()
+    }
+
+    @SuppressLint("InflateParams")
+    protected fun fullScreenAvatar(imageUrl: String?, userName: String?) {
+        val binding = AvatarOverlayViewBinding.bind(
+            LayoutInflater.from(requireContext()).inflate(
+                R.layout.avatar_overlay_view,
+                null
+            )
+        )
+
+        val closeButton: ImageButton = binding.overlayClose
+        val overlayName: TextView = binding.overlayText
+        overlayName.text = userName
+
+        val viewer = StfalconImageViewer.Builder(
+            requireContext(),
+            arrayListOf(imageUrl)
+        ) { imageView, image ->
+            Glide.with(requireContext())
+                .load(image)
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.mipmap.user)
+                .fitCenter()
+                .into(imageView)
+        }
+            .withHiddenStatusBar(false)
+            .allowSwipeToDismiss(true)
+            .allowZooming(true)
+            .withOverlayView(binding.root)
+            .withBackgroundColor(Color.BLACK)
+            .show(true)
+
+        closeButton.setOnClickListener {
+            viewer.close()
+        }
+    }
+
+    protected fun fullScreenArticleAttachments(imageUrl: String?) {
+        StfalconImageViewer.Builder(
+            requireContext(),
+            arrayListOf(imageUrl)
+        ) { imageView, image ->
+            Glide.with(requireContext())
+                .load(image)
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.drawable.image_placeholder)
+                .fitCenter()
+                .into(imageView)
+        }
+            .withHiddenStatusBar(false)
+            .allowSwipeToDismiss(true)
+            .allowZooming(true)
+            .withBackgroundColor(Color.BLACK)
+            .show(true)
     }
 
     override fun showBottomNavigation() {

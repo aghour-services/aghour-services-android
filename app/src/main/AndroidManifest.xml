@@ -63,10 +63,6 @@
             android:screenOrientation="locked"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.activities.AboutActivity"
-            android:exported="false"
-            android:theme="@style/MainTheme" />
-        <activity
             android:name=".ui.activities.AddDataActivity"
             android:exported="false"
             android:theme="@style/MainTheme"
@@ -76,11 +72,6 @@
             android:exported="false"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="stateAlwaysVisible" />
-        <activity
-            android:name=".ui.activities.FullScreenProfileActivity"
-            android:exported="false"
-            android:theme="@style/MainTheme" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />

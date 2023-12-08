@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aghourservices.R
@@ -14,6 +13,7 @@ import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.databinding.LikesDialogSheetBinding
 import com.aghourservices.ui.adapters.LikesAdapter
 import com.aghourservices.utils.helper.AlertDialogs
+import com.aghourservices.utils.helper.Intents.fullScreenAvatar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import retrofit2.Call
@@ -102,12 +102,9 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
     private fun onUserClick(view: View, position: Int) {
         val user = likesAdapter.getUser(position)
 
-        val userProfile =
-            LikesDialogSheetDirections.actionLikesDialogSheetToUserProfileFragment(user.id!!)
-
         when (view.id) {
             R.id.user_layout -> {
-                findNavController().navigate(userProfile)
+                fullScreenAvatar(requireContext(), user.url, user.name)
             }
         }
     }

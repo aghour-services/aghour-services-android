@@ -49,6 +49,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
     realm {
         syncEnabled = true
@@ -121,4 +122,6 @@ dependencies {
     // Sdp & Ssp
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
     implementation 'com.intuit.ssp:ssp-android:1.1.0'
+
+    implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
 }

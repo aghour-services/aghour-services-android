@@ -50,8 +50,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar_image"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     app:civ_border_color="@color/Gray"
@@ -220,6 +220,7 @@
                             android:text="@string/share_app"
                             android:textColor="@color/dialogText"
                             android:textSize="@dimen/_11ssp"
+                            app:drawableLeftCompat="@drawable/ic_arrow_left"
                             app:drawableRightCompat="@drawable/ic_share"
                             app:drawableTint="@color/dialogText" />
 
@@ -234,6 +235,7 @@
                             android:text="@string/rate_app"
                             android:textColor="@color/dialogText"
                             android:textSize="@dimen/_11ssp"
+                            app:drawableLeftCompat="@drawable/ic_arrow_left"
                             app:drawableRightCompat="@drawable/ic_star_filled"
                             app:drawableTint="@color/dialogText" />
 

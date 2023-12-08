@@ -19,11 +19,11 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="left|center"
-            android:layout_margin="4dp"
-            android:background="@drawable/about_app_back_ripple"
-            android:padding="10dp"
+            android:layout_margin="@dimen/_2sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_4sdp"
             android:src="@drawable/ic_back_settings" />
 
         <TextView
@@ -192,15 +192,15 @@
                 android:layout_gravity="center"
                 android:layout_margin="30dp"
                 android:background="@drawable/add_data_btn_bg"
-                android:maxHeight="48dp"
                 android:gravity="center"
+                android:maxHeight="48dp"
                 android:text="@string/must_create_account"
                 android:textColor="@color/add_data"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
-            <include layout="@layout/admob_banner"/>
+            <include layout="@layout/admob_banner" />
 
         </LinearLayout>
     </ScrollView>

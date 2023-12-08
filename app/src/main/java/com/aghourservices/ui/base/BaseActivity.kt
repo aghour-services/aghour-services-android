@@ -88,4 +88,40 @@ open class BaseActivity : AppCompatActivity() {
         galleryIntent.type = "image/*"
         startActivityForResult(galleryIntent, Constants.GALLERY_CODE)
     }
+
+//    protected fun fullScreenAvatar(imageUrl: String?, view: View?) {
+//        StfalconImageViewer.Builder(
+//            this,
+//            arrayListOf(imageUrl)
+//        ) { imageView, image ->
+//            Glide.with(this)
+//                .load(image)
+//                .placeholder(R.color.image_bg)
+//                .error(R.drawable.image_placeholder)
+//                .into(imageView)
+//        }
+//            .withHiddenStatusBar(false)
+//            .allowSwipeToDismiss(true)
+//            .allowZooming(true)
+//            .withBackgroundColor(Color.BLACK)
+//            .show()
+//    }
+//
+//    protected fun fullScreenArticleAttachments(imageUrl: String?, view: View?) {
+//        StfalconImageViewer.Builder(
+//            this,
+//            arrayListOf(imageUrl)
+//        ) { imageView, image ->
+//            Glide.with(this)
+//                .load(image)
+//                .placeholder(R.color.image_bg)
+//                .error(R.drawable.image_placeholder)
+//                .into(imageView)
+//        }
+//            .withHiddenStatusBar(false)
+//            .allowSwipeToDismiss(true)
+//            .allowZooming(true)
+//            .withBackgroundColor(Color.BLACK)
+//            .show(true)
+//    }
 }

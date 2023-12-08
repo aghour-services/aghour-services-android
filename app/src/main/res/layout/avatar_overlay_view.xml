@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/avatar_overlay"
+    style="@style/MainTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/overlay_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/navigation_drawer_close"
+        android:padding="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:src="@drawable/ic_close"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/overlay_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:drawablePadding="@dimen/_4sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        tools:text="أجهور الكبرى" />
+
+</RelativeLayout>

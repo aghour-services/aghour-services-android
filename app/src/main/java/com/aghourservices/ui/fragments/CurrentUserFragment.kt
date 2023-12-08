@@ -14,7 +14,6 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.FragmentCurrentUserBinding
-import com.aghourservices.ui.activities.FullScreenProfileActivity
 import com.aghourservices.ui.activities.SignUpActivity
 import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.utils.helper.Constants
@@ -40,6 +39,7 @@ class CurrentUserFragment : BaseFragment() {
     private val binding get() = _binding!!
     private var avatarUri: Uri? = null
     private var avatarPart: MultipartBody.Part? = null
+    private var currentUserAvatar: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -55,7 +55,7 @@ class CurrentUserFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         if (isUserLogin) {
             requireActivity().title = currentUser.name
-        }else{
+        } else {
             requireActivity().title = getString(R.string.setting_fragment)
         }
         showBottomNavigation()
@@ -116,8 +116,7 @@ class CurrentUserFragment : BaseFragment() {
     private fun profileUserClicks() {
         binding.apply {
             avatarImage.setOnClickListener {
-                val intent = Intent(requireContext(), FullScreenProfileActivity::class.java)
-                startActivity(intent)
+                fullScreenAvatar(currentUserAvatar, binding.userName.text.toString())
             }
             addUserImage.setOnClickListener {
                 if (!checkStoragePermission()) {
@@ -146,7 +145,7 @@ class CurrentUserFragment : BaseFragment() {
                         )
 
                         loadProfileImage(requireContext(), profile.url, binding.avatarImage)
-
+                        currentUserAvatar = profile.url
                         binding.userName.apply {
                             text = profile.name
                             if (profile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -181,6 +180,7 @@ class CurrentUserFragment : BaseFragment() {
                     visibility = View.VISIBLE
                 }
                 profileUserClicks()
+                binding.avatarImage.setImageResource(R.mipmap.user)
             }
         })
     }
