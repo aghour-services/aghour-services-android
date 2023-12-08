@@ -23,7 +23,6 @@ import com.aghourservices.utils.services.cache.UserInfo
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 import com.stfalcon.imageviewer.StfalconImageViewer
@@ -56,17 +55,40 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
         snackBar.show()
     }
 
-    fun fullScreenAvatar(avatar: String?) {
+    protected fun fullScreenAvatar(imageUrl: String?, view: View?) {
         StfalconImageViewer.Builder(
             requireContext(),
-            arrayListOf(avatar)
+            arrayListOf(imageUrl)
         ) { imageView, image ->
             Glide.with(requireContext())
                 .load(image)
-                .placeholder(R.mipmap.user)
-                .error(R.mipmap.user)
+                .placeholder(R.color.image_bg)
+                .error(R.drawable.image_placeholder)
                 .into(imageView)
-        }.show()
+        }
+            .withHiddenStatusBar(false)
+            .allowSwipeToDismiss(true)
+            .allowZooming(true)
+            .withBackgroundColor(Color.BLACK)
+            .show()
+    }
+
+    protected fun fullScreenArticleAttachments(imageUrl: String?, view: View?) {
+        StfalconImageViewer.Builder(
+            requireContext(),
+            arrayListOf(imageUrl)
+        ) { imageView, image ->
+            Glide.with(requireContext())
+                .load(image)
+                .placeholder(R.color.image_bg)
+                .error(R.drawable.image_placeholder)
+                .into(imageView)
+        }
+            .withHiddenStatusBar(false)
+            .allowSwipeToDismiss(true)
+            .allowZooming(true)
+            .withBackgroundColor(Color.BLACK)
+            .show(true)
     }
 
     override fun showBottomNavigation() {

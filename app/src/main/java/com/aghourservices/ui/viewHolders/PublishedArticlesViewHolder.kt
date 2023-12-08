@@ -2,6 +2,7 @@ package com.aghourservices.ui.viewHolders
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -34,9 +35,11 @@ class PublishedArticlesViewHolder(
 
     @SuppressLint("SetTextI18n")
     fun setNewsList(article: Article) {
-        val currentUser by lazy { UserInfo.getUserData(binding.root.context.applicationContext) }
-
+        val currentProfile = UserInfo.getProfile(binding.root.context)
         val avatarUrl = article.user?.url
+        val articleUserId = article.user?.id
+
+        Log.d("USER", "setNewsList: ${currentProfile.id}")
 
         article.attachments?.forEach { attachment ->
             Glide.with(binding.root.context)
@@ -46,7 +49,11 @@ class PublishedArticlesViewHolder(
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.articleImage)
         }
+
         binding.articleImage.isVisible = article.attachments!!.isNotEmpty()
+        binding.popupMenu.isVisible = currentProfile.id == articleUserId || currentProfile.verified
+        binding.commentsCard.isVisible =
+            !article.latest_comment?.user?.name.isNullOrEmpty() && !article.latest_comment?.body.isNullOrEmpty()
 
         // Likes & Comments
         binding.apply {
@@ -79,8 +86,6 @@ class PublishedArticlesViewHolder(
 
         binding.date.text = article.created_at
 
-        binding.commentsCard.isVisible =
-            !article.latest_comment?.user?.name.isNullOrEmpty() && !article.latest_comment?.body.isNullOrEmpty()
 
         if (binding.commentsCard.isVisible) {
             val commentUser = article.latest_comment?.user
@@ -106,7 +111,6 @@ class PublishedArticlesViewHolder(
             Intents.shareNews(article.description, itemView)
         }
 
-        binding.popupMenu.isVisible = article.user?.id == currentUser.id
 
         loadProfileImage(
             binding.root.context,

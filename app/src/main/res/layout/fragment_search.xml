@@ -26,7 +26,7 @@
                 android:layout_height="42dp"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:background="@drawable/back_selector"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
                 android:src="@drawable/ic_back" />
 
@@ -46,18 +46,18 @@
                     android:id="@+id/search_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/ic_search"
-                    app:drawableTint="@color/dialogText"
-                    android:drawablePadding="10dp"
                     android:layout_gravity="center"
-                    android:gravity="right|center"
+                    android:autofillHints=""
                     android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/ic_search"
+                    android:drawablePadding="10dp"
+                    android:gravity="right|center"
                     android:hint="@string/search"
                     android:imeOptions="actionDone"
                     android:textColor="@color/searchTxt"
                     android:textColorHint="@color/searchTxt"
                     android:textCursorDrawable="@drawable/cursor_color"
-                    android:autofillHints="" />
+                    app:drawableTint="@color/dialogText" />
 
                 <requestFocus />
 

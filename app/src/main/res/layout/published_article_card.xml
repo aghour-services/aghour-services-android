@@ -20,13 +20,11 @@
             android:layout_above="@+id/article_layout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/news_card_ripple"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:gravity="center"
             android:text="@string/popup"
             android:textColor="@color/dialogText"
-            android:textSize="@dimen/_18sdp"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:textSize="@dimen/_14sdp" />
 
         <LinearLayout
             android:id="@+id/user_layout"
@@ -102,6 +100,7 @@
                 android:autoLink="all"
                 android:background="?android:selectableItemBackground"
                 android:padding="@dimen/_10sdp"
+                android:textColor="@color/dialogText"
                 android:textSize="@dimen/_11ssp"
                 app:readMoreMaxLines="6"
                 app:readMoreOverflow="ellipsis"
@@ -215,7 +214,7 @@
                                         android:drawablePadding="4dp"
                                         android:fontFamily="@font/segoe_ui_bold"
                                         android:textColor="@color/dialogText"
-                                        android:textSize="@dimen/_12ssp"
+                                        android:textSize="@dimen/_11ssp"
                                         app:drawableLeftCompat="@drawable/ic_verified"
                                         tools:text="محمد مجدي" />
 
@@ -224,7 +223,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/bottom_nav_unChecked_item"
-                                        android:textSize="@dimen/_9ssp"
+                                        android:textSize="@dimen/_8ssp"
                                         tools:text="منذ ساعتين" />
 
                                     <com.webtoonscorp.android.readmore.ReadMoreTextView
@@ -236,7 +235,7 @@
                                         android:gravity="right"
                                         android:padding="@dimen/_2sdp"
                                         android:textColor="@color/dialogText"
-                                        android:textSize="@dimen/_10ssp"
+                                        android:textSize="@dimen/_9ssp"
                                         app:readLessTextColor="@color/colorPrimary"
                                         app:readLessTextSize="@dimen/_11ssp"
                                         app:readLessTextStyle="bold"
