@@ -4,24 +4,19 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Build
 import android.provider.MediaStore
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.aghourservices.R
 import com.aghourservices.utils.helper.Constants
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
-import com.bumptech.glide.Glide
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.stfalcon.imageviewer.StfalconImageViewer
 import com.suddenh4x.ratingdialog.AppRating
 import com.suddenh4x.ratingdialog.preferences.RatingThreshold
 
@@ -94,39 +89,39 @@ open class BaseActivity : AppCompatActivity() {
         startActivityForResult(galleryIntent, Constants.GALLERY_CODE)
     }
 
-    protected fun fullScreenAvatar(imageUrl: String?, view: View?) {
-        StfalconImageViewer.Builder(
-            this,
-            arrayListOf(imageUrl)
-        ) { imageView, image ->
-            Glide.with(this)
-                .load(image)
-                .placeholder(R.color.image_bg)
-                .error(R.drawable.image_placeholder)
-                .into(imageView)
-        }
-            .withHiddenStatusBar(false)
-            .allowSwipeToDismiss(true)
-            .allowZooming(true)
-            .withBackgroundColor(Color.BLACK)
-            .show()
-    }
-
-    protected fun fullScreenArticleAttachments(imageUrl: String?, view: View?) {
-        StfalconImageViewer.Builder(
-            this,
-            arrayListOf(imageUrl)
-        ) { imageView, image ->
-            Glide.with(this)
-                .load(image)
-                .placeholder(R.color.image_bg)
-                .error(R.drawable.image_placeholder)
-                .into(imageView)
-        }
-            .withHiddenStatusBar(false)
-            .allowSwipeToDismiss(true)
-            .allowZooming(true)
-            .withBackgroundColor(Color.BLACK)
-            .show(true)
-    }
+//    protected fun fullScreenAvatar(imageUrl: String?, view: View?) {
+//        StfalconImageViewer.Builder(
+//            this,
+//            arrayListOf(imageUrl)
+//        ) { imageView, image ->
+//            Glide.with(this)
+//                .load(image)
+//                .placeholder(R.color.image_bg)
+//                .error(R.drawable.image_placeholder)
+//                .into(imageView)
+//        }
+//            .withHiddenStatusBar(false)
+//            .allowSwipeToDismiss(true)
+//            .allowZooming(true)
+//            .withBackgroundColor(Color.BLACK)
+//            .show()
+//    }
+//
+//    protected fun fullScreenArticleAttachments(imageUrl: String?, view: View?) {
+//        StfalconImageViewer.Builder(
+//            this,
+//            arrayListOf(imageUrl)
+//        ) { imageView, image ->
+//            Glide.with(this)
+//                .load(image)
+//                .placeholder(R.color.image_bg)
+//                .error(R.drawable.image_placeholder)
+//                .into(imageView)
+//        }
+//            .withHiddenStatusBar(false)
+//            .allowSwipeToDismiss(true)
+//            .allowZooming(true)
+//            .withBackgroundColor(Color.BLACK)
+//            .show(true)
+//    }
 }

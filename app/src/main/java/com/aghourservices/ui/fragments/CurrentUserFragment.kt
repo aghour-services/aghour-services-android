@@ -116,7 +116,7 @@ class CurrentUserFragment : BaseFragment() {
     private fun profileUserClicks() {
         binding.apply {
             avatarImage.setOnClickListener {
-                fullScreenAvatar(currentUserAvatar, avatarImage)
+                fullScreenAvatar(currentUserAvatar, binding.userName.text.toString())
             }
             addUserImage.setOnClickListener {
                 if (!checkStoragePermission()) {

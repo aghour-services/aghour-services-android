@@ -8,13 +8,16 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.aghourservices.R
+import com.aghourservices.databinding.AvatarOverlayViewBinding
 import com.aghourservices.utils.helper.Constants
 import com.aghourservices.utils.helper.Event
 import com.aghourservices.utils.helper.HasBottomNavigation
@@ -55,25 +58,42 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
         snackBar.show()
     }
 
-    protected fun fullScreenAvatar(imageUrl: String?, view: View?) {
-        StfalconImageViewer.Builder(
+    @SuppressLint("InflateParams")
+    protected fun fullScreenAvatar(imageUrl: String?, userName: String?) {
+        val binding = AvatarOverlayViewBinding.bind(
+            LayoutInflater.from(requireContext()).inflate(
+                R.layout.avatar_overlay_view,
+                null
+            )
+        )
+
+        val closeButton: ImageButton = binding.overlayClose
+        val overlayName: TextView = binding.overlayText
+        overlayName.text = userName
+
+        val viewer = StfalconImageViewer.Builder(
             requireContext(),
             arrayListOf(imageUrl)
         ) { imageView, image ->
             Glide.with(requireContext())
                 .load(image)
-                .placeholder(R.color.image_bg)
+                .placeholder(R.drawable.image_placeholder)
                 .error(R.drawable.image_placeholder)
                 .into(imageView)
         }
             .withHiddenStatusBar(false)
             .allowSwipeToDismiss(true)
             .allowZooming(true)
+            .withOverlayView(binding.root)
             .withBackgroundColor(Color.BLACK)
-            .show()
+            .show(true)
+
+        closeButton.setOnClickListener {
+            viewer.close()
+        }
     }
 
-    protected fun fullScreenArticleAttachments(imageUrl: String?, view: View?) {
+    protected fun fullScreenArticleAttachments(imageUrl: String?) {
         StfalconImageViewer.Builder(
             requireContext(),
             arrayListOf(imageUrl)

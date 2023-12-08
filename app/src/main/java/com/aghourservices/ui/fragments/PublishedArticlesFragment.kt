@@ -154,13 +154,13 @@ class PublishedArticlesFragment : BaseFragment() {
             }
 
             R.id.avatar_image -> {
-                fullScreenAvatar(user.url, v)
+                fullScreenAvatar(user.url, user.name)
 
                 Log.d("USER_AVATAR", "onListItemClick: ${user.url}")
             }
 
             R.id.article_image -> {
-                fullScreenArticleAttachments(article.attachments?.last()?.resource_url, v)
+                fullScreenArticleAttachments(article.attachments?.last()?.resource_url)
             }
         }
     }
