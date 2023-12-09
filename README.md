@@ -10,19 +10,19 @@ The goal of the project is to demonstrate best practices, provide a set of guide
 
 # **Available for Android**
 
-[<img src="https://i.imgur.com/heN9nOS.png" height="50">](https://play.google.com/store/apps/details?id=com.aghourservices)
+[<img src="https://i.imgur.com/YM76s52.png" height="50">](https://play.google.com/store/apps/details?id=com.aghourservices)
 
 # **App Screenshots**
 
 ### **Light**
-<img src="https://i.imgur.com/9AM93ER.png" width="130"><img src="https://i.imgur.com/kS5LTQY.png" width="130">
+<img src="https://i.imgur.com/9AM93ER.png" width="130"><img src="https://i.imgur.com/TTXNbWm.png" width="130">
 <img src="https://i.imgur.com/9wt5Cpd.png" width="130"><img src="https://i.imgur.com/iC22VWt.png" width="130">
-<img src="https://i.imgur.com/8DzQ6SX.png" width="130"><img src="https://i.imgur.com/6vbm91k.png" width="130">
+<img src="https://i.imgur.com/8DzQ6SX.png" width="130"><img src="https://i.imgur.com/JsfOF2X.png" width="130">
 
 ### **Dark**
-<img src="https://i.imgur.com/i7jjZm9.png" width="130"><img src="https://i.imgur.com/JKvaalI.png" width="130">
+<img src="https://i.imgur.com/i7jjZm9.png" width="130"><img src="https://i.imgur.com/iLKBUM6.png" width="130">
 <img src="https://i.imgur.com/zfITlkR.png" width="130"><img src="https://i.imgur.com/Ch5ua8N.png" width="130">
-<img src="https://i.imgur.com/fbEoXVr.png" width="130"><img src="https://i.imgur.com/uJqdN4B.png" width="130">
+<img src="https://i.imgur.com/fbEoXVr.png" width="130"><img src="https://i.imgur.com/TET8dUR.png" width="130">
 
 # Architecture
 
