@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -62,15 +61,8 @@ class ShowOneArticleFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         loadComments()
+        noInternetConnectionBehavior()
     }
-
-//    private fun scrollToSpecificComment() {
-//        val commentId = arguments.commentId
-//        if (commentId > 0) {
-//            val position = commentsAdapter.getCommentPosition(commentId)
-//            binding.commentsRecyclerView.scrollToPosition(position)
-//        }
-//    }
 
     private fun refresh() {
         reloadingComments()
@@ -160,7 +152,8 @@ class ShowOneArticleFragment : BaseFragment() {
             }
 
             override fun onFailure(call: Call<Article>, t: Throwable) {
-                Toast.makeText(requireContext(), "لا يوجد إنترنت", Toast.LENGTH_SHORT).show()
+                binding.refreshComments.isVisible = false
+                binding.noInternet.isVisible = true
             }
         })
     }
@@ -298,6 +291,16 @@ class ShowOneArticleFragment : BaseFragment() {
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+    }
+
+    private fun noInternetConnectionBehavior() {
+        binding.apply {
+            tryAgainBtn.setOnClickListener {
+                showArticle()
+                noInternet.isVisible = false
+                refreshComments.isVisible = true
+            }
+        }
     }
 
     override fun onDestroyView() {

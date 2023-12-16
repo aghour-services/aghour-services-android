@@ -1,7 +1,6 @@
 package com.aghourservices.ui.viewModels
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aghourservices.data.model.Notification
@@ -31,9 +30,7 @@ class NotificationsViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Notification>>, t: Throwable) {
-                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
-            }
+            override fun onFailure(call: Call<ArrayList<Notification>>, t: Throwable) {}
         })
     }
 }

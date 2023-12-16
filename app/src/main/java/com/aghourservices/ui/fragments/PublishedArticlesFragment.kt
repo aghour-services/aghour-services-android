@@ -38,6 +38,7 @@ class PublishedArticlesFragment : BaseFragment() {
         initNewsObserve()
         getProfile()
         refresh()
+        noInternetConnectionBehavior()
         return binding.root
     }
 
@@ -220,6 +221,21 @@ class PublishedArticlesFragment : BaseFragment() {
             newsShimmer.stopShimmer()
             newsShimmer.isVisible = false
             newsRecyclerview.isVisible = true
+        }
+    }
+
+    private fun noInternetConnectionBehavior() {
+        binding.apply {
+            tryAgainBtn.setOnClickListener {
+                newsShimmer.startShimmer()
+                newsShimmer.isVisible = true
+                noInternet.isVisible = false
+                publishedArticlesViewModel.loadArticles(
+                    binding,
+                    currentUser.token,
+                    fcmToken
+                )
+            }
         }
     }
 
