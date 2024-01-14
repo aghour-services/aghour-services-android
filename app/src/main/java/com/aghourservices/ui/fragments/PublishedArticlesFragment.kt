@@ -68,7 +68,7 @@ class PublishedArticlesFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        publishedArticlesViewModel.loadArticles(binding, currentUser.token, fcmToken)
+        currentUser.let { publishedArticlesViewModel.loadArticles(binding, it.token, fcmToken) }
     }
 
     private fun refresh() {
@@ -244,7 +244,9 @@ class PublishedArticlesFragment : BaseFragment() {
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-                binding.draftArticlesBtn.isVisible = response.body()?.verified == true
+                if (response.isSuccessful) {
+                    binding.draftArticlesBtn.isVisible = response.body()?.verified == true
+                }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {}
