@@ -53,8 +53,8 @@ class CurrentUserFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (isUserLogin) {
-            requireActivity().title = currentUser.name
+        if (isUserLogin == true) {
+            requireActivity().title = currentUser?.name
         } else {
             requireActivity().title = getString(R.string.setting_fragment)
         }
@@ -93,7 +93,7 @@ class CurrentUserFragment : BaseFragment() {
     }
 
     private fun checkUser() {
-        if (isUserLogin) {
+        if (isUserLogin == true) {
             binding.apply {
                 userLayout.visibility = View.VISIBLE
                 logOut.visibility = View.VISIBLE
@@ -129,7 +129,7 @@ class CurrentUserFragment : BaseFragment() {
     }
 
     private fun getProfile() {
-        val retrofitInstance = userApi.userProfile(currentUser.token)
+        val retrofitInstance = userApi.userProfile(currentUser?.token.toString())
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
@@ -138,18 +138,21 @@ class CurrentUserFragment : BaseFragment() {
                 if (response.isSuccessful) {
                     stopShimmer()
                     if (profile != null) {
-                        saveProfile(
-                            requireContext().applicationContext,
-                            profile.id!!,
-                            profile.name,
-                            profile.verified
-                        )
-
-                        loadProfileImage(
-                            requireContext().applicationContext,
-                            profile.url,
-                            binding.avatarImage
-                        )
+                        context?.let {
+                            saveProfile(
+                                it,
+                                profile.id!!,
+                                profile.name,
+                                profile.verified
+                            )
+                        }
+                        context?.let {
+                            loadProfileImage(
+                                it,
+                                profile.url,
+                                binding.avatarImage
+                            )
+                        }
                         currentUserAvatar = profile.url
                         binding.userName.apply {
                             text = profile.name
@@ -172,12 +175,12 @@ class CurrentUserFragment : BaseFragment() {
             override fun onFailure(call: Call<Profile>, t: Throwable) {
                 stopShimmer()
                 binding.apply {
-                    userEmail.text = currentUser.email
-                    userPhone.text = currentUser.mobile
+                    userEmail.text = currentUser?.email
+                    userPhone.text = currentUser?.mobile
                 }
                 binding.userName.apply {
-                    text = currentProfile.name
-                    if (currentProfile.verified && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text = currentProfile?.name
+                    if (currentProfile?.verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         tooltipText = context.getString(R.string.verified)
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
@@ -252,7 +255,7 @@ class CurrentUserFragment : BaseFragment() {
         val userService = UserService()
         userService.updateAvatar(
             requireContext(),
-            currentUser.token,
+            currentUser?.token.toString(),
             avatarPart,
         )
     }

@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -17,26 +16,19 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.R
-import com.aghourservices.data.model.Profile
-import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivityDashboardBinding
 import com.aghourservices.databinding.PostOrDataBottomSheetBinding
 import com.aghourservices.ui.base.BaseActivity
-import com.aghourservices.ui.viewModels.NotificationsViewModel
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DashboardActivity : BaseActivity() {
     private var _binding: ActivityDashboardBinding? = null
     private val binding get() = _binding!!
-    private val notificationsViewModel: NotificationsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,24 +41,11 @@ class DashboardActivity : BaseActivity() {
         inAppUpdate()
         notificationPermission()
         getFirebaseInstanceToken()
-        notificationsCount()
-
-//        binding.profileImage.setOnClickListener {
-//            startActivity(Intent(this@DashboardActivity, SettingsActivity::class.java))
-//        }
     }
 
     override fun onResume() {
         super.onResume()
-        getUserProfile()
-        notificationsCount()
-    }
-
-    private fun notificationsCount() {
-        notificationsViewModel.getNotifications(this, fcmToken, currentUser.token)
-        notificationsViewModel.notificationsLiveData.observe(this) {
-            notificationBadge()
-        }
+        notificationBadge()
     }
 
     @SuppressLint("UnsafeOptInUsageError")
@@ -90,30 +69,6 @@ class DashboardActivity : BaseActivity() {
                 99
             )
         }
-    }
-
-    private fun getUserProfile() {
-        val retrofitInstance = userApi.userProfile(currentUser.token)
-        retrofitInstance.enqueue(object : Callback<Profile> {
-            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-                val profile = response.body()
-
-//                if (response.isSuccessful) {
-//                    loadProfileImage(
-//                        this@DashboardActivity,
-//                        profile?.url.toString(),
-//                        binding.profileImage
-//                    )
-//                } else {
-//                    binding.profileImage.setImageResource(R.mipmap.user)
-//                }
-            }
-
-            override fun onFailure(call: Call<Profile>, t: Throwable) {
-//                Log.d("user", t.message.toString())
-//                binding.profileImage.setImageResource(R.mipmap.user)
-            }
-        })
     }
 
     override fun onNewIntent(intent: Intent?) {

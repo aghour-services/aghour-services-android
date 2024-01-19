@@ -38,7 +38,7 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
     val currentUser by lazy { getUserData(requireContext()) }
     val fcmToken by lazy { getFCMToken(requireContext()) }
     val isUserLogin by lazy { UserInfo.isUserLoggedIn(requireContext()) }
-    val currentProfile by lazy { UserInfo.getProfile(requireContext()) }
+    val currentProfile by lazy { context?.let { UserInfo.getProfile(it) } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

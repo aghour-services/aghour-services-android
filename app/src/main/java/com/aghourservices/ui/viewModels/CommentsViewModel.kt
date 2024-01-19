@@ -33,9 +33,7 @@ class CommentsViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Comment>>, t: Throwable) {
-                Toast.makeText(context, "لا يوجد إنترنت", Toast.LENGTH_SHORT).show()
-            }
+            override fun onFailure(call: Call<ArrayList<Comment>>, t: Throwable) {}
         })
     }
 

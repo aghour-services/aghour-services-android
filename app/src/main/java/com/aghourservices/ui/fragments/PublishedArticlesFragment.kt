@@ -38,6 +38,7 @@ class PublishedArticlesFragment : BaseFragment() {
         initNewsObserve()
         getProfile()
         refresh()
+        noInternetConnectionBehavior()
         return binding.root
     }
 
@@ -67,7 +68,7 @@ class PublishedArticlesFragment : BaseFragment() {
                 noInternetConnection()
             }
         }
-        publishedArticlesViewModel.loadArticles(binding, currentUser.token, fcmToken)
+        currentUser.let { publishedArticlesViewModel.loadArticles(binding, it.token, fcmToken) }
     }
 
     private fun refresh() {
@@ -223,12 +224,29 @@ class PublishedArticlesFragment : BaseFragment() {
         }
     }
 
+    private fun noInternetConnectionBehavior() {
+        binding.apply {
+            tryAgainBtn.setOnClickListener {
+                newsShimmer.startShimmer()
+                newsShimmer.isVisible = true
+                noInternet.isVisible = false
+                publishedArticlesViewModel.loadArticles(
+                    binding,
+                    currentUser.token,
+                    fcmToken
+                )
+            }
+        }
+    }
+
     private fun getProfile() {
         val retrofitInstance = RetrofitInstance.userApi.userProfile(currentUser.token)
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-                binding.draftArticlesBtn.isVisible = response.body()?.verified == true
+                if (response.isSuccessful) {
+                    binding.draftArticlesBtn.isVisible = response.body()?.verified == true
+                }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {}

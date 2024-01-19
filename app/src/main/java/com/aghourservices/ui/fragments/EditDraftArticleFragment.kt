@@ -10,7 +10,6 @@ import com.aghourservices.data.model.Article
 import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.FragmentEditDraftArticleBinding
 import com.aghourservices.ui.base.BaseFragment
-import com.aghourservices.utils.helper.AlertDialogs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,9 +70,7 @@ class EditDraftArticleFragment : BaseFragment() {
         retrofitBuilder.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {}
 
-            override fun onFailure(call: Call<Article>, t: Throwable) {
-                AlertDialogs.noInternet(requireContext())
-            }
+            override fun onFailure(call: Call<Article>, t: Throwable) {}
         })
     }
 

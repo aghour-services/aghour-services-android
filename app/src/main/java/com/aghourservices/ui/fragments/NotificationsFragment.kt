@@ -25,6 +25,7 @@ class NotificationsFragment : BaseFragment() {
         initRecyclerView()
         initNotificationObserve()
         handleOnBackPressed()
+        noInternetConnectionBehavior()
         return binding.root
     }
 
@@ -34,7 +35,6 @@ class NotificationsFragment : BaseFragment() {
         hideToolbar()
     }
 
-
     private fun handleOnBackPressed() {
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -42,7 +42,7 @@ class NotificationsFragment : BaseFragment() {
     }
 
     private fun initNotificationObserve() {
-        notificationsViewModel.getNotifications(requireContext(), fcmToken, currentUser.token)
+        notificationsViewModel.getNotifications(binding, fcmToken, currentUser.token)
         notificationsViewModel.notificationsLiveData.observe(viewLifecycleOwner) {
             notificationsAdapter.setNotifications(it)
             progressBar()
@@ -85,5 +85,13 @@ class NotificationsFragment : BaseFragment() {
     private fun progressBar() {
         binding.progressBar.visibility = View.GONE
         binding.notificationsRv.visibility = View.VISIBLE
+    }
+
+    private fun noInternetConnectionBehavior() {
+        binding.apply {
+            tryAgainBtn.setOnClickListener {
+                initNotificationObserve()
+            }
+        }
     }
 }

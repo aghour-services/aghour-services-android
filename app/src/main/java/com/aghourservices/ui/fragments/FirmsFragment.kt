@@ -52,6 +52,7 @@ class FirmsFragment : BaseFragment() {
         refresh()
         hideBottomNavigation()
         showToolbar()
+        noInternetConnectionBehavior()
     }
 
     private fun tagsAsParameter(): String {
@@ -73,20 +74,6 @@ class FirmsFragment : BaseFragment() {
                 requireContext(),
                 tagsList
             ) { v, position -> onTagsItemClick(v as CheckBox, position) }
-
-            binding.apply {
-                tagsRecyclerView.setHasFixedSize(true)
-                tagsRecyclerView.layoutManager =
-                    LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                tagsRecyclerView.adapter = tagsAdapter
-
-                if (tagsList.isNotEmpty()) {
-                    tagsRecyclerView.isVisible = true
-                    lineView.isVisible = true
-//                    smoothScrolling()
-                }
-                stopShimmerAnimation()
-            }
         }
     }
 
@@ -154,7 +141,6 @@ class FirmsFragment : BaseFragment() {
     private fun noInternetConnection() {
         binding.apply {
             noInternet.isVisible = true
-            tagsRecyclerView.isVisible = false
             firmsRecyclerView.isVisible = false
         }
     }
@@ -162,9 +148,6 @@ class FirmsFragment : BaseFragment() {
     private fun stopShimmerAnimation() {
         binding.apply {
             firmsShimmer.stopShimmer()
-            tagsShimmer.stopShimmer()
-            tagsShimmer.isVisible = false
-            line.isVisible = false
             firmsShimmer.isVisible = false
             firmsRecyclerView.isVisible = true
         }
@@ -230,6 +213,19 @@ class FirmsFragment : BaseFragment() {
         realm.executeTransaction {
             firm.isFavorite = !firm.isFavorite
             realm.createOrUpdateObjectFromJson(Firm::class.java, firm.toJSONObject())
+        }
+    }
+
+    private fun noInternetConnectionBehavior() {
+        binding.apply {
+            tryAgainBtn.setOnClickListener {
+                firmsShimmer.startShimmer()
+                firmsShimmer.isVisible = true
+                noInternet.isVisible = false
+                firmsViewModel.loadFirms(
+                    categoryId, tagsAsParameter(), fcmToken
+                )
+            }
         }
     }
 }

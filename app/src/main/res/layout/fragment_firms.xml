@@ -11,105 +11,6 @@
         android:orientation="vertical">
 
         <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/tagsShimmer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:forceDarkAllowed="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="q">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-                <include layout="@layout/tags_shimmer" />
-
-            </LinearLayout>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <View
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/lineView" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tagsRecyclerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/tags_card" />
-
-        <View
-            android:id="@+id/lineView"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/lineView"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/noInternet"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@mipmap/cloud"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo_bold"
-                android:text="@string/noInternetConnections"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/firmsShimmer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -172,4 +73,40 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/noInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/wifi"
+            android:tint="@color/dialogText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:text="@string/no_internet"
+            android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tryAgainBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/try_again"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_20sdp" />
+    </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

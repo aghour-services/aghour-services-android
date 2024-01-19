@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -39,32 +40,32 @@
             android:id="@+id/draft_articles_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="20dp"
             android:layout_gravity="bottom"
+            android:layout_margin="10dp"
             android:backgroundTint="#F3DC16"
-            android:visibility="gone"
             android:drawableLeft="@drawable/ic_drafts"
+            android:elevation="20dp"
             android:padding="10dp"
             android:text="@string/draft_articles"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
             android:layout_width="match_parent"
-            android:layout_below="@id/draft_articles_btn"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/draft_articles_btn">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newsRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="gone"
                 android:background="@color/main_bg"
                 android:orientation="vertical"
+                android:visibility="gone"
                 tools:listitem="@layout/published_article_card" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -78,12 +79,14 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="invisible">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@mipmap/cloud" />
+            android:background="@android:color/transparent"
+            android:src="@mipmap/wifi"
+            android:tint="@color/dialogText" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -91,6 +94,17 @@
             android:fontFamily="@font/cairo_bold"
             android:text="@string/no_internet"
             android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tryAgainBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/try_again"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_20sdp" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
