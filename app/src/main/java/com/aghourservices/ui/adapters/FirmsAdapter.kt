@@ -14,11 +14,11 @@ class FirmsAdapter(
     val context: Context,
     private var firmsList: ArrayList<Firm>,
     private val onItemClicked: (v: View, position: Int) -> Unit
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<FirmsViewHolder>() {
 
     private val itemsCountToShowAds = 4
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirmsViewHolder {
         val firmsCard = FirmsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
 
@@ -27,14 +27,12 @@ class FirmsAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder as FirmsViewHolder
+    override fun onBindViewHolder(holder: FirmsViewHolder, position: Int) {
         holder.setList(position)
-
 
         if (getItemViewType(position) == 0) {
             val adFrame = holder.binding.adFrame
-            NativeAdViewHolder(context, adFrame)
+            NativeAdViewHolder(holder.binding.root.context, adFrame)
         }
     }
 

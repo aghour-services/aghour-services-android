@@ -16,7 +16,6 @@ import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySignInBinding
 import com.aghourservices.ui.base.BaseActivity
-import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.AlertDialogs.Companion.errorLogin
 import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
 import com.aghourservices.utils.helper.ProgressDialog
@@ -28,7 +27,6 @@ import retrofit2.Response
 
 class SignInActivity : BaseActivity() {
     private lateinit var binding: ActivitySignInBinding
-    private lateinit var adView: AdView
     private val progressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +37,6 @@ class SignInActivity : BaseActivity() {
         initUserRegister()
         initUserClick()
         adView()
-    }
-
-    private fun adView() {
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
     }
 
     private fun initIconsColor() {

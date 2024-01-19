@@ -44,6 +44,7 @@ class CreateArticleActivity : BaseActivity() {
         requestStoragePermissions()
         getUserProfile()
         initUserClick()
+        adView()
         binding.userLayout.isVisible = isUserLogin
     }
 

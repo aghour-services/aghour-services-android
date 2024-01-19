@@ -9,7 +9,6 @@ import com.aghourservices.data.network.RetrofitInstance.firmsApi
 import com.aghourservices.databinding.ActivityAddDataBinding
 import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.ui.viewHolders.SpinnerCategoriesAdapter
-import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.AlertDialogs.Companion.createAccount
 import com.aghourservices.utils.helper.AlertDialogs.Companion.dataAdded
 import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
@@ -23,7 +22,6 @@ import retrofit2.Response
 class AddDataActivity : BaseActivity() {
     private lateinit var binding: ActivityAddDataBinding
     private lateinit var categoryList: ArrayList<Category>
-    private lateinit var adView: AdView
     private val progressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +34,6 @@ class AddDataActivity : BaseActivity() {
         spinnerAdapter()
         initUserClicks()
         adView()
-    }
-
-    private fun adView() {
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
     }
 
     private fun initUserClicks() {

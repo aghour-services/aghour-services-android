@@ -18,7 +18,6 @@ import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.userApi
 import com.aghourservices.databinding.ActivitySignUpBinding
 import com.aghourservices.ui.base.BaseActivity
-import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.AlertDialogs.Companion.errorLogin
 import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
 import com.aghourservices.utils.helper.Constants
@@ -37,7 +36,6 @@ import java.io.File
 
 class SignUpActivity : BaseActivity() {
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var adView: AdView
     private val progressDialog by lazy { ProgressDialog(this) }
     private var avatarUri: Uri? = null
     private var avatarPart: MultipartBody.Part? = null
@@ -53,11 +51,6 @@ class SignUpActivity : BaseActivity() {
         initStoragePermissions()
         requestStoragePermissions()
         initUserClicks()
-    }
-
-    private fun adView() {
-        adView = findViewById(R.id.adView)
-        Banner.show(this, adView)
     }
 
     private fun initEditTextIconsColor() {

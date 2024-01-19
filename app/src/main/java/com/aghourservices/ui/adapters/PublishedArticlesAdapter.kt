@@ -14,10 +14,11 @@ class PublishedArticlesAdapter(
     private val onItemClicked: (v: View, position: Int) -> Unit
 ) : RecyclerView.Adapter<PublishedArticlesViewHolder>() {
     private var articleList: ArrayList<Article> = ArrayList()
-    private var itemsCountToShowAds = 4
+    private var itemsCountToShowAds = 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublishedArticlesViewHolder {
-        val view = PublishedArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view =
+            PublishedArticleCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PublishedArticlesViewHolder(view, onItemClicked)
     }
 
@@ -26,7 +27,8 @@ class PublishedArticlesAdapter(
         holder.setNewsList(article)
 
         if (getItemViewType(position) == 0) {
-            NativeAdViewHolder(holder.binding.root.context, holder.binding.adFrame)
+            val adFrame = holder.binding.adFrame
+            NativeAdViewHolder(holder.binding.root.context, adFrame)
         }
     }
 

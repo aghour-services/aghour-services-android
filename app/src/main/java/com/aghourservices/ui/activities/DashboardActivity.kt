@@ -41,6 +41,7 @@ class DashboardActivity : BaseActivity() {
         inAppUpdate()
         notificationPermission()
         getFirebaseInstanceToken()
+        adView()
     }
 
     override fun onResume() {
