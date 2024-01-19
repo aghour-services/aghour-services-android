@@ -9,11 +9,14 @@ import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.aghourservices.R
+import com.aghourservices.utils.ads.Banner
 import com.aghourservices.utils.helper.Constants
 import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getProfile
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.aghourservices.utils.services.cache.UserInfo.isUserLoggedIn
+import com.google.android.gms.ads.AdView
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
@@ -26,6 +29,12 @@ open class BaseActivity : AppCompatActivity() {
     val isUserLogin by lazy { isUserLoggedIn(this) }
     val currentProfile by lazy { getProfile(this) }
     private lateinit var permissions: Array<String>
+    private lateinit var adView: AdView
+
+    fun adView() {
+        adView = findViewById(R.id.adView)
+        Banner.show(this, adView)
+    }
 
     fun inAppRating() {
         AppRating.Builder(this)

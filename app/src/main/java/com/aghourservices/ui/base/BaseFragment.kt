@@ -10,9 +10,9 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -31,7 +31,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.stfalcon.imageviewer.StfalconImageViewer
 
 open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
-    private lateinit var bottomNavigation: ConstraintLayout
+    private lateinit var bottomNavigation: ViewGroup
     private lateinit var dashboardToolbar: MaterialToolbar
     private lateinit var permissions: Array<String>
 

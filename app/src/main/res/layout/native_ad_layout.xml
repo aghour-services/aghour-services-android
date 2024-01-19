@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="10pt">
+        app:cardElevation="@dimen/_10sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             <com.google.android.gms.ads.nativead.MediaView
                 android:id="@+id/ad_media_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/_100sdp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp" />
 
@@ -36,7 +36,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/ad_call_to_action"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:background="@drawable/ad_selector"

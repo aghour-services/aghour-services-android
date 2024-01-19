@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animationCache="true"
     android:animateLayoutChanges="true"
+    android:animationCache="true"
     android:background="@color/main_bg">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Widget.App.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbarBg"
@@ -19,9 +20,8 @@
         app:menu="@menu/toolbar_menu"
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="@color/drawerToggle"
-        app:titleTextColor="@color/toolbarText"
         app:title="@string/app_name"
-        style="@style/Widget.App.Toolbar" />
+        app:titleTextColor="@color/toolbarText" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -31,51 +31,75 @@
         android:background="@color/main_bg"
         app:defaultNavHost="true"
         app:layout_anchorGravity="center"
-        app:layout_constraintBottom_toTopOf="@id/bottomViewContainer"
+        app:layout_constraintBottom_toTopOf="@id/adViewContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/adViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/bottomViewContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include layout="@layout/admob_banner" />
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/bottomViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomView"
+        <com.google.android.material.bottomappbar.BottomAppBar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/toolbarBg"
-            android:padding="@dimen/_6sdp"
-            app:itemIconTint="@color/bottom_nav_item_color"
-            app:itemTextColor="@color/bottom_nav_item_color"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav_menu" />
+            android:layout_height="match_parent"
+            app:backgroundTint="@color/toolbarBg">
 
-        <ImageButton
-            android:id="@+id/add_data_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:background="?android:selectableItemBackground"
-            android:elevation="@dimen/_20sdp"
-            android:padding="@dimen/_8sdp"
-            android:src="@drawable/add_circle_outline"
-            app:layout_constraintBottom_toBottomOf="@+id/bottomView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/bottomView"
-            app:layout_constraintTop_toTopOf="@+id/bottomView"
-            app:tint="@color/bottom_nav_checked_item"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_14sdp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_8sdp"
+                    app:backgroundTint="@color/toolbarBg"
+                    app:itemIconTint="@color/bottom_nav_item_color"
+                    app:itemTextColor="@color/bottom_nav_item_color"
+                    app:labelVisibilityMode="labeled"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:menu="@menu/bottom_nav_menu" />
+
+                <ImageButton
+                    android:id="@+id/add_data_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:background="?android:selectableItemBackground"
+                    android:elevation="@dimen/_20sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/add_circle_outline"
+                    app:layout_constraintBottom_toBottomOf="@+id/bottomView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/bottomView"
+                    app:layout_constraintTop_toTopOf="@+id/bottomView"
+                    app:tint="@color/bottom_nav_checked_item"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -120,11 +120,6 @@
                 android:scaleType="centerCrop"
                 android:src="@color/image_bg" />
 
-            <FrameLayout
-                android:id="@+id/ad_frame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/news_bg" />
         </LinearLayout>
 
         <LinearLayout
@@ -323,6 +318,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_view"
             android:layout_below="@id/likes_comments_layout"
+            android:layout_centerHorizontal="true"
             android:background="@color/lineView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -409,5 +405,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <FrameLayout
+            android:id="@+id/ad_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/like_article_layout"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>
