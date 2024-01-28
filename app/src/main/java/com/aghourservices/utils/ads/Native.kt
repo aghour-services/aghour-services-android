@@ -10,7 +10,6 @@ import android.widget.TextView
 import com.aghourservices.R
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.android.gms.ads.nativead.NativeAdView
@@ -35,8 +34,20 @@ class Native {
             val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
             headlineView.text = ad.headline
             adView.headlineView = headlineView
-            adView.mediaView = adView.findViewById<MediaView>(R.id.ad_media_view)
+            adView.mediaView = adView.findViewById(R.id.ad_media)
             adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
+            adView.iconView = adView.findViewById(R.id.ad_app_icon)
+            adView.priceView = adView.findViewById(R.id.ad_price)
+            adView.starRatingView = adView.findViewById(R.id.ad_stars)
+            adView.storeView = adView.findViewById(R.id.ad_store)
+            adView.advertiserView = adView.findViewById(R.id.ad_advertiser)
+
+            if (ad.price == null) {
+                adView.priceView!!.visibility = View.INVISIBLE
+            } else {
+                adView.priceView!!.visibility = View.VISIBLE
+                (adView.priceView as TextView).text = ad.price
+            }
 
             if (ad.callToAction == null) {
                 adView.callToActionView!!.visibility = View.INVISIBLE
@@ -44,6 +55,7 @@ class Native {
                 adView.callToActionView!!.visibility = View.VISIBLE
                 (adView.callToActionView as Button).text = ad.callToAction
             }
+            
             adView.setNativeAd(ad)
             parent.removeAllViews()
             parent.addView(adView)
