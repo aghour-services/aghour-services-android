@@ -47,13 +47,24 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_below="@id/sheet_handling"
                 android:layout_toLeftOf="@id/likes_count"
+                android:layout_toRightOf="@id/close_sheet_btn"
                 android:gravity="left|center"
-                android:layout_alignParentLeft="true"
                 android:padding="@dimen/_10sdp"
                 android:text="@string/all_comments"
                 android:textColor="@color/dialogText"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/close_sheet_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/ic_close"
+                app:tint="@color/dialogText" />
 
             <View
                 android:id="@+id/line_view"

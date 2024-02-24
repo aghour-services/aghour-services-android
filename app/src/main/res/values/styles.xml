@@ -35,17 +35,10 @@
 
     <style name="ShapeableImageView">
         <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:scaleType">fitXY</item>
-        <item name="android:layout_margin">@dimen/_5sdp</item>
-        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/_10sdp</item>
+        <item name="cornerSize">@dimen/_8sdp</item>
     </style>
 </resources>

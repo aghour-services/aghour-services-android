@@ -11,12 +11,7 @@
         android:id="@+id/firmsToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/toolbarBg"
-        android:elevation="@dimen/_2sdp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back_btn"
@@ -26,39 +21,61 @@
             android:layout_centerVertical="true"
             android:background="?android:selectableItemBackgroundBorderless"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_back_settings" />
+            android:src="@drawable/ic_close"
+            app:tint="@color/dialogText" />
 
-        <TextView
-            android:id="@+id/toolBarTv"
+        <LinearLayout
+            android:id="@+id/user_layout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_toEndOf="@id/back_btn"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="@string/add_article"
-            android:textColor="@color/toolbarText"
-            android:textSize="@dimen/_14ssp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/publish_btn"
+            android:layout_toRightOf="@id/back_btn"
+            android:orientation="horizontal"
+            android:padding="@dimen/_8sdp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_image"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:background="@mipmap/user" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="@dimen/_6sdp"
+                android:fontFamily="@font/noto_bold"
+                android:paddingLeft="@dimen/_6sdp"
+                android:textColor="@color/dialogText"
+                android:textSize="@dimen/_13ssp"
+                android:visibility="invisible"
+                app:drawableRightCompat="@drawable/ic_verified"
+                tools:text="أجهور الكبرى"
+                tools:visibility="visible" />
+
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/publish_btn"
-            style="@style/Widget.Material3.Button.IconButton"
+            style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
             android:enabled="false"
             android:text="@string/publish"
-            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
-            app:background="?android:selectableItemBackground"
+            app:cornerRadius="@dimen/_30sdp"
             app:icon="@drawable/ic_send"
-            app:iconGravity="end"
-            app:iconPadding="@dimen/_10sdp"
-            app:iconSize="@dimen/_18sdp"
-            tools:ignore="RelativeOverlap" />
+            app:iconGravity="textEnd"
+            app:iconTint="@color/white" />
 
     </RelativeLayout>
 
@@ -72,36 +89,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/user_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="horizontal"
-                android:padding="@dimen/_8sdp">
-
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawablePadding="@dimen/_6sdp"
-                    android:fontFamily="@font/noto_bold"
-                    android:paddingRight="@dimen/_4sdp"
-                    android:textColor="@color/dialogText"
-                    android:textSize="@dimen/_13ssp"
-                    android:visibility="invisible"
-                    app:drawableLeftCompat="@drawable/ic_verified"
-                    tools:text="أجهور الكبرى" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar_image"
-                    android:layout_width="@dimen/_26sdp"
-                    android:layout_height="@dimen/_26sdp"
-                    android:background="@mipmap/user" />
-
-            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/article_edt"
@@ -120,18 +107,29 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/article_img"
+                    android:id="@+id/article_image"
                     style="@style/ShapeableImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerCrop"
                     android:visibility="invisible"
-                    tools:src="@mipmap/ic_launcher" />
+                    tools:src="@mipmap/ajhour"
+                    tools:visibility="visible" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/remove_img"
                     style="@style/Widget.Material3.Button.IconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/_4sdp"
@@ -139,10 +137,13 @@
                     android:layout_marginEnd="@dimen/_4sdp"
                     android:layout_marginBottom="@dimen/_4sdp"
                     android:backgroundTint="#23000000"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:visibility="invisible"
                     app:cornerRadius="@dimen/_30sdp"
                     app:icon="@drawable/ic_close"
                     app:iconTint="@color/white"
-                    tools:ignore="RelativeOverlap" />
+                    tools:ignore="RelativeOverlap"
+                    tools:visibility="visible" />
 
             </RelativeLayout>
         </LinearLayout>

@@ -33,14 +33,14 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = LikesDialogSheetBinding.inflate(inflater, container, false)
+        initRecyclerView()
+        getLikes()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initProductSheet()
-        initRecyclerView()
-        getLikes()
     }
 
     private fun initProductSheet() {
@@ -55,6 +55,7 @@ class LikesDialogSheet : BottomSheetDialogFragment() {
         val layoutParams = bottomSheet.layoutParams
         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         bottomSheet.layoutParams = layoutParams
+        binding.closeSheetBtn.setOnClickListener { dismiss() }
     }
 
     private fun initRecyclerView() {

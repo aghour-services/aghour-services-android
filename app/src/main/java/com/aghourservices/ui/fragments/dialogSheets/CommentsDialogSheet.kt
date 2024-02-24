@@ -66,6 +66,7 @@ class CommentsDialogSheet : BottomSheetDialogFragment() {
         val layoutParams = bottomSheet.layoutParams
         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         bottomSheet.layoutParams = layoutParams
+        binding.closeSheetBtn.setOnClickListener { dismiss() }
     }
 
     private fun initRecyclerView() {
