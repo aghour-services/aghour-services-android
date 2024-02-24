@@ -124,4 +124,8 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.1.0'
 
     implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
+
+    // Image Compressor
+    implementation 'id.zelory:compressor:3.0.1'
+
 }

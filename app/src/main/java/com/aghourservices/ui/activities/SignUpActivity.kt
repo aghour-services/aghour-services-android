@@ -13,6 +13,7 @@ import android.text.style.ClickableSpan
 import android.util.Patterns
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.aghourservices.R
 import com.aghourservices.data.model.User
 import com.aghourservices.data.network.RetrofitInstance.userApi
@@ -22,9 +23,10 @@ import com.aghourservices.utils.helper.AlertDialogs.Companion.errorLogin
 import com.aghourservices.utils.helper.AlertDialogs.Companion.noInternet
 import com.aghourservices.utils.helper.Constants
 import com.aghourservices.utils.helper.Intents
+import com.aghourservices.utils.helper.Intents.compressImage
 import com.aghourservices.utils.helper.ProgressDialog
 import com.aghourservices.utils.services.cache.UserInfo.saveUserData
-import com.google.android.gms.ads.AdView
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -48,9 +50,10 @@ class SignUpActivity : BaseActivity() {
         initUserValidations()
         initUserLogin()
         adView()
-        initStoragePermissions()
-        requestStoragePermissions()
         initUserClicks()
+        if (!checkStoragePermission()) {
+            requestStoragePermissions()
+        }
     }
 
     private fun initEditTextIconsColor() {
@@ -252,12 +255,18 @@ class SignUpActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.GALLERY_CODE && resultCode == Activity.RESULT_OK) {
             avatarUri = data?.data!!
-            val file = File(Intents.getRealPathFromURI(this, avatarUri!!)!!)
-            Intents.compressFile(this, file)
-            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            avatarPart =
-                MultipartBody.Part.createFormData("user[avatar]", file.name, requestBody)
-            binding.avatarImage.setImageURI(avatarUri)
+            lifecycleScope.launch {
+                val file = File(Intents.getRealPathFromURI(this@SignUpActivity, avatarUri!!)!!)
+                val compressedImage = compressImage(this@SignUpActivity, file.path)
+                val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), compressedImage)
+                avatarPart =
+                    MultipartBody.Part.createFormData(
+                        "user[avatar]",
+                        compressedImage.name,
+                        requestBody
+                    )
+                binding.avatarImage.setImageURI(avatarUri)
+            }
         }
     }
 

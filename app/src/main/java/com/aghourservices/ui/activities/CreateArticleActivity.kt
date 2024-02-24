@@ -10,6 +10,7 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
@@ -17,14 +18,15 @@ import com.aghourservices.databinding.ActivityCreateArticleBinding
 import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.helper.Constants.Companion.GALLERY_CODE
-import com.aghourservices.utils.helper.Intents
+import com.aghourservices.utils.helper.Intents.compressImage
 import com.aghourservices.utils.helper.Intents.getRealPathFromURI
 import com.aghourservices.utils.helper.Intents.loadProfileImage
 import com.aghourservices.utils.services.ArticleService
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,12 +42,17 @@ class CreateArticleActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initStoragePermissions()
-        requestStoragePermissions()
         getUserProfile()
         initUserClick()
         adView()
+        requestPermissions()
         binding.userLayout.isVisible = isUserLogin
+    }
+
+    private fun requestPermissions() {
+        if (!checkStoragePermission()) {
+            requestStoragePermissions()
+        }
     }
 
     @Suppress("DEPRECATION")
@@ -55,12 +62,15 @@ class CreateArticleActivity : BaseActivity() {
         if (requestCode == GALLERY_CODE && resultCode == Activity.RESULT_OK) {
             imageUri = data?.data!!
             val file = File(getRealPathFromURI(this, imageUri!!)!!)
-            Intents.compressFile(this, file)
-            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            imagePart =
-                MultipartBody.Part.createFormData("article[attachment]", file.name, requestBody)
-            binding.articleImg.setImageURI(imageUri)
-            binding.addImageBtn.text = "تغيير الصورة"
+            lifecycleScope.launch {
+                val compressedImage = compressImage(this@CreateArticleActivity, file.path)
+                val requestBody = compressedImage.asRequestBody("image/*".toMediaTypeOrNull())
+                imagePart = MultipartBody.Part.createFormData("article[attachment]", compressedImage.name, requestBody)
+                binding.articleImg.setImageURI(imageUri)
+                binding.removeImg.isVisible = true
+                binding.articleImg.isVisible = true
+                binding.addImageBtn.text = "تغيير الصورة"
+            }
         }
     }
 
@@ -113,6 +123,15 @@ class CreateArticleActivity : BaseActivity() {
                     }
                 }
             })
+        }
+
+        binding.removeImg.setOnClickListener {
+            imageUri = null
+            imagePart = null
+            binding.articleImg.setImageURI(null)
+            binding.removeImg.isVisible = false
+            binding.articleImg.isVisible = false
+            binding.addImageBtn.text = "إضافة صورة"
         }
     }
 

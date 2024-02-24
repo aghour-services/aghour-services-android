@@ -6,8 +6,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
@@ -28,8 +26,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.stfalcon.imageviewer.StfalconImageViewer
 import de.hdodenhof.circleimageview.CircleImageView
+import id.zelory.compressor.Compressor
 import java.io.File
-import java.io.FileOutputStream
 
 
 object Intents {
@@ -44,41 +42,9 @@ object Intents {
         return filePath
     }
 
-    fun compressFile(context: Context, file: File): File? {
-        return try {
-            val o = BitmapFactory.Options()
-            o.inJustDecodeBounds = true
-            BitmapFactory.decodeFile(file.path, o)
-
-            val REQUIRED_SIZE = 100
-            var scale = 1
-            while (o.outWidth / scale / 2 >= REQUIRED_SIZE &&
-                o.outHeight / scale / 2 >= REQUIRED_SIZE
-            ) {
-                scale *= 2
-            }
-
-            val o2 = BitmapFactory.Options()
-            o2.inSampleSize = scale
-            val selectedBitmap = BitmapFactory.decodeFile(file.path, o2)
-
-            val compressedFile = File.createTempFile("compressed_", ".jpg", context.cacheDir)
-            compressedFile.createNewFile()
-            val outputStream = FileOutputStream(compressedFile)
-
-            var quality = 100
-            var compressedSize = -1
-            while (compressedSize > 100 * 1024 || compressedSize == -1) {
-                selectedBitmap!!.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
-                compressedSize = compressedFile.length().toInt()
-                quality -= 5
-            }
-
-            outputStream.close()
-            compressedFile
-        } catch (e: Exception) {
-            null
-        }
+    suspend fun compressImage(context: Context, imagePath: String): File {
+        val imageFile = File(imagePath)
+        return Compressor.compress(context, imageFile)
     }
 
     fun shareApp(context: Context) {
