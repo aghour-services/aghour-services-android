@@ -156,11 +156,7 @@ class ShowOneArticleFragment : BaseFragment() {
                             }
                         }
                     }
-
-                    if (article != null) {
-                        binding.likeArticle.isChecked = true
-                        initUserClicks(article)
-                    }
+                    article?.let { initUserClicks(it) }
                 }
             }
 
@@ -316,6 +312,7 @@ class ShowOneArticleFragment : BaseFragment() {
         }
     }
 
+    // TODO: To be implemented in the future
     private fun initUserClicks(article: Article) {
         binding.apply {
             avatarImage.setOnClickListener {
@@ -323,6 +320,10 @@ class ShowOneArticleFragment : BaseFragment() {
                     article.user?.url,
                     article.user?.name
                 )
+            }
+
+            articleImage.setOnClickListener {
+                fullScreenArticleAttachments(article.attachments?.last()?.resource_url)
             }
 
             likeArticle.setOnClickListener {

@@ -80,9 +80,10 @@
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/avatar_image"
-                                android:layout_width="@dimen/_28sdp"
-                                android:layout_height="@dimen/_28sdp"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
                                 android:layout_gravity="center"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
                                 android:src="@mipmap/user" />
 
                         </LinearLayout>
@@ -111,8 +112,15 @@
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/article_image"
                                 style="@style/ShapeableImageView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_6sdp"
                                 android:adjustViewBounds="true"
-                                tools:src="@mipmap/ic_launcher" />
+                                android:layout_gravity="center"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:src="@color/image_bg" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -125,319 +133,307 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/news_card_layout">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            android:id="@+id/comments_count"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="?android:selectableItemBackground"
-                            android:drawablePadding="@dimen/_6sdp"
-                            android:fontFamily="@font/segoe_ui_regular"
-                            android:gravity="left|center"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/dialogText"
-                            android:textSize="@dimen/_10ssp"
-                            tools:text="2 تعليق" />
-
-                        <TextView
-                            android:id="@+id/likes_count"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="?android:selectableItemBackground"
-                            android:drawablePadding="@dimen/_6sdp"
-                            android:fontFamily="@font/segoe_ui_regular"
-                            android:gravity="right|center"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/dialogText"
-                            android:textSize="@dimen/_10ssp"
-                            tools:text="أنت و 5 أخرون" />
-
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/line1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_view"
-                    android:background="@color/lineView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/likes_comments_layout" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/like_article_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/line1">
-
-                    <androidx.appcompat.widget.AppCompatCheckBox
-                        android:id="@+id/like_article"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/fav_selector"
-                        android:tooltipText="تضامنا"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:targetApi="o" />
-
-                    <View
-                        android:id="@+id/v_line"
-                        android:layout_width="@dimen/line_view"
-                        android:layout_height="0dp"
-                        android:background="@color/lineView"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout9"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout9"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:weightSum="2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/like_article"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/share_article"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
-                            android:drawableLeft="@drawable/ic_share_small"
-                            android:gravity="center"
-                            android:padding="@dimen/_4sdp"
-                            android:text="@string/share_firm"
-                            android:textColor="@color/shareText"
-                            android:textSize="@dimen/_9ssp"
-                            android:tooltipText="مشاركة الخبر"
-                            app:drawableTint="@color/dialogText"
-                            tools:targetApi="o" />
-
-                        <View
-                            android:id="@+id/line_v"
-                            android:layout_width="@dimen/line_view"
-                            android:layout_height="wrap_content"
-                            android:background="@color/lineView"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/linearLayout9"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/add_comment"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
-                            android:drawableLeft="@drawable/ic_comment_small"
-                            android:gravity="center"
-                            android:paddingLeft="10dp"
-                            android:text="@string/comment"
-                            android:textColor="@color/shareText"
-                            android:textSize="@dimen/_9ssp"
-                            android:tooltipText="@string/add_a_comment"
-                            app:drawableTint="@color/dialogText"
-                            tools:targetApi="o" />
-
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/line2"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_view"
-                    android:background="@color/lineView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/like_article_layout" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/main_bg"
-                    android:orientation="vertical"
-                    android:paddingTop="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/line2">
-
-                    <TextView
-                        android:id="@+id/comments"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:padding="@dimen/_6sdp"
-                        android:text="@string/all_comments"
-                        android:textColor="@color/dialogText"
-                        android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/comments_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/comment_card" />
-
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/comments_shimmer"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:forceDarkAllowed="false"
-                        android:orientation="vertical"
-                        tools:targetApi="q">
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <include layout="@layout/comments_shimmer" />
+                            <TextView
+                                android:id="@+id/comments_count"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="?android:selectableItemBackground"
+                                android:drawablePadding="@dimen/_6sdp"
+                                android:fontFamily="@font/segoe_ui_regular"
+                                android:gravity="left|center"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/dialogText"
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="2 تعليق" />
 
-                            <include layout="@layout/comments_shimmer" />
+                            <TextView
+                                android:id="@+id/likes_count"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="?android:selectableItemBackground"
+                                android:drawablePadding="@dimen/_6sdp"
+                                android:fontFamily="@font/segoe_ui_regular"
+                                android:gravity="right|center"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/dialogText"
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="أنت و 5 أخرون" />
 
-                            <include layout="@layout/comments_shimmer" />
                         </LinearLayout>
 
-                    </com.facebook.shimmer.ShimmerFrameLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
-                        android:id="@+id/noComments"
+                    <View
+                        android:id="@+id/line1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_view"
+                        android:background="@color/lineView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/likes_comments_layout" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/like_article_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:elevation="20dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line1">
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:src="@drawable/ic_outline_comment" />
-
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/like_article"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/cairo_bold"
-                            android:text="@string/no_comments_yet"
+                            android:button="@null"
+                            android:tooltipText="تضامنا"
+                            tools:ignore="MissingConstraints"
+                            tools:targetApi="o" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout9"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/share_article"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackground"
+                                android:drawableLeft="@drawable/ic_share_small"
+                                android:gravity="center"
+                                android:padding="@dimen/_4sdp"
+                                android:text="@string/share_firm"
+                                android:textColor="@color/shareText"
+                                android:textSize="@dimen/_9ssp"
+                                android:tooltipText="مشاركة الخبر"
+                                app:drawableTint="@color/dialogText"
+                                tools:targetApi="o" />
+
+                            <View
+                                android:id="@+id/line_v"
+                                android:layout_width="@dimen/line_view"
+                                android:layout_height="wrap_content"
+                                android:background="@color/lineView"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/linearLayout9"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/add_comment"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackground"
+                                android:drawableLeft="@drawable/ic_comment_small"
+                                android:gravity="center"
+                                android:paddingLeft="10dp"
+                                android:text="@string/comment"
+                                android:textColor="@color/shareText"
+                                android:textSize="@dimen/_9ssp"
+                                android:tooltipText="@string/add_a_comment"
+                                app:drawableTint="@color/dialogText"
+                                tools:targetApi="o" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/line2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_view"
+                        android:background="@color/lineView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/like_article_layout" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/main_bg"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/_8sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line2">
+
+                        <TextView
+                            android:id="@+id/comments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:padding="@dimen/_6sdp"
+                            android:text="@string/all_comments"
                             android:textColor="@color/dialogText"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/comments_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:itemCount="3"
+                            tools:listitem="@layout/comment_card" />
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/comments_shimmer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:forceDarkAllowed="false"
+                            android:orientation="vertical"
+                            tools:targetApi="q">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/comments_shimmer" />
+
+                                <include layout="@layout/comments_shimmer" />
+
+                                <include layout="@layout/comments_shimmer" />
+                            </LinearLayout>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/noComments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:src="@drawable/ic_outline_comment" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/cairo_bold"
+                                android:text="@string/no_comments_yet"
+                                android:textColor="@color/dialogText"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
 
-        </androidx.core.widget.NestedScrollView>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/comment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/toolbarBg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="2dp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/comment_layout"
+                <EditText
+                    android:id="@+id/comment_edt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:autofillHints="yes"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:hint="@string/write_a_comment"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLines="5"
+                    android:padding="14dp"
+                    android:textColor="@color/dialogText"
+                    android:textColorHint="@color/dialogText"
+                    android:textSize="16sp" />
+
+                <requestFocus />
+
+                <ProgressBar
+                    android:id="@+id/comment_progress"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/comment_btn"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/ic_send"
+                    android:contentDescription="@string/write_a_comment"
+                    android:enabled="false" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/noInternet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/wifi"
+            android:tint="@color/dialogText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:text="@string/no_internet"
+            android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tryAgainBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="@color/toolbarBg"
-            android:elevation="20dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="2dp">
-
-            <EditText
-                android:id="@+id/comment_edt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:autofillHints="yes"
-                android:background="@android:color/transparent"
-                android:gravity="right"
-                android:hint="@string/write_a_comment"
-                android:inputType="textCapSentences|textMultiLine"
-                android:maxLines="5"
-                android:padding="14dp"
-                android:textColor="@color/dialogText"
-                android:textColorHint="@color/dialogText"
-                android:textSize="16sp" />
-
-            <requestFocus />
-
-            <ProgressBar
-                android:id="@+id/comment_progress"
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/comment_btn"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginRight="6dp"
-                android:background="@drawable/ic_send"
-                android:contentDescription="@string/write_a_comment"
-                android:enabled="false" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </RelativeLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-<LinearLayout
-android:gravity="center"
-android:id="@+id/noInternet"
-android:layout_gravity="center"
-android:layout_height="match_parent"
-android:layout_width="match_parent"
-android:orientation="vertical"
-android:visibility="invisible">
-
-<androidx.appcompat.widget.AppCompatImageView
-    android:background="@android:color/transparent"
-    android:layout_height="150dp"
-    android:layout_width="150dp"
-    android:src="@mipmap/wifi"
-    android:tint="@color/dialogText" />
-
-<TextView
-    android:fontFamily="@font/cairo_bold"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:text="@string/no_internet"
-    android:textSize="14sp" />
-
-<com.google.android.material.button.MaterialButton
-    android:id="@+id/tryAgainBtn"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/_50sdp"
-    android:layout_marginRight="@dimen/_50sdp"
-    android:layout_width="match_parent"
-    android:padding="@dimen/_10sdp"
-    android:text="@string/try_again"
-    android:textSize="@dimen/_12ssp"
-    app:cornerRadius="@dimen/_20sdp" />
-</LinearLayout></androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/try_again"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_20sdp" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -112,7 +112,7 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/article_image"
-                style="@style/FiamUI.ResizableImageView"
+                style="@style/ShapeableImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/_6sdp"
