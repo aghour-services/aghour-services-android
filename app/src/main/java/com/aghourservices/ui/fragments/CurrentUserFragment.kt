@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
@@ -26,6 +27,7 @@ import com.aghourservices.utils.helper.Intents.showOnCloseDialog
 import com.aghourservices.utils.helper.ThemePreference
 import com.aghourservices.utils.services.UserService
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -53,14 +55,17 @@ class CurrentUserFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (isUserLogin == true) {
-            requireActivity().title = currentUser?.name
+        if (isUserLogin) {
+            requireActivity().title = currentUser.name
         } else {
             requireActivity().title = getString(R.string.setting_fragment)
         }
         showBottomNavigation()
         showToolbar()
-        initStoragePermissions()
+
+        if (!checkStoragePermission()) {
+            requestStoragePermissions()
+        }
     }
 
     private fun initUserClick() {
@@ -241,13 +246,19 @@ class CurrentUserFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.GALLERY_CODE && resultCode == Activity.RESULT_OK) {
             avatarUri = data?.data!!
-            val file = File(Intents.getRealPathFromURI(requireContext(), avatarUri!!)!!)
-            Intents.compressFile(requireContext(), file)
-            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            avatarPart =
-                MultipartBody.Part.createFormData("user[avatar]", file.name, requestBody)
-            binding.avatarImage.setImageURI(avatarUri)
-            updateProfileAvatar()
+            lifecycleScope.launch {
+                val file = File(Intents.getRealPathFromURI(requireContext(), avatarUri!!)!!)
+                val compressedImage = Intents.compressImage(requireContext(), file.path)
+                val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), compressedImage)
+                avatarPart =
+                    MultipartBody.Part.createFormData(
+                        "user[avatar]",
+                        compressedImage.name,
+                        requestBody
+                    )
+                binding.avatarImage.setImageURI(avatarUri)
+                updateProfileAvatar()
+            }
         }
     }
 
@@ -255,7 +266,7 @@ class CurrentUserFragment : BaseFragment() {
         val userService = UserService()
         userService.updateAvatar(
             requireContext(),
-            currentUser?.token.toString(),
+            currentUser.token,
             avatarPart,
         )
     }
