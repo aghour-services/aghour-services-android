@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.aghourservices.ui.fragments.PublishedArticlesFragment"
-        android:label="@string/menu_news"
+        android:label="@string/news_fragment"
         tools:layout="@layout/fragment_published_articles">
         <action
             android:id="@+id/action_newsFragment_to_showOneArticleFragment"
@@ -88,7 +88,6 @@
     <fragment
         android:id="@+id/showOneArticleFragment"
         android:name="com.aghourservices.ui.fragments.ShowOneArticleFragment"
-        android:label=""
         tools:layout="@layout/fragment_show_one_article">
         <argument
             android:name="article_id"
@@ -108,7 +107,6 @@
     <fragment
         android:id="@+id/updateCommentFragment"
         android:name="com.aghourservices.ui.fragments.EditCommentFragment"
-        android:label=""
         tools:layout="@layout/fragment_edit_comment">
         <argument
             android:name="article_id"
@@ -126,7 +124,6 @@
     <fragment
         android:id="@+id/editArticleFragment"
         android:name="com.aghourservices.ui.fragments.EditPublishedArticleFragment"
-        android:label=""
         tools:layout="@layout/fragment_edit_published_article">
         <argument
             android:name="articleId"
@@ -143,7 +140,6 @@
     <dialog
         android:id="@+id/likesDialogSheet"
         android:name="com.aghourservices.ui.fragments.dialogSheets.LikesDialogSheet"
-        android:label=""
         tools:layout="@layout/likes_dialog_sheet">
 
         <argument
@@ -154,7 +150,6 @@
     <dialog
         android:id="@+id/commentsDialogSheet"
         android:name="com.aghourservices.ui.fragments.dialogSheets.CommentsDialogSheet"
-        android:label=""
         tools:layout="@layout/comments_dialog_sheet">
         <argument
             android:name="articleId"
@@ -203,7 +198,6 @@
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.aghourservices.ui.fragments.NotificationsFragment"
-        android:label=""
         tools:layout="@layout/fragment_notifications">
         <action
             android:id="@+id/action_notificationsFragment_to_showOneArticleFragment"
@@ -216,6 +210,5 @@
     <fragment
         android:id="@+id/currentUserFragment"
         tools:layout="@layout/fragment_current_user"
-        android:name="com.aghourservices.ui.fragments.CurrentUserFragment"
-        android:label="" />
+        android:name="com.aghourservices.ui.fragments.CurrentUserFragment" />
 </navigation>

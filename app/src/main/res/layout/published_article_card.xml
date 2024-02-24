@@ -101,23 +101,25 @@
                 android:background="?android:selectableItemBackground"
                 android:padding="@dimen/_10sdp"
                 android:textColor="@color/dialogText"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_12ssp"
                 app:readMoreMaxLines="6"
                 app:readMoreOverflow="ellipsis"
                 app:readMoreText="قراءة المزيد"
-                app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:readMoreTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:readMoreTextColor="@color/bottom_nav_unChecked_item"
                 app:readMoreTextSize="@dimen/_12ssp"
                 tools:text="@string/description" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/article_image"
+                style="@style/FiamUI.ResizableImageView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_6sdp"
                 android:adjustViewBounds="true"
-                android:background="?attr/selectableItemBackground"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:src="@color/image_bg" />
 
         </LinearLayout>

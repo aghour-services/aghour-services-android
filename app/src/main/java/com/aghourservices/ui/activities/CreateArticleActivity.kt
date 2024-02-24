@@ -66,9 +66,9 @@ class CreateArticleActivity : BaseActivity() {
                 val compressedImage = compressImage(this@CreateArticleActivity, file.path)
                 val requestBody = compressedImage.asRequestBody("image/*".toMediaTypeOrNull())
                 imagePart = MultipartBody.Part.createFormData("article[attachment]", compressedImage.name, requestBody)
-                binding.articleImg.setImageURI(imageUri)
+                binding.articleImage.setImageURI(imageUri)
                 binding.removeImg.isVisible = true
-                binding.articleImg.isVisible = true
+                binding.articleImage.isVisible = true
                 binding.addImageBtn.text = "تغيير الصورة"
             }
         }
@@ -128,9 +128,9 @@ class CreateArticleActivity : BaseActivity() {
         binding.removeImg.setOnClickListener {
             imageUri = null
             imagePart = null
-            binding.articleImg.setImageURI(null)
+            binding.articleImage.setImageURI(null)
             binding.removeImg.isVisible = false
-            binding.articleImg.isVisible = false
+            binding.articleImage.isVisible = false
             binding.addImageBtn.text = "إضافة صورة"
         }
     }
@@ -202,7 +202,7 @@ class CreateArticleActivity : BaseActivity() {
 
     private fun setArticleEmpty() {
         binding.articleEdt.text!!.clear()
-        binding.articleImg.setImageURI(null)
+        binding.articleImage.setImageURI(null)
         onBackPressedDispatcher.onBackPressed()
     }
 }
