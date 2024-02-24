@@ -13,5 +13,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="settings_text">12sp</dimen>
     <dimen name="edt_sign_up">11dp</dimen>
-    <dimen name="line_view">0.5dp</dimen>
+    <dimen name="line_view">0.1dp</dimen>
 </resources>

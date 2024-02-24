@@ -1,5 +1,7 @@
 package com.aghourservices.ui.fragments
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -19,12 +21,14 @@ import com.aghourservices.R
 import com.aghourservices.data.model.Article
 import com.aghourservices.data.model.Comment
 import com.aghourservices.data.network.RetrofitInstance.articlesApi
+import com.aghourservices.data.network.RetrofitInstance.likeApi
 import com.aghourservices.databinding.FragmentShowOneArticleBinding
 import com.aghourservices.ui.adapters.CommentsAdapter
 import com.aghourservices.ui.base.BaseFragment
 import com.aghourservices.ui.viewModels.CommentsViewModel
 import com.aghourservices.utils.helper.AlertDialogs
 import com.aghourservices.utils.helper.Intents.loadProfileImage
+import com.aghourservices.utils.helper.Intents.showKeyboard
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import retrofit2.Call
@@ -44,6 +48,7 @@ class ShowOneArticleFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentShowOneArticleBinding.inflate(inflater, container, false)
+        @Suppress("DEPRECATION")
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         initRecyclerView()
         initCommentEdt()
@@ -100,6 +105,7 @@ class ShowOneArticleFragment : BaseFragment() {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showArticle() {
         val retrofitBuilder =
             articlesApi.showArticle(arguments.articleId, currentUser.token, fcmToken)
@@ -140,13 +146,20 @@ class ShowOneArticleFragment : BaseFragment() {
                         )
 
                         binding.apply {
-                            avatarImage.setOnClickListener {
-                                fullScreenAvatar(
-                                    article?.user?.url,
-                                    article?.user?.name
-                                )
+                            likesCount.isVisible = article?.likes_count!! > 0
+                            likesCount.text = "${article.likes_count} إعجاب"
+
+                            if (article.comments_count < 1) {
+                                commentsCount.text = "لا توجد تعليقات"
+                            } else {
+                                commentsCount.text = "${article.comments_count} تعليق"
                             }
                         }
+                    }
+
+                    if (article != null) {
+                        binding.likeArticle.isChecked = true
+                        initUserClicks(article)
                     }
                 }
             }
@@ -303,8 +316,65 @@ class ShowOneArticleFragment : BaseFragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun initUserClicks(article: Article) {
+        binding.apply {
+            avatarImage.setOnClickListener {
+                fullScreenAvatar(
+                    article.user?.url,
+                    article.user?.name
+                )
+            }
+
+            likeArticle.setOnClickListener {
+                if (currentUser.token.isEmpty()) {
+                    AlertDialogs.createAccount(requireContext(), "للإعجاب أنشئ حساب أولا")
+                } else {
+                    if (article.liked) {
+                        unLikeArticle(currentUser.token, article)
+                    } else {
+                        likeArticle(currentUser.token, article)
+                    }
+                }
+            }
+
+            addComment.setOnClickListener {
+                showKeyboard(requireContext().applicationContext, binding.commentEdt)
+            }
+
+            shareArticle.setOnClickListener {
+                val userName = article.user?.name
+                val articleDescription = article.description
+
+                val shareItem = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "$userName \n $articleDescription \n ${getString(R.string.aghour_share_content)}"
+                    )
+                    type = "text/plain"
+                }
+                requireContext().startActivity(Intent.createChooser(shareItem, "شارك الخبر.."))
+            }
+        }
+    }
+
+    private fun likeArticle(userToken: String, article: Article) {
+        article.liked = true
+
+        val request = likeApi.likeArticle(article.id, userToken)
+
+        request.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {}
+            override fun onFailure(call: Call<Article>, t: Throwable) {}
+        })
+    }
+
+    private fun unLikeArticle(userToken: String, article: Article) {
+        article.liked = false
+        val request = likeApi.unLikeArticle(article.id, userToken)
+        request.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {}
+            override fun onFailure(call: Call<Article>, t: Throwable) {}
+        })
     }
 }

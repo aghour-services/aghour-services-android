@@ -21,6 +21,7 @@
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="@color/drawerToggle"
         app:title="@string/app_name"
+        app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
         app:titleTextColor="@color/toolbarText" />
 
     <androidx.fragment.app.FragmentContainerView
