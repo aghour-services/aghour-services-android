@@ -3,28 +3,41 @@ package com.aghourservices.ui.activities
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuItemCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.aghourservices.R
+import com.aghourservices.data.model.Profile
+import com.aghourservices.data.network.RetrofitInstance
 import com.aghourservices.databinding.ActivityDashboardBinding
 import com.aghourservices.databinding.PostOrDataBottomSheetBinding
 import com.aghourservices.ui.base.BaseActivity
 import com.aghourservices.utils.services.cache.UserInfo.saveFCMToken
+import com.aghourservices.utils.services.cache.UserInfo.saveProfile
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DashboardActivity : BaseActivity() {
     private var _binding: ActivityDashboardBinding? = null
@@ -47,13 +60,18 @@ class DashboardActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         notificationBadge()
+        getCurrentProfile()
+        binding.bottomView.apply {
+            foregroundTintList = null
+            backgroundTintList = null
+        }
     }
 
     @SuppressLint("UnsafeOptInUsageError")
     private fun notificationBadge() {
         val badgeDrawable = BadgeDrawable.create(this).apply {
             isVisible = true
-            backgroundColor = ContextCompat.getColor(this@DashboardActivity, R.color.clear)
+            backgroundColor = ContextCompat.getColor(this@DashboardActivity, R.color.colorPrimary)
         }
         BadgeUtils.attachBadgeDrawable(
             badgeDrawable,
@@ -139,6 +157,49 @@ class DashboardActivity : BaseActivity() {
                 bottomSheetDialog.dismiss()
             }
         }
+    }
+
+    private fun getCurrentProfile() {
+        val retrofitInstance = RetrofitInstance.userApi.userProfile(currentUser.token)
+        retrofitInstance.enqueue(object : Callback<Profile> {
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+                if (response.isSuccessful) {
+                    val profile = response.body()
+                    if (profile != null) {
+                        saveProfile(
+                            this@DashboardActivity,
+                            profile.id!!,
+                            profile.name,
+                            profile.verified
+                        )
+                    }
+
+                    val menuItem = binding.bottomView.menu.findItem(R.id.currentUserFragment)
+                    MenuItemCompat.setIconTintMode(menuItem, PorterDuff.Mode.DST)
+
+                    Glide.with(this@DashboardActivity)
+                        .load(profile?.url)
+                        .circleCrop()
+                        .placeholder(R.drawable.account_selector) // Placeholder resource
+                        .error(R.drawable.ic_person)
+                        .into(object : CustomTarget<Drawable>() {
+                            @RequiresApi(Build.VERSION_CODES.O)
+                            override fun onResourceReady(
+                                resource: Drawable,
+                                transition: Transition<in Drawable>?
+                            ) {
+                                menuItem.icon = resource
+                            }
+
+                            override fun onLoadCleared(placeholder: Drawable?) {}
+                        })
+
+                }
+            }
+
+            override fun onFailure(call: Call<Profile>, t: Throwable) {}
+        })
     }
 
     private fun getFirebaseInstanceToken() {
