@@ -28,10 +28,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <TextView
+                        android:id="@+id/popup_menu"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
+                        android:text="@string/popup"
+                        android:textColor="@color/dialogText"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <LinearLayout
                         android:id="@+id/news_card_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -51,31 +64,50 @@
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:gravity="right"
-                                android:orientation="vertical"
+                                android:layout_gravity="right|top"
+                                android:gravity="right|top"
+                                android:orientation="horizontal"
                                 android:padding="@dimen/_2sdp">
 
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/_1sdp">
+
+                                    <TextView
+                                        android:id="@+id/date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/_2sdp"
+                                        android:textColor="@color/bottom_nav_unChecked_item"
+                                        android:textSize="@dimen/_9ssp"
+                                        tools:text="منذ ساعتين" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/_2sdp"
+                                        android:layout_marginRight="@dimen/_2sdp"
+                                        android:gravity="center"
+                                        android:text="@string/dot"
+                                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                        android:textColor="@color/bottom_nav_unChecked_item"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
                                 <TextView
-                                    android:id="@+id/article_user_name"
+                                    android:id="@+id/user_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="?android:selectableItemBackground"
                                     android:drawablePadding="@dimen/_4sdp"
                                     android:fontFamily="@font/segoe_ui_bold"
                                     android:textColor="@color/dialogText"
-                                    android:textSize="@dimen/_15ssp"
+                                    android:textSize="@dimen/_13ssp"
                                     app:drawableLeftCompat="@drawable/ic_verified"
                                     tools:text="محمود داوود صالح" />
 
-                                <TextView
-                                    android:id="@+id/article_created_at"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="@dimen/_2sdp"
-                                    android:textColor="@color/bottom_nav_unChecked_item"
-                                    android:textSize="@dimen/_8ssp"
-                                    tools:text="منذ ساعتين" />
                             </LinearLayout>
 
                             <de.hdodenhof.circleimageview.CircleImageView
@@ -114,13 +146,15 @@
                                 style="@style/ShapeableImageView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/_6sdp"
                                 android:adjustViewBounds="true"
-                                android:layout_gravity="center"
                                 android:clickable="true"
                                 android:focusable="true"
                                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                                android:src="@color/image_bg" />
+                                android:src="@color/image_bg"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
                         </LinearLayout>
 
                     </LinearLayout>

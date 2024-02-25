@@ -27,8 +27,10 @@ import com.aghourservices.utils.services.cache.UserInfo.getFCMToken
 import com.aghourservices.utils.services.cache.UserInfo.getUserData
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
 import com.stfalcon.imageviewer.StfalconImageViewer
+import de.hdodenhof.circleimageview.CircleImageView
 
 open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
     private lateinit var bottomNavigation: ConstraintLayout
@@ -59,7 +61,11 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
     }
 
     @SuppressLint("InflateParams")
-    protected fun fullScreenAvatar(imageUrl: String?, userName: String?) {
+    protected fun fullScreenAvatar(
+        imageUrl: String?,
+        userName: String?,
+        transImageView: CircleImageView?
+    ) {
         val binding = AvatarOverlayViewBinding.bind(
             LayoutInflater.from(requireContext()).inflate(
                 R.layout.avatar_overlay_view,
@@ -87,6 +93,8 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
             .allowZooming(true)
             .withOverlayView(binding.root)
             .withBackgroundColor(Color.BLACK)
+            .withTransitionFrom(transImageView)
+            .withDismissListener { transImageView?.visibility = View.VISIBLE }
             .show(true)
 
         closeButton.setOnClickListener {
@@ -94,7 +102,10 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
         }
     }
 
-    protected fun fullScreenArticleAttachments(imageUrl: String?) {
+    protected fun fullScreenArticleAttachments(
+        imageUrl: String?,
+        transImageView: ShapeableImageView?
+    ) {
         StfalconImageViewer.Builder(
             requireContext(),
             arrayListOf(imageUrl)
@@ -110,6 +121,8 @@ open class BaseFragment : Fragment(), HasToolbar, HasBottomNavigation {
             .allowSwipeToDismiss(true)
             .allowZooming(true)
             .withBackgroundColor(Color.BLACK)
+            .withTransitionFrom(transImageView)
+            .withDismissListener { transImageView?.visibility = View.VISIBLE }
             .show(true)
     }
 

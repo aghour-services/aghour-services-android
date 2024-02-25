@@ -103,6 +103,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_showOneArticleFragment_to_editArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/editArticleFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateCommentFragment"
@@ -209,6 +216,6 @@
     </fragment>
     <fragment
         android:id="@+id/currentUserFragment"
-        tools:layout="@layout/fragment_current_user"
-        android:name="com.aghourservices.ui.fragments.CurrentUserFragment" />
+        android:name="com.aghourservices.ui.fragments.CurrentUserFragment"
+        tools:layout="@layout/fragment_current_user" />
 </navigation>
