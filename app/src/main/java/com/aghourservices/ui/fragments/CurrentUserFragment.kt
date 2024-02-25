@@ -49,6 +49,7 @@ class CurrentUserFragment : BaseFragment() {
         _binding = FragmentCurrentUserBinding.inflate(layoutInflater)
         checkUser()
         initUserClick()
+        getProfile()
         return binding.root
     }
 
@@ -65,16 +66,6 @@ class CurrentUserFragment : BaseFragment() {
         if (!checkStoragePermission()) {
             requestStoragePermissions()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getProfile()
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        getProfile()
     }
 
     private fun initUserClick() {
