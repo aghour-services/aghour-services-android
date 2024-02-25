@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -52,8 +54,10 @@ class ShowOneArticleFragment : BaseFragment() {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         initRecyclerView()
         initCommentEdt()
-        showArticle()
         refresh()
+        loadComments()
+        noInternetConnectionBehavior()
+        showArticle()
         return binding.root
     }
 
@@ -61,12 +65,6 @@ class ShowOneArticleFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
         showToolbar()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        loadComments()
-        noInternetConnectionBehavior()
     }
 
     private fun refresh() {
@@ -118,7 +116,7 @@ class ShowOneArticleFragment : BaseFragment() {
                     val article = response.body()
                     requireActivity().title = article?.user?.name
                     binding.apply {
-                        articleUserName.apply {
+                        userName.apply {
                             text = article?.user?.name
                             if (article?.user?.verified == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 tooltipText = context.getString(R.string.verified)
@@ -126,7 +124,7 @@ class ShowOneArticleFragment : BaseFragment() {
                                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
                             }
                         }
-                        articleCreatedAt.text = article?.created_at
+                        date.text = article?.created_at
                         articleDescription.text = article?.description
 
                         article?.attachments?.forEach { attachment ->
@@ -249,7 +247,7 @@ class ShowOneArticleFragment : BaseFragment() {
 
         binding.apply {
             avatarImage.setOnClickListener {
-                fullScreenAvatar(user.url, user.name)
+                fullScreenAvatar(user.url, user.name, avatarImage)
             }
         }
 
@@ -273,13 +271,13 @@ class ShowOneArticleFragment : BaseFragment() {
             }
 
             R.id.avatar_image -> {
-                fullScreenAvatar(user.url, user.name)
+                fullScreenAvatar(user.url, user.name, null)
             }
         }
     }
 
     private fun deleteCommentAlert(position: Int) {
-        val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle(getString(R.string.delete_comment))
         alertDialogBuilder.setMessage(getString(R.string.are_you_sure_to_delete_comment))
         alertDialogBuilder.setCancelable(true)
@@ -318,12 +316,16 @@ class ShowOneArticleFragment : BaseFragment() {
             avatarImage.setOnClickListener {
                 fullScreenAvatar(
                     article.user?.url,
-                    article.user?.name
+                    article.user?.name,
+                    avatarImage
                 )
             }
 
             articleImage.setOnClickListener {
-                fullScreenArticleAttachments(article.attachments?.last()?.resource_url)
+                fullScreenArticleAttachments(
+                    article.attachments?.last()?.resource_url,
+                    articleImage
+                )
             }
 
             likeArticle.setOnClickListener {
@@ -356,6 +358,35 @@ class ShowOneArticleFragment : BaseFragment() {
                 }
                 requireContext().startActivity(Intent.createChooser(shareItem, "شارك الخبر.."))
             }
+
+            val editArticleFragment =
+                ShowOneArticleFragmentDirections.actionShowOneArticleFragmentToEditArticleFragment(
+                    article.id,
+                    article.description,
+                    article.user?.name!!,
+                )
+
+            popupMenu.setOnClickListener {
+                val popup = PopupMenu(requireContext(), it)
+                popup.inflate(R.menu.popup_menu)
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.edit -> {
+                            findNavController().navigate(editArticleFragment)
+                        }
+
+                        R.id.delete -> {
+                            deleteArticleDialog()
+                        }
+                    }
+                    true
+                }
+                popup.show()
+            }
+
+            if (currentUser.token == article.user?.token) {
+                popupMenu.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -375,6 +406,40 @@ class ShowOneArticleFragment : BaseFragment() {
         val request = likeApi.unLikeArticle(article.id, userToken)
         request.enqueue(object : Callback<Article> {
             override fun onResponse(call: Call<Article>, response: Response<Article>) {}
+            override fun onFailure(call: Call<Article>, t: Throwable) {}
+        })
+    }
+
+    private fun deleteArticleDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("حذف الخبر")
+        alertDialogBuilder.setMessage("أنت على وشك حذف الخبر")
+        alertDialogBuilder.setCancelable(true)
+        alertDialogBuilder.setPositiveButton(getString(R.string.delete)) { _, _ ->
+            deleteArticle(currentUser.token, fcmToken)
+        }
+        alertDialogBuilder.setNegativeButton(getString(R.string.negativeButton)) { _, _ -> }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    private fun deleteArticle(
+        userToken: String,
+        fcmToken: String,
+    ) {
+        val retrofitBuilder = articlesApi.deleteArticle(
+            arguments.articleId,
+            userToken,
+            fcmToken
+        )
+
+        retrofitBuilder.enqueue(object : Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "تم مسح الخبر", Toast.LENGTH_SHORT).show()
+                }
+            }
+
             override fun onFailure(call: Call<Article>, t: Throwable) {}
         })
     }

@@ -48,8 +48,8 @@ class CurrentUserFragment : BaseFragment() {
     ): View {
         _binding = FragmentCurrentUserBinding.inflate(layoutInflater)
         checkUser()
-        getProfile()
         initUserClick()
+        getProfile()
         return binding.root
     }
 
@@ -121,7 +121,7 @@ class CurrentUserFragment : BaseFragment() {
     private fun profileUserClicks() {
         binding.apply {
             avatarImage.setOnClickListener {
-                fullScreenAvatar(currentUserAvatar, binding.userName.text.toString())
+                fullScreenAvatar(currentUserAvatar, binding.userName.text.toString(), avatarImage)
             }
             addUserImage.setOnClickListener {
                 if (!checkStoragePermission()) {
