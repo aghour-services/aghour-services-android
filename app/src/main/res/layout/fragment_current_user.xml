@@ -85,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
+                android:includeFontPadding="true"
                 android:textColor="@color/dialogText"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"

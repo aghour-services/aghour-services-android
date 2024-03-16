@@ -166,5 +166,6 @@
     <string name="notifications">الإشعارات</string>
     <string name="you">بروفايلي</string>
     <string name="general_settings">الإعدادات العامة</string>
+    <string name="profile_picture">الصورة الشخصية</string>
 
 </resources>
