@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.App.BottomSheetDialog">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_35sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sheet_handling"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:cardBackgroundColor="@color/dialogText"
+                app:cardCornerRadius="12dp" />
+
+            <RelativeLayout
+                android:id="@+id/head_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sheet_handling"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="8dp"
+                    android:text="@string/edit_profile"
+                    android:textColor="@color/dialogText"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
+
+                <ImageButton
+                    android:id="@+id/close_sheet_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:backgroundTint="@color/white"
+                    android:minHeight="48dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_close"
+                    app:tint="@color/dialogText" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/profile_picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/head_view"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_selector"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:drawablePadding="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="left|center"
+                    android:text="@string/profile_picture"
+                    android:textColor="@color/dialogText"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableLeftCompat="@drawable/ic_account_outline"
+                    app:drawableTint="@color/dialogText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_picture"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/btn_selector"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:drawablePadding="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="left|center"
+                    android:text="@string/name"
+                    android:textColor="@color/dialogText"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableLeftCompat="@drawable/ic_edit_name"
+                    app:drawableTint="@color/dialogText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/user_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/btn_selector"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:drawablePadding="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="left|center"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/dialogText"
+                    android:textSize="@dimen/_12ssp"
+                    app:drawableLeftCompat="@drawable/ic_phone"
+                    app:drawableTint="@color/dialogText" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,5 +1,6 @@
 package com.aghourservices.ui.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -8,12 +9,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.aghourservices.R
 import com.aghourservices.data.model.Profile
 import com.aghourservices.data.network.RetrofitInstance.userApi
+import com.aghourservices.databinding.BottomSheetEditProfileBinding
 import com.aghourservices.databinding.FragmentCurrentUserBinding
 import com.aghourservices.ui.activities.SignUpActivity
 import com.aghourservices.ui.base.BaseFragment
@@ -27,10 +31,13 @@ import com.aghourservices.utils.helper.Intents.showOnCloseDialog
 import com.aghourservices.utils.helper.ThemePreference
 import com.aghourservices.utils.services.UserService
 import com.aghourservices.utils.services.cache.UserInfo.saveProfile
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -98,10 +105,11 @@ class CurrentUserFragment : BaseFragment() {
     }
 
     private fun checkUser() {
-        if (isUserLogin == true) {
+        if (isUserLogin) {
             binding.apply {
                 userLayout.visibility = View.VISIBLE
                 logOut.visibility = View.VISIBLE
+                editProfile.visibility = View.VISIBLE
             }
         } else {
             binding.apply {
@@ -130,11 +138,80 @@ class CurrentUserFragment : BaseFragment() {
                     openGallery()
                 }
             }
+            binding.editProfile.setOnClickListener { bottomSheetEditProfile() }
+        }
+    }
+
+
+    private fun bottomSheetEditProfile() {
+        val binding = BottomSheetEditProfileBinding.inflate(layoutInflater)
+
+        val bottomSheet = BottomSheetDialog(requireContext()).apply {
+            setContentView(binding.root)
+            setCancelable(true)
+            show()
+        }
+
+        binding.apply {
+            profilePicture.setOnClickListener {
+                if (!checkStoragePermission()) {
+                    requestStoragePermissions()
+                } else {
+                    openGallery()
+                    bottomSheet.dismiss()
+                }
+            }
+        }
+
+        binding.apply {
+            userName.setOnClickListener {
+                showNamePhoneUpdateDialog("name")
+                bottomSheet.dismiss()
+            }
+            userPhone.setOnClickListener {
+                showNamePhoneUpdateDialog("phone")
+                bottomSheet.dismiss()
+            }
+        }
+
+        binding.closeSheetBtn.setOnClickListener { bottomSheet.dismiss() }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showNamePhoneUpdateDialog(key: String) {
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_edit_user_details, null);
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
+        val editLayout = dialogView.findViewById(R.id.user_layout) as TextInputLayout
+        val nameOrPhone = dialogView.findViewById(R.id.user_info_edt) as TextInputEditText
+        val headerName = dialogView.findViewById(R.id.edit_name) as TextView
+        val updateBtn = dialogView.findViewById(R.id.update_btn) as Button
+        val cancelBtn = dialogView.findViewById(R.id.cancel_btn) as Button
+        val userName = binding.userName.text.toString().trim()
+        val userPhone = binding.userPhone.text.toString().trim()
+        when (key) {
+            "name" -> nameOrPhone.setText(userName)
+            "phone" -> nameOrPhone.setText(userPhone)
+        }
+        headerName.text = "تعديل الأسم"
+        nameOrPhone.hint = "تعديل رقم الهاتف"
+        val dialog = builder.create()
+        dialog.show()
+
+        cancelBtn.setOnClickListener { dialog.dismiss() }
+        updateBtn.setOnClickListener {
+            val value = nameOrPhone.text.toString().trim()
+            if (value.isEmpty()) {
+                editLayout.error = "الرجاء إدخال $key"
+            } else {
+                dialog.dismiss()
+            }
         }
     }
 
     private fun getProfile() {
-        val retrofitInstance = userApi.userProfile(currentUser?.token.toString())
+        val retrofitInstance = userApi.userProfile(currentUser.token)
 
         retrofitInstance.enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
@@ -180,8 +257,8 @@ class CurrentUserFragment : BaseFragment() {
             override fun onFailure(call: Call<Profile>, t: Throwable) {
                 stopShimmer()
                 binding.apply {
-                    userEmail.text = currentUser?.email
-                    userPhone.text = currentUser?.mobile
+                    userEmail.text = currentUser.email
+                    userPhone.text = currentUser.mobile
                 }
                 binding.userName.apply {
                     text = currentProfile?.name
@@ -249,7 +326,7 @@ class CurrentUserFragment : BaseFragment() {
             lifecycleScope.launch {
                 val file = File(Intents.getRealPathFromURI(requireContext(), avatarUri!!)!!)
                 val compressedImage = Intents.compressImage(requireContext(), file.path)
-                val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), compressedImage)
+                val requestBody = compressedImage.asRequestBody("image/*".toMediaTypeOrNull())
                 avatarPart =
                     MultipartBody.Part.createFormData(
                         "user[avatar]",
