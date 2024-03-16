@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_6sdp"
             app:backgroundTint="@color/toolbarBg"
+            android:background="@color/toolbarBg"
             app:itemIconTint="@color/bottom_nav_item_color"
             app:itemTextColor="@color/bottom_nav_item_color"
             app:labelVisibilityMode="labeled"

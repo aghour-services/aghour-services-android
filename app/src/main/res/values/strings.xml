@@ -162,9 +162,9 @@
     <string name="create_article_failed">فشل إنشاء الخبر</string>
     <string name="try_again">حاول مرة تانية.</string>
     <string name="draft_articles">الأخبار المؤجلة</string>
-    <string name="edit_profile">تعديل</string>
+    <string name="edit_profile">تعديل البروفايل</string>
     <string name="notifications">الإشعارات</string>
-    <string name="you">أنـت</string>
+    <string name="you">بروفايلي</string>
     <string name="general_settings">الإعدادات العامة</string>
 
 </resources>
