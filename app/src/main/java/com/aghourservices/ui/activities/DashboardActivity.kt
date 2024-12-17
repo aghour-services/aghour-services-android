@@ -51,7 +51,6 @@ class DashboardActivity : BaseActivity() {
         checkExtras(mainNavController, intent)
         floatActionButton()
         inAppRating()
-        inAppUpdate()
         notificationPermission()
         getFirebaseInstanceToken()
         adView()
@@ -105,16 +104,6 @@ class DashboardActivity : BaseActivity() {
                 R.id.showOneArticleFragment,
                 bundleOf("article_id" to articleId.toInt())
             )
-        }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0) {
-            if (resultCode != RESULT_OK) {
-                inAppUpdate()
-            }
         }
     }
 
